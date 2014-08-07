@@ -57,7 +57,7 @@ sub end : ActionClass('RenderView') {}
 
 =head1 AUTHOR
 
-Catalyst developer
+renan.carvalho
 
 =head1 LICENSE
 

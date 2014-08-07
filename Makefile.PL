@@ -9,7 +9,7 @@ use Module::Install::Catalyst; # Complain loudly if you don't have
 name 'SMM';
 all_from 'lib/SMM.pm';
 
-requires 'Catalyst::Runtime' => '5.90064';
+requires 'Catalyst::Runtime' => '5.90053';
 requires 'Catalyst::Plugin::ConfigLoader';
 requires 'Catalyst::Plugin::Static::Simple';
 requires 'Catalyst::Action::RenderView';

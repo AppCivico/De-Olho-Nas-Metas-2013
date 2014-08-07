@@ -20,6 +20,8 @@ use Catalyst qw/
     -Debug
     ConfigLoader
     Static::Simple
+
+    Authenticate
 /;
 
 extends 'Catalyst';
@@ -65,7 +67,7 @@ L<SMM::Controller::Root>, L<Catalyst>
 
 =head1 AUTHOR
 
-Catalyst developer
+renan.carvalho
 
 =head1 LICENSE
 
