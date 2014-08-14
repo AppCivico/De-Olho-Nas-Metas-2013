@@ -1,0 +1,34 @@
+[%-CALL assets.include("js/forms.js")%]
+
+[%IF !NO_TITLE%]
+    <h2>Formatar convite</h2>
+[%END%]
+
+<form class="form-horizontal" method="post" action="/admin/form/invitation">
+    <div class="tab-pane active" id="tab1">
+        <fieldset>
+            [%IF NO_TITLE%]
+                <input type="hidden" name="redirect_to_dashboard" value="1"/>
+            [%END%]
+
+            [%input_text('title','Título', value => invitation_obj.title)|none%]
+
+            <div class="control-group">
+                <label for="content" class="control-label">Conteúdo</label>
+                <div class="controls">
+                    <textarea rows="10" name="content" class="span3">[%invitation_obj.content%]</textarea>
+                </div>
+            </div>
+
+            <input type="hidden" name="campaign_id" value="[%invitation_obj.campaign.id%]">
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary" data-loading-text="Processando...">Continuar</button>
+                [%IF !NO_TITLE%]
+                    [%href = c.uri_for_action('/admin/campaign/index')%]
+                    <a href="[%c.req.referer%]" class="btn btn-right">Voltar</a>
+                [%END%]
+            </div>
+        </fieldset>
+    </div>
+</form>

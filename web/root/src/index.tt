@@ -1,0 +1,40 @@
+[%-CALL assets.include("js/ga.js")%]
+[%-CALL assets.include("js/facebook.js")%]
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="fb-plugin"><div class="fb-like" data-href="https://www.facebook.com/8publicidadeinteligente" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div></div>
+
+<div class="row panel-home">
+	<div class="span8 video">
+		<iframe src="//player.vimeo.com/video/73480443?title=0&amp;byline=0&amp;portrait=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+	</div>
+	<div class="span4 text bg-dark">
+		<div class="contents">
+			<h3 class="shadow">Ganhe até R$ 6.000,00 por ano!</h3>
+			<br />
+			<p class="lead shadow">Estamos construindo uma grande rede de publicidade em automóveis por todo o Brasil.
+			<br /><br />
+			Para participar, basta usar o seu carro sem sair da rotina.
+			</p>
+			<p class="saiba-mais">
+				<a href="/sobre"><i class="icon-arrow-right"></i> Saiba mais</a>
+			</p>
+			<a class="button" href="/pre-cadastro">Quero me cadastrar!</a>
+		</div>
+	</div>
+</div>
+<div class="divider divider-bottom"></div>
+
+<div class="partners">
+	<div class="title">Parceiros de Tecnologia:</div>
+	<div class="row-fluid logos bg-bright">
+	</div>
+</div>

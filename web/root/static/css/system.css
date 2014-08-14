@@ -1,0 +1,169 @@
+body.admin{
+	margin-top: 160px;
+}
+
+body.admin .masthead{
+	background-color: #e9ddd2;
+	border-bottom: 1px solid #cfbaa6;
+	padding: 5px;
+}
+
+body.admin .masthead .logo img{
+	height: 140px;
+}
+
+input {text-indent: 0.5em}
+select {text-indent: 0.3em}
+input.required, select.required {background-image: url(/static/img/asterisk_lgRed.gif); background-repeat: no-repeat; background-position: 0.3em center;}
+textarea.required {background: #FFF url(/static/img/exclamation_lgRed.gif) no-repeat left 3px;}
+
+.input-loading {
+    background-image: url(/static/img/loading.gif);
+    background-repeat: no-repeat;
+    background-position: 98% center;
+}
+
+select, .input-loading {
+    background-position: 94% center;
+}
+
+body.admin a,
+body.admin a:visited{
+	color: #000000;
+}
+
+body.admin a:hover{
+	text-decoration: none;
+	color: #d11212;
+}
+
+.clear{
+	clear: both;
+}
+
+body.admin .content-container{
+	min-height: 400px;
+}
+
+.hide {
+    display: none;
+}
+
+body.admin a.del {
+    font-size: 0.8em;
+    color: #E00;
+    display: inline-block;
+
+}
+body.admin i.del{
+    color: #E00;
+}
+body.admin a.edit {
+    font-size: 0.8em;
+    color: #0033cc;
+    display: inline-block;
+}
+body.admin i.edit{
+    color: #0033cc;
+}
+
+body.admin h2{
+	margin-bottom: 40px;
+	color: #666;
+	font-size: 1.4em;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.controls .help-inline, {
+    padding-right: 5px;
+}
+
+.controls .hint-inline, #cep_not_found {
+    border: 1px solid #EEE;
+    background-color: white;
+}
+
+#elm_car_plate {
+    text-transform: uppercase;
+}
+
+#x-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+
+#x-container .x-dummy {
+    padding-top: 50%; /* 4:3 aspect ratio */
+}
+
+#x-container .x-element {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: silver /* show me! */
+
+}
+
+body.admin .masthead .container{
+	position: relative;
+}
+body.admin .masthead  .menu-top{
+	position: absolute;
+	list-style: none;
+	bottom: 0px;
+}
+body.admin .masthead  .menu-top li{
+	display: inline-block;
+	padding: 5px 20px;
+}
+body.admin .masthead .welcome{
+	position: absolute;
+	text-align: right;
+	top: 5px;
+	right: 5px;
+}
+
+body.admin .table-list{
+	border: 1px solid #e0e0e0;
+}
+
+body.admin footer .container{
+	border-top: 1px solid #e0e0e0;
+	padding: 5px 10px;
+	font-size: 0.9em;
+	color: #999;
+}
+
+.customer-list{
+	margin-left: 20px;
+	background-color: #ffffff;
+	border: 1px solid #cccccc;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	-webkit-transition: border linear .2s, box-shadow linear .2s;
+	-moz-transition: border linear .2s, box-shadow linear .2s;
+	-o-transition: border linear .2s, box-shadow linear .2s;
+	transition: border linear .2s, box-shadow linear .2s;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding: 4px 6px;
+}
+
+#distance_error{
+    display: none;
+}
+
+.map-grid {
+	margin-bottom: 2cm;
+}
+
+@media (max-width: 979px) {
+	body.admin{
+		margin-top: 0;
+	}
+}

@@ -1,0 +1,20 @@
+<div class="sidebar-nav" style="width: 130px" data-spy="affix" data-offset-top="0">
+    <ul class="well nav nav-list">
+        <li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]><a href="/admin/dashboard">Dashboard</a></li>
+
+        <li class="nav-header">Clientes</li>
+        <li><a href="/admin/customer"><i class="icon-th-list"></i>Listar</a></li>
+        <li><a href="/admin/customer/new"><i class="icon-user"></i>Cadastrar</a></li>
+        <li class="nav-header">Campanhas</li>
+        <li><a href="/admin/campaign"><i class="icon-th-list"></i>Listar</a></li>
+        <li><a href="/admin/associated_routes"><i class="icon-road"></i>Cadastrar</a></li>
+        <li class="nav-header">Associados</li>
+        <li><a href="/admin/driver"><i class="icon-user"></i>Motoristas</a></li>
+        <li><a href="/admin/pre-user"><i class="icon-list"></i>Pré-cadastros</a></li>
+        <li class="nav-header">Gerenciamento</li>
+        <li><a href="/admin/user"><i class="icon-user"></i>Usuários</a></li>
+        <li class="nav-header">Relatórios</li>
+        <li><a href="/admin/reports/driver-by-region"><i class="icon-user"></i>Motoristas por região</a></li>
+        <li><a href="/logout">Sair</a></li>
+    </ul>
+</div>

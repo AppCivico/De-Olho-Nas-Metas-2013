@@ -1,0 +1,121 @@
+[%-CALL assets.include("js/jquery.maskedinput.js")%]
+[%-CALL assets.include("js/forms.js")%]
+[%-CALL assets.include("js/address.js")%]
+[%-CALL assets.include("js/cadastro.js")%]
+<section id="forms">
+  <div class="page-header bg-dark">
+    <h1>Faça o seu cadastro!</h1>
+    <p>Para ser nosso parceiro, precisamos que você preencha o formulário abaixo</p>
+  </div>
+
+  <div class="row page-content">
+    <div class="span11">
+    [%IF error_msg %]<div class="alert alert-error"><p>[%error_msg%]</p></div>[%END%]
+    [%IF status_msg %]<div class="alert"><p>[%status_msg%]</p></div>[%END%]
+      <form class="form-horizontal" method="post" action="/form/driver" autocomplete="off">
+        <fieldset>
+            <legend>Informações pessoais</legend>
+
+            [%input_text('name','Nome completo', req=>1, value => pre_registrations.name)|none%]
+
+            [%input_text('cpf','CPF', classes => ['span3', 'cpf'], req=>1)|none%]
+
+            [%IF pre_registrations.birth_date%]
+                [%input_text('birth_date','Data de nascimento',
+                    value   => format_date_to_human(pre_registrations.birth_date),
+                    classes => ['span3', 'date'], req=>1, birth_date => 1, )
+                |none%]
+            [%ELSE%]
+                [%input_text('birth_date','Data de nascimento',
+                    classes => ['span3', 'date'], req=>1, birth_date => 1)
+                |none%]
+            [%END%]
+
+            [%select_field('gender', 'Sexo',  array => [
+                    ['m','Masculino'],
+                    ['f','Feminino'],
+                ],
+                value => pre_registrations.gender
+                req=>1
+            )|none%]
+
+            [%select_field('marital_state', 'Estado civil',  array => [
+                    ['C','Casado (a)'],
+                    ['D','Divorciado(a)'],
+                    ['S','Solteiro (a)'],
+                    ['E','União estável'],
+                    ['V','Viúvo(a)'],
+                ],
+                value => pre_registrations.marital_state
+                req=>1)|none%]
+
+        </fieldset>
+
+
+        <!--<fieldset>
+            <legend>Informações do condutor</legend>
+
+			<div class="pull-left">
+				[%#input_text('cnh_code','Nº de registro da CNH', req=>1, only_digits => 1, check_length => 1
+				)|none#%]
+				[%#input_text('cnh_validity','Validade da habilitação', classes => ['span3', 'date'], req=>1, date => 1
+				)|none#%]
+				[%#input_text('first_driver_license','Data da 1ª habilitação', classes => ['span3', 'date'], req=>1, date => 1
+				)|none#%]
+			</div>
+			<div class="pull-left">
+				<div class="cnh-hint">
+					<div class="cnh-arrow">
+						<img src="/static/img/cnh_arrow.png">
+					</div>
+					<div class="cnh-arrow2">
+						<img src="/static/img/cnh_arrow2.png">
+					</div>
+				</div>
+			</div>
+        </fieldset>-->
+
+        <fieldset>
+            <legend>Informações de localização</legend>
+            <p>Para facilitar as próximas etapadas do cadastro, precisamos do endereço de sua residência</p>
+            [%input_text('postal_code','CEP', classes => ['span3', 'postal_code'], req=>1,
+                input_append => '<span id="cep_not_found" class="hide">CEP não encontrado</span>'
+            )|none%]
+
+            [%select_field('state_id', 'Estado',  array => select_states, classes => ['span3', 'clear_addr'], req=>1)|none%]
+            <div id="cities">
+                [%select_field('city_id', 'Cidade', classes => ['span3', 'clear_addr'], array => select_cities, req=>1)|none%]
+            </div>
+            <input type="hidden" id="city_aux" name="city_aux"/>
+
+            [%input_text('address','Endereço', classes => ['span3', 'clear_addr'], req=>1)|none%]
+            [%input_text('number','Número', classes => ['span3', 'clear_addr'], req=>1)|none%]
+            [%input_text('complement','Complemento', classes => ['span3', 'clear_addr'])|none%]
+            [%input_text('neighborhood','Bairro', classes => ['span3', 'clear_addr'], req=>1)|none%]
+
+        </fieldset>
+
+        <fieldset>
+            <legend>Informações de contato</legend>
+            <p>Sempre que necessário, entraremos em contato com você através destas informações</p>
+            [%input_text('email','E-mail', value => email, value => pre_registrations.email, req=>1)|none%]
+            [%input_text('email_confirm','Email novamente',  type => 'text', req=>1)|none%]
+
+            [%input_text('telephone_number','Telefone', classes => ['span3', 'phone'], req=>1)|none%]
+
+            [%input_text('mobile_number','Celular', value => pre_registrations.telephone, classes => ['span3', 'mobile_phone'], req=>1)|none%]
+
+        </fieldset>
+
+        <fieldset>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-success" data-loading-text="Processando...">Continuar</button>
+            </div>
+        </fieldset>
+
+      </form>
+    </div>
+  </div>
+
+</section>
+

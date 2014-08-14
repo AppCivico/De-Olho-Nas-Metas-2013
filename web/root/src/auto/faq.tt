@@ -1,0 +1,159 @@
+[%-CALL assets.include("js/faq.js")%]
+<div class="page-header bg-dark">
+	<h3>Perguntas frequentes</h3>
+	<p>Dúvidas? Saiba quais são as perguntas mais frequentes aqui</p>
+</div>
+<div class="row page-content">
+
+	<div class="faq">
+		<div class="buttons"><a href="#" class="expand-all">expandir todos</a> | <a href="#" class="collapse-all">fechar todos</a></div>
+			<div class='item even'>
+				<div class='question'>
+					Sou pago só por quilômetro rodado ou ganho um valor mínimo mesmo se o carro ficar na garagem?
+					<div class='arrow'></div>
+				</div>
+				<div class='answer'>
+					Sua remuneração será estabelecida de acordo com a rota e utilização informada no seu cadastro. Por isso, a transparência na hora de preencher o cadastro é muito importante.
+					A remuneração terá início quando você atingir 80% do que foi informado no seu cadastro. A partir daí, ela será crescente.
+				</div>
+			</div>
+			<div class='item odd'>
+				<div class='question'>
+					O adesivo vai deixar alguma cola ou alterar a cor da pintura do meu carro?
+					<div class='arrow'></div>
+				</div>
+				<div class='answer'>
+					Utilizamos os adesivos mais modernos existentes no mercado e a cola é específica para este tipo de utilização. Por isso, não provoca qualquer dano ou mudança de característica do seu automóvel. Após o término da campanha e, caso não tenha interesse em continuar, basta retirar o adesivo e fazer a vistoria para liberar seu pagamento.
+				</div>
+			</div>
+			<div class='item even'>
+				<div class='question'>
+					O período da campanha acabou. Como eu faço para tirar o adesivo do carro?
+					<div class='arrow'></div>
+				</div>
+				<div class='answer'>
+                    No término da campanha, basta retirar o adesivo, e realizar um agendamento para comprovação da retirada, que é obrigatório. O pagamento da última mensalidade só será liberado após a retirada do adesivo.
+				</div>
+			</div>
+			<div class='item odd'>
+				<div class='question'>
+					O adesivo sofreu um pequeno dano. Preciso fazer a troca?
+					<div class='arrow'></div>
+				</div>
+				<div class='answer'>
+					Nesse tipo de situação, fazemos uma avaliação caso a caso. Caso ocorra algo fora do previsto, entre em contato com nossa central e agende uma avaliação.
+				</div>
+			</div>
+			<div class='item even'>
+				<div class='question'>
+					Recebi uma proposta incrível para vender o meu veículo, mas ainda tenho um mês de campanha adesivada. O que acontece?
+					<div class='arrow'></div>
+				</div>
+				<div class='answer'>
+					Basta comunicar a retirada do adesivo e do rastreador. Sua remuneração também será interrompida e você receberá proporcionalmente até o último dia de veiculação da campanha.
+				</div>
+			</div>
+			<div class='item odd'>
+				<div class='question'>
+					Estourei os pontos na carteira, posso participar?
+					<div class='arrow'></div>
+				</div>
+				<div class='answer'>
+					Sua habilitação precisa estar válida. Caso haja algum problema junto aos órgão reguladores, primeiro regularize a situação, depois realize o cadastramento. A validade do seu documento é fundamental para a aprovação do cadastro.
+				</div>
+			</div>
+			<div class='item even'>
+				<div class='question'>
+					Minha carteira vence daqui a seis meses, preciso renová-la agora?
+					<div class='arrow'></div>
+				</div>
+				<div class='answer'>
+					Não há necessidade, porém você só poderá aderir à campanha durante o período de validade. No vencimento da habilitação, será solicitado o documento renovado. Caso isso não ocorra, seu cadastro será suspenso até a regularização e, consequentemente, a suspensão dos benefícios da campanha.
+				</div>
+			</div>
+			<div class='item odd'>
+				<div class='question'>
+					Meu carro está com o IPVA atrasado, tudo bem?
+					<div class='arrow'></div>
+				</div>
+				<div class='answer'>
+					Infelizmente, não. Na validação do cadastro será necessário apresentar os comprovantes das obrigações legais em dia, caso esteja com alguma pendência, é necessário regularizar sua situação para ter acesso aos benefícios da campanha.
+				</div>
+			</div>
+			<div class='item even'>
+				<div class='question'>
+					Sou o motorista principal, mas a minha filha de 18 anos também usa bastante o carro. O meu cadastro é válido?
+					<div class='arrow'></div>
+				</div>
+				<div class='answer'>
+					É válido, com certeza. Mas é importante informar o perfil de utilização do veículo com transparência, uma vez que no termo de compromisso assinado por você, vinculamos a campanha e a remuneração de acordo com o perfil de uso. Caso a informação não esteja de acordo, a Publicidade Inteligente se reserva ao direito de descadastrar seu veículo da campanha.
+				</div>
+			</div>
+			<div class='item odd'>
+				<div class='question'>
+					Meu carro está amassado, vocês aceitam a minha inscrição?
+					<div class='arrow'></div>
+				</div>
+				<div class='answer'>
+					Não, infelizmente. Para participar, é preciso consertá-lo. Lembre-se que seu veículo será a vitrine de uma grande marca e, por isso, é preciso que ele esteja bem cuidado.
+				</div>
+			</div>
+			<div class='item even'>
+				<div class='question'>
+					Viajo para o sítio todos os fins de semana e o meu carro fica cheio de lama. Posso veicular campanhas mesmo com ele sujo?
+					<div class='arrow'></div>
+				</div>
+				<div class='answer'>
+					Não recomendamos. Um dos compromissos é manter o veículo em boas condições visuais. Mais uma vez, reforçamos que seu veículo será vitrine de grandes marcas, então é fundamental que ele esteja sempre em boas condições visuais. Este inclusive é um requisito de continuidade do seu cadastro. Em nossas auditorias periódicas, avaliamos as condições visuais do veículo e, caso não esteja adequado, enviaremos comunicados para regularização e/ou manutenção, tendo como consequência máxima o descadastramento e perda dos benefícios da campanha. Haja sempre com bom senso.
+				</div>
+			</div>
+			<div class='item odd'>
+				<div class='question'>
+					Sou funcionário da empresa concorrente que deseja anunciar no meu carro, algum problema?
+					<div class='arrow'></div>
+				</div>
+				<div class='answer'>
+					Para a Publicidade Inteligente não há problemas, porém é necessário avaliar se haverá alguma retaliação por parte do seu empregador. Nós não interferimos no processo e não podemos nos responsabilizar ou negociar com seu empregador.
+				</div>
+			</div>
+			<div class='item even'>
+				<div class='question'>
+					Se eu for pego num blitz do bafômetro ou for culpado de um acidente de trânsito, posso sofrer algum processo da marca que anunciou no meu carro?
+					<div class='arrow'></div>
+				</div>
+				<div class='answer'>
+					Não. O processo, se houver, será dos órgãos públicos competentes e os envolvidos no acidente e/ou incidente. Porém, se houver consequências como processo ou cassação do direito de dirigir, infelizmente seu perfil será descadastrado.
+				</div>
+			</div>
+			<div class='item odd'>
+				<div class='question'>
+					Eu posso ser multado por exibir propaganda nas laterais do meu carro?
+					<div class='arrow'></div>
+				</div>
+				<div class='answer'>
+					Depende da cidade. Em locais onde a lei cidade limpa é vigente, não é permitido veicular campanhas publicitárias, porém a Publicidade Inteligente sempre monitora as permissões e somente irá te oferecer o que for compatível com a legislação para que não haja qualquer problema.
+				</div>
+			</div>
+			<div class='item even'>
+				<div class='question'>
+					Eu não me sinto à vontade em veicular campanhas de determinadas marcas e produtos. Quem pode anunciar no meu automóvel?
+					<div class='arrow'></div>
+				</div>
+				<div class='answer'>
+					A campanha publicitária será oferecida ao associado, que irá avaliar se quer ou não aderir à veiculação. Lembre-se você é um parceiro associado e não um funcionário. Por isso, tem todo direito de aceitar ou recusar o tipo de anuncio que será colocado no seu veículo.
+				</div>
+			</div>
+            <div class='item even'>
+                <div class='question'>
+                    Como será realizado o pagamento da campanha que eu aderi?
+                    <div class='arrow'></div>
+                </div>
+                <div class='answer'>
+                    Uma vez por mês, você deverá realizar uma vistoria, que é rápida e muito simples, nela será verificado as condições do seu adesivo e as funcionalidades do rastreador, após a vistoria realizada, o sistema irá liberar o seu pagamento, que será pago através de depósito bancário na conta corrente cadastrada.
+                </div>
+            </div>
+
+		</div>
+	</div>
+
+</div>

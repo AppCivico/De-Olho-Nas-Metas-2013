@@ -1,0 +1,46 @@
+[%-CALL assets.include("js/jquery.maskedinput.js")%]
+[%-CALL assets.include("js/forms.js")%]
+
+<div class="page-header bg-dark">
+	<h3>Contato</h3>
+	<p>Preencha o formulário abaixo para entrar em contato</p>
+</div>
+<div class="row page-content">
+	<form class="form-horizontal" id="contact" method="post" action="/form/contact">
+	<fieldset>
+	        [%IF error_msg %]
+            <div class="row page-content">
+                <div class="alert alert-error"><p>[%error_msg%]</p></div>
+            </div>
+        [%END%]
+        [%IF status_msg %]
+            <div class="alert"><p>[%status_msg%]</p></div>
+        [%END%]
+        [%input_text('name','Nome completo', req=>1)|none%]
+        <span class="contact_error" id="name_err">Este campo não pode ser vazio</span>
+        [%input_text('email','Email', req=>1)|none%]
+        <span class="contact_error" id="email_err">Este campo não pode ser vazio</span>
+		[%input_text('telephone_number','Telefone', classes => ['span3', 'mobile_phone'], req=>1)|none%]
+		<span class="contact_error" id="tel_err">Este campo não pode ser vazio</span>
+		[%select_field('motive', 'Motivo do contato',  array => [
+			['Dúvida','Dúvida'],
+			['Sugestão','Sugestão'],
+			['Crítica','Crítica'],
+			['Parcerias','Parcerias'],
+			['Outros','Outros'],
+		], req=>1)|none%]
+		<span class="contact_error" id="motive_err">Este campo não pode ser vazio</span>
+		<div class="control-group ">
+			<label class="control-label" for="elm_comment">Comentário</label>
+			<div class="controls">
+				<div class="">
+					<textarea id="elm_comment" name="comment" class="span3" rows="3" cols="40"></textarea>
+				</div>
+			</div>
+		</div>
+		<div class="form-actions">
+			<button type="submit" class="btn btn-success" data-loading-text="Processando...">Enviar</button>
+			<button type="reset" class="btn">Limpar formulário</button>
+		</div>
+    </fieldset>
+</div>

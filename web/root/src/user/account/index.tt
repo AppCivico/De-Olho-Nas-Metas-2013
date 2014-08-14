@@ -1,0 +1,16 @@
+<div class="page-header bg-dark">
+	<h3>Meus dados</h3>
+</div>
+<div class="row page-content">
+	<dl class="profile">
+		<dt>Nome</dt>
+		<dd>[%driver.name%] [%driver.last_name%]</dd>
+
+		<dt>Data de nascimento</dt>
+		<dd>[%driver.birth_date%]</dd>
+
+		<dt>CPF</dt>
+		<dd>[%driver.cpf%]</dd>
+
+	</dl>
+</div>
