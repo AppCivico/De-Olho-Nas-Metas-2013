@@ -1,0 +1,64 @@
+<content class="processo">
+	<div class="content-yellow">
+		<div class="container">
+			<p>
+				<form action="/promessas" method="post" class="select-filter">
+					<div class="selectbox">
+						<img src="/static/images/icon-01.png" border="0">
+						[%select_field('state_id',false, array => select_states, req=>0, default_first=>'Selecione Brasil ou Estados')|none%]
+					</div>
+					<div class="selectbox">
+						<img src="/static/images/icon-02.png" border="0">
+						[%select_field('candidate_id',false, array => select_candidates, req=>0, default_first=>'Escolha o candidato', classes	=> ['form-control', 'disabled'])|none%]
+					</div>
+					<div class="selectbox">
+						<img src="/static/images/icon-03.png" border="0">
+						[%select_field('category_id',false, array => select_categories, req=>0, default_first=>'Navegue pelos temas')|none%]
+					</div>
+					<button type="submit" class="btn btn-default">ver promessas</button>
+				</form>
+			</p>
+		</div>
+	</div>
+	<div class="content-white">
+		<div class="container processo-info">
+			<div class="row">					
+				<div class="col-xs-12">
+					<div class="item text-center">
+						<div class="title">Tribunal Regional Eleitoral</div>
+						<div class="state">[%state_electoral_processes.0.electoral_regional_court.state.name%]</div>
+					</div>
+				</div>
+			</div>
+				
+			[%IF state_electoral_processes.size > 0%]
+<!-- 				<div class="value">[%#state_electoral_processes.size#%]</div> -->
+<!-- 				<div class="legend">processo[%#IF state_electoral_processes.size > 1#%]s[%#END#%]</div> -->
+				[%FOREACH sep IN state_electoral_processes%]
+				<div class="row">
+					<div class="texto">
+						[%sep.content%]
+					</div>
+					<div class="info">
+						Fonte: [%sep.source%]<br />
+					</div>
+					[%IF sep.external_link%]
+						<div class="info">
+							Link externo: <a href="//[%sep.external_link%]" target="_blank">[%sep.external_link%]</a><br />
+						</div>
+					[%END%]
+					<div class="info">
+						Data de registro: [%format_date_to_human(sep.created_at)%]<br />
+					</div>
+				</div>
+				<hr>
+				[%END%]
+			[%ELSE%]
+				<div class="row text-center">
+				Nenhum processo encontrado
+				</div>
+			[%END%]
+		</div>
+	</div>
+	[%INCLUDE parts/green_box.tt  %]
+</content>

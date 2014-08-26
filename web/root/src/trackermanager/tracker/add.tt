@@ -1,0 +1,30 @@
+[%IF !NO_TITLE%]
+<h2>Adicionar novo rastreador</h2>
+[%END%]
+<form class="form-horizontal" method="post" action="/tracker-manager/form/tracker">
+<div class="tab-pane active" id="tab1">
+    <fieldset>
+[%IF NO_TITLE%]
+<input type="hidden" name="redirect_to_dashboard" value="1"/>
+[%END%]
+
+    [%input_text('code','Código')|none%]
+    [%input_text('iccid','ICCID')|none%]
+    [%input_text('mobile_number','Número do telefone')|none%]
+    [%select_field('status', 'Status',  array => [
+        [1,'Ativo'],
+        [0,'Inativo'],
+        [2, 'Vinculado']
+        ])|none%]
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary" data-loading-text="Processando...">Continuar</button>
+            [%IF !NO_TITLE%]
+            [%href = c.uri_for_action('/trackermanager/tracker/index')%]
+            <a href="[%href%]" class="btn btn-right">Voltar para lista de rastreadores</a>
+            [%END%]
+        </div>
+    </fieldset>
+
+</div>
+</form>

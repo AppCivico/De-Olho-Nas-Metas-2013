@@ -1,0 +1,19 @@
+[%-CALL assets.include("js/forms.js")%]
+<div>
+	<div class="rows">
+	<h2 class="sub-header">Editar processo eleitoral - TSE</h2>
+		<form role="form" method="post" class="form-horizontal" action="/admin/form/federal_electoral_process/[%fep_obj.id%]">
+			[%input_text('name','Nome', req=>1, value=>fep_obj.name)|none%]
+			<div class="form-group">
+				<label class="col-lg-12" for="elm_description">Descrição</label>
+				<div class="col-lg-12">
+					<textarea class="form-control" rows="3" name="content">[%fep_obj.content%]</textarea>
+				</div>
+			</div>
+			<input type="hidden" value="[%fep_obj.electoral_superior_court_id%]" name="electoral_superior_court_id"></input>
+			[%input_text('external_link','Link externo', value=>fep_obj.external_link, req=>1)|none%]
+			[%input_text('source','Fonte', req=>1, value=>fep_obj.source)|none%]
+		<button type="submit" class="btn btn-success pull-right">Salvar</button>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,29 @@
+<script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqzgv3oZ3sIleufGf1AoskyItrYun-GRA&sensor=false&region=br&libraries=visualization">
+</script>
+
+[%-CALL assets.include("js/maps.js")%]
+[%-CALL assets.include("js/bootstrap-datepicker.js")%]
+[%-CALL assets.include("js/bootstrap-datepicker.pt-BR.js")%]
+[%-CALL assets.include("js/forms.js")%]
+[%-CALL assets.include("css/datepicker.css")%]
+
+<div class="page-header bg-dark">
+    <h3>Teste de rastreadores</h3>
+</div>
+<div class="row page-content">
+    <form class="form-horizontal" method="post" id="form_tracker">
+            [%select_field('tracker_id', 'Escolha um rastreador',  array => trackers_obj)|none%]
+            [%input_text('date', 'Escolha uma data', classes => ['span3', 'datepicker'])|none%]
+            
+            <button type="submit" id="search_track" class="btn btn-success" data-loading-text="Processando...">Pesquisar</button>
+            <p id="empty_tracker" style="display:none;"> Não existem registros para esta data<p>
+    </form>
+    <div id="x-container" class="map-grid">
+        <div class="x-dummy"></div>
+            <div class="x-element">
+                <div id="map_canvas" style="width:100%; height:100%" class="map-route"></div>
+            </div>
+        </div>
+    </div>
+</div>

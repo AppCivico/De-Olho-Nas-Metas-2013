@@ -1,0 +1,35 @@
+[%IF !result.error%]
+    <h3>Verificação</h3>
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <td>
+                        Marca: [%vehicle_token_check.brand.name%]
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Modelo: [%vehicle_token_check.model.name%]
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Placa: [%vehicle_token_check.car_plate%]
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Ano: [%vehicle_token_check.manufacture_year%]
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    <h3>Confirmação</h3>
+    <form class="form-horizontal" method="post" action="/tracker-manager/form/activation">
+        [%select_field('tracker', 'Rastreador',  array => trackers)|none%]
+        <input type="hidden" name="vehicle_id" value="[%result.id%]">
+        <button type="submit" class="btn btn-primary">Ativar rastreador para esse carro</button>
+    </form>
+[%ELSE%]
+    <p>Informações inválidas</p>
+[%END%]

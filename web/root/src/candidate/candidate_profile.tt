@@ -1,0 +1,53 @@
+<div class="row">
+	<div class="col-xs-3 candidato-image img-circle">
+		<img src="/static/images/candidates/[%candidate_obj.id%]/[%candidate_obj.img_profile%]">
+	</div>
+	<div class="col-xs-9">
+		<div class="candidato-name">[%candidate_obj.name%]</div>
+		[%IF election_campaign_obj.political_position.position%]
+			[%IF candidate_obj.gender == 'm'%]
+				<div class="candidato-role">Candidato à [%election_campaign_obj.political_position.position%]</div>
+			[%ELSIF candidate_obj.gender == 'f'%]
+				<div class="candidato-role">Candidata à [%election_campaign_obj.political_position.position%]</div>
+			[%END%]
+		[%ELSE%]
+			<div class="candidato-role">Cargo concorrido não informado</div>
+		[%END%]
+		<div class="row info">
+			<div class="col-sm-4 label">VICE</div>
+			<div class="col-sm-8 value">[%candidate_obj.vice%]</div>
+		</div>
+		<div class="row info">
+			<div class="col-sm-4 label">PARTIDO</div>
+			<div class="col-sm-8 value">[%candidate_obj.political_party.name%] ([%candidate_obj.political_party.acronym%])</div>
+		</div>
+		[%IF coalition_parties.size > 0%]
+			<div class="row info">
+				<div class="col-sm-4 label">COLIGAÇÃO</div>
+				<div class="col-sm-8 value">[%coalition_info.0.name%] - [%coalition_parties.0%]</div>
+			</div>
+		[%END%]
+		[%IF  election_campaign_obj.elected_candidate_id and election_campaign_obj.elected_candidate_id == candidate_obj.id%]
+			<div class="row info">
+				<div class="col-sm-4 label">ELEITO</div>
+				<div class="col-sm-8 value">Sim</div>
+			</div>
+		[%ELSIF election_campaign_obj.elected_candidate_id%]
+			<div class="row info">
+				<div class="col-sm-4 label">ELEITO</div>
+				<div class="col-sm-8 value">Não</div>
+			</div>
+		[%END%]
+		[%IF runoff %]
+			<div class="row info">
+				<div class="col-sm-4 label">SEGUNDO TURNO</div>
+				<div class="col-sm-8 value">Sim</div>
+			</div>
+		[%END%]
+	</div>
+</div>	
+<div class="row text-center">
+	[%IF candidate_obj.government_program%]
+		<a href="/programa-de-governo/[%candidate_obj.id%]" class="btn btn-default btn-yellow-green">Programa de governo</a>
+	[%END%]
+</div>

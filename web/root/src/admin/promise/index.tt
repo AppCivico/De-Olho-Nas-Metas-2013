@@ -1,0 +1,41 @@
+<div>
+<div class="rows">
+<h2 class="sub-header">Promessas cadastradas</h2>
+<div class="table-responsive">
+	[%IF promises.size > 0%]
+	<table class="table table-striped">
+		<thead>
+			<tr>
+                <th>Nome</th>
+                <th>Candidato</th>
+                <th>Categoria</th>
+<!--                 <th>Campanha eleitoral</th> -->
+                <th>Ações</th>
+			</tr>
+		</thead>
+		<tbody>
+			[%FOREACH promise IN promises%]
+				<tr>
+					<td>[%promise.name%]</td>
+					<td>[%promise.candidate.name%]</td>
+					<td>[%promise.category.name%]</td>
+					<!--<td>[%promise.election_campaign.political_position.name%]</td>-->
+					<td>
+						<a href="/admin/promise/[%promise.id%]">Editar</a> |
+						<a href="/admin/form/remove_promise/[%promise.id%]">Excluir</a>
+					</td>
+				</tr>
+            [%END%]
+		</tbody>
+	</table>
+	[%ELSE%]
+		<h4>Nenhuma promessa cadastrada</h4>
+	[%END%]
+	
+	<a href="/admin/promise/new">
+	<button type="button" class="btn btn-primary pull-right">Adicionar nova promessa</button>
+	</a>
+</div>
+[%PROCESS pagination.tt  %]
+</div>
+</div>

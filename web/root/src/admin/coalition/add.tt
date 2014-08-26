@@ -1,0 +1,14 @@
+[%-CALL assets.include("js/admin.js")%]
+[%-CALL assets.include("js/address.js")%]
+<div>
+	<div class="rows">
+	<h2 class="sub-header">Adicionar coligação partidária</h2>
+	<form role="form" method="post" class="form-horizontal" action="/admin/form/coalition">
+		[%input_text('name','Nome', req=>1)|none%]
+		[%select_field('political_position_id','Escolha o cargo concorrido', array => select_political_positions, req=>0)|none%]
+		<input type="hidden" name="country_id" value="1"></input>
+		<div id="coalition"></div>
+		<button type="submit" class="btn btn-success pull-right">Salvar e vincular partidos</button>
+	</form>
+	</div>
+</div>

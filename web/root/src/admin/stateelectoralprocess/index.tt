@@ -1,0 +1,39 @@
+<div>
+<div class="rows">
+<h2 class="sub-header">Processos cadastrados - TRE</h2>
+<div class="table-responsive">
+	[%IF state_electoral_processes.size > 0%]
+	<table class="table table-striped">
+		<thead>
+			<tr>
+                <th>Nome</th>
+                <th>Fonte</th>
+                <th>Estado</th>
+                <th>Ações</th>
+			</tr>
+		</thead>
+		<tbody>
+			[%FOREACH sep IN state_electoral_processes%]
+				<tr>
+					<td>[%sep.name%]</td>
+					<td>[%sep.source%]</td>
+					<td>[%sep.electoral_regional_court.state.name%]
+					<td>
+						<a href="/admin/state_electoral_process/[%sep.id%]">Editar</a> |
+						<a href="/admin/form/remove_state_electoral_process/[%sep.id%]">Excluir</a>
+					</td>
+				</tr>
+            [%END%]
+		</tbody>
+	</table>
+	[%ELSE%]
+		<h4>Nenhum processo cadastrado</h4>
+	[%END%]
+	
+	<a href="/admin/state_electoral_process/new">
+	<button type="button" class="btn btn-primary pull-right">Adicionar novos</button>
+	</a>
+</div>
+[%PROCESS pagination.tt  %]
+</div>
+</div>

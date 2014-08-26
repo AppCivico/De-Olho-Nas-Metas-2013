@@ -1,0 +1,31 @@
+[%IF !NO_TITLE%]
+<div class="page-header bg-dark">
+    <h3>Adicionar nova versão de firmware</h3>
+</div>
+[%END%]
+<div class="row page-content">
+    <form class="form-horizontal" method="post" action="/tracker-manager/form/new_firmware" enctype="multipart/form-data">
+    <div class="tab-pane active" id="tab1">
+        <fieldset>
+    [%IF NO_TITLE%]
+    <input type="hidden" name="redirect_to_dashboard" value="1"/>
+    [%END%]
+        [%input_text('version','Versão')|none%]
+        [%select_field('status', 'Status',  array => [
+            [1,'Ativo'],
+            [2,'Inativo'],
+        ])|none%]
+        [%input_text('file','Arquivo', type => 'file')|none%]
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success" data-loading-text="Processando...">Salvar</button>
+            [%IF !NO_TITLE%]
+            [%href = c.uri_for_action('/user/document/index')%]
+            <a href="[%href%]" class="btn">Voltar para lista de firmwares</a>
+            [%END%]
+        </div>
+        </fieldset>
+
+    </div>
+    </form>
+</div>

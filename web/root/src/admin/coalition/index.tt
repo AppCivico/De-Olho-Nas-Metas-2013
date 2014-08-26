@@ -1,0 +1,44 @@
+<div>
+<div class="rows">
+<h2 class="sub-header">Coligações partidárias cadastradas</h2>
+<div class="table-responsive">
+	[%IF coalitions.size > 0%]
+	<table class="table table-striped">
+		<thead>
+			<tr>
+                <th>Ano</th>
+                <th>Nome</th>
+                <th>Estado</th>
+                <th>Cidade</th>
+                <th>Cargo disputado</th>
+                <th>Ações</th>
+			</tr>
+		</thead>
+		<tbody>
+			[%FOREACH ct IN coalitions%]
+				<tr>
+					<td>[%ct.election_campaign.year%]</td>
+					<td>[%ct.name%]</td>
+					<td>[%ct.election_campaign.state.uf%]</td>
+					<td>[%ct.election_campaign.city.name%]</td>
+					<td>[%ct.election_campaign.political_position.position%]</td>
+					
+					<td>
+						<a href="/admin/coalition/[%ct.id%]">Editar</a> |
+						<a href="/admin/form/remove_coalition/[%ct.id%]">Excluir</a>
+					</td>
+				</tr>
+            [%END%]
+		</tbody>
+	</table>
+	[%ELSE%]
+		<h4>Nenhuma coligação cadastrada</h4>
+	[%END%]
+	
+	<a href="/admin/coalition/new">
+	<button type="button" class="btn btn-primary pull-right">Adicionar nova coligação</button>
+	</a>
+</div>
+[%PROCESS pagination.tt  %]
+</div>
+</div>

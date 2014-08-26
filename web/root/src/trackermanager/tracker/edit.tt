@@ -1,0 +1,68 @@
+[%IF !NO_TITLE%]
+<h2>Editar rastreador</h2>
+[%END%]
+<form class="form-horizontal" method="post" action="/tracker-manager/form/tracker/[%tracker_obj.id%]">
+<div class="tab-pane active" id="tab1">
+    <fieldset>
+        [%IF NO_TITLE%]
+            <input type="hidden" name="redirect_to_dashboard" value="1"/>
+        [%END%]
+        [%input_text('code','Código', value => tracker_obj.code)|none%]
+        [%select_field('status', 'Status', value => tracker_obj.status  array => [
+            [1,'Ativo'],
+            [0,'Inativo']
+            [2, 'Vinculado']
+            ])|none%]
+
+        [%IF tracker_obj.status == 2 %]
+            <h4> Dados do associado </h4>
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <td>
+                            Nome: [%associated_driver.name%]
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            CPF: [%associated_driver.cpf%]
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Veículo: [%associated_car.brand.name%] - [%associated_car.model.name%]
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Cor: [%associated_car.color.name%]
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Ano: [%associated_car.manufacture_year%]
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Placa: [%associated_car.car_plate%]
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        [%ELSIF tracker_obj.status == 1%]
+            Dispositivo disponível para instalação
+        [%ELSE%]
+            Dispositivo indisponível para instalação
+        [%END%]
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary" data-loading-text="Processando...">Continuar</button>
+            [%IF !NO_TITLE%]
+            [%href = c.uri_for_action('/trackermanager/tracker/index')%]
+            <a href="[%href%]" class="btn btn-right">Voltar para lista de rastreadores</a>
+            [%END%]
+        </div>
+    </fieldset>
+</div>
+</form>
