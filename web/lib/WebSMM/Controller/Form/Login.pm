@@ -10,7 +10,7 @@ sub base : Chained('/form/root') : PathPart('') : CaptureArgs(0) {
 
 sub login : Chained('base') : PathPart('login') : Args(0) {
     my ( $self, $c ) = @_;
-
+    
     if ( $c->authenticate( $c->req->params ) ) {
         if ( $c->req->param('remember') ) {
             $c->session_time_to_live(2629743)    # 1 month
@@ -33,10 +33,7 @@ sub after_login {
     if ( grep { /^user$/ } $c->user->roles ) {
         $url = '/user/dashboard/index';
     }
-    elsif ( grep { /^admin-tracker$/ } $c->user->roles ) {
-        $url = '/trackermanager/dashboard/index';
-    }
-    elsif ( grep { /^admin$/ } $c->user->roles ) {
+    elsif ( grep { /^admin|organization$/ } $c->user->roles ) {
         $url = '/admin/dashboard/index';
     }
     

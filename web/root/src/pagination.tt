@@ -71,12 +71,12 @@ END;
 %]
 [%IF (links.size > 2)%]
 <div class="pagination pagination-centered">
-<ul>
+<ul class="pagination">
 <li class="previous [% IF (!previous_page) %]disabled[%END%]">
 [% IF (!previous_page) %]
-<span>&lt;</span>
+<span>&laquo;</span>
 [% ELSE %]
-<a href="[%pag_req.uri_with({page => previous_page})%]">&lt;</a>
+<a href="[%pag_req.uri_with({page => previous_page})%]">&laquo;</a>
 [%END%]
 </li>
 
@@ -99,9 +99,9 @@ END;
 [%END%]
     <li [% IF (!next_page)%] class="disabled" [%END%] >
     [% IF (!next_page)%]
-        <span>&gt;</span>
+        <span>&raquo;</span>
     [%ELSE%]
-        <a href="[%pag_req.uri_with({page => next_page})%]">&gt;</a>
+        <a href="[%pag_req.uri_with({page => next_page})%]">&raquo;</a>
     [%END%]
     </li>
 </ul>

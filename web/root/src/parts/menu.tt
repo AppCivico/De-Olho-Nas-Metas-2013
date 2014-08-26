@@ -1,5 +1,6 @@
 <div class="masthead row">
 	<div class="span12">
+		<div class="logo pull-left"><img src="/static/img/logo.png"/></div>
 		<div class="pull-right">
 			<ul class="menu-top">
 				<li class="[% IF "/${c_req_path}" == '/' %]active[%END%] odd"><a href="/" class="white shadow"><i class="icon-home"></i></a></li>

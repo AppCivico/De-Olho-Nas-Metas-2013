@@ -1,205 +1,107 @@
 var $admin = function () {
-
-    function getCostumers(form) {
-        var $data;
-
-        if (form) {
-            $data = form;
-        }
-
-        $.ajax({
-            url: "/admin/campaign/search_customer",
-            dataType: 'html',
-            data: $data,
-            success: function (result) {
-                $('#modal_body').html(result);
-            },
-            error: function (err) {
-                console.log(err);
-            },
-            complete: function () {
-                $('.customer_choice').click(function () {
-                    $('#elm_customer').val($(this).val());
-                    $('#customer_name').text(($(this).parent().text()));
-                });
-            }
-        });
-    }
-
-    function analiseDriverDocuments(document_id, element) {
-        var $url;
-        if (element == 'accept') {
-            $url = '/admin/validate-driver-documents/validate/' + document_id;
-        } else {
-            $url = '/admin/validate-driver-documents/reject/' + document_id;
-        }
-
-        $.ajax({
-            url: $url,
-            dataType: 'json',
-            success: function (result) {
-                $('#status_' + document_id).text(result.status);
-                alert('Documento ' + result.status);
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
-
-    }
-
-    function sendInvitation() {
-        var $campaign_id = $('#campaign_id').val();
-        var $vehicle_id = $('#vehicle_id').val();
-
-        $.ajax({
-            url: '/admin/form/send_invitation',
-            data: {
-                campaign_id: $campaign_id,
-                vehicle_id: $vehicle_id
-            },
-            dataType: 'json',
-            success: function (result) {
-                $('#sent_txt').html('<dt>Convite enviado</dt>');
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
-
-    }
-
-    function getAssociatedLatLnt() {
-        $.ajax({
-            url: '/admin/associated_routes/get_positions',
-            dataType: 'json',
-            success: function (result) {
-                $maps.buildHeatMap(result);
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
-    }
-    
-    function getRealTimePosition() {
-		
-		var $control;
-		
+	
+	function getCandidates(party_id) {
 		$.ajax({
-			url: '/user/vehicle_tracker/get_real_time_position',
-			dataType: 'json',
+			url: '/admin/election_campaign/filter_candidate/'+party_id,
+			dataType: 'html',
 			success: function (result) {
-				if(result.lat && result.lng) {
-					$('#date_position').text(result.date);
-					$('#speed').text(result.speed+' Km/h');
-					$('#hour').text(result.hour);
-					
-					$maps.real_time_position(result.lat, result.lng);
-					$control = 0;
+				if( result ) {
+					$('#candidates').html(result);
 				} else {
-					alert('Não foram encontradas posições para esse veículo.');
-					
-					$control = 1;
+					$('#candidates').html('');
+					alert('Nenhum candidato cadastrado');
+				}
+			},
+			error: function (err) {
+				console.log(err);
+			},
+		});
+	}
+
+	function getElectionCampaigns(position_id) {
+		$.ajax({
+			url: '/admin/coalition/filter_election_campaign',
+			dataType: 'html',
+			data: { political_position_id: position_id },
+			success: function (result) {
+				console.log(result)
+				if( result ) {
+					$('#coalition').html(result);
+				} else {
+					$('#coalition').html('');
+					alert('Nenhuma campanha eleitoral cadastrada');
 				}
 			},
 			error: function (err) {
 				console.log(err);
 			},
 			complete: function() {
-				$("#upload_position_real").button('reset');
-				if(!$control) {
-					assignReload();
+				if($('#elm_state_id').length) {
+					$('#elm_state_id').on('change', function () {
+						$address.get_cities($(this).val());
+					});
 				}
 			}
 		});
-		
-		return $control;
 	}
 	
-	function assignReload() {
-		setInterval(function(){
-			$admin.getRealTimePosition();
-		},180000); //3 minutos
+	function filterCandidates(param) {
+		$.ajax({
+			url: "/filter_candidates_by_ec",
+			data:{election_campaign_id: param},
+			dataType: 'html',
+			success: function (result) {
+				$("#elm_candidate_id").html(result);
+			},
+			error: function (err) {
+				console.log(err);
+			},
+			complete: function() {
+				$('#elm_candidate_id').removeAttr('disabled');
+			}
+		});
 	}
 
-    return {
-        getCostumers: getCostumers,
-        analiseDriverDocuments: analiseDriverDocuments,
-        sendInvitation: sendInvitation,
-        getAssociatedLatLnt: getAssociatedLatLnt,
-		getRealTimePosition: getRealTimePosition
+	return {
+		getCandidates: getCandidates,
+		getElectionCampaigns: getElectionCampaigns,
+		filterCandidates: filterCandidates
     };
 }();
 
 $(document).ready(function () {
-    if ($('#customer_list').length) {
-        $('#customer_list').click(function () {
-            $admin.getCostumers();
-        });
-    }
-
-    $('#search_customer').on('submit', function () {
-        getCostumers($(this).serialize());
-    });
-
-    var $check_all = $('#check_all');
-    if ($check_all.length) {
-        $check_all.on('click', function () {
-            if ($(this).attr('checked') == 'checked') {
-                $(this).removeAttr('checked');
-                $('.check_driver').attr('checked', false);
-            } else {
-                $(this).attr('checked', 'checked');
-                $('.check_driver').attr('checked', true);
-            }
-        });
-    }
-
-    var $approve_docs = $('.approve_docs');
-    if ($approve_docs.length) {
-        $approve_docs.click(function () {
-            var $info = $(this).attr('id').split('_');
-
-            $admin.analiseDriverDocuments($info[1], $info[0]);
-        });
-    }
-
-    var $send_invitation = $('#send_invitation');
-    if ($send_invitation.length) {
-        $send_invitation.click(function () {
-            $admin.sendInvitation();
-        });
-    }
-
-    var $cancel_campaign = $('#cancel_campaign');
-    if ($cancel_campaign.length) {
-        $cancel_campaign.click(function () {
-            $('#campaign_status').val(7);
-        });
-    }
-
-    $admin.getAssociatedLatLnt();
-
-    var $search_points = $('#search_points');
-    if ($search_points.length) {
-        $search_points.click(function () {
-            $maps.searchAssociateds();
-        });
-    }
-    
-    var $report_driver = $('#report_driver');
-    if($report_driver.length) {
-		$('#search_driver_report').click(function(){
-			$report_driver.submit();
+	
+	$('.disabled').attr('disabled', 'disabled');
+	
+	if( $('#candidates').length ) {
+		$('#elm_political_party').change(function(){
+			$admin.getCandidates($(this).val());
 		});
-    }
-    
-    var $real_time_map = $('#real_time_map');
-	if($real_time_map.length) {
-		$admin.getRealTimePosition();
-		$('#upload_position_real').click(function(){
-			$admin.getRealTimePosition();
+	}
+	
+	if( $('#elm_political_position_id').length ) {
+		$('#elm_political_position_id').change(function() {
+			$admin.getElectionCampaigns($(this).val());
+		});
+	}
+	
+	$("[data-confirm]").click(function (event) {
+		var confirmPrompt = event.currentTarget.attributes['data-confirm'].value;
+		if (window.confirm(confirmPrompt)) {
+			return 1;
+		} else {
+			event.preventDefault();
+		}
+		
+		return 0;
+	});
+	
+	var $election_campaign = $('#elm_election_campaign_id');
+	if( $election_campaign.length ) {
+		$election_campaign.change(function(){
+			if($(this).val()) {
+				$admin.filterCandidates($(this).val());
+			}
 		});
 	}
 

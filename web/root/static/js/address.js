@@ -91,10 +91,10 @@ var $address = function () {
             },
             dataType: 'html',
             success: function (result) {
-                $("#cities").html(result);
+                $("#elm_city_id").html(result);
             },
             error: function (err) {
-                alert(err);
+                console.log(err);
             },
             complete: function () {
                 $me.removeClass('input-loading');
@@ -159,6 +159,12 @@ $(document).ready(function () {
     if ($('.postal_code').val()) {
         $address.get_address($('.postal_code'), true);
     }
+    
+    if ($('#elm_state_id').val() != '') {
+		$address.get_cities($('#elm_state_id').val());
+	}
+	
+	
 //     else {
 //         if ($('#elm_state_id').val() != '') {
 //             $address.get_cities($('#elm_state_id').val());

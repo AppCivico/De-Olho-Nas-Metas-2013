@@ -1,20 +1,59 @@
-<div class="sidebar-nav" style="width: 130px" data-spy="affix" data-offset-top="0">
-    <ul class="well nav nav-list">
-        <li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]><a href="/admin/dashboard">Dashboard</a></li>
-
-        <li class="nav-header">Clientes</li>
-        <li><a href="/admin/customer"><i class="icon-th-list"></i>Listar</a></li>
-        <li><a href="/admin/customer/new"><i class="icon-user"></i>Cadastrar</a></li>
-        <li class="nav-header">Campanhas</li>
-        <li><a href="/admin/campaign"><i class="icon-th-list"></i>Listar</a></li>
-        <li><a href="/admin/associated_routes"><i class="icon-road"></i>Cadastrar</a></li>
-        <li class="nav-header">Associados</li>
-        <li><a href="/admin/driver"><i class="icon-user"></i>Motoristas</a></li>
-        <li><a href="/admin/pre-user"><i class="icon-list"></i>Pré-cadastros</a></li>
-        <li class="nav-header">Gerenciamento</li>
-        <li><a href="/admin/user"><i class="icon-user"></i>Usuários</a></li>
-        <li class="nav-header">Relatórios</li>
-        <li><a href="/admin/reports/driver-by-region"><i class="icon-user"></i>Motoristas por região</a></li>
-        <li><a href="/logout">Sair</a></li>
-    </ul>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-3 col-md-2 sidebar">
+			<ul class="nav nav-sidebar">
+				<li class=""><a href="/admin/dashboard">Dashboard</a></li>
+				<!--<li><a href="#">Perfil</a></li>
+				<li><a href="#">Usuários</a></li>-->
+				[%IF role_controller == 'admin'%]
+					[%href = c.uri_for_action('/admin/organization/index')%]
+					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
+						<a href="[%href%]">Organizações</a>
+					</li>
+				[%END%]
+			</ul>
+			<ul class="nav nav-sidebar">
+				[%href = c.uri_for_action('/admin/politicalparty/index')%]
+				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
+					<a href="[%href%]">Partidos</a>
+				</li>
+				[%href = c.uri_for_action('/admin/candidate/index')%]
+				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
+					<a href="[%href%]">Candidatos</a>
+				</li>
+				[%href = c.uri_for_action('/admin/electioncampaign/index')%]
+				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
+					<a href="[%href%]">Campanhas eleitorais</a>
+				</li>
+				[%href = c.uri_for_action('/admin/coalition/index')%]
+				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
+					<a href="[%href%]">Coligações</a>
+				</li>
+				[%IF role_controller == 'admin'%]
+				[%href = c.uri_for_action('/admin/category/index')%]
+				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
+					<a href="[%href%]">Categorias</a>
+				</li>
+				
+				[%href = c.uri_for_action('/admin/sourcetype/index')%]
+				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
+					<a href="[%href%]">Tipos de fonte</a>
+				</li>
+				[%END%]
+				[%href = c.uri_for_action('/admin/promise/index')%]
+				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
+					<a href="[%href%]">Promessas</a>
+				</li>
+				[%href = c.uri_for_action('/admin/federalelectoralprocess/index')%]
+				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
+					<a href="[%href%]">Processo eleitoral - TSE</a>
+				</li>
+				[%href = c.uri_for_action('/admin/stateelectoralprocess/index')%]
+				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
+					<a href="[%href%]">Processo eleitoral - TRE</a>
+				</li>
+<!-- 				<li><a href="">More navigation</a></li> -->
+			</ul>
+		</div>
+	</div>
 </div>

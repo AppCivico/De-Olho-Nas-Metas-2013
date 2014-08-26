@@ -3,6 +3,7 @@ use utf8;
 
 use Moose;
 use namespace::autoclean;
+use Data::Dumper;
 
 BEGIN { extends 'Catalyst::Controller::REST'; }
 __PACKAGE__->config( default => 'application/json', );
@@ -14,8 +15,8 @@ sub api_key_check : Private {
     my ( $self, $c ) = @_;
 
     my $api_key = $c->req->param('api_key')
-      || ( $c->req->data ? $c->req->data->{api_key} : undef );
-
+      || ( $c->req->header('X-API-Key') );
+    
     unless ( ref $c->user eq 'SMM::TestOnly::Mock::AuthUser' ) {
         $self->status_forbidden( $c, message => "access denied" ), $c->detach
           unless defined $api_key;
@@ -24,12 +25,14 @@ sub api_key_check : Private {
             {
                 api_key      => $api_key,
                 valid_until  => { '>=' => \'now()' },
-                valid_for_ip => $c->req->address
+                valid_for_ip => [ $c->req->address, undef ]
             }
         )->first;
+
+
         my $user = $user_session ? $c->find_user( { id => $user_session->user_id } ) : undef;
 
-        $self->status_forbidden( $c, message => "access denied", ),
+        $self->status_forbidden( $c, message => "key expired", ),
 
           $c->detach unless defined $api_key && $user;
 

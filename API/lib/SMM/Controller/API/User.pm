@@ -13,9 +13,9 @@ __PACKAGE__->config(
     # result_attr => { prefetch => '', ... },
     object_key => 'user',
 
-    update_roles => [qw/superadmin/],
-    create_roles => [qw/superadmin/],
-    delete_roles => [qw/superadmin/],
+    update_roles => [qw/superadmin admin/],
+    create_roles => [qw/superadmin admin/],
+    delete_roles => [qw/superadmin admin/],
 
 );
 with 'SMM::TraitFor::Controller::DefaultCRUD';

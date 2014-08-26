@@ -76,6 +76,7 @@ sub stash_result {
                 exists $opts{body} ? ( body => $opts{body} ) : ()
             );
         };
+	print STDERR $res->as_string;
     }
     if ($@) {
         $c->stash( error => "$method $endpoint", error_content => $@ );
@@ -155,8 +156,6 @@ sub stash_result {
 
     if ( $c->debug ) {
 
-        #    use DDP;
-        #   p $obj;
     }
 
     return 1;
@@ -213,6 +212,7 @@ sub _do_http_req {
 
     my $method = uc $args{method};
     my $res;
+    
 
     if ( $method =~ /^GET/o ) {
         $res = $self->furl->get( $args{url}, $args{headers} );

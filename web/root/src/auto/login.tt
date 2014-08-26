@@ -1,43 +1,18 @@
-LOOLLLLLLLLLLLLLLL
-<div class="row"><div class="span12">
+[%-CALL assets.include("css/signin.css")%]
 
-    <div class="page-header bg-dark">
-        <h1>Entrar</h1>
-        <p>Informe seu e-mail e senha de acesso</p>
-    </div>
-
-	<div class="tab-pane active page-content" id="login">
-		<div class="row">
-			<div class="span5">
-				[%IF error_msg %]<div class="alert alert-error"><p>[%error_msg%]</p></div>[%END%]
-				[%IF status_msg %]<div class="alert"><p>[%status_msg%]</p></div>[%END%]
-
-					<form class="form-horizontal" method="post" action="/form/login">
-						[%input_text('email','E-mail', { pre => '@' })|none%]
-						[%input_text('password', 'Senha', { type => 'password', pre => '<i class="icon-lock"></i>' })|none%]
-
-						<div class="control-group">
-							<div class="controls">
-							<label class="checkbox">
-								<input name="remember" type="checkbox" checked>Lembrar
-								<p><a href="/forgot_password">Esqueci minha senha</p>
-							</label>
-
-							</div>
-						</div>
-						<div class="form-actions">
-						<button type="submit" class="btn btn-success" data-loading-text="Processando...">Entrar</button>
-						</div>
-						<input type="hidden" name="redirect_to" value="[%c.req.params.redirect_to%]"/>
-					</form>
-
-			</div>
-			<div class="span3">
-			</div>
+<content class="login">
+	<div class="content-yellow">
+		<div class="container">
+			<form class="form-signin" role="form" method="post" action="/form/login">
+			<h2 class="form-signin-heading text-center">Acesso ao sistema</h2>
+			<input name="email" type="email" class="form-control" placeholder="Email" required autofocus>
+			<input name="password" type="password" class="form-control" placeholder="Senha" required>
+			<!--<label class="checkbox">
+			<input type="checkbox" value="remember-me"> Remember me
+			</label>-->
+			<button class="btn btn-lg btn-default btn-block" type="submit">Entrar</button>
+			</form>
 		</div>
-
 	</div>
-</div></div><!-- row/span12 -->
-
-
-
+	[%INCLUDE parts/green_box.tt  %]
+</content>

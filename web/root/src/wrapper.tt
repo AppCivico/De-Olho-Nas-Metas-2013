@@ -1,22 +1,37 @@
-[%-CALL assets.include("js/ga.js")%][%IF !without_wrapper%][%IF template_wrapper %][% INCLUDE "wrapper_${template_wrapper}.tt"|none%][%ELSE%]
-<!DOCTYPE HTML>
+[%IF !without_wrapper%][%IF template_wrapper %][% INCLUDE "wrapper_${template_wrapper}.tt"|none%][%ELSE%]
+
+<!DOCTYPE html>
 <html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<title>[% template.title or site.title or title or 'Sistemas de Monitoramento de Metas' %]</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <head>
+    <meta charset="utf-8">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="De Olho Nas Promessas - http://www.deolhonaspromessas.org.br">
+	<meta name="keywords" content="de olho nas promessas">
+	<title>[% template.title or site.title or title or 'De olho nas promessas' %]</title>
+    <!-- Bootstrap -->
+  
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
 
 <!--[if lt IE 9]>
     <script src="/static/js/html5shiv.js"></script>
 <![endif]-->
-<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+
+<link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
 [%-CALL assets.include("css/bootstrap.min.css")%]
-[%-CALL assets.include("css/bootstrap.template.css")%]
-[%-CALL assets.include("css/font-awesome.min.css")%]
-[%-CALL assets.include("css/system.css")%]
+[%-CALL assets.include("css/bootstrap-theme.min.css")%]
+[%#-CALL assets.include("css/system.css")#%]
 [%-CALL assets.include("css/site.css")%]
-
 [%-CALL assets.include("js/bootstrap.min.js")%]
 
 [%- assets.export("css") |none-%]
@@ -24,33 +39,51 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body class="[% body_class %]"><script>var actions=[];</script>
-<div class="container">
-    [%IF !no_menu%]
-        [%INCLUDE parts/menu.tt%]
-    [%END%]
-	<div class="divider"></div>
-[%content|none%]
-</div> <!-- /container -->
-<div class="footer bg-dark">
-	<div class="container">
-		<ul class="menu-footer">
-			<li class="title">Associados</li>
-			[%IF !c.user%]
-				<li class="item"><a href="/pre-cadastro">Cadastro</a></li>
-				<li class="item"><a href="/login">Login</a></li>
-			[%ELSE%]
-				<li class="item"><a href="[%c.uri_for_action("/$role_controller/dashboard/index")%]">Meu Perfil</a></li>
-				<li class="item"><a href="/logout">Sair</a></li>
-			[%END%]
-		</ul>
-		<ul class="menu-footer">
-			<li class="title">Saiba mais</li>
-			<li class="item"><a href="/sobre">Sobre</a></li>
-			<li class="item"><a href="/faq">Perguntas Frequentes</a></li>
-			<li class="item"><a href="/contato">Contato</a></li>
-		</ul>
-		<p class="copy">&copy; Sistema de Monitoramento de Metas. Todos os direitos reservados.</p>
-	</div>
+	<header class="header-top">
+		<div class="header-content">
+			<div class="container">
+				<div class="col-sm-3 eleicoes-title">
+					<a href="/"><span class="yellow">Eleições</span> <span class="green">2014</span></a>
+				</div>
+				<div class="col-sm-6 text-center">
+					<div class="logo-top"><a href="/"><img src="/static/images/logo-top.png" border="0"></a></div>
+				</div>				
+				<div class="col-sm-3 text-right">
+					<ul class="menu-top">
+						<li><a href="/saiba-mais">Saiba mais</a></li>
+					[%IF ! c.user%]
+						<li><a href="/login">Login</a></li>
+					[%ELSE%]
+						<li><a href="/admin/dashboard">Administração</a></li>
+					[%END%]
+					</ul>
+				</div>
+			</div>
+		</div>
+	</header>
+    [%content|none%]
+	</content>
+	<footer class="bs-footer" role="contentinfo">
+		<div class="container text-center">
+			<div class="row">
+				<div class="col-xs-3 text-center">
+					<a href="http://www.cidadessustentaveis.org.br/" target="_blank"><img src="/static/images/logo-pcs-footer.png"></a>
+				</div>
+				<div class="col-xs-3 text-center">
+					<a href="http://www.nossasaopaulo.org.br/" target="_blank"><img src="/static/images/logo-rnsp-footer.png"><a/>
+				</div>
+				<div class="col-xs-3 text-center">
+					<a href="http://rededecidades.ning.com/" target="_blank"><img src="/static/images/logo-redes-footer.png"><a/>
+				</div>
+				<div class="col-xs-3 text-center">
+					<a href="http://www3.ethos.org.br/" target="_blank"><img src="/static/images/logo-ethos-footer.png"><a/>
+				</div>
+			</div>
+			<div class="row text-center">
+				<div class="aware">Desenvolvido por <a href="http://www.aware.com.br" target="_blank">Aware</a><img src="/static/images/logo-aware.gif" alt="Aware - Desenvolvendo conceitos, criando parceiros"></div>
+			</div>
+		</div>
+	</footer>
 </div>
 
 <script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script>
