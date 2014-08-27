@@ -8,8 +8,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="De Olho Nas Promessas - http://www.deolhonaspromessas.org.br">
-	<meta name="keywords" content="de olho nas promessas">
-	<title>[% template.title or site.title or title or 'De olho nas promessas' %]</title>
+	<meta name="keywords" content="sistema de monitoramento de metas>
+	<title>[% template.title or site.title or title or 'Sistema de Monitoramento de Metas' %]</title>
     <!-- Bootstrap -->
   
 
@@ -42,15 +42,8 @@
 	<header class="header-top">
 		<div class="header-content">
 			<div class="container">
-				<div class="col-sm-3 eleicoes-title">
-					<a href="/"><span class="yellow">Eleições</span> <span class="green">2014</span></a>
-				</div>
-				<div class="col-sm-6 text-center">
-					<div class="logo-top"><a href="/"><img src="/static/images/logo-top.png" border="0"></a></div>
-				</div>				
 				<div class="col-sm-3 text-right">
 					<ul class="menu-top">
-						<li><a href="/saiba-mais">Saiba mais</a></li>
 					[%IF ! c.user%]
 						<li><a href="/login">Login</a></li>
 					[%ELSE%]
@@ -65,20 +58,6 @@
 	</content>
 	<footer class="bs-footer" role="contentinfo">
 		<div class="container text-center">
-			<div class="row">
-				<div class="col-xs-3 text-center">
-					<a href="http://www.cidadessustentaveis.org.br/" target="_blank"><img src="/static/images/logo-pcs-footer.png"></a>
-				</div>
-				<div class="col-xs-3 text-center">
-					<a href="http://www.nossasaopaulo.org.br/" target="_blank"><img src="/static/images/logo-rnsp-footer.png"><a/>
-				</div>
-				<div class="col-xs-3 text-center">
-					<a href="http://rededecidades.ning.com/" target="_blank"><img src="/static/images/logo-redes-footer.png"><a/>
-				</div>
-				<div class="col-xs-3 text-center">
-					<a href="http://www3.ethos.org.br/" target="_blank"><img src="/static/images/logo-ethos-footer.png"><a/>
-				</div>
-			</div>
 			<div class="row text-center">
 				<div class="aware">Desenvolvido por <a href="http://www.aware.com.br" target="_blank">Aware</a><img src="/static/images/logo-aware.gif" alt="Aware - Desenvolvendo conceitos, criando parceiros"></div>
 			</div>

@@ -33,41 +33,10 @@ sub index : Path : Args(0) {
     
 	my $api = $c->model('API');
 	
-	$api->stash_result(
-		$c, 'categories',
-		params => {
-			order   => 'name',
-		}
-	);
-	$c->stash->{select_categories} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{categories} } ];
-	
-	$api->stash_result(
-		$c, 'candidates',
-		params => {
-			order   => 'me.name',
-		}
-	);
-	$c->stash->{select_candidates} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{candidates} } ];
-	
-	$api->stash_result(
-		$c, 'states',
-		params => {
-			order   => 'name',
-		}
-	);
 	$c->stash->{select_states} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{states} } ];
 	
 	unshift($c->stash->{select_states}, ['br', 'Brasil']);
 	
-	$api->stash_result(
-		$c, 'electoral_regional_courts',
-		params => {
-			order   => 'state.name',
-		}
-	);
-	
-	$c->stash->{select_spe} = [ map { [ $_->{id}, $_->{state}{name} ] } @{ $c->stash->{electoral_regional_courts} } ];
-    
     $self->root($c);
 }
 

@@ -86,11 +86,15 @@ sub result_DELETE {
 sub result_PUT {
     my ( $self, $c ) = @_;
 
+    my $params = { %{$c->req->params} };
     my $organization = $c->stash->{organization};
 
-    my $params = $c->req->params;
+    
+    use DDP;
+    p$c->stash->{organization};    
 
     $organization->execute( $c, for => 'update', with => $params );
+
     $self->status_accepted(
         $c,
         location => $c->uri_for( $self->action_for('result'), [ $organization->id ] )->as_string,
@@ -176,7 +180,7 @@ sub complete : Chained('base') : PathPart('complete') : Args(0) {
         sub {
             $organization = $c->stash->{collection}->execute( $c, for => 'create', with => $c->req->params );
 
-            $c->req->params->{is_active} 		= 1;
+            $c->req->params->{active} 			= 1;
             $c->req->params->{role} 			= 'organization';
             $c->req->params->{organization_id} 	= $organization->id;
 

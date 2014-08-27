@@ -45,7 +45,9 @@ __PACKAGE__->table("organization");
 =head2 id
 
   data_type: 'integer'
+  is_auto_increment: 1
   is_nullable: 0
+  sequence: 'organization_id_seq'
 
 =head2 name
 
@@ -64,7 +66,8 @@ __PACKAGE__->table("organization");
 
 =head2 city_id
 
-  data_type: 'text'
+  data_type: 'integer'
+  is_foreign_key: 1
   is_nullable: 1
 
 =head2 description
@@ -101,7 +104,12 @@ __PACKAGE__->table("organization");
 
 __PACKAGE__->add_columns(
   "id",
-  { data_type => "integer", is_nullable => 0 },
+  {
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+    sequence          => "organization_id_seq",
+  },
   "name",
   { data_type => "text", is_nullable => 0 },
   "address",
@@ -109,7 +117,7 @@ __PACKAGE__->add_columns(
   "postal_code",
   { data_type => "text", is_nullable => 1 },
   "city_id",
-  { data_type => "text", is_nullable => 1 },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "description",
   { data_type => "text", is_nullable => 1 },
   "email",
@@ -136,9 +144,31 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key("id");
 
+=head1 RELATIONS
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-08-25 22:28:29
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:eQ7E/rhKo8hhl2fjRKP6MA
+=head2 city
+
+Type: belongs_to
+
+Related object: L<SMM::Schema::Result::City>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "city",
+  "SMM::Schema::Result::City",
+  { id => "city_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-08-27 12:54:45
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:k06H3xu7s/YBsAcMh5xFHg
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

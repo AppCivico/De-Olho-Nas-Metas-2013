@@ -65,13 +65,10 @@ sub verifiers_specs {
 
 sub action_specs {
     my $self = shift;
-
     return {
         create => sub {
 			my %values = shift->valid_values;
-
 			my $organization = $self->create( \%values );
-
 			return $organization;
         }
     };

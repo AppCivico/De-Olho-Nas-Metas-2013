@@ -60,11 +60,13 @@ __PACKAGE__->table("city");
 =head2 state_id
 
   data_type: 'integer'
+  is_foreign_key: 1
   is_nullable: 1
 
 =head2 country_id
 
   data_type: 'integer'
+  is_foreign_key: 1
   is_nullable: 1
 
 =cut
@@ -77,9 +79,9 @@ __PACKAGE__->add_columns(
   "name_url",
   { data_type => "text", is_nullable => 1 },
   "state_id",
-  { data_type => "integer", is_nullable => 1 },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "country_id",
-  { data_type => "integer", is_nullable => 1 },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -94,9 +96,66 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key("id");
 
+=head1 RELATIONS
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-08-25 15:06:29
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:pmibmw+apWrOsNrVNo2BBw
+=head2 country
+
+Type: belongs_to
+
+Related object: L<SMM::Schema::Result::Country>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "country",
+  "SMM::Schema::Result::Country",
+  { id => "country_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
+=head2 organizations
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::Organization>
+
+=cut
+
+__PACKAGE__->has_many(
+  "organizations",
+  "SMM::Schema::Result::Organization",
+  { "foreign.city_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 state
+
+Type: belongs_to
+
+Related object: L<SMM::Schema::Result::State>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "state",
+  "SMM::Schema::Result::State",
+  { id => "state_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-08-25 23:01:50
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:nL89MmmBgN8xkD6PP/bvyw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

@@ -94,9 +94,26 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key("id");
 
+=head1 RELATIONS
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-08-23 22:01:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:4kqI31LMVOJ+4hH7VzBC9w
+=head2 cities
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::City>
+
+=cut
+
+__PACKAGE__->has_many(
+  "cities",
+  "SMM::Schema::Result::City",
+  { "foreign.state_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-08-25 23:01:50
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:zpuzSvu6CBrSttuatDmh/w
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

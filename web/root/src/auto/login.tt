@@ -1,7 +1,7 @@
 [%-CALL assets.include("css/signin.css")%]
 
 <content class="login">
-	<div class="content-yellow">
+	<div >
 		<div class="container">
 			<form class="form-signin" role="form" method="post" action="/form/login">
 			<h2 class="form-signin-heading text-center">Acesso ao sistema</h2>
@@ -14,5 +14,4 @@
 			</form>
 		</div>
 	</div>
-	[%INCLUDE parts/green_box.tt  %]
 </content>
