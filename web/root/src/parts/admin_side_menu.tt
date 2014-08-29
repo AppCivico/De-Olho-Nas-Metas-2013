@@ -10,6 +10,10 @@
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 						<a href="[%href%]">Organizações</a>
 					</li>
+					[%href = c.uri_for_action('/admin/management/index')%]
+					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
+						<a href="[%href%]">Gestões</a>
+					</li>
 				[%END%]
 			</ul>
 			<ul class="nav nav-sidebar">
@@ -21,25 +25,15 @@
 				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 					<a href="[%href%]">Candidatos</a>
 				</li>
-				[%href = c.uri_for_action('/admin/electioncampaign/index')%]
-				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
-					<a href="[%href%]">Campanhas eleitorais</a>
-				</li>
 				[%href = c.uri_for_action('/admin/coalition/index')%]
 				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 					<a href="[%href%]">Coligações</a>
-				</li>
-				[%IF role_controller == 'admin'%]
-				[%href = c.uri_for_action('/admin/category/index')%]
-				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
-					<a href="[%href%]">Categorias</a>
 				</li>
 				
 				[%href = c.uri_for_action('/admin/sourcetype/index')%]
 				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 					<a href="[%href%]">Tipos de fonte</a>
 				</li>
-				[%END%]
 				[%href = c.uri_for_action('/admin/promise/index')%]
 				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 					<a href="[%href%]">Promessas</a>
