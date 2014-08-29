@@ -17,34 +17,9 @@
 				[%END%]
 			</ul>
 			<ul class="nav nav-sidebar">
-				[%href = c.uri_for_action('/admin/politicalparty/index')%]
-				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
-					<a href="[%href%]">Partidos</a>
-				</li>
-				[%href = c.uri_for_action('/admin/candidate/index')%]
-				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
-					<a href="[%href%]">Candidatos</a>
-				</li>
-				[%href = c.uri_for_action('/admin/coalition/index')%]
-				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
-					<a href="[%href%]">Coligações</a>
-				</li>
-				
-				[%href = c.uri_for_action('/admin/sourcetype/index')%]
-				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
-					<a href="[%href%]">Tipos de fonte</a>
-				</li>
-				[%href = c.uri_for_action('/admin/promise/index')%]
-				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
-					<a href="[%href%]">Promessas</a>
-				</li>
-				[%href = c.uri_for_action('/admin/federalelectoralprocess/index')%]
-				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
-					<a href="[%href%]">Processo eleitoral - TSE</a>
-				</li>
 				[%href = c.uri_for_action('/admin/stateelectoralprocess/index')%]
 				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
-					<a href="[%href%]">Processo eleitoral - TRE</a>
+					<a href="[%href%]">Usuários</a>
 				</li>
 <!-- 				<li><a href="">More navigation</a></li> -->
 			</ul>

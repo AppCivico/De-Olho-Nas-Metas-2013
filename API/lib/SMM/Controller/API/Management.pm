@@ -69,6 +69,11 @@ sub result_GET {
 				(
 					map { $_ => $management->organization->$_,}
 					qw/
+						id
+						name
+					/
+				),
+		},
         }
     );
 
