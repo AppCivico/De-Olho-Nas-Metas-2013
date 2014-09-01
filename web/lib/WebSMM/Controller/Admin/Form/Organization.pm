@@ -18,8 +18,6 @@ sub process : Chained('base') : PathPart('organization') : Args(0) {
     
     my $params 	= { %{ $c->req->params } };
     
-	$form->only_number($params, 'phone', 'postal_code');
-    
     $api->stash_result(
 		$c, ['organizations/complete'],
 		method => 'POST',
@@ -38,12 +36,9 @@ sub process_edit : Chained('base') : PathPart('organization') : Args(1) {
 	my ( $self, $c, $id ) = @_;
 
     my $api 	= $c->model('API');
-    my $form	= $c->model('Form');
    
     my $params 	= { %{ $c->req->params } };
     
-    $form->only_number($params, 'phone', 'postal_code');
-   
     $api->stash_result(
         $c, [ 'organizations', $id ],
         method => 'PUT',

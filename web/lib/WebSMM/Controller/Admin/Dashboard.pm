@@ -14,7 +14,6 @@ sub object : Chained('base') : PathPart('dashboard') : CaptureArgs(0) {
 sub index : Chained('object') : PathPart('') : Args(0) {
     my ( $self, $c ) = @_;
     my $s = $c->user->name;
-    use DDP; p $s;
 }
 
 __PACKAGE__->meta->make_immutable;

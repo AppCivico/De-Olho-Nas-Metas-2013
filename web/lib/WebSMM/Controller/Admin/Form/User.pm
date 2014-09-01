@@ -65,7 +65,6 @@ sub process_edit : Chained('base') : PathPart('user') : Args(1) {
 
     my $api 	= $c->model('API');
     my $params 	= { %{ $c->req->params } };
-    
     my @r;
     if ( ref $params->{roles} eq 'ARRAY' ) {
     

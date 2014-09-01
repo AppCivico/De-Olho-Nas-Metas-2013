@@ -166,9 +166,24 @@ __PACKAGE__->belongs_to(
   },
 );
 
+=head2 users
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-08-27 12:54:45
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:k06H3xu7s/YBsAcMh5xFHg
+Type: has_many
+
+Related object: L<SMM::Schema::Result::User>
+
+=cut
+
+__PACKAGE__->has_many(
+  "users",
+  "SMM::Schema::Result::User",
+  { "foreign.organization_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-08-30 11:49:53
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:lYtUzG3qGSuCUdv/E4G3wQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

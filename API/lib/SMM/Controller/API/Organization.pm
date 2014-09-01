@@ -90,10 +90,7 @@ sub result_PUT {
     my $organization = $c->stash->{organization};
 
     
-    use DDP;
-    p$c->stash->{organization};    
-
-    $organization->execute( $c, for => 'update', with => $params );
+   $organization->execute( $c, for => 'update', with => $c->req->params );
 
     $self->status_accepted(
         $c,

@@ -17,7 +17,7 @@
 				[%END%]
 			</ul>
 			<ul class="nav nav-sidebar">
-				[%href = c.uri_for_action('/admin/stateelectoralprocess/index')%]
+				[%href = c.uri_for_action('/admin/user/index')%]
 				<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 					<a href="[%href%]">Usuários</a>
 				</li>

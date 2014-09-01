@@ -7,7 +7,7 @@
     <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="De Olho Nas Promessas - http://www.deolhonaspromessas.org.br">
+	<meta name="description" content="Sistema de Monitoramento de Metas">
 	<meta name="keywords" content="sistema de monitoramento de metas>
 	<title>[% template.title or site.title or title or 'Sistema de Monitoramento de Metas' %]</title>
     <!-- Bootstrap -->

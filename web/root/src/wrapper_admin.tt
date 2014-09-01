@@ -5,7 +5,7 @@
       type="image/png"
       href="/static/img/favicon.png" />
 <meta charset="UTF-8">
-<title>[% template.title or site.title or title or 'De olho nas promessas' %]</title>
+<title>[% template.title or site.title or title or 'Sistema de Monitoramento de Metas' %]</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 <!--[if lt IE 9]>

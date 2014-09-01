@@ -89,6 +89,12 @@ __PACKAGE__->table("user");
   is_nullable: 1
   size: 12
 
+=head2 organization_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -118,6 +124,8 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "type",
   { data_type => "varchar", is_nullable => 1, size => 12 },
+  "organization_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -160,6 +168,26 @@ __PACKAGE__->belongs_to(
   "created_by",
   "SMM::Schema::Result::User",
   { id => "created_by" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
+=head2 organization
+
+Type: belongs_to
+
+Related object: L<SMM::Schema::Result::Organization>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "organization",
+  "SMM::Schema::Result::Organization",
+  { id => "organization_id" },
   {
     is_deferrable => 0,
     join_type     => "LEFT",
@@ -214,8 +242,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-08-22 17:11:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:DMeNTTXG+DcX9s3QXAtaeA
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-08-30 11:49:53
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:zGLrWQiBhj8G9PmbemmdgA
 
 __PACKAGE__->many_to_many( roles => user_roles => 'role' );
 
