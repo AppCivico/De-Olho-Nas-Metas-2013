@@ -2,7 +2,7 @@
 <div class="rows">
 <h2 class="sub-header">Gestões cadastradas</h2>
 <div class="table-responsive">
-	[%IF organizations.size > 0%]
+	[%IF managements.size > 0%]
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -17,7 +17,7 @@
 					<td>[%management.name%]</td>
 					<td>[%management.description%]</td>
 					<td>
-						<a href="/admin/management/[%management.id%]">Editar</a>
+<!--						<a href="/admin/management/[%management.id%]">Editar</a>-->
 <!-- 						<a href="/admin/form/remove_management/[%management.id%]">Excluir</a> -->
 					</td>
 				</tr>

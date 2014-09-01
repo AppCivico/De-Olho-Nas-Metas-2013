@@ -166,6 +166,21 @@ __PACKAGE__->belongs_to(
   },
 );
 
+=head2 managements
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::Management>
+
+=cut
+
+__PACKAGE__->has_many(
+  "managements",
+  "SMM::Schema::Result::Management",
+  { "foreign.organization_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 users
 
 Type: has_many
@@ -182,8 +197,82 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-08-30 11:49:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:lYtUzG3qGSuCUdv/E4G3wQ
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-09-01 15:52:44
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:762jPgxK2rGWFC0DG5QgfA
+with 'SMM::Role::Verification';
+with 'SMM::Role::Verification::TransactionalActions::DBIC';
+with 'SMM::Schema::Role::ResultsetFind';
+
+use Data::Verifier;
+use MooseX::Types::Email qw/EmailAddress/;
+use SMM::Types qw /DataStr TimeStr/;
+
+sub verifiers_specs {
+    my $self = shift;
+     return {
+        update => Data::Verifier->new(
+            filters => [qw(trim)],
+            profile => {
+                name => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                address => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                postal_code => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                city_id => {
+                    required => 0,
+                    type     => 'Int',
+                },
+                description => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                phone => {
+					required => 0,
+                    type     => 'Str',
+                },
+                email => {
+					required => 0,
+                    type     => 'Str',
+                },
+                website => {
+					required => 0,
+                    type     => 'Str',
+                },
+                complement => {
+					required => 0,
+                    type     => 'Str',
+                },
+                number => {
+					required => 0,
+                    type     => 'Str',
+                },
+            }
+        ),
+    };
+}
+
+sub action_specs {
+    my $self = shift;
+    return {
+        update => sub {
+            my %values = shift->valid_values;
+
+            not defined $values{$_} and delete $values{$_} for keys %values;
+
+            my $organization = $self->update( \%values );
+
+            return $organization;
+        },
+
+    };
+}
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

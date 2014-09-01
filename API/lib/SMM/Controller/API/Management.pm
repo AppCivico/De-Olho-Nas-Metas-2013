@@ -7,11 +7,8 @@ BEGIN { extends 'Catalyst::Controller::REST' }
 __PACKAGE__->config(
     default => 'application/json',
 
-    result     	=> 'DB::Organization',
+    result     	=> 'DB::Management',
     object_key 	=> 'management',
-    result_attr => {
-		prefetch => [ { 'city' => 'state' } ]
-    },
     search_ok => {
 		id => 	'Int'
     },
@@ -182,11 +179,11 @@ sub complete : Chained('base') : PathPart('complete') : Args(0) {
         sub {
             $management = $c->stash->{collection}->execute( $c, for => 'create', with => $c->req->params );
 
-            $c->req->params->{active} 			= 1;
-            $c->req->params->{role} 			= 'management';
-            $c->req->params->{management_id} 	= $management->id;
+            #$c->req->params->{active} 			= 1;
+            #$c->req->params->{role} 			= 'management';
+            #$c->req->params->{management_id} 	= $management->id;
 
-            my $user = $c->model('DB::User')->execute( $c, for => 'create', with => $c->req->params );
+            #my $user = $c->model('DB::User')->execute( $c, for => 'create', with => $c->req->params );
         }
     );
 

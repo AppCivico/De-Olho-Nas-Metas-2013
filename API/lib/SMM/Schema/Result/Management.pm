@@ -66,12 +66,14 @@ __PACKAGE__->table("management");
 
 =head2 city_id
 
-  data_type: 'text'
+  data_type: 'integer'
+  is_foreign_key: 1
   is_nullable: 0
 
 =head2 organization_id
 
-  data_type: 'text'
+  data_type: 'integer'
+  is_foreign_key: 1
   is_nullable: 0
 
 =head2 active
@@ -101,9 +103,9 @@ __PACKAGE__->add_columns(
   "expected_end_date",
   { data_type => "text", is_nullable => 0 },
   "city_id",
-  { data_type => "text", is_nullable => 0 },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "organization_id",
-  { data_type => "text", is_nullable => 0 },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "active",
   { data_type => "boolean", is_nullable => 1 },
   "created_at",
@@ -122,9 +124,104 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key("id");
 
+=head1 RELATIONS
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-08-28 21:03:58
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:0ni6DtAbwl32aGM4pP6/4A
+=head2 city
+
+Type: belongs_to
+
+Related object: L<SMM::Schema::Result::City>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "city",
+  "SMM::Schema::Result::City",
+  { id => "city_id" },
+  { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
+);
+
+=head2 organization
+
+Type: belongs_to
+
+Related object: L<SMM::Schema::Result::Organization>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "organization",
+  "SMM::Schema::Result::Organization",
+  { id => "organization_id" },
+  { is_deferrable => 0, on_delete => "NO ACTION", on_update => "NO ACTION" },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-09-01 15:52:44
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:DlXW83EMsdCY5I4o76scnA
+
+use SMM::Types qw /DataStr TimeStr/;
+with 'SMM::Role::Verification';
+with 'SMM::Role::Verification::TransactionalActions::DBIC';
+with 'SMM::Schema::Role::ResultsetFind';
+
+use Data::Verifier;
+
+sub verifiers_specs {
+    my $self = shift;
+     return {
+        update => Data::Verifier->new(
+            filters => [qw(trim)],
+            profile => {
+                name => {
+                    required => 1,
+                    type     => 'Str',
+                },
+                start_date => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                expected_end_date => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                city_id => {
+                    required => 0,
+                    type     => 'Int',
+                },
+                organization_id => {
+                    required => 1,
+                    type     => 'Int',
+                },
+                active => {
+		    required => 0,
+                    type     => 'Bool',
+                },
+                created_at => {
+		    required => 0,
+                    type     => 'Str',
+                },
+            }
+        ),
+    };
+}
+
+sub action_specs {
+    my $self = shift;
+
+    return {
+        update => sub {
+            my %values = shift->valid_values;
+	    
+            not defined $values{$_} and delete $values{$_} for keys %values;
+
+            my $management = $self->update( \%values );
+
+            return $management;
+        },
+
+    };
+}
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

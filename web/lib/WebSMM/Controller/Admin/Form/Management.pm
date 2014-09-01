@@ -1,4 +1,4 @@
-package WebSMM::Controller::Admin::Form::Organization;
+package WebSMM::Controller::Admin::Form::Management;
 use Moose;
 use namespace::autoclean;
 use DateTime;
@@ -10,7 +10,7 @@ sub base : Chained('/admin/form/base') : PathPart('') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 }
 
-sub process : Chained('base') : PathPart('organization') : Args(0) {
+sub process : Chained('base') : PathPart('management') : Args(0) {
     my ( $self, $c ) = @_;
 
     my $api     = $c->model('API');
@@ -19,7 +19,7 @@ sub process : Chained('base') : PathPart('organization') : Args(0) {
     my $params 	= { %{ $c->req->params } };
     
     $api->stash_result(
-		$c, ['organizations/complete'],
+		$c, ['managements/complete'],
 		method => 'POST',
 		body   => $params
     );
@@ -27,12 +27,12 @@ sub process : Chained('base') : PathPart('organization') : Args(0) {
     if ( $c->stash->{error} ) {
         $c->detach( '/form/redirect_error', [] );
     } else {
-		$c->detach( '/form/redirect_ok', [ '/admin/organization/index', {}, 'Cadastrado com sucesso!' ] );
+		$c->detach( '/form/redirect_ok', [ '/admin/management/index', {}, 'Cadastrado com sucesso!' ] );
 	}
     
 }
 
-sub process_edit : Chained('base') : PathPart('organization') : Args(1) {
+sub process_edit : Chained('base') : PathPart('management') : Args(1) {
 	my ( $self, $c, $id ) = @_;
 
     my $api 	= $c->model('API');
@@ -41,7 +41,7 @@ sub process_edit : Chained('base') : PathPart('organization') : Args(1) {
     my $params 	= { %{ $c->req->params } };
     
     $api->stash_result(
-        $c, [ 'organizations', $id ],
+        $c, [ 'managements', $id ],
         method => 'PUT',
         body   => $params
     );
@@ -49,16 +49,16 @@ sub process_edit : Chained('base') : PathPart('organization') : Args(1) {
     if ( $c->stash->{error} ) {
         $c->detach( '/form/redirect_error', [] );
     } else {
-        $c->detach( '/form/redirect_ok', [ '/admin/organization/index', {}, 'Alterado com sucesso!' ] );
+        $c->detach( '/form/redirect_ok', [ '/admin/management/index', {}, 'Alterado com sucesso!' ] );
     }
 }
 
-sub process_delete : Chained('base') : PathPart('remove_organization') : Args(1) {
+sub process_delete : Chained('base') : PathPart('remove_management') : Args(1) {
     my ( $self, $c, $id ) = @_;
 
     my $api = $c->model('API');
 
-    $api->stash_result( $c, [ 'organizations', $id ], method => 'DELETE' );
+    $api->stash_result( $c, [ 'managements', $id ], method => 'DELETE' );
 
     if ( $c->stash->{error} ) {
         $c->detach( '/form/redirect_error', [] );
@@ -68,7 +68,7 @@ sub process_delete : Chained('base') : PathPart('remove_organization') : Args(1)
     }
 }
 
-sub process_password : Chained('base') :PathPart('change_organization_password') : Args(0) {
+sub process_password : Chained('base') :PathPart('change_management_password') : Args(0) {
 	my ( $self, $c, $id ) = @_;
 
     my $api = $c->model('API');

@@ -8,10 +8,6 @@ __PACKAGE__->config(
     default => 'application/json',
 
     result    => 'DB::City',
-    search_ok => {
-        state_id => 'Int',
-        order    => 'Str'
-    }
 );
 with 'SMM::TraitFor::Controller::AutoBase';
 with 'SMM::TraitFor::Controller::Search';

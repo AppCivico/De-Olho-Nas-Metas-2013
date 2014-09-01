@@ -17,7 +17,7 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
 
     my $api = $c->model('API');
     
-    $api->stash_result( $c, [ 'roles', $id ], stash => 'user_obj' );
+    $api->stash_result( $c, [ 'users', $id ], stash => 'user_obj' );
 	my %ar 	= map { $_ => 1 } @ { $c->stash->{user_obj}{role_ids} };
 	$c->stash->{active_roles} = \%ar;
 	
@@ -45,7 +45,7 @@ sub edit : Chained('object') : PathPart('') : Args(0) {
 
     my $api = $c->model('API');
     
-	$api->stash_result( $c, 'users', params => { admin => 1 } );
+	$api->stash_result( $c, 'roles', params => { admin => 1 } );
 	my $r = $c->stash->{active_roles};
      $c->stash->{roles} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{roles} } ];
 }
@@ -55,7 +55,7 @@ sub add : Chained('base') : PathPart('new') : Args(0) {
 
     my $api = $c->model('API');
 
-	$api->stash_result( $c, 'users', params => { admin => 1 } );
+	$api->stash_result( $c, 'roles', params => { admin => 1 } );
 }
 
 __PACKAGE__->meta->make_immutable;

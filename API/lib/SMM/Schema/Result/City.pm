@@ -118,6 +118,21 @@ __PACKAGE__->belongs_to(
   },
 );
 
+=head2 managements
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::Management>
+
+=cut
+
+__PACKAGE__->has_many(
+  "managements",
+  "SMM::Schema::Result::Management",
+  { "foreign.city_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 organizations
 
 Type: has_many
@@ -154,8 +169,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-08-25 23:01:50
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:nL89MmmBgN8xkD6PP/bvyw
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-09-01 15:52:44
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:6NWvM6RfEKS0r54Wj3/LVg
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

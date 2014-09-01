@@ -11,7 +11,10 @@ sub base : Chained('/admin/base') : PathPart('management') : CaptureArgs(0) {
 	my $api = $c->model('API');
 	
 	$api->stash_result(
-		$c, 'cities'
+		$c, 'cities',
+		params => {
+		order => 'me.name',
+		},
 	);
 	$c->stash->{select_cities} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{cities} } ];
 

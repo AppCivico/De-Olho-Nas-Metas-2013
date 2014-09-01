@@ -89,17 +89,12 @@ sub get_cities : Chained('base') : PathPart('get_cities') {
 
     $api->stash_result(
         $c, 'cities',
-        params => {
-            state_id => $c->req->params->{state_id},
-            order    => 'name'
-        }
     );
-
-    $c->stash(
-        select_cities   => [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{cities} } ],
-        without_wrapper => 1,
-        template        => 'auto/cities.tt'
-    );
+     $c->stash(
+         select_cities   => [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{cities} } ],
+         without_wrapper => 1,
+         template        => 'auto/cities.tt'
+     );
 }
 
 sub get_vehicle_models : Chained('base') : PathPart('get_vehicle_models') : Args(0) {

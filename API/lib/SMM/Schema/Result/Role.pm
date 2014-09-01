@@ -115,6 +115,42 @@ __PACKAGE__->has_many(
 # Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-08-22 17:11:35
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Cc5ajpesE2WSy7p+WMc5LA
 
+with 'SMM::Role::Verification';
+with 'SMM::Role::Verification::TransactionalActions::DBIC';
+with 'SMM::Schema::Role::ResultsetFind';
+
+use Data::Verifier;
+
+sub verifiers_specs {
+    my $self = shift;
+     return {
+        update => Data::Verifier->new(
+            filters => [qw(trim)],
+            profile => {
+                name => {
+                    required => 0,
+                    type     => 'Str',
+                },
+            }
+        ),
+    };
+}
+
+sub action_specs {
+    my $self = shift;
+
+    return {
+        update => sub {
+            my %values = shift->valid_values;
+
+            my $role = $self->update( \%values );
+
+            return $role;
+        },
+
+    };
+}
+
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;
