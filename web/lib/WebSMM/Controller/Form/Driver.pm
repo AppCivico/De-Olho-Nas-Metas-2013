@@ -17,9 +17,11 @@ sub process : Chained('base') : PathPart('driver') : Args(0) {
     my $api  = $c->model('API');
     my $form = $c->model('Form');
 
-    $form->format_date( $param, 'first_driver_license', 'cnh_validity', 'birth_date' );
+    $form->format_date( $param, 'first_driver_license', 'cnh_validity',
+        'birth_date' );
 
-    $form->only_number( $param, 'telephone_number', 'mobile_number', 'postal_code', 'cpf' );
+    $form->only_number( $param, 'telephone_number', 'mobile_number',
+        'postal_code', 'cpf' );
 
     $param->{validation_key} = sha1_hex( $param->{email} . $param->{name} );
     $param->{password}       = $param->{validation_key};
@@ -52,7 +54,8 @@ sub process : Chained('base') : PathPart('driver') : Args(0) {
 
         if ( !$c->stash->{error} ) {
             $api->stash_result(
-                $c, ['drivers', $c->stash->{driver}{id}],
+                $c,
+                [ 'drivers', $c->stash->{driver}{id} ],
                 method => 'PUT',
                 body   => {
                     address_id => $c->stash->{address}{id}
@@ -60,8 +63,8 @@ sub process : Chained('base') : PathPart('driver') : Args(0) {
             );
 
             my $route_type = {
-                'name'             => 'Casa',
-                address_id         => $c->stash->{address}{id},
+                'name'     => 'Casa',
+                address_id => $c->stash->{address}{id},
             };
 
             $api->stash_result(
@@ -84,7 +87,8 @@ sub process : Chained('base') : PathPart('driver') : Args(0) {
 
 }
 
-sub process_password : Chained('base') : PathPart('driver/process_password') : Args(1) {
+sub process_password : Chained('base') : PathPart('driver/process_password') :
+  Args(1) {
     my ( $self, $c, $user_id ) = @_;
 
     my $api = $c->model('API');

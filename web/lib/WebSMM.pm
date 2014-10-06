@@ -53,7 +53,7 @@ __PACKAGE__->config(
 
     # Disable deprecated behavior needed by old applications
     disable_component_resolution_regex_fallback => 1,
-    enable_catalyst_header                      => 1,    # Send X-Catalyst header
+    enable_catalyst_header                      => 1,   # Send X-Catalyst header
 
     'Plugin::Assets' => {
 
@@ -63,14 +63,10 @@ __PACKAGE__->config(
         stash_var   => 'assets'
     },
     'View::TT' => {
-        expose_methods =>
-        [
-            'days_of_week_human',
-            'hour_human',
-            'format_date_to_human',
-            'format_cnpj_to_human',
-            'birthdate_to_age',
-            'meter_to_kilometer'
+        expose_methods => [
+            'days_of_week_human',   'hour_human',
+            'format_date_to_human', 'format_cnpj_to_human',
+            'birthdate_to_age',     'meter_to_kilometer'
         ]
       }
 

@@ -76,21 +76,23 @@ sub stash_result {
                 exists $opts{body} ? ( body => $opts{body} ) : ()
             );
         };
-	print STDERR $res->as_string;
+        print STDERR $res->as_string;
     }
     if ($@) {
         $c->stash( error => "$method $endpoint", error_content => $@ );
         $c->detach('/rest_error');
     }
-    
-    if ($res->code == 403 && $res->content =~ /key expired/){
+
+    if ( $res->code == 403 && $res->content =~ /key expired/ ) {
         $c->logout;
         $c->detach( '/form/redirect_relogin', [] );
     }
 
-    if ( !exists $opts{exp_code} && $res->code !~ /^(200|201|202|204|404|410|400)$/ ) {
+    if ( !exists $opts{exp_code}
+        && $res->code !~ /^(200|201|202|204|404|410|400)$/ )
+    {
         $c->stash(
-            error         => "ERROR WHILE $method $endpoint CODE ${\$res->code}",
+            error => "ERROR WHILE $method $endpoint CODE ${\$res->code}",
             error_content => $res->content,
             error_code    => $res->code,
             error_url     => $url
@@ -132,7 +134,8 @@ sub stash_result {
         return undef if $opts{get_result};
 
         $c->stash(
-            error         => "ERROR WHILE $method $endpoint CODE ${\$res->code} ISN'T $opts{exp_code}",
+            error =>
+              "ERROR WHILE $method $endpoint CODE ${\$res->code} ISN'T $opts{exp_code}",
             error_content => $res->content,
             error_code    => $res->code,
             error_url     => $url
@@ -187,7 +190,8 @@ sub _generate_query_params {
 
     return '' unless exists $opts{params};
 
-    my @aa = ref $opts{params} eq 'HASH' ? %{ $opts{params} } : @{ $opts{params} };
+    my @aa =
+      ref $opts{params} eq 'HASH' ? %{ $opts{params} } : @{ $opts{params} };
     my $str = '?';
 
     my $url = '';
@@ -212,7 +216,6 @@ sub _do_http_req {
 
     my $method = uc $args{method};
     my $res;
-    
 
     if ( $method =~ /^GET/o ) {
         $res = $self->furl->get( $args{url}, $args{headers} );

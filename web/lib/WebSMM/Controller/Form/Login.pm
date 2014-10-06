@@ -10,7 +10,7 @@ sub base : Chained('/form/root') : PathPart('') : CaptureArgs(0) {
 
 sub login : Chained('base') : PathPart('login') : Args(0) {
     my ( $self, $c ) = @_;
-    
+
     if ( $c->authenticate( $c->req->params ) ) {
         if ( $c->req->param('remember') ) {
             $c->session_time_to_live(2629743)    # 1 month
@@ -39,14 +39,17 @@ sub after_login {
     elsif ( grep { /^admin|management$/ } $c->user->roles ) {
         $url = '/admin/dashboard/index';
     }
-    
-	if ($c->req->params->{redirect_to} && $c->req->params->{redirect_to} =~ /^\//){
-		$url = $c->req->params->{redirect_to};
-		$c->res->redirect($url);
-		$c->detach;
-	}
 
-    $c->detach( '/form/redirect_ok', [ $url, {}, 'Bem vindo, ' . $c->user->name ] );
+    if (   $c->req->params->{redirect_to}
+        && $c->req->params->{redirect_to} =~ /^\// )
+    {
+        $url = $c->req->params->{redirect_to};
+        $c->res->redirect($url);
+        $c->detach;
+    }
+
+    $c->detach( '/form/redirect_ok',
+        [ $url, {}, 'Bem vindo, ' . $c->user->name ] );
 }
 
 __PACKAGE__->meta->make_immutable;

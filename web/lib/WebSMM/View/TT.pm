@@ -71,7 +71,8 @@ sub format_date_to_human {
 sub format_cnpj_to_human {
     my ( $self, $ref, $cnpj ) = @_;
 
-    my ( $a, $b, $c, $d, $e ) = $cnpj =~ m/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/;
+    my ( $a, $b, $c, $d, $e ) =
+      $cnpj =~ m/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/;
 
     return "$a.$b.$c/$d-$e";
 }
@@ -79,12 +80,12 @@ sub format_cnpj_to_human {
 sub birthdate_to_age {
     my ( $self, $ref, $date ) = @_;
 
-    if(!$date) {
+    if ( !$date ) {
         return undef;
     }
 
-    my $now         = DateTime->now();
-    my $birthdate   = eval { DateTime::Format::Pg->parse_datetime( $date ) };
+    my $now = DateTime->now();
+    my $birthdate = eval { DateTime::Format::Pg->parse_datetime($date) };
 
     my $age = $birthdate->subtract_datetime($now);
 
@@ -94,7 +95,7 @@ sub birthdate_to_age {
 sub meter_to_kilometer {
     my ( $self, $ref, $distance ) = @_;
 
-    return sprintf("%.2f", $distance/1000);
+    return sprintf( "%.2f", $distance / 1000 );
 }
 
 =head1 NAME

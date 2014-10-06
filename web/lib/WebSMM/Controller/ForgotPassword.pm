@@ -20,12 +20,12 @@ sub change : Chained('base') : PathPart('forgot_password/change') : Args(0) {
     $api->stash_result(
         $c, 'users',
         params => {
-            email               => $c->req->params->{email},
-            reset_password_key  => decode_base64($c->req->params->{key}),
+            email              => $c->req->params->{email},
+            reset_password_key => decode_base64( $c->req->params->{key} ),
         }
     );
 
-    if(!$c->stash->{users}[0]) {
+    if ( !$c->stash->{users}[0] ) {
         $c->stash->{invalid_account} = 1;
         $c->detach();
     }

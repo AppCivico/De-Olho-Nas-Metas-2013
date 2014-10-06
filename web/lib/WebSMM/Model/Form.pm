@@ -12,9 +12,9 @@ sub format_date {
     foreach my $f (@fields) {
         next unless $ref->{$f};
 
-        my $date            = $ref->{$f};
-        my ( $d, $m, $y )   = $date =~ m/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
-        $ref->{$f}          = "$y-$m-$d";
+        my $date = $ref->{$f};
+        my ( $d, $m, $y ) = $date =~ m/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
+        $ref->{$f} = "$y-$m-$d";
     }
 }
 
@@ -48,7 +48,8 @@ sub format_cnpj_to_human {
     foreach my $f (@fields) {
         my $cpf = $ref->{$f};
 
-        my ( $a, $b, $c, $d, $e ) = $cpf =~ m/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/;
+        my ( $a, $b, $c, $d, $e ) =
+          $cpf =~ m/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/;
         $ref->{$f} = "$a.$b.$c/$d-$e";
     }
 }

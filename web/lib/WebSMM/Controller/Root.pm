@@ -30,57 +30,65 @@ The root page (/)
 
 sub index : Path : Args(0) {
     my ( $self, $c ) = @_;
-    
-	my $api = $c->model('API');
-	$c->res->redirect('http://192.168.1.61:3000/login');	
-#	$c->stash->{select_states} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{states} } ];
-	
-#	unshift($c->stash->{select_states}, ['br', 'Brasil']);
-	
- #   $self->root($c);
+
+    my $api = $c->model('API');
+    $c->res->redirect('http://192.168.1.61:3000/login');
+
+    #	$c->stash->{select_states} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{states} } ];
+
+    #	unshift($c->stash->{select_states}, ['br', 'Brasil']);
+
+    #   $self->root($c);
 }
 
 sub more : Chained('') : Path('saiba-mais') : Args(0) {
-	my ( $self, $c ) = @_;
-	
-	my $api = $c->model('API');
-	
-	$api->stash_result(
-		$c, 'categories',
-		params => {
-			order   => 'name',
-		}
-	);
-	$c->stash->{select_categories} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{categories} } ];
-	
-	$api->stash_result(
-		$c, 'candidates',
-		params => {
-			order   => 'me.name',
-		}
-	);
-	$c->stash->{select_candidates} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{candidates} } ];
-	
-	$api->stash_result(
-		$c, 'states',
-		params => {
-			order   => 'name',
-		}
-	);
-	$c->stash->{select_states} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{states} } ];
-	
-	unshift($c->stash->{select_states}, ['br', 'Brasil']);
-	
-	$api->stash_result(
-		$c, 'electoral_regional_courts',
-		params => {
-			order   => 'state.name',
-		}
-	);
-	
-	$c->stash->{select_spe} = [ map { [ $_->{id}, $_->{state}{name} ] } @{ $c->stash->{electoral_regional_courts} } ];
-	
-	$c->stash->{template} = 'auto/saiba_mais.tt';
+    my ( $self, $c ) = @_;
+
+    my $api = $c->model('API');
+
+    $api->stash_result(
+        $c,
+        'categories',
+        params => {
+            order => 'name',
+        }
+    );
+    $c->stash->{select_categories} =
+      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{categories} } ];
+
+    $api->stash_result(
+        $c,
+        'candidates',
+        params => {
+            order => 'me.name',
+        }
+    );
+    $c->stash->{select_candidates} =
+      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{candidates} } ];
+
+    $api->stash_result(
+        $c, 'states',
+        params => {
+            order => 'name',
+        }
+    );
+    $c->stash->{select_states} =
+      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{states} } ];
+
+    unshift( $c->stash->{select_states}, [ 'br', 'Brasil' ] );
+
+    $api->stash_result(
+        $c,
+        'electoral_regional_courts',
+        params => {
+            order => 'state.name',
+        }
+    );
+
+    $c->stash->{select_spe} = [ map { [ $_->{id}, $_->{state}{name} ] }
+          @{ $c->stash->{electoral_regional_courts} } ];
+
+    $c->stash->{template} = 'auto/saiba_mais.tt';
 }
 
 sub root : Chained('/') : PathPart('') : CaptureArgs(0) {
@@ -94,8 +102,10 @@ sub root : Chained('/') : PathPart('') : CaptureArgs(0) {
     my $status_msg = $c->stash->{status_msg};
     my $error_msg  = $c->stash->{error_msg};
 
-    @{ $c->stash }{ keys %$status_msg } = values %$status_msg if ref $status_msg eq 'HASH';
-    @{ $c->stash }{ keys %$error_msg }  = values %$error_msg  if ref $error_msg eq 'HASH';
+    @{ $c->stash }{ keys %$status_msg } = values %$status_msg
+      if ref $status_msg eq 'HASH';
+    @{ $c->stash }{ keys %$error_msg } = values %$error_msg
+      if ref $error_msg eq 'HASH';
 
     my ( $class, $action ) = ( $c->action->class, $c->action->name );
     $class =~ s/^WebSMM::Controller:://;
@@ -109,7 +119,7 @@ sub root : Chained('/') : PathPart('') : CaptureArgs(0) {
         }
         elsif ( grep { /^admin$/ } $c->user->roles ) {
             $c->stash->{role_controller} = 'admin';
-        } 
+        }
         elsif ( grep { /^organization$/ } $c->user->roles ) {
             $c->stash->{role_controller} = 'organization';
         }
@@ -136,7 +146,8 @@ sub default : Path {
     eval {
         $c->stash->{body_class} .= ' ' . $maybe_view;
         $c->stash->{body_class} =~ s/\//-/g;
-        $output = $c->view('TT')->render( $c, "auto/$maybe_view.tt", $c->stash );
+        $output =
+          $c->view('TT')->render( $c, "auto/$maybe_view.tt", $c->stash );
     };
     if ( $@ && $@ =~ /not found$/ ) {
         $c->response->body('Page not found');

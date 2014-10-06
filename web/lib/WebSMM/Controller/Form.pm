@@ -94,10 +94,10 @@ sub redirect_relogin : Private {
     my $port  = $c->req->uri->port == 80 ? '' : ":" . $c->req->uri->port;
     my $refer = $c->req->headers->referer;
 
-    if ( !$refer || $refer !~ /^https?:\/\/$host$port/i) {
+    if ( !$refer || $refer !~ /^https?:\/\/$host$port/i ) {
         $refer = '/erro';
     }
-    if ($c->req->method eq 'GET'){
+    if ( $c->req->method eq 'GET' ) {
         $refer = $c->req->uri->as_string;
     }
 
@@ -112,7 +112,7 @@ sub redirect_relogin : Private {
     $refer =~ s/^https?:\/\/$host$port//g;
 
     my $uri = URI->new('/login');
-    $uri->query_param( 'mid', $mid );
+    $uri->query_param( 'mid',         $mid );
     $uri->query_param( 'redirect_to', $refer );
 
     $c->res->redirect( $uri->as_string );

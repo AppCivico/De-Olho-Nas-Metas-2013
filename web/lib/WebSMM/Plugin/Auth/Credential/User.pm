@@ -8,7 +8,8 @@ our $VERSION = '0.01';
 sub BUILDARGS {
     my ( $self, $config, $c, $realm ) = @_;
 
-    die "context method 'user_session' not present. " . "Have you loaded Catalyst::Plugin::Session::PerUser ?"
+    die "context method 'user_session' not present. "
+      . "Have you loaded Catalyst::Plugin::Session::PerUser ?"
       unless $c->can('user_session');
 
     return $config;

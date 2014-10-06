@@ -20,26 +20,29 @@ sub cadastro : Chained('base') : PathPart('cadastro') : Args(0) {
         $c->detach( 'Form::Login' => 'after_login' );
     }
 
-    if($c->req->params->{pre_id}) {
+    if ( $c->req->params->{pre_id} ) {
         $api->stash_result(
-            $c, ['pre_registrations', $c->req->params->{pre_id}],
+            $c,
+            [ 'pre_registrations', $c->req->params->{pre_id} ],
             stash => 'pre_registrations'
         );
     }
 
     $api->stash_result( $c, 'states' );
-    $c->stash->{select_states} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{states} } ];
+    $c->stash->{select_states} =
+      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{states} } ];
 
-    if( $c->stash->{body}{state_id} && !$c->stash->{body}{postal_code}) {
+    if ( $c->stash->{body}{state_id} && !$c->stash->{body}{postal_code} ) {
         $api->stash_result(
             $c, 'cities',
             params => {
-                state_id    => $c->{stash}->{body}{state_id},
-                order       => 'name'
+                state_id => $c->{stash}->{body}{state_id},
+                order    => 'name'
             }
         );
 
-        $c->stash->{select_cities} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{cities} } ];
+        $c->stash->{select_cities} =
+          [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{cities} } ];
     }
 
     if ( exists( $c->stash->{form_error}{birth_date} ) ) {
@@ -53,7 +56,8 @@ sub cadastro : Chained('base') : PathPart('cadastro') : Args(0) {
 
         #TODO  limpar a string com uma regex retirando os caracteres que vem com a mascara de data
         if ( $body->{birth_date} != '--' ) {
-            my $dt = DateTime::Format::Pg->parse_datetime( $body->{birth_date} );
+            my $dt =
+              DateTime::Format::Pg->parse_datetime( $body->{birth_date} );
 
             my $interval = $now->subtract_datetime($dt);
 
@@ -87,17 +91,17 @@ sub get_cities : Chained('base') : PathPart('get_cities') {
 
     my $api = $c->model('API');
 
-    $api->stash_result(
-        $c, 'cities',
+    $api->stash_result( $c, 'cities', );
+    $c->stash(
+        select_cities =>
+          [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{cities} } ],
+        without_wrapper => 1,
+        template        => 'auto/cities.tt'
     );
-     $c->stash(
-         select_cities   => [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{cities} } ],
-         without_wrapper => 1,
-         template        => 'auto/cities.tt'
-     );
 }
 
-sub get_vehicle_models : Chained('base') : PathPart('get_vehicle_models') : Args(0) {
+sub get_vehicle_models : Chained('base') : PathPart('get_vehicle_models') :
+  Args(0) {
     my ( $self, $c ) = @_;
 
     my $api = $c->model('API');
@@ -112,13 +116,15 @@ sub get_vehicle_models : Chained('base') : PathPart('get_vehicle_models') : Args
     );
 
     $c->stash(
-        select_vehicle_models => [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{vehicle_models} } ],
-        without_wrapper       => 1,
-        template => 'user/vehicle/vehicle_models.tt'
+        select_vehicle_models =>
+          [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{vehicle_models} } ],
+        without_wrapper => 1,
+        template        => 'user/vehicle/vehicle_models.tt'
     );
 }
 
-sub registration_successfully : Chained('base') : PathPart('registration_successfully') : Args(0) {
+sub registration_successfully : Chained('base') :
+  PathPart('registration_successfully') : Args(0) {
     my ( $self, $c ) = @_;
 
     $c->stash( template => 'user/account/success.tt' );

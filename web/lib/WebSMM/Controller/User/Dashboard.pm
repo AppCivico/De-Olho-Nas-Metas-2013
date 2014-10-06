@@ -29,48 +29,57 @@ sub object : Chained('base') : PathPart('dashboard') : CaptureArgs(0) {
     }
 
     $api->stash_result( $c, 'states' );
-    $c->stash->{select_states} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{states} } ];
+    $c->stash->{select_states} =
+      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{states} } ];
 
-    if($c->stash->{body}{state_id}) {
+    if ( $c->stash->{body}{state_id} ) {
         $api->stash_result(
             $c, 'cities',
             params => {
-                state_id    => $c->stash->{body}{state_id},
-                order       => 'name'
+                state_id => $c->stash->{body}{state_id},
+                order    => 'name'
             }
         );
-        $c->stash->{select_cities} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{cities} } ];
+        $c->stash->{select_cities} =
+          [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{cities} } ];
     }
 
-    $api->stash_result($c, 'vehicle_colors', params => { order => 'name' } );
-    $c->stash->{select_colors} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{vehicle_colors} } ];
+    $api->stash_result( $c, 'vehicle_colors', params => { order => 'name' } );
+    $c->stash->{select_colors} =
+      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{vehicle_colors} } ];
 
     $api->stash_result(
-        $c, 'vehicle_brands',
-         params => {
-            order => 'name'
-        }
-    );
-    $c->stash->{select_brands} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{vehicle_brands} } ];
-
-    if($c->stash->{body}{vehicle_brand_id}) {
-        $api->stash_result(
-            $c, 'vehicle_models',
-            params => {
-                vehicle_brand_id    => $c->stash->{body}{vehicle_brand_id},
-                order               => 'name'
-            }
-        );
-        $c->stash->{select_models} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{vehicle_models} } ];
-    }
-
-    $api->stash_result(
-        $c, 'insurance_companies',
+        $c,
+        'vehicle_brands',
         params => {
             order => 'name'
         }
     );
-    $c->stash->{select_insurance_companies} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{insurance_company} } ];
+    $c->stash->{select_brands} =
+      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{vehicle_brands} } ];
+
+    if ( $c->stash->{body}{vehicle_brand_id} ) {
+        $api->stash_result(
+            $c,
+            'vehicle_models',
+            params => {
+                vehicle_brand_id => $c->stash->{body}{vehicle_brand_id},
+                order            => 'name'
+            }
+        );
+        $c->stash->{select_models} =
+          [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{vehicle_models} } ];
+    }
+
+    $api->stash_result(
+        $c,
+        'insurance_companies',
+        params => {
+            order => 'name'
+        }
+    );
+    $c->stash->{select_insurance_companies} =
+      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{insurance_company} } ];
 
     my $year       = DateTime->now;
     my $first_year = $year->year - 3;
@@ -85,7 +94,8 @@ sub object : Chained('base') : PathPart('dashboard') : CaptureArgs(0) {
         $vehicle_years{ $year_range[$i] } = $year_range[$i];
     }
 
-    $c->stash->{vehicle_years} = [ map { [ $_, $vehicle_years{$_} ] } sort keys %vehicle_years ];
+    $c->stash->{vehicle_years} =
+      [ map { [ $_, $vehicle_years{$_} ] } sort keys %vehicle_years ];
 
     $api->stash_result(
         $c,
@@ -94,7 +104,8 @@ sub object : Chained('base') : PathPart('dashboard') : CaptureArgs(0) {
             order => 'name'
         }
     );
-    $c->stash->{select_parking_types} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{vehicle_parking_types} } ];
+    $c->stash->{select_parking_types} = [ map { [ $_->{id}, $_->{name} ] }
+          @{ $c->stash->{vehicle_parking_types} } ];
 }
 
 sub index : Chained('object') : PathPart('') : Args(0) {

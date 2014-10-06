@@ -5,13 +5,14 @@ use JSON::XS;
 
 BEGIN { extends 'Catalyst::Controller' }
 
-sub base : Chained('/user/base') : PathPart('find_postal_code') : CaptureArgs(0) {
+sub base : Chained('/user/base') : PathPart('find_postal_code') :
+  CaptureArgs(0) {
 }
 
 sub index : Chained('base') : PathPart('search') : Args(0) {
     my ( $self, $c ) = @_;
 
-    my $api  = $c->model('API');
+    my $api = $c->model('API');
 
     $api->stash_result(
         $c,
