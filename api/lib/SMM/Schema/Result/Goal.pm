@@ -419,13 +419,13 @@ __PACKAGE__->belongs_to(
   },
 );
 
-__PACKAGE__->many_to_many(projects => goal_project => 'project');
-
-__PACKAGE__->many_to_many(secretaries => goal_secretary => 'secretary');
 
 # Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-10-06 19:49:39
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZmtOG+UoWB03gVxDLjM3EQ
 
+__PACKAGE__->many_to_many(projects => goal_project => 'project');
+
+__PACKAGE__->many_to_many(secretaries => goal_secretary => 'secretary');
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;
