@@ -1,17 +1,15 @@
-package WebSMM::Controller::Updates;
+package SMM::Controller::Update;
 use Moose;
 use namespace::autoclean;
 use JSON;
-use Data::Dumper;
-use XML::Simple;
-use XML::XML2JSON;
-use Spreadsheet::WriteExcel;
 use utf8;
+use Furl;
+
 BEGIN { extends 'Catalyst::Controller'; }
 
 =head1 NAME
 
-WebSMM::Controller::Updates - Catalyst Controller
+SMM::Controller::Update - Catalyst Controller
 
 =head1 DESCRIPTION
 
@@ -21,6 +19,7 @@ Catalyst Controller.
 
 =cut
 
+
 =head2 index
 
 =cut
@@ -29,7 +28,6 @@ sub base : Chained('/') : PathPart('') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
     $c->stash->{url} = 'http://planejasampa.prefeitura.sp.gov.br/metas/api/';
 }
-
 sub document : Chained('base') Args(0) {
     my ( $self, $c ) = @_;
     my $return;
@@ -78,16 +76,17 @@ sub document : Chained('base') Args(0) {
     }
 }
 
-sub projects : Chained('base') Args(1) {
 
+sub goal : Chained('base') Args(0) {
     my ( $self, $c ) = @_;
     my $return;
     my $res;
-
+	
+	my $db = $c->model('DB::Goal');
     use DDP;
     my $model = $c->model('API');
 
-    $c->stash->{url} .= 'project';
+    $c->stash->{url} .= 'goal/1';
 
     p $c->stash->{url};
 
@@ -95,109 +94,32 @@ sub projects : Chained('base') Args(1) {
         $return = $model->_do_http_req(
             method => 'GET',
             url    => $c->stash->{url},
-
         );
     };
-    my $teste = decode_json $res->content;
-    OA $c->res->body( Dumper $teste );
+    my $data = decode_json $res->content;
+
+    for my $val ( $data ) {
+
+        for my $project_content ( @{ $val->{projects}} ) {
+#			my $district = $c->model('DB::District'){
+#			}
+			my $project_result = $c->model('DB::Project')->create(
+				name => $project_content->{name},
+				
+			);
+        }
+		my $result = $db->create(
+			name              => $db->{name},
+			will_be_delivered => $db->{will_be_delivered},	
+			description       => $db->{observation},	
+			technically       => $db->{technically},
+			transversality    => $db->{transversalidade},
+			expected_budget   => $db->{total_cust},
+			porcentage        => $db->{porcentagem}->{concluido},		
+			
+		);	
+    }
 }
-
-sub axes : Chained('base') Args(0) {
-    my ( $self, $c ) = @_;
-    my $return;
-    my $res;
-
-    use DDP;
-    my $model = $c->model('API');
-
-    $c->stash->{url} .= 'axes';
-
-    p $c->stash->{url};
-
-    $res = eval {
-        $return = $model->_do_http_req(
-            method => 'GET',
-            url    => $c->stash->{url},
-
-        );
-    };
-    my $teste = decode_json $res->content;
-
-    $c->res->body( Dumper $teste );
-}
-
-sub articulations : Chained('base') Args(0) {
-    my ( $self, $c ) = @_;
-    my $return;
-    my $res;
-
-    use DDP;
-    my $model = $c->model('API');
-
-    $c->stash->{url} .= 'articulations';
-
-    p $c->stash->{url};
-
-    $res = eval {
-        $return = $model->_do_http_req(
-            method => 'GET',
-            url    => $c->stash->{url},
-
-        );
-    };
-    my $teste = decode_json $res->content;
-
-    $c->res->body( Dumper $teste );
-}
-
-sub objectives : Chained('base') Args(0) {
-    my ( $self, $c ) = @_;
-    my $return;
-    my $res;
-
-    use DDP;
-    my $model = $c->model('API');
-
-    $c->stash->{url} .= 'objectives';
-
-    p $c->stash->{url};
-
-    $res = eval {
-        $return = $model->_do_http_req(
-            method => 'GET',
-            url    => $c->stash->{url},
-
-        );
-    };
-    my $teste = decode_json $res->content;
-
-    $c->res->body( Dumper $teste );
-}
-
-sub secretaries : Chained('base') Args(0) {
-    my ( $self, $c ) = @_;
-    my $return;
-    my $res;
-
-    use DDP;
-    my $model = $c->model('API');
-
-    $c->stash->{url} .= 'objectives';
-
-    p $c->stash->{url};
-
-    $res = eval {
-        $return = $model->_do_http_req(
-            method => 'GET',
-            url    => $c->stash->{url},
-
-        );
-    };
-    my $teste = decode_json $res->content;
-
-    $c->res->body( Dumper $teste );
-}
-
 sub prefectures : Chained('base') Args(0) {
     my ( $self, $c ) = @_;
     my $return;
@@ -210,15 +132,26 @@ sub prefectures : Chained('base') Args(0) {
 
     p $c->stash->{url};
 
-    $res = eval {
-        $return = $model->_do_http_req(
-            method => 'GET',
-            url    => $c->stash->{url},
-        );
-    };
-    my $teste = decode_json $res->content;
+    #$res = eval {
+    #    $return = $model->_do_http_req(
+    #        method => 'GET',
+    #        url    => $c->stash->{url},
+    #    );
+    #};
 
-    $c->res->body( Dumper $teste );
+	$res = $self->furl->get( $c->stash->{url} );
+
+    my $data = decode_json $res->content;
+	p$data;
+	
+	$c->res->body('teste');
+} 
+
+sub furl {
+	return Furl->new(
+		agent   => 'SMM',
+		timeout => 100
+	);
 }
 
 =encoding utf8
@@ -226,7 +159,6 @@ sub prefectures : Chained('base') Args(0) {
 =head1 AUTHOR
 
 development,,,
-B
 
 =head1 LICENSE
 

@@ -1,5 +1,4 @@
 use utf8;
-
 package SMM::Schema::Result::Management;
 
 # Created by DBIx::Class::Schema::Loader
@@ -33,8 +32,7 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
-    "PassphraseColumn" );
+__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
 =head1 TABLE: C<management>
 
@@ -91,27 +89,27 @@ __PACKAGE__->table("management");
 =cut
 
 __PACKAGE__->add_columns(
-    "id",
-    {
-        data_type         => "integer",
-        is_auto_increment => 1,
-        is_nullable       => 0,
-        sequence          => "management_id_seq",
-    },
-    "name",
-    { data_type => "text", is_nullable => 0 },
-    "start_date",
-    { data_type => "text", is_nullable => 0 },
-    "expected_end_date",
-    { data_type => "text", is_nullable => 0 },
-    "city_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
-    "organization_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
-    "active",
-    { data_type => "boolean", is_nullable => 1 },
-    "created_at",
-    { data_type => "text", is_nullable => 1 },
+  "id",
+  {
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+    sequence          => "management_id_seq",
+  },
+  "name",
+  { data_type => "text", is_nullable => 0 },
+  "start_date",
+  { data_type => "text", is_nullable => 0 },
+  "expected_end_date",
+  { data_type => "text", is_nullable => 0 },
+  "city_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
+  "organization_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
+  "active",
+  { data_type => "boolean", is_nullable => 1 },
+  "created_at",
+  { data_type => "text", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -137,9 +135,25 @@ Related object: L<SMM::Schema::Result::City>
 =cut
 
 __PACKAGE__->belongs_to(
-    "city", "SMM::Schema::Result::City",
-    { id            => "city_id" },
-    { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
+  "city",
+  "SMM::Schema::Result::City",
+  { id => "city_id" },
+  { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
+);
+
+=head2 goals
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::Goal>
+
+=cut
+
+__PACKAGE__->has_many(
+  "goals",
+  "SMM::Schema::Result::Goal",
+  { "foreign.management_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 organization
@@ -151,14 +165,15 @@ Related object: L<SMM::Schema::Result::Organization>
 =cut
 
 __PACKAGE__->belongs_to(
-    "organization",
-    "SMM::Schema::Result::Organization",
-    { id            => "organization_id" },
-    { is_deferrable => 0, on_delete => "NO ACTION", on_update => "NO ACTION" },
+  "organization",
+  "SMM::Schema::Result::Organization",
+  { id => "organization_id" },
+  { is_deferrable => 0, on_delete => "NO ACTION", on_update => "NO ACTION" },
 );
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-09-01 15:52:44
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:DlXW83EMsdCY5I4o76scnA
+
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-10-06 19:49:39
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:fFOWowuvOwnZWpBCdtRV3w
 
 use SMM::Types qw /DataStr TimeStr/;
 with 'SMM::Role::Verification';

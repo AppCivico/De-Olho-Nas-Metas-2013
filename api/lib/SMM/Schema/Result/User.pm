@@ -1,5 +1,4 @@
 use utf8;
-
 package SMM::Schema::Result::User;
 
 # Created by DBIx::Class::Schema::Loader
@@ -33,8 +32,7 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
-    "PassphraseColumn" );
+__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
 =head1 TABLE: C<user>
 
@@ -100,34 +98,34 @@ __PACKAGE__->table("user");
 =cut
 
 __PACKAGE__->add_columns(
-    "id",
-    {
-        data_type         => "integer",
-        is_auto_increment => 1,
-        is_nullable       => 0,
-        sequence          => "user_id_seq",
-    },
-    "name",
-    { data_type => "text", is_nullable => 0 },
-    "email",
-    { data_type => "text", is_nullable => 0 },
-    "active",
-    { data_type => "boolean", default_value => \"true", is_nullable => 0 },
-    "created_at",
-    {
-        data_type     => "timestamp",
-        default_value => \"current_timestamp",
-        is_nullable   => 0,
-        original      => { default_value => \"now()" },
-    },
-    "password",
-    { data_type => "text", is_nullable => 0 },
-    "created_by",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-    "type",
-    { data_type => "varchar", is_nullable => 1, size => 12 },
-    "organization_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "id",
+  {
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+    sequence          => "user_id_seq",
+  },
+  "name",
+  { data_type => "text", is_nullable => 0 },
+  "email",
+  { data_type => "text", is_nullable => 0 },
+  "active",
+  { data_type => "boolean", default_value => \"true", is_nullable => 0 },
+  "created_at",
+  {
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
+    is_nullable   => 0,
+    original      => { default_value => \"now()" },
+  },
+  "password",
+  { data_type => "text", is_nullable => 0 },
+  "created_by",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "type",
+  { data_type => "varchar", is_nullable => 1, size => 12 },
+  "organization_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -154,7 +152,7 @@ __PACKAGE__->set_primary_key("id");
 
 =cut
 
-__PACKAGE__->add_unique_constraint( "user_email_key", ["email"] );
+__PACKAGE__->add_unique_constraint("user_email_key", ["email"]);
 
 =head1 RELATIONS
 
@@ -167,15 +165,30 @@ Related object: L<SMM::Schema::Result::User>
 =cut
 
 __PACKAGE__->belongs_to(
-    "created_by",
-    "SMM::Schema::Result::User",
-    { id => "created_by" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "created_by",
+  "SMM::Schema::Result::User",
+  { id => "created_by" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
+=head2 goals
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::Goal>
+
+=cut
+
+__PACKAGE__->has_many(
+  "goals",
+  "SMM::Schema::Result::Goal",
+  { "foreign.user_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 organization
@@ -187,15 +200,15 @@ Related object: L<SMM::Schema::Result::Organization>
 =cut
 
 __PACKAGE__->belongs_to(
-    "organization",
-    "SMM::Schema::Result::Organization",
-    { id => "organization_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "organization",
+  "SMM::Schema::Result::Organization",
+  { id => "organization_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
 =head2 user_roles
@@ -207,10 +220,10 @@ Related object: L<SMM::Schema::Result::UserRole>
 =cut
 
 __PACKAGE__->has_many(
-    "user_roles",
-    "SMM::Schema::Result::UserRole",
-    { "foreign.user_id" => "self.id" },
-    { cascade_copy      => 0, cascade_delete => 0 },
+  "user_roles",
+  "SMM::Schema::Result::UserRole",
+  { "foreign.user_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 user_sessions
@@ -222,10 +235,10 @@ Related object: L<SMM::Schema::Result::UserSession>
 =cut
 
 __PACKAGE__->has_many(
-    "user_sessions",
-    "SMM::Schema::Result::UserSession",
-    { "foreign.user_id" => "self.id" },
-    { cascade_copy      => 0, cascade_delete => 0 },
+  "user_sessions",
+  "SMM::Schema::Result::UserSession",
+  { "foreign.user_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 users
@@ -237,13 +250,15 @@ Related object: L<SMM::Schema::Result::User>
 =cut
 
 __PACKAGE__->has_many(
-    "users", "SMM::Schema::Result::User",
-    { "foreign.created_by" => "self.id" },
-    { cascade_copy         => 0, cascade_delete => 0 },
+  "users",
+  "SMM::Schema::Result::User",
+  { "foreign.created_by" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-08-30 11:49:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:zGLrWQiBhj8G9PmbemmdgA
+
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-10-06 19:49:39
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:8sHZ9uSGfaR4U+fEtJInNQ
 
 __PACKAGE__->many_to_many( roles => user_roles => 'role' );
 

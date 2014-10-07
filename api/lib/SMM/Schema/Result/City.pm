@@ -1,5 +1,4 @@
 use utf8;
-
 package SMM::Schema::Result::City;
 
 # Created by DBIx::Class::Schema::Loader
@@ -33,8 +32,7 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
-    "PassphraseColumn" );
+__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
 =head1 TABLE: C<city>
 
@@ -74,16 +72,16 @@ __PACKAGE__->table("city");
 =cut
 
 __PACKAGE__->add_columns(
-    "id",
-    { data_type => "integer", is_nullable => 0 },
-    "name",
-    { data_type => "text", is_nullable => 0 },
-    "name_url",
-    { data_type => "text", is_nullable => 1 },
-    "state_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-    "country_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "id",
+  { data_type => "integer", is_nullable => 0 },
+  "name",
+  { data_type => "text", is_nullable => 0 },
+  "name_url",
+  { data_type => "text", is_nullable => 1 },
+  "state_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "country_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -109,15 +107,45 @@ Related object: L<SMM::Schema::Result::Country>
 =cut
 
 __PACKAGE__->belongs_to(
-    "country",
-    "SMM::Schema::Result::Country",
-    { id => "country_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "country",
+  "SMM::Schema::Result::Country",
+  { id => "country_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
+=head2 districts
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::District>
+
+=cut
+
+__PACKAGE__->has_many(
+  "districts",
+  "SMM::Schema::Result::District",
+  { "foreign.city_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 goals
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::Goal>
+
+=cut
+
+__PACKAGE__->has_many(
+  "goals",
+  "SMM::Schema::Result::Goal",
+  { "foreign.city_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 managements
@@ -129,10 +157,10 @@ Related object: L<SMM::Schema::Result::Management>
 =cut
 
 __PACKAGE__->has_many(
-    "managements",
-    "SMM::Schema::Result::Management",
-    { "foreign.city_id" => "self.id" },
-    { cascade_copy      => 0, cascade_delete => 0 },
+  "managements",
+  "SMM::Schema::Result::Management",
+  { "foreign.city_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 organizations
@@ -144,10 +172,40 @@ Related object: L<SMM::Schema::Result::Organization>
 =cut
 
 __PACKAGE__->has_many(
-    "organizations",
-    "SMM::Schema::Result::Organization",
-    { "foreign.city_id" => "self.id" },
-    { cascade_copy      => 0, cascade_delete => 0 },
+  "organizations",
+  "SMM::Schema::Result::Organization",
+  { "foreign.city_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 prefectures
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::Prefecture>
+
+=cut
+
+__PACKAGE__->has_many(
+  "prefectures",
+  "SMM::Schema::Result::Prefecture",
+  { "foreign.city_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 secretaries
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::Secretary>
+
+=cut
+
+__PACKAGE__->has_many(
+  "secretaries",
+  "SMM::Schema::Result::Secretary",
+  { "foreign.city_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 state
@@ -159,19 +217,20 @@ Related object: L<SMM::Schema::Result::State>
 =cut
 
 __PACKAGE__->belongs_to(
-    "state",
-    "SMM::Schema::Result::State",
-    { id => "state_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "state",
+  "SMM::Schema::Result::State",
+  { id => "state_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-09-01 15:52:44
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:6NWvM6RfEKS0r54Wj3/LVg
+
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-10-06 19:49:39
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:lkq86qk73i2sOWTR7ucamg
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;
