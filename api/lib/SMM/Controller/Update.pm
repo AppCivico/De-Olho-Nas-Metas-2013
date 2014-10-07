@@ -19,7 +19,6 @@ Catalyst Controller.
 
 =cut
 
-
 =head2 index
 
 =cut
@@ -28,6 +27,7 @@ sub base : Chained('/') : PathPart('') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
     $c->stash->{url} = 'http://planejasampa.prefeitura.sp.gov.br/metas/api/';
 }
+
 sub document : Chained('base') Args(0) {
     my ( $self, $c ) = @_;
     my $return;
@@ -76,13 +76,12 @@ sub document : Chained('base') Args(0) {
     }
 }
 
-
 sub goal : Chained('base') Args(0) {
     my ( $self, $c ) = @_;
     my $return;
     my $res;
-	
-	my $db = $c->model('DB::Goal');
+
+    my $db = $c->model('DB::Goal');
     use DDP;
     my $model = $c->model('API');
 
@@ -90,36 +89,61 @@ sub goal : Chained('base') Args(0) {
 
     p $c->stash->{url};
 
-    $res = eval {
-        $return = $model->_do_http_req(
-            method => 'GET',
-            url    => $c->stash->{url},
-        );
-    };
+    #$res = eval {
+    #    $return = $model->_do_http_req(
+    #        method => 'GET',
+    #        url    => $c->stash->{url},
+    #    );
+    #};
+
+    $res = $self->furl->get( $c->stash->{url} );
+
     my $data = decode_json $res->content;
 
-    for my $val ( $data ) {
+	delete $data->{qualitative_progress_3};
+	delete $data->{qualitative_progress_5};
+	delete $data->{qualitative_progress_4};
+	delete $data->{qualitative_progress_2};
+	delete $data->{qualitative_progress_1};
+	delete $data->{qualitative_progress_6};
+	delete $data->{schedule_2015_2016};
+	delete $data->{schedule_2013_2014};
+	delete $data->{axis_id};
+	delete $data->{articulation_id};
+	delete $data->{objective_id};
+	delete $data->{status};
+	delete $data->{porcentagem};
+	$data->{transversality} = delete $data->{transversalidade};
+	$data->{description} = delete $data->{observation};
+	$data->{expected_budget} = delete $data->{total_cost};
+	$data->{update_at} = delete $data->{updated_at};
+	
+	p $data;
+	my $ret = $c->model('DB::Goal')->create($data);
 
-        for my $project_content ( @{ $val->{projects}} ) {
-#			my $district = $c->model('DB::District'){
-#			}
-			my $project_result = $c->model('DB::Project')->create(
-				name => $project_content->{name},
-				
-			);
-        }
-		my $result = $db->create(
-			name              => $db->{name},
-			will_be_delivered => $db->{will_be_delivered},	
-			description       => $db->{observation},	
-			technically       => $db->{technically},
-			transversality    => $db->{transversalidade},
-			expected_budget   => $db->{total_cust},
-			porcentage        => $db->{porcentagem}->{concluido},		
-			
-		);	
-    }
+    # for my $val ( $data ) {
+
+    #    for my $project_content ( @{ $val->{projects}} ) {
+    #			my $district = $c->model('DB::District'){
+    #			}
+    #		my $project_result = $c->model('DB::Project')->create(
+    #				name => $project_content->{name},
+
+    #			);
+    #       }
+    #		my $result = $db->create(
+    #			name              => $db->{name},
+    #			will_be_delivered => $db->{will_be_delivered},
+    #			description       => $db->{observation},
+    #			technically       => $db->{technically},
+    #			transversality    => $db->{transversalidade},
+    #			expected_budget   => $db->{total_cust},
+    #			porcentage        => $db->{porcentagem}->{concluido},
+    #
+    #		);
+    #    }
 }
+
 sub prefectures : Chained('base') Args(0) {
     my ( $self, $c ) = @_;
     my $return;
@@ -139,19 +163,19 @@ sub prefectures : Chained('base') Args(0) {
     #    );
     #};
 
-	$res = $self->furl->get( $c->stash->{url} );
+    $res = $self->furl->get( $c->stash->{url} );
 
     my $data = decode_json $res->content;
-	p$data;
-	
-	$c->res->body('teste');
-} 
+    p $data;
+
+    $c->res->body('teste');
+}
 
 sub furl {
-	return Furl->new(
-		agent   => 'SMM',
-		timeout => 100
-	);
+    return Furl->new(
+        agent   => 'SMM',
+        timeout => 100
+    );
 }
 
 =encoding utf8

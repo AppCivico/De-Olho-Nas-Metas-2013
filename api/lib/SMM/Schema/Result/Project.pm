@@ -169,6 +169,7 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+__PACKAGE__->many_to_many( prefectures => project_prefecture => 'prefecture');
 
 # Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-10-06 19:49:39
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:HKC1EPqqUTSAVLdoxPV04A
