@@ -324,6 +324,21 @@ __PACKAGE__->belongs_to(
   },
 );
 
+=head2 goal_projects
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::GoalProject>
+
+=cut
+
+__PACKAGE__->has_many(
+  "goal_projects",
+  "SMM::Schema::Result::GoalProject",
+  { "foreign.goal_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 goal_secretaries
 
 Type: has_many
@@ -420,12 +435,12 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-10-06 19:49:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZmtOG+UoWB03gVxDLjM3EQ
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-10-06 21:06:07
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VKEALzWylGtlomgh035Qbg
 
-__PACKAGE__->many_to_many(projects => goal_project => 'project');
+__PACKAGE__->many_to_many( projects => goal_projects => 'project');
 
-__PACKAGE__->many_to_many(secretaries => goal_secretary => 'secretary');
+__PACKAGE__->many_to_many( secretaries => goal_secretaries => 'secretary');
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;
