@@ -440,7 +440,83 @@ __PACKAGE__->belongs_to(
 
 __PACKAGE__->many_to_many( projects => goal_projects => 'project');
 
-__PACKAGE__->many_to_many( secretaries => goal_secretaries => 'secretary');
+
+__PACKAGE__->many_to_many( secretaries => 'goal_secretaries' => 'secretary',);
+
+with 'SMM::Role::Verification';
+with 'SMM::Role::Verification::TransactionalActions::DBIC';
+with 'SMM::Schema::Role::ResultsetFind';
+
+use Data::Verifier;
+use MooseX::Types::Email qw/EmailAddress/;
+use SMM::Types qw /DataStr TimeStr/;
+
+sub verifiers_specs {
+    my $self = shift;
+    return {
+        update => Data::Verifier->new(
+            filters => [qw(trim)],
+            profile => {
+                name => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                address => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                postal_code => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                city_id => {
+                    required => 0,
+                    type     => 'Int',
+                },
+                description => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                phone => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                email => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                website => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                complement => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                number => {
+                    required => 0,
+                    type     => 'Str',
+                },
+            }
+        ),
+    };
+}
+
+sub action_specs {
+    my $self = shift;
+    return {
+        update => sub {
+            my %values = shift->valid_values;
+
+            not defined $values{$_} and delete $values{$_} for keys %values;
+
+            my $goal = $self->update( \%values );
+
+            return $goal;
+        },
+
+    };
+}
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;

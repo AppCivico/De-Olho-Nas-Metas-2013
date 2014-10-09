@@ -14,6 +14,11 @@
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 						<a href="[%href%]">Gestões</a>
 					</li>
+					[%href = c.uri_for_action('/admin/goal/index')%]
+					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
+						<a href="[%href%]">Metas</a>
+					</li>
+
 				[%END%]
 			</ul>
 			<ul class="nav nav-sidebar">

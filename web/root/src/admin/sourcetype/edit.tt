@@ -1,9 +1,0 @@
-<div>
-	<div class="rows">
-	<h2 class="sub-header">Editar tipo de fonte</h2>
-	<form role="form" method="post" class="form-horizontal" action="/admin/form/source_type/[%source_type_obj.id%]">
-		[%input_text('name','Nome', req=>1, value=>source_type_obj.name)|none%]
-		<button type="submit" class="btn btn-success pull-right">Salvar</button>
-	</form>
-	</div>
-</div>

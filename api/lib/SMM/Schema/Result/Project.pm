@@ -54,16 +54,10 @@ __PACKAGE__->table("project");
   data_type: 'text'
   is_nullable: 0
 
-=head2 district_id
-
-  data_type: 'integer'
-  is_foreign_key: 1
-  is_nullable: 0
-
 =head2 address
 
   data_type: 'text'
-  is_nullable: 0
+  is_nullable: 1
 
 =head2 latitude
 
@@ -87,7 +81,7 @@ __PACKAGE__->table("project");
   is_nullable: 1
   original: {default_value => \"now()"}
 
-=head2 update_at
+=head2 updated_at
 
   data_type: 'timestamp'
   is_nullable: 1
@@ -104,10 +98,8 @@ __PACKAGE__->add_columns(
   },
   "name",
   { data_type => "text", is_nullable => 0 },
-  "district_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "address",
-  { data_type => "text", is_nullable => 0 },
+  { data_type => "text", is_nullable => 1 },
   "latitude",
   { data_type => "text", is_nullable => 1 },
   "longitude",
@@ -121,7 +113,7 @@ __PACKAGE__->add_columns(
     is_nullable   => 1,
     original      => { default_value => \"now()" },
   },
-  "update_at",
+  "updated_at",
   { data_type => "timestamp", is_nullable => 1 },
 );
 
@@ -138,21 +130,6 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
-
-=head2 district
-
-Type: belongs_to
-
-Related object: L<SMM::Schema::Result::District>
-
-=cut
-
-__PACKAGE__->belongs_to(
-  "district",
-  "SMM::Schema::Result::District",
-  { id => "district_id" },
-  { is_deferrable => 0, on_delete => "NO ACTION", on_update => "NO ACTION" },
-);
 
 =head2 goal_projects
 
@@ -185,10 +162,10 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-10-06 21:06:07
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Zfz3yeypl+G+FluveEZynw
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-10-06 22:57:23
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:lhB/EO0/x0vUaN7zpzeAJQ
 
-__PACKAGE__->many_to_many( prefectures => project_prefecture => 'prefecture' );
+__PACKAGE__->many_to_many( prefectures => project_prefectures => 'prefecture' );
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;
