@@ -29,16 +29,21 @@ sub base : Chained('/admin/base') : PathPart('goal') : CaptureArgs(0) {
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
     my ( $self, $c, $id ) = @_;
-
+	print "\n id:", $id;
     my $api = $c->model('API');
 
     $api->stash_result(
         $c,
-        [ 'organizations', $id ],
-        stash => 'organization_obj'
+        [ 'goals', $id ],
+        stash => 'goal_obj'
     );
 
 }
+
+sub detail :Chained('object') :PathPart('') Args(0){
+    my ( $self, $c ) = @_;
+}
+
 
 sub index : Chained('base') : PathPart('') : Args(0) {
     my ( $self, $c ) = @_;

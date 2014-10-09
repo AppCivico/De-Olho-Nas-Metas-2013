@@ -7,63 +7,25 @@
 		<thead>
 			<tr>
                 <th>Nome</th>
+                <th>Description</th>
 			</tr>
 		</thead>
 		<tbody>
 			[%FOREACH goal IN goals%]
 				<tr>
-					<td>[%goal.name%]</td>
-						</tr>
-            [%END%]
-		</tbody>
-	</table>
-	[%ELSE%]
-		<h4>Metas</h4>
-	[%END%]
-	[%IF goals.size > 0%]
-	<table class="table table-striped">
-		<thead>
-			<tr>
-                <th>Descrição</th>
-			</tr>
-		</thead>
-		<tbody>
-			[%FOREACH goal IN goals%]
-				<tr>
+					<td>
+						<a href="[% c.uri_for_action('/admin/goal/detail',[goal.id] ) %]">[%goal.name%]</a>
+					</td>
 					<td>[%goal.description%]</td>
 				</tr>
             [%END%]
 		</tbody>
-	</table>
 	[%ELSE%]
-		<h4>Description</h4>
+		<h4>Metas</h4>
 	[%END%]
-	<div class="panel panel-info">
-	  <!-- Default panel contents -->
-	  <div class="panel-heading">Projetos Relacionados</div>
-
-	  <!-- Table -->
-	  <table class="table">
-			[% FOREACH goal IN goals %]
-				[% FOREACH prj IN goal.project%]
-			<tr>
-				<td>[% prj.name %]</td>
-			</tr>
-				[% END %]
-			[%END%]
 	  </table>
 	
 </div>
-<div class="panel panel-default">
-  <div class="panel-heading">Comentários e Sugestões</div>
-  <div class="panel-body">
-	<textarea class="form-control" rows="3"></textarea>
-  </div>
-  <div class="pull-right">
-	<button type="button" class="btn btn-primary">Comentar</button>
-  </div>
-</div>
-
 </div>
 [%PROCESS pagination.tt  %]
 </div>

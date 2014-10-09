@@ -29,10 +29,8 @@ sub result : Chained('object') : PathPart('') : Args(0) :
 sub result_GET {
     my ( $self, $c ) = @_;
 
-
     my $goal = $c->stash->{goal};
-	use DDP;
-	p $goal;
+    use DDP;
     $self->status_ok(
         $c,
         entity => {
@@ -41,25 +39,40 @@ sub result_GET {
                   qw/
                   id
                   name
-                  address
-                  postal_code
                   description
-                  phone
-                  email
-                  website
-                  complement
-                  number
                   /
             ),
-            project => {
+            goal_projects => {
                 (
-                    map { $_ => $goal->goal_projects->$_, }
-                      qw/
-                      id
-                      name
-                      /
+                    map {
+
+                        my $d = $_;
+                        (
+                            map { $_ => $d->$_ }
+                              qw/
+                              id
+                              /
+                          ),
+
+                      } $goal->goal_projects,
+
                 ),
-            }
+            },
+            project => [
+                (
+                    map {
+                        my $p = $_;
+                        (
+                            map {
+                                { $_ => $p->project->$_ }
+                              } qw/
+                              name
+                              /
+                          ),
+                    } $goal->goal_projects,
+                ),
+            ],
+
         }
     );
 
@@ -77,16 +90,15 @@ sub result_DELETE {
 sub result_PUT {
     my ( $self, $c ) = @_;
 
-    my $params       = { %{ $c->req->params } };
-    my $goal = $c->stash->{organization};
+    my $params = { %{ $c->req->params } };
+    my $goal   = $c->stash->{organization};
 
     $goal->execute( $c, for => 'update', with => $c->req->params );
 
     $self->status_accepted(
         $c,
         location =>
-          $c->uri_for( $self->action_for('result'), [ $goal->id ] )
-          ->as_string,
+          $c->uri_for( $self->action_for('result'), [ $goal->id ] )->as_string,
         entity => { id => $goal->id }
       ),
       $c->detach
@@ -97,8 +109,9 @@ sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
 
 sub list_GET {
     my ( $self, $c ) = @_;
-	use DDP;
-#	p $c->stash->{collection}->as_hashref->all;
+    use DDP;
+
+    #	p $c->stash->{collection}->as_hashref->all;
     $self->status_ok(
         $c,
         entity => {
@@ -119,35 +132,36 @@ sub list_GET {
                               website
                               complement
                               /
-                        ),						
+                        ),
                         goal_projects => {
                             (
                                 map {
-										  
-									my $d = $_;
-									(
-									map { $_ => $d->{$_} }
-									qw/
-									id
-									/
-									),
 
-								}  @{$r->{goal_projects}},
-                                  
+                                    my $d = $_;
+                                    (
+                                        map { $_ => $d->{$_} }
+                                          qw/
+                                          id
+                                          /
+                                      ),
+
+                                  } @{ $r->{goal_projects} },
+
                             ),
                         },
-                        project => [ 
-                            	(
+                        project => [
+                            (
                                 map {
-									my $p = $_;
-									(
-									map {  {$_ => $p->{project}->{$_}}  }
-									qw/
-									name
-									/
-									),
-								}  @{$r->{goal_projects}},
-                                ), 
+                                    my $p = $_;
+                                    (
+                                        map {
+                                            { $_ => $p->{project}->{$_} }
+                                          } qw/
+                                          name
+                                          /
+                                      ),
+                                } @{ $r->{goal_projects} },
+                            ),
                         ],
                         url => $c->uri_for_action(
                             $self->action_for('result'),
@@ -169,8 +183,7 @@ sub list_POST {
     $self->status_created(
         $c,
         location =>
-          $c->uri_for( $self->action_for('result'), [ $goal->id ] )
-          ->as_string,
+          $c->uri_for( $self->action_for('result'), [ $goal->id ] )->as_string,
         entity => {
             id => $goal->id
         }
@@ -186,8 +199,8 @@ sub complete : Chained('base') : PathPart('complete') : Args(0) {
         sub {
             #$goal = $c->stash->{collection}->execute( $c, for => 'create', with => $c->req->params );
 
-            $c->req->params->{active}          = 1;
-            $c->req->params->{role}            = 'goal';
+            $c->req->params->{active}  = 1;
+            $c->req->params->{role}    = 'goal';
             $c->req->params->{goal_id} = $goal->id;
 
             my $user = $c->model('DB::User')
@@ -198,8 +211,7 @@ sub complete : Chained('base') : PathPart('complete') : Args(0) {
     $self->status_created(
         $c,
         location =>
-          $c->uri_for( $self->action_for('result'), [ $goal->id ] )
-          ->as_string,
+          $c->uri_for( $self->action_for('result'), [ $goal->id ] )->as_string,
         entity => {
             id => $goal->id
         }
