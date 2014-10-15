@@ -10,7 +10,6 @@ sub base : Chained('/form/root') : PathPart('') : CaptureArgs(0) {
 
 sub login : Chained('base') : PathPart('login') : Args(0) {
     my ( $self, $c ) = @_;
-
     if ( $c->authenticate( $c->req->params ) ) {
         if ( $c->req->param('remember') ) {
             $c->session_time_to_live(2629743)    # 1 month

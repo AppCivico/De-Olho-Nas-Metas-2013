@@ -31,8 +31,8 @@ The root page (/)
 sub index : Path : Args(0) {
     my ( $self, $c ) = @_;
 
-    my $api = $c->model('API');
-    $c->res->redirect($c->res->redirect('/login'));
+    #my $api = $c->model('API');
+    #$c->res->redirect($c->res->redirect('/login'));
 
     #	$c->stash->{select_states} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{states} } ];
 

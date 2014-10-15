@@ -1,53 +1,240 @@
-	<content class="home">
-		<div class="slide-home">
-			<div class="container">
-				<p>
-					<a href="/saiba-mais">Nas campanhas eleitorais, em geral, os candidatos prometem muitas coisas para ganhar o voto dos eleitores e, passadas as eleições, muitos nem lembram do que prometeram...</a>
-				</p>
+<!DOCTYPE html>
+<html lang="pt-br">
 
-			</div>
-		</div>
-		
-		<!--<div class="content-yellow">
-			<div class="container">
-				<p>
-				<h1>Em breve</h1>
-				</p>
-			</div>
-		</div>
-		<div class="content-green">
-			<div class="container">
-				<p>
-				Confira, aqui, o que o seu candidato diz que vai fazer se for eleito. Acompanhe. E cobre depois.
-				</p>
-			</div>
-		</div>
-	</content>-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sistema de monitoramento de metas</title>
+
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Cabin+Sketch' rel='stylesheet' type='text/css'>
 	
-	
-		
-		<div class="content-yellow">
-			<div class="container">
-				<p>
-				Confira o que os candidatos afirmam que irão fazer se forem eleitos. Acompanhe. E cobre depois.
-				<form action="/promessas" method="post" class="select-filter">
-					<div class="selectbox">
-						<img src="static/images/icon-01.png" border="0">
-						[%select_field('state_id',false, array => select_states, req=>0, default_first=>'Selecione Brasil ou Estados')|none%]
+    <!-- Bootstrap Core CSS -->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Fonts -->
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom Theme CSS -->
+    <link href="/static/css/style.css" rel="stylesheet">
+	<link rel="icon" type="image/png" href="/static/css/images/favicon.png" />
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+
+	<nav class="nav-top visible-xs">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menu">
+			<i class="fa fa-bars"></i>
+		</button>
+		<img src="/static/css/images/logo-collapse.png" border="0">
+		<div class="navbar-menu collapse">
+			<ul>
+				<li class="page-scroll">
+					<a href="#about">Sobre</a>
+				</li>
+				<!--//<li class="page-scroll">
+					<a href="#faq">Perguntas Frequentes</a>
+				</li>//-->
+				<li class="page-scroll">
+					<a href="#contact">Contato</a>
+				</li>
+				<li class="page-scroll">
+					<a href="#signup">Cadastro</a>
+				</li>
+				<li class="page-scroll">
+					<a href="[% c.uri_for_action('/form/login/login') %]">Entrar</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<section class="menu-top hidden-xs">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4 text-right">
+					<ul class="menu">
+						<li class="page-scroll">
+							<a href="#about">Sobre</a>
+						</li>
+						<!--//<li class="page-scroll">
+							<a href="#faq">Perguntas Frequentes</a>
+						</li>//-->
+						<li class="page-scroll">
+							<a href="#contact">Contato</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-sm-4 text-center logo-top">
+					<img src="/static/css/images/logo-top.png" class="img-responsive">
+				</div>
+				<div class="col-sm-4 text-left">
+					<ul class="menu">
+						<li class="page-scroll">
+							<a href="#signup">Cadastro</a>
+						</li>
+						<li class="page-scroll">
+							<a href="[% c.uri_for_action('/form/login/login') %]">Entrar</a>
+						</li>
+					</ul>
+					<ul class="menu menu-social">
+						<li class="twitter">
+							<a href="" title="Twitter" alt="Facebook">&nbsp;</a>
+						</li>
+						<li class="facebook">
+							<a href="" title="Facebook" alt="Facebook">&nbsp;</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<a id="signup" class="anchor"></a>
+    <section class="signup text-center">
+		<div class="container">
+			<div class="col-sm-8 col-sm-offset-2">
+				<h2 class="title">Sistema de monitoramento de metas</h2>
+				<p>Conheça e monitore as metas da cidade de São Paulo. Preencha o formulário abaixo para se cadastrar:</p>
+				
+				<form>
+					<div class="col-sm-6">
+						<div class="form-group">
+							NOME<br />
+							<input type="text" name="name" class="form-control signup-input">
+						</div>
 					</div>
-					<div class="selectbox">
-						<img src="static/images/icon-02.png" border="0">
-						[%select_field('candidate_id',false, array => select_candidates, req=>0, default_first=>'Escolha o candidato', classes => ['form-control', 'disabled'])|none%]
+					<div class="col-sm-6">
+						<div class="form-group">
+							E-MAIL<br />
+							<input type="text" name="email" class="form-control signup-input">
+						</div>
 					</div>
-					<div class="selectbox">
-						<img src="static/images/icon-03.png" border="0">
-						[%select_field('category_id',false, array => select_categories, req=>0, default_first=>'Navegue pelos temas')|none%]
+					<div class="button">
+						<button class="btn btn-success">PARTICIPE</button>
 					</div>
-					
-					<button type="submit" class="btn btn-default">ver promessas</button>
 				</form>
-				</p>
 			</div>
 		</div>
-		[%INCLUDE parts/green_box.tt  %]
-	</content>
+    </section>
+	
+	<a id="about" class="anchor"></a>
+    <section class="about text-center">
+		<div class="container">
+			<h2 class="title">Sobre o Sistema de monitoramento de metas</h2>
+			<div class="row">
+				<div class="col-sm-6">
+					<p>
+						Criada por iniciativa da sociedade civil, o sistema De Olho nas Metas ajudará cidadãos e organizações da sociedade civil a acompanhar e monitorar o cumprimento de metas da prefeitura de São Paulo.
+						<br /><br />
+						A base para o desenvolvimento do sistema foi o Programa de Metas da Cidade de São Paulo 2013-2016, que contempla 123 metas a serem executadas até o final da atual gestão.
+						<br /><br />
+						Entre as 123 metas estão: a instalação de 243 creches (meta 17), três novos hospitais (meta 22), 43 Unidades Básicas de Saúde (meta 24), 150 quilômetros de corredores de ônibus (meta 93) e 400 quilômetros de ciclovias (meta 97).
+						<br /><br />
+						Embora tenham impacto direto na vida dos paulistanos, grande parte da população desconhece a existência destas metas e não tem a menor ideia de como contribuir para que sejam de fato cumpridas 
+					</p>
+				</div>
+				<div class="col-sm-6">
+					<p>
+						Por isso, tornar o Programa de Metas mais conhecido e estimular o cidadão e as organizações a monitorar a sua execução são desafios do De Olho nas Metas.
+						<br /><br />
+						O De Olho nas Metas oferecerá uma série de ferramentas para telefonia móvel e mídias sociais criadas especialmente para facilitar o acesso à informação, divulgar o que foi prometido para cada região, e ajudar os conselheiros participativos, as organizações e os cidadãos interessados a garantir que as metas sejam implementadas.
+						<br /> <br />
+						A iniciativa também auxiliará o governo municipal a colocar em prática projetos que realmente atendam os anseios da população e a avaliar o desempenho das empresas contratas pelo poder público.
+						<br /><br />
+						O sistema De Olho nas Metas é uma iniciativa da Rede Nossa São Paulo, em parceria com a Avina Américas e o Centro de Mídias Cívicas do Instituto de Tecnologia de Massachusetts (MIT Center for Civic Media)
+					</p>
+				</div>
+			</div>
+			<div class="about-logos">
+				<a href="http://www.nossasaopaulo.org.br" target="_blank"><img src="/static/css/images/logo-rnsp.png" border="0"></a>
+				<a href="http://www.avinaamericas.org" target="_blank"><img src="/static/css/images/logo-avina.png" border="0"></a>
+			</div>
+		</div>
+    </section>
+	<!--//
+	<a id="faq" class="anchor"></a>
+    <section class="faq text-center">
+		<div class="container">
+		
+			<h2>Perguntas Frequentes</h2>
+			
+			<ul class="faq">
+				<li>
+					<div class="q"><span class="glyphicon glyphicon-question-sign"></span> Gummi bears carrot cake biscuit jelly beans icing lemon drops. Jujubes tiramisu dessert?</div>
+					<div class="a">Dragée soufflé liquorice candy unerdwear.com dessert donut icing jelly-o. Cupcake tart powder cotton candy tiramisu gingerbread apple pie oat cake. Lemon drops pie liquorice toffee cookie. Caramels sweet roll wafer dragée carrot cake pastry apple pie caramels.</div>
+				</li>
+				<li>
+					<div class="q"><span class="glyphicon glyphicon-question-sign"></span> Gummi bears carrot cake biscuit jelly beans icing lemon drops. Jujubes tiramisu dessert?</div>
+					<div class="a">Dragée soufflé liquorice candy unerdwear.com dessert donut icing jelly-o. Cupcake tart powder cotton candy tiramisu gingerbread apple pie oat cake. Lemon drops pie liquorice toffee cookie. Caramels sweet roll wafer dragée carrot cake pastry apple pie caramels.</div>
+				</li>
+				<li>
+					<div class="q"><span class="glyphicon glyphicon-question-sign"></span> Gummi bears carrot cake biscuit jelly beans icing lemon drops. Jujubes tiramisu dessert?</div>
+					<div class="a">Dragée soufflé liquorice candy unerdwear.com dessert donut icing jelly-o. Cupcake tart powder cotton candy tiramisu gingerbread apple pie oat cake. Lemon drops pie liquorice toffee cookie. Caramels sweet roll wafer dragée carrot cake pastry apple pie caramels.</div>
+				</li>
+				<li>
+					<div class="q"><span class="glyphicon glyphicon-question-sign"></span> Gummi bears carrot cake biscuit jelly beans icing lemon drops. Jujubes tiramisu dessert?</div>
+					<div class="a">Dragée soufflé liquorice candy unerdwear.com dessert donut icing jelly-o. Cupcake tart powder cotton candy tiramisu gingerbread apple pie oat cake. Lemon drops pie liquorice toffee cookie. Caramels sweet roll wafer dragée carrot cake pastry apple pie caramels.</div>
+				</li>
+				<li>
+					<div class="q"><span class="glyphicon glyphicon-question-sign"></span> Gummi bears carrot cake biscuit jelly beans icing lemon drops. Jujubes tiramisu dessert?</div>
+					<div class="a">Dragée soufflé liquorice candy unerdwear.com dessert donut icing jelly-o. Cupcake tart powder cotton candy tiramisu gingerbread apple pie oat cake. Lemon drops pie liquorice toffee cookie. Caramels sweet roll wafer dragée carrot cake pastry apple pie caramels.</div>
+				</li>
+				<li>
+					<div class="q"><span class="glyphicon glyphicon-question-sign"></span> Gummi bears carrot cake biscuit jelly beans icing lemon drops. Jujubes tiramisu dessert?</div>
+					<div class="a">Dragée soufflé liquorice candy unerdwear.com dessert donut icing jelly-o. Cupcake tart powder cotton candy tiramisu gingerbread apple pie oat cake. Lemon drops pie liquorice toffee cookie. Caramels sweet roll wafer dragée carrot cake pastry apple pie caramels.</div>
+				</li>
+			</ul>
+			
+		</div>
+    </section>
+	//-->
+
+	<a id="contact" class="anchor"></a>
+    <section class="contact text-center">
+		<div class="container">
+			<h2 class="title">Contato</h2>
+			<p class="text-center">Entre em contato conosco para saber mais:</p>
+			<div class="col-sm-8 col-sm-offset-2">
+				<form>
+					<div class="form-group">
+						NOME<br />
+						<input type="text" name="name" class="form-control signup-input">
+					</div>
+					<div class="form-group">
+						E-MAIL<br />
+						<input type="text" name="email" class="form-control signup-input">
+					</div>
+					<div class="form-group">
+						MENSAGEM<br />
+						<textarea name="message" class="form-control signup-input" cols="40" rows="3"></textarea>
+					</div>
+					<div class="button">
+						<button class="btn btn-success">ENVIAR</button>
+					</div>
+				</form>
+			</div>
+		</div>
+    </section>
+	
+	<footer>
+		<div class="container">
+			<div class="text-center">
+				<img src="/static/css/images/logo-footer.png" border="0">
+			</div>
+		</div>
+	</footer>
+
+    <!-- Core JavaScript Files -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.easing.1.3.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="/static/js/index.js"></script>
+
+</body>
+
+</html>
