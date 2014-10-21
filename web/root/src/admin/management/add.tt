@@ -14,7 +14,6 @@
 
 			[%select_field('city_id','Cidade', array => select_cities, req=>0)|none%]
 
-			[%select_field('organization_id','Organização', array => select_organizations, req=>0)|none%]
 			<button type="submit" class="btn btn-success pull-right">Salvar</button>
 		</form>
 	</div>

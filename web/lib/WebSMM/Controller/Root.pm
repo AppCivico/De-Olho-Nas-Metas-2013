@@ -31,14 +31,6 @@ The root page (/)
 sub index : Path : Args(0) {
     my ( $self, $c ) = @_;
 
-    #my $api = $c->model('API');
-    #$c->res->redirect($c->res->redirect('/login'));
-
-    #	$c->stash->{select_states} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{states} } ];
-
-    #	unshift($c->stash->{select_states}, ['br', 'Brasil']);
-
-    #   $self->root($c);
 }
 
 sub more : Chained('') : Path('saiba-mais') : Args(0) {

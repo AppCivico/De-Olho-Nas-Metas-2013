@@ -72,11 +72,11 @@
 				<h2 class="title">Sistema de monitoramento de metas</h2>
 				<p>Conheça e monitore as metas da cidade de São Paulo. Preencha o formulário abaixo para se cadastrar:</p>
 				
-				<form>
+				<form role="form" method="POST" action="/form/preregister">
 					<div class="col-sm-6">
 						<div class="form-group">
 							NOME<br />
-							<input type="text" name="name" class="form-control signup-input">
+							<input type="text" name="username" class="form-control signup-input">
 						</div>
 					</div>
 					<div class="col-sm-6">

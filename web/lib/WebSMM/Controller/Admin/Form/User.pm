@@ -15,7 +15,8 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
 
     my $api    = $c->model('API');
     my $params = { %{ $c->req->params } };
-
+	use DDP;
+	p$params;
     $api->stash_result(
         $c, ['users'],
         method => 'POST',

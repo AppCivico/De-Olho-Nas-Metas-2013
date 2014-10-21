@@ -27,6 +27,7 @@
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
 
+	[%IF status_msg %]<p>[%status_msg%]</p>[%END%]
     [%content|none%]
 
 	<footer>
