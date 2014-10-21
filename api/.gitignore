@@ -18,4 +18,6 @@ pm_to_blib
 root/static/user/
 root/static/built/
 .tidyall.d/
-perltidy.LOG
+session_data*
+../etc/*
+*.log
