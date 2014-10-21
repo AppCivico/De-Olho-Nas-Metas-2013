@@ -1,72 +1,54 @@
-[%IF !without_wrapper%][%IF template_wrapper %][% INCLUDE "wrapper_${template_wrapper}.tt"|none%][%ELSE%]
-
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
+
+<head>
     <meta charset="utf-8">
-    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Sistema de Monitoramento de Metas">
-	<meta name="keywords" content="sistema de monitoramento de metas>
-	<title>[% template.title or site.title or title or 'Sistema de Monitoramento de Metas' %]</title>
-    <!-- Bootstrap -->
-  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
+    <title>Sistema de monitoramento de metas</title>
 
-<!--[if lt IE 9]>
-    <script src="/static/js/html5shiv.js"></script>
-<![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Cabin+Sketch' rel='stylesheet' type='text/css'>
+	
+    <!-- Bootstrap Core CSS -->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
-<link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <!-- Fonts -->
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-[%-CALL assets.include("css/bootstrap.min.css")%]
-[%-CALL assets.include("css/bootstrap-theme.min.css")%]
-[%#-CALL assets.include("css/system.css")#%]
-[%-CALL assets.include("css/site.css")%]
-[%-CALL assets.include("js/bootstrap.min.js")%]
-
-[%- assets.export("css") |none-%]
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Custom Theme CSS -->
+    <link href="/static/css/style.css" rel="stylesheet">
+	<link rel="icon" type="image/png" href="/static/css/images/favicon.png" />
 </head>
-<body class="[% body_class %]"><script>var actions=[];</script>
-	<header class="header-top">
-		<div class="header-content">
-			<div class="container">
-				<div class="col-sm-3 text-right">
-					<ul class="menu-top">
-					[%IF ! c.user%]
-						<li><a href="/login">Login</a></li>
-					[%ELSE%]
-						<li><a href="/admin/dashboard">Administração</a></li>
-					[%END%]
-					</ul>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+
+    [%content|none%]
+
+	<footer>
+		<div class="container">
+			<div class="col-xs-4">
+			</div>
+			<div class="col-xs-4">
+				<div class="text-center">
+					<img src="/static/css/images/logo-footer.png" border="0">
 				</div>
 			</div>
-		</div>
-	</header>
-    [%content|none%]
-	</content>
-	<footer class="bs-footer" role="contentinfo">
-		<div class="container text-center">
-			<div class="row text-center">
+			<div class="col-xs-4">
 				<div class="aware">Desenvolvido por <a href="http://www.aware.com.br" target="_blank">Aware</a><img src="/static/images/logo-aware.gif" alt="Aware - Desenvolvendo conceitos, criando parceiros"></div>
 			</div>
 		</div>
 	</footer>
-</div>
 
-<script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script>
-[% assets.export("js")|none %]
+    <!-- Core JavaScript Files -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.easing.1.3.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="/static/js/index.js"></script>
+
 </body>
 </html>
-[%END%][%ELSE%][%content|none%][%END%]
