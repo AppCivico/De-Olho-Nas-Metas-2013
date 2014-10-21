@@ -1,17 +1,87 @@
 [%-CALL assets.include("css/signin.css")%]
 
-<content class="login">
-	<div >
-		<div class="container">
-			<form class="form-signin" role="form" method="post" action="/form/login">
-			<h2 class="form-signin-heading text-center">Acesso ao sistema</h2>
-			<input name="email" type="email" class="form-control" placeholder="Email" required autofocus>
-			<input name="password" type="password" class="form-control" placeholder="Senha" required>
-			<!--<label class="checkbox">
-			<input type="checkbox" value="remember-me"> Remember me
-			</label>-->
-			<button class="btn btn-lg btn-default btn-block" type="submit">Entrar</button>
-			</form>
+	<nav class="nav-top visible-xs">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menu">
+			<i class="fa fa-bars"></i>
+		</button>
+		<img src="/static/css/images/logo-collapse.png" border="0">
+		<div class="navbar-menu collapse">
+			<ul>
+				<li class="page-scroll">
+					<a href="#../about">Sobre</a>
+				</li>
+				<!--//<li class="page-scroll">
+					<a href="#faq">Perguntas Frequentes</a>
+				</li>//-->
+				<li class="page-scroll">
+					<a href="../#contact">Contato</a>
+				</li>
+				<li class="page-scroll">
+					<a href="../#signup">Cadastro</a>
+				</li>
+				<li>
+					<a href="/login">Entrar</a>
+				</li>
+			</ul>
 		</div>
-	</div>
-</content>
+	</nav>
+
+	<section class="menu-top hidden-xs">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4 text-right">
+					<ul class="menu">
+						<li class="page-scroll">
+							<a href="../#about">Sobre</a>
+						</li>
+						<!--//<li class="page-scroll">
+							<a href="#faq">Perguntas Frequentes</a>
+						</li>//-->
+						<li class="page-scroll">
+							<a href="../#contact">Contato</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-sm-4 text-center logo-top">
+					<img src="/static/css/images/logo-top.png" class="img-responsive">
+				</div>
+				<div class="col-sm-4 text-left">
+					<ul class="menu">
+						<li class="page-scroll">
+							<a href="../#signup">Cadastro</a>
+						</li>
+						<li>
+							<a href="/login">Entrar</a>
+						</li>
+					</ul>
+					<ul class="menu menu-social">
+						<li class="twitter">
+							<a href="" title="Twitter" alt="Facebook">&nbsp;</a>
+						</li>
+						<li class="facebook">
+							<a href="" title="Facebook" alt="Facebook">&nbsp;</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+    <section class="about text-center">
+		<div class="container">
+			<h2 class="title">Acesso ao sistema</h2>
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+
+					<form class="form-signin" role="form" method="post" action="/form/login">
+					<input name="email" type="email" class="form-control" placeholder="Email" required autofocus>
+					<input name="password" type="password" class="form-control" placeholder="Senha" required>
+					<!--<label class="checkbox">
+					<input type="checkbox" value="remember-me"> Remember me
+					</label>-->
+					<button class="btn btn-lg btn-default btn-block" type="submit">Entrar</button>
+					</form>
+				</div>
+			</div>
+		</div>
+    </section>

@@ -218,8 +218,22 @@ ul.faq li .a{
 	margin: 0 10px;
 }
 
+footer .aware{
+	margin-top: 105px;
+}
+footer .aware a,
+footer .aware a:visited{
+	color: #fff;
+}
+footer .aware a:hover{
+	color: #f0f0f0;
+}
+
 footer{
 	background-color: #666056;
+}
+footer .logo-footer img{
+	margin-top: 20px;
 }
 
 @media (min-width: 768px){

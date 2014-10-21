@@ -18,7 +18,7 @@
 					<a href="#signup">Cadastro</a>
 				</li>
 				<li>
-					<a href="[% c.uri_for_action('/login') %]">Entrar</a>
+					<a href="/login">Entrar</a>
 				</li>
 			</ul>
 		</div>
@@ -49,7 +49,7 @@
 							<a href="#signup">Cadastro</a>
 						</li>
 						<li>
-							<a href="[% c.uri_for_action('/login') %]">Entrar</a>
+							<a href="/login">Entrar</a>
 						</li>
 					</ul>
 					<ul class="menu menu-social">
@@ -121,6 +121,11 @@
 					</p>
 				</div>
 			</div>
+			<br />
+			<div class="text-center">
+				<a href="/sobre" class="btn btn-warning">CLIQUE E SAIBA MAIS</a>
+			</div>
+			</br />
 			<div class="about-logos">
 				<a href="http://www.nossasaopaulo.org.br" target="_blank"><img src="/static/css/images/logo-rnsp.png" border="0"></a>
 				<a href="http://www.avinaamericas.org" target="_blank"><img src="/static/css/images/logo-avina.png" border="0"></a>

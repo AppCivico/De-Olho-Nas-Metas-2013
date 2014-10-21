@@ -1,83 +1,123 @@
-<div class="page-header bg-dark">
-	<h3>Seja um parceiro da PUBLICIDADE INTELIGENTE</h3>
-	<p>Um novo jeito de fazer publicidade</p>
-</div>
-<div class="row page-content">
+	<nav class="nav-top visible-xs">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menu">
+			<i class="fa fa-bars"></i>
+		</button>
+		<img src="/static/css/images/logo-collapse.png" border="0">
+		<div class="navbar-menu collapse">
+			<ul>
+				<li class="page-scroll">
+					<a href="#../about">Sobre</a>
+				</li>
+				<!--//<li class="page-scroll">
+					<a href="#faq">Perguntas Frequentes</a>
+				</li>//-->
+				<li class="page-scroll">
+					<a href="../#contact">Contato</a>
+				</li>
+				<li class="page-scroll">
+					<a href="../#signup">Cadastro</a>
+				</li>
+				<li>
+					<a href="/login">Entrar</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
 
-<p>
-<h4>Prestação do carro, seguro, combustível, manutenção, IPVA....
-não está fácil para ninguém, não é verdade?</h4>
+	<section class="menu-top hidden-xs">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4 text-right">
+					<ul class="menu">
+						<li class="page-scroll">
+							<a href="../#about">Sobre</a>
+						</li>
+						<!--//<li class="page-scroll">
+							<a href="#faq">Perguntas Frequentes</a>
+						</li>//-->
+						<li class="page-scroll">
+							<a href="../#contact">Contato</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-sm-4 text-center logo-top">
+					<img src="/static/css/images/logo-top.png" class="img-responsive">
+				</div>
+				<div class="col-sm-4 text-left">
+					<ul class="menu">
+						<li class="page-scroll">
+							<a href="../#signup">Cadastro</a>
+						</li>
+						<li>
+							<a href="/login">Entrar</a>
+						</li>
+					</ul>
+					<ul class="menu menu-social">
+						<li class="twitter">
+							<a href="" title="Twitter" alt="Facebook">&nbsp;</a>
+						</li>
+						<li class="facebook">
+							<a href="" title="Facebook" alt="Facebook">&nbsp;</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
 
-Já imaginou se você pudesse contar com ganho extra todo mês para pagar as contas, sem mudar a sua rotina?<br />
-E melhor ainda, deixando seu veículo mais seguro para você e a sua família?<br /><br />
+    <section class="about text-center">
+		<div class="container">
+			<h2 class="title">Sobre o Sistema de monitoramento de metas</h2>
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+					
+					<p>
+						Criada por iniciativa da sociedade civil, o sistema De Olho nas Metas ajudará cidadãos e organizações da sociedade civil a acompanhar e monitorar o cumprimento de metas da prefeitura de São Paulo.
+						<br /><br />
+						A base para o desenvolvimento do sistema foi o Programa de Metas da Cidade de São Paulo 2013-2016, que contempla 123 metas a serem executadas até o final da atual gestão.
+						<br /><br />
+						Entre as 123 metas estão: a instalação de 243 creches (meta 17), três novos hospitais (meta 22), 43 Unidades Básicas de Saúde (meta 24), 150 quilômetros de corredores de ônibus (meta 93) e 400 quilômetros de ciclovias (meta 97).
+						<br /><br />
+						Embora tenham impacto direto na vida dos paulistanos, grande parte da população desconhece a existência destas metas e não tem a menor ideia de como contribuir para que sejam de fato cumpridas.
+						<br /><br />
+						Por isso, tornar o Programa de Metas mais conhecido e estimular o cidadão e as organizações a monitorar a sua execução são desafios do De Olho nas Metas.
+						<br /><br />
+						O De Olho nas Metas oferecerá uma série de ferramentas para telefonia móvel e mídias sociais criadas especialmente para facilitar o acesso à informação, divulgar o que foi prometido para cada região, e ajudar os conselheiros participativos, as organizações e os cidadãos interessados a garantir que as metas sejam implementadas.
+						<br /><br />
+						A iniciativa também auxiliará o governo municipal a colocar em prática projetos que realmente atendam os anseios da população e a avaliar o desempenho das empresas contratas pelo poder público.
+						<br /><br />
+						O sistema De Olho nas Metas é uma iniciativa da Rede Nossa São Paulo, em parceria com a Avina Américas e o Centro de Mídias Cívicas do Instituto de Tecnologia de Massachusetts (MIT Center for Civic Media).						
+						<br /><br />
+						
+						<strong>Sobre a Rede Nossa São Paulo</strong>
+						<br /><br />
+						Lançada em maio de 2007, a Rede Nossa São Paulo (RNSP) é uma organização que defende o desenvolvimento sustentável, a ética e a democracia participativa.
+						 <br /><br />
+						Tem como missão mobilizar diversos segmentos da sociedade para, em parceria com instituições públicas e privadas, construir e se comprometer com uma agenda e um conjunto de metas visando uma cidade justa e sustentável.
+						<br /><br />
+						Apartidária e inter-religiosa, a RNSP é apoiada por cerca de 700 organizações e milhares de cidadãos interessados em participar do processo de construção de uma São Paulo com melhor qualidade de vida para todos.
+						<br /><br />
+						A lei que instituiu a obrigatoriedade da apresentação do Plano de Metas na capital paulista foi aprovada a partir de uma iniciativa da Rede Nossa São Paulo.
+						<br /><br />
 
-Essa é a proposta da <strong>PUBLICIDADE INTELIGENTE</strong>, um novo jeito de fazer publicidade.
+						<strong>Sobre a Avina Américas</strong>
+						<br /><br />
+						Avina Americas é uma organização filantrópica com base em Washington, DC (USA). Ela foi criada em 2008 com a missão de impactar o desenvolvimento a is a 501(c)(3) public charity organization headquartered in Washington D.C. It was created in 2008 with the mission to impact sustainable development in Latin America and beyond by engaging US actors in shared strategies for action which contribute to the common good.
+						<br /><br />
+						AVINA Americas envisions a prosperous, integrated, compassionate and democratic Latin America that is inspired by its own diversity and built on a form of citizenship that positions the region globally according to its own model of sustainable and inclusive development. In furthering this purpose, Avina Americas works closely with Fundación Avina, a private foundation with offices throughout Latin America.
+						<br /><br />
 
-</p>
-
-<p>
-
-<div class="row">
-
-	<div class="span8">
-
-		<h3>Como funciona a nossa parceria:</h3>
-
-		Após o seu cadastramento, a Publicidade Inteligente irá te enviar um convite para participar de uma campanha publicitária, nele constará todas as informações de anuncio,
-		tempo de campanha, remuneração prevista, enfim, todas as informações importantes.<br /><br />
-
-        Caso aceite o convite, a Publicidade Inteligente enviará um Kit de instalação do adesivo, que é muito simples e também contará com um vídeo tutorial explicando passo a passo,
-        de como o adesivo deve ser instalado. Após a instalação do adesivo, basta agendar uma vistoria em um dos postos de serviços colocados em pontos estratégicos da sua cidade.<br /><br />
-
-		Mais segurança – Instalaremos também um rastreador que será conectado à nossa central de operações. Assim, seu automóvel poderá ser localizado a qualquer hora do dia,
-		oferecendo mais proteção para você e a sua família.<br /><br />
-
-		Sendo nosso parceiro, você passará a receber mensalmente um pagamento pelo uso do espaço publicitário no seu carro. Essa remuneração será variável,
-		dependendo do horário, localização e quilometragem rodada no período.<br /><br />
-
-		Dessa maneira, sempre que você for para o trabalho, levar as crianças à escola, ou simplesmente sair para passear com família, estará ganhando um dinheiro extra.
-		Viu como é fácil e divertido?<br /><br />
-
-	</div>
-	<div class="span3">
-		<img src="/static/img/personagens/01.png" border="0">
-	</div>
-
-</div>
-<h3>Mas como se calcula a remuneração?</h3>
-
-É muito simples. A partir da instalação do rastreador por satélite no seu automóvel, podemos medir com total precisão as distâncias, o tempo de exposição e os locais por onde você circulou no mês.
-<br /> <br />
-Gostou da ideia?<br /><br />
-
-<div class="row">
-	<div class="span3">
-		<img src="/static/img/personagens/03.png" border="0">
-	</div>
-	<div class="span7">
-		<h3>SEJA NOSSO PARCEIRO!</h3>
-
-		Para isso, você precisará cumprir alguns pré-requisitos:<br /><br />
-
-		<ul>
-			<li>Ser proprietário particular de qualquer veículo de passeio com até três anos.</li>
-			<li>Estar com a carteira de habilitação em ordem</li>
-			<li>Estar com todas as obrigações do automóvel em dia.</li>
-		</ul>
-
-		<br /><br />
-
-		<a class="button" href="/pre-cadastro">Faça seu cadastro</a>
-
-		<br /><br /><br />
-
-		<strong>Dúvidas?</strong> Saiba quais são as perguntas mais frequentes <a href="/faq">clicando aqui</a>.
-	</div>
-
-</div>
-
-
-
-</p>
-
-</div>
+						<strong>Sobre o Centro de Mídias Cívicas do MIT (MIT Center for Civic Media)</strong>
+						<br /><br />
+						O Centro de Mídias Cívicas do Instituto de Tecnologia de Massachusetts (MIT Center for Civic Media) trabalha lado-a-lado com governos e organizações comunitárias na criação, desenho, implementação e avaliação de novas práticas e mídias cívicas.
+						<br /><br />
+						Nós inventamos novas tecnologias que facilitam e incentivam a geração de conteúdos e ações políticas, estudamos o impacto destas tecnologias, e coordenamos processos colaborativos de design em Boston, nos Estados Unidos como um todo, e em outras partes do mundo.
+						<br /><br />
+						Unindo dois programas altamente reconhecidos do MIT -- um famoso por inventar futuros tecnológicos alternativos, e outro por analizar o potencial de transformação social e cultural da mídia -- o Centro de Mídias Cívicas é um esforço conjunto do MIT Media Lab e do MIT Comparative Media Studies.						
+					</p>
+					
+					
+				</div>
+			</div>
+		</div>
+    </section>
