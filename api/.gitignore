@@ -21,3 +21,4 @@ root/static/built/
 session_data*
 ../etc/*
 *.log
+*.conf
