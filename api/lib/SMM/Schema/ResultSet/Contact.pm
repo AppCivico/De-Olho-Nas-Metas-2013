@@ -1,4 +1,4 @@
-package SMM::Schema::ResultSet::PreRegister;
+package SMM::Schema::ResultSet::Contact;
 use namespace::autoclean;
 
 use utf8;
@@ -21,16 +21,14 @@ sub verifiers_specs {
                 username => {
                     required => 1,
                     type     => 'Str',
-				    post_check => sub {
-                        my $r = shift;
-                        return 0 if ( $self->find( { username => lc $r->get_value('username') } ) );
-                        return 1;
-                      }
-
                 },
                 email => {
                     required => 1,
                     type     => EmailAddress,
+                },
+                message => {
+                    required => 1,
+                    type     => 'Str',
                 },
             }
         )
@@ -42,8 +40,8 @@ sub action_specs {
     return {
         create => sub {
             my %values       = shift->valid_values;
-            my $preregister = $self->create( \%values );
-            return $preregister;
+            my $contact = $self->create( \%values );
+            return $contact;
         }
     };
 }

@@ -29,7 +29,7 @@ sub process : Chained('base') : PathPart('preregister') : Args(0) {
     }
     else {
         $c->detach( '/form/redirect_ok',
-            [ '/index', {}, 'Cadastrado com sucesso!' ] );
+            [ '/', {}, 'Cadastrado com sucesso!' ] );
     }
 
 }

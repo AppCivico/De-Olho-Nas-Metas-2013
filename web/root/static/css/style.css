@@ -127,6 +127,7 @@ body {
 }
 
 .signup .container,
+.home .container,
 .about .container,
 .contact .container,
 .faq .container{
@@ -136,10 +137,8 @@ body {
 .signup{
 	background-color: #666056;
 	color: #fff;
-	background-image: url("images/img_home.png");
 	background-repeat: no-repeat;
 	background-position: bottom center;
-	padding-bottom: 370px;
 }
 
 .signup button{
@@ -165,10 +164,24 @@ section p{
 .signup .button{
 	text-align: center;
 }
+.home{
+	background-color: #666056;
+	color: #fff;
+	background-image: url("images/img_home.png");
+	background-repeat: no-repeat;
+	background-position: bottom center;
+	padding-bottom: 370px;
+}
+
+.home h2{
+	font-family: "Cabin Sketch";
+}
+
 
 .about{
 	background-color: #fcf0cc;	
 	color: #666056;
+	font-size: 18px;
 }
 
 .about h2{

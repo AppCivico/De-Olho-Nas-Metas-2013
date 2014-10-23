@@ -15,7 +15,7 @@
 					<a href="#contact">Contato</a>
 				</li>
 				<li class="page-scroll">
-					<a href="#signup">Cadastro</a>
+					<a href="#signup">Participe</a>
 				</li>
 				<li>
 					<a href="/login">Entrar</a>
@@ -23,21 +23,23 @@
 			</ul>
 		</div>
 	</nav>
-
 	<section class="menu-top hidden-xs">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-4 text-right">
 					<ul class="menu">
 						<li class="page-scroll">
+							<a href="#home">Início</a>
+						</li>
+						<li class="page-scroll">
 							<a href="#about">Sobre</a>
 						</li>
 						<!--//<li class="page-scroll">
 							<a href="#faq">Perguntas Frequentes</a>
 						</li>//-->
-						<li class="page-scroll">
+						<!--<li class="page-scroll">
 							<a href="#contact">Contato</a>
-						</li>
+						</li>-->
 					</ul>
 				</div>
 				<div class="col-sm-4 text-center logo-top">
@@ -46,78 +48,49 @@
 				<div class="col-sm-4 text-left">
 					<ul class="menu">
 						<li class="page-scroll">
-							<a href="#signup">Cadastro</a>
+							<a href="#signup">Participe</a>
 						</li>
 						<li>
 							<a href="/login">Entrar</a>
 						</li>
 					</ul>
-					<ul class="menu menu-social">
+<!--					<ul class="menu menu-social">
 						<li class="twitter">
 							<a href="" title="Twitter" alt="Facebook">&nbsp;</a>
 						</li>
 						<li class="facebook">
 							<a href="" title="Facebook" alt="Facebook">&nbsp;</a>
-						</li>
+						</li>-->
 					</ul>
 				</div>
 			</div>
 		</div>
 	</section>
-
-	<a id="signup" class="anchor"></a>
-    <section class="signup text-center">
+	<a id="home" class="anchor"></a>
+    <section class="home text-center">
 		<div class="container">
 			<div class="col-sm-8 col-sm-offset-2">
-				<h2 class="title">Sistema de monitoramento de metas</h2>
-				<p>Conheça e monitore as metas da cidade de São Paulo. Preencha o formulário abaixo para se cadastrar:</p>
+				<h2 class="title">Ajude a monitorar as metas da cidade de SP</h2>
 				
-				<form role="form" method="POST" action="/form/preregister">
-					<div class="col-sm-6">
-						<div class="form-group">
-							NOME<br />
-							<input type="text" name="username" class="form-control signup-input">
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							E-MAIL<br />
-							<input type="text" name="email" class="form-control signup-input">
-						</div>
-					</div>
-					<div class="button">
-						<button class="btn btn-success">PARTICIPE</button>
-					</div>
-				</form>
 			</div>
 		</div>
     </section>
 	
+
 	<a id="about" class="anchor"></a>
     <section class="about text-center">
 		<div class="container">
 			<h2 class="title">Sobre o Sistema de monitoramento de metas</h2>
 			<div class="row">
-				<div class="col-sm-6">
+				<div class="col-sm-8 col-md-offset-2">
 					<p>
 						Criada por iniciativa da sociedade civil, o sistema De Olho nas Metas ajudará cidadãos e organizações da sociedade civil a acompanhar e monitorar o cumprimento de metas da prefeitura de São Paulo.
 						<br /><br />
 						A base para o desenvolvimento do sistema foi o Programa de Metas da Cidade de São Paulo 2013-2016, que contempla 123 metas a serem executadas até o final da atual gestão.
 						<br /><br />
-						Entre as 123 metas estão: a instalação de 243 creches (meta 17), três novos hospitais (meta 22), 43 Unidades Básicas de Saúde (meta 24), 150 quilômetros de corredores de ônibus (meta 93) e 400 quilômetros de ciclovias (meta 97).
-						<br /><br />
-						Embora tenham impacto direto na vida dos paulistanos, grande parte da população desconhece a existência destas metas e não tem a menor ideia de como contribuir para que sejam de fato cumpridas 
-					</p>
-				</div>
-				<div class="col-sm-6">
-					<p>
-						Por isso, tornar o Programa de Metas mais conhecido e estimular o cidadão e as organizações a monitorar a sua execução são desafios do De Olho nas Metas.
-						<br /><br />
 						O De Olho nas Metas oferecerá uma série de ferramentas para telefonia móvel e mídias sociais criadas especialmente para facilitar o acesso à informação, divulgar o que foi prometido para cada região, e ajudar os conselheiros participativos, as organizações e os cidadãos interessados a garantir que as metas sejam implementadas.
-						<br /> <br />
-						A iniciativa também auxiliará o governo municipal a colocar em prática projetos que realmente atendam os anseios da população e a avaliar o desempenho das empresas contratas pelo poder público.
 						<br /><br />
-						O sistema De Olho nas Metas é uma iniciativa da Rede Nossa São Paulo, em parceria com a Avina Américas e o Centro de Mídias Cívicas do Instituto de Tecnologia de Massachusetts (MIT Center for Civic Media)
+						O sistema De Olho nas Metas é uma iniciativa da Rede Nossa São Paulo, em parceria com a Avina Américas e o Centro de Mídias Cívicas do Instituto de Tecnologia de Massachusetts (MIT Center for Civic Media).
 					</p>
 				</div>
 			</div>
@@ -169,8 +142,36 @@
 		</div>
     </section>
 	//-->
+	<a id="signup" class="anchor"></a>
+    <section class="signup text-center">
+		<div class="container">
+			<div class="col-sm-8 col-sm-offset-2">
+				<h2 class="title">O De Olho nas Metas está em desenvolvimento e será lançado no início de 2015. Para receber informações, cadastre-se abaixo:</h2>
+				<!--<p>Conheça e monitore as metas da cidade de São Paulo. Preencha o formulário abaixo para se cadastrar:</p>-->
+				
+				<form role="form" method="POST" action="/form/preregister">
+					<div class="col-sm-6">
+						<div class="form-group">
+							NOME<br />
+							<input type="text" name="username" class="form-control signup-input">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							E-MAIL<br />
+							<input type="text" name="useremail" class="form-control signup-input">
+						</div>
+					</div>
+					<div class="button">
+						<button class="btn btn-success">PARTICIPE</button>
+					</div>
+				</form>
+			</div>
+		</div>
+    </section>
+	
 
-	<a id="contact" class="anchor"></a>
+<!--	<a id="contact" class="anchor"></a>
     <section class="contact text-center">
 		<div class="container">
 			<h2 class="title">Contato</h2>
@@ -195,4 +196,4 @@
 				</form>
 			</div>
 		</div>
-    </section>
+    </section>-->

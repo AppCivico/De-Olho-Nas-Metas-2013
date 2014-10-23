@@ -13,8 +13,8 @@ sub root : Chained('/root') : PathPart('form') : CaptureArgs(0) {
 
 sub redirect_ok : Private {
     my ( $self, $c, $path, $params, $msg, %args ) = @_;
-
-    my $method = ref $path eq 'SCALAR' ? 'uri_for' : 'uri_for_action';
+    
+	my $method = ref $path eq 'SCALAR' ? 'uri_for' : 'uri_for_action';
     $path = ref $path eq 'SCALAR' ? $$path : $path;
 
     my $a = $c->$method(
