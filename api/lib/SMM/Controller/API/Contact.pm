@@ -1,4 +1,4 @@
-package SMM::Controller::API::PreRegister;
+package SMM::Controller::API::Contact;
 use Moose;
 
 BEGIN { extends 'Catalyst::Controller::REST' }
@@ -12,7 +12,7 @@ __PACKAGE__->config(
 
 with 'SMM::TraitFor::Controller::DefaultCRUD';
 
-sub base : Chained('/api/base') : PathPart('preregister') : CaptureArgs(0) { }
+sub base : Chained('/api/base') : PathPart('contacts') : CaptureArgs(0) { }
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
 

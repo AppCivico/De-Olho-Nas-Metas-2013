@@ -22,6 +22,11 @@
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 						<a href="[%href%]">Aprovações</a>
 					</li>
+					[%href = c.uri_for_action('/admin/preregister/index')%]
+					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
+						<a href="[%href%]">Pré Cadastro</a>
+					</li>
+
 
 
 				[%END%]

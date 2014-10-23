@@ -33,8 +33,7 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $organization = $c->stash->{organization};
-	use DDP;
-	p $organization;
+
     $self->status_ok(
         $c,
         entity => {

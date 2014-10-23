@@ -1,29 +1,4 @@
-	<nav class="nav-top visible-xs">
-		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menu">
-			<i class="fa fa-bars"></i>
-		</button>
-		<img src="/static/css/images/logo-collapse.png" border="0">
-		<div class="navbar-menu collapse">
-			<ul>
-				<li class="page-scroll">
-					<a href="#about">Sobre</a>
-				</li>
-				<!--//<li class="page-scroll">
-					<a href="#faq">Perguntas Frequentes</a>
-				</li>//-->
-				<li class="page-scroll">
-					<a href="#contact">Contato</a>
-				</li>
-				<li class="page-scroll">
-					<a href="#signup">Participe</a>
-				</li>
-				<li>
-					<a href="/login">Entrar</a>
-				</li>
-			</ul>
-		</div>
-	</nav>
-	<section class="menu-top hidden-xs">
+<section class="menu-top hidden-xs">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-4 text-right">
@@ -66,11 +41,39 @@
 			</div>
 		</div>
 	</section>
+		
+	<nav class="nav-top visible-xs">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menu">
+			<i class="fa fa-bars"></i>
+		</button>
+		<img src="/static/css/images/logo-collapse.png" border="0">
+		<div class="navbar-menu collapse">
+			<ul>
+				<li class="page-scroll">
+					<a href="#about">Sobre</a>
+				</li>
+				<!--//<li class="page-scroll">
+					<a href="#faq">Perguntas Frequentes</a>
+				</li>//-->
+				<li class="page-scroll">
+					<a href="#contact">Contato</a>
+				</li>
+				<li class="page-scroll">
+					<a href="#signup">Participe</a>
+				</li>
+				<li>
+					<a href="/login">Entrar</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
 	<a id="home" class="anchor"></a>
     <section class="home text-center">
 		<div class="container">
-			<div class="col-sm-8 col-sm-offset-2">
-				<h2 class="title">Ajude a monitorar as metas da cidade de SP</h2>
+			<div class="col-sm-9 col-sm-offset-2">
+
+			[% IF status_msg %]<div class="alert alert-warning" role="alert">[% status_msg %]</div>[%END%]
+				<h2 class="title">Ajude a monitorar as metas da cidade de São Paulo</h2>
 				
 			</div>
 		</div>
@@ -144,6 +147,7 @@
 	//-->
 	<a id="signup" class="anchor"></a>
     <section class="signup text-center">
+
 		<div class="container">
 			<div class="col-sm-8 col-sm-offset-2">
 				<h2 class="title">O De Olho nas Metas está em desenvolvimento e será lançado no início de 2015. Para receber informações, cadastre-se abaixo:</h2>
