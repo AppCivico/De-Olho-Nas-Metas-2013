@@ -54,7 +54,7 @@ __PACKAGE__->table("pre_register");
   data_type: 'text'
   is_nullable: 0
 
-=head2 email
+=head2 useremail
 
   data_type: 'text'
   is_nullable: 0
@@ -71,7 +71,7 @@ __PACKAGE__->add_columns(
   },
   "username",
   { data_type => "text", is_nullable => 0 },
-  "email",
+  "useremail",
   { data_type => "text", is_nullable => 0 },
 );
 
@@ -88,8 +88,8 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("id");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-10-21 10:07:31
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7Ew9SZPFeKC+hBlTSA0Z8A
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-10-23 09:25:29
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:X6mswoOX9ea0WJIwMQs9OQ
 
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
@@ -109,7 +109,7 @@ sub verifiers_specs {
                     required => 0,
                     type     => 'Str',
                 },
-                email => {
+                useremail => {
                     required => 0,
                     type     => 'Str',
                 },

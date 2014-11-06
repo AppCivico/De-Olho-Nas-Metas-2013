@@ -12,7 +12,7 @@ __PACKAGE__->config(
 
 with 'SMM::TraitFor::Controller::DefaultCRUD';
 
-sub base : Chained('/api/base') : PathPart('preregister') : CaptureArgs(0) { }
+sub base : Chained('/api/base') : PathPart('preregisters') : CaptureArgs(0) { }
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
 
@@ -57,11 +57,12 @@ sub list_POST {
 
 sub list_GET {
     my ( $self, $c ) = @_;
-
+	use DDP;
+	p$c->stash->{collection}->as_hashref->all;
     $self->status_ok(
         $c,
         entity => {
-            preregister => [
+            preregisters => [
                 map {
                     my $r = $_;
                     +{
@@ -69,27 +70,10 @@ sub list_GET {
                             map { $_ => $r->{$_} }
                               qw/
                               id
-                              name
+                              username
+							  useremail
                               /
                         ),
-                        city => {
-                            (
-                                map { $_ => $r->{city}{$_}, }
-                                  qw/
-                                  id
-                                  name
-                                  /
-                            ),
-                            state => {
-                                (
-                                    map { $_ => $r->{city}{state}{$_}, }
-                                      qw/
-                                      id
-                                      name
-                                      /
-                                )
-                            }
-                        },
                         url => $c->uri_for_action(
                             $self->action_for('result'),
                             [ $r->{id} ]

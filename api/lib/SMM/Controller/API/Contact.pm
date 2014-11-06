@@ -12,7 +12,7 @@ __PACKAGE__->config(
 
 with 'SMM::TraitFor::Controller::DefaultCRUD';
 
-sub base : Chained('/api/base') : PathPart('preregister') : CaptureArgs(0) { }
+sub base : Chained('/api/base') : PathPart('contacts') : CaptureArgs(0) { }
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
 

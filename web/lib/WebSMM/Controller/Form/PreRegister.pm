@@ -19,7 +19,7 @@ sub process : Chained('base') : PathPart('preregister') : Args(0) {
     my $params = { %{ $c->req->params } };
 
     $api->stash_result(
-        $c, ['preregister/complete'],
+        $c, ['preregisters/complete'],
         method => 'POST',
         body   => $params
     );
@@ -29,7 +29,7 @@ sub process : Chained('base') : PathPart('preregister') : Args(0) {
     }
     else {
         $c->detach( '/form/redirect_ok',
-            [ '/', {}, 'Cadastrado com sucesso!' ] );
+            [ '/index', {}, 'Cadastrado com sucesso!' ] );
     }
 
 }

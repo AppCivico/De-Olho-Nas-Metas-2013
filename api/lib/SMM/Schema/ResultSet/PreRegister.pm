@@ -28,7 +28,7 @@ sub verifiers_specs {
                       }
 
                 },
-                email => {
+                useremail => {
                     required => 1,
                     type     => EmailAddress,
                 },
