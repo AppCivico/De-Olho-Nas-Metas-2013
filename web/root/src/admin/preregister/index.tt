@@ -22,7 +22,11 @@
 	[%ELSE%]
 		<h4>Nenhum usuário cadastrado</h4>
 	[%END%]
-	
+		
+	<a href="/download">
+		<button type="button" class="btn btn-success pull-right">Download CSV</button>
+	</a>
+
 </div>
 [%PROCESS pagination.tt  %]
 </div>
