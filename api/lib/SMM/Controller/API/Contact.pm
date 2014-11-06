@@ -1,4 +1,4 @@
-package SMM::Controller::API::PreRegister;
+package SMM::Controller::API::Contact;
 use Moose;
 
 BEGIN { extends 'Catalyst::Controller::REST' }
