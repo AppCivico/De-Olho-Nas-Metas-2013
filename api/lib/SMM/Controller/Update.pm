@@ -4,6 +4,7 @@ use namespace::autoclean;
 use JSON;
 use utf8;
 use Furl;
+use Data::Dumper;
 
 BEGIN { extends 'Catalyst::Controller::REST'; }
 
@@ -82,36 +83,48 @@ sub goal : Chained('base') Args(0) {
     my $res;
     my @prefectures;
     my @projects;
+    my @secretary;
     my @secretaries;
     my $db = $c->model('DB::Goal');
     use DDP;
     my $model = $c->model('API');
 
-    $c->stash->{url} .= 'goal/1';
+    $c->stash->{url} .= 'goals';
 
     p $c->stash->{url};
-
-    #$res = eval {
-    #    $return = $model->_do_http_req(
-    #        method => 'GET',
-    #        url    => $c->stash->{url},
-    #    );
-    #};
 
     $res = $self->furl->get( $c->stash->{url} );
 
     my $data = decode_json $res->content;
-    for my $key ( @{ $data->{projects} } ) {
+    for my $goal (@$data){
+
+	next if $c->model('DB::Goal')->search({ name => $goal->{name} })->next; 
+    p $c->stash->{url};	
+
+    for my $sec ( @{ $goal->{secretaries} } ) {
+		my $return_sec;
+		
+        delete $sec->{created_at};
+        delete $sec->{updated_at};
+        delete $sec->{pivot};
+
+		$return_sec = $c->model('DB::Secretary')->search({ name => $sec->{name}})->next;
+		$return_sec = $c->model('DB::Secretary')->create($sec) unless $return_sec;
+		
+        push( @secretary, $return_sec->id );
+	}
+    for my $key ( @{ $goal->{projects} } ) {
 
         for my $lol ( @{ $key->{prefectures} } ) {
+			my $return_pref;
             delete $lol->{pivot};
             delete $lol->{created_at};
             delete $lol->{updated_at};
-            p $lol;
+			delete $lol->{id};
             $lol->{latitude}  = delete $lol->{gps_lat};
             $lol->{longitude} = delete $lol->{gps_long};
-            my $return_pref = $c->model('DB::Prefecture')->create($lol);
-            p $return_pref;
+			$return_pref = $c->model('DB::Prefecture')->search({ name => $lol->{name}})->next;
+            $return_pref = $c->model('DB::Prefecture')->create($lol) unless $return_pref;
             push( @prefectures, $return_pref->id );
         }
         delete $key->{qualitative_progress_3};
@@ -128,46 +141,58 @@ sub goal : Chained('base') Args(0) {
         delete $key->{created_at};
         delete $key->{location_type};
         delete $key->{weight_about_goal};
+		delete $key->{id};
         $key->{latitude}  = delete $key->{gps_lat};
         $key->{longitude} = delete $key->{gps_long};
-        my $return_proj = $c->model('DB::Project')->create($key);
+        my $return_proj; 
+		$return_proj = $c->model('DB::Project')->search({ name => $key->{name}})->next;
+		$return_proj = $c->model('DB::Project')->create($key) unless $return_proj;
+        for (@prefectures){
 
-        
         my $project = $c->model('DB::ProjectPrefecture')->create({
             project_id    => $return_proj->id,
-            prefecture_id => $_  }) for @prefectures;
+            prefecture_id => $_  }) unless $c->model('DB::ProjectPrefecture')->search({ project_id => $return_proj->id, prefecture_id => $_ })->next;
 
+		}
         push( @projects, $return_proj->id )
 
     }
-    delete $data->{qualitative_progress_3};
-    delete $data->{qualitative_progress_5};
-    delete $data->{qualitative_progress_4};
-    delete $data->{qualitative_progress_2};
-    delete $data->{qualitative_progress_1};
-    delete $data->{qualitative_progress_6};
-    delete $data->{schedule_2015_2016};
-    delete $data->{schedule_2013_2014};
-    delete $data->{axis_id};
-    delete $data->{articulation_id};
-    delete $data->{objective_id};
-    delete $data->{status};
-    delete $data->{porcentagem};
-	delete $data->{projects};
-	delete $data->{secretaries};
-	delete $data->{created_at};
-	delete $data->{updated_at};
-    $data->{transversality}  = delete $data->{transversalidade};
-    $data->{description}     = delete $data->{observation};
-    $data->{expected_budget} = delete $data->{total_cost};
+    delete $goal->{qualitative_progress_3};
+    delete $goal->{qualitative_progress_5};
+    delete $goal->{qualitative_progress_4};
+    delete $goal->{qualitative_progress_2};
+    delete $goal->{qualitative_progress_1};
+    delete $goal->{qualitative_progress_6};
+    delete $goal->{schedule_2015_2016};
+    delete $goal->{schedule_2013_2014};
+    delete $goal->{axis_id};
+    delete $goal->{articulation_id};
+    delete $goal->{objective_id};
+    delete $goal->{status};
+    delete $goal->{porcentagem};
+	delete $goal->{projects};
+	delete $goal->{secretaries};
+	delete $goal->{created_at};
+	delete $goal->{updated_at};
+    $goal->{transversality}  = delete $goal->{transversalidade};
+    $goal->{description}     = delete $goal->{observation};
+    $goal->{expected_budget} = delete $goal->{total_cost};
 
-    my $return_goal = $c->model('DB::Goal')->create($data);
-
+    my $return_goal = $c->model('DB::Goal')->create($goal);
+	
+	for (@projects){
     my $lol = $c->model('DB::GoalProject')->create({
         goal_id    => $return_goal->id,
-        project_id => $_ }) for @projects;
-    
+        project_id => $_ }) unless $c->model('DB::GoalProject')->search({ goal_id => $return_goal->id, project_id => $_ })->next;
+	}
+	for (@secretary){
 
+    my $sec = $c->model('DB::GoalSecretary')->create({
+        goal_id    => $return_goal->id,
+        secretary_id => $_ }) unless $c->model('DB::GoalSecretary')->search({ goal_id => $return_goal->id, secretary_id => $_ })->next; 
+	}
+
+    }
 }
 
 sub prefectures : Chained('base') Args(0) {

@@ -178,21 +178,6 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 secretaries
-
-Type: has_many
-
-Related object: L<SMM::Schema::Result::Secretary>
-
-=cut
-
-__PACKAGE__->has_many(
-  "secretaries",
-  "SMM::Schema::Result::Secretary",
-  { "foreign.city_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
-);
-
 =head2 state
 
 Type: belongs_to
@@ -214,8 +199,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-10-06 22:23:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:e9VeRZQXrK13gsYuYlYmxQ
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-11-11 07:38:17
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:PV5PBlk6r9sGeMlkVp6uQw
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;

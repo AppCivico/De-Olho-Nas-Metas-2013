@@ -69,11 +69,6 @@ __PACKAGE__->table("goal");
   data_type: 'text'
   is_nullable: 0
 
-=head2 transversality
-
-  data_type: 'text'
-  is_nullable: 0
-
 =head2 expected_start_date
 
   data_type: 'timestamp'
@@ -183,6 +178,11 @@ __PACKAGE__->table("goal");
   data_type: 'text'
   is_nullable: 1
 
+=head2 transversality
+
+  data_type: 'text'
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -200,8 +200,6 @@ __PACKAGE__->add_columns(
   "description",
   { data_type => "text", is_nullable => 0 },
   "technically",
-  { data_type => "text", is_nullable => 0 },
-  "transversality",
   { data_type => "text", is_nullable => 0 },
   "expected_start_date",
   { data_type => "timestamp", is_nullable => 1 },
@@ -247,6 +245,8 @@ __PACKAGE__->add_columns(
   "real_value_expended",
   { data_type => "double precision", is_nullable => 1 },
   "origin",
+  { data_type => "text", is_nullable => 1 },
+  "transversality",
   { data_type => "text", is_nullable => 1 },
 );
 
@@ -435,8 +435,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-10-06 21:06:07
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VKEALzWylGtlomgh035Qbg
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-11-11 05:55:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:gfIkh+08q9vLl3iKf7ayNg
 
 __PACKAGE__->many_to_many( projects => goal_projects => 'project');
 
