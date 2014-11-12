@@ -59,11 +59,12 @@ __PACKAGE__->table("secretary");
   data_type: 'text'
   is_nullable: 0
 
-=head2 city_id
+=head2 created_at
 
-  data_type: 'integer'
-  is_foreign_key: 1
-  is_nullable: 0
+  data_type: 'timestamp'
+  default_value: current_timestamp
+  is_nullable: 1
+  original: {default_value => \"now()"}
 
 =cut
 
@@ -79,8 +80,13 @@ __PACKAGE__->add_columns(
   { data_type => "text", is_nullable => 0 },
   "name",
   { data_type => "text", is_nullable => 0 },
-  "city_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
+  "created_at",
+  {
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
+    is_nullable   => 1,
+    original      => { default_value => \"now()" },
+  },
 );
 
 =head1 PRIMARY KEY
@@ -96,21 +102,6 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
-
-=head2 city
-
-Type: belongs_to
-
-Related object: L<SMM::Schema::Result::City>
-
-=cut
-
-__PACKAGE__->belongs_to(
-  "city",
-  "SMM::Schema::Result::City",
-  { id => "city_id" },
-  { is_deferrable => 0, on_delete => "NO ACTION", on_update => "NO ACTION" },
-);
 
 =head2 goal_secretaries
 
@@ -128,8 +119,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-10-06 19:49:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:LOhzSoluJwzP3MpESj+gQA
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-11-11 07:38:17
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:pgW6q7Yrh/iFxetUHzegaA
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

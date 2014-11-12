@@ -182,7 +182,7 @@ sub complete : Chained('base') : PathPart('complete') : Args(0) {
 
     $c->model('DB')->txn_do(
         sub {
-            #$organization = $c->stash->{collection}->execute( $c, for => 'create', with => $c->req->params );
+            $organization = $c->stash->{collection}->execute( $c, for => 'create', with => $c->req->params );
 
             $c->req->params->{active}          = 1;
             $c->req->params->{role}            = 'organization';

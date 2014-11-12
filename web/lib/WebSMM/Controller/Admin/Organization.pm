@@ -37,7 +37,7 @@ sub index : Chained('base') : PathPart('') : Args(0) {
 
     my $api = $c->model('API');
 
-    #$api->stash_result( $c, 'organizations' );
+    $api->stash_result( $c, 'organizations' );
 }
 
 sub add : Chained('base') : PathPart('new') : Args(0) {
