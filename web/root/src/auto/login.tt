@@ -28,12 +28,12 @@
 							<a href="/login">Entrar</a>
 						</li>
 					</ul>
-					<ul class="menu menu-social">
+<!--					<ul class="menu menu-social">
 						<li class="twitter">
 							<a href="" title="Twitter" alt="Facebook">&nbsp;</a>
 						</li>
 						<li class="facebook">
-							<a href="" title="Facebook" alt="Facebook">&nbsp;</a>
+							<a href="" title="Facebook" alt="Facebook">&nbsp;</a>-->
 						</li>
 					</ul>
 				</div>
