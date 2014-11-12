@@ -90,108 +90,149 @@ sub goal : Chained('base') Args(0) {
     my $model = $c->model('API');
 
     $c->stash->{url} .= 'goals';
-
     p $c->stash->{url};
-
     $res = $self->furl->get( $c->stash->{url} );
 
     my $data = decode_json $res->content;
-    for my $goal (@$data){
+    for my $goal (@$data) {
+		@projects = ();
+		@secretaries = ();
 
-	next if $c->model('DB::Goal')->search({ name => $goal->{name} })->next; 
-    p $c->stash->{url};	
+        p $c->stash->{url};
+        next
+          if $c->model('DB::Goal')->search( { name => $goal->{name} } )->next;
 
-    for my $sec ( @{ $goal->{secretaries} } ) {
-		my $return_sec;
-		
-        delete $sec->{created_at};
-        delete $sec->{updated_at};
-        delete $sec->{pivot};
+        for my $sec ( @{ $goal->{secretaries} } ) {
+            my $return_sec;
+            delete $sec->{created_at};
+            delete $sec->{updated_at};
+            delete $sec->{pivot};
 
-		$return_sec = $c->model('DB::Secretary')->search({ name => $sec->{name}})->next;
-		$return_sec = $c->model('DB::Secretary')->create($sec) unless $return_sec;
-		
-        push( @secretary, $return_sec->id );
-	}
-    for my $key ( @{ $goal->{projects} } ) {
+            $return_sec =
+              $c->model('DB::Secretary')->search( { name => $sec->{name} } )
+              ->next;
+            $return_sec = $c->model('DB::Secretary')->create($sec)
+              unless $return_sec;
 
-        for my $lol ( @{ $key->{prefectures} } ) {
-			my $return_pref;
-            delete $lol->{pivot};
-            delete $lol->{created_at};
-            delete $lol->{updated_at};
-			delete $lol->{id};
-            $lol->{latitude}  = delete $lol->{gps_lat};
-            $lol->{longitude} = delete $lol->{gps_long};
-			$return_pref = $c->model('DB::Prefecture')->search({ name => $lol->{name}})->next;
-            $return_pref = $c->model('DB::Prefecture')->create($lol) unless $return_pref;
-            push( @prefectures, $return_pref->id );
+            push( @secretary, $return_sec->id );
         }
-        delete $key->{qualitative_progress_3};
-        delete $key->{qualitative_progress_5};
-        delete $key->{qualitative_progress_4};
-        delete $key->{qualitative_progress_2};
-        delete $key->{qualitative_progress_1};
-        delete $key->{qualitative_progress_6};
-        delete $key->{district};
-        delete $key->{goal_id};
-        delete $key->{prefectures};
-        delete $key->{project_type};
-        delete $key->{updated_at};
-        delete $key->{created_at};
-        delete $key->{location_type};
-        delete $key->{weight_about_goal};
-		delete $key->{id};
-        $key->{latitude}  = delete $key->{gps_lat};
-        $key->{longitude} = delete $key->{gps_long};
-        my $return_proj; 
-		$return_proj = $c->model('DB::Project')->search({ name => $key->{name}})->next;
-		$return_proj = $c->model('DB::Project')->create($key) unless $return_proj;
-        for (@prefectures){
+        for my $key ( @{ $goal->{projects} } ) {
+			@prefectures = ();
 
-        my $project = $c->model('DB::ProjectPrefecture')->create({
-            project_id    => $return_proj->id,
-            prefecture_id => $_  }) unless $c->model('DB::ProjectPrefecture')->search({ project_id => $return_proj->id, prefecture_id => $_ })->next;
+            for my $lol ( @{ $key->{prefectures} } ) {
+                my $return_pref;
+                delete $lol->{pivot};
+                delete $lol->{created_at};
+                delete $lol->{updated_at};
+                delete $lol->{id};
+                $lol->{latitude}  = delete $lol->{gps_lat};
+                $lol->{longitude} = delete $lol->{gps_long};
+                $return_pref      = $c->model('DB::Prefecture')
+                  ->search( { name => $lol->{name} } )->next;
+                $return_pref = $c->model('DB::Prefecture')->create($lol)
+                  unless $return_pref;
+                push( @prefectures, $return_pref->id );
+            }
+            delete $key->{qualitative_progress_3};
+            delete $key->{qualitative_progress_5};
+            delete $key->{qualitative_progress_4};
+            delete $key->{qualitative_progress_2};
+            delete $key->{qualitative_progress_1};
+            delete $key->{qualitative_progress_6};
+            delete $key->{district};
+            delete $key->{goal_id};
+            delete $key->{prefectures};
+            delete $key->{project_type};
+            delete $key->{updated_at};
+            delete $key->{created_at};
+            delete $key->{location_type};
+            delete $key->{weight_about_goal};
+            delete $key->{id};
+            $key->{latitude}  = delete $key->{gps_lat};
+            $key->{longitude} = delete $key->{gps_long};
+            my $return_proj;
+            $return_proj =
+              $c->model('DB::Project')->search( { name => $key->{name} } )
+              ->next;
+            $return_proj = $c->model('DB::Project')->create($key)
+              unless $return_proj;
 
-		}
-        push( @projects, $return_proj->id )
+            my $proj_vs_pref = {};
+            map { $proj_vs_pref->{ $_->{project_id} }{ $_->{prefecture_id} } }
+              $c->model('DB::ProjectPrefecture')->search(
+                {},
+                {
+                    result_class => 'DBIx::Class::ResultClass::HashRefInflator',
+                }
+              )->all;
 
-    }
-    delete $goal->{qualitative_progress_3};
-    delete $goal->{qualitative_progress_5};
-    delete $goal->{qualitative_progress_4};
-    delete $goal->{qualitative_progress_2};
-    delete $goal->{qualitative_progress_1};
-    delete $goal->{qualitative_progress_6};
-    delete $goal->{schedule_2015_2016};
-    delete $goal->{schedule_2013_2014};
-    delete $goal->{axis_id};
-    delete $goal->{articulation_id};
-    delete $goal->{objective_id};
-    delete $goal->{status};
-    delete $goal->{porcentagem};
-	delete $goal->{projects};
-	delete $goal->{secretaries};
-	delete $goal->{created_at};
-	delete $goal->{updated_at};
-    $goal->{transversality}  = delete $goal->{transversalidade};
-    $goal->{description}     = delete $goal->{observation};
-    $goal->{expected_budget} = delete $goal->{total_cost};
+            for (@prefectures) {
+                next if exists $proj_vs_pref->{ $return_proj->id }{$_};
+                $c->model('DB::ProjectPrefecture')->create(
+                    {
+                        project_id    => $return_proj->id,
+                        prefecture_id => $_
+                    }
+                );
+            }
+            push( @projects, $return_proj->id )
 
-    my $return_goal = $c->model('DB::Goal')->create($goal);
-	
-	for (@projects){
-    my $lol = $c->model('DB::GoalProject')->create({
-        goal_id    => $return_goal->id,
-        project_id => $_ }) unless $c->model('DB::GoalProject')->search({ goal_id => $return_goal->id, project_id => $_ })->next;
-	}
-	for (@secretary){
+        }
+        delete $goal->{qualitative_progress_3};
+        delete $goal->{qualitative_progress_5};
+        delete $goal->{qualitative_progress_4};
+        delete $goal->{qualitative_progress_2};
+        delete $goal->{qualitative_progress_1};
+        delete $goal->{qualitative_progress_6};
+        delete $goal->{schedule_2015_2016};
+        delete $goal->{schedule_2013_2014};
+        delete $goal->{axis_id};
+        delete $goal->{articulation_id};
+        delete $goal->{objective_id};
+        delete $goal->{status};
+        delete $goal->{porcentagem};
+        delete $goal->{projects};
+        delete $goal->{secretaries};
+        delete $goal->{created_at};
+        delete $goal->{updated_at};
+        $goal->{transversality}  = delete $goal->{transversalidade};
+        $goal->{description}     = delete $goal->{observation};
+        $goal->{expected_budget} = delete $goal->{total_cost};
 
-    my $sec = $c->model('DB::GoalSecretary')->create({
-        goal_id    => $return_goal->id,
-        secretary_id => $_ }) unless $c->model('DB::GoalSecretary')->search({ goal_id => $return_goal->id, secretary_id => $_ })->next; 
-	}
+        my $return_goal = $c->model('DB::Goal')->create($goal);
 
+        my $goal_vs_proj = {};
+        map { $goal_vs_proj->{ $_->{goal_id} }{ $_->{project_id} } }
+          $c->model('DB::GoalProject')
+          ->search( {},
+            { result_class => 'DBIx::Class::ResultClass::HashRefInflator', } )
+          ->all;
+
+        for (@projects) {
+            next if $goal_vs_proj->{ $return_goal->id }{$_};
+            my $lol = $c->model('DB::GoalProject')->create(
+                {
+                    goal_id    => $return_goal->id,
+                    project_id => $_
+                }
+            );
+        }
+        my $goal_vs_sec = {};
+        map { $goal_vs_sec->{ $_->{goal_id} }{ $_->{secretary_id} } }
+          $c->model('DB::GoalSecretary')
+          ->search( {},
+            { result_class => 'DBIx::Class::ResultClass::HashRefInflator', } )
+          ->all;
+        for (@secretary) {
+            next if $goal_vs_sec->{ $return_goal->id }{$_};
+
+            my $sec = $c->model('DB::GoalSecretary')->create(
+                {
+                    goal_id      => $return_goal->id,
+                    secretary_id => $_
+                }
+            );
+        }
     }
 }
 
@@ -221,24 +262,26 @@ sub prefectures : Chained('base') Args(0) {
 
     $c->res->body('teste');
 }
-sub search_goal : Chained('base') :Args(0) :ActionClass('REST'){}
+sub search_goal : Chained('base') : Args(0) : ActionClass('REST') { }
+
 sub search_goal_GET {
     my ( $self, $c ) = @_;
     my $return;
     my $res;
 
     use DDP;
-	my @goals =  $c->model('DB::Goal')->search(undef, { prefetch => [{ goal_projects => 'project' }] })->all;
+    my @goals =
+      $c->model('DB::Goal')
+      ->search( undef, { prefetch => [ { goal_projects => 'project' } ] } )
+      ->all;
 
-	for my $key (@goals){
-		for my $lol ($key->goal_projects){
-			p$lol->project;
-		}
-	}
-	$self->status_ok( $c , 
-	entity => \@goals ); 	
+    for my $key (@goals) {
+        for my $lol ( $key->goal_projects ) {
+            p $lol->project;
+        }
+    }
+    $self->status_ok( $c, entity => \@goals );
 }
-
 
 sub furl {
     return Furl->new(
