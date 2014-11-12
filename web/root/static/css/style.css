@@ -190,6 +190,8 @@ section p{
 
 .about .about-logos{
 	text-align: center;
+	font-size: 0.7em;
+	color: #ccc082;
 }
 .about .about-logos img{
 	margin: 20px 50px;

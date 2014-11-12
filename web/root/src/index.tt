@@ -84,7 +84,7 @@
 	<a id="about" class="anchor"></a>
     <section class="about text-center">
 		<div class="container">
-			<h2 class="title">Sobre o Sistema de monitoramento de metas</h2>
+			<h2 class="title">Sobre o De Olho nas Metas</h2>
 			<div class="row">
 				<div class="col-sm-8 col-md-offset-2">
 					<p>
@@ -103,10 +103,19 @@
 				<a href="/sobre" class="btn btn-warning">CLIQUE E SAIBA MAIS</a>
 			</div>
 			</br />
-			<div class="about-logos">
-				<a href="http://www.nossasaopaulo.org.br" target="_blank"><img src="/static/css/images/logo-rnsp.png" border="0"></a>
-				<a href="http://www.avinaamericas.org" target="_blank"><img src="/static/css/images/logo-avina.png" border="0"></a>
-				<a href="http://civic.mit.edu/" target="_blank"><img src="/static/css/images/logo-civic.png" border="0"></a>
+			<div class="about-logos text-center">
+				<div class="col-sm-4">
+					Realização<br />
+					<a href="http://www.nossasaopaulo.org.br" target="_blank"><img src="/static/css/images/logo-rnsp.png" border="0"></a>
+				</div>
+				<div class="col-sm-4 text-center">
+					Patrocínio<br />
+					<a href="http://www.avinaamericas.org" target="_blank"><img src="/static/css/images/logo-avina.png" border="0"></a>
+				</div>
+				<div class="col-sm-4 text-center">
+					Parceiro<br />
+					<a href="http://civic.mit.edu/" target="_blank"><img src="/static/css/images/logo-civic.png" border="0"></a>
+				</div>
 			</div>
 		</div>
     </section>
