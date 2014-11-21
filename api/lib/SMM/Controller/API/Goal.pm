@@ -30,7 +30,6 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $goal = $c->stash->{goal};
-    use DDP;
     $self->status_ok(
         $c,
         entity => {
