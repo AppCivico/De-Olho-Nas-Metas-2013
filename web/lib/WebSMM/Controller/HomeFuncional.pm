@@ -4,7 +4,7 @@ use namespace::autoclean;
 
 BEGIN { extends 'Catalyst::Controller'; }
 
-__PACKAGE__->config( namespace => '' );
+#__PACKAGE__->config( namespace => '');
 =head1 NAME
 
 WebSMM::Controller::HomeFuncional - Catalyst Controller
@@ -24,6 +24,8 @@ Catalyst Controller.
 
 sub base :Chained('/') :PathPart('home') :CaptureArgs(0) {
     my ( $self, $c ) = @_;
+
+	$c->stash->{template_wrapper} = 'funcional';
 }
 
 sub object :Chained('base') :PathPart('') :CaptureArgs(1){

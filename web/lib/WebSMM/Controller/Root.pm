@@ -34,55 +34,55 @@ sub index : Path : Args(0) {
 
 }
 
-sub more : Chained('') : Path('saiba-mais') : Args(0) {
-    my ( $self, $c ) = @_;
-
-    my $api = $c->model('API');
-
-    $api->stash_result(
-        $c,
-        'categories',
-        params => {
-            order => 'name',
-        }
-    );
-    $c->stash->{select_categories} =
-      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{categories} } ];
-
-    $api->stash_result(
-        $c,
-        'candidates',
-        params => {
-            order => 'me.name',
-        }
-    );
-    $c->stash->{select_candidates} =
-      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{candidates} } ];
-
-    $api->stash_result(
-        $c, 'states',
-        params => {
-            order => 'name',
-        }
-    );
-    $c->stash->{select_states} =
-      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{states} } ];
-
-    unshift( $c->stash->{select_states}, [ 'br', 'Brasil' ] );
-
-    $api->stash_result(
-        $c,
-        'electoral_regional_courts',
-        params => {
-            order => 'state.name',
-        }
-    );
-
-    $c->stash->{select_spe} = [ map { [ $_->{id}, $_->{state}{name} ] }
-          @{ $c->stash->{electoral_regional_courts} } ];
-
-    $c->stash->{template} = 'auto/saiba_mais.tt';
-}
+#sub more : Chained('') : Path('saiba-mais') : Args(0) {
+#    my ( $self, $c ) = @_;
+#
+#    my $api = $c->model('API');
+#
+#    $api->stash_result(
+#        $c,
+#        'categories',
+#        params => {
+#            order => 'name',
+#        }
+#    );
+#    $c->stash->{select_categories} =
+#      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{categories} } ];
+#
+#    $api->stash_result(
+#        $c,
+#        'candidates',
+#        params => {
+#            order => 'me.name',
+#        }
+#    );
+#    $c->stash->{select_candidates} =
+#      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{candidates} } ];
+#
+#    $api->stash_result(
+#        $c, 'states',
+#        params => {
+#            order => 'name',
+#        }
+#    );
+#    $c->stash->{select_states} =
+#      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{states} } ];
+#
+#    unshift( $c->stash->{select_states}, [ 'br', 'Brasil' ] );
+#
+#    $api->stash_result(
+#        $c,
+#        'electoral_regional_courts',
+#        params => {
+#            order => 'state.name',
+#        }
+#    );
+#
+#    $c->stash->{select_spe} = [ map { [ $_->{id}, $_->{state}{name} ] }
+#          @{ $c->stash->{electoral_regional_courts} } ];
+#
+#    $c->stash->{template} = 'auto/saiba_mais.tt';
+#}
 
 sub root : Chained('/') : PathPart('') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
