@@ -1,0 +1,39 @@
+
+<div>
+<div class="rows">
+<h2 class="sub-header">Promise Tracker - Campanhas</h2>
+<div class="table-responsive">
+	[%IF campaigns.size > 0%]
+	<table class="table table-striped">
+		<thead>
+			<tr>
+                <th>Audience</th>
+                <th>Data Collectors</th>
+                <th>description</th>
+                <th>goal</th>
+                <th>meta</th>
+                <th>title</th>
+			</tr>
+		</thead>
+		<tbody>
+			[%FOREACH campaign IN campaigns%]
+				<tr>
+					<td>
+						<a href="[% c.uri_for_action('/promisetracker/campaign/detail',[campaign.id] ) %]">[%campaign.audience%]</a>
+					</td>
+					<td>[%campaign.data_collectors%]</td>
+					<td>[%campaign.goal%]</td>
+					<td>[%campaign.description%]</td>
+					<td>[%campaign.meta%]</td>
+					<td>[%campaign.title%]</td>
+				</tr>
+            [%END%]
+		</tbody>
+	</table>
+	[%ELSE%]
+		<h4>Nenhuma organização cadastrada</h4>
+	[%END%]
+	
+</div>
+</div>
+</div>
