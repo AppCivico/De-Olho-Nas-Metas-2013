@@ -21,8 +21,24 @@ Catalyst Controller.
 
 =cut
 
-sub index :Path :Args(0) {
+sub base :Chained('/homefuncional/base') :PathPart('goal') :CaptureArgs(0) {
     my ( $self, $c ) = @_;
+
+}
+
+sub object :Chained('base') :PathPart('') :CaptureArgs(1){
+    my ( $self, $c, $id ) = @_;
+
+
+}
+
+sub detail :Chained('object') :PathPart('') :Args(0){
+    my ( $self, $c, $id ) = @_;
+}
+
+sub index :Chained('base') :PathPart('') :Args(0){
+    my ( $self, $c ) = @_;
+
 
 }
 
