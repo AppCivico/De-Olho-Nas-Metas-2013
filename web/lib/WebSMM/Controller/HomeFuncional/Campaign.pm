@@ -24,7 +24,6 @@ Catalyst Controller.
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 
-    $c->response->body('Matched WebSMM::Controller::HomeFuncional::Campaign in HomeFuncional::Campaign.');
 }
 
 

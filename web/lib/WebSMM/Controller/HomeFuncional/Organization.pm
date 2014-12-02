@@ -1,13 +1,12 @@
-package WebSMM::Controller::HomeFuncional;
+package WebSMM::Controller::HomeFuncional::Organization;
 use Moose;
 use namespace::autoclean;
 
 BEGIN { extends 'Catalyst::Controller'; }
 
-#__PACKAGE__->config( namespace => '');
 =head1 NAME
 
-WebSMM::Controller::HomeFuncional - Catalyst Controller
+WebSMM::Controller::HomeFuncional::Goal - Catalyst Controller
 
 =head1 DESCRIPTION
 
@@ -22,10 +21,9 @@ Catalyst Controller.
 
 =cut
 
-sub base :Chained('/') :PathPart('home') :CaptureArgs(0) {
+sub base :Chained('/homefuncional/base') :PathPart('organization') :CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
-	$c->stash->{template_wrapper} = 'func';
 }
 
 sub object :Chained('base') :PathPart('') :CaptureArgs(1){
@@ -38,14 +36,16 @@ sub detail :Chained('object') :PathPart('') :Args(0){
     my ( $self, $c, $id ) = @_;
 }
 
-sub home :Chained('base') :PathPart('') :Args(0){
+sub index :Chained('base') :PathPart('') :Args(0){
     my ( $self, $c ) = @_;
 
     my $api = $c->model('API');
 
-    $api->stash_result( $c, 'goals' );
+    $api->stash_result( $c, 'organizations' );
 
 }
+
+
 
 
 =encoding utf8

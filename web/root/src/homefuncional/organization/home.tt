@@ -1,3 +1,43 @@
+	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+			<div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+				<a href="#home" class="navbar-brand"><img src="/static/images/logo-header.png"></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a href="/home#metas-result">Metas</a>
+                    </li>
+                    <li>
+                        <a href="regions">Regiões</a>
+                    </li>
+                    <li>
+                        <a href="/home/organization">Organizações</a>
+                    </li>
+                    <li>
+                        <a href="campaigns">Campanhas</a>
+                    </li>
+                    <li>
+                        <a href="managements">Gestões</a>
+                    </li>
+                    <li class="highlight">
+                        <a href="login">Entrar</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
     <section class="map text-center">
 		<div id="map">
 		</div>

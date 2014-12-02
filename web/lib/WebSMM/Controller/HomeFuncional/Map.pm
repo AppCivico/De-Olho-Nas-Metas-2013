@@ -1,8 +1,10 @@
-package WebSMM::Controller::HomeFuncional::Management;
+package WebSMM::Controller::HomeFuncional::Map;
 use Moose;
 use namespace::autoclean;
 
-BEGIN { extends 'Catalyst::Controller'; }
+BEGIN { extends 'Catalyst::Controller::REST'; }
+
+__PACKAGE__->config( default => 'application/json',);
 
 =head1 NAME
 
@@ -21,27 +23,21 @@ Catalyst Controller.
 
 =cut
 
-sub base :Chained('/homefuncional/base') :PathPart('management') :CaptureArgs(0) {
+sub base :Chained('/homefuncional/base') :PathPart('') :CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
 }
 
-sub object :Chained('base') :PathPart('') :CaptureArgs(1){
-    my ( $self, $c, $id ) = @_;
+sub project_map :Chained('base') :Args(0) :ActionClass('REST') {}
 
-
-}
-
-sub detail :Chained('object') :PathPart('') :Args(0){
-    my ( $self, $c, $id ) = @_;
-}
-
-sub index :Chained('base') :PathPart('') :Args(0){
+sub project_map_GET {
     my ( $self, $c ) = @_;
 
     my $api = $c->model('API');
 
-    $api->stash_result( $c, 'managements' );
+    $api->stash_result( $c, 'projects' );
+	
+	$self->status_ok( $c, entity => $c->stash->{projects} );
 
 }
 

@@ -34,16 +34,14 @@ sub object :Chained('base') :PathPart('') :CaptureArgs(1){
 
 sub detail :Chained('object') :PathPart('') :Args(0){
     my ( $self, $c, $id ) = @_;
-	$c->stash->{without_wrapper} = 1;
 }
 
-sub goal :Chained('base') :PathPart('') :Args(0){
+sub index :Chained('base') :PathPart('') :Args(0){
     my ( $self, $c ) = @_;
 
     my $api = $c->model('API');
 
     $api->stash_result( $c, 'goals' );
-	$c->stash->{without_wrapper} = 1;
 
 }
 
