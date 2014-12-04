@@ -84,7 +84,7 @@ function initialize() {
                         <a href="/home/management">Gestões</a>
                     </li>
                     <li class="highlight">
-                        <a href="login">Entrar</a>
+                        <a href="/login">Entrar</a>
                     </li>
                 </ul>
             </div>

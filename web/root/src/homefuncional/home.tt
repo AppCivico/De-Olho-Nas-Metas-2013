@@ -70,19 +70,17 @@
 		<div class="container">
 
 			<h2 class="section-title">[% goals.size %] Metas Encontradas</h2>
-		
+			[% FOREACH goal IN goals %]		
 			<div class="item row">
-				<div class="col-sm-2 nopadding">
-					<div class="image pull-left"><img src="/static/css/images/meta01.jpg" border="0"></div>
-				</div>
 				<div class="col-sm-10 nopadding">
 					<div class="contents pull-left">
 						<div class="description">
-							<h2>Ampliar em 20 mil o número de matrículas na Educação de Jovens e Adultos e implantar 3 novos Centros Integrados (CIEJA)</h2>
-							Tecnologia e inovação, Saúde e Meio Ambiente
+							<h2>
+								<a href="[% c.uri_for_action('/homefuncional/detail',[goal.id] ) %]">[%goal.name%]</a>
+							</h2>
 							<div class="stats">
 								<div class="icon regions"></div> <span class="regions">3 Regiões</span>
-								<div class="icon projects"></div> <span class="projects">3 Projetos</span>
+								<div class="icon projects"></div> <span class="projects">[% goal.project.size %] Projetos</span>
 								<div class="icon organizations"></div> <span class="organizations">3 Organizações</span>
 							</div>
 						</div>
@@ -90,79 +88,7 @@
 					<div class="clear"></div>
 				</div>
 			</div>
-			<div class="item row">
-				<div class="col-sm-2 nopadding">
-					<div class="image pull-left"><img src="/static/css/images/meta02.jpg" border="0"></div>
-				</div>
-				<div class="col-sm-10 nopadding">
-					<div class="contents pull-left">
-						<div class="description">
-							<h2>Requalificar a infraestrutura e os espaços públicos do Centro.</h2>
-							Tecnologia e inovação, Saúde e Meio Ambiente
-							<div class="stats">
-								<div class="icon regions"></div> <span class="regions">3 Regiões</span>
-								<div class="icon projects"></div> <span class="projects">3 Projetos</span>
-								<div class="icon organizations"></div> <span class="organizations">3 Organizações</span>
-							</div>
-						</div>
-					</div>
-					<div class="clear"></div>
-				</div>
-			</div>
-			<div class="item row">
-				<div class="col-sm-12 nopadding">
-					<div class="contents pull-left">
-						<div class="description">
-							<h2>Formalizar aproximadamente 22.500 microempreendedores individuais.</h2>
-							Tecnologia e inovação, Saúde e Meio Ambiente
-							<div class="stats">
-								<div class="icon regions"></div> <span class="regions">3 Regiões</span>
-								<div class="icon projects"></div> <span class="projects">3 Projetos</span>
-								<div class="icon organizations"></div> <span class="organizations">3 Organizações</span>
-							</div>
-						</div>
-					</div>
-					<div class="clear"></div>
-				</div>
-			</div>
-			<div class="item row">
-				<div class="col-sm-2 nopadding">
-					<div class="image pull-left"><img src="/static/css/images/meta01.jpg" border="0"></div>
-				</div>
-				<div class="col-sm-10 nopadding">
-					<div class="contents pull-left">
-						<div class="description">
-							<h2>Ampliar em 20 mil o número de matrículas na Educação de Jovens e Adultos e implantar 3 novos Centros Integrados (CIEJA)</h2>
-							Tecnologia e inovação, Saúde e Meio Ambiente
-							<div class="stats">
-								<div class="icon regions"></div> <span class="regions">3 Regiões</span>
-								<div class="icon projects"></div> <span class="projects">3 Projetos</span>
-								<div class="icon organizations"></div> <span class="organizations">3 Organizações</span>
-							</div>
-						</div>
-					</div>
-					<div class="clear"></div>
-				</div>
-			</div>
-			<div class="item row">
-				<div class="col-sm-2 nopadding">
-					<div class="image pull-left"><img src="/static/css/images/meta02.jpg" border="0"></div>
-				</div>
-				<div class="col-sm-10 nopadding">
-					<div class="contents pull-left">
-						<div class="description">
-							<h2>Requalificar a infraestrutura e os espaços públicos do Centro.</h2>
-							Tecnologia e inovação, Saúde e Meio Ambiente
-							<div class="stats">
-								<div class="icon regions"></div> <span class="regions">3 Regiões</span>
-								<div class="icon projects"></div> <span class="projects">3 Projetos</span>
-								<div class="icon organizations"></div> <span class="organizations">3 Organizações</span>
-							</div>
-						</div>
-					</div>
-					<div class="clear"></div>
-				</div>
-			</div>
+			[%END%]
 		</div>
     </section>
 	
