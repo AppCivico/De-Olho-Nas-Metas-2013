@@ -29,7 +29,13 @@ sub base :Chained('/homefuncional/base') :PathPart('goal') :CaptureArgs(0) {
 sub object :Chained('base') :PathPart('') :CaptureArgs(1){
     my ( $self, $c, $id ) = @_;
 
-
+    my $api = $c->model('API');
+    $api->stash_result(
+        $c,
+        [ 'goals', $id ],
+        stash => 'goal_obj'
+    );
+	
 }
 
 sub detail :Chained('object') :PathPart('') :Args(0){

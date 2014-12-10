@@ -54,13 +54,15 @@ sub index :Chained('base') :PathPart('') :Args(0){
 sub type :Chained('base')  :Args(0){
     my ( $self, $c ) = @_;
 
-	my $type_id = $c->req->params('type_id');
+	my $type_id = $c->req->param('type_id');
     my $api = $c->model('API');
 
-    $api->stash_result( 
+    my $res = $api->stash_result( 
 		$c, 'projects',
 		params => { type_id => $type_id },
-	 );
+    );
+	use DDP;
+	p$res;
 }
 
 

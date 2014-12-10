@@ -40,7 +40,7 @@ h2{
 	overflow: hidden;
 	width: 36px;
 	height: 36px;
-	background-image: url("images/social-icons.png");
+	background-image: url("/static/images/social-icons.png");
 	background-repeat: no-repeat;
 	background-position: 0 0;
 }
@@ -127,7 +127,7 @@ body {
 .signup{
 	background-color: #666056;
 	color: #fff;
-	background-image: url("images/img_home.png");
+	background-image: url("/static/images/img_home.png");
 	background-repeat: no-repeat;
 	background-position: bottom center;
 	padding-bottom: 370px;
@@ -265,7 +265,7 @@ section.map{
 #filter-map .item .icon{
 	width: 35px;
 	height: 35px;
-	background-image: url("images/icons-map.png");
+	background-image: url("/static/images/icons-map.png");
 	background-repeat: no-repeat;
 	background-position: 0 0;
 	margin: 6px 20px;
@@ -377,7 +377,7 @@ section.metas-result .item .stats .icon{
 	width: 22px;
 	height: 22px;
 	display: inline-block;
-	background-image: url("images/icons-meta.png");
+	background-image: url("/static/images/icons-meta.png");
 	background-repeat: no-repeat;
 	margin-bottom: -6px;
 }

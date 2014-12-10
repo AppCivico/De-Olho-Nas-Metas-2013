@@ -24,6 +24,8 @@
 	<link rel="icon" type="image/png" href="favicon.png" />
 </head>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCVRSogQpUwhgvu2GccC7F9rh7B7915qSY&sensor=TRUE">
 </script>
@@ -55,6 +57,14 @@ function initialize() {
 			});
 		});
       }
+	$(document).ready(function(){
+		$("#type").change(function(){
+  			alert("The text has been changed.");
+  	     	$.post("/homefuncional/project/type",{type_id: '1'},function(result){
+           		$("span").html(result);
+         	});
+		});
+	});
 </script> 
 <body onload="initialize()" id="page-top" data-spy="scroll" data-target=".navbar-custom">
 
@@ -74,7 +84,7 @@ function initialize() {
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a href="/home">Metas</a>
+                        <a href="/home/goal">Metas</a>
                     </li>
                     <li>
                         <a href="/home/region">Regiões</a>
@@ -128,7 +138,6 @@ function initialize() {
 	</footer>
 	
     <!-- Core JavaScript Files -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="/static/js/jquery.easing.1.3.js"></script>
     <!-- Custom Theme JavaScript -->

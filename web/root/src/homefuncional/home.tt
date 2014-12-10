@@ -1,14 +1,3 @@
-<script>
-	$(document).ready(function(){
-       $("type").change(function(){
-   		 txt=$("type").val();
-		 alert(txt);
-  	     $.post("/homefuncional/project/type",{type_id: txt},function(result){
-           $("span").html(result);
-         });
-       });
-    });
-</script>
 	<section class="map text-center">
 		<div id="map">
 		</div>
@@ -68,7 +57,7 @@
 							&nbsp;<br />
 							<select id="type">
 								[% FOREACH type IN objectives %]
-								<option value="type.id">[% type.name %]</option>
+								<option value="[% type.id %]">[% type.name %]</option>
 								[% END %]
 							</select>
 						</div>

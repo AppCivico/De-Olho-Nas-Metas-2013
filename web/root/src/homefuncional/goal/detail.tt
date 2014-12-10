@@ -38,17 +38,23 @@
 	<section class="metas-filtro">
 		<div class="container">
 			<form>
-				<div class="col-xs-6 cep">
-					PROCURAR EMPRESAS<br />
-					<input type="text" placeholder="Informe o Nome">
+				<div class="col-xs-4 cep">
+					Metas próximas a mim<br />
+					<input type="text" placeholder="Informe o CEP">
 					<button><span class="glyphicon glyphicon-search"></span></button>
 				</div>
-				<div class="col-xs-6">
+				<div class="col-xs-8">
 					<div class="row">
 						<div class="col-xs-6 region">
-							FILTRAR EMPRESAS POR<br />
+							Filtrar metas por<br />
 							<select>
-								<option>Metas
+								<option>Nome da região
+							</select>
+						</div>
+						<div class="col-xs-6 type">
+							&nbsp;<br />
+							<select>
+								<option>Esporte e lazer
 							</select>
 						</div>
 					</div>
@@ -61,21 +67,29 @@
     <section class="metas-result">
 		<div class="container">
 
-			<h2 class="section-title">[% goals.size %] Metas Encontradas</h2>
-			[% FOREACH goal IN goals %]	
 			<div class="item row">
+				<div class="col-sm-2 nopadding">
+					<div class="image pull-left"><img src="/static/images/meta02.jpg" border="0"></div>
+				</div>
 				<div class="col-sm-10 nopadding">
 					<div class="contents pull-left">
 						<div class="description">
-							<h2>
-								<a href="[% c.uri_for_action('/homefuncional/goal/detail',[goal.id] ) %]">[%goal.name%]</a>
-							</h2>
+							<h2>[% goal_obj.description %]</h2>
+							
 						</div>
 					</div>
+					<h2> Projetos</h2>
+					[% FOREACH project IN goal_obj.project%]
+					<div class="contents pull-left">
+						<div class="description">
+							<h2><a>[% project.name %]</a></h2>
+						</div>
+					</div>
+					[% END %]
+					
 					<div class="clear"></div>
 				</div>
 			</div>
-			[% END %]
 		</div>
     </section>
 	
