@@ -1,17 +1,4 @@
-<script>
-	$(document).ready(function(){
-       $("type").change(function(){
-   		 txt=$("type").val();
-		 alert(txt);
-  	     $.post("/homefuncional/project/type",{type_id: txt},function(result){
-           $("span").html(result);
-         });
-       });
-    });
-</script>
-	<section class="map text-center">
-		<div id="map">
-		</div>
+    <section class="map text-center">
 		<div id="filter-map">
 			<div class="contents text-center">
 				<div class="item">
@@ -66,10 +53,8 @@
 						</div>
 						<div class="col-xs-6 type">
 							&nbsp;<br />
-							<select id="type">
-								[% FOREACH type IN objectives %]
-								<option value="type.id">[% type.name %]</option>
-								[% END %]
+							<select>
+								<option>Esporte e lazer
 							</select>
 						</div>
 					</div>
@@ -82,47 +67,27 @@
     <section class="metas-result">
 		<div class="container">
 
-			<h2 class="section-title">[% projects.size %] Projetos Encontrados</h2>
-			[% FOREACH project IN projects %]		
 			<div class="item row">
+				<div class="col-sm-2 nopadding">
+					<div class="image pull-left"><img src="/static/images/meta02.jpg" border="0"></div>
+				</div>
 				<div class="col-sm-10 nopadding">
 					<div class="contents pull-left">
 						<div class="description">
-							<h2>
-								<a href="[% c.uri_for_action('/homefuncional/project/detail',[project.id] ) %]">[%project.name%]</a>
-							</h2>
-							<div class="stats">
-								<div class="icon regions"></div> <span class="regions">Regiões</span>
-								<div class="icon projects"></div> <span class="projects">[% project.goal.size %] Metas</span>
-								<div class="icon organizations"></div> <span class="organizations">Organizações</span>
-							</div>
+							<h2>[% project_obj.description %]</h2>
+							
 						</div>
 					</div>
+					<h2> Projetos</h2>
+					<div class="contents pull-left">
+						<div class="description">
+							<h2><a>[% project_obj.name %]</a></h2>
+						</div>
+					</div>
+					
 					<div class="clear"></div>
 				</div>
 			</div>
-			[%END%]
 		</div>
     </section>
 	
-    <section class="statistics">
-		<div class="container">
-		
-			<h2 class="section-title">Estatísticas de Metas e Projetos</h2>
-			
-			<div class="row">
-				<div class="chart-stats col-sm-3 text-center" color="darkblue">
-					<div class="chart">
-						<canvas id="chart1"></canvas>
-					</div>
-					<div class="chart-label">Novos Visitantes</div>
-				</div>
-				<div class="chart-stats col-sm-3 text-center" color="red">
-					<div class="chart">
-						<canvas id="chart2"></canvas>
-					</div>
-					<div class="chart-label">Taxa de rejeição</div>
-				</div>
-			</div>
-		</div>
-    </section>

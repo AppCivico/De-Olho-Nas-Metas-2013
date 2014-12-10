@@ -40,13 +40,18 @@ function initialize() {
 		$.getJSON('/home/project_map',function(data,status){
 			var json = data;
 			$.each(json, function(i, pj){
-		
+				marker = "";
 				var myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
-				new google.maps.Marker({
+				marker = new google.maps.Marker({
     	            position: myLatlng,
 	                map: map,
-					title: pj.name
+					title: pj.name,
+					url : "/home/project/"+pj.id
         	    });
+
+				google.maps.event.addListener(marker, 'click', function() {
+        			window.location.href = marker.url;
+    			});
 			});
 		});
       }
@@ -75,13 +80,10 @@ function initialize() {
                         <a href="/home/region">Regiões</a>
                     </li>
                     <li>
-                        <a href="/home/organization">Organizações</a>
+                        <a href="/home/organization">Conselhos</a>
                     </li>
                     <li>
                         <a href="/home/campaign">Campanhas</a>
-                    </li>
-                    <li>
-                        <a href="/home/management">Gestões</a>
                     </li>
                     <li class="highlight">
                         <a href="/login">Entrar</a>

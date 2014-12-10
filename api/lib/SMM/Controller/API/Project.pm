@@ -8,12 +8,14 @@ __PACKAGE__->config(
     default => 'application/json',
 
     result      => 'DB::Project',
-    object_key  => 'projects',
+    object_key  => 'project',
     search_ok => {
         id => 'Int'
     },
-
-    update_roles => [qw/superadmin user admin webapi project/],
+    result_attr => {
+        prefetch => [ { 'goal_projects' => 'goal' } ]
+    },
+    update_roles => [qw/superadmin user admin webapi organization/],
     create_roles => [qw/superadmin admin webapi/],
     delete_roles => [qw/superadmin admin webapi/],
 );
@@ -30,20 +32,35 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $project = $c->stash->{project};
-
+	use DDP;
+	
     $self->status_ok(
         $c,
         entity => {
             (
                 map { $_ => $project->$_, }
                   qw/
-                  id
                   name
                   address
                   latitude
 				  longitude
                   /
             ),
+			goal => [
+                (
+                    map {
+                        my $p = $_;
+                        (
+                            map {
+                                { $_ => $p->goal->$_ }
+                              } qw/
+                              name
+                              /
+                          ),
+                    } $project->goal_projects,
+                ),
+            ],
+
         }
     );
 
@@ -81,6 +98,13 @@ sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
 
 sub list_GET {
     my ( $self, $c ) = @_;
+	
+	#my $rs = $c->stash->{collection};
+
+	#my $id = $c->req->params('type_id');
+	#use DDP;
+	#p $id;
+#	$rs = $rs->search( { 'goal.objective_id' => $c->req->params('type_id') });
 
     $self->status_ok(
         $c,
@@ -99,6 +123,20 @@ sub list_GET {
 							  longitude		
                               /
                         ),
+						goal => [
+                             (
+                                 map {
+                                     my $p = $_;
+                                     (
+                                         map {
+                                             { $_ => $p->{goal}->{$_} }
+                                           } qw/
+                                           name
+                                           /
+                                       ),
+                                 } @{ $r->{goal_projects} },
+                             ),
+                         ],						
                         url => $c->uri_for_action(
                             $self->action_for('result'),
                             [ $r->{id} ]

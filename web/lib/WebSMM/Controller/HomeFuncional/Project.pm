@@ -1,13 +1,12 @@
-package WebSMM::Controller::HomeFuncional;
+package WebSMM::Controller::HomeFuncional::Project;
 use Moose;
 use namespace::autoclean;
 
 BEGIN { extends 'Catalyst::Controller'; }
 
-#__PACKAGE__->config( namespace => '');
 =head1 NAME
 
-WebSMM::Controller::HomeFuncional - Catalyst Controller
+WebSMM::Controller::HomeFuncional::Project - Catalyst Controller
 
 =head1 DESCRIPTION
 
@@ -22,39 +21,46 @@ Catalyst Controller.
 
 =cut
 
-sub base :Chained('/') :PathPart('home') :CaptureArgs(0) {
+sub base :Chained('/homefuncional/base') :PathPart('project') :CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
-	$c->stash->{template_wrapper} = 'func';
 }
 
 sub object :Chained('base') :PathPart('') :CaptureArgs(1){
     my ( $self, $c, $id ) = @_;
 
     my $api = $c->model('API');
-
     $api->stash_result(
         $c,
-        [ 'goals', $id ],
-        stash => 'goal_obj'
+        [ 'projects', $id ],
+        stash => 'project_obj'
     );
 	
-
 
 }
 
 sub detail :Chained('object') :PathPart('') :Args(0){
-    my ( $self, $c ) = @_;
+    my ( $self, $c, $id ) = @_;
 }
 
-sub home :Chained('base') :PathPart('') :Args(0){
+sub index :Chained('base') :PathPart('') :Args(0){
     my ( $self, $c ) = @_;
 
     my $api = $c->model('API');
 
     $api->stash_result( $c, 'projects' );
-    $api->stash_result( $c, 'objectives' );
+}
 
+sub type :Chained('base')  :Args(0){
+    my ( $self, $c ) = @_;
+
+	my $type_id = $c->req->params('type_id');
+    my $api = $c->model('API');
+
+    $api->stash_result( 
+		$c, 'projects',
+		params => { type_id => $type_id },
+	 );
 }
 
 

@@ -176,8 +176,6 @@ sub end : ActionClass('RenderView') {
 
     if ( $c->debug && exists $ENV{DUMP_STASH} ) {
         my $x = $c->stash;
-        use DDP;
-        p $x;
     }
 }
 

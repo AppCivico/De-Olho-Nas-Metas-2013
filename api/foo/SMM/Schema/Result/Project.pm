@@ -13,10 +13,7 @@ SMM::Schema::Result::Project
 use strict;
 use warnings;
 
-use Moose;
-use MooseX::NonMoose;
-use MooseX::MarkAsMethods autoclean => 1;
-extends 'DBIx::Class::Core';
+use base 'DBIx::Class::Core';
 
 =head1 COMPONENTS LOADED
 
@@ -24,15 +21,11 @@ extends 'DBIx::Class::Core';
 
 =item * L<DBIx::Class::InflateColumn::DateTime>
 
-=item * L<DBIx::Class::TimeStamp>
-
-=item * L<DBIx::Class::PassphraseColumn>
-
 =back
 
 =cut
 
-__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
+__PACKAGE__->load_components("InflateColumn::DateTime");
 
 =head1 TABLE: C<project>
 
@@ -162,65 +155,9 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-10-06 22:57:23
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:lhB/EO0/x0vUaN7zpzeAJQ
-
-__PACKAGE__->many_to_many( goals => goal_projects => 'goal');
-
-__PACKAGE__->many_to_many( prefectures => project_prefectures => 'prefecture' );
-
-with 'SMM::Role::Verification';
-with 'SMM::Role::Verification::TransactionalActions::DBIC';
-with 'SMM::Schema::Role::ResultsetFind';
-
-use Data::Verifier;
-use MooseX::Types::Email qw/EmailAddress/;
-use SMM::Types qw /DataStr TimeStr/;
-
-sub verifiers_specs {
-    my $self = shift;
-    return {
-        update => Data::Verifier->new(
-            filters => [qw(trim)],
-            profile => {
-                name => {
-                    required => 0,
-                    type     => 'Str',
-                },
-                address => {
-                    required => 0,
-                    type     => 'Str',
-                },
-                latitude => {
-                    required => 0,
-                    type     => 'Str',
-                },
-                longitude => {
-                    required => 0,
-                    type     => 'Str',
-                },
-            }
-        ),
-    };
-}
-
-sub action_specs {
-    my $self = shift;
-    return {
-        update => sub {
-            my %values = shift->valid_values;
-
-            not defined $values{$_} and delete $values{$_} for keys %values;
-
-            my $project = $self->update( \%values );
-
-            return $project;
-        },
-
-    };
-}
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-12-07 13:48:45
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:3+zzuzLj0c9l4c2Ic4tGrA
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
-__PACKAGE__->meta->make_immutable;
 1;

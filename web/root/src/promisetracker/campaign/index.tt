@@ -7,25 +7,23 @@
 	<table class="table table-striped">
 		<thead>
 			<tr>
-                <th>Audience</th>
-                <th>Data Collectors</th>
+                <th>Title</th>
+                <th>Id</th>
+                <th>URL</th>
+                <th>Status</th>
                 <th>description</th>
-                <th>goal</th>
-                <th>meta</th>
-                <th>title</th>
 			</tr>
 		</thead>
 		<tbody>
 			[%FOREACH campaign IN campaigns%]
 				<tr>
 					<td>
-						<a href="[% c.uri_for_action('/promisetracker/campaign/detail',[campaign.id] ) %]">[%campaign.audience%]</a>
+						<a href="[% c.uri_for_action('/promisetracker/campaign/detail',[campaign.id] ) %]">[%campaign.title%]</a>
 					</td>
-					<td>[%campaign.data_collectors%]</td>
-					<td>[%campaign.goal%]</td>
+					<td>[%campaign.id%]</td>
+					<td>[%campaign.public_url%]</td>
+					<td>[%campaign.status%]</td>
 					<td>[%campaign.description%]</td>
-					<td>[%campaign.meta%]</td>
-					<td>[%campaign.title%]</td>
 				</tr>
             [%END%]
 		</tbody>

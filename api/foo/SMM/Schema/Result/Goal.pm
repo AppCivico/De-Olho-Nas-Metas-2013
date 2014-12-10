@@ -13,10 +13,7 @@ SMM::Schema::Result::Goal
 use strict;
 use warnings;
 
-use Moose;
-use MooseX::NonMoose;
-use MooseX::MarkAsMethods autoclean => 1;
-extends 'DBIx::Class::Core';
+use base 'DBIx::Class::Core';
 
 =head1 COMPONENTS LOADED
 
@@ -24,15 +21,11 @@ extends 'DBIx::Class::Core';
 
 =item * L<DBIx::Class::InflateColumn::DateTime>
 
-=item * L<DBIx::Class::TimeStamp>
-
-=item * L<DBIx::Class::PassphraseColumn>
-
 =back
 
 =cut
 
-__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
+__PACKAGE__->load_components("InflateColumn::DateTime");
 
 =head1 TABLE: C<goal>
 
@@ -442,89 +435,9 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-12-07 13:50:14
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Qf0rvcHv7bmNRgt5InuSHA
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-12-07 13:48:45
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:kfWm8r4melkkr8KGFL8mcw
 
-__PACKAGE__->many_to_many( projects => goal_projects => 'project');
-
-
-__PACKAGE__->many_to_many( secretaries => 'goal_secretaries' => 'secretary',);
-
-with 'SMM::Role::Verification';
-with 'SMM::Role::Verification::TransactionalActions::DBIC';
-with 'SMM::Schema::Role::ResultsetFind';
-
-use Data::Verifier;
-use MooseX::Types::Email qw/EmailAddress/;
-use SMM::Types qw /DataStr TimeStr/;
-
-sub verifiers_specs {
-    my $self = shift;
-    return {
-        update => Data::Verifier->new(
-            filters => [qw(trim)],
-            profile => {
-                name => {
-                    required => 0,
-                    type     => 'Str',
-                },
-                address => {
-                    required => 0,
-                    type     => 'Str',
-                },
-                postal_code => {
-                    required => 0,
-                    type     => 'Str',
-                },
-                city_id => {
-                    required => 0,
-                    type     => 'Int',
-                },
-                description => {
-                    required => 0,
-                    type     => 'Str',
-                },
-                phone => {
-                    required => 0,
-                    type     => 'Str',
-                },
-                email => {
-                    required => 0,
-                    type     => 'Str',
-                },
-                website => {
-                    required => 0,
-                    type     => 'Str',
-                },
-                complement => {
-                    required => 0,
-                    type     => 'Str',
-                },
-                number => {
-                    required => 0,
-                    type     => 'Str',
-                },
-            }
-        ),
-    };
-}
-
-sub action_specs {
-    my $self = shift;
-    return {
-        update => sub {
-            my %values = shift->valid_values;
-
-            not defined $values{$_} and delete $values{$_} for keys %values;
-
-            my $goal = $self->update( \%values );
-
-            return $goal;
-        },
-
-    };
-}
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
-__PACKAGE__->meta->make_immutable;
 1;

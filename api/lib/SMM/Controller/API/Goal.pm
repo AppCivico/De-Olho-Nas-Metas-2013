@@ -108,7 +108,6 @@ sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
 
 sub list_GET {
     my ( $self, $c ) = @_;
-    use DDP;
 
     #	p $c->stash->{collection}->as_hashref->all;
     $self->status_ok(

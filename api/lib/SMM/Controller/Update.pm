@@ -81,6 +81,7 @@ sub goal : Chained('base') Args(0) {
     my ( $self, $c ) = @_;
     my $return;
     my $res;
+	my $res_obj;
     my @prefectures;
     my @projects;
     my @secretary;
@@ -89,11 +90,21 @@ sub goal : Chained('base') Args(0) {
     use DDP;
     my $model = $c->model('API');
 
-    $c->stash->{url} .= 'goals';
-    p $c->stash->{url};
-    $res = $self->furl->get( $c->stash->{url} );
+    my $url_goal = 'goals';
+	my $url_obj  = 'objectives';
+	
+	p $c->stash->{url};
+	p $url_goal;
+    $res     = $self->furl->get( $c->stash->{url}.$url_goal );
+    $res_obj = $self->furl->get( $c->stash->{url}.$url_obj );
+	my $data_obj = decode_json $res_obj->content;
+    my $data     = decode_json $res->content;
+#	p $data_obj;
 
-    my $data = decode_json $res->content;
+	my $objectives = {};
+
+	map {  $objectives->{ $_->{id} } =  $_->{name} } @$data_obj;
+
     for my $goal (@$data) {
 		@projects = ();
 		@secretaries = ();
@@ -101,7 +112,8 @@ sub goal : Chained('base') Args(0) {
         p $c->stash->{url};
         next
           if $c->model('DB::Goal')->search( { name => $goal->{name} } )->next;
-
+		
+		
         for my $sec ( @{ $goal->{secretaries} } ) {
             my $return_sec;
             delete $sec->{created_at};
@@ -148,12 +160,16 @@ sub goal : Chained('base') Args(0) {
             delete $key->{location_type};
             delete $key->{weight_about_goal};
             delete $key->{id};
+	
             $key->{latitude}  = delete $key->{gps_lat};
             $key->{longitude} = delete $key->{gps_long};
+
+            
             my $return_proj;
             $return_proj =
               $c->model('DB::Project')->search( { name => $key->{name} } )
               ->next;
+
             $return_proj = $c->model('DB::Project')->create($key)
               unless $return_proj;
 
@@ -188,7 +204,6 @@ sub goal : Chained('base') Args(0) {
         delete $goal->{schedule_2013_2014};
         delete $goal->{axis_id};
         delete $goal->{articulation_id};
-        delete $goal->{objective_id};
         delete $goal->{status};
         delete $goal->{porcentagem};
         delete $goal->{projects};
@@ -198,6 +213,16 @@ sub goal : Chained('base') Args(0) {
         $goal->{transversality}  = delete $goal->{transversalidade};
         $goal->{description}     = delete $goal->{observation};
         $goal->{expected_budget} = delete $goal->{total_cost};
+
+		my $return_obj;
+            $return_obj =
+              $c->model('DB::Objective')->search( { name => $objectives->{ $goal->{objective_id} } } )
+              ->next;
+
+            $return_obj = $c->model('DB::Objective')->create( { name => $objectives->{ $goal->{objective_id }} })
+              unless $return_obj;
+
+		$goal->{objective_id} = $return_obj->id;	
 
         my $return_goal = $c->model('DB::Goal')->create($goal);
 

@@ -41,11 +41,12 @@ sub object :Chained('base') :PathPart('') : CaptureArgs(1){
 	    $return = $model->_do_http_req(
 			method => 'GET',
 			url    => $c->stash->{url},
+			headers => [ Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' ] ,
 		);
 	};
 
 	my $json = decode_json $return->content;
-	$c->stash->{campaign} = $json->{payload}->{campaign};
+	$c->stash->{campaign} = $json->{payload};
 }
 sub index :Chained('base') :Args(0){
     my ( $self, $c ) = @_;
@@ -59,11 +60,12 @@ sub index :Chained('base') :Args(0){
 	
 	eval{
 		$return = $model->_do_http_req(
-			method => 'GET',
-			url    => $url,
+			method  => 'GET',
+			url     => $url,
+			headers => [ Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' ] ,
 		);
 	};
-
+	
 	my $data = decode_json $return->content;
 	$c->stash->{campaigns} = $data->{payload};
 }

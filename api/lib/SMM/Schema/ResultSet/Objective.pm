@@ -1,4 +1,4 @@
-package SMM::Schema::ResultSet::Project;
+package SMM::Schema::ResultSet::Objective;
 use namespace::autoclean;
 
 use utf8;
@@ -18,21 +18,9 @@ sub verifiers_specs {
         create => Data::Verifier->new(
             filters => [qw(trim)],
             profile => {
-			    name => {
+                name => {
                     required => 1,
                     type     => 'Str',
-                },
-                address => {
-                    required => 0,
-                    type     => 'Str',
-                },
-                latitude => {
-                    required => 0,
-                    type     => 'Str',
-                },
-                longitude => {
-                    required => 0,
-                    type     => 'Int',
                 },
             }
         )
@@ -43,9 +31,9 @@ sub action_specs {
     my $self = shift;
     return {
         create => sub {
-            my %values     = shift->valid_values;
-            my $project = $self->create( \%values );
-            return $project;
+            my %values    = shift->valid_values;
+            my $objective = $self->create( \%values );
+            return $objective;
         }
     };
 }
