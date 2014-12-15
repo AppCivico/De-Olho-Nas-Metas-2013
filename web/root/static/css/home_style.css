@@ -422,6 +422,58 @@ section.statistics .chart-stats[color=green] .chart-label{
 	color: #1bbc9b;
 }
 
+.metas-detail *{
+	font-family: "PT Sans";
+	color: #474135;
+}
+.metas-detail h1{
+	font-family: "Cabin";
+	font-size: 2.2em;
+	color: #88817b;
+}
+
+.metas-detail ul{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	margin-top: 20px;
+}
+
+.metas-detail ul.list-types{
+	background-color: #8cc63f;
+	color: #ffffff;
+}
+.metas-detail ul.list-types li{
+	border-bottom: 1px solid #ffffff;
+}
+.metas-detail ul.list-types li:last-child{
+	border-bottom: none;
+}
+.metas-detail ul.list-regions{
+	background-color: #dea402;
+	color: #ffffff;
+}
+.metas-detail ul.list-projects{
+	background-color: #00a6cc;
+	color: #ffffff;
+}
+.metas-detail ul.list-organizations{
+	background-color: #795891;
+	color: #ffffff;
+}
+
+.metas-detail ul.list-regions li:before,
+.metas-detail ul.list-projects li:before,
+.metas-detail ul.list-organizations li:before{
+	content: "\009B \0020";
+}
+.metas-detail ul.list-regions .header,
+.metas-detail ul.list-projects .header,
+.metas-detail ul.list-organizations .header{
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
 footer .menu{
 	padding: 5px;
 	text-align: center;
