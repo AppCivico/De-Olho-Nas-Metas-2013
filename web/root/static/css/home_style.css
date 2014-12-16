@@ -448,6 +448,7 @@ section.statistics .chart-stats[color=green] .chart-label{
 }
 .metas-detail ul.list-types li{
 	border-bottom: 1px solid #ffffff;
+	padding: 10px;
 }
 .metas-detail ul.list-types li:last-child{
 	border-bottom: none;
@@ -466,6 +467,13 @@ section.statistics .chart-stats[color=green] .chart-label{
 .metas-detail div.list-projects,
 .metas-detail div.list-organizations{
 	margin-top: 20px;
+	padding: 10px;
+}
+
+.metas-detail div.list-regions li,
+.metas-detail div.list-projects li,
+.metas-detail div.list-organizations li{
+	padding: 10px;
 }
 
 .metas-detail ul.list-regions li:before,
@@ -473,11 +481,13 @@ section.statistics .chart-stats[color=green] .chart-label{
 .metas-detail ul.list-organizations li:before{
 	content: "\003E \0020";
 }
-.metas-detail ul.list-regions .header,
-.metas-detail ul.list-projects .header,
-.metas-detail ul.list-organizations .header{
+.metas-detail .list-regions .header,
+.metas-detail .list-projects .header,
+.metas-detail .list-organizations .header{
 	font-size: 1.2em;
 	font-weight: bold;
+	color: #ffffff;
+	text-transform: uppercase;
 }
 
 footer .menu{
