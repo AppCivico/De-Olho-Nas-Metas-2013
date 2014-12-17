@@ -10,7 +10,7 @@ __PACKAGE__->config(
     result      => 'DB::Goal',
     object_key  => 'goal',
     result_attr => {
-        prefetch => [ { 'goal_projects' => 'project' } ]
+        prefetch => [ { 'goal_projects' => 'project' }, 'objective' ]
     },
 
     update_roles => [qw/superadmin user admin webapi/],
@@ -54,6 +54,23 @@ sub result_GET {
                           ),
 
                       } $goal->goal_projects,
+
+                ),
+            },
+			objective => {
+                (
+                    map {
+
+                        my $d = $_;
+                        (
+                            map { $_ => $d->$_ }
+                              qw/
+                              id
+							  name
+                              /
+                          ),
+
+                      } $goal->objective,
 
                 ),
             },

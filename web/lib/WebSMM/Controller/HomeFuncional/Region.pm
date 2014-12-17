@@ -1,4 +1,4 @@
-package WebSMM::Controller::HomeFuncional::Goal;
+package WebSMM::Controller::HomeFuncional::Region;
 use Moose;
 use namespace::autoclean;
 
@@ -6,7 +6,7 @@ BEGIN { extends 'Catalyst::Controller'; }
 
 =head1 NAME
 
-WebSMM::Controller::HomeFuncional::Goal - Catalyst Controller
+WebSMM::Controller::HomeFuncional::Region - Catalyst Controller
 
 =head1 DESCRIPTION
 
@@ -21,7 +21,7 @@ Catalyst Controller.
 
 =cut
 
-sub base :Chained('/homefuncional/base') :PathPart('goal') :CaptureArgs(0) {
+sub base :Chained('/homefuncional/base') :PathPart('region') :CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
 }
@@ -32,12 +32,10 @@ sub object :Chained('base') :PathPart('') :CaptureArgs(1){
     my $api = $c->model('API');
     $api->stash_result(
         $c,
-        [ 'goals', $id ],
-        stash => 'goal_obj'
+        [ 'regions', $id ],
+        stash => 'region_obj'
     );
 	
-	use DDP;
-	p $c->stash->{goal_obj};	
 }
 
 sub detail :Chained('object') :PathPart('') :Args(0){
@@ -49,7 +47,7 @@ sub index :Chained('base') :PathPart('') :Args(0){
 
     my $api = $c->model('API');
 
-    $api->stash_result( $c, 'goals' );
+    $api->stash_result( $c, 'regions' );
 
 }
 

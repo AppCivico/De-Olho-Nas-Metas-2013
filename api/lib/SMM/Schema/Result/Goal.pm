@@ -186,6 +186,7 @@ __PACKAGE__->table("goal");
 =head2 objective_id
 
   data_type: 'integer'
+  is_foreign_key: 1
   is_nullable: 1
 
 =cut
@@ -254,7 +255,7 @@ __PACKAGE__->add_columns(
   "transversality",
   { data_type => "text", is_nullable => 1 },
   "objective_id",
-  { data_type => "integer", is_nullable => 1 },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -381,6 +382,26 @@ __PACKAGE__->belongs_to(
   },
 );
 
+=head2 objective
+
+Type: belongs_to
+
+Related object: L<SMM::Schema::Result::Objective>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "objective",
+  "SMM::Schema::Result::Objective",
+  { id => "objective_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
 =head2 state
 
 Type: belongs_to
@@ -442,8 +463,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-12-07 13:50:14
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Qf0rvcHv7bmNRgt5InuSHA
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-12-16 09:32:55
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Yp0xwmJsMrbhzycgCLaVrg
 
 __PACKAGE__->many_to_many( projects => goal_projects => 'project');
 

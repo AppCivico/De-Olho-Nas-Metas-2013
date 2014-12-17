@@ -71,9 +71,9 @@
 				<div class="col-sm-8">
 				
 					<div class="body">
-						<h1>Ampliar em 20 mil o número de matrículas na Educação de Jovens e Adultos e implantar 3 novos Centros Integrados (CIEJA)</h1>
+						<h1>[% goal_obj.name %]</h1>
 						<p>
-							Superar a extrema pobreza na cidade de São Paulo, elevando a renda, promovendo a inclusão produtiva e o acesso a serviços públicos para todos. Está em elaboração uma proposta de reorientação curricular que articule a educação escolar com o mundo do trabalho, da cultura e a pratica social, bem como os diferentes atendimentos oferecidos na modalidade EJA: Noturno, modular, CIEJA, CMCT e MOVA. O custo da meta apresentado refere-se à instalação dos 3 novos CIEJAs e o custo das 20 mil novas vagas no período de 1 ano.
+							[% goal_obj.description %].
 						</p>
 					</div>
 
@@ -125,9 +125,7 @@
 				</div>
 				<div class="col-sm-4">
 					<ul class="list-types">
-						<li><div class="icon lamp"></div> Tecnologia e Inovação</li>
-						<li><div class="icon medic"></div> Saúde</li>
-						<li><div class="icon globe"></div> Meio Ambiente</li>
+						<li><div class="icon lamp"></div> [% goal_obj.objective.name%]</li>
 					</ul>
 					
 					<div class="list-regions">

@@ -59,10 +59,11 @@ sub type :Chained('base')  :Args(0){
 
     my $res = $api->stash_result( 
 		$c, 'projects',
-		params => { type_id => $type_id },
+		params => { 
+			type_id => $type_id 
+		}
     );
-	use DDP;
-	p$res;
+	$c->stash->{without_wrapper} = 1;
 }
 
 

@@ -59,9 +59,9 @@ function initialize() {
       }
 	$(document).ready(function(){
 		$("#type").change(function(){
-  			alert("The text has been changed.");
-  	     	$.post("/homefuncional/project/type",{type_id: '1'},function(result){
-           		$("span").html(result);
+			var id = $( "#type option:selected" ).val();
+  	     	$.get("/home/project/type",{type_id: id}).done( function(data){
+				document.getElementById("result").innerHTML=data
          	});
 		});
 	});
@@ -74,7 +74,7 @@ function initialize() {
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-				<a href="#home" class="navbar-brand"><img src="/static/images/logo-header.png"></a>
+				<a href="/home" class="navbar-brand"><img src="/static/images/logo-header.png"></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-main-collapse">

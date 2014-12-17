@@ -12,7 +12,9 @@ __PACKAGE__->config(
     search_ok => {
         id => 'Int'
     },
-
+    #result_attr => {
+    #    prefetch => [ 'goals' ]
+    #},
     update_roles => [qw/superadmin user admin webapi organization/],
     create_roles => [qw/superadmin admin webapi/],
     delete_roles => [qw/superadmin admin webapi/],
@@ -79,12 +81,22 @@ sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
 sub list_GET {
     my ( $self, $c ) = @_;
 
+	my $rs = $c->stash->{collection};
+	my $lol = $c->stash->{collection};
+	use DDP;
+	p$lol;
+	my $teste = $lol->search( {}, { join => 'goals', select => [qw/me.id me.name/], 'as' => [ 'id', 'name' ], group_by =>  [ 'me.id','me.name' ]});	
+	use DDP;
+	p $teste;
+
     $self->status_ok(
         $c,
         entity => {
             objectives => [
                 map {
                     my $r = $_;
+					use DDP;
+					p $r;
                     +{
                         (
                             map { $_ => $r->{$_} }
@@ -98,7 +110,7 @@ sub list_GET {
                             [ $r->{id} ]
                         )->as_string
                       }
-                } $c->stash->{collection}->as_hashref->all
+                } $rs->as_hashref->all
             ]
         }
     );

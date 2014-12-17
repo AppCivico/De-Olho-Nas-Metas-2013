@@ -1,4 +1,4 @@
-package SMM::Controller::API::Project;
+package SMM::Controller::API::Region;
 
 use Moose;
 
@@ -7,13 +7,10 @@ BEGIN { extends 'Catalyst::Controller::REST' }
 __PACKAGE__->config(
     default => 'application/json',
 
-    result      => 'DB::Project',
-    object_key  => 'project',
+    result      => 'DB::Region',
+    object_key  => 'region',
     search_ok => {
         id => 'Int'
-    },
-    result_attr => {
-        prefetch => [ { 'goal_projects' => 'goal' } ]
     },
     update_roles => [qw/superadmin user admin webapi organization/],
     create_roles => [qw/superadmin admin webapi/],
@@ -21,7 +18,7 @@ __PACKAGE__->config(
 );
 with 'SMM::TraitFor::Controller::DefaultCRUD';
 
-sub base : Chained('/api/base') : PathPart('projects') : CaptureArgs(0) { }
+sub base : Chained('/api/base') : PathPart('regions') : CaptureArgs(0) { }
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
 
@@ -31,14 +28,14 @@ sub result : Chained('object') : PathPart('') : Args(0) :
 sub result_GET {
     my ( $self, $c ) = @_;
 
-    my $project = $c->stash->{project};
+    my $region = $c->stash->{region};
 	use DDP;
 	
     $self->status_ok(
         $c,
         entity => {
             (
-                map { $_ => $project->$_, }
+                map { $_ => $region->$_, }
                   qw/
                   name
                   address
@@ -57,7 +54,7 @@ sub result_GET {
                               name
                               /
                           ),
-                    } $project->goal_projects,
+                    } $region->goal_regions,
                 ),
             ],
 
@@ -68,9 +65,9 @@ sub result_GET {
 
 sub result_DELETE {
     my ( $self, $c ) = @_;
-    my $project = $c->stash->{organization};
+    my $region = $c->stash->{organization};
 
-    $project->delete;
+    $region->delete;
 
     $self->status_no_content($c);
 }
@@ -79,19 +76,19 @@ sub result_PUT {
     my ( $self, $c ) = @_;
 
     my $params       = { %{ $c->req->params } };
-    my $project = $c->stash->{organization};
+    my $region = $c->stash->{organization};
 
-    $project->execute( $c, for => 'update', with => $c->req->params );
+    $region->execute( $c, for => 'update', with => $c->req->params );
 
     $self->status_accepted(
         $c,
         location =>
-          $c->uri_for( $self->action_for('result'), [ $project->id ] )
+          $c->uri_for( $self->action_for('result'), [ $region->id ] )
           ->as_string,
-        entity => { id => $project->id }
+        entity => { id => $region->id }
       ),
       $c->detach
-      if $project;
+      if $region;
 }
 
 sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
@@ -99,17 +96,11 @@ sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
 sub list_GET {
     my ( $self, $c ) = @_;
 	my $rs = $c->stash->{collection};
-	if ( $c->req->param('type_id')) {
-		$c->detach unless $c->req->param('type_id') =~ /^\d$/;
-
-		$rs = $rs->search( { 'goal.objective_id' => $c->req->param('type_id') });
-
-	}
 
     $self->status_ok(
         $c,
         entity => {
-            projects => [
+            regions => [
                 map {
                     my $r = $_;
                     +{
@@ -118,29 +109,10 @@ sub list_GET {
                               qw/
                               id
                               name
-                              address
 						      latitude
 							  longitude		
                               /
                         ),
-						goal => [
-                             (
-                                 map {
-                                     my $p = $_;
-                                     (
-                                         map {
-                                             { $_ => $p->{goal}->{$_} }
-                                           } qw/
-                                           name
-                                           /
-                                       ),
-                                 } @{ $r->{goal_projects} },
-                             ),
-                         ],						
-                        url => $c->uri_for_action(
-                            $self->action_for('result'),
-                            [ $r->{id} ]
-                        )->as_string
                       }
                 } $rs->as_hashref->all
             ]
@@ -151,16 +123,16 @@ sub list_GET {
 sub list_POST {
     my ( $self, $c ) = @_;
 
-    my $project = $c->stash->{collection}
+    my $region = $c->stash->{collection}
       ->execute( $c, for => 'create', with => $c->req->params );
 
     $self->status_created(
         $c,
         location =>
-          $c->uri_for( $self->action_for('result'), [ $project->id ] )
+          $c->uri_for( $self->action_for('result'), [ $region->id ] )
           ->as_string,
         entity => {
-            id => $project->id
+            id => $region->id
         }
     );
 }
@@ -168,15 +140,15 @@ sub list_POST {
 sub complete : Chained('base') : PathPart('complete') : Args(0) {
     my ( $self, $c ) = @_;
 
-    my $project;
+    my $region;
 
     $c->model('DB')->txn_do(
         sub {
-            $project = $c->stash->{collection}->execute( $c, for => 'create', with => $c->req->params );
+            $region = $c->stash->{collection}->execute( $c, for => 'create', with => $c->req->params );
 
             $c->req->params->{active}          = 1;
-            $c->req->params->{role}            = 'project';
-            $c->req->params->{project_id} = $project->id;
+            $c->req->params->{role}            = 'region';
+            $c->req->params->{region_id} = $region->id;
 
             my $user = $c->model('DB::User')
               ->execute( $c, for => 'create', with => $c->req->params );
@@ -186,10 +158,10 @@ sub complete : Chained('base') : PathPart('complete') : Args(0) {
     $self->status_created(
         $c,
         location =>
-          $c->uri_for( $self->action_for('result'), [ $project->id ] )
+          $c->uri_for( $self->action_for('result'), [ $region->id ] )
           ->as_string,
         entity => {
-            id => $project->id
+            id => $region->id
         }
     );
 
