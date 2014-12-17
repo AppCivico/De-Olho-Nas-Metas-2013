@@ -498,6 +498,39 @@ section.statistics .chart-stats[color=green] .chart-label{
 	text-transform: uppercase;
 }
 
+.list-types .icon {
+	width: 35px;
+	height: 35px;
+	background-image: url("/static/images/icons-map.png");
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	float: left;
+	margin-top: -0.5em;
+	margin-right: 5px;
+}
+
+.list-types .icon.home{
+	background-position: 0 0;
+}
+.list-types .icon.transport{
+	background-position: -210px 0;
+}
+.list-types .icon.lamp{
+	background-position: -35px 0;
+}
+.list-types .item .icon.medic{
+	background-position: -70px 0;
+}
+.list-types .icon.paint{
+	background-position: -105px 0;
+}
+.list-types .icon.globe{
+	background-position: -140px 0;
+}
+.list-types .icon.balloon{
+	background-position: -175px 0;
+}
+
 .comments .item .thumb {
 	display: inline-block;
 }
