@@ -469,6 +469,7 @@ section.statistics .chart-stats[color=green] .chart-label{
 }
 .metas-detail div.list-organizations{
 	background-color: #795891;
+	margin-bottom: 20px;
 }
 
 .metas-detail div.list-regions,
@@ -549,6 +550,10 @@ section.statistics .chart-stats[color=green] .chart-label{
 	width: 60px;
 	height: 60px;
 	border-radius: 0px;
+}
+.comments .item.reply{
+	margin-left: 4em;
+	margin-top: 0.5em;
 }
 
 footer .menu{
