@@ -363,6 +363,14 @@ section.metas-result .item .contents{
 	padding: 15px 30px;
 	color: #88817b;
 }
+
+section.metas-result .item .contents a,
+section.metas-result .item .contents a:visited{
+	color: #666056;
+}
+section.metas-result .item .contents a:hover{
+	color: #ffcc66;
+}
 section.metas-result .item .image{
 }
 section.metas-result .item .contents .description h2{
@@ -448,6 +456,7 @@ section.statistics .chart-stats[color=green] .chart-label{
 }
 .metas-detail ul.list-types li{
 	border-bottom: 1px solid #ffffff;
+	padding: 10px;
 }
 .metas-detail ul.list-types li:last-child{
 	border-bottom: none;
@@ -460,12 +469,20 @@ section.statistics .chart-stats[color=green] .chart-label{
 }
 .metas-detail div.list-organizations{
 	background-color: #795891;
+	margin-bottom: 20px;
 }
 
 .metas-detail div.list-regions,
 .metas-detail div.list-projects,
 .metas-detail div.list-organizations{
 	margin-top: 20px;
+	padding: 10px;
+}
+
+.metas-detail div.list-regions li,
+.metas-detail div.list-projects li,
+.metas-detail div.list-organizations li{
+	padding: 10px;
 }
 
 .metas-detail ul.list-regions li:before,
@@ -473,11 +490,70 @@ section.statistics .chart-stats[color=green] .chart-label{
 .metas-detail ul.list-organizations li:before{
 	content: "\003E \0020";
 }
-.metas-detail ul.list-regions .header,
-.metas-detail ul.list-projects .header,
-.metas-detail ul.list-organizations .header{
+.metas-detail .list-regions .header,
+.metas-detail .list-projects .header,
+.metas-detail .list-organizations .header{
 	font-size: 1.2em;
 	font-weight: bold;
+	color: #ffffff;
+	text-transform: uppercase;
+}
+
+.list-types .icon {
+	width: 35px;
+	height: 35px;
+	background-image: url("/static/images/icons-map.png");
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	float: left;
+	margin-top: -0.5em;
+	margin-right: 5px;
+}
+
+.list-types .icon.home{
+	background-position: 0 0;
+}
+.list-types .icon.transport{
+	background-position: -210px 0;
+}
+.list-types .icon.lamp{
+	background-position: -35px 0;
+}
+.list-types .item .icon.medic{
+	background-position: -70px 0;
+}
+.list-types .icon.paint{
+	background-position: -105px 0;
+}
+.list-types .icon.globe{
+	background-position: -140px 0;
+}
+.list-types .icon.balloon{
+	background-position: -175px 0;
+}
+
+.comments .item .thumb {
+	display: inline-block;
+}
+.comments .item .body {
+	display: inline-block;
+}
+.comments .btn-reply{
+	background-color: #42210b;
+	color: #fff;
+	border-radius: 0px;
+}
+.comments .btn-reply:hover{
+	background-color: #703e1c;
+}
+.comments img.thumbnail {
+	width: 60px;
+	height: 60px;
+	border-radius: 0px;
+}
+.comments .item.reply{
+	margin-left: 4em;
+	margin-top: 0.5em;
 }
 
 footer .menu{

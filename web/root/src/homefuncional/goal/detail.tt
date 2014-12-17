@@ -88,22 +88,22 @@
 
 					<div class="comments">
 						<h3>03 Comentários</h3>
-						<div class="item">
-							<div class="thumb">
+						<div class="item row">
+							<div class="thumb col-xs-1 nopadding">
 								<img src="" class="thumbnail">
 							</div>
-							<div class="body">
+							<div class="body col-xs-11">
 								<p class="autor">Nome da pessoa</p>
 								<p class="date">em 00/00/0000</p>
 								<p>Carrot cake topping gummi bears tootsie roll tart cupcake. Marshmallow jelly jujubes candy. Bear claw sugar plum applicake sugar plum. Bear claw candy canes powder donut cookie pastry tiramisu. Pudding jelly-o chocolate croissant sesame snaps. Pudding pudding chocolate cake wafer gingerbread gummies.</p>
 								<button class="btn btn-reply">Responder</button>
 							</div>
 						</div>
-						<div class="item reply">
-							<div class="thumb">
+						<div class="item reply row">
+							<div class="thumb col-xs-1">
 								<img src="" class="thumbnail">
 							</div>
-							<div class="body">
+							<div class="body col-xs-11">
 								<p class="autor">Nome da pessoa</p>
 								<p class="date">em 00/00/0000</p>
 								<p>Carrot cake topping gummi bears tootsie roll tart cupcake. Marshmallow jelly jujubes candy. Bear claw sugar plum applicake sugar plum. Bear claw candy canes powder donut cookie pastry tiramisu. Pudding jelly-o chocolate croissant sesame snaps. Pudding pudding chocolate cake wafer gingerbread gummies.</p>
