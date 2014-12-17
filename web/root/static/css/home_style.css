@@ -363,6 +363,14 @@ section.metas-result .item .contents{
 	padding: 15px 30px;
 	color: #88817b;
 }
+
+section.metas-result .item .contents a,
+section.metas-result .item .contents a:visited{
+	color: #666056;
+}
+section.metas-result .item .contents a:hover{
+	color: #ffcc66;
+}
 section.metas-result .item .image{
 }
 section.metas-result .item .contents .description h2{
@@ -488,6 +496,26 @@ section.statistics .chart-stats[color=green] .chart-label{
 	font-weight: bold;
 	color: #ffffff;
 	text-transform: uppercase;
+}
+
+.comments .item .thumb {
+	display: inline-block;
+}
+.comments .item .body {
+	display: inline-block;
+}
+.comments .btn-reply{
+	background-color: #42210b;
+	color: #fff;
+	border-radius: 0px;
+}
+.comments .btn-reply:hover{
+	background-color: #703e1c;
+}
+.comments img.thumbnail {
+	width: 60px;
+	height: 60px;
+	border-radius: 0px;
 }
 
 footer .menu{
