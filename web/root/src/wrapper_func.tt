@@ -68,7 +68,7 @@ $(document).ready(function(){
 			zoom: 8,
 		};
    	    var map = new google.maps.Map(document.getElementById("listprojects"),mapOptions);
-		$.getJSON('/home/project_map_list', { id : [% goal_obj.id ? goal_obj.id : 0 %] },function(data,status){
+		$.getJSON('/home/project_map_list', { id : [%goal_obj.id ? goal_obj.id : 0 %] },function(data,status){
 			var json = data;
 			$.each(json, function(i, pj){
 				marker = "";

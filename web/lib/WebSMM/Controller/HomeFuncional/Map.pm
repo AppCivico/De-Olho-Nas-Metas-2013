@@ -37,7 +37,7 @@ sub project_map_list_GET{
     my $api = $c->model('API');
 	my $id;
 
-	if ($c->req->param('id') =~ /^\d$/){
+	if ($c->req->param('id') =~ /^\d+$/){
        $id = $c->req->param('id');
 	}else{
 		$c->detach;
