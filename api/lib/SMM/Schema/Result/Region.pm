@@ -101,9 +101,26 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key("id");
 
+=head1 RELATIONS
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-12-16 09:32:55
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:LSUurwAh/2LYzm6eGzBViA
+=head2 project_regions
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::ProjectRegion>
+
+=cut
+
+__PACKAGE__->has_many(
+  "project_regions",
+  "SMM::Schema::Result::ProjectRegion",
+  { "foreign.region_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-12-17 20:17:58
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:5bJp71NsnvVFOdYEFI1bSg
 
 
 with 'SMM::Role::Verification';

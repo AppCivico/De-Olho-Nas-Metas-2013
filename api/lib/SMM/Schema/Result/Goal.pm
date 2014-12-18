@@ -332,6 +332,21 @@ __PACKAGE__->belongs_to(
   },
 );
 
+=head2 goal_comments
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::GoalComment>
+
+=cut
+
+__PACKAGE__->has_many(
+  "goal_comments",
+  "SMM::Schema::Result::GoalComment",
+  { "foreign.goal_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 goal_projects
 
 Type: has_many
@@ -463,8 +478,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-12-16 09:32:55
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Yp0xwmJsMrbhzycgCLaVrg
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-12-17 12:24:23
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:YFek0dov8TEZOIqNMyOXsQ
 
 __PACKAGE__->many_to_many( projects => goal_projects => 'project');
 

@@ -232,6 +232,15 @@ footer .logo-footer{
 	background-position: center center;
 }
 
+#listprojects{
+	width: 100%;
+	height: 300px;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-position: center center;
+}
+
+
 section.map{
 	background-color: #f0eee4;
 }

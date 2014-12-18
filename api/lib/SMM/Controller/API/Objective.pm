@@ -83,11 +83,7 @@ sub list_GET {
 
 	my $rs = $c->stash->{collection};
 	my $lol = $c->stash->{collection};
-	use DDP;
-	p$lol;
 	my $teste = $lol->search( {}, { join => 'goals', select => [qw/me.id me.name/], 'as' => [ 'id', 'name' ], group_by =>  [ 'me.id','me.name' ]});	
-	use DDP;
-	p $teste;
 
     $self->status_ok(
         $c,
@@ -95,8 +91,6 @@ sub list_GET {
             objectives => [
                 map {
                     my $r = $_;
-					use DDP;
-					p $r;
                     +{
                         (
                             map { $_ => $r->{$_} }

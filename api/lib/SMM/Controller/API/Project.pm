@@ -105,7 +105,10 @@ sub list_GET {
 		$rs = $rs->search( { 'goal.objective_id' => $c->req->param('type_id') });
 
 	}
-
+	if ($c->req->param('goal_id')) {
+		
+		$rs = $rs->search( { 'goal.id' => $c->req->param('goal_id') });
+	}
     $self->status_ok(
         $c,
         entity => {
@@ -118,7 +121,6 @@ sub list_GET {
                               qw/
                               id
                               name
-                              address
 						      latitude
 							  longitude		
                               /

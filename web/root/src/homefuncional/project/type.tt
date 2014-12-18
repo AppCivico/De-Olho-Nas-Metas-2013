@@ -9,9 +9,7 @@
 								<a href="[% c.uri_for_action('/homefuncional/project/detail',[project.id] ) %]">[%project.name%]</a>
 							</h2>
 							<div class="stats">
-								<div class="icon regions"></div> <span class="regions">Regiões</span>
-								<div class="icon projects"></div> <span class="projects">[% project.goal.size %] Metas</span>
-								<div class="icon organizations"></div> <span class="organizations">Organizações</span>
+								<div class="icon projects"></div> <span class="projects">Meta: [% FOREACH goal IN project.goal %][% goal.name %][%END%]</span>
 							</div>
 						</div>
 					</div>

@@ -57,7 +57,35 @@ function initialize() {
 			});
 		});
       }
-	$(document).ready(function(){
+	
+	
+$(document).ready(function(){
+ 		if (document.getElementById("listprojects")){ 
+		var marker;
+	
+		var mapOptions = {
+			center: new google.maps.LatLng(-23.549035, -46.634438),
+			zoom: 8,
+		};
+   	    var map = new google.maps.Map(document.getElementById("listprojects"),mapOptions);
+		$.getJSON('/home/project_map_list', { id : [% goal_obj.id ? goal_obj.id : 0 %] },function(data,status){
+			var json = data;
+			$.each(json, function(i, pj){
+				marker = "";
+				var myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
+				marker = new google.maps.Marker({
+    	            position: myLatlng,
+	                map: map,
+					title: pj.name,
+					url : "/home/project/"+pj.id
+        	    });
+
+				google.maps.event.addListener(marker, 'click', function() {
+        			window.location.href = marker.url;
+    			});
+			});
+		});
+		}
 		$("#type").change(function(){
 			var id = $( "#type option:selected" ).val();
   	     	$.get("/home/project/type",{type_id: id}).done( function(data){
@@ -65,6 +93,7 @@ function initialize() {
          	});
 		});
 	});
+
 </script> 
 <body onload="initialize()" id="page-top" data-spy="scroll" data-target=".navbar-custom">
 

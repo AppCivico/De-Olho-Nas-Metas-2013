@@ -80,6 +80,22 @@ sub result_GET {
                         my $p = $_;
                         (
                             map {
+                                { $_ =>  $p->project->$_  }
+                              } qw/
+                              name
+							  latitude
+							  longitude
+                              /
+                          ),
+                    } $goal->goal_projects,
+                ),
+            ],
+			project_qt => [
+                (
+                    map {
+                        my $p = $_;
+                        (
+                            map {
                                 { $_ => $p->project->$_ }
                               } qw/
                               name
@@ -88,7 +104,6 @@ sub result_GET {
                     } $goal->goal_projects,
                 ),
             ],
-
         }
     );
 

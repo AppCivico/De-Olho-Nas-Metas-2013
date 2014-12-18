@@ -161,9 +161,24 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 project_regions
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-10-06 22:57:23
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:lhB/EO0/x0vUaN7zpzeAJQ
+Type: has_many
+
+Related object: L<SMM::Schema::Result::ProjectRegion>
+
+=cut
+
+__PACKAGE__->has_many(
+  "project_regions",
+  "SMM::Schema::Result::ProjectRegion",
+  { "foreign.project_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-12-17 20:17:58
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:KX9M7ySNlobHCK4Vc9ohlQ
 
 __PACKAGE__->many_to_many( goals => goal_projects => 'goal');
 

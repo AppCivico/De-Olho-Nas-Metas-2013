@@ -56,7 +56,6 @@ sub home :Chained('base') :PathPart('') :Args(0){
     $api->stash_result( $c, 'objectives' );
     $api->stash_result( $c, 'regions' );
 
-	use DDP; p $c->stash->{regions};
 }
 
 

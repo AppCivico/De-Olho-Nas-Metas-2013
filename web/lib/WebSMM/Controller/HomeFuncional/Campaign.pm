@@ -21,7 +21,7 @@ Catalyst Controller.
 
 =cut
 
-sub base :Chained('/homefuncional/base') :PathPart('goal') :CaptureArgs(0) {
+sub base :Chained('/homefuncional/base') :PathPart('campaign') :CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
 }

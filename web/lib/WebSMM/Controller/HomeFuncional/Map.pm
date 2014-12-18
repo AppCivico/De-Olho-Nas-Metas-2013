@@ -28,6 +28,27 @@ sub base :Chained('/homefuncional/base') :PathPart('') :CaptureArgs(0) {
 
 }
 
+
+sub project_map_list :Chained('base') :Args(0) :ActionClass('REST'){}
+
+sub project_map_list_GET{
+    my ( $self, $c ) = @_;
+
+    my $api = $c->model('API');
+	my $id;
+
+	if ($c->req->param('id') =~ /^\d$/){
+       $id = $c->req->param('id');
+	}else{
+		$c->detach;
+	} 
+    $api->stash_result( $c, 'projects',
+		params => { goal_id => $id },
+	 );
+
+	$self->status_ok( $c, entity => $c->stash->{projects} );
+	
+}
 sub project_map :Chained('base') :Args(0) :ActionClass('REST') {}
 
 sub project_map_GET {

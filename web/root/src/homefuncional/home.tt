@@ -84,7 +84,7 @@
 							</h2>
 							<div class="stats">
 								<div class="icon regions"></div> <span class="regions">Regiões</span>
-								<div class="icon projects"></div> <span class="projects">[% project.goal.size %] Metas</span>
+								<div class="icon projects"></div> <span class="projects">[% project.goal.name %] </span>
 								<div class="icon organizations"></div> <span class="organizations">Organizações</span>
 							</div>
 						</div>
@@ -96,7 +96,7 @@
 		</div>
     </section>
 	
-    <section class="statistics">
+<!--    <section class="statistics">
 		<div class="container">
 		
 			<h2 class="section-title">Estatísticas de Metas e Projetos</h2>
@@ -117,3 +117,4 @@
 			</div>
 		</div>
     </section>
+-->

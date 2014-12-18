@@ -35,13 +35,15 @@ sub object :Chained('base') :PathPart('') :CaptureArgs(1){
         [ 'goals', $id ],
         stash => 'goal_obj'
     );
-	
-	use DDP;
-	p $c->stash->{goal_obj};	
+
 }
 
 sub detail :Chained('object') :PathPart('') :Args(0){
     my ( $self, $c, $id ) = @_;
+    my $api = $c->model('API');
+
+    $api->stash_result( $c, 'regions' );
+    $api->stash_result( $c, 'objectives' );
 }
 
 sub index :Chained('base') :PathPart('') :Args(0){
@@ -50,6 +52,7 @@ sub index :Chained('base') :PathPart('') :Args(0){
     my $api = $c->model('API');
 
     $api->stash_result( $c, 'goals' );
+    $api->stash_result( $c, 'objectives' );
 
 }
 

@@ -38,6 +38,9 @@ sub after_login {
     elsif ( grep { /^admin|management$/ } $c->user->roles ) {
         $url = '/admin/dashboard/index';
     }
+    elsif ( grep { /^counsil$/ } $c->user->roles ) {
+        $url = '/counsil/dashboard/index';
+    }
 
     if (   $c->req->params->{redirect_to}
         && $c->req->params->{redirect_to} =~ /^\// )
