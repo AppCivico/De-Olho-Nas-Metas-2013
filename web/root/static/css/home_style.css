@@ -463,6 +463,11 @@ section.statistics .chart-stats[color=green] .chart-label{
 	background-color: #8cc63f;
 	margin-top: 20px;
 }
+
+.metas-detail ul.list-types.project{
+	background-color: #88817b;
+}
+
 .metas-detail ul.list-types li{
 	border-bottom: 1px solid #ffffff;
 	padding: 10px;
