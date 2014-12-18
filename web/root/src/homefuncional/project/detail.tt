@@ -76,6 +76,16 @@
 							[% project_obj.description %].
 						</p>
 					</div>
+
+					<div class="timeline">
+					</div>
+
+					<div class="indicators">
+					</div>
+
+					<div class="image-gallery">
+					</div>
+
 					<div class="comments">
 						<h3>03 Comentários</h3>
 						<div class="item row">
