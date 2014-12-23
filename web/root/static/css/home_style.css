@@ -54,7 +54,16 @@ h2{
 .btn-reply:hover{
 	background-color: #703e1c;
 }
-.
+.btn-white{
+	background-color: #ffffff;
+	border-color: #88817b;
+	color: #88817b;
+}
+.btn-white:hover{
+	background-color: #f0f0f0;
+	border-color: #333;
+	color: #333;
+}
 .menu-social li a{
 	float: left;
 	text-indent: -999em;
@@ -454,36 +463,41 @@ section.metas-result{
 	background-color: #f0eee4;
 }
 
-section.metas-result .item{
+section.metas-result .item,
+section.metas-detail .item{
 	background-color: #fff;
 	font-weight: bold;
 	margin: 15px 0;
 }
 
-section.metas-result .item h2{
+section.metas-result .item h2,
+section.metas-detail .item h2{
 	margin: 0;
 	padding-bottom: 5px;
 }
-section.metas-result .item .contents{
+section.metas-result .item .contents,
+section.metas-detail .item .contents{
 	padding: 15px 30px;
 	color: #88817b;
 }
 
 section.metas-result .item .contents a,
-section.metas-result .item .contents a:visited{
+section.metas-result .item .contents a:visited,
+section.metas-detail .item .contents a,
+section.metas-detail .item .contents a:visited{
 	color: #666056;
 }
-section.metas-result .item .contents a:hover{
+section.metas-result .item .contents a:hover,
+section.metas-detail .item .contents a:hover{
 	color: #ffcc66;
 }
-section.metas-result .item .image{
-}
-section.metas-result .item .contents .description h2{
+section.metas-result .item .contents .description h2,
+section.metas-detail .item .contents .description h2{
 	font-size: 2em;
 	text-transform: inherit;
 }
-
-section.metas-result .item .stats{
+section.metas-result .item .stats,
+section.metas-detail .item .stats{
 	margin-top: 10px;
 }
 section.metas-result .item .stats .icon{
@@ -505,7 +519,13 @@ section.metas-result .item .stats .icon.organizations{
 	background-position: -44px 0px;
 	margin-left: 20px;
 }
-
+section.metas-detail .item .stats .icon,
+section.metas-detail .item .stats button{
+	margin-left: 20px;
+}
+section.metas-detail .item{
+		border-bottom: 1px dotted #c6c2c0;
+}
 
 section.statistics .container{
 	padding-top: 50px;
@@ -555,6 +575,9 @@ section.search-list{
 	color: #88817b;
 }
 
+.metas-detail h3:first-child{
+	margin-top: 20px;
+}
 .metas-detail ul{
 	padding: 0;
 	margin: 0;
@@ -600,6 +623,9 @@ section.search-list{
 	background-color: #795891;
 	margin-bottom: 20px;
 }
+.metas-detail div.list-brown{
+	background-color: #d6cab5;
+}
 
 .metas-detail div.list-regions,
 .metas-detail div.list-projects,
@@ -617,6 +643,12 @@ div.list-box ul li a:hover{
 	color: #ccc;
 }
 
+
+div.list-brown ul li a,
+div.list-brown ul li a:visited,
+div.list-brown ul li{
+	color: #42210b;
+}
 .metas-detail div.list-regions li,
 .metas-detail div.list-projects li,
 .metas-detail div.list-organizations li,
@@ -856,7 +888,7 @@ div.icon.gps2{
 div.icon.circles2{
 	background-position: -154px 0px;
 }
-div.icon.alert{
+div.icon.bell{
 	background-position: -176px 0px;
 }
 div.icon.clone{
@@ -867,6 +899,9 @@ div.icon.chat{
 }
 div.icon.chat2{
 	background-position: -242px 0px;
+}
+div.icon.eye{
+	background-position: -264px 0px;
 }
 div.followers{
 	margin-top: 30px;
@@ -956,6 +991,10 @@ div.followers{
 	margin: 0;
 }
 
+h3.dotted{
+	border-bottom: 1px dotted #c6c2c0;
+}
+
 .enquete-list,
 .form-list{
 	margin-bottom: 20px;
@@ -996,4 +1035,80 @@ div.followers{
 .enquete-detail .form-number{
 	color: #face53;
 	font-weight: bold;
+}
+table.dataTable{
+	border-collapse: collapse;
+}
+table.dataTable thead{
+	border: 5px solid #8cc63f;
+}
+table.dataTable tbody{
+	border: 5px solid #ffffff;
+}
+table.dataTable thead th{
+	background-color: #dea402;
+	color: #fff;
+	text-transform: uppercase;
+	border-bottom: none;
+}
+table.dataTable.no-footer{
+	border-bottom: none;
+}
+.dataTables.yellow thead th{
+	background-color: #face53;
+}
+.dataTables.gold thead th{
+	background-color: #dea402;
+}
+.dataTables.blue thead th{
+	background-color: #29abe2;
+}
+.dataTables.violet thead th{
+	background-color: #795891;
+}
+.dataTables.green thead th{
+	background-color: #8cc63f;
+}
+table.dataTable.blue thead{
+	border-color: #29abe2;
+}
+table.dataTable.violet thead{
+	border-color: #795891;
+}
+table.dataTable.green thead{
+	border-color: #8cc63f;
+}
+table.dataTable.yellow thead{
+	border-color: #face53;
+}
+table.dataTable.gold thead{
+	border-color: #dea402;
+}
+
+.dataTables tbody tr.even td{
+	background-color: #e7e6e5;
+}
+
+.notification-list .item,
+.activity-list .item{
+	padding-bottom: 10px;
+	clear: both;
+}
+.activity-list .date{
+	color: #face53;
+	font-weight: bold;
+}
+
+.profile-box{
+	border: 1px solid #e2dacb;
+	padding: 10px;
+	margin-top: 20px;
+}
+.profile-box img{
+	display: inline;
+}
+.profile-box .name{
+	color: #42210b;
+	font-weight: bold;
+	padding: 10px;
 }
