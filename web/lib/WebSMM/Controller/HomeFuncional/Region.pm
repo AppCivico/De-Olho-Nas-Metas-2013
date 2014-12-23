@@ -33,7 +33,7 @@ sub object :Chained('base') :PathPart('') :CaptureArgs(1){
     $api->stash_result(
         $c,
         [ 'regions', $id ],
-        stash => 'region_obj'
+        stash => 'region_obj',
     );
 	
 }
@@ -47,7 +47,12 @@ sub index :Chained('base') :PathPart('') :Args(0){
 
     my $api = $c->model('API');
 
-    $api->stash_result( $c, 'regions' );
+    $api->stash_result( 
+		$c, 'regions',
+		params => {
+			order => 'me.name',
+		},
+	 );
 
 }
 

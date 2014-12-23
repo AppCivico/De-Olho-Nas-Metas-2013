@@ -10,7 +10,8 @@ __PACKAGE__->config(
     result      => 'DB::Region',
     object_key  => 'region',
     search_ok => {
-        id => 'Int'
+        id 	  => 'Int',
+		order => 'Str'
     },
     update_roles => [qw/superadmin user admin webapi organization/],
     create_roles => [qw/superadmin admin webapi/],
@@ -29,7 +30,6 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $region = $c->stash->{region};
-	use DDP;
 	
     $self->status_ok(
         $c,

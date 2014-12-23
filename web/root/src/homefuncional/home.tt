@@ -50,7 +50,7 @@
 						<div class="col-xs-6 region">
 							Filtrar metas por<br />
 							<select>
-								[% FOREACH region IN regions%]
+								[% FOREACH region IN regions.sort%]
 									<option>[% region.name %]</option>
 								[% END %]
 							</select>
