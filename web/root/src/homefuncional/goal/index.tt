@@ -47,9 +47,9 @@
 					<div class="row">
 						<div class="col-xs-6 region">
 							FILTRAR EMPRESAS POR<br />
-							<select>
+							<div class="select-stylized"><select>
 								<option>Metas
-							</select>
+							</select></div>
 						</div>
 					</div>
 				</div>
