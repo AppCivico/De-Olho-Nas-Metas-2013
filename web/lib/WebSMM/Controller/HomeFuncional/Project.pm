@@ -71,7 +71,7 @@ sub region :Chained('base')  :Args(0){
 
 	$c->detach unless $c->req->param('region_id');
 	$c->detach unless $c->req->param('region_id') =~ /^\d+$/;
-
+	
 	my $region_id = $c->req->param('region_id');
     my $api = $c->model('API');
 
@@ -82,6 +82,30 @@ sub region :Chained('base')  :Args(0){
 		}
     );
 	$c->stash->{without_wrapper} = 1;
+}
+
+sub region_by_cep :Chained('base') :Args(0) {
+    my ( $self, $c ) = @_;
+
+	$c->detach unless $c->req->param('latitude');
+	$c->detach unless $c->req->param('longitude');
+	
+	$c->detach unless $c->req->param('latitude')  =~ qr/^(\-?\d+(\.\d+)?)$/;
+	$c->detach unless $c->req->param('longitude') =~ qr/^(\-?\d+(\.\d+)?)$/;
+
+	my $lnglat = join (q/ /,$c->req->param('longitude'),$c->req->param('latitude'));
+	use DDP;
+	p $lnglat;
+    my $api = $c->model('API');
+
+    my $res = $api->stash_result( 
+		$c, 'projects',
+		params => { 
+			lnglat => $lnglat 
+		}
+    );
+	$c->stash->{without_wrapper} = 1;
+
 }
 
 =encoding utf8

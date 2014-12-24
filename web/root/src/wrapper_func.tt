@@ -37,17 +37,44 @@
 
 <script type="text/javascript">
 var geocoder;
+var marker;
+	function carregarNoMapa(endereco) {
+        geocoder.geocode({ 'address': endereco + ', Brasil', 'region': 'BR' }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
+                    var latitude = results[0].geometry.location.lat();
+                    var longitude = results[0].geometry.location.lng();
+ 
+                    $('#txtaddress').val(results[0].formatted_address);
+                    $('#txtLatitude').val(latitude);
+                    $('#txtLongitude').val(longitude);
+
+ 					$.get("/home/project/region_by_cep",{latitude: latitude, longitude: longitude}).done( function(data){
+						document.getElementById("result").innerHTML=data
+        		 	});
+
+                    var location = new google.maps.LatLng(latitude, longitude);
+					var mapOptions = {
+					center: new google.maps.LatLng(location),
+					zoom: 16,
+					};
+
+                    map.setCenter(location);
+                    map.setZoom(16);
+                }
+            }
+        });
+    }
 
 function initialize() {
 		var marker;
-	
 		var mapOptions = {
 			center: new google.maps.LatLng(-23.549035, -46.634438),
 			zoom: 16,
 		};
 		geocoder = new google.maps.Geocoder();
 
-   	    var map = new google.maps.Map(document.getElementById("map"),mapOptions);
+   	    map = new google.maps.Map(document.getElementById("map"),mapOptions);
 		$.getJSON('/home/project_map',function(data,status){
 			var json = data;
 			$.each(json, function(i, pj){
@@ -69,14 +96,13 @@ function initialize() {
 	
 	
 $(document).ready(function(){
- 		if (document.getElementById("listprojects")){ 
+		if ($('#listprojects').length){	
 		var marker;
-	
 		var mapOptions = {
 			center: new google.maps.LatLng(-23.549035, -46.634438),
 			zoom: 8,
 		};
-   	    var map = new google.maps.Map(document.getElementById("listprojects"),mapOptions);
+   	    map = new google.maps.Map(document.getElementById("listprojects"),mapOptions);
 		$.getJSON('/home/project_map_list', { id : [%goal_obj.id ? goal_obj.id : 0 %] },function(data,status){
 			var json = data;
 			$.each(json, function(i, pj){
@@ -94,6 +120,7 @@ $(document).ready(function(){
     			});
 			});
 		});
+
 		}
 		$("#type").change(function(){
 			var id = $( "#type option:selected" ).val();
@@ -107,7 +134,7 @@ $(document).ready(function(){
 				document.getElementById("result").innerHTML=data
          	});
 		});
-	$("#txtEndereco").autocomplete({
+		$("#txtaddress").autocomplete({
         source: function (request, response) {
             geocoder.geocode({ 'address': request.term + ', Brasil', 'region': 'BR' }, function (results, status) {
                 response($.map(results, function (item) {
@@ -121,14 +148,25 @@ $(document).ready(function(){
             })
         },
         select: function (event, ui) {
-            $("#txtLatitude").val(ui.item.latitude);
-            $("#txtLongitude").val(ui.item.longitude);
             var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
-            marker.setPosition(location);
+						
+ 			$.get("/home/project/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+				document.getElementById("result").innerHTML=data
+        	});
             map.setCenter(location);
             map.setZoom(16);
         }
     });
+
+	$("#btnaddress").click(function() {
+        if($(this).val() != "")
+            carregarNoMapa($("#txtaddress").val());
+    });
+ 
+    $("#txtaddress").blur(function() {
+        if($(this).val() != "")
+            carregarNoMapa($(this).val());
+    });
 });
 </script> 
 <body onload="initialize()" id="page-top" data-spy="scroll" data-target=".navbar-custom">

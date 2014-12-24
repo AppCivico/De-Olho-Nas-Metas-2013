@@ -39,11 +39,10 @@
 
 	<section class="metas-filtro">
 		<div class="container">
-			<form>
 				<div class="col-xs-4 cep">
 					Metas próximas a mim<br />
-					<input type="text" id="txtEndereco" name="txtEndereco" placeholder="Informe o CEP">
-					<button><span class="glyphicon glyphicon-search"></span></button>
+					<input type="text" id="txtaddress" name="txtaddress" placeholder="Informe o CEP">
+					<button id="btnaddress" name="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
 				</div>
 				<div class="col-xs-8">
 					<div class="row">
@@ -67,7 +66,6 @@
 					</div>
 				</div>
 				<div class="clear"></div>
-			</form>
 		</div>
     </section>
 

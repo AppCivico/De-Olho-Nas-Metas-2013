@@ -112,13 +112,27 @@ sub list_GET {
 		$rs = $rs->search( { region_id => $c->req->param('region_id') });
 
 	}	
-
-	my $lol;
+	
+	if ( $c->req->param('lnglat')){
+		$c->detach unless $c->req->param('lnglat') =~ qr/^(\-?\d+(\.\d+)?)\ \s*(\-?\d+(\.\d+)?)$/;
+		my $lnglat = $c->req->param('lnglat');
+	    my @teste = $c->model('DB')->resultset('Region')->search_rs(
+        
+            \[
+               	q{ST_Intersects(me.geom::geography, ?::geography )},  
+                [ _coords => qq{SRID=4326;POINT($lnglat)} ]
+            ],
+			{
+				select => [ qw/id name/],
+				result_class => 'DBIx::Class::ResultClass::HashRefInflator',
+			}	
+   	    )->all;
+			
+		$rs = $rs->search( { region_id => $teste[0]->{id} });
+	}
 	if ($c->req->param('goal_id')) {
 		
 		$rs = $rs->search( { 'goal.id' => $c->req->param('goal_id') });
-		$lol = $rs->search( { 'goal.id' => $c->req->param('goal_id') });
-		use DDP; p $lol;
 	}
     $self->status_ok(
         $c,
