@@ -118,9 +118,24 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 projects
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-12-17 20:17:58
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:5bJp71NsnvVFOdYEFI1bSg
+Type: has_many
+
+Related object: L<SMM::Schema::Result::Project>
+
+=cut
+
+__PACKAGE__->has_many(
+  "projects",
+  "SMM::Schema::Result::Project",
+  { "foreign.region_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-12-23 15:16:41
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:EayNziSHJXYzL7YJqAtpZg
 
 
 with 'SMM::Role::Verification';

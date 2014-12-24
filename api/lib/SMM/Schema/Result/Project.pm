@@ -86,6 +86,12 @@ __PACKAGE__->table("project");
   data_type: 'timestamp'
   is_nullable: 1
 
+=head2 region_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -115,6 +121,8 @@ __PACKAGE__->add_columns(
   },
   "updated_at",
   { data_type => "timestamp", is_nullable => 1 },
+  "region_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -176,9 +184,29 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 region
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-12-17 20:17:58
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:KX9M7ySNlobHCK4Vc9ohlQ
+Type: belongs_to
+
+Related object: L<SMM::Schema::Result::Region>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "region",
+  "SMM::Schema::Result::Region",
+  { id => "region_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-12-23 15:16:41
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:SWYJ410VjbegaBVaLb6Jgw
 
 __PACKAGE__->many_to_many( goals => goal_projects => 'goal');
 

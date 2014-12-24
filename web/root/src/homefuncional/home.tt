@@ -42,22 +42,23 @@
 			<form>
 				<div class="col-xs-4 cep">
 					Metas próximas a mim<br />
-					<input type="text" placeholder="Informe o CEP">
+					<input type="text" id="txtEndereco" name="txtEndereco" placeholder="Informe o CEP">
 					<button><span class="glyphicon glyphicon-search"></span></button>
 				</div>
 				<div class="col-xs-8">
 					<div class="row">
 						<div class="col-xs-6 region">
 							Filtrar metas por<br />
-							<div class="select-stylized"><select>
-								[% FOREACH region IN regions%]
-									<option>[% region.name %]</option>
+							<div class="select-stylized"><select id="region">
+								[% FOREACH region IN regions.sort%]
+									<option value="[% region.id %]">[% region.name %]</option>
 								[% END %]
 							</select></div>
 						</div>
 						<div class="col-xs-6 type">
 							&nbsp;<br />
-							<div class="select-stylized"><select id="type">
+							<div class="select-stylized">
+								<select id="type">
 								[% FOREACH type IN objectives %]
 								<option value="[% type.id %]">[% type.name %]</option>
 								[% END %]

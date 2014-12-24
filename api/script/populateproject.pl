@@ -19,20 +19,20 @@ my $schema = SMM::Schema->connect(
 
 my @projects = $schema->resultset('Project')
   ->search( {}, { +select => [qw/id name latitude longitude/], } );
+
 for my $prj (@projects) {
 
     use DDP;
 
-    #my $teste = $schema->resultset('Region')->search(
-    #    \[
-    #        'ST_Intersects(geom, ST_GeomFromText((POINT(? ?)),4326)::geometry)',
-    #        [ p => "-71.06454", 42.28787 ]
-    #    ]
-    #);
 	my $lat  = $prj->latitude;
-	my $long = $prj->longitude;	
-    p $prj->latitude;
-    p $prj->longitude;
+	my $long = $prj->longitude;
+    next if $prj->latitude eq "";	
+    next if $prj->longitude eq "";	
+    next if $prj->latitude eq 0;	
+    p $prj->name;	
+	p $prj->id;
+	p $prj->latitude;
+	p $prj->longitude;
     my @teste = $schema->resultset('Region')->search_rs(
         
             \[
@@ -41,10 +41,9 @@ for my $prj (@projects) {
             ],
 			{
 				select => [ qw/id name/],
+				result_class => 'DBIx::Class::ResultClass::HashRefInflator',
 			}	
-    )->all
-	unless $prj->latitude eq 0 and $prj->longitude eq 0;
-
-    p @teste;
-
+    )->all;
+    #p $teste[0]->{id};
+	$schema->resultset('Project')->find( $prj->id )->update({ region_id => $teste[0]->{id}});
 }

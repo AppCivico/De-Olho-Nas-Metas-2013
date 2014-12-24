@@ -13,7 +13,7 @@ __PACKAGE__->config(
         id => 'Int'
     },
     result_attr => {
-        prefetch => [ { 'goal_projects' => 'goal' } ]
+        prefetch => [ { 'goal_projects' => 'goal' }, 'region' ]
     },
     update_roles => [qw/superadmin user admin webapi organization/],
     create_roles => [qw/superadmin admin webapi/],
@@ -99,12 +99,20 @@ sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
 sub list_GET {
     my ( $self, $c ) = @_;
 	my $rs = $c->stash->{collection};
+
 	if ( $c->req->param('type_id')) {
-		$c->detach unless $c->req->param('type_id') =~ /^\d$/;
+		$c->detach unless $c->req->param('type_id') =~ /^\d+$/;
 
 		$rs = $rs->search( { 'goal.objective_id' => $c->req->param('type_id') });
 
 	}
+	if ( $c->req->param('region_id')) {
+		$c->detach unless $c->req->param('region_id') =~ /^\d+$/;
+
+		$rs = $rs->search( { region_id => $c->req->param('region_id') });
+
+	}	
+
 	my $lol;
 	if ($c->req->param('goal_id')) {
 		

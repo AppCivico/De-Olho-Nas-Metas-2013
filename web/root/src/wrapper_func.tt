@@ -21,16 +21,23 @@
 
     <!-- Custom Theme CSS -->
     <link href="/static/css/home_style.css" rel="stylesheet">
+    <link href="/static/css/jquery-ui.theme.min.css" rel="stylesheet">
+    <link href="/static/css/jquery-ui.structure.min.css" rel="stylesheet">
+    <link href="/static/css/jquery-ui.min.css" rel="stylesheet">
 	<link rel="icon" type="image/png" href="favicon.png" />
 </head>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
 
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCVRSogQpUwhgvu2GccC7F9rh7B7915qSY&sensor=TRUE">
 </script>
 
 <script type="text/javascript">
+var geocoder;
+
 function initialize() {
 		var marker;
 	
@@ -38,6 +45,8 @@ function initialize() {
 			center: new google.maps.LatLng(-23.549035, -46.634438),
 			zoom: 16,
 		};
+		geocoder = new google.maps.Geocoder();
+
    	    var map = new google.maps.Map(document.getElementById("map"),mapOptions);
 		$.getJSON('/home/project_map',function(data,status){
 			var json = data;
@@ -92,8 +101,35 @@ $(document).ready(function(){
 				document.getElementById("result").innerHTML=data
          	});
 		});
-	});
-
+		$("#region").change(function(){
+			var id = $( "#region option:selected" ).val();
+  	     	$.get("/home/project/region",{region_id: id}).done( function(data){
+				document.getElementById("result").innerHTML=data
+         	});
+		});
+	$("#txtEndereco").autocomplete({
+        source: function (request, response) {
+            geocoder.geocode({ 'address': request.term + ', Brasil', 'region': 'BR' }, function (results, status) {
+                response($.map(results, function (item) {
+                    return {
+                        label: item.formatted_address,
+                        value: item.formatted_address,
+                        latitude: item.geometry.location.lat(),
+                        longitude: item.geometry.location.lng()
+                    }
+                }));
+            })
+        },
+        select: function (event, ui) {
+            $("#txtLatitude").val(ui.item.latitude);
+            $("#txtLongitude").val(ui.item.longitude);
+            var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
+            marker.setPosition(location);
+            map.setCenter(location);
+            map.setZoom(16);
+        }
+    });
+});
 </script> 
 <body onload="initialize()" id="page-top" data-spy="scroll" data-target=".navbar-custom">
 

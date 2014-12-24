@@ -66,6 +66,23 @@ sub type :Chained('base')  :Args(0){
 	$c->stash->{without_wrapper} = 1;
 }
 
+sub region :Chained('base')  :Args(0){
+    my ( $self, $c ) = @_;
+
+	$c->detach unless $c->req->param('region_id');
+	$c->detach unless $c->req->param('region_id') =~ /^\d+$/;
+
+	my $region_id = $c->req->param('region_id');
+    my $api = $c->model('API');
+
+    my $res = $api->stash_result( 
+		$c, 'projects',
+		params => { 
+			region_id => $region_id 
+		}
+    );
+	$c->stash->{without_wrapper} = 1;
+}
 
 =encoding utf8
 
