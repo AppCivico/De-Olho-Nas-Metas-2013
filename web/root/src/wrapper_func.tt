@@ -30,14 +30,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+	<!--<script type="text/javascript" src="/static/js/map.js"></script>-->
 
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCVRSogQpUwhgvu2GccC7F9rh7B7915qSY&sensor=TRUE">
 </script>
 
 <script type="text/javascript">
-var geocoder;
-var marker;
+		var geocoder;
+		var marker;
 	function carregarNoMapa(endereco) {
         geocoder.geocode({ 'address': endereco + ', Brasil', 'region': 'BR' }, function (results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
@@ -49,18 +50,27 @@ var marker;
                     $('#txtLatitude').val(latitude);
                     $('#txtLongitude').val(longitude);
 
- 					$.get("/home/project/region_by_cep",{latitude: latitude, longitude: longitude}).done( function(data){
+					if ($("#pagetype").val() == 'home'){			
+ 						$.get("/home/project/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
 						document.getElementById("result").innerHTML=data
-        		 	});
+        				});
+					    var location = new google.maps.LatLng(latitude, longitude);
+						var mapOptions = {
+						center: new google.maps.LatLng(location),
+						zoom: 16,
+						};
 
-                    var location = new google.maps.LatLng(latitude, longitude);
-					var mapOptions = {
-					center: new google.maps.LatLng(location),
-					zoom: 16,
-					};
+	                    map.setCenter(location);
+    	                map.setZoom(16);
 
-                    map.setCenter(location);
-                    map.setZoom(16);
+					}
+					if ($("#pagetype").val() == 'region'){			
+ 						$.get("/home/region/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+						document.getElementById("result").innerHTML=data
+        				});
+					}
+	
+
                 }
             }
         });
@@ -96,6 +106,9 @@ function initialize() {
 	
 	
 $(document).ready(function(){
+		
+
+
 		if ($('#listprojects').length){	
 		var marker;
 		var mapOptions = {
@@ -149,25 +162,33 @@ $(document).ready(function(){
         },
         select: function (event, ui) {
             var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
-						
- 			$.get("/home/project/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+			if ($("#pagetype").val() == 'home'){			
+ 				$.get("/home/project/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
 				document.getElementById("result").innerHTML=data
-        	});
-            map.setCenter(location);
-            map.setZoom(16);
+        		});
+            	map.setCenter(location);
+	            map.setZoom(16);
+			}
+			if ($("#pagetype").val() == 'region'){			
+ 				$.get("/home/region/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+				document.getElementById("result").innerHTML=data
+        		});
+			}
+			
         }
     });
 
 	$("#btnaddress").click(function() {
         if($(this).val() != "")
-            carregarNoMapa($("#txtaddress").val());
+            carregarNoMapa($("#txtaddress").val(),$("#pagetype").val());
     });
  
     $("#txtaddress").blur(function() {
         if($(this).val() != "")
-            carregarNoMapa($(this).val());
+            carregarNoMapa($(this).val(),$("#pagetype").val());
     });
 });
+</script>
 </script> 
 <body onload="initialize()" id="page-top" data-spy="scroll" data-target=".navbar-custom">
 

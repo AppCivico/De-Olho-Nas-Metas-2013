@@ -19,7 +19,9 @@ __PACKAGE__->config(
 );
 with 'SMM::TraitFor::Controller::DefaultCRUD';
 
-sub base : Chained('/api/base') : PathPart('regions') : CaptureArgs(0) { }
+sub base : Chained('/api/base') : PathPart('regions') : CaptureArgs(0) { 
+    my ( $self, $c ) = @_;
+}
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
 
@@ -96,6 +98,23 @@ sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
 sub list_GET {
     my ( $self, $c ) = @_;
 	my $rs = $c->stash->{collection};
+use DDP;
+	if ( $c->req->param('lnglat')){
+		$c->detach unless $c->req->param('lnglat') =~ qr/^(\-?\d+(\.\d+)?)\ \s*(\-?\d+(\.\d+)?)$/;
+		my $lnglat = $c->req->param('lnglat');
+		p $lnglat;
+	    $rs->search_rs(
+        
+            \[
+               	q{ST_Intersects(me.geom::geography, ?::geography )},  
+                [ _coords => qq{SRID=4326;POINT($lnglat)} ]
+            ],
+			{
+				select => [ qw/id name/],
+				result_class => 'DBIx::Class::ResultClass::HashRefInflator',
+			}	
+   	    );
+	}
 
     $self->status_ok(
         $c,
@@ -167,4 +186,35 @@ sub complete : Chained('base') : PathPart('complete') : Args(0) {
 
 }
 
+sub latlong :Chained('base') :Args(0){
+    my ( $self, $c ) = @_;
+	use DDP;
+
+	if ( $c->req->param('lnglat')){
+		$c->detach unless $c->req->param('lnglat') =~ qr/^(\-?\d+(\.\d+)?)\ \s*(\-?\d+(\.\d+)?)$/;
+		my $lnglat = $c->req->param('lnglat');
+		p $lnglat;
+	    my $region = $c->model('DB')->resultset('Region')->search_rs(
+        
+            \[
+               	q{ST_Intersects(me.geom::geography, ?::geography )},  
+                [ _coords => qq{SRID=4326;POINT($lnglat)} ]
+            ],
+			{
+				select => [ qw/id name/],
+				result_class => 'DBIx::Class::ResultClass::HashRefInflator',
+			}	
+   	    )->single;
+		
+		$self->status_ok(
+        $c,
+        entity => {
+            id => $region->{id}
+        }
+    );
+
+
+	}
+
+}
 1;

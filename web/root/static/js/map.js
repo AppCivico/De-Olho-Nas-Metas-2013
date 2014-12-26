@@ -1,42 +1,136 @@
-$(document).ready(function() {
-	$.extend({
-		scrollTo: function(id){
-			if (id.charAt(0) != "." && id.charAt(0) != "#"){
-				id = "#"+id;
-			}			
-			var top = $(id).offset().top - 108,
-				target = "html,body";
-			$(target).animate({scrollTop: top},'slow');
-		}
+	function carregarNoMapa(endereco) {
+        geocoder.geocode({ 'address': endereco + ', Brasil', 'region': 'BR' }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
+                    var latitude = results[0].geometry.location.lat();
+                    var longitude = results[0].geometry.location.lng();
+ 
+                    $('#txtaddress').val(results[0].formatted_address);
+                    $('#txtLatitude').val(latitude);
+                    $('#txtLongitude').val(longitude);
+
+ 					$.get("/home/project/region_by_cep",{latitude: latitude, longitude: longitude}).done( function(data){
+						document.getElementById("result").innerHTML=data
+        		 	});
+
+                    var location = new google.maps.LatLng(latitude, longitude);
+					var mapOptions = {
+					center: new google.maps.LatLng(location),
+					zoom: 16,
+					};
+
+                    map.setCenter(location);
+                    map.setZoom(16);
+                }
+            }
+        });
+    }
+
+function initialize() {
+		var marker;
+		var mapOptions = {
+			center: new google.maps.LatLng(-23.549035, -46.634438),
+			zoom: 16,
+		};
+		geocoder = new google.maps.Geocoder();
+
+   	    map = new google.maps.Map(document.getElementById("map"),mapOptions);
+		$.getJSON('/home/project_map',function(data,status){
+			var json = data;
+			$.each(json, function(i, pj){
+				marker = "";
+				var myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
+				marker = new google.maps.Marker({
+    	            position: myLatlng,
+	                map: map,
+					title: pj.name,
+					url : "/home/project/"+pj.id
+        	    });
+
+				google.maps.event.addListener(marker, 'click', function() {
+        			window.location.href = marker.url;
+    			});
+			});
+		});
+      }
+	
+	
+$(document).ready(function(){
 		
-	});
-	
-	$('.page-scroll a').bind('click', function(event) {
-        var $anchor = $(this);
-		console.log($($anchor.attr('href')).offset().top);
-        $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top - 108
-        }, 1500, 'easeInOutExpo');
-        event.preventDefault();
+		var geocoder;
+		var marker;
+
+		initialize();
+
+		if ($('#listprojects').length){	
+		var marker;
+		var mapOptions = {
+			center: new google.maps.LatLng(-23.549035, -46.634438),
+			zoom: 8,
+		};
+   	    map = new google.maps.Map(document.getElementById("listprojects"),mapOptions);
+		$.getJSON('/home/project_map_list', { id : [%goal_obj.id ? goal_obj.id : 0 %] },function(data,status){
+			var json = data;
+			$.each(json, function(i, pj){
+				marker = "";
+				var myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
+				marker = new google.maps.Marker({
+    	            position: myLatlng,
+	                map: map,
+					title: pj.name,
+					url : "/home/project/"+pj.id
+        	    });
+
+				google.maps.event.addListener(marker, 'click', function() {
+        			window.location.href = marker.url;
+    			});
+			});
+		});
+
+		}
+		$("#type").change(function(){
+			var id = $( "#type option:selected" ).val();
+  	     	$.get("/home/project/type",{type_id: id}).done( function(data){
+				document.getElementById("result").innerHTML=data
+         	});
+		});
+		$("#region").change(function(){
+			var id = $( "#region option:selected" ).val();
+  	     	$.get("/home/project/region",{region_id: id}).done( function(data){
+				document.getElementById("result").innerHTML=data
+         	});
+		});
+		$("#txtaddress").autocomplete({
+        source: function (request, response) {
+            geocoder.geocode({ 'address': request.term + ', Brasil', 'region': 'BR' }, function (results, status) {
+                response($.map(results, function (item) {
+                    return {
+                        label: item.formatted_address,
+                        value: item.formatted_address,
+                        latitude: item.geometry.location.lat(),
+                        longitude: item.geometry.location.lng()
+                    }
+                }));
+            })
+        },
+        select: function (event, ui) {
+            var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
+						
+ 			$.get("/home/project/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+				document.getElementById("result").innerHTML=data
+        	});
+            map.setCenter(location);
+            map.setZoom(16);
+        }
     });
-	
-	var iv;
-	
-	$(".image-gallery .arrow.left .glyphicon").mousedown(function(){
-		var div = $(this).parent().parent().find(".contents");
-		iv = setInterval(function(){
-            div.scrollLeft( div.scrollLeft() - 4);
-        },20);
-	});
-	$(".image-gallery .arrow.right .glyphicon").mousedown(function(){
-		var div = $(this).parent().parent().find(".contents");
-		iv = setInterval(function(){
-            div.scrollLeft( div.scrollLeft() + 4);
-        },20);
-	});
-	
-	$('.image-gallery .arrow.left .glyphicon,.image-gallery .arrow.right .glyphicon').on('mouseup mouseleave', function(){
-        clearInterval(iv);
-    });
-	
+
+	$("#btnaddress").click(function() {
+        if($(this).val() != "")
+            carregarNoMapa($("#txtaddress").val());
+    });
+ 
+    $("#txtaddress").blur(function() {
+        if($(this).val() != "")
+            carregarNoMapa($(this).val());
+    });
 });

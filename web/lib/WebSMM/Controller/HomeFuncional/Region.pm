@@ -47,15 +47,31 @@ sub index :Chained('base') :PathPart('') :Args(0){
 
     my $api = $c->model('API');
 
-    $api->stash_result( 
-		$c, 'regions',
-		params => {
-			order => 'me.name',
-		},
-	 );
+   # $api->stash_result(	$c, 'regions' );
 
 }
 
+sub region_by_cep :Chained('base') :Args(0){
+    my ( $self, $c ) = @_;
+
+	$c->detach unless $c->req->param('latitude');
+	$c->detach unless $c->req->param('longitude');
+	
+	$c->detach unless $c->req->param('latitude')  =~ qr/^(\-?\d+(\.\d+)?)$/;
+	$c->detach unless $c->req->param('longitude') =~ qr/^(\-?\d+(\.\d+)?)$/;
+
+	my $lnglat = join (q/ /,$c->req->param('longitude'),$c->req->param('latitude'));
+
+    my $api = $c->model('API');
+			
+	
+	my $id =  $api->stash_result( 
+		$c, 'regions/latlong',
+		params => {
+			lnglat => $lnglat, 
+		},
+	 );
+}
 
 
 

@@ -94,16 +94,17 @@ sub region_by_cep :Chained('base') :Args(0) {
 	$c->detach unless $c->req->param('longitude') =~ qr/^(\-?\d+(\.\d+)?)$/;
 
 	my $lnglat = join (q/ /,$c->req->param('longitude'),$c->req->param('latitude'));
-	use DDP;
-	p $lnglat;
+
     my $api = $c->model('API');
 
     my $res = $api->stash_result( 
-		$c, 'projects',
+		$c, 'latlong',
 		params => { 
 			lnglat => $lnglat 
 		}
     );
+	p $res;
+	
 	$c->stash->{without_wrapper} = 1;
 
 }
