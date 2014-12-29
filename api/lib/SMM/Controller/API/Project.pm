@@ -134,6 +134,12 @@ sub list_GET {
 		
 		$rs = $rs->search( { 'goal.id' => $c->req->param('goal_id') });
 	}
+	$rs = $rs->search(
+		undef,
+		{ 
+			order_by => 'me.name'
+		},
+	);
     $self->status_ok(
         $c,
         entity => {

@@ -45,13 +45,16 @@
                 if (results[0]) {
                     var latitude = results[0].geometry.location.lat();
                     var longitude = results[0].geometry.location.lng();
+					alert (latitude);
+					alert (longitude);
  
                     $('#txtaddress').val(results[0].formatted_address);
                     $('#txtLatitude').val(latitude);
                     $('#txtLongitude').val(longitude);
 
 					if ($("#pagetype").val() == 'home'){			
- 						$.get("/home/project/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+ 						$.get("/home/project/region_by_cep",{latitude: latitude, longitude: longitude}).done( function(data){
+						alert(data);
 						document.getElementById("result").innerHTML=data
         				});
 					    var location = new google.maps.LatLng(latitude, longitude);
@@ -65,18 +68,17 @@
 
 					}
 					if ($("#pagetype").val() == 'region'){			
- 						$.get("/home/region/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
-						document.getElementById("result").innerHTML=data
+ 						$.getJSON("/home/region/id",{latitude: latitude, longitude: longitude},function(data,status){
+						window.location.href="/home/region/"+data.id;
         				});
 					}
-	
-
                 }
             }
         });
     }
 
 function initialize() {
+
 		var marker;
 		var mapOptions = {
 			center: new google.maps.LatLng(-23.549035, -46.634438),
@@ -103,13 +105,7 @@ function initialize() {
 			});
 		});
       }
-	
-	
-$(document).ready(function(){
-		
-
-
-		if ($('#listprojects').length){	
+function mapproject(){
 		var marker;
 		var mapOptions = {
 			center: new google.maps.LatLng(-23.549035, -46.634438),
@@ -134,19 +130,62 @@ $(document).ready(function(){
 			});
 		});
 
+}	
+
+function regionproject(projects){
+		var marker;
+		var mapOptions = {
+			center: new google.maps.LatLng(-23.549035, -46.634438),
+			zoom: 8,
+		};
+	   	map = new google.maps.Map(document.getElementById("regionprojects"),mapOptions);
+		$.each(projects, function(i, pj){
+			var myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
+			marker = new google.maps.Marker({
+                position: myLatlng,
+	            map: map,
+				title: pj.name,
+				url : "/home/project/"+pj.id
+        	    });
+
+			google.maps.event.addListener(marker, 'click', function() {
+        		window.location.href = marker.url;
+    		});
+		});
+
+}	
+	
+$(document).ready(function(){
+		if ($('#listprojects').length){	
+			mapproject();
 		}
+/*	if ($('#regionprojects').length){
+		var mapOptions = {
+			center: new google.maps.LatLng(-23.549035, -46.634438),
+			zoom: 8,
+		};
+	   	map = new google.maps.Map(document.getElementById("regionprojects"),mapOptions);
+
+		}*/
 		$("#type").change(function(){
 			var id = $( "#type option:selected" ).val();
   	     	$.get("/home/project/type",{type_id: id}).done( function(data){
 				document.getElementById("result").innerHTML=data
          	});
 		});
-		$("#region").change(function(){
-			var id = $( "#region option:selected" ).val();
+		$("#homeregion").change(function(){
+			var id = $( "#homeregion option:selected" ).val();
   	     	$.get("/home/project/region",{region_id: id}).done( function(data){
 				document.getElementById("result").innerHTML=data
          	});
 		});
+		/*$("#region").change(function(){
+			var id = $( "#region option:selected" ).val();
+  	     	$.get("/home/region/region_by_id",{region_id: id}).done( function(data){
+				document.getElementById("result").innerHTML=data
+         	});
+		});*/
+
 		$("#txtaddress").autocomplete({
         source: function (request, response) {
             geocoder.geocode({ 'address': request.term + ', Brasil', 'region': 'BR' }, function (results, status) {
@@ -169,10 +208,12 @@ $(document).ready(function(){
             	map.setCenter(location);
 	            map.setZoom(16);
 			}
+
 			if ($("#pagetype").val() == 'region'){			
- 				$.get("/home/region/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
-				document.getElementById("result").innerHTML=data
-        		});
+ 				$.getJSON("/home/region/id",{latitude: ui.item.latitude, longitude: ui.item.longitude},function(data,status){
+					alert(status);
+					window.location.href="/home/region/"+data.id;
+				});
 			}
 			
         }

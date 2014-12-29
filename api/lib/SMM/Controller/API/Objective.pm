@@ -83,8 +83,13 @@ sub list_GET {
 
 	my $rs = $c->stash->{collection};
 	my $lol = $c->stash->{collection};
-	my $teste = $lol->search( {}, { join => 'goals', select => [qw/me.id me.name/], 'as' => [ 'id', 'name' ], group_by =>  [ 'me.id','me.name' ]});	
-
+	#my $teste = $lol->search( {}, { join => 'goals', select => [qw/me.id me.name/], 'as' => [ 'id', 'name' ], group_by =>  [ 'me.id','me.name' ]});	
+	$rs = $rs->search(
+		undef,
+		{ 
+			order_by => 'name',
+		}
+	);
     $self->status_ok(
         $c,
         entity => {

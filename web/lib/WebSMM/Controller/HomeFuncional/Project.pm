@@ -81,6 +81,8 @@ sub region :Chained('base')  :Args(0){
 			region_id => $region_id 
 		}
     );
+	use DDP;
+	p $c->stash->{projects};
 	$c->stash->{without_wrapper} = 1;
 }
 

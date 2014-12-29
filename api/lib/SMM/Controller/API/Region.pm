@@ -13,7 +13,10 @@ __PACKAGE__->config(
         id 	  => 'Int',
 		order => 'Str'
     },
-    update_roles => [qw/superadmin user admin webapi organization/],
+    result_attr => {
+        prefetch => [  'projects' ]
+	},
+	update_roles => [qw/superadmin user admin webapi organization/],
     create_roles => [qw/superadmin admin webapi/],
     delete_roles => [qw/superadmin admin webapi/],
 );
@@ -31,32 +34,28 @@ sub result : Chained('object') : PathPart('') : Args(0) :
 sub result_GET {
     my ( $self, $c ) = @_;
 
-    my $region = $c->stash->{region};
-	
+    my $region = $c->stash->{region};	
+	use DDP;
+	p $region;
     $self->status_ok(
         $c,
         entity => {
             (
                 map { $_ => $region->$_, }
                   qw/
+				  id
                   name
-                  address
-                  latitude
-				  longitude
+                  lat	 
+                  long
                   /
             ),
-			goal => [
+			projects => [
                 (
                     map {
-                        my $p = $_;
-                        (
-                            map {
-                                { $_ => $p->goal->$_ }
-                              } qw/
-                              name
-                              /
-                          ),
-                    } $region->goal_regions,
+                       	  { id   => $_->id,
+							name => $_->name } 
+
+                    } $region->projects,
                 ),
             ],
 
@@ -98,7 +97,7 @@ sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
 sub list_GET {
     my ( $self, $c ) = @_;
 	my $rs = $c->stash->{collection};
-use DDP;
+	
 	if ( $c->req->param('lnglat')){
 		$c->detach unless $c->req->param('lnglat') =~ qr/^(\-?\d+(\.\d+)?)\ \s*(\-?\d+(\.\d+)?)$/;
 		my $lnglat = $c->req->param('lnglat');
@@ -116,6 +115,12 @@ use DDP;
    	    );
 	}
 
+	$rs = $rs->search(
+		undef,
+		{
+			order_by => 'me.name'
+		},
+	);
     $self->status_ok(
         $c,
         entity => {
@@ -205,12 +210,10 @@ sub latlong :Chained('base') :Args(0){
 				result_class => 'DBIx::Class::ResultClass::HashRefInflator',
 			}	
    	    )->single;
-		
+
 		$self->status_ok(
         $c,
-        entity => {
-            id => $region->{id}
-        }
+        entity => { region_id => $region->{id} },
     );
 
 
