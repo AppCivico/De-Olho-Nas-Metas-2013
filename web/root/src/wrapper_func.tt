@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
+<meta charset="UTF-8">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,202 +37,10 @@
 	src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCVRSogQpUwhgvu2GccC7F9rh7B7915qSY&sensor=TRUE">
 </script>
 
-<script type="text/javascript">
-		var geocoder;
-		var marker;
-	function carregarNoMapa(endereco) {
-        geocoder.geocode({ 'address': endereco + ', Brasil', 'region': 'BR' }, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                if (results[0]) {
-                    var latitude = results[0].geometry.location.lat();
-                    var longitude = results[0].geometry.location.lng();
-					alert (latitude);
-					alert (longitude);
- 
-                    $('#txtaddress').val(results[0].formatted_address);
-                    $('#txtLatitude').val(latitude);
-                    $('#txtLongitude').val(longitude);
 
-					if ($("#pagetype").val() == 'home'){			
- 						$.get("/home/project/region_by_cep",{latitude: latitude, longitude: longitude}).done( function(data){
-						alert(data);
-						document.getElementById("result").innerHTML=data
-        				});
-					    var location = new google.maps.LatLng(latitude, longitude);
-						var mapOptions = {
-						center: new google.maps.LatLng(location),
-						zoom: 16,
-						};
+<!--<script type="text/javascript" src="/static/js/maps.js"></script>-->
 
-	                    map.setCenter(location);
-    	                map.setZoom(16);
-
-					}
-					if ($("#pagetype").val() == 'region'){			
- 						$.getJSON("/home/region/id",{latitude: latitude, longitude: longitude},function(data,status){
-						window.location.href="/home/region/"+data.id;
-        				});
-					}
-                }
-            }
-        });
-    }
-
-function initialize() {
-
-		var marker;
-		var mapOptions = {
-			center: new google.maps.LatLng(-23.549035, -46.634438),
-			zoom: 16,
-		};
-		geocoder = new google.maps.Geocoder();
-
-   	    map = new google.maps.Map(document.getElementById("map"),mapOptions);
-		$.getJSON('/home/project_map',function(data,status){
-			var json = data;
-			$.each(json, function(i, pj){
-				marker = "";
-				var myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
-				marker = new google.maps.Marker({
-    	            position: myLatlng,
-	                map: map,
-					title: pj.name,
-					url : "/home/project/"+pj.id
-        	    });
-
-				google.maps.event.addListener(marker, 'click', function() {
-        			window.location.href = marker.url;
-    			});
-			});
-		});
-      }
-function mapproject(){
-		var marker;
-		var mapOptions = {
-			center: new google.maps.LatLng(-23.549035, -46.634438),
-			zoom: 8,
-		};
-   	    map = new google.maps.Map(document.getElementById("listprojects"),mapOptions);
-		$.getJSON('/home/project_map_list', { id : [%goal_obj.id ? goal_obj.id : 0 %] },function(data,status){
-			var json = data;
-			$.each(json, function(i, pj){
-				marker = "";
-				var myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
-				marker = new google.maps.Marker({
-    	            position: myLatlng,
-	                map: map,
-					title: pj.name,
-					url : "/home/project/"+pj.id
-        	    });
-
-				google.maps.event.addListener(marker, 'click', function() {
-        			window.location.href = marker.url;
-    			});
-			});
-		});
-
-}	
-
-function regionproject(projects){
-		var marker;
-		var mapOptions = {
-			center: new google.maps.LatLng(-23.549035, -46.634438),
-			zoom: 8,
-		};
-	   	map = new google.maps.Map(document.getElementById("regionprojects"),mapOptions);
-		$.each(projects, function(i, pj){
-			var myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
-			marker = new google.maps.Marker({
-                position: myLatlng,
-	            map: map,
-				title: pj.name,
-				url : "/home/project/"+pj.id
-        	    });
-
-			google.maps.event.addListener(marker, 'click', function() {
-        		window.location.href = marker.url;
-    		});
-		});
-
-}	
-	
-$(document).ready(function(){
-		if ($('#listprojects').length){	
-			mapproject();
-		}
-/*	if ($('#regionprojects').length){
-		var mapOptions = {
-			center: new google.maps.LatLng(-23.549035, -46.634438),
-			zoom: 8,
-		};
-	   	map = new google.maps.Map(document.getElementById("regionprojects"),mapOptions);
-
-		}*/
-		$("#type").change(function(){
-			var id = $( "#type option:selected" ).val();
-  	     	$.get("/home/project/type",{type_id: id}).done( function(data){
-				document.getElementById("result").innerHTML=data
-         	});
-		});
-		$("#homeregion").change(function(){
-			var id = $( "#homeregion option:selected" ).val();
-  	     	$.get("/home/project/region",{region_id: id}).done( function(data){
-				document.getElementById("result").innerHTML=data
-         	});
-		});
-		/*$("#region").change(function(){
-			var id = $( "#region option:selected" ).val();
-  	     	$.get("/home/region/region_by_id",{region_id: id}).done( function(data){
-				document.getElementById("result").innerHTML=data
-         	});
-		});*/
-
-		$("#txtaddress").autocomplete({
-        source: function (request, response) {
-            geocoder.geocode({ 'address': request.term + ', Brasil', 'region': 'BR' }, function (results, status) {
-                response($.map(results, function (item) {
-                    return {
-                        label: item.formatted_address,
-                        value: item.formatted_address,
-                        latitude: item.geometry.location.lat(),
-                        longitude: item.geometry.location.lng()
-                    }
-                }));
-            })
-        },
-        select: function (event, ui) {
-            var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
-			if ($("#pagetype").val() == 'home'){			
- 				$.get("/home/project/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
-				document.getElementById("result").innerHTML=data
-        		});
-            	map.setCenter(location);
-	            map.setZoom(16);
-			}
-
-			if ($("#pagetype").val() == 'region'){			
- 				$.getJSON("/home/region/id",{latitude: ui.item.latitude, longitude: ui.item.longitude},function(data,status){
-					alert(status);
-					window.location.href="/home/region/"+data.id;
-				});
-			}
-			
-        }
-    });
-
-	$("#btnaddress").click(function() {
-        if($(this).val() != "")
-            carregarNoMapa($("#txtaddress").val(),$("#pagetype").val());
-    });
- 
-    $("#txtaddress").blur(function() {
-        if($(this).val() != "")
-            carregarNoMapa($(this).val(),$("#pagetype").val());
-    });
-});
-</script>
-</script> 
-<body onload="initialize()" id="page-top" data-spy="scroll" data-target=".navbar-custom">
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
 
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
@@ -310,6 +119,7 @@ $(document).ready(function(){
     <script src="/static/js/Chart.min.js"></script>
     <script src="/static/js/chart.js"></script>
 
+	[% assets.export("js")|none %]
 </body>
 
 </html>

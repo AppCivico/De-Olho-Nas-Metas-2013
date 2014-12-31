@@ -100,12 +100,11 @@ sub region_by_cep :Chained('base') :Args(0) {
     my $api = $c->model('API');
 
     my $res = $api->stash_result( 
-		$c, 'latlong',
+		$c, 'projects',
 		params => { 
 			lnglat => $lnglat 
 		}
     );
-	p $res;
 	
 	$c->stash->{without_wrapper} = 1;
 

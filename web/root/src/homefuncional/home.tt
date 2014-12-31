@@ -1,3 +1,5 @@
+
+	[%-CALL assets.include("js/maps.js")%]
 	<section class="map text-center">
 		<div id="map">
 		</div>
@@ -50,7 +52,7 @@
 						<div class="col-xs-6 region">
 							Filtrar metas por<br />
 							<div class="select-stylized"><select id="homeregion">
-								[% FOREACH region IN regions.sort%]
+								[% FOREACH region IN regions %]
 									<option value="[% region.id %]">[% region.name %]</option>
 								[% END %]
 							</select></div>
