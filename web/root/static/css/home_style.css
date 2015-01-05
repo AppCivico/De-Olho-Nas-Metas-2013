@@ -445,7 +445,8 @@ section.metas-filtro{
 	color: #fff;
 	text-transform: uppercase;	
 }
-section.metas-filtro form{
+section.metas-filtro form,
+section.metas-filtro .form{
 	padding: 20px;
 }
 
@@ -456,14 +457,19 @@ section.metas-filtro .region{
 
 section.metas-filtro form input,
 section.metas-filtro form select,
-section.metas-filtro form button{
+section.metas-filtro form button,
+section.metas-filtro .form input,
+section.metas-filtro .form select,
+section.metas-filtro .form button{
 	padding: 5px 10px;
 	font-size: 1.2em;
 	color: #59544b;
 	
 }
 section.metas-filtro form input,
-section.metas-filtro form select{
+section.metas-filtro form select,
+section.metas-filtro .form input,
+section.metas-filtro .form select{
 	min-width: 80%;
 }
 section.metas-result{
@@ -1118,4 +1124,18 @@ table.dataTable.gold thead{
 	color: #42210b;
 	font-weight: bold;
 	padding: 10px;
+}
+.page-login h2{
+	color: #8cc63f;
+}
+.page-login .form-group input{
+	border-color: #42210b;
+}
+.page-login .form-group label{
+	color: #42210b;
+	text-transform: uppercase;	
+}
+.page-login .forgot-login a{
+	text-decoration: underline;
+	margin-top: 5px;
 }
