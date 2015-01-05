@@ -6,8 +6,8 @@ BEGIN { extends 'Catalyst::Controller::REST' }
 __PACKAGE__->config(
     default => 'application/json',
 
-    result      => 'DB::PreRegister',
-    object_key  => 'preregister',
+    result     => 'DB::PreRegister',
+    object_key => 'preregister',
 );
 
 with 'SMM::TraitFor::Controller::DefaultCRUD';
@@ -16,11 +16,13 @@ sub base : Chained('/api/base') : PathPart('contacts') : CaptureArgs(0) { }
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
 
-sub result : Chained('object') : PathPart('') : Args(0) :  ActionClass('REST') { }
+sub result : Chained('object') : PathPart('') : Args(0) :
+  ActionClass('REST') { }
+
 sub result_PUT {
     my ( $self, $c ) = @_;
 
-    my $params       = { %{ $c->req->params } };
+    my $params      = { %{ $c->req->params } };
     my $preregister = $c->stash->{preregister};
 
     $preregister->execute( $c, for => 'update', with => $c->req->params );
@@ -32,7 +34,8 @@ sub result_PUT {
           ->as_string,
         entity => { id => $preregister->id }
       ),
-      $c->detach  if $preregister;
+      $c->detach
+      if $preregister;
 
 }
 
@@ -108,11 +111,12 @@ sub complete : Chained('base') : PathPart('complete') : Args(0) {
 
     $c->model('DB')->txn_do(
         sub {
-			use DDP;
+            use DDP;
 
-            $preregister = $c->stash->{collection}->execute( $c, for => 'create', with => $c->req->params );
+            $preregister = $c->stash->{collection}
+              ->execute( $c, for => 'create', with => $c->req->params );
 
-		}       
+        }
     );
 
     $self->status_created(
@@ -139,13 +143,9 @@ Catalyst Controller.
 
 =cut
 
-
 =head2 index
 
 =cut
-
-
-
 
 =encoding utf8
 

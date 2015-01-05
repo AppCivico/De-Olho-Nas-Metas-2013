@@ -1,4 +1,8 @@
+	
+	[%-CALL assets.include("js/maps.js")%]
     <section class="map text-center">
+		<div id="map">
+		</map>
 		<div id="filter-map">
 			<div class="contents text-center">
 				<div class="item">
@@ -34,32 +38,41 @@
 		</div>
 		<div class="clear"></div>
     </section>
-
 	<section class="metas-filtro">
 		<div class="container">
-			<form>
-				<div class="col-xs-6 cep">
-					PROCURAR EMPRESAS<br />
-					<input type="text" placeholder="Informe o Nome">
-					<button><span class="glyphicon glyphicon-search"></span></button>
+				<div class="col-xs-4 cep">
+					Metas próximas a mim<br />
+					<input type="hidden" id="pagetype" value="homegoal">
+					<input type="text" id="txtaddress" name="txtaddress" placeholder="Informe o CEP">
+					<button id="btnaddress" name="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
 				</div>
-				<div class="col-xs-6">
+				<div class="col-xs-8">
 					<div class="row">
 						<div class="col-xs-6 region">
-							FILTRAR EMPRESAS POR<br />
-							<div class="select-stylized"><select>
-								<option>Metas
+							Filtrar metas por<br />
+							<div class="select-stylized"><select id="goalregion">
+								[% FOREACH region IN regions%]
+									<option value="[% region.id%]">[%region.name%]</option>
+								[% END %]
+				
+							</select></div>
+						</div>
+						<div class="col-xs-6 type">
+							&nbsp;<br />
+							<div class="select-stylized"><select id="type_goal">
+								[% FOREACH type IN objectives%]
+									<option value="[% type.id%]">[%type.name%]</option>
+								[% END %]
 							</select></div>
 						</div>
 					</div>
 				</div>
 				<div class="clear"></div>
-			</form>
 		</div>
     </section>
 
     <section class="metas-result">
-		<div class="container">
+		<div id="result" class="container">
 
 			<h2 class="section-title">[% goals.size %] Metas Encontradas</h2>
 			[% FOREACH goal IN goals %]	
@@ -70,6 +83,18 @@
 							<h2>
 								<a href="[% c.uri_for_action('/homefuncional/goal/detail',[goal.id] ) %]">[%goal.name%]</a>
 							</h2>
+							<div class="stats">
+								[% IF goal.region.size > 0 %]
+								<div class="icon regions"></div> <span class="regions"> [% goal.region.size %]Regiões</span>
+								[% END %]
+								[% IF goal.project.size > 0 %]
+								<div class="icon projects"></div> <span class="projects">[% goal.project.size %] Projeto[% goal.project.size > 1 ? "s" : "" %]</span>
+								[% END %]
+								[% IF goal.organization.size > 0 %]
+								<div class="icon organizations"></div> <span class="organizations">3 Organizações</span>
+								[% END %]
+							</div>
+
 						</div>
 					</div>
 					<div class="clear"></div>

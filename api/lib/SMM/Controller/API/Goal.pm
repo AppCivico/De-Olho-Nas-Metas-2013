@@ -1,6 +1,8 @@
 package SMM::Controller::API::Goal;
 
 use Moose;
+use utf8;
+use List::MoreUtils qw(uniq);
 
 BEGIN { extends 'Catalyst::Controller::REST' }
 
@@ -30,6 +32,23 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $goal = $c->stash->{goal};
+	use DDP;
+	my @region_ids;
+	#@region_ids = map { map { $_->project->region_id } grep { $_->project->region_id } $_->goal_projects } $rs->all;
+	@region_ids = map { $_->project->region_id } grep {$_->project->region_id } $goal->goal_projects;
+	my @region_ids_unique = uniq @region_ids;
+	my @region;
+	if (@region_ids_unique){
+
+		@region = $goal->resultset('Region')->search(
+		{
+			id => {'-in' => \@region_ids_unique}
+		},
+		{
+	 	select       => [qw/id name/],
+	 	result_class => 'DBIx::Class::ResultClass::HashRefInflator',
+		})->all;
+	}
     $self->status_ok(
         $c,
         entity => {
@@ -57,7 +76,7 @@ sub result_GET {
 
                 ),
             },
-			objective => {
+            objective => {
                 (
                     map {
 
@@ -66,7 +85,7 @@ sub result_GET {
                             map { $_ => $d->$_ }
                               qw/
                               id
-							  name
+                              name
                               /
                           ),
 
@@ -80,17 +99,18 @@ sub result_GET {
                         my $p = $_;
                         (
                             map {
-                                { $_ =>  $p->project->$_  }
+                                { $_ => $p->project->$_ }
                               } qw/
                               name
-							  latitude
-							  longitude
+                              latitude
+                              longitude
+                              region_id
                               /
                           ),
                     } $goal->goal_projects,
                 ),
             ],
-			project_qt => [
+            project_qt => [
                 (
                     map {
                         my $p = $_;
@@ -104,6 +124,7 @@ sub result_GET {
                     } $goal->goal_projects,
                 ),
             ],
+			region => \@region,
         }
     );
 
@@ -142,6 +163,71 @@ sub list_GET {
     my ( $self, $c ) = @_;
 
     #	p $c->stash->{collection}->as_hashref->all;
+    my $rs = $c->stash->{collection};
+
+    if ( $c->req->param('type_id') ) {
+        $c->detach('/rest_error') unless $c->req->param('type_id') =~ qr/^\d+$/;
+
+        $rs = $rs->search( { objective_id => $c->req->param('type_id') } );
+    }
+    if ( $c->req->param('region_id') ) {
+        $self->status_bad_request(
+            $c, message => "Parâmetro região inválido.",
+          ),
+          $c->detach
+          unless $c->req->param('region_id') =~ qr/^\d+$/;
+
+        $rs =
+          $rs->search( { 'project.region_id' => $c->req->param('region_id') } );
+        unless ($rs) {
+            $self->status_bad_request(
+                $c, message => "Nenhuma meta encontrada",
+              ),
+              $c->detach;
+        }
+    }
+    if ( $c->req->param('lnglat') ) {
+        $c->detach
+          unless $c->req->param('lnglat') =~
+          qr/^(\-?\d+(\.\d+)?)\ \s*(\-?\d+(\.\d+)?)$/;
+        my $lnglat = $c->req->param('lnglat');
+
+        my $region = $c->model('DB')->resultset('Region')->search_rs(
+
+            \[
+                q{ST_Intersects(me.geom::geography, ?::geography )},
+                [ _coords => qq{SRID=4326;POINT($lnglat)} ]
+            ],
+            {
+                select       => [qw/id/],
+                result_class => 'DBIx::Class::ResultClass::HashRefInflator',
+            }
+        )->single;
+
+        $self->status_bad_request(
+            $c, message => "NENHUMA META PRÓXIMA A LOCALIDADE",
+          ),
+          $c->detach
+          unless $region;
+        $rs = $rs->search( { 'project.region_id' => $region->{id} } );
+    }
+
+	my @region_ids;
+	@region_ids = map { map { $_->project->region_id } grep { $_->project->region_id } $_->goal_projects } $rs->all;
+	my @region_ids_unique = uniq @region_ids;
+	my @region;
+	if (@region_ids_unique){
+
+		@region = $rs->resultset('Region')->search(
+		{
+			id => {'-in' => \@region_ids_unique}
+		},
+		{
+	 	select       => [qw/id name/],
+	 	result_class => 'DBIx::Class::ResultClass::HashRefInflator',
+		})->all;
+	}
+
     $self->status_ok(
         $c,
         entity => {
@@ -198,7 +284,7 @@ sub list_GET {
                             [ $r->{id} ]
                         )->as_string
                       }
-                } $c->stash->{collection}->as_hashref->all
+                } $rs->as_hashref->all
             ]
         }
     );

@@ -42,11 +42,12 @@ sub project_map_list_GET{
 	}else{
 		$c->detach;
 	} 
-    $api->stash_result( $c, 'projects',
-		params => { goal_id => $id },
+    $api->stash_result( $c, 
+		['projects', $id],
+		stash => 'project_obj',
 	 );
 
-	$self->status_ok( $c, entity => $c->stash->{projects} );
+	$self->status_ok( $c, entity => $c->stash->{project_obj} );
 	
 }
 sub project_map :Chained('base') :Args(0) :ActionClass('REST') {}
@@ -62,7 +63,27 @@ sub project_map_GET {
 
 }
 
+sub project_map_single :Chained('base') :Args(0) :ActionClass('REST') {}
+sub project_map_single_GET{
+    my ( $self, $c ) = @_;
 
+    my $api = $c->model('API');
+	my $id;
+
+	if ($c->req->param('id') =~ /^\d+$/){
+       $id = $c->req->param('id');
+	}else{
+		$c->detach;
+	} 
+    $api->stash_result( 
+		$c, 
+		[ 'projects', $id ],
+		stash => 'project_obj',
+	 );
+
+	$self->status_ok( $c, entity => $c->stash->{project_obj} );
+	
+}
 
 
 =encoding utf8

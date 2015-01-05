@@ -1,4 +1,6 @@
-    <section class="map text-center">
+    
+	[%-CALL assets.include("js/maps.js")%]
+	<section class="map text-center">
 		<div id="filter-map">
 			<div class="contents text-center">
 				<div class="item">
@@ -37,35 +39,41 @@
 
 	<section class="metas-filtro">
 		<div class="container">
-			<form>
 				<div class="col-xs-4 cep">
-					Metas próximas a mim<br />
-					<input type="text" placeholder="Informe o CEP">
-					<button><span class="glyphicon glyphicon-search"></span></button>
+					Projetos próximos a mim<br />
+					<input type="text" id="txtaddress" name="txtaddress" placeholder="Informe o CEP">
+					<input type="hidden" id="pagetype" value="projectdetail">
+					<input type="hidden" id="projectid" value="[%project_obj.id%]">
+					<button id="btnaddress" name="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
 				</div>
 				<div class="col-xs-8">
 					<div class="row">
 						<div class="col-xs-6 region">
-							Filtrar metas por<br />
-							<select>
-								<option>Nome da região
-							</select>
+							Filtrar projetos por<br />
+							<div class="select-stylized">
+							<select id="homeregion">
+								[% FOREACH region IN regions %]
+									<option value="[% region.id %]">[% region.name %]</option>
+								[% END %]
+							</select></div>
 						</div>
 						<div class="col-xs-6 type">
 							&nbsp;<br />
-							<select>
-								<option>Esporte e lazer
-							</select>
+							<div class="select-stylized">
+							<select id="type">
+								[% FOREACH type IN objectives %]
+								<option value="[% type.id %]">[% type.name %]</option>
+								[% END %]
+							</select></div>
 						</div>
 					</div>
 				</div>
 				<div class="clear"></div>
-			</form>
 		</div>
     </section>
 
 	   <section class="metas-detail project-detail">
-		<div class="container">
+		<div id="result" class="container">
 
 			<div class="row">
 				<div class="col-sm-8">
@@ -76,7 +84,8 @@
 							[% project_obj.description %].
 						</p>
 					</div>
-
+					<div style="height: 300px;" id="map">
+					</div>
 					<div class="timeline">
 					</div>
 
@@ -125,29 +134,31 @@
 				</div>
 				<div class="col-sm-4">
 					<ul class="list-types project">
-						<li><div class="icon lamp"></div> [% goal_obj.objective.name%]</li>
+						[% FOREACH type IN project_obj.type%]
+						<li><div class="icon lamp">
+						</div> 
+						[% type.name%]
+						</li>
+						[% END %]
 					</ul>
-					
+				    [% IF project_obj.region.size > 0 %]	
 					<div class="list-regions">
 						<span class="header">Regiões</span>
 						<ul class="list-regions">
-							<li>São Mateus</li>
-							<li>Pirituba</li>
-							<li>São Miguel</li>
+							<li>[% project_obj.region.name%]</li>
 						</ul>
 					</div>
+					[% END %]
 					
-					<div id="listprojects" class="list-projects-map">
-					</div>
 					<div class="list-projects">
-						<span class="header">[% goal_obj.project_qt.size %] Projetos da Meta</span>
+						<span class="header">[% project_obj.goal.size %] Meta</span>
 						<ul class="list-projects">
-							[% FOREACH project IN goal_obj.project_qt %]
-							<li>[%project.name%]</li>
+							[% FOREACH goal IN project_obj.goal %]
+							<li><a href="[% c.uri_for_action('/homefuncional/goal/detail',[goal.id] ) %]">[%goal.name%]</a></li>
 							[% END %]
 						</ul>
 					</div>
-					
+					[% IF organizations.size > 0 %]	
 					<div class="list-organizations">
 						<span class="header">3 Organizações</span>
 						<ul class="list-organizations">
@@ -156,7 +167,7 @@
 							<li>Organização 03</li>
 						</ul>
 					</div>
-					
+					[% END %]
 				</div>
 			</div>
 			

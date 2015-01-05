@@ -7,11 +7,12 @@ BEGIN { extends 'Catalyst::Controller::REST' }
 __PACKAGE__->config(
     default => 'application/json',
 
-    result      => 'DB::Objective',
-    object_key  => 'objective',
-    search_ok => {
+    result     => 'DB::Objective',
+    object_key => 'objective',
+    search_ok  => {
         id => 'Int'
     },
+
     #result_attr => {
     #    prefetch => [ 'goals' ]
     #},
@@ -60,7 +61,7 @@ sub result_DELETE {
 sub result_PUT {
     my ( $self, $c ) = @_;
 
-    my $params       = { %{ $c->req->params } };
+    my $params    = { %{ $c->req->params } };
     my $objective = $c->stash->{objective};
 
     $objective->execute( $c, for => 'update', with => $c->req->params );
@@ -81,15 +82,16 @@ sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
 sub list_GET {
     my ( $self, $c ) = @_;
 
-	my $rs = $c->stash->{collection};
-	my $lol = $c->stash->{collection};
-	#my $teste = $lol->search( {}, { join => 'goals', select => [qw/me.id me.name/], 'as' => [ 'id', 'name' ], group_by =>  [ 'me.id','me.name' ]});	
-	$rs = $rs->search(
-		undef,
-		{ 
-			order_by => 'name',
-		}
-	);
+    my $rs  = $c->stash->{collection};
+    my $lol = $c->stash->{collection};
+
+    #my $teste = $lol->search( {}, { join => 'goals', select => [qw/me.id me.name/], 'as' => [ 'id', 'name' ], group_by =>  [ 'me.id','me.name' ]});
+    $rs = $rs->search(
+        undef,
+        {
+            order_by => 'name',
+        }
+    );
     $self->status_ok(
         $c,
         entity => {
@@ -104,10 +106,8 @@ sub list_GET {
                               name
                               /
                         ),
-                        url => $c->uri_for_action(
-                            $self->action_for('result'),
-                            [ $r->{id} ]
-                        )->as_string
+                        url => $c->uri_for_action( $self->action_for('result'),
+                            [ $r->{id} ] )->as_string
                       }
                 } $rs->as_hashref->all
             ]
@@ -139,10 +139,11 @@ sub complete : Chained('base') : PathPart('complete') : Args(0) {
 
     $c->model('DB')->txn_do(
         sub {
-            $objective = $c->stash->{collection}->execute( $c, for => 'create', with => $c->req->params );
+            $objective = $c->stash->{collection}
+              ->execute( $c, for => 'create', with => $c->req->params );
 
-            $c->req->params->{active}          = 1;
-            $c->req->params->{role}            = 'objective';
+            $c->req->params->{active}       = 1;
+            $c->req->params->{role}         = 'objective';
             $c->req->params->{objective_id} = $objective->id;
 
             my $user = $c->model('DB::User')

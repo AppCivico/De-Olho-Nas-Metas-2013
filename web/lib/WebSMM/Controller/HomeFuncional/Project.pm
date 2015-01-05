@@ -23,6 +23,10 @@ Catalyst Controller.
 
 sub base :Chained('/homefuncional/base') :PathPart('project') :CaptureArgs(0) {
     my ( $self, $c ) = @_;
+    my $api = $c->model('API');
+
+    $api->stash_result( $c, 'regions' );
+    $api->stash_result( $c, 'objectives' );
 
 }
 
@@ -30,6 +34,8 @@ sub object :Chained('base') :PathPart('') :CaptureArgs(1){
     my ( $self, $c, $id ) = @_;
 
     my $api = $c->model('API');
+	use DDP;
+	p $id;
     $api->stash_result(
         $c,
         [ 'projects', $id ],
@@ -105,7 +111,8 @@ sub region_by_cep :Chained('base') :Args(0) {
 			lnglat => $lnglat 
 		}
     );
-	
+	use DDP; p $c->stash->{error};
+	$c->stash->{message} = 1 if $c->stash->{error};
 	$c->stash->{without_wrapper} = 1;
 
 }

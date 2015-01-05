@@ -34,6 +34,28 @@ var $maps = function () {
 		});
 	
 	}
+	function markprojectdetail( project_id ){
+		$.getJSON('/home/project_map_single', { id : project_id } ,function(data,status){
+			var json = data;
+			marker = "";
+			var myLatlng = new google.maps.LatLng(json.latitude,json.longitude);	
+			marker = new google.maps.Marker({
+                position: myLatlng,
+	            map: map,
+				title: json.name,
+				url : "/home/project/"+json.id
+            });
+
+			google.maps.event.addListener(marker, 'click', function() {
+        		window.location.href = marker.url;
+    		});
+			if (myLatlng){
+				map.setCenter(myLatlng);
+		    	map.setZoom(16);
+			}
+		});
+	
+	}
 
 	function codeAddress(data){
 		geocoder.geocode({ 'address': data + ', Brasil', 'region': 'BR' }, function (results, status) {
@@ -50,7 +72,8 @@ var $maps = function () {
 		initialize	: initialize,
 		loadproject : loadproject,
 		codeAddress : codeAddress,
-		setlocal      : setlocal
+		setlocal      : setlocal,
+		markprojectdetail : markprojectdetail
 	};
 }();
 
@@ -59,10 +82,22 @@ $(document).ready(function () {
 	if ($("#pagetype").val() == 'home'){	
 		$maps.loadproject();
 	}		
-
+	if ($("#pagetype").val() == 'homegoal'){	
+		$maps.loadproject();
+	}		
+	if ($("#pagetype").val() == 'projectdetail'){	
+		$maps.markprojectdetail($("#projectid").val());
+	}		
 	$("#type").change(function(){
 		var id = $( "#type option:selected" ).val();
      	$.get("/home/project/type",{type_id: id}).done( function(data){
+			document.getElementById("result").innerHTML=data
+       	});
+	});
+
+	$("#type_goal").change(function(){
+		var id = $( "#type_goal option:selected" ).val();
+     	$.get("/home/goal/type",{type_id: id}).done( function(data){
 			document.getElementById("result").innerHTML=data
        	});
 	});
@@ -74,6 +109,12 @@ $(document).ready(function () {
        	});
 	});
 
+	$("#goalregion").change(function(){
+		var id = $( "#goalregion option:selected" ).val();
+     	$.get("/home/goal/region",{region_id: id}).done( function(data){
+			document.getElementById("result").innerHTML=data
+       	});
+	});
 
 	$("#txtaddress").autocomplete({
 	source: function (request, response) {
@@ -98,6 +139,23 @@ $(document).ready(function () {
 				document.getElementById("result").innerHTML=data
         	});
         	$maps.setlocal(location);
+		}
+		if ($("#pagetype").val() == 'projectdetail'){		
+ 			$.get("/home/project/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+				document.getElementById("result").innerHTML=data
+        	});
+		}
+		
+		if ($("#pagetype").val() == 'homegoal'){		
+ 			$.get("/home/goal/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+				document.getElementById("result").innerHTML=data
+        	});
+		}
+
+		if ($("#pagetype").val() == 'goaldetail'){		
+ 			$.get("/home/goal/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+				document.getElementById("result").innerHTML=data
+        	});
 		}
 
 		if ($("#pagetype").val() == 'region'){			
