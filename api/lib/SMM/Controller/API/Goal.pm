@@ -32,23 +32,25 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $goal = $c->stash->{goal};
-	use DDP;
-	my @region_ids;
-	#@region_ids = map { map { $_->project->region_id } grep { $_->project->region_id } $_->goal_projects } $rs->all;
-	@region_ids = map { $_->project->region_id } grep {$_->project->region_id } $goal->goal_projects;
-	my @region_ids_unique = uniq @region_ids;
-	my @region;
-	if (@region_ids_unique){
+    use DDP;
+    my @region_ids;
+    @region_ids =
+      map  { $_->project->region_id }
+      grep { $_->project->region_id } $goal->goal_projects;
+    my @region_ids_unique = uniq @region_ids;
+    my @region;
+    if (@region_ids_unique) {
 
-		@region = $goal->resultset('Region')->search(
-		{
-			id => {'-in' => \@region_ids_unique}
-		},
-		{
-	 	select       => [qw/id name/],
-	 	result_class => 'DBIx::Class::ResultClass::HashRefInflator',
-		})->all;
-	}
+        @region = $goal->resultset('Region')->search(
+            {
+                id => { '-in' => \@region_ids_unique }
+            },
+            {
+                select       => [qw/id name/],
+                result_class => 'DBIx::Class::ResultClass::HashRefInflator',
+            }
+        )->all;
+    }
     $self->status_ok(
         $c,
         entity => {
@@ -101,6 +103,7 @@ sub result_GET {
                             map {
                                 { $_ => $p->project->$_ }
                               } qw/
+                              id
                               name
                               latitude
                               longitude
@@ -115,16 +118,18 @@ sub result_GET {
                     map {
                         my $p = $_;
                         (
-                            map {
-                                { $_ => $p->project->$_ }
-                              } qw/
-                              name
-                              /
+                            +{
+                                map { $_ => $p->project->$_, }
+                                  qw/
+                                  id
+                                  name
+                                  /
+                            },
                           ),
                     } $goal->goal_projects,
                 ),
             ],
-			region => \@region,
+            region => \@region,
         }
     );
 
@@ -212,22 +217,18 @@ sub list_GET {
         $rs = $rs->search( { 'project.region_id' => $region->{id} } );
     }
 
-	my @region_ids;
-	@region_ids = map { map { $_->project->region_id } grep { $_->project->region_id } $_->goal_projects } $rs->all;
-	my @region_ids_unique = uniq @region_ids;
-	my @region;
-	if (@region_ids_unique){
-
-		@region = $rs->resultset('Region')->search(
-		{
-			id => {'-in' => \@region_ids_unique}
-		},
-		{
-	 	select       => [qw/id name/],
-	 	result_class => 'DBIx::Class::ResultClass::HashRefInflator',
-		})->all;
-	}
-
+    my $region_ids = {};
+    map {
+        my $p = $_;
+        map { push @{ $region_ids->{ $p->id } }, $_->project->region_id }
+          grep { $_->project->region_id }
+          $_->goal_projects
+    } $rs->all;
+    my $order = {};
+    for my $id ( keys %$region_ids ) {
+        my @lol = uniq @{ $region_ids->{$id} };
+        push( @{ $order->{$id} }, @lol );
+    }
     $self->status_ok(
         $c,
         entity => {
@@ -279,7 +280,8 @@ sub list_GET {
                                 } @{ $r->{goal_projects} },
                             ),
                         ],
-                        url => $c->uri_for_action(
+                        region => $order->{ $r->{id} },
+                        url    => $c->uri_for_action(
                             $self->action_for('result'),
                             [ $r->{id} ]
                         )->as_string

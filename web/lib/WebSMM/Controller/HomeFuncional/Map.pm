@@ -43,11 +43,10 @@ sub project_map_list_GET{
 		$c->detach;
 	} 
     $api->stash_result( $c, 
-		['projects', $id],
-		stash => 'project_obj',
+		['goals', $id],
+		stash => 'goal_obj',
 	 );
-
-	$self->status_ok( $c, entity => $c->stash->{project_obj} );
+	$self->status_ok( $c, entity => $c->stash->{goal_obj} );
 	
 }
 sub project_map :Chained('base') :Args(0) :ActionClass('REST') {}
@@ -83,6 +82,25 @@ sub project_map_single_GET{
 
 	$self->status_ok( $c, entity => $c->stash->{project_obj} );
 	
+}
+
+sub region_project :Chained('base') :Args(0) :ActionClass('REST') {}
+
+sub region_project_GET{
+    my ( $self, $c ) = @_;
+
+	$c->detach unless $c->req->param('id');
+	$c->detach unless $c->req->param('id') =~ qr/^\d+$/;
+
+    my $api = $c->model('API');
+	my $id = $c->req->param('id');
+
+    $api->stash_result(
+        $c,
+        [ 'regions', $id ],
+        stash => 'region_obj',
+    );
+	$self->status_ok( $c, entity => $c->stash->{region_obj} );
 }
 
 

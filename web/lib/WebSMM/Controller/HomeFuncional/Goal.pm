@@ -53,7 +53,7 @@ sub index :Chained('base') :PathPart('') :Args(0){
     my $api = $c->model('API');
 
     $api->stash_result( $c, 'goals' );
-
+	$c->stash->{goals};
 }
 
 sub type :Chained('base')  :Args(0){

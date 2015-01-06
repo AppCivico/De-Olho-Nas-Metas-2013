@@ -1,6 +1,7 @@
 package SMM::Controller::API::Region;
 
 use Moose;
+use utf8;
 
 BEGIN { extends 'Catalyst::Controller::REST' }
 
@@ -50,11 +51,13 @@ sub result_GET {
                   /
             ),
             projects => [
-                (
+                ( 
                     map {
                         {
-                            id   => $_->id,
-                            name => $_->name
+                            id        => $_->id,
+                            name      => $_->name,
+							latitude  => $_->latitude,
+							longitude => $_->longitude
                         }
 
                     } $region->projects,
@@ -198,14 +201,12 @@ sub complete : Chained('base') : PathPart('complete') : Args(0) {
 
 sub latlong : Chained('base') : Args(0) {
     my ( $self, $c ) = @_;
-    use DDP;
 
     if ( $c->req->param('lnglat') ) {
         $c->detach
           unless $c->req->param('lnglat') =~
           qr/^(\-?\d+(\.\d+)?)\ \s*(\-?\d+(\.\d+)?)$/;
         my $lnglat = $c->req->param('lnglat');
-        p $lnglat;
         my $region = $c->model('DB')->resultset('Region')->search_rs(
 
             \[
@@ -213,12 +214,19 @@ sub latlong : Chained('base') : Args(0) {
                 [ _coords => qq{SRID=4326;POINT($lnglat)} ]
             ],
             {
-                select       => [qw/id name/],
+				select       => [qw/id/],
                 result_class => 'DBIx::Class::ResultClass::HashRefInflator',
             }
-        )->single;
-
-        $self->status_ok( $c, entity => { region_id => $region->{id} }, );
+        )->next;
+		
+        $self->status_bad_request(
+            $c, message => "NENHUMA REGIÃO PRÓXIMA A ESSA LOCALIDADE",
+        ),
+        $c->detach
+		unless $region;
+	    use DDP;
+		p $region;	
+        $self->status_ok( $c, entity =>  { id => $region->{id} } );
 
     }
 

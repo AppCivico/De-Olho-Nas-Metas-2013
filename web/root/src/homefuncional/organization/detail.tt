@@ -1,6 +1,4 @@
-    
-	[%-CALL assets.include("js/maps.js")%]
-	<section class="map text-center">
+    <section class="map text-center">
 		<div id="filter-map">
 			<div class="contents text-center">
 				<div class="item">
@@ -37,56 +35,41 @@
 		<div class="clear"></div>
     </section>
 
-	<section class="metas-filtro gold">
+	<section class="metas-filtro violet">
 		<div class="container">
-				<div class="col-xs-4 cep">
-					Encontre sua região<br />
-					<input type="hidden" id="pagetype" value="regiondetail">
-					<input type="hidden" id="regionid" value="[% region_obj.id %]">
-					<input type="text" id="txtaddress" placeholder="Informe o CEP">
-					<button id="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
-				</div>
-				<div class="col-xs-8">
-					<div class="row">
-						<div class="col-xs-6 region">
-							Selecione o Distrito<br />
-							<div class="select-stylized">
-							<select id="region" onchange="location = this.options[this.selectedIndex].value;">
-								[% FOREACH region IN regions %]
-								<option value="[% c.uri_for_action('/homefuncional/region/detail',[ region.id ] ) %]">[%region.name%]</option>
-								[% END %]
-							</select>
-							</div>
-						</div>
-<!--					<div class="col-xs-6 type">
-							&nbsp;<br />
-							<div class="select-stylized">
-							<select>
-								<option>Bairro
-							</select>
-							</div>
-						</div>-->
+			<form>
+				<div class="row">
+					<div class="col-xs-8 nome">
+						Procurar Conselho<br />
+						<input type="text" placeholder="Informe o Nome">
+						<button><span class="glyphicon glyphicon-search"></span></button>
+					</div>
+					<div class="col-xs-4">
+							Filtrar conselho por<br />
+							<div class="select-stylized"><select>
+								<option>Metas
+							</select></div>
 					</div>
 				</div>
 				<div class="clear"></div>
+			</form>
 		</div>
     </section>
 
-	   <section class="metas-detail region-detail">
-		<div id="result" class="container">
+	   <section class="metas-detail company-detail">
+		<div class="container">
+
 			<div class="row">
 				<div class="col-sm-8">
 				
 					<div class="body">
-						<h1>[%region_obj.name%]</h1>
+						<h1>Nome do Conselho</h1>
 						<p>
 							Liquorice brownie unerdwear.com bonbon brownie croissant croissant. Croissant sugar plum macaroon liquorice I love icing applicake I love gummies. Candy canes icing cotton candy macaroon lollipop. Pudding gummi bears oat cake bear claw chupa chups. I love wafer lollipop chocolate bar. Jujubes I love I love fruitcake I love gummi bears dragée pie ice cream. I love lollipop halvah jelly-o chupa chups liquorice candy canes unerdwear.com I love. Brownie sweet roll liquorice bonbon I love macaroon chocolate bar I love.
 						</p>
 					</div>
 					
-					<div style="height: 300px;" id="map">
-					</div>	
-<!--				<div class="row social">
+					<div class="row social">
 						<div class="col-xs-4">
 							<div class="social-share">
 								<ul>
@@ -97,9 +80,18 @@
 								<div class="clear"></div>
 							</div>
 						</div>
-					</div>-->
+						<div class="col-xs-4 text-center">
+							<div class="followers">
+								<div class="icon users2"></div> <span class="caption"><span class="counter">1250</span> seguidores
+							</div>
+						</div>
+						<div class="col-xs-4 text-right">
+							<button class="btn btn-reply">Siga o Conselho</button>
+						</div>
+					</div>
 					
-<!--				<div class="events">
+					
+					<div class="events">
 						<h3>Participe dos Eventos</h3>
 						<div class="date-row row">
 							<div class="col-xs-1">
@@ -114,40 +106,48 @@
 								<div class="item">
 									<div class="title">Nome da campanha</div>
 									<div class="description">Pastry wafer brownie liquorice. Unerdwear.com gummi cupcake bears bonbon. Cheesecake dessert cupcake.</div>
+									<div class="footer">
+										<div class="row">
+											<div class="col-sm-6">
+												<div class="icon clock"></div> Sábado, 28/12/2014 às 15h
+											</div>
+											<div class="col-sm-6">
+												<div class="icon gps"></div> Nome do local
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>-->
-					
-					<br /><br />
-					
-				</div>
-					<div class="col-sm-4">
-					<div class="list-box list-gold">
-						<span class="header">Bairros e sub regiões</span>
-						<ul>
-							<li>[%region_obj.name%]</li>
-						</ul>
 					</div>
 					
+				</div>
+				<div class="col-sm-4">
 					<div class="list-box list-green">
-						<span class="header">[% region_obj.projects.size%] Projetos na Região</span>
+						<span class="header">Projetos Prioritários</span>
 						<ul>
-							[% IF region_obj.projects.size > 0 %]
-
-							[% FOREACH project IN region_obj.projects%]
-							
-							<li><a href="[% c.uri_for_action('/homefuncional/project/detail',[project.id] ) %]">[% project.name%]</a></li>
-
-							[% END %]
-							[%ELSE%]
-							<li><a href="">NENHUM PROJETO NA REGIÃO</a></li>
-							[% END %]
+							<li>São Mateus</li>
+							<li>Pirituba</li>
+							<li>São Miguel</li>
+						</ul>
+					</div>
+					
+					<div id="map-mock" class="project-map">
+					</div>
+					
+					<div class="list-box list-orange">
+						<span class="header">Campanhas</span>
+						<ul>
+							<li><a href="">Campanha 01</a></li>
+							<li><a href="">Campanha 02</a></li>
+							<li><a href="">Campanha 03</a></li>
 						</ul>
 					</div>
 					<br /><br />
 					
 				</div>
-			</div>	
+			</div>
+			
 		</div>
     </section>	
+	

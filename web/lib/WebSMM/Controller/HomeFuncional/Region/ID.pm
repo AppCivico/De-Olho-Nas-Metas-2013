@@ -22,10 +22,11 @@ Catalyst Controller.
 =head2 index
 
 =cut
+sub id :Chained('/homefuncional/region/base') :Args(0) :ActionClass('REST'){}
 
-sub id :Chained('/homefuncional/region/base') :Args(0) {
+sub id_GET{
     my ( $self, $c ) = @_;
-	
+
 	$c->detach unless $c->req->param('latitude');
 	$c->detach unless $c->req->param('longitude');
 	
@@ -35,20 +36,21 @@ sub id :Chained('/homefuncional/region/base') :Args(0) {
 	my $lnglat = join (q/ /,$c->req->param('longitude'),$c->req->param('latitude'));
 
     my $api = $c->model('API');
+			
 	
 	$api->stash_result( 
 		$c, 'regions/latlong',
 		params => {
 			lnglat => $lnglat, 
 		},
-		stash => 'region',
-	 );
-	$self->status_ok(
-		$c,
-		entity => { id => $c->stash->{region}->{region_id} }
+		stash => 'region_id',
 	);
+	if ($c->stash->{region_id}->{error}){
+		$self->status_ok($c, entity => { message => 'NENHUMA REGIÃO ENCONTRADA'});
+	}else{
+		$self->status_ok($c, entity => { id => $c->stash->{region_id}->{id} });	 
+	}
 }
-
 
 
 =encoding utf8

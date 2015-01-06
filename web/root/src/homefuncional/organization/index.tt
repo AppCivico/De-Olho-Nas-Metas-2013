@@ -57,23 +57,34 @@
 			</form>
 		</div>
     </section>
-
-    <section class="metas-result">
+	   <section class="metas-detail search-list">
 		<div class="container">
-
-			<h2 class="section-title">[% organizations.size %] Organizações Encontradas</h2>
-			[% FOREACH organization IN organizations %]	
-			<div class="item row">
-				<div class="col-sm-10 nopadding">
-					<div class="contents pull-left">
-						<div class="description">
-							<h2>[% organization.name%]</h2>
+			<h2 class="section-title">[%organizations.count.0%] Conselhos</h2>
+				
+			<div class="row index-results violet">
+				<div class="col-sm-4">
+					[% FOREACH key IN order %]
+					[% UNLESS key == 'count' %]
+					<div class="item row">
+						<div class="index col-xs-1">
+							<div class="contents">[%key%]</div>
+						</div>
+						<div class="list col-xs-11">
+							<ul>
+							[%FOREACH org IN organizations.$key %]
+								<li><a href="[% c.uri_for_action('/homefuncional/organization/detail', [ org.id ])%]">[%org.name%]</a></li>
+								[% END %]
+							</ul>
 						</div>
 					</div>
-					<div class="clear"></div>
+					[% END%]
+					[% END %]
 				</div>
+
 			</div>
-			[% END %]
+			
+			
 		</div>
-    </section>
+    </section>	
 	
+

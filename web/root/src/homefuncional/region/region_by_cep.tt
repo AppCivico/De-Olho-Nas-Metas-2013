@@ -1,17 +1,26 @@
+
+[% IF region_obj.error %]
+
+	<h2 class="section-title">[% region_obj.error %]</h2>
+[% ELSE %] 
+	
+
+	   [%-CALL assets.include("js/maps.js")%]
+	   <section class="metas-detail region-detail">
+		<div id="result" class="container">
 			<div class="row">
 				<div class="col-sm-8">
 				
 					<div class="body">
-						<h1>[%regions.name%]</h1>
+						<h1>[%region_obj.name%]</h1>
 						<p>
 							Liquorice brownie unerdwear.com bonbon brownie croissant croissant. Croissant sugar plum macaroon liquorice I love icing applicake I love gummies. Candy canes icing cotton candy macaroon lollipop. Pudding gummi bears oat cake bear claw chupa chups. I love wafer lollipop chocolate bar. Jujubes I love I love fruitcake I love gummi bears dragée pie ice cream. I love lollipop halvah jelly-o chupa chups liquorice candy canes unerdwear.com I love. Brownie sweet roll liquorice bonbon I love macaroon chocolate bar I love.
 						</p>
 					</div>
 					
-					<div id="map-mock" class="project-map">
-					</div>
-					
-					<div class="row social">
+					<div style="height: 300px;" id="map">
+					</div>	
+<!--				<div class="row social">
 						<div class="col-xs-4">
 							<div class="social-share">
 								<ul>
@@ -22,9 +31,9 @@
 								<div class="clear"></div>
 							</div>
 						</div>
-					</div>
+					</div>-->
 					
-					<div class="events">
+<!--				<div class="events">
 						<h3>Participe dos Eventos</h3>
 						<div class="date-row row">
 							<div class="col-xs-1">
@@ -39,43 +48,41 @@
 								<div class="item">
 									<div class="title">Nome da campanha</div>
 									<div class="description">Pastry wafer brownie liquorice. Unerdwear.com gummi cupcake bears bonbon. Cheesecake dessert cupcake.</div>
-									<div class="footer">
-										<div class="row">
-											<div class="col-sm-6">
-												<div class="icon clock"></div> Sábado, 28/12/2014 às 15h
-											</div>
-											<div class="col-sm-6">
-												<div class="icon gps"></div> Nome do local
-											</div>
-										</div>
-									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					</div>-->
 					
 					<br /><br />
 					
 				</div>
-				<div class="col-sm-4">
+					<div class="col-sm-4">
 					<div class="list-box list-gold">
 						<span class="header">Bairros e sub regiões</span>
 						<ul>
-							<li>São Mateus</li>
-							<li>Pirituba</li>
-							<li>São Miguel</li>
+							<li>[%region_obj.name%]</li>
 						</ul>
 					</div>
 					
 					<div class="list-box list-green">
-						<span class="header">3 Projetos na Região</span>
+						<span class="header">[% region_obj.projects.size%] Projetos na Região</span>
 						<ul>
-							<li><a href="">Projeto 01</a></li>
-							<li><a href="">Projeto 02</a></li>
-							<li><a href="">Projeto 03</a></li>
+							[% IF region_obj.projects.size > 0 %]
+
+							[% FOREACH project IN region_obj.projects%]
+							
+							<li><a href="[% c.uri_for_action('/homefuncional/project/detail',[project.id] ) %]">[% project.name%]</a></li>
+
+							[% END %]
+							[%ELSE%]
+							<li><a href="">NENHUM PROJETO NA REGIÃO</a></li>
+							[% END %]
 						</ul>
 					</div>
 					<br /><br />
 					
 				</div>
-			</div>
+			</div>	
+		</div>
+    </section>	
+[%END%]

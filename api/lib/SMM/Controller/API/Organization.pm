@@ -33,7 +33,9 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $organization = $c->stash->{organization};
-
+	
+	my $group_by = {} ; push @{$group_by->{ substr($_->name, 1, 1) }}, $_->name for $organization;
+	
     $self->status_ok(
         $c,
         entity => {
