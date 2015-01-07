@@ -21,6 +21,14 @@ sub verifiers_specs {
                     required => 1,
                     type     => 'Str',
                 },
+                username => {
+                    required => 1,
+                    type     => 'Str',
+                },
+                phone_number => {
+                    required => 1,
+                    type     => 'Str',
+                },
                 password => {
                     required  => 1,
                     type      => 'Str',

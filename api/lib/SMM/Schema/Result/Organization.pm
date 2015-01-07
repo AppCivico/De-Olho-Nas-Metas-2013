@@ -1,5 +1,4 @@
 use utf8;
-
 package SMM::Schema::Result::Organization;
 
 # Created by DBIx::Class::Schema::Loader
@@ -33,8 +32,7 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
-    "PassphraseColumn" );
+__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
 =head1 TABLE: C<organization>
 
@@ -105,33 +103,33 @@ __PACKAGE__->table("organization");
 =cut
 
 __PACKAGE__->add_columns(
-    "id",
-    {
-        data_type         => "integer",
-        is_auto_increment => 1,
-        is_nullable       => 0,
-        sequence          => "organization_id_seq",
-    },
-    "name",
-    { data_type => "text", is_nullable => 0 },
-    "address",
-    { data_type => "text", is_nullable => 1 },
-    "postal_code",
-    { data_type => "text", is_nullable => 1 },
-    "city_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-    "description",
-    { data_type => "text", is_nullable => 1 },
-    "email",
-    { data_type => "text", is_nullable => 1 },
-    "website",
-    { data_type => "text", is_nullable => 1 },
-    "phone",
-    { data_type => "text", is_nullable => 1 },
-    "number",
-    { data_type => "text", is_nullable => 1 },
-    "complement",
-    { data_type => "text", is_nullable => 1 },
+  "id",
+  {
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+    sequence          => "organization_id_seq",
+  },
+  "name",
+  { data_type => "text", is_nullable => 0 },
+  "address",
+  { data_type => "text", is_nullable => 1 },
+  "postal_code",
+  { data_type => "text", is_nullable => 1 },
+  "city_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "description",
+  { data_type => "text", is_nullable => 1 },
+  "email",
+  { data_type => "text", is_nullable => 1 },
+  "website",
+  { data_type => "text", is_nullable => 1 },
+  "phone",
+  { data_type => "text", is_nullable => 1 },
+  "number",
+  { data_type => "text", is_nullable => 1 },
+  "complement",
+  { data_type => "text", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -157,15 +155,30 @@ Related object: L<SMM::Schema::Result::City>
 =cut
 
 __PACKAGE__->belongs_to(
-    "city",
-    "SMM::Schema::Result::City",
-    { id => "city_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "city",
+  "SMM::Schema::Result::City",
+  { id => "city_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
+=head2 goal_organizations
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::GoalOrganization>
+
+=cut
+
+__PACKAGE__->has_many(
+  "goal_organizations",
+  "SMM::Schema::Result::GoalOrganization",
+  { "foreign.organization_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 managements
@@ -177,10 +190,10 @@ Related object: L<SMM::Schema::Result::Management>
 =cut
 
 __PACKAGE__->has_many(
-    "managements",
-    "SMM::Schema::Result::Management",
-    { "foreign.organization_id" => "self.id" },
-    { cascade_copy              => 0, cascade_delete => 0 },
+  "managements",
+  "SMM::Schema::Result::Management",
+  { "foreign.organization_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 users
@@ -192,13 +205,15 @@ Related object: L<SMM::Schema::Result::User>
 =cut
 
 __PACKAGE__->has_many(
-    "users", "SMM::Schema::Result::User",
-    { "foreign.organization_id" => "self.id" },
-    { cascade_copy              => 0, cascade_delete => 0 },
+  "users",
+  "SMM::Schema::Result::User",
+  { "foreign.organization_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-09-01 15:52:44
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:762jPgxK2rGWFC0DG5QgfA
+
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-01-06 17:54:12
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:YTfwmjiVKPkDs3eLfVtTxw
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
 with 'SMM::Schema::Role::ResultsetFind';

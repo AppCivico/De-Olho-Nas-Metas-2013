@@ -95,6 +95,16 @@ __PACKAGE__->table("user");
   is_foreign_key: 1
   is_nullable: 1
 
+=head2 username
+
+  data_type: 'text'
+  is_nullable: 1
+
+=head2 phone_number
+
+  data_type: 'text'
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -126,6 +136,10 @@ __PACKAGE__->add_columns(
   { data_type => "varchar", is_nullable => 1, size => 12 },
   "organization_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "username",
+  { data_type => "text", is_nullable => 1 },
+  "phone_number",
+  { data_type => "text", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -153,6 +167,18 @@ __PACKAGE__->set_primary_key("id");
 =cut
 
 __PACKAGE__->add_unique_constraint("user_email_key", ["email"]);
+
+=head2 C<user_username_key>
+
+=over 4
+
+=item * L</username>
+
+=back
+
+=cut
+
+__PACKAGE__->add_unique_constraint("user_username_key", ["username"]);
 
 =head1 RELATIONS
 
@@ -257,8 +283,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-10-06 19:49:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:8sHZ9uSGfaR4U+fEtJInNQ
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-01-06 17:55:52
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:p+IMhXzJyzmH0woQeKU5Mw
 
 __PACKAGE__->many_to_many( roles => user_roles => 'role' );
 
@@ -299,6 +325,14 @@ sub verifiers_specs {
             filters => [qw(trim)],
             profile => {
                 name => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                username => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                phone_number => {
                     required => 0,
                     type     => 'Str',
                 },

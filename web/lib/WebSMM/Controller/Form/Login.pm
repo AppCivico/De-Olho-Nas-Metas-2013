@@ -29,8 +29,10 @@ sub login : Chained('base') : PathPart('login') : Args(0) {
 sub after_login {
     my ( $self, $c ) = @_;
     my $url = \'/';
+	use DDP;
+	p $c->user->roles;
     if ( grep { /^user$/ } $c->user->roles ) {
-        $url = '/user/dashboard/index';
+        $url = '/user/account/index';
     }
     elsif ( grep { /^admin|organization$/ } $c->user->roles ) {
         $url = '/admin/dashboard/index';

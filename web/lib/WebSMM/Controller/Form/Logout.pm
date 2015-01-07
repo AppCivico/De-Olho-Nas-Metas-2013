@@ -13,7 +13,7 @@ sub logout : Chained('base') : PathPart('logout') : Args(0) {
 
     $c->logout;
 
-    $c->detach( '/form/redirect_ok', [ \'/', {}, 'Volte sempre!' ] );
+    $c->detach( '/form/redirect_ok', [ \'/login', {}, 'Volte sempre!' ] );
 }
 
 __PACKAGE__->meta->make_immutable;
