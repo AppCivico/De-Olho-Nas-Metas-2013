@@ -39,6 +39,7 @@
 
 	<section class="metas-filtro">
 		<div class="container">
+			<div class="form">
 				<div class="col-xs-4 cep">
 					Projetos próximos a mim<br />
 					<input type="text" id="txtaddress" name="txtaddress" placeholder="Informe o CEP">
@@ -52,6 +53,7 @@
 							Filtrar projetos por<br />
 							<div class="select-stylized">
 							<select id="homeregion">
+								<option value="">Bairro</option>
 								[% FOREACH region IN regions %]
 									<option value="[% region.id %]">[% region.name %]</option>
 								[% END %]
@@ -61,6 +63,7 @@
 							&nbsp;<br />
 							<div class="select-stylized">
 							<select id="type">
+								<option value="">Tipo</option>
 								[% FOREACH type IN objectives %]
 								<option value="[% type.id %]">[% type.name %]</option>
 								[% END %]
@@ -69,6 +72,7 @@
 					</div>
 				</div>
 				<div class="clear"></div>
+			</div>
 		</div>
     </section>
 
