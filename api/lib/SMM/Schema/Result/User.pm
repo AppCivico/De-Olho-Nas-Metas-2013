@@ -105,6 +105,11 @@ __PACKAGE__->table("user");
   data_type: 'text'
   is_nullable: 1
 
+=head2 image_perfil
+
+  data_type: 'text'
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -139,6 +144,8 @@ __PACKAGE__->add_columns(
   "username",
   { data_type => "text", is_nullable => 1 },
   "phone_number",
+  { data_type => "text", is_nullable => 1 },
+  "image_perfil",
   { data_type => "text", is_nullable => 1 },
 );
 
@@ -283,8 +290,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-01-06 17:55:52
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:p+IMhXzJyzmH0woQeKU5Mw
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-01-07 07:10:20
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:uiOJ3BM9tdogzfonA52N9A
 
 __PACKAGE__->many_to_many( roles => user_roles => 'role' );
 
