@@ -38,6 +38,7 @@
 
 	<section class="metas-filtro">
 		<div class="container">
+			<div class="form">
 				<div class="col-xs-4 cep">
 					Metas próximas a mim<br />
 					<input type="hidden" id="pagetype" value="goaldetail">
@@ -51,6 +52,7 @@
 							Filtrar metas por<br />
 							<div class="select-stylized">
 							<select id="goalregion">
+								<option value="">Bairro</option>
 								[% FOREACH region IN regions%]
 									<option value="[%region.id%]">[% region.name %]</option>
 								[% END %]
@@ -60,6 +62,7 @@
 							&nbsp;<br />
 							<div class="select-stylized">
 							<select id="type_goal">
+								<option value="">Tipo</option>
 								[% FOREACH type IN objectives %]
 								<option value="[% type.id %]">[% type.name %]</option>
 								[% END %]
@@ -68,6 +71,7 @@
 					</div>
 				</div>
 				<div class="clear"></div>
+			</div>
 		</div>
     </section>
 
