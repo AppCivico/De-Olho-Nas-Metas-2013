@@ -15,12 +15,6 @@ sub base : Chained('/root') : PathPart('user') : CaptureArgs(0) {
     my $api  = $c->model('API');
     my $form = $c->model('Form');
 
-    $api->stash_result(
-        $c,
-        [ 'drivers', $c->user->driver->{id} ],
-        stash => 'driver'
-    );
-
 
     if ( $c->req->method eq 'POST' ) {
         return;

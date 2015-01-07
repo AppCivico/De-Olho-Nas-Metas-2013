@@ -10,6 +10,7 @@ BEGIN { extends 'Catalyst::Controller' }
 sub base : Chained('/root') : PathPart('') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
     $c->response->headers->header( 'charset' => 'utf-8' );
+	$c->stash->{template_wrapper} = 'func';
 }
 
 sub register : Chained('base') : PathPart('cadastro') : Args(0) {
@@ -52,7 +53,7 @@ sub register : Chained('base') : PathPart('cadastro') : Args(0) {
         }
     }
 
-    $c->stash->{template} = 'auto/cadastro.tt';
+    $c->stash->{template} = 'auto/register.tt';
 }
 
 

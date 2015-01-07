@@ -18,6 +18,10 @@ sub index : Chained('object') : PathPart('') : Args(0) {
 
 }
 
+sub follow : Chained('object') : PathPart('seguindo') :Args(0){
+    my ( $self, $c ) = @_;
+
+}
 __PACKAGE__->meta->make_immutable;
 
 1;

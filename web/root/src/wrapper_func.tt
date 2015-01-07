@@ -26,6 +26,7 @@
     <link href="/static/css/jquery-ui.structure.min.css" rel="stylesheet">
     <link href="/static/css/jquery-ui.min.css" rel="stylesheet">
 	<link rel="icon" type="image/png" href="favicon.png" />
+    <link href="/static/css/style.css" rel="stylesheet">
 </head>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -69,9 +70,18 @@
                     <li>
                         <a href="/home/campaign">Campanhas</a>
                     </li>
+					[% IF c.user %]
                     <li class="highlight">
-                        <a href="/login">Entrar</a>
+                        <a href="[%c.uri_for_action('/user/account/index')%]" class="navbar-link"> Olá [%c.user.username%]</a>
                     </li>
+                    <li class="highlight">
+						<a href="[%c.uri_for('/logout')%]">Sair</a>
+                    </li>
+					[% ELSE %]
+                    <li class="highlight">
+						<a href="/login">Entrar</a>
+                    </li>
+					[%END%]
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
