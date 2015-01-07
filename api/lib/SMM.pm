@@ -1,7 +1,7 @@
 package SMM;
 use Moose;
 use namespace::autoclean;
-
+use Sys::Hostname;
 use Catalyst::Runtime 5.90042;
 use open qw(:std :utf8);
 
@@ -39,6 +39,9 @@ our $VERSION = '0.01';
 # with an external configuration file acting as an override for
 # local deployment.
 
+my $user = $ENV{USER};
+my $host = Sys::Hostname::hostname();
+
 __PACKAGE__->config(
     name     => 'SMM',
     encoding => 'UTF-8',
@@ -47,6 +50,11 @@ __PACKAGE__->config(
     disable_component_resolution_regex_fallback => 1,
     enable_catalyst_header                      => 1,   # Send X-Catalyst header
 
+    'Plugin::ConfigLoader' => {
+         driver              => { General => { -ForceArray => 1, } },
+         config_local_suffix => "${user}_${host}",
+         file => __PACKAGE__->path_to('conf')
+     },
 );
 
 after 'setup_components' => sub {
