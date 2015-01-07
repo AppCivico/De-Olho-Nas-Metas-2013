@@ -71,6 +71,7 @@ __PACKAGE__->table("user_follow_project");
 =head2 active
 
   data_type: 'boolean'
+  default_value: true
   is_nullable: 1
 
 =cut
@@ -95,7 +96,7 @@ __PACKAGE__->add_columns(
     original      => { default_value => \"now()" },
   },
   "active",
-  { data_type => "boolean", is_nullable => 1 },
+  { data_type => "boolean", default_value => \"true", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -153,8 +154,57 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-03 11:41:59
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ql9Ynp6gojaX5PjlJ3R5tQ
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-04 05:03:04
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:0Zljail4TKthAGPiZ3uBpQ
+
+with 'SMM::Role::Verification';
+with 'SMM::Role::Verification::TransactionalActions::DBIC';
+with 'SMM::Schema::Role::ResultsetFind';
+
+use Data::Verifier;
+use MooseX::Types::Email qw/EmailAddress/;
+
+sub verifiers_specs {
+    my $self = shift;
+    return {
+
+        update => Data::Verifier->new(
+            filters => [qw(trim)],
+            profile => {
+                user_id => {
+                    required => 1,
+                    type     => 'Int',
+                },
+                project_id => {
+                    required => 1,
+                    type     => 'Int',
+                },
+				active => {
+					required => 0,
+					type     => 'Bool',
+				},
+            },
+        ),
+
+    };
+}
+
+sub action_specs {
+    my $self = shift;
+    return {
+        update => sub {
+            my %values = shift->valid_values;
+
+            not defined $values{$_} and delete $values{$_} for keys %values;
+			
+            my $user_follow_project = $self->update( \%values );
+
+            return $user_follow_project;
+        },
+
+    };
+}
+
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

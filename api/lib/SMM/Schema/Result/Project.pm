@@ -139,6 +139,21 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
 
+=head2 comments
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::Comment>
+
+=cut
+
+__PACKAGE__->has_many(
+  "comments",
+  "SMM::Schema::Result::Comment",
+  { "foreign.project_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 goal_projects
 
 Type: has_many
@@ -235,9 +250,34 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-03 11:41:59
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:HbK0tPYJA/p9mmxJNWZiuw
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-06 09:52:11
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:bDOkpOkhWOz/ZBnGT/sGYQ
 
+__PACKAGE__->has_many(
+    approved_comments => 'SMM::Schema::Result::Comment',
+    sub {
+      my $args = shift;
+
+      return {
+        "$args->{foreign_alias}.project_id" => { -ident => "$args->{self_alias}.id" },
+        "$args->{foreign_alias}.approved"   => 1,
+      };
+    },
+    { cascade_copy => 0, cascade_delete => 0 },
+  );
+
+__PACKAGE__->has_many(
+    approved_project_events => 'SMM::Schema::Result::ProjectEvent',
+    sub {
+      my $args = shift;
+
+      return {
+        "$args->{foreign_alias}.project_id" => { -ident => "$args->{self_alias}.id" },
+        "$args->{foreign_alias}.approved"   => 1,
+      };
+    },
+    { cascade_copy => 0, cascade_delete => 0 },
+  );
 __PACKAGE__->many_to_many( goals => goal_projects => 'goal');
 
 __PACKAGE__->many_to_many( prefectures => project_prefectures => 'prefecture' );

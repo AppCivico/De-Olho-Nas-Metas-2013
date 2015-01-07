@@ -8,7 +8,7 @@ BEGIN { extends 'Catalyst::Controller::REST' }
 
 __PACKAGE__->config(
     default => 'application/json',
-
+	
     result      => 'DB::Goal',
     object_key  => 'goal',
     result_attr => {
@@ -60,6 +60,7 @@ sub result_GET {
                   id
                   name
                   description
+				  expected_budget
                   /
             ),
             goal_projects => {
@@ -216,7 +217,6 @@ sub list_GET {
           unless $region;
         $rs = $rs->search( { 'project.region_id' => $region->{id} } );
     }
-use DDP;
     $self->status_ok(
         $c,
         entity => {

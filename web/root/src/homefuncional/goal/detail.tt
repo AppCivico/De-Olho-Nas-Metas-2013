@@ -90,6 +90,10 @@
 						</p>
 					</div>
 
+					<div id="investimento">
+					<a>Investimento: [% goal_obj.expected_budget %] R$</a>
+					</div>
+
 					<div class="timeline">
 						<h3 class="section-title">Linha do tempo segundo o cronograma</h3>
 						<div class="chart">

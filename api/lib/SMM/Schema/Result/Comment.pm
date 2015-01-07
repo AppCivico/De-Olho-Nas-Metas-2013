@@ -64,6 +64,25 @@ __PACKAGE__->table("comment");
 =head2 approved
 
   data_type: 'boolean'
+  default_value: false
+  is_nullable: 1
+
+=head2 project_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
+=head2 user_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
+=head2 active
+
+  data_type: 'boolean'
+  default_value: true
   is_nullable: 1
 
 =cut
@@ -86,7 +105,13 @@ __PACKAGE__->add_columns(
     original      => { default_value => \"now()" },
   },
   "approved",
-  { data_type => "boolean", is_nullable => 1 },
+  { data_type => "boolean", default_value => \"false", is_nullable => 1 },
+  "project_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "user_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "active",
+  { data_type => "boolean", default_value => \"true", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -118,10 +143,99 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 project
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-01-27 06:10:00
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:dwTPAi+sKR/qNA7AYw6TuQ
+Type: belongs_to
 
+Related object: L<SMM::Schema::Result::Project>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "project",
+  "SMM::Schema::Result::Project",
+  { id => "project_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
+=head2 user
+
+Type: belongs_to
+
+Related object: L<SMM::Schema::Result::User>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "user",
+  "SMM::Schema::Result::User",
+  { id => "user_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-06 12:00:39
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VbR6BnkP9FbhK6+eZ4DQ2Q
+with 'SMM::Role::Verification';
+with 'SMM::Role::Verification::TransactionalActions::DBIC';
+with 'SMM::Schema::Role::ResultsetFind';
+
+use Data::Verifier;
+use MooseX::Types::Email qw/EmailAddress/;
+use SMM::Types qw /DataStr TimeStr/;
+
+sub verifiers_specs {
+    my $self = shift;
+    return {
+        update => Data::Verifier->new(
+            filters => [qw(trim)],
+            profile => {
+                description => {
+                    required => 0,
+                    type     => 'Int',
+                },
+                approved => {
+                    required => 0,
+                    type     => 'Bool',
+                },
+                project_id => {
+                    required => 0,
+                    type     => 'Int',
+                },
+				user_id => {
+					required => 0,
+					type     => 'Int',
+				},
+            }
+        ),
+    };
+}
+
+sub action_specs {
+    my $self = shift;
+    return {
+        update => sub {
+            my %values = shift->valid_values;
+
+            not defined $values{$_} and delete $values{$_} for keys %values;
+
+            my $comment = $self->update( \%values );
+
+            return $comment;
+        },
+
+    };
+}
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;

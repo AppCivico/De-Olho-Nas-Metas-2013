@@ -30,11 +30,12 @@ The root page (/)
 
 sub index : Path : Args(0) {
     my ( $self, $c ) = @_;
- 	 $c->res->redirect( $c->uri_for_action('/user/account/index') ), $c->detach
+
+	 $c->res->redirect( $c->uri_for_action('/user/account/index') ), $c->detach
     	 if $c->user_exists;
   
-      $c->res->redirect( $c->uri_for_action('/homefuncional/home') );
-	
+    $c->res->redirect( $c->uri_for_action('/homefuncional/home') );
+		
 	$self->root($c);
 
 	
@@ -119,8 +120,8 @@ sub root : Chained('/') : PathPart('') : CaptureArgs(0) {
         elsif ( grep { /^admin$/ } $c->user->roles ) {
             $c->stash->{role_controller} = 'admin';
         }
-        elsif ( grep { /^conselheiro$/ } $c->user->roles ) {
-            $c->stash->{role_controller} = 'admin';
+        elsif ( grep { /^counsil$/ } $c->user->roles ) {
+            $c->stash->{role_controller} = 'counsil';
         }
         elsif ( grep { /^organization$/ } $c->user->roles ) {
             $c->stash->{role_controller} = 'organization';

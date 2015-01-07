@@ -24,7 +24,6 @@ use Catalyst qw/
   StatusMessage
 
   Authentication
-
   Session::DynamicExpiry
   Session
 

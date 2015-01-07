@@ -1,4 +1,10 @@
-				    [% IF c.check_user_roles('user')%]	
+					<div class="profile-box text-center">
+						<div class="img text-center"><img src="/static/images/user/[%c.user.id%]/[%c.user.id%].jpg" border="0" class="img-responsive"></div>
+						<div class="name text-center">[% c.user.name %]</div>
+						<button class="btn btn-yellow"><a href="/user/perfil/editar">Editar perfil</a></button>
+					</div>
+
+					[% IF user_obj.role.user == 1%]
 					<div class="list-box list-brown">
 						<ul>
 							<li><a href="">Seguindo</a></li>
@@ -12,12 +18,12 @@
 						<ul>
 							<li><a href="/user/perfil/enquete">Enquetes Móveis</a></li>
 							<li><a href="">Campanhas</a></li>
-							<li><a href="">Seguindo</a></li>
+							<li><a href="/user/perfil/seguindo">Seguindo</a></li>
 							<li><a href="/user/perfil/seguranca">Segurança</a></li>
 							<li><a href="">Linha do tempo</a></li>
 							<li><a href="">Atividades</a></li>
 						</ul>
 					</div>
+					[%END%]
 					
-					[%END%]	
 

@@ -189,6 +189,21 @@ __PACKAGE__->add_unique_constraint("user_username_key", ["username"]);
 
 =head1 RELATIONS
 
+=head2 comments
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::Comment>
+
+=cut
+
+__PACKAGE__->has_many(
+  "comments",
+  "SMM::Schema::Result::Comment",
+  { "foreign.user_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 created_by
 
 Type: belongs_to
@@ -242,6 +257,21 @@ __PACKAGE__->belongs_to(
     on_delete     => "NO ACTION",
     on_update     => "NO ACTION",
   },
+);
+
+=head2 project_events
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::ProjectEvent>
+
+=cut
+
+__PACKAGE__->has_many(
+  "project_events",
+  "SMM::Schema::Result::ProjectEvent",
+  { "foreign.user_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 project_events_read
@@ -320,8 +350,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-03 11:41:59
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:H78wo1GrNsfKcci+CaqJpA
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-06 09:52:11
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:31XZPppYZ7tNjb8i6NiVbQ
 
 __PACKAGE__->many_to_many( roles => user_roles => 'role' );
 
@@ -444,6 +474,7 @@ sub action_specs {
 
     };
 }
+
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;

@@ -8,13 +8,21 @@ BEGIN { extends 'Catalyst::Controller::REST' }
 __PACKAGE__->config(
     default => 'application/json',
 
-    result     => 'DB::Project',
-    object_key => 'project',
-    search_ok  => {
-        id => 'Int'
+    result      => 'DB::Project',
+    object_key  => 'project',
+    search_ok   => {
+		id => 'Int'
     },
     result_attr => {
-        prefetch => [ { 'goal_projects' => 'goal' }, 'region' ]
+        prefetch  => [ { 'goal_projects' => 'goal' }, 'region', 'approved_comments','user_follow_projects', { 'approved_project_events' => 'user'}],
+		
+		'+select' => [ 
+						\q{to_char(approved_project_events.ts, 'DD/MM/YYYY HH24:MI:SS')},						
+						\q{to_char(approved_comments.timestamp, 'DD/MM/YYYY HH24:MI:SS')},						
+					 ],
+		'+as'     => ['approved_project_events.process_ts_fmt','approved_comments.process_ts_fmt'],
+		distinct => 1,
+		
     },
     update_roles => [qw/superadmin user admin webapi organization/],
     create_roles => [qw/superadmin admin webapi/],
@@ -31,15 +39,15 @@ sub result : Chained('object') : PathPart('') : Args(0) :
 
 sub result_GET {
     my ( $self, $c ) = @_;
-
     my $project = $c->stash->{project};
+	
+	my $follow_project = $project->user_follow_projects->search({ active => 1})->count;
+	use DDP; p $project->comments;
     my $type;
-
     $type = $_->goal->objective_id for $project->goal_projects;
-
+	
     my $objective =
       $project->resultset('Objective')->search( { id => $type } )->next;
-
     my $region;
 	
     ($region) = map { { id => $_->id, name => $_->name } } $project->region
@@ -76,6 +84,36 @@ sub result_GET {
                 },
             ],
             region => $region,
+			
+			follow_project => $follow_project,	
+			
+			project_event => [(
+					
+				map {
+				$_ ? (+{
+					id         => $_->id,	
+					text       => $_->text,
+					name       => $_->user->name,
+					process_ts => $_->get_column('process_ts_fmt'),
+					id_user    => $_->user->id
+					}):()
+				}($project->approved_project_events),
+			  )
+			],	
+			comments => [(
+					
+				map {
+				$_ ? (+{
+					id            => $_->id,	
+					description   => $_->description,
+					name          => $_->user->name,
+					process_ts    => $_->get_column('process_ts_fmt'),
+					user_id       => $_->user->id
+					}):()
+				}($project->approved_comments),
+			  )
+			],	
+
         }
     );
 
@@ -114,7 +152,7 @@ sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
 sub list_GET {
     my ( $self, $c ) = @_;
     my $rs = $c->stash->{collection};
-
+	
     if ( $c->req->param('type_id') ) {
         $c->detach unless $c->req->param('type_id') =~ /^\d+$/;
 
@@ -269,8 +307,6 @@ sub geom :Chained('base') PathPart('geom') :Args(0){
 			join => [qw(region)]
 		}
     )->as_hashref->next;
-	use DDP;
-	p $geom;
     $self->status_ok( $c, entity =>  { geom => $geom } );
 
 

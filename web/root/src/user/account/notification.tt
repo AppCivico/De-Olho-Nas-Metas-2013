@@ -41,7 +41,7 @@
 			<div class="row">
 				<div class="col-sm-9">
 				
-					<h3 class="dotted">Notificações Recentes</h3>
+					<h3 class="dotted">Notificações</h3>
 					
 					<div class="notification-list">
 						[% FOREACH ufp IN user_obj.user_follow_projects%]
@@ -56,6 +56,7 @@
 							<div class="col-xs-11">
 								<div class="title">O projeto "[% ufp.project.name%]" foi atualizado.</div>
 								<div class="title">[%pe.text%]</div>
+								<div class="title">[%pe.ts%]</div>
 							</div>
 
 							<button type="button" id="close" class="close" data-id="" data-dismiss="alert" aria-label="Close">
@@ -65,41 +66,7 @@
 						[% END %]
 						[% END %]
 					</div>
-					<div class="text-right">
-						<button id="see_all" class="btn "><a href="/user/perfil/notificacoes">Ver todas</a></button>
-					</div>
 					
-					<h3 class="dotted">Atividades recentes</h3>
-					<div class="activity-list">
-						<div class="item">
-							<div class="date">
-								00/00/0000
-							</div>
-							<div class="title">
-								Pastry wafer brownie liquorice. Unerdwear.com gummi bears bonbon. Cheese cake dessert cupcake. Pastry wafer brownie liquorice. Unerdwear.com gummi bears bonbon.
-							</div>
-						</div>
-						<div class="item">
-							<div class="date">
-								00/00/0000
-							</div>
-							<div class="title">
-								Pastry wafer brownie liquorice. Unerdwear.com gummi bears bonbon. Cheese cake dessert cupcake. Pastry wafer brownie liquorice. Unerdwear.com gummi bears bonbon.
-							</div>
-						</div>
-						<div class="item">
-							<div class="date">
-								00/00/0000
-							</div>
-							<div class="title">
-								Pastry wafer brownie liquorice. Unerdwear.com gummi bears bonbon. Cheese cake dessert cupcake. Pastry wafer brownie liquorice. Unerdwear.com gummi bears bonbon.
-							</div>
-						</div>
-					</div>
-					<div class="text-right">
-						<button class="btn btn-reply">Ver todas</button>
-					</div>
-					<br /><br />
 				</div>
 				<div class="col-sm-3">
 								[% INCLUDE 'user/account/menu.tt' %]

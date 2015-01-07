@@ -8,6 +8,7 @@
 <title>[% template.title or site.title or title or 'Sistema de Monitoramento de Metas' %]</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
+<script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script>
 <!--[if lt IE 9]>
     <script src="/static/js/html5shiv.js"></script>
 <![endif]-->
@@ -53,7 +54,6 @@
 	</div>
 </footer>
 
-<script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script>
 [% assets.export("js")|none %]
 
 </body>

@@ -3,6 +3,60 @@
 	[%-CALL assets.include("js/chart-line.js")%]
 	[%-CALL assets.include("js/maps.js")%]
 	[%-CALL assets.include("js/infobubble.min.js")%]
+<script>
+
+$(document).ready(function () {
+  $('#follow_project').on('click', function () {
+	var id = $(this).data("id");
+	$.post( "/home/project/user_follow_project", { user_id: $(this).data("id"), project_id: $('#projectid').val() }).done(function( data ) {
+		var button_stop = '<button type="button" id="stop_follow_sub" name="stop_follow" class="btn btn-reply" data-id="'+id+'" autocomplete="off">Parar de seguir</button>';
+
+		$('#follow').html(button_stop);
+    });	
+  })
+
+  $('#stop_follow').on('click', function () {
+	var id = $(this).data("id");
+	$.post( "/home/project/user_stop_follow", { user_id: $(this).data("id"), project_id: $('#projectid').val() }, function( data ) {
+		var button_follow = '<button type="button" id="follow_project_sub" class="btn btn-reply" data-id="'+id+'" autocomplete="off">Siga o projeto</button>';
+		console.log(data);
+		$('#follow').html(button_follow);
+  	},"json");	
+  })
+   
+  $('#comment_counsil').on('click', function () {
+
+	if ($('#text_comment_counsil').val() == ""){
+		$('#alert').html('<div class="alert alert-success"><p>Por favor preencha o campo da notificação.</p></div>');
+		return;
+	}
+
+	var id = $(this).data("id");
+	$.post( "/home/project/comment_counsil", { user_id: $(this).data("id"), text: $('#text_comment_counsil').val(), project_id : $('#projectid').val() } ,function( data ) {
+		console.log(data);
+		$('#alert').html('<div class="alert alert-success"><p>'+data.message+'</p></div>');
+  	},"json");
+
+	$('#text_comment_counsil').val('');
+  })
+  $('#comment').on('click', function () {
+	alert('lol');
+	if ($('#text_comment').val() == ""){
+		$('#alert_comment').html('<div class="alert alert-success"><p>Por favor preencha o campo de comentário.</p></div>');
+		return;
+	}
+
+	var id = $(this).data("id");
+	$.post( "/home/project/comment", { user_id: $(this).data("id"), text: $('#text_comment').val(), project_id : $('#projectid').val() } ,function( data ) {
+		console.log(data);
+		$('#alert_comment').html('<div class="alert alert-success"><p>'+data.message+'</p></div>');
+  	},"json");
+
+	$('#text_comment').val('');
+  })
+
+});
+</script>
 	<section class="map text-center">
 		<div id="filter-map">
 			<div class="contents text-center">
@@ -96,25 +150,67 @@
 					</div>
 					<div class="row social">
 						<div class="col-xs-4">
-							<div class="social-share">
+<!--							<div class="social-share">
 								<ul>
 									<li class="twitter"><a href="">twitter</a></li>
 									<li class="facebook active"><a href="">facebook</a></li>
 									<li class="googleplus"><a href="">google+</a></li>
 								</ul>
 								<div class="clear"></div>
-							</div>
+							</div>-->
 						</div>
 						<div class="col-xs-4 text-center">
 							<div class="followers">
-								<div class="icon users2"></div> <span class="caption"><span class="counter">1250</span> seguidores
+								<div class="icon users2"></div> <span class="caption"><span class="counter">[% project_obj.follow_project %]</span> [% IF project_obj.follow_project > 1 %]seguidores [% ELSE %] seguidor [% END %]
 							</div>
 						</div>
-						<div class="col-xs-4 text-right">
-							<button class="btn btn-reply">Siga o Projeto</button>
+					    [% IF c.user%]	
+							
+						<div id="follow" class="col-xs-4 text-right">							
+							[% UNLESS do_i_follow > 0 %]
+							<button  type="button" id="follow_project" class="btn btn-reply" data-id="[% c.user.obj.id%]" autocomplete="off">Siga o Projeto</button>
+							[% ELSE%]
+							<button  type="button" id="stop_follow" class="btn btn-reply" data-id="[% c.user.obj.id%]" autocomplete="off">Parar de seguir</button>
+							[% END %]
 						</div>
+						[% END %]
 					</div>
+					<div >
+						<table id="list_note" class="table table-striped">
+							<thead>
+								<tr>
+					                <th>Conselheiro</th>
+				    	            <th>Nota</th>
+				    	            <th>Data</th>
+								</tr>
+							</thead>
+							<tbody>
+					[% IF project_obj.project_event.size > 0 %]
+					[% FOREACH project_event IN project_obj.project_event%]
+							<tr>
+								<td>[%project_event.name%]</td>
+								<td>[%project_event.text%]</td>
+								<td>[%project_event.process_ts%]</td>
+							</tr>
+		            [%END%]
+					[% ELSE %]
+							<tr>
+								<td>Nenhuma notificação encontrada</td>
+							</tr>
+					[% END %]
+	
+							</tbody>
+						</table>
 
+					</div>
+					[% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]	
+					<div id="alert">
+					</div>
+					<div id="disqus_thread">						
+						<textarea id="text_comment_counsil" class="form-control" rows="2"></textarea>
+						<button  type="button" id="comment_counsil" class="btn btn-principal" data-id="[% c.user.obj.id%]" autocomplete="off">Inserir</button>
+					</div>
+					[% END %]
 
 						<div class="timeline">
 								<h3 class="section-title">Linha do tempo segundo o cronograma</h3>
@@ -155,19 +251,40 @@
 
 					<div class="image-gallery">
 					</div>
-					<div id="disqus_thread"></div>
-    				<script type="text/javascript">
-			        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-			       	 var disqus_shortname = 'deolhonasmetas'; // required: replace example with your forum shortname
-			        	/* * * DON'T EDIT BELOW THIS LINE * * */
-			        	(function() {
-		            		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-				            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-				            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-				        })();
-				    </script>
+						<div>
+						<table id="list_comment" class="table table-striped">
+							<thead>
+								<tr>
+				    	            <th>Comentários </th>
+								</tr>
+							</thead>
+							<tbody>
+					[% IF project_obj.comments.size > 0 %]
+					[% FOREACH c IN project_obj.comments%]
+							<tr>
+								<td>[%c.name%]</td>
+								<td>[%c.description%]</td>
+								<td>[%c.process_ts%]</td>
+							</tr>
+		            [%END%]
+					[% ELSE %]
+							<tr>
+								<td>Nenhum comentário encontrado</td>
+							</tr>
+					[% END %]
+	
+							</tbody>
+						</table>
 
-					
+					</div>
+					<div id="alert_comment">
+					</div>
+					<div>						
+						<textarea id="text_comment" class="form-control" rows="2"></textarea>
+						<button  id="comment" type="button" class="btn btn-primary" data-id="[% c.user.obj.id%]">Comentar</button>
+					</div>
+
+
 				</div>
 				<div class="col-sm-4">
 					<ul class="list-types project">

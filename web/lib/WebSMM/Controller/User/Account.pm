@@ -7,6 +7,9 @@ use utf8;
 BEGIN { extends 'Catalyst::Controller' }
 
 sub base : Chained('/user/base') : PathPart('') : CaptureArgs(0) {
+    my ( $self, $c ) = @_;
+
+
 }
 
 sub object : Chained('base') : PathPart('perfil') : CaptureArgs(0) {
@@ -17,11 +20,17 @@ sub object : Chained('base') : PathPart('perfil') : CaptureArgs(0) {
 sub index : Chained('object') : PathPart('') : Args(0) {
     my ( $self, $c ) = @_;
 
-	
-}
+	$c->detach( '/form/redirect_error', [] ) unless $c->user;
 
-sub follow : Chained('object') : PathPart('seguindo') :Args(0){
-    my ( $self, $c ) = @_;
+	my $api = $c->model('API');
+
+	$api->stash_result(
+		$c,
+		[ 'users/user_project_event', $c->user->obj->id ],
+		stash => 'user_obj',
+	);
+	use DDP; p $c->stash->{user_obj};
+	$c->stash->{user_obj}->{role} = { map { $_ => 1 } @{$c->stash->{user_obj}->{roles}} };
 
 }
 
@@ -44,16 +53,9 @@ sub security :Chained('object') :PathPart('seguranca') :Args(0){
 sub edit :Chained('object') :PathPart('editar') :Args(0){
     my ( $self, $c ) = @_;
 
-	my $api = $c->model('API');
-
-	$api->stash_result(
-		$c,
-		[ 'users', $c->user->id ],
-		stash => 'user_obj',
-	);
-	
 	return unless $c->req->method eq 'POST';
 
+	my $api = $c->model('API');
 
 	$api->stash_result(
 		$c,
@@ -87,6 +89,36 @@ sub survey :Chained('object') :PathPart('enquete') :Args(0){
 	$c->stash->{campaigns} = $data->{payload};
 	use DDP; p $c->stash->{campaigns};
 	warn "lol";
+
+}
+
+sub follow :Chained('object') :PathPart('seguindo') :Args(0){
+    my ( $self, $c ) = @_;
+
+	my $api = $c->model('API');
+
+	$api->stash_result(
+		$c,
+		[ 'users', $c->user->id ],
+		stash => 'user_obj',
+	);
+	use DDP; p $c->stash->{user_obj};
+}
+
+sub notification :Chained('object') :PathPart('notificacoes') :Args(0){
+    my ( $self, $c ) = @_;
+
+	$c->detach( '/form/redirect_error', [] ) unless $c->user;
+
+	my $api = $c->model('API');
+
+	$api->stash_result(
+		$c,
+		[ 'users/user_project_event_all', $c->user->obj->id ],
+		stash => 'user_obj',
+	);
+	use DDP; p $c->stash->{user_obj};
+	$c->stash->{user_obj}->{role} = { map { $_ => 1 } @{$c->stash->{user_obj}->{roles}} };
 
 }
 __PACKAGE__->meta->make_immutable;

@@ -8,9 +8,12 @@ __PACKAGE__->config(
     default => 'application/json',
 
     result      => 'DB::User',
-    result_cond => { active => 1 },
+    result_cond => { 'me.active' => 1 },
 
-    # result_attr => { prefetch => '', ... },
+	 result_attr => { 
+		prefetch => [{ user_follow_projects =>  'project'} ],
+		distinct => 1 
+	},
     object_key => 'user',
 
     update_roles => [qw/superadmin admin user/],
@@ -22,7 +25,8 @@ with 'SMM::TraitFor::Controller::DefaultCRUD';
 
 sub base : Chained('/api/base') : PathPart('users') : CaptureArgs(0) { }
 
-sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
+sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
+}
 
 sub result : Chained('object') : PathPart('') : Args(0) :
   ActionClass('REST') { }
@@ -31,13 +35,46 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $user  = $c->stash->{user};
+
     my %attrs = $user->get_inflated_columns;
     $self->status_ok(
         $c,
         entity => {
             roles => [ map { $_->name } $user->roles ],
 
-            map { $_ => $attrs{$_}, } qw(id name phone_number username email type)
+            ( map { $_ => $attrs{$_}, } qw(id name phone_number username email type) ),
+
+			projects_i_follow => [ map { $_->project_id }  $user->user_follow_projects->search({ active => 1})->all ],
+		
+			projects => [ 
+
+					map { 
+							my $p = $_; 
+							map {
+								+{ name => $_->name, 
+								   id   => $_->id,
+								   region => $_->region_id
+								 }	
+							} $p->project
+						} $user->user_follow_projects,
+	
+			],	
+			project_event => [
+				map {
+						my $ufp = $_;
+						map {
+							my $p = $_;
+							map {
+
+								+{
+								id         => $_->id,
+								project_id => $_->project_id	
+								}
+								
+							} $p->project_events,
+						}$ufp->project,
+					} $user->user_follow_projects,
+			],	
         }
     );
 }
@@ -46,9 +83,6 @@ sub result_PUT {
     my ( $self, $c ) = @_;
 
     my $user = $c->stash->{user};
-	use DDP;
-	p $c->req->params;
-	p$c->stash->{user};
     $user->execute( $c, for => 'update', with => $c->req->params );
 
     $self->status_accepted(
@@ -136,6 +170,75 @@ sub list_POST {
             id => $user->id
         }
     );
+
+}
+sub project :Chained('object') :PathPart('project') :Args(1) :ActionClass('REST'){}
+
+sub project_POST{
+
+    my ( $self, $c, $id ) = @_;
+	my $user = $c->stash->{user};
+
+	my $user_project = $user->user_follow_projects->search({ project_id => $id })->update({ active => 0});
+	use DDP; p $user_project;
+
+	$self->status_accepted(
+        $c,
+        entity => { id => 1 }
+    ),
+    $c->detach
+    if $user_project;
+
+}
+
+sub user_project_event :Chained('base') :PathPart('user_project_event') :Args(1) :ActionClass('REST'){}
+
+sub user_project_event_GET{
+
+    my ( $self, $c, $id ) = @_;
+
+	my $user = $c->model('DB::User');
+	
+	my ($result) = $user->search({'me.id' => $id , 'me.active' => 1, 'project_events_read.user_id' => undef },
+	{ 
+		prefetch => [{ user_follow_projects => { 'project' => { 'project_events' => 'project_events_read' }} }],
+		'+columns' => ['project_events.text', 'project_events.id', 'project_events_read.id'],
+		distinct => 1,
+			
+	}
+	)->as_hashref->all;	
+
+	$self->status_accepted(
+        $c,
+        entity =>  $result 
+    ),
+    if $result;
+
+}
+
+sub user_project_event_all :Chained('base') :PathPart('user_project_event_all') :Args(1) :ActionClass('REST'){}
+
+sub user_project_event_all_GET{
+
+    my ( $self, $c, $id ) = @_;
+
+	my $user = $c->model('DB::User');
+	my ($result) = $user->search({'me.id' => $id , 'me.active' => 1 },
+	{ 
+		prefetch => [{ user_follow_projects => { 'project' => { 'project_events' => 'project_events_read' }} }],
+		'select'  => [	\q{to_char(project_events.ts, 'DD/MM/YYYY HH24:MI:SS') }],
+		'as'      => ['project_events.process_ts'],
+		'+columns' => ['project_events.text', 'project_events.id', 'project_events_read.id'],
+		distinct => 1,
+			
+	}
+	)->as_hashref->all;	
+	use DDP; p $result;
+	$self->status_accepted(
+        $c,
+        entity =>  $result 
+    ),
+    if $result;
 
 }
 

@@ -1,0 +1,46 @@
+ <script>
+
+$(document).ready(function () {
+	$('.aceitar').on('click', function () {
+      var id = $(this).data("id");
+      $.post( "/admin/comentario/aceito", { pe_id: $(this).data("id"), }).done(function( data ) {
+       var button_remove = '<button id="removed" type="button" class="btn btn-danger">Remover</button>';
+      $('#control_'+id).html('') 
+     });	
+	})
+ 
+    $('.remover').on('click', function () {
+      var id = $(this).data("id");
+   	  $.post( "/admin/comentario/remover", { pe_id: $(this).data("id"), }).done(function( data ) {
+   	  $('#control_'+id).html('') 
+	 });	
+	})
+});
+</script>
+	<section class="metas-result">
+		<div id="result" class="container">
+			[% IF comments.size > 0%]
+			<h2 class="section-title">[% goals.size %] Notificações Encontradas</h2>
+			[% FOREACH c IN comments %]	
+			<div class="item row">
+				<div class="col-sm-10 nopadding">
+					<div class="contents pull-left">
+						<div class="description">
+							<h2>
+								[% c.project.id%] - [%c.project.name%]
+							</h2>
+							<p> [%pe.text%]</p>
+							<div id="control_[%c.id%]">
+								<button type="button" id="accepted" data-id="[%c.id%]" class="aceitar btn btn-success">Aceitar</button>  <button type="button" id="removed" class="remover btn btn-danger">Remover</button>
+							</div>	
+						</div>
+					</div>
+				</div>
+			</div>
+			[% END %]
+			[% ELSE%]
+				<h2>Nenhum comentário encontrado</h2>
+			[% END %]
+		</div>
+    </section>
+

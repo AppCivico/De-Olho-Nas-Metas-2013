@@ -1,7 +1,7 @@
 package WebSMM::Controller::HomeFuncional::Project;
 use Moose;
 use namespace::autoclean;
-
+use utf8;
 BEGIN { extends 'Catalyst::Controller'; }
 
 =head1 NAME
@@ -34,13 +34,24 @@ sub object :Chained('base') :PathPart('') :CaptureArgs(1){
     my ( $self, $c, $id ) = @_;
 
     my $api = $c->model('API');
+	my $user_id = $c->user->obj->id if $c->user;
+
     $api->stash_result(
         $c,
         [ 'projects', $id ],
-        stash => 'project_obj'
+        stash => 'project_obj',
+		params => { user_id => $user_id ?  $user_id : '' }
     );
-	
+	if ($c->user){
+    	$api->stash_result(
+       		$c,
+       		[ 'users', $c->user->obj->id ],
+			stash => 'user_obj',
+    	);
+		$c->stash->{user_obj}->{role} = { map { $_ => 1 } @{$c->stash->{user_obj}->{roles}} };
 
+		$c->stash->{do_i_follow} = grep { $_ eq $id } @{$c->stash->{user_obj}->{projects_i_follow}};
+	}	
 }
 
 sub detail :Chained('object') :PathPart('') :Args(0){
@@ -110,6 +121,110 @@ sub region_by_cep :Chained('base') :Args(0) {
 	$c->stash->{message} = 1 if $c->stash->{error};
 	$c->stash->{without_wrapper} = 1;
 
+}
+
+sub user_follow_project :Chained('base') :PathPart('user_follow_project') :Args(0){
+
+    my ( $self, $c ) = @_;
+
+    my $api = $c->model('API');
+	
+	my $user_id    = $c->req->param('user_id');
+	my $project_id = $c->req->param('project_id');
+	
+    $api->stash_result(
+        $c,
+		 'user_follow_project',
+        method => 'POST',
+        params   => { user_id => $user_id, project_id => $project_id }
+    );
+	
+	$c->res->status(400),$c->detach unless $c->stash->{id};
+	$c->res->status(200);
+	$c->res->content_type('application/json');
+	use DDP; p $c->stash->{id};
+	$c->res->body(
+		$c->stash->{id}
+	);
+
+}
+
+sub user_stop_follow :Chained('base') :PathPart('user_stop_follow') :Args(0){
+    my ( $self, $c ) = @_;
+
+    my $api = $c->model('API');
+	
+	my $user_id    = $c->req->param('user_id');
+	my $project_id = $c->req->param('project_id');
+	
+    $api->stash_result(
+        $c,
+		 [ 'users' , $user_id, 'project', $project_id],
+	     method => 'POST',
+    );
+
+	$c->res->status(200);
+	$c->res->content_type('application/json');
+	$c->res->body(
+		JSON::encode_json(
+		{message => 'parou de seguir'}
+		)
+	);
+
+}
+
+sub comment_counsil :Chained('base') :PathParth('comment_counsil') :Args(0) {
+	my ( $self, $c ) = @_;
+
+    my $api = $c->model('API');
+	
+	my $user_id    = $c->req->param('user_id');
+	my $text       = $c->req->param('text');
+	my $project_id = $c->req->param('project_id');
+
+    $api->stash_result(
+        $c,
+		 'project_events',
+        method => 'POST',
+        params   => { user_id => $user_id, text => $text , project_id => $project_id }
+    );
+	
+	$api->stash_result(
+		$c,
+		'project_events',
+		params => { project_id => $project_id, approved => 'true', active => 1 }
+	);	
+
+	$c->res->status(200);
+	$c->res->content_type('application/json');
+	$c->res->body(
+	  JSON::encode_json(
+	  {message => 'Seu comentário foi enviado para moderação, aguarde aprovação.'} )
+	);
+}
+
+sub comment :Chained('base') :PathParth('comment') :Args(0) {
+	my ( $self, $c ) = @_;
+
+    my $api = $c->model('API');
+	
+	my $user_id    = $c->req->param('user_id');
+	my $text       = $c->req->param('text');
+	my $project_id = $c->req->param('project_id');
+
+    $api->stash_result(
+        $c,
+		 'comments',
+        method => 'POST',
+        params   => { user_id => $user_id, description => $text , project_id => $project_id }
+    );
+	
+	$c->res->status(200);
+	$c->res->content_type('application/json');
+	$c->res->body(
+	  JSON::encode_json(
+	  {message => 'Seu comentário foi enviado para moderação, aguarde aprovação.'} )
+	);
 }
 
 =encoding utf8

@@ -18,10 +18,15 @@
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 						<a href="[%href%]">Metas</a>
 					</li>
-<!--					[%href = c.uri_for_action('/admin/goal/index')%]
+					[%href = c.uri_for_action('/admin/projectevent/index')%]
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
-						<a href="[%href%]">Aprovações</a>
-					</li>-->
+						<a href="[%href%]">Aprovações de Notificações</a>
+					</li>
+					[%href = c.uri_for_action('/admin/comment/index')%]
+					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
+						<a href="[%href%]">Aprovações de Comentários</a>
+					</li>
+
 					[%href = c.uri_for_action('/admin/preregister/index')%]
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 						<a href="[%href%]">Pré Cadastro</a>
