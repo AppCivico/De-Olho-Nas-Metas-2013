@@ -30,8 +30,14 @@ The root page (/)
 
 sub index : Path : Args(0) {
     my ( $self, $c ) = @_;
+ 	 $c->res->redirect( $c->uri_for_action('/user/account/index') ), $c->detach
+    	 if $c->user_exists;
+  
+      $c->res->redirect( $c->uri_for_action('/homefuncional/home') );
+	
 	$self->root($c);
 
+	
 }
 
 #sub more : Chained('') : Path('saiba-mais') : Args(0) {
