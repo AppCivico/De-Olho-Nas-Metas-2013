@@ -26,9 +26,9 @@ var $maps = function () {
 					title: pj.name,
 					url : "/home/project/"+pj.id
         	    });
-
+				var url = marker.url;
 				google.maps.event.addListener(marker, 'click', function() {
-        			window.location.href = marker.url;
+        			window.location.href = url;
     			});
 			});
 		});
@@ -45,9 +45,9 @@ var $maps = function () {
 				title: json.name,
 				url : "/home/project/"+json.id
             });
-
+			var url = marker.url;
 			google.maps.event.addListener(marker, 'click', function() {
-        		window.location.href = marker.url;
+        		window.location.href = url;
     		});
 			if (myLatlng){
 				map.setCenter(myLatlng);
@@ -70,9 +70,9 @@ var $maps = function () {
 				title: pj.name,
 				url : "/home/project/"+pj.id
             });
-
+			var url = marker.url;
 			google.maps.event.addListener(marker, 'click', function() {
-        		window.location.href = marker.url;
+        		window.location.href = url;
     		});
 			});
 			if (myLatlng){
@@ -92,9 +92,9 @@ var $maps = function () {
 					title: pj.name,
 					url : "/home/project/"+pj.id
         	    });
-
+				var url = marker.url;
 				google.maps.event.addListener(marker, 'click', function() {
-        			window.location.href = marker.url;
+        			window.location.href = url;
     			});
 			});
 

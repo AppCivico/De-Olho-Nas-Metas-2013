@@ -68,6 +68,8 @@ sub type :Chained('base')  :Args(0){
 			type_id => $type_id 
 		}
     );
+	use DDP;
+	p $c->stash->{goals};
 	$c->stash->{without_wrapper} = 1;
 }
 

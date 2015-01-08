@@ -148,6 +148,7 @@ sub default : Path {
     eval {
         $c->stash->{body_class} .= ' ' . $maybe_view;
         $c->stash->{body_class} =~ s/\//-/g;
+		$c->stash->{template_wrapper} = 'func';
         $output =
           $c->view('TT')->render( $c, "auto/$maybe_view.tt", $c->stash );
     };

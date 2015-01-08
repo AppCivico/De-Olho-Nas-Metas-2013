@@ -216,23 +216,11 @@ sub list_GET {
           unless $region;
         $rs = $rs->search( { 'project.region_id' => $region->{id} } );
     }
-
-    my $region_ids = {};
-    map {
-        my $p = $_;
-        map { push @{ $region_ids->{ $p->id } }, $_->project->region_id }
-          grep { $_->project->region_id }
-          $_->goal_projects
-    } $rs->all;
-    my $order = {};
-    for my $id ( keys %$region_ids ) {
-        my @lol = uniq @{ $region_ids->{$id} };
-        push( @{ $order->{$id} }, @lol );
-    }
+use DDP;
     $self->status_ok(
         $c,
         entity => {
-            goals => [
+            goals =>  [
                 map {
                     my $r = $_;
                     +{
@@ -248,6 +236,8 @@ sub list_GET {
                               email
                               website
                               complement
+							  region_count
+							  project_count
                               /
                         ),
                         goal_projects => {
@@ -266,27 +256,16 @@ sub list_GET {
 
                             ),
                         },
-                        project => [
-                            (
-                                map {
-                                    my $p = $_;
-                                    (
-                                        map {
-                                            { $_ => $p->{project}->{$_} }
-                                          } qw/
-                                          name
-                                          /
-                                      ),
-                                } @{ $r->{goal_projects} },
-                            ),
-                        ],
-                        region => $order->{ $r->{id} },
                         url    => $c->uri_for_action(
                             $self->action_for('result'),
                             [ $r->{id} ]
                         )->as_string
                       }
-                } $rs->as_hashref->all
+                } $rs->search(undef, {
+                   '+select' => [\'(select count(distinct p.region_id) from goal_project gp join project p on p.id = gp.project_id where gp.goal_id = me.id)',
+								\'(select count(distinct gp.project_id) from goal_project gp where gp.goal_id = me.id)'],
+                   '+as'     => ['region_count','project_count'],
+                })->as_hashref->all
             ]
         }
     );

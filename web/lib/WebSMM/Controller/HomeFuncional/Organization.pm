@@ -46,7 +46,7 @@ sub index :Chained('base') :PathPart('') :Args(0){
 	push @{$group_by->{ uc(substr($_->{name}, 0, 1)) }}, $_ for @{$c->stash->{organizations}};
 	push @{$group_by->{count}},scalar(@{$c->stash->{organizations}});
 	use DDP;
-	p %$group_by;
+	p $group_by;
 	$c->stash->{organizations} = $group_by;
 #	p $c->stash->{organizations};
 	my @order = sort keys %$group_by;

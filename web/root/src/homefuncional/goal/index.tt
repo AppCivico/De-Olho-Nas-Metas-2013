@@ -88,11 +88,11 @@
 								<a href="[% c.uri_for_action('/homefuncional/goal/detail',[goal.id] ) %]">[%goal.name%]</a>
 							</h2>
 							<div class="stats">
-								[% IF goal.region.size > 0 %]
-								<div class="icon regions"></div> <span class="regions"> [% goal.region.size %] [% goal.region.size > 1 ? "Regiões" : "Região" %]</span>
+								[% IF goal.region_count > 0 %]
+								<div class="icon regions"></div> <span class="regions"> [% goal.region_count %] [% goal.region.size > 1 ? "Regiões" : "Região" %]</span>
 								[% END %]
-								[% IF goal.project.size > 0 %]
-								<div class="icon projects"></div> <span class="projects">[% goal.project.size %] Projeto[% goal.project.size > 1 ? "s" : "" %]</span>
+								[% IF goal.project_count > 0 %]
+								<div class="icon projects"></div> <span class="projects">[% goal.project_count %] Projeto[% goal.project_count > 1 ? "s" : "" %]</span>
 								[% END %]
 								[% IF goal.organization.size > 0 %]
 								<div class="icon organizations"></div> <span class="organizations">3 Organizações</span>
