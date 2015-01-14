@@ -53,7 +53,7 @@
 							Filtrar projetos por<br />
 							<div class="select-stylized">
 							<select id="homeregion">
-								<option value="">Bairro</option>
+								<option value="">Distrito</option>
 								[% FOREACH region IN regions %]
 									<option value="[% region.id %]">[% region.name %]</option>
 								[% END %]
@@ -63,7 +63,7 @@
 							&nbsp;<br />
 							<div class="select-stylized">
 							<select id="type">
-								<option value="">Tipo</option>
+								<option value="">Temas</option>
 								[% FOREACH type IN objectives %]
 								<option value="[% type.id %]">[% type.name %]</option>
 								[% END %]
@@ -123,9 +123,9 @@
 					</ul>
 				    [% IF project_obj.region.size > 0 %]	
 					<div class="list-regions">
-						<span class="header">Regiões</span>
+						<span class="header">Distritos</span>
 						<ul class="list-regions">
-							<li>[% project_obj.region.name%]</li>
+							<li> <a href="[% c.uri_for_action('/homefuncional/region/detail',[project_obj.region.id] ) %]">[%project_obj.region.name%]</a></li>
 						</ul>
 					</div>
 					[% END %]

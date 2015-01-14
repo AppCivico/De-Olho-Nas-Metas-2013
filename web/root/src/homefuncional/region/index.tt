@@ -53,7 +53,7 @@
 							Selecione o Distrito<br />
 							<div class="select-stylized">
 							<select id="region" onchange="location = this.options[this.selectedIndex].value;">
-								<option value="">Bairro</option>
+								<option value="">Distrito</option>
 								[% FOREACH region IN regions %]
 								<option value="[% c.uri_for_action('/homefuncional/region/detail',[region.id] ) %]">[%region.name%]</option>
 								[% END %]

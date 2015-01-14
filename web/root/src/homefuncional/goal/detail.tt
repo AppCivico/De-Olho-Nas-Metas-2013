@@ -52,7 +52,7 @@
 							Filtrar metas por<br />
 							<div class="select-stylized">
 							<select id="goalregion">
-								<option value="">Bairro</option>
+								<option value="">Distrito</option>
 								[% FOREACH region IN regions%]
 									<option value="[%region.id%]">[% region.name %]</option>
 								[% END %]
@@ -62,7 +62,7 @@
 							&nbsp;<br />
 							<div class="select-stylized">
 							<select id="type_goal">
-								<option value="">Tipo</option>
+								<option value="">Temas</option>
 								[% FOREACH type IN objectives %]
 								<option value="[% type.id %]">[% type.name %]</option>
 								[% END %]
@@ -117,7 +117,7 @@
 						</ul>
 				    [% IF goal_obj.region.size > 0 %]	
 					<div class="list-regions">
-						<span class="header">Regiões</span>
+						<span class="header">Distritos</span>
 						<ul class="list-regions">
 							[% FOREACH region IN goal_obj.region%]
 							<li><a href="[% c.uri_for_action('/homefuncional/region/detail',[region.id] ) %]">[%region.name%]</a></li>
