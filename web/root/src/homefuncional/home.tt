@@ -7,7 +7,7 @@
 			<h2 class="title text-center">Ajude a monitorar as Metas da cidade de São Paulo</h2>
 			<div class="form">
 				<div class="col-xs-4 cep">
-					Metas próximas a mim<br />
+					Filtar por CEP<br />
 					<input type="text" id="txtaddress" name="txtaddress" placeholder="Informe o CEP">
 					<input type="hidden" id="pagetype" value="home">
 					<button id="btnaddress" name="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
@@ -15,7 +15,7 @@
 				<div class="col-xs-8">
 					<div class="row">
 						<div class="col-xs-6 region">
-							Filtrar metas por<br />
+							por Região<br />
 							<div class="select-stylized"><select id="homeregion">
 								<option value="">Distrito</option>
 								[% FOREACH region IN regions %]
@@ -24,7 +24,7 @@
 							</select></div>
 						</div>
 						<div class="col-xs-6 type">
-							&nbsp;<br />
+							por Tema<br />
 							<div class="select-stylized">
 								<select id="type">
 								<option value="">Temas</option>

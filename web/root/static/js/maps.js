@@ -203,6 +203,9 @@ $(document).ready(function () {
      	$.get("/home/project/type",{type_id: id}).done( function(data){
 			document.getElementById("result").innerHTML=data
        	});
+       	$(".metas-filtro .form .type .select-stylized").removeClass("disabled");
+       	$(".metas-filtro .form .region .select-stylized").addClass("disabled");
+       	$(".metas-filtro .form .cep button").addClass("disabled");
 	});
 
 	$("#type_goal").change(function(){
@@ -217,6 +220,9 @@ $(document).ready(function () {
      	$.get("/home/project/region",{region_id: id}).done( function(data){
 			document.getElementById("result").innerHTML=data
        	});
+       	$(".metas-filtro .form .type .select-stylized").addClass("disabled");
+       	$(".metas-filtro .form .region .select-stylized").removeClass("disabled");
+       	$(".metas-filtro .form .cep button").addClass("disabled");
 	});
 
 	$("#goalregion").change(function(){
@@ -282,6 +288,9 @@ $(document).ready(function () {
         	});
 		}
 			
+       	$(".metas-filtro .form .type .select-stylized").addClass("disabled");
+       	$(".metas-filtro .form .region .select-stylized").addClass("disabled");
+       	$(".metas-filtro .form .cep button").removeClass("disabled");
     }
     });
 
