@@ -713,6 +713,12 @@ div.list-box ul li:before{
 	color: #ffffff;
 	text-transform: uppercase;
 }
+.metas-detail div.list-regions li a,
+.metas-detail div.list-projects li a,
+.metas-detail div.list-organizations li a,
+.list-box li a{
+	color: #fff;
+}
 
 .list-types .icon {
 	width: 35px;
@@ -955,6 +961,7 @@ div.followers{
 	margin-bottom: 20px;
 	margin-right: 5px;
 }
+.metas-detail .index-results .index .contents,
 .index-results .index .contents{
 	padding: 10px;
 	color: #fff;

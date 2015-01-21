@@ -25,7 +25,7 @@ var $maps = function () {
 				marker = new google.maps.Marker({
     	            position: myLatlng,
 	                map: map,
-	                url: pj.url
+	                url: "/home/project/"+pj.id
         	    });
 				var url = marker.url;
 				var content = '<div class="project-bubble"><div class="name">';
@@ -58,8 +58,6 @@ var $maps = function () {
 						//ib.setPosition(myLatlng);
 						ib.open(map, this);
 					}
-					console.log(marker);
-					
         			//window.location.href = url;
     			});
 			});
