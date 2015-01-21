@@ -273,6 +273,31 @@ footer .logo-footer{
 	background-image: url("/static/images/map.jpg");
 }
 
+.project-bubble{
+	font-size: 12pt;
+	position: relative;
+	text-align: left;
+}
+.project-bubble .name{
+	color: #8cc63f;
+	font-weight: bold;
+	text-align: left;
+}
+.project-bubble .description{
+	text-align: left;
+}
+.project-bubble a.link{
+	position: absolute;
+	right: 0;
+	background-color: #59544b;
+	padding: 4px 10px;
+	font-weight: bold;
+	color: #fff;
+}
+.project-bubble a.link:hover{
+	background-color: #6e685d;
+	text-decoration: none;
+}
 
 #listprojects{
 	width: 100%;
@@ -288,6 +313,7 @@ section.map{
 }
 
 #filter-map{
+	display: none;
 	width: 100%;
 	position: absolute;
 	margin-top: -65px;
@@ -431,6 +457,10 @@ section.map{
 }
 .metas-filtro.green .select-stylized{
 	background-image: url("/static/css/images/dd_green.png");
+}
+
+section.metas-filtro h2.title{
+	font-family: "Cabin Sketch";
 }
 
 section.metas-filtro{

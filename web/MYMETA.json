@@ -4,7 +4,7 @@
       "renato,,,"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Module::Install version 1.08, CPAN::Meta::Converter version 2.140640",
+   "generated_by" : "Module::Install version 1.14, CPAN::Meta::Converter version 2.143240",
    "license" : [
       "perl_5"
    ],
@@ -49,7 +49,6 @@
             "Furl" : "0",
             "Moose" : "0",
             "Template::AutoFilter" : "0",
-            "Test::More" : "0.88",
             "namespace::autoclean" : "0"
          }
       }
