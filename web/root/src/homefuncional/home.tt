@@ -1,5 +1,45 @@
 
 	[%-CALL assets.include("js/maps.js")%]
+	[%-CALL assets.include("js/infobubble.min.js")%]
+
+	<section class="metas-filtro">
+		<div class="container">
+			<h2 class="title text-center">Ajude a monitorar as Metas da cidade de São Paulo</h2>
+			<div class="form">
+				<div class="col-xs-4 cep">
+					Filtar por CEP<br />
+					<input type="text" id="txtaddress" name="txtaddress" placeholder="Informe o CEP">
+					<input type="hidden" id="pagetype" value="home">
+					<button id="btnaddress" name="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
+				</div>
+				<div class="col-xs-8">
+					<div class="row">
+						<div class="col-xs-6 region">
+							por Região<br />
+							<div class="select-stylized"><select id="homeregion">
+								<option value="">Distrito</option>
+								[% FOREACH region IN regions %]
+									<option value="[% region.id %]">[% region.name %]</option>
+								[% END %]
+							</select></div>
+						</div>
+						<div class="col-xs-6 type">
+							por Tema<br />
+							<div class="select-stylized">
+								<select id="type">
+								<option value="">Temas</option>
+								[% FOREACH type IN objectives %]
+								<option value="[% type.id %]">[% type.name %]</option>
+								[% END %]
+							</select></div>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+    </section>
+
 	<section class="map text-center">
 		<div id="map">
 		</div>
@@ -38,44 +78,6 @@
 		</div>
 		<div class="clear"></div>
     </section>
-
-	<section class="metas-filtro">
-		<div class="container">
-			<div class="form">
-				<div class="col-xs-4 cep">
-					Metas próximas a mim<br />
-					<input type="text" id="txtaddress" name="txtaddress" placeholder="Informe o CEP">
-					<input type="hidden" id="pagetype" value="home">
-					<button id="btnaddress" name="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
-				</div>
-				<div class="col-xs-8">
-					<div class="row">
-						<div class="col-xs-6 region">
-							Filtrar metas por<br />
-							<div class="select-stylized"><select id="homeregion">
-								<option value="">Distrito</option>
-								[% FOREACH region IN regions %]
-									<option value="[% region.id %]">[% region.name %]</option>
-								[% END %]
-							</select></div>
-						</div>
-						<div class="col-xs-6 type">
-							&nbsp;<br />
-							<div class="select-stylized">
-								<select id="type">
-								<option value="">Temas</option>
-								[% FOREACH type IN objectives %]
-								<option value="[% type.id %]">[% type.name %]</option>
-								[% END %]
-							</select></div>
-						</div>
-					</div>
-				</div>
-				<div class="clear"></div>
-			</div>
-		</div>
-    </section>
-
     <section class="metas-result">
 		<div id="result" name="name" class="container">
 

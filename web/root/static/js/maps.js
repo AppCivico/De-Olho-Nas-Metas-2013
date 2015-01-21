@@ -1,7 +1,8 @@
 var $maps = function () {
-    var map;
-    var addr;
-    var geocoder;
+    var map,
+    	infoBubble,
+    	addr,
+    	geocoder;
 
     function initialize() {
 		var mapOptions = {
@@ -14,6 +15,7 @@ var $maps = function () {
     }
 
 	function loadproject(){
+		var ib;
 
 		$.getJSON('/home/project_map',function(data,status){
 			var json = data;
@@ -23,12 +25,42 @@ var $maps = function () {
 				marker = new google.maps.Marker({
     	            position: myLatlng,
 	                map: map,
-					title: pj.name,
-					url : "/home/project/"+pj.id
+	                url: pj.url
         	    });
 				var url = marker.url;
+				var content = '<div class="project-bubble"><div class="name">';
+				content += pj.name + '</div>';
+				content += '<div class="description"></div>';
+				content += '<a class="link" href="' + url + '">Veja mais</a>';
+				content += '</div>';
 				google.maps.event.addListener(marker, 'click', function() {
-        			window.location.href = url;
+					if (!ib){
+						ib = new InfoBubble({
+				          map: map,
+				          content: content,
+				          shadowStyle: 0,
+				          padding: 10,
+				          backgroundColor: 'rgb(255,255,255)',
+				          borderRadius: 0,
+				          arrowSize: 15,
+				          borderWidth: 0,
+				          borderColor: '#fff',
+				          disableAutoPan: true,
+				          hideCloseButton: false,
+				          arrowPosition: 50,
+				          arrowStyle: 0,
+				          MaxWidth: 340,
+				          MinHeight: 100
+				        });
+				        ib.open(map, this);
+					}else{
+						ib.setContent(content);
+						//ib.setPosition(myLatlng);
+						ib.open(map, this);
+					}
+					console.log(marker);
+					
+        			//window.location.href = url;
     			});
 			});
 		});
@@ -36,7 +68,7 @@ var $maps = function () {
 	}
 	function markprojectdetail( project_id ){
 		$.getJSON('/home/project_map_single', { id : project_id } ,function(data,status){
-			var json = data;
+			var json = data;d
 			marker = "";
 			var myLatlng = new google.maps.LatLng(json.latitude,json.longitude);	
 			marker = new google.maps.Marker({
@@ -47,7 +79,29 @@ var $maps = function () {
             });
 			var url = marker.url;
 			google.maps.event.addListener(marker, 'click', function() {
-        		window.location.href = url;
+				if (!infoBubble){
+					infoBubble = new InfoBubble({
+			          map: map,
+			          content: '<div class="project-bubble">' + json.name + '</div>',
+			          position: myLatlng,
+			          shadowStyle: 0,
+			          padding: 10,
+			          backgroundColor: 'rgb(57,57,57)',
+			          borderRadius: 0,
+			          arrowSize: 15,
+			          borderWidth: 0,
+			          borderColor: '#ffffff',
+			          disableAutoPan: true,
+			          hideCloseButton: false,
+			          arrowPosition: 50,
+			          backgroundClassName: 'project-bubble',
+			          arrowStyle: 0
+			        });
+				}else{
+					infoBubble.close();
+				}
+				infoBubble.open(map, marker);
+        		//window.location.href = url;
     		});
 			if (myLatlng){
 				map.setCenter(myLatlng);
@@ -149,6 +203,9 @@ $(document).ready(function () {
      	$.get("/home/project/type",{type_id: id}).done( function(data){
 			document.getElementById("result").innerHTML=data
        	});
+       	$(".metas-filtro .form .type .select-stylized").removeClass("disabled");
+       	$(".metas-filtro .form .region .select-stylized").addClass("disabled");
+       	$(".metas-filtro .form .cep button").addClass("disabled");
 	});
 
 	$("#type_goal").change(function(){
@@ -163,6 +220,9 @@ $(document).ready(function () {
      	$.get("/home/project/region",{region_id: id}).done( function(data){
 			document.getElementById("result").innerHTML=data
        	});
+       	$(".metas-filtro .form .type .select-stylized").addClass("disabled");
+       	$(".metas-filtro .form .region .select-stylized").removeClass("disabled");
+       	$(".metas-filtro .form .cep button").addClass("disabled");
 	});
 
 	$("#goalregion").change(function(){
@@ -228,6 +288,9 @@ $(document).ready(function () {
         	});
 		}
 			
+       	$(".metas-filtro .form .type .select-stylized").addClass("disabled");
+       	$(".metas-filtro .form .region .select-stylized").addClass("disabled");
+       	$(".metas-filtro .form .cep button").removeClass("disabled");
     }
     });
 
