@@ -1,0 +1,32 @@
+SPAD;Cidade Ademar
+SPAF;Aricanduva
+SPBT;Butantä
+SPCL;Campo Limpo
+SPCS;Capela do Socorro
+SPCT;Cidade Tiradentes
+SPCV;Casa Verde/Cachoeirinha
+SPEM;Ermelino Matarazzo
+SPFO;Freguesia/Brasilândia
+SPGU;Guaianases
+SPIP;Ipiranga
+SPIQ;Itaquera
+SPIT;Itaim Paulista
+SPJA;Jabaquara
+SPJT;Tremembé/Jaçanä
+SPLA;Lapa
+SPMB;MBoi Mirim
+SPMG;Vila Maria/Vila Guilherme
+SPMO;Mooca
+SPMP;São Miguel
+SPPA;Parelheiros
+SPPE;Penha
+SPPI;Pinheiros
+SPPJ;Pirituba
+SPPR;Perus
+SPSA;Santo Amaro
+SPSB;Sapopemba
+SPSE;Sé
+SPSM;São Mateus
+SPST;Santana/Tucuruvi
+SPVM;Vila Mariana
+SPVP;Vila Prudente

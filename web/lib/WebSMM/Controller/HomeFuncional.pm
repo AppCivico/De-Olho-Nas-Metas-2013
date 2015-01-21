@@ -52,7 +52,6 @@ sub home :Chained('base') :PathPart('') :Args(0){
 
     my $api = $c->model('API');
 
-    $api->stash_result( $c, 'projects' );
     $api->stash_result( $c, 'objectives' );
     $api->stash_result( $c, 'regions' );
 

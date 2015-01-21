@@ -24,6 +24,7 @@ Catalyst Controller.
 sub base :Chained('/homefuncional/base') :PathPart('goal') :CaptureArgs(0) {
     my ( $self, $c ) = @_;
     my $api = $c->model('API');
+
     $api->stash_result( $c, 'objectives' );
     $api->stash_result( $c, 'regions' );
 
@@ -43,7 +44,6 @@ sub object :Chained('base') :PathPart('') :CaptureArgs(1){
 
 sub detail :Chained('object') :PathPart('') :Args(0){
     my ( $self, $c, $id ) = @_;
-    my $api = $c->model('API');
 
 }
 
@@ -53,7 +53,6 @@ sub index :Chained('base') :PathPart('') :Args(0){
     my $api = $c->model('API');
 
     $api->stash_result( $c, 'goals' );
-	$c->stash->{goals};
 }
 
 sub type :Chained('base')  :Args(0){
@@ -68,8 +67,6 @@ sub type :Chained('base')  :Args(0){
 			type_id => $type_id 
 		}
     );
-	use DDP;
-	p $c->stash->{goals};
 	$c->stash->{without_wrapper} = 1;
 }
 
