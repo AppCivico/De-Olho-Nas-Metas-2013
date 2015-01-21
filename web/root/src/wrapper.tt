@@ -18,11 +18,9 @@
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
     <!-- Fonts -->
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- Custom Theme CSS -->
     <link href="/static/css/style.css" rel="stylesheet">
-	<link rel="icon" type="image/png" href="/static/css/images/favicon.png" />
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
