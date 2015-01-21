@@ -14,10 +14,8 @@
 	<link href='http://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Cabin+Sketch' rel='stylesheet' type='text/css'>
 	
-    <!-- Bootstrap Core CSS -->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
-    <!-- Fonts -->
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- Custom Theme CSS -->
@@ -30,8 +28,7 @@
 </head>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+<!--	<script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>-->
 	<!--<script type="text/javascript" src="/static/js/map.js"></script>-->
 
 <script type="text/javascript"
