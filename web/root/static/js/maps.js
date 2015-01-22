@@ -25,7 +25,8 @@ var $maps = function () {
 				marker = new google.maps.Marker({
     	            position: myLatlng,
 	                map: map,
-	                url: "/home/project/"+pj.id
+	                url: "/home/project/"+pj.id,
+	                icon: "/static/images/icone_mapa.png"
         	    });
 				var url = marker.url;
 				var content = '<div class="project-bubble"><div class="name">';
@@ -73,7 +74,8 @@ var $maps = function () {
                 position: myLatlng,
 	            map: map,
 				title: json.name,
-				url : "/home/project/"+json.id
+				url : "/home/project/"+json.id,
+	            icon: "/static/images/icone_mapa.png"
             });
 			var url = marker.url;
 			google.maps.event.addListener(marker, 'click', function() {
@@ -120,7 +122,8 @@ var $maps = function () {
                 position: myLatlng,
 	            map: map,
 				title: pj.name,
-				url : "/home/project/"+pj.id
+				url : "/home/project/"+pj.id,
+	            icon: "/static/images/icone_mapa.png"
             });
 			var url = marker.url;
 			google.maps.event.addListener(marker, 'click', function() {
@@ -142,7 +145,8 @@ var $maps = function () {
     	            position: myLatlng,
 	                map: map,
 					title: pj.name,
-					url : "/home/project/"+pj.id
+					url : "/home/project/"+pj.id,
+	                icon: "/static/images/icone_mapa.png"
         	    });
 				var url = marker.url;
 				google.maps.event.addListener(marker, 'click', function() {
