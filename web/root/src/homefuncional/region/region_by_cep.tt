@@ -6,6 +6,7 @@
 	
 
 	   [%-CALL assets.include("js/maps.js")%]
+	   [%-CALL assets.include("js/infobubble.min.js")%]
 	   <section class="metas-detail region-detail">
 		<div id="result" class="container">
 			<div class="row">

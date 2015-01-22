@@ -310,6 +310,22 @@ footer .logo-footer{
 
 section.map{
 	background-color: #f0eee4;
+	position: relative;
+}
+
+section.map .map-overlay{
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #e0e0e0;
+	background-image: url("images/loading.gif");
+	background-repeat: no-repeat;
+	background-position: center center;
+	opacity: 0.5;
+    filter: alpha(opacity=50)
 }
 
 #filter-map{
