@@ -76,6 +76,8 @@
 				<div class="clear"></div>
 			</div>
 		</div>
+		<div class="map-overlay">
+		</div>
 		<div class="clear"></div>
     </section>
     <section class="metas-result">

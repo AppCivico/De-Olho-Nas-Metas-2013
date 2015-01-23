@@ -25,7 +25,8 @@ var $maps = function () {
 				marker = new google.maps.Marker({
     	            position: myLatlng,
 	                map: map,
-	                url: "/home/project/"+pj.id
+	                url: "/home/project/"+pj.id,
+	                icon: "/static/images/icone_mapa.png"
         	    });
 				var url = marker.url;
 				var content = '<div class="project-bubble"><div class="name">';
@@ -33,7 +34,7 @@ var $maps = function () {
 				content += '<div class="description"></div>';
 				content += '<a class="link" href="' + url + '">Veja mais</a>';
 				content += '</div>';
-				google.maps.event.addListener(marker, 'click', function() {
+				google.maps.event.addListener(marker, 'mouseover', function() {
 					if (!ib){
 						ib = new InfoBubble({
 				          map: map,
@@ -65,40 +66,48 @@ var $maps = function () {
 	
 	}
 	function markprojectdetail( project_id ){
+		var ib;
 		$.getJSON('/home/project_map_single', { id : project_id } ,function(data,status){
-			var json = data;d
+			var json = data;
 			marker = "";
 			var myLatlng = new google.maps.LatLng(json.latitude,json.longitude);	
 			marker = new google.maps.Marker({
                 position: myLatlng,
 	            map: map,
-				title: json.name,
-				url : "/home/project/"+json.id
+				url : "/home/project/"+json.id,
+	            icon: "/static/images/icone_mapa.png"
             });
 			var url = marker.url;
-			google.maps.event.addListener(marker, 'click', function() {
-				if (!infoBubble){
-					infoBubble = new InfoBubble({
+			var content = '<div class="project-bubble"><div class="name">';
+			content += json.name + '</div>';
+			content += '<div class="description"></div>';
+			content += '<a class="link" href="' + url + '">Veja mais</a>';
+			content += '</div>';
+			google.maps.event.addListener(marker, 'mouseover', function() {
+				if (!ib){
+					ib = new InfoBubble({
 			          map: map,
-			          content: '<div class="project-bubble">' + json.name + '</div>',
-			          position: myLatlng,
+			          content: content,
 			          shadowStyle: 0,
 			          padding: 10,
-			          backgroundColor: 'rgb(57,57,57)',
+			          backgroundColor: 'rgb(255,255,255)',
 			          borderRadius: 0,
 			          arrowSize: 15,
 			          borderWidth: 0,
-			          borderColor: '#ffffff',
+			          borderColor: '#fff',
 			          disableAutoPan: true,
 			          hideCloseButton: false,
 			          arrowPosition: 50,
-			          backgroundClassName: 'project-bubble',
-			          arrowStyle: 0
+			          arrowStyle: 0,
+			          MaxWidth: 340,
+			          MinHeight: 100
 			        });
+			        ib.open(map, this);
 				}else{
-					infoBubble.close();
+					ib.setContent(content);
+					//ib.setPosition(myLatlng);
+					ib.open(map, this);
 				}
-				infoBubble.open(map, marker);
         		//window.location.href = url;
     		});
 			if (myLatlng){
@@ -109,23 +118,52 @@ var $maps = function () {
 	
 	}
 	function markregiondetail( region_id ){
+		var ib;
 		$.getJSON('/home/region_project', { id : region_id } ,function(data,status){
 			var json = data;
 			var myLatlng;
 			$.each(json.projects, function(i, pj){
-			marker = "";
-			console.log(pj);
-			myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
-			marker = new google.maps.Marker({
-                position: myLatlng,
-	            map: map,
-				title: pj.name,
-				url : "/home/project/"+pj.id
-            });
-			var url = marker.url;
-			google.maps.event.addListener(marker, 'click', function() {
-        		window.location.href = url;
-    		});
+				marker = "";
+				myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
+				marker = new google.maps.Marker({
+	                position: myLatlng,
+		            map: map,
+					url : "/home/project/"+pj.id,
+		            icon: "/static/images/icone_mapa.png"
+	            });
+				var url = marker.url;
+				var content = '<div class="project-bubble"><div class="name">';
+				content += pj.name + '</div>';
+				content += '<div class="description"></div>';
+				content += '<a class="link" href="' + url + '">Veja mais</a>';
+				content += '</div>';
+				google.maps.event.addListener(marker, 'mouseover', function() {
+					if (!ib){
+						ib = new InfoBubble({
+				          map: map,
+				          content: content,
+				          shadowStyle: 0,
+				          padding: 10,
+				          backgroundColor: 'rgb(255,255,255)',
+				          borderRadius: 0,
+				          arrowSize: 15,
+				          borderWidth: 0,
+				          borderColor: '#fff',
+				          disableAutoPan: true,
+				          hideCloseButton: false,
+				          arrowPosition: 50,
+				          arrowStyle: 0,
+				          MaxWidth: 340,
+				          MinHeight: 100
+				        });
+				        ib.open(map, this);
+					}else{
+						ib.setContent(content);
+						//ib.setPosition(myLatlng);
+						ib.open(map, this);
+					}
+	        		//window.location.href = url;
+	    		});
 			});
 			if (myLatlng){
 				map.setCenter(myLatlng);
@@ -141,13 +179,42 @@ var $maps = function () {
 				marker = new google.maps.Marker({
     	            position: myLatlng,
 	                map: map,
-					title: pj.name,
-					url : "/home/project/"+pj.id
+					url : "/home/project/"+pj.id,
+	                icon: "/static/images/icone_mapa.png"
         	    });
 				var url = marker.url;
-				google.maps.event.addListener(marker, 'click', function() {
-        			window.location.href = url;
-    			});
+				var content = '<div class="project-bubble"><div class="name">';
+				content += pj.name + '</div>';
+				content += '<div class="description"></div>';
+				content += '<a class="link" href="' + url + '">Veja mais</a>';
+				content += '</div>';
+				google.maps.event.addListener(marker, 'mouseover', function() {
+					if (!ib){
+						ib = new InfoBubble({
+				          map: map,
+				          content: content,
+				          shadowStyle: 0,
+				          padding: 10,
+				          backgroundColor: 'rgb(255,255,255)',
+				          borderRadius: 0,
+				          arrowSize: 15,
+				          borderWidth: 0,
+				          borderColor: '#fff',
+				          disableAutoPan: true,
+				          hideCloseButton: false,
+				          arrowPosition: 50,
+				          arrowStyle: 0,
+				          MaxWidth: 340,
+				          MinHeight: 100
+				        });
+				        ib.open(map, this);
+					}else{
+						ib.setContent(content);
+						//ib.setPosition(myLatlng);
+						ib.open(map, this);
+					}
+	        		//window.location.href = url;
+	    		});
 			});
 
 		    	map.setZoom(8);
@@ -198,7 +265,9 @@ $(document).ready(function () {
 	}		
 	$("#type").change(function(){
 		var id = $( "#type option:selected" ).val();
+		$("section.map .map-overlay").fadeIn();
      	$.get("/home/project/type",{type_id: id}).done( function(data){
+			$("section.map .map-overlay").fadeOut();
 			document.getElementById("result").innerHTML=data
        	});
        	$(".metas-filtro .form .type .select-stylized").removeClass("disabled");
@@ -208,14 +277,18 @@ $(document).ready(function () {
 
 	$("#type_goal").change(function(){
 		var id = $( "#type_goal option:selected" ).val();
+		$("section.map .map-overlay").fadeIn();
      	$.get("/home/goal/type",{type_id: id}).done( function(data){
+			$("section.map .map-overlay").fadeOut();
 			document.getElementById("result").innerHTML=data
        	});
 	});
 
 	$("#homeregion").change(function(){
 		var id = $( "#homeregion option:selected" ).val();
+		$("section.map .map-overlay").fadeIn();
      	$.get("/home/project/region",{region_id: id}).done( function(data){
+			$("section.map .map-overlay").fadeOut();
 			document.getElementById("result").innerHTML=data
        	});
        	$(".metas-filtro .form .type .select-stylized").addClass("disabled");
@@ -247,7 +320,9 @@ $(document).ready(function () {
     select: function (event, ui) {
         var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
 		if ($("#pagetype").val() == 'home'){		
+			$("section.map .map-overlay").fadeIn();
  			$.get("/home/project/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+				$("section.map .map-overlay").fadeOut();
 				document.getElementById("result").innerHTML=data
         	});
         	$maps.setlocal(location);
