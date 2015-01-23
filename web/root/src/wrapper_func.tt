@@ -20,15 +20,16 @@
 
     <!-- Custom Theme CSS -->
     <link href="/static/css/home_style.css" rel="stylesheet">
-    <!--<link href="/static/css/jquery-ui.theme.min.css" rel="stylesheet">
+<!--	<link href="/static/css/jquery-ui.theme.min.css" rel="stylesheet">-->
     <link href="/static/css/jquery-ui.structure.min.css" rel="stylesheet">
-    <link href="/static/css/jquery-ui.min.css" rel="stylesheet">-->
+  <!--  <link href="/static/css/jquery-ui.min.css" rel="stylesheet">-->
     <link href="/static/css/style.css" rel="stylesheet">
 </head>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<!--	<script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>-->
-	<!--<script type="text/javascript" src="/static/js/map.js"></script>-->
+	<script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+
+	<script type="text/javascript" src="/static/js/GeoJSON.js"></script>
 
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCVRSogQpUwhgvu2GccC7F9rh7B7915qSY&sensor=TRUE">

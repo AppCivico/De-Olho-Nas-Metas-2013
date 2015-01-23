@@ -15,6 +15,7 @@ __PACKAGE__->config(
         order => 'Str'
     },
     result_attr => {
+	    '+select' => [ \q{ST_AsGeoJSON(geom) as geom_json}  ], '+as' => [qw(geom_json)], 
         prefetch => ['projects']
     },
     update_roles => [qw/superadmin user admin webapi organization/],
@@ -36,8 +37,6 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $region = $c->stash->{region};
-    use DDP;
-    p $region;
     $self->status_ok(
         $c,
         entity => {
@@ -63,6 +62,7 @@ sub result_GET {
                     } $region->projects,
                 ),
             ],
+			geom => $region->get_column('geom_json'),
 
         }
     );
@@ -224,11 +224,29 @@ sub latlong : Chained('base') : Args(0) {
         ),
         $c->detach
 		unless $region;
-	    use DDP;
-		p $region;	
         $self->status_ok( $c, entity =>  { id => $region->{id} } );
 
     }
 
 }
+sub regions_map : Chained('base') : PathPart('regions_map') : Args(0) { 
+	my ( $self , $c ) = @_;
+	
+	$c->detach unless $c->req->method eq 'GET';
+
+    my @geoms = $c->model('DB')->resultset('Region')->search( {},{
+			'select' => [ \q{ST_AsGeoJSON(geom) as geom_json}  ], 
+			'as' => [qw(geom_json)],
+			'columns' => [qw(id name)]
+			
+		}
+    )->as_hashref->all;
+	use DDP; p @geoms;
+    $self->status_ok( $c, entity =>  { geoms => \@geoms } );
+	
+}
+sub single_region : Chained('base') : PathPart('single_region') Args(0){
+
+}
+
 1;

@@ -103,6 +103,22 @@ sub region_project_GET{
 	$self->status_ok( $c, entity => $c->stash->{region_obj} );
 }
 
+sub getregions :Chained('base') :Args(0) :ActionClass('REST') {}
+
+sub getregions_GET{
+    my ( $self, $c ) = @_;
+
+    my $api = $c->model('API');
+
+    $api->stash_result(
+        $c,
+        [ 'regions/regions_map'],
+        stash => 'region_obj',
+    );
+	$self->status_ok( $c, entity => $c->stash->{region_obj} );
+
+}
+
 
 =encoding utf8
 

@@ -1,9 +1,28 @@
 var $maps = function () {
+	if (!google.maps.Polygon.prototype.getBounds) {
+
+        google.maps.Polygon.prototype.getBounds = function(latLng) {
+
+                var bounds = new google.maps.LatLngBounds();
+                var paths = this.getPaths();
+                var path;
+                
+                for (var p = 0; p < paths.getLength(); p++) {
+                        path = paths.getAt(p);
+                        for (var i = 0; i < path.getLength(); i++) {
+                                bounds.extend(path.getAt(i));
+                        }
+                }
+
+                return bounds;
+        }
+
+	}
     var map,
     	infoBubble,
     	addr,
     	geocoder;
-
+	
     function initialize() {
 		var mapOptions = {
 			center: new google.maps.LatLng(-23.549035, -46.634438),
@@ -69,6 +88,7 @@ var $maps = function () {
 		var ib;
 		$.getJSON('/home/project_map_single', { id : project_id } ,function(data,status){
 			var json = data;
+			console.log(json);
 			marker = "";
 			var myLatlng = new google.maps.LatLng(json.latitude,json.longitude);	
 			marker = new google.maps.Marker({
@@ -77,6 +97,23 @@ var $maps = function () {
 				url : "/home/project/"+json.id,
 	            icon: "/static/images/icone_mapa.png"
             });
+			var geojson = eval('(' + json.geojson + ')');
+            var polygon = new GeoJSON(geojson, 
+			{
+					  "strokeColor": "#FF7800",
+				      "strokeOpacity": 1,
+				      "strokeWeight": 2,
+				      "fillColor": "#46461F",
+				      "fillOpacity": 0.25 
+
+			});
+
+			
+			map.data.setStyle({
+			  fillColor: 'green'
+			});
+			polygon.setMap(map);	
+
 			var url = marker.url;
 			var content = '<div class="project-bubble"><div class="name">';
 			content += json.name + '</div>';
@@ -112,16 +149,79 @@ var $maps = function () {
     		});
 			if (myLatlng){
 				map.setCenter(myLatlng);
-		    	map.setZoom(16);
+		    	map.setZoom(14);
 			}
 		});
 	
 	}
+	function showregions( ){
+		var ib;
+		var myLatlng;
+		myLatlng = new google.maps.LatLng(-23.554070, -46.634438);	
+		$.getJSON('/home/getregions', function(data,status){
+			var json = data;
+			var myLatlng;
+			console.log(json);
+			var infowindow = new google.maps.InfoWindow();
+			$.each(json.geoms, function(i, pj){
+				marker = "";
+		    	var geojson = eval('(' + pj.geom_json + ')');
+	            var polygon = new GeoJSON(geojson, 
+					{
+					  "strokeColor": "#FF7800",
+				      "strokeOpacity": 1,
+				      "strokeWeight": 2,
+				      "fillColor": "#46461F",
+				      "fillOpacity": 0.25 });
+
+				marker = new google.maps.Marker({
+		            map: map,
+					url : "/home/region/"+pj.id,
+	            });
+				var url = marker.url;
+
+				google.maps.event.addListener(polygon, "click", function(event) {
+
+				var content = '<div style="width:200px;height:60px;" class="project-bubble"><div class="name">';
+				content += pj.name + '</div>';
+				content += '<div class="description"></div>';
+				content += '<a class="link" href="' + url + '">Veja mais</a>';
+				content += '</div>';
+
+				infowindow.setContent(content);
+				infowindow.setPosition(event.latLng);
+				infowindow.open(map);
+				});
+
+				map.data.addListener('click', function(event) {
+				    event.feature.setProperty('isColorful', true);
+			    });	
+				polygon.getBounds().getCenter();
+				polygon.setMap(map);	
+			
+			});
+		    	map.setZoom(12);
+      });	
+	}
+
 	function markregiondetail( region_id ){
 		var ib;
 		$.getJSON('/home/region_project', { id : region_id } ,function(data,status){
 			var json = data;
 			var myLatlng;
+			console.log(json);
+			var geojson = eval('(' + json.geom + ')');
+	        var polygon = new GeoJSON(geojson, 
+			{
+			  "strokeColor": "#FF7800",
+			  "strokeOpacity": 1,
+			  "strokeWeight": 2,
+			  "fillColor": "#46461F",
+			  "fillOpacity": 0.25 
+			});
+
+			polygon.setMap(map);	
+
 			$.each(json.projects, function(i, pj){
 				marker = "";
 				myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
@@ -165,9 +265,15 @@ var $maps = function () {
 	        		//window.location.href = url;
 	    		});
 			});
+						
+			var latlong = polygon.getBounds().getCenter();
+			console.log(latlong);
+			myLatlng = new google.maps.LatLng(latlong.k,latlong.D);	
+			
+
 			if (myLatlng){
 				map.setCenter(myLatlng);
-		    	map.setZoom(12);
+		    	map.setZoom(14);
 			}
       });	
 	}
@@ -240,14 +346,13 @@ var $maps = function () {
 		setlocal          : setlocal,
 		markprojectdetail : markprojectdetail,
 		markgoaldetail    : markgoaldetail,
-		markregiondetail  : markregiondetail
+		markregiondetail  : markregiondetail,
+		showregions       : showregions
 	};
 }();
 
 $(document).ready(function () {
-	if ($("#pagetype").val() !== 'homeregion'){
 		$maps.initialize();
-	}
 	if ($("#pagetype").val() == 'home'){	
 		$maps.loadproject();
 	}		
@@ -262,6 +367,9 @@ $(document).ready(function () {
 	}		
 	if ($("#pagetype").val() == 'regiondetail'){
 		$maps.markregiondetail($("#regionid").val());
+	}		
+	if ($("#pagetype").val() == 'homeregion'){
+		$maps.showregions();
 	}		
 	$("#type").change(function(){
 		var id = $( "#type option:selected" ).val();

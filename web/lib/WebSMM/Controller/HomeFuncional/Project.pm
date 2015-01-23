@@ -34,8 +34,6 @@ sub object :Chained('base') :PathPart('') :CaptureArgs(1){
     my ( $self, $c, $id ) = @_;
 
     my $api = $c->model('API');
-	use DDP;
-	p $id;
     $api->stash_result(
         $c,
         [ 'projects', $id ],

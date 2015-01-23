@@ -14,6 +14,7 @@ __PACKAGE__->config(
         id => 'Int'
     },
     result_attr => {
+	    '+select' => [ \q{ST_AsGeoJSON(region.geom) as geom_json}  ], '+as' => [qw(geom_json)], 
         prefetch => [ { 'goal_projects' => 'goal' }, 'region' ]
     },
     update_roles => [qw/superadmin user admin webapi organization/],
@@ -33,7 +34,6 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $project = $c->stash->{project};
-    use DDP;
     my $type;
 
     $type = $_->goal->objective_id for $project->goal_projects;
@@ -42,7 +42,7 @@ sub result_GET {
       $project->resultset('Objective')->search( { id => $type } )->next;
 
     my $region;
-
+	
     ($region) = map { { id => $_->id, name => $_->name } } $project->region
       if $project->region;
 
@@ -77,6 +77,7 @@ sub result_GET {
                 },
             ],
             region => $region,
+			geojson => $project->get_column('geom_json'),
         }
     );
 
