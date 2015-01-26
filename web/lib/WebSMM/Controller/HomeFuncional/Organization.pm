@@ -28,6 +28,18 @@ sub base :Chained('/homefuncional/base') :PathPart('organization') :CaptureArgs(
 
 sub object :Chained('base') :PathPart('') :CaptureArgs(1){
     my ( $self, $c, $id ) = @_;
+	use DDP;
+	p $id;
+
+    my $api = $c->model('API');
+    $api->stash_result(
+        $c,
+        [ 'organizations', $id ],
+        stash => 'organization_obj'
+    );
+
+	p $c->stash->{organization_obj};
+
 
 
 }
@@ -45,14 +57,9 @@ sub index :Chained('base') :PathPart('') :Args(0){
 	my $group_by = {};
 	push @{$group_by->{ uc(substr($_->{name}, 0, 1)) }}, $_ for @{$c->stash->{organizations}};
 	push @{$group_by->{count}},scalar(@{$c->stash->{organizations}});
-	use DDP;
-	p $group_by;
 	$c->stash->{organizations} = $group_by;
-#	p $c->stash->{organizations};
 	my @order = sort keys %$group_by;
 	$c->stash->{order} = \@order;
-	use Data::Dumper;
-	print Dumper $c->stash->{order};	
 }
 
 
