@@ -15,7 +15,6 @@ __PACKAGE__->config(
         order => 'Str'
     },
     result_attr => {
-	    '+select' => [ \q{ST_AsGeoJSON(geom) as geom_json}  ], '+as' => [qw(geom_json)], 
         prefetch => ['projects']
     },
     update_roles => [qw/superadmin user admin webapi organization/],
@@ -28,7 +27,10 @@ sub base : Chained('/api/base') : PathPart('regions') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 }
 
+#'+select' => [ \q{ST_AsGeoJSON(geom) as geom_json}  ], '+as' => [qw(geom_json)], 
+
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
+    my ( $self, $c ) = @_;
 
 sub result : Chained('object') : PathPart('') : Args(0) :
   ActionClass('REST') { }
@@ -62,7 +64,6 @@ sub result_GET {
                     } $region->projects,
                 ),
             ],
-			geom => $region->get_column('geom_json'),
 
         }
     );
@@ -235,18 +236,32 @@ sub regions_map : Chained('base') : PathPart('regions_map') : Args(0) {
 	$c->detach unless $c->req->method eq 'GET';
 
     my @geoms = $c->model('DB')->resultset('Region')->search( {},{
-			'select' => [ \q{ST_AsGeoJSON(geom) as geom_json}  ], 
+			'select' => [ \q{ST_AsGeoJSON(geom,3) as geom_json}  ], 
 			'as' => [qw(geom_json)],
 			'columns' => [qw(id name)]
 			
 		}
     )->as_hashref->all;
-	use DDP; p @geoms;
     $self->status_ok( $c, entity =>  { geoms => \@geoms } );
 	
 }
-sub single_region : Chained('base') : PathPart('single_region') Args(0){
+sub geom : Chained('base') : PathPart('geom') Args(0){
+	my ( $self , $c ) = @_;
 
+	my $id = $c->req->param('region_id') if $c->req->param('region_id') =~ /^\d+$/;
+
+	my ( $geom ) = $c->model('DB')->resultset('Region')->search( 
+		{ 'me.id' => $id },
+		{
+			'+select' => [ \q{ST_AsGeoJSON(geom,3) as geom_json}  ], 
+			'+as' => [qw(geom_json)],
+			columns => [qw( me.id projects.id projects.latitude projects.longitude)],
+			collapse => 1,
+			join => [qw(projects)]
+		}
+    )->as_hashref->all;
+	use DDP; p $geom;
+    $self->status_ok( $c, entity =>  { geom => $geom } );
 }
 
 1;

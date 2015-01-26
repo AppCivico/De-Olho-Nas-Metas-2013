@@ -76,11 +76,11 @@ sub project_map_single_GET{
 	} 
     $api->stash_result( 
 		$c, 
-		[ 'projects', $id ],
-		stash => 'project_obj',
+		'projects/geom',
+		params => { project_id => $id },
 	 );
 
-	$self->status_ok( $c, entity => $c->stash->{project_obj} );
+	$self->status_ok( $c, entity => $c->stash->{geom} );
 	
 }
 
@@ -97,10 +97,13 @@ sub region_project_GET{
 
     $api->stash_result(
         $c,
-        [ 'regions', $id ],
-        stash => 'region_obj',
+        'regions/geom',
+		params => {
+			region_id => $id, 
+		},
     );
-	$self->status_ok( $c, entity => $c->stash->{region_obj} );
+	use DDP; p $c->stash->{geom};
+	$self->status_ok( $c, entity => $c->stash->{geom} );
 }
 
 sub getregions :Chained('base') :Args(0) :ActionClass('REST') {}

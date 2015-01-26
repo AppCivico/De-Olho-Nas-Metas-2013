@@ -85,8 +85,6 @@ sub region :Chained('base')  :Args(0){
 			region_id => $region_id 
 		}
     );
-	use DDP;
-	p $c->stash->{projects};
 	$c->stash->{without_wrapper} = 1;
 }
 
@@ -109,7 +107,6 @@ sub region_by_cep :Chained('base') :Args(0) {
 			lnglat => $lnglat 
 		}
     );
-	use DDP; p $c->stash->{error};
 	$c->stash->{message} = 1 if $c->stash->{error};
 	$c->stash->{without_wrapper} = 1;
 

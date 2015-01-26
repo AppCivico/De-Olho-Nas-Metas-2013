@@ -14,7 +14,6 @@ __PACKAGE__->config(
         id => 'Int'
     },
     result_attr => {
-	    '+select' => [ \q{ST_AsGeoJSON(region.geom) as geom_json}  ], '+as' => [qw(geom_json)], 
         prefetch => [ { 'goal_projects' => 'goal' }, 'region' ]
     },
     update_roles => [qw/superadmin user admin webapi organization/],
@@ -77,7 +76,6 @@ sub result_GET {
                 },
             ],
             region => $region,
-			geojson => $project->get_column('geom_json'),
         }
     );
 
@@ -254,5 +252,30 @@ sub complete : Chained('base') : PathPart('complete') : Args(0) {
     );
 
 }
+
+sub geom :Chained('base') PathPart('geom') :Args(0){
+	my ( $self , $c ) = @_;
+
+	my $id = $c->req->param('project_id') if $c->req->param('project_id') =~ /^\d+$/;
+
+
+	my ( $geom ) = $c->model('DB')->resultset('Project')->search( 
+		{ 'me.id' => $id },
+		{
+			'+select' => [ \q{ST_AsGeoJSON(region.geom,3) as geom_json}  ], 
+			'+as' => [qw(geom_json)],
+			columns => [qw( me.id region.id region.name)],
+			collapse => 1,
+			join => [qw(region)]
+		}
+    )->as_hashref->next;
+	use DDP;
+	p $geom;
+    $self->status_ok( $c, entity =>  { geom => $geom } );
+
+
+}
+
+
 
 1;

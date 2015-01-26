@@ -86,18 +86,13 @@ var $maps = function () {
 	}
 	function markprojectdetail( project_id ){
 		var ib;
+		var myLatlng;
 		$.getJSON('/home/project_map_single', { id : project_id } ,function(data,status){
 			var json = data;
 			console.log(json);
 			marker = "";
-			var myLatlng = new google.maps.LatLng(json.latitude,json.longitude);	
-			marker = new google.maps.Marker({
-                position: myLatlng,
-	            map: map,
-				url : "/home/project/"+json.id,
-	            icon: "/static/images/icone_mapa.png"
-            });
-			var geojson = eval('(' + json.geojson + ')');
+			var geojson = eval('(' + json.geom_json + ')');
+			var infowindow = new google.maps.InfoWindow();
             var polygon = new GeoJSON(geojson, 
 			{
 					  "strokeColor": "#FF7800",
@@ -107,46 +102,32 @@ var $maps = function () {
 				      "fillOpacity": 0.25 
 
 			});
-
 			
-			map.data.setStyle({
-			  fillColor: 'green'
-			});
+			latlong = polygon.getBounds().getCenter();
+
+			myLatlng = new google.maps.LatLng(latlong.k,latlong.D);	
 			polygon.setMap(map);	
 
+			marker = new google.maps.Marker({
+		            map: map,
+					url : "/home/region/"+json.region.id,
+	            });
 			var url = marker.url;
-			var content = '<div class="project-bubble"><div class="name">';
-			content += json.name + '</div>';
-			content += '<div class="description"></div>';
-			content += '<a class="link" href="' + url + '">Veja mais</a>';
-			content += '</div>';
-			google.maps.event.addListener(marker, 'mouseover', function() {
-				if (!ib){
-					ib = new InfoBubble({
-			          map: map,
-			          content: content,
-			          shadowStyle: 0,
-			          padding: 10,
-			          backgroundColor: 'rgb(255,255,255)',
-			          borderRadius: 0,
-			          arrowSize: 15,
-			          borderWidth: 0,
-			          borderColor: '#fff',
-			          disableAutoPan: true,
-			          hideCloseButton: false,
-			          arrowPosition: 50,
-			          arrowStyle: 0,
-			          MaxWidth: 340,
-			          MinHeight: 100
-			        });
-			        ib.open(map, this);
-				}else{
-					ib.setContent(content);
-					//ib.setPosition(myLatlng);
-					ib.open(map, this);
-				}
-        		//window.location.href = url;
-    		});
+
+			google.maps.event.addListener(polygon, "click", function(event) {
+
+				var content = '<div style="width:200px;height:60px;" class="project-bubble"><div class="name">';
+				content += json.region.name + '</div>';
+				content += '<div class="description"></div>';
+				content += '<a class="link" href="' + url + '">Veja mais</a>';
+				content += '</div>';
+
+				infowindow.setContent(content);
+				infowindow.setPosition(event.latLng);
+				infowindow.open(map);
+			});
+
+
 			if (myLatlng){
 				map.setCenter(myLatlng);
 		    	map.setZoom(14);
@@ -210,7 +191,7 @@ var $maps = function () {
 			var json = data;
 			var myLatlng;
 			console.log(json);
-			var geojson = eval('(' + json.geom + ')');
+			var geojson = eval('(' + json.geom_json + ')');
 	        var polygon = new GeoJSON(geojson, 
 			{
 			  "strokeColor": "#FF7800",
