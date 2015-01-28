@@ -69,6 +69,12 @@ __PACKAGE__->table("region");
   data_type: 'text'
   is_nullable: 1
 
+=head2 subprefecture_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -87,6 +93,8 @@ __PACKAGE__->add_columns(
   { data_type => "text", is_nullable => 1 },
   "long",
   { data_type => "text", is_nullable => 1 },
+  "subprefecture_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -133,9 +141,29 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 subprefecture
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-12-23 15:16:41
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:EayNziSHJXYzL7YJqAtpZg
+Type: belongs_to
+
+Related object: L<SMM::Schema::Result::Subprefecture>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "subprefecture",
+  "SMM::Schema::Result::Subprefecture",
+  { id => "subprefecture_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-01-27 06:10:00
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:rcMPzM1A6BZqTS1zEGeCpw
 
 
 with 'SMM::Role::Verification';

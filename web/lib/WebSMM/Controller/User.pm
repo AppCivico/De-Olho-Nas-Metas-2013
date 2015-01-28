@@ -22,8 +22,8 @@ sub base : Chained('/root') : PathPart('user') : CaptureArgs(0) {
 
     $c->stash->{template_wrapper} = 'func';
 
-
 }
+
 
 __PACKAGE__->meta->make_immutable;
 

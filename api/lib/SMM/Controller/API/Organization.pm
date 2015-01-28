@@ -34,14 +34,14 @@ sub result_GET {
 
     my $organization = $c->stash->{organization};
 	
-	
+	use DDP; p $organization->id;	
     $self->status_ok(
         $c,
         entity => {
             (
                 map { $_ => $organization->$_, }
                   qw/
-                  id
+				  id
                   name
                   address
                   postal_code

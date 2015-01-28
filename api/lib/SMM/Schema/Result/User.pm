@@ -362,11 +362,32 @@ sub verifiers_specs {
                         return 1;
                     }
                 },
-                password => {
-                    required => 0,
-                    type     => 'Str',
+				current_password => {
+                    required   => 0,
+                    type       => 'Str',
+                    post_check => sub {
+                        my $r = shift;
+                        return $self->check_password( $r->get_value('current_password') );
+                    },
                 },
-
+ 
+                password => {
+                    required   => 0,
+                    type       => 'Str',
+                    min_length => 5,
+                    max_length => 256,
+                    dependent  => {
+                        password_confirm => {
+                            required => 1,
+                            type     => 'Str',
+                        },
+                    },
+                    post_check => sub {
+                        my $r = shift;
+                        return $r->get_value('password') eq $r->get_value('password_confirm')
+                          && $self->check_password( $r->get_value('current_password') );
+                    },
+                },
             },
         ),
 
@@ -380,6 +401,9 @@ sub action_specs {
             my %values = shift->valid_values;
 
             not defined $values{$_} and delete $values{$_} for keys %values;
+
+			delete $values{password_confirm};
+            delete $values{current_password};
 
             my $new_role = delete $values{role};
 

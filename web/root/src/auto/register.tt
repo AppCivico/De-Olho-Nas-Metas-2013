@@ -146,7 +146,7 @@
 				
 					<h4 class="green">FAÇA SEU CADASTRO E FIQUE DE OLHO NAS METAS</h4>
 				
-					<form action="/form/user" method="post">
+					<form action="/form/user" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 						<label>Nome completo:</label>
 						<input type="text" name="name" class="form-control">
@@ -197,13 +197,13 @@
 									FOTO DO PERFIL<br />
 									Faça upload de uma foto para usar no seu perfil<br /><br />
 								</small>
-								<input type="file" name="avatar" value="Selecionar uma foto do meu computador">
+								<input type="file" name="avatar">
 							</div>
 						</div>
 					</div>
 					
 					<button type="reset"  class="btn btn-danger pull-left">Limpar</button>
-					<button class="btn btn-success pull-right">Enviar</button>
+					<input type="submit" value="Enviar" class="btn btn-success pull-right"/>
 				
 					</form>
 				</div>					

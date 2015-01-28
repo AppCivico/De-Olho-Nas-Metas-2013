@@ -104,6 +104,21 @@
 							loadLineGraph(".timeline .chart",chart_labels,chart_data);
 						</script>
 					</div>
+    <section class="statistics">
+		<div class="container">
+		
+			<h2 class="section-title">Estatísticas de Metas e Projetos</h2>
+			
+			<div class="row">
+				<div class="chart-stats col-sm-3 text-center" color="darkblue">
+					<div class="chart">
+						<canvas id="chart1"></canvas>
+					</div>
+					<div class="chart-label">Progresso</div>
+				</div>
+			</div>
+		</div>
+    </section>
 
 					<div class="indicators">
 					</div>

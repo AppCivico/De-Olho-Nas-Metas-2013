@@ -13,7 +13,7 @@ __PACKAGE__->config(
     # result_attr => { prefetch => '', ... },
     object_key => 'user',
 
-    update_roles => [qw/superadmin admin/],
+    update_roles => [qw/superadmin admin user/],
     create_roles => [qw/superadmin admin/],
     delete_roles => [qw/superadmin admin/],
 
@@ -46,7 +46,9 @@ sub result_PUT {
     my ( $self, $c ) = @_;
 
     my $user = $c->stash->{user};
-
+	use DDP;
+	p $c->req->params;
+	p$c->stash->{user};
     $user->execute( $c, for => 'update', with => $c->req->params );
 
     $self->status_accepted(
@@ -121,9 +123,10 @@ sub list_GET {
 
 sub list_POST {
     my ( $self, $c ) = @_;
-
+	
     my $user = $c->stash->{collection}
       ->execute( $c, for => 'create', with => $c->req->params );
+
 
     $self->status_created(
         $c,

@@ -54,6 +54,18 @@ __PACKAGE__->table("comment");
   data_type: 'text'
   is_nullable: 1
 
+=head2 timestamp
+
+  data_type: 'timestamp'
+  default_value: current_timestamp
+  is_nullable: 1
+  original: {default_value => \"now()"}
+
+=head2 approved
+
+  data_type: 'boolean'
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -66,6 +78,15 @@ __PACKAGE__->add_columns(
   },
   "description",
   { data_type => "text", is_nullable => 1 },
+  "timestamp",
+  {
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
+    is_nullable   => 1,
+    original      => { default_value => \"now()" },
+  },
+  "approved",
+  { data_type => "boolean", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -98,8 +119,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-12-17 12:24:23
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:V37MYxKpyRJRmxfZF3q0zQ
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-01-27 06:10:00
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:dwTPAi+sKR/qNA7AYw6TuQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

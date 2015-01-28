@@ -31,7 +31,7 @@ use Catalyst qw/
   Session::Store::File
   Session::State::Cookie
   Session::PerUser
-
+  Static::Simple
   /;
 
 extends 'Catalyst';
@@ -68,8 +68,7 @@ __PACKAGE__->config(
             'format_date_to_human', 'format_cnpj_to_human',
             'birthdate_to_age',     'meter_to_kilometer'
         ]
-      }
-
+    },
 );
 
 after 'setup_components' => sub {

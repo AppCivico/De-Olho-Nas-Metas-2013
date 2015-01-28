@@ -3,6 +3,7 @@ use Moose;
 use namespace::autoclean;
 use DateTime;
 use JSON::XS;
+use Path::Class qw(dir);
 
 BEGIN { extends 'Catalyst::Controller' }
 
@@ -17,7 +18,8 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
     my $params = { %{ $c->req->params } };
 	use DDP;
 	$params->{active} = 1;
-	p $params;
+	
+	my $avatar = $c->req->upload('avatar');
     $api->stash_result(
         $c, ['users'],
         method => 'POST',
@@ -39,6 +41,13 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
             );
 
         my $roles = encode_json( \@r );
+	
+		my $path = dir( $c->config->{profile_picture_path})->resolve . '/'. $c->stash->{id};
+		unless (-e $path){
+			mkdir $path;
+		} 
+
+		$avatar->copy_to($path.'/'.$c->stash->{id}.'.jpg');
 
         $api->stash_result(
             $c, 'roles',
@@ -54,7 +63,7 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
         }
         else {
             $c->detach( '/form/redirect_ok',
-                [ '/login', {}, 'Cadastrado com sucesso!' ] );
+                [ \'/login', {}, 'Cadastrado com sucesso!' ] );
         }
     }
 }
@@ -124,6 +133,27 @@ sub process_delete : Chained('base') : PathPart('remove_user') : Args(1) {
     }
 }
 
+sub process_user :Chained('base') :PathPart('change_password') :Args(1){
+    my ( $self, $c, $id ) = @_;
+	
+	my $api    = $c->model('API');
+    my $params = { %{ $c->req->params } };
+
+    $api->stash_result(
+        $c, [ 'users', $id ],
+        method => 'PUT',
+        body   => $params
+    );
+	
+    if ( $c->stash->{error} ) {
+        $c->detach( '/form/redirect_error', [] );
+    }
+    else {
+        $c->detach( '/form/redirect_ok',
+            [ '/user/account/security', {}, 'Alterado com sucesso!' ] );
+    }
+
+}
 __PACKAGE__->meta->make_immutable;
 
 1;

@@ -213,6 +213,9 @@ sub goal : Chained('base') Args(0) {
         $goal->{description}     = delete $goal->{observation};
         $goal->{expected_budget} = delete $goal->{total_cost};
 
+
+		my $porcentage = $self->furl->get( $c->stash->{url} . ''); 
+
         my $return_obj;
         $return_obj =
           $c->model('DB::Objective')
@@ -274,18 +277,19 @@ sub prefectures : Chained('base') Args(0) {
 
     p $c->stash->{url};
 
-    #$res = eval {
-    #    $return = $model->_do_http_req(
-    #        method => 'GET',
-    #        url    => $c->stash->{url},
-    #    );
-    #};
-
     $res = $self->furl->get( $c->stash->{url} );
 
     my $data = decode_json $res->content;
     p $data;
-
+	for my $value (@$data){
+		delete $value->{updated_at};
+		delete $value->{created_at};
+		$value->{latitude} = delete $value->{gps_lat};
+		$value->{longitude} = delete $value->{gps_long};
+		$value->{name} = uc $value->{name};
+		$c->model('DB::Subprefecture')->create($value);
+	}
+	
     $c->res->body('teste');
 }
 sub search_goal : Chained('base') : Args(0) : ActionClass('REST') { }

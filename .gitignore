@@ -2,3 +2,4 @@
 .tidyallrc
 dbi_dump*
 web.error.log
+web/root/static/images/user/

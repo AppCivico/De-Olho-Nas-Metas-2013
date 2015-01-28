@@ -1,4 +1,6 @@
     
+	[%-CALL assets.include("js/Chart.min.js")%]
+	[%-CALL assets.include("js/chart-line.js")%]
 	[%-CALL assets.include("js/maps.js")%]
 	[%-CALL assets.include("js/infobubble.min.js")%]
 	<section class="map text-center">
@@ -89,8 +91,40 @@
 							[% project_obj.description %].
 						</p>
 					</div>
+	
 					<div style="height: 300px;" id="map">
 					</div>
+						<div class="timeline">
+								<h3 class="section-title">Linha do tempo segundo o cronograma</h3>
+								<div class="chart">
+									<canvas id="chartline-goal"></canvas>
+								</div>
+								<script language="text/javascript">
+									var chart_data = {
+														0: [10,20,30,40,50,60,70,80,90,100,110,12],
+														1: [5,10,60,50,45,35,20,40,60,110,85,60]
+													},
+										chart_labels = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+									loadLineGraph(".timeline .chart",chart_labels,chart_data);
+								</script>
+							</div>
+							<section class="statistics">
+						<div class="container">
+						
+							<h2 class="section-title">Estatísticas de Metas e Projetos</h2>
+							
+							<div class="row">
+								<div class="chart-stats col-sm-3 text-center" color="darkblue">
+									<div class="chart">
+										<canvas id="chart1"></canvas>
+									</div>
+									<div class="chart-label">Progresso</div>
+								</div>
+							</div>
+						</div>
+					</section>
+
+
 					<div class="timeline">
 					</div>
 

@@ -40,13 +40,8 @@ $(document).ready(function() {
 				  };
 				  
 	var values = {"chart1": {
-								value_a: 45,
-								value_b: 55
-							 }
-				  ,
-				  "chart2": {
-								value_a: 7,
-								value_b: 93
+								value_a: 224.94633947736,
+								value_b: 124.94633947736
 							 }
 				  };
 	
