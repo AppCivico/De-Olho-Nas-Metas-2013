@@ -1,0 +1,87 @@
+	<section class="menu-top hidden-xs">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4 text-right">
+					<ul class="menu">
+						<li class="page-scroll">
+							<a href="../#home">Início</a>
+						</li>
+						<!--//<li class="page-scroll">
+							<a href="#faq">Perguntas Frequentes</a>
+						</li>//-->
+						<li class="page-scroll">
+							<a href="../#about">Sobre</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-sm-4 text-center logo-top">
+					<img src="/static/css/images/logo-top.png" class="img-responsive">
+				</div>
+				<div class="col-sm-4 text-left">
+					<ul class="menu">
+						<li class="page-scroll">
+							<a href="../#signup">Participe</a>
+						</li>
+						<li>
+							<a href="/login">Entrar</a>
+						</li>
+					</ul>
+					<ul class="menu menu-social">
+						<li class="twitter">
+							<a href="" title="Twitter" alt="Facebook">&nbsp;</a>
+						</li>
+						<li class="facebook">
+							<a href="" title="Facebook" alt="Facebook">&nbsp;</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+    <section class="about text-center">
+		<div class="container">
+			<h2 class="title">Rede Nossa São Paulo lançará plataforma "De Olho Nas Metas"</h2>
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2">
+					
+					<p>
+
+						<em>No evento, que ocorrera no dia 24/3, serão apresentados também um aplicativo de monitoramento da cidade – para celular – e uma avaliação do Plano de Metas da Prefeitura.</em>
+
+						<br /><br />
+						Visando ajudar conselheiros participativos, cidadãos e organizações da sociedade civil a acompanhar e monitorar o cumprimento do Programa de Metas da Prefeitura, a Rede Nossa São Paulo, em parceria com a Avina Américas e o Centro de Mídias Cívicas do Instituto de Tecnologia de Massachusetts (MIT Center for Civic Media), está desenvolvendo o sistema “De Olho nas Metas”.			
+						<br /><br />
+						A plataforma digital, que está em fase final de elaboração, será lançada no dia 24 de março, em um evento público no Sesc Consolação.						
+
+						<br /><br />
+						De acordo com os desenvolvedores do projeto, o “De Olho nas Metas” oferecerá uma série de ferramentas para telefonia móvel e mídias sociais criadas especialmente para facilitar o acesso à informação e divulgar como está o andamento do que foi prometido pela administração municipal.
+
+						<br /><br />
+						No evento será apresentado também um aplicativo para celular, que é parte integrante do sistema “De Olho nas Metas”, destinado ao monitoramento da cidade.
+						<br /><br />
+
+						A ferramenta digital visa auxiliar a sociedade civil no acompanhamento da execução das metas em cada região da cidade, bem como o andamento de outras obras da prefeitura.
+						
+						<strong>Avaliação do Programa de Metas da Prefeitura</strong>
+						<br /><br />
+						Durante o lançamento do sistema, a Rede Nossa São Paulo fará ainda uma avaliação do Plano de Metas da Prefeitura 2013-2016, que contempla 123 metas a serem executadas até o final da atual gestão.
+						 <br /><br />
+
+						
+						<strong>Serviço:</strong>
+						<br /><br />
+						Lançamento do sistema “De Olho nas Metas”<br />
+						Data: 24 de março de 2015<br />
+						Horário: das 9h30 às 12h30  <br />
+						Local: Sesc Consolação<br />
+						Rua Dr. Vila Nova, 245, Vila Buarque<br /><br />
+						Agende-se!
+						 <br /><br />
+					</p>
+					
+					
+				</div>
+			</div>
+		</div>
+    </section>

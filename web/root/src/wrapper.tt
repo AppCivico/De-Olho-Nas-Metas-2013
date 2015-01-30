@@ -50,6 +50,7 @@
     <script src="/static/js/jquery.easing.1.3.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="/static/js/index.js"></script>
+    <script src="/static/js/home.js"></script>
 
 </body>
 </html>

@@ -252,6 +252,23 @@ footer .logo-footer img{
 	margin-top: 20px;
 }
 
+#launchModal .modal-title,
+#launchModal .modal-body h2{
+	font-family: "Cabin Sketch";
+}
+
+#launchModal .modal-body a{
+	color: #f0ad4e;
+}
+#launchModal .modal-body{
+	background-color: #666056;
+	color: #ffffff;
+	font-size: 2em;
+}
+#launchModal .modal-footer{
+	margin-top: 0;
+}
+
 @media (min-width: 768px){
 }  
 @media(max-width:979px) {

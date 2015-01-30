@@ -185,7 +185,25 @@
 		</div>
     </section>
 	
-
+<div class="modal fade" id="launchModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Rede Nossa São Paulo lançará plataforma “De Olho nas Metas”</h4>
+      </div>
+      <div class="modal-body">
+        <h2 class="text-center">Agende-se:<br /><strong>24 de Março de 2015</strong><br /> Lançamento do "De Olho nas Metas"</h2>
+        <div class="text-center">Clique <a href="http://www.nossasaopaulo.org.br/noticias/rede-nossa-sao-paulo-lancara-plataforma-de-olho-nas-metas" target="_blank">aqui</a> para informações</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script type="text/javascript">
+</script>
 <!--	<a id="contact" class="anchor"></a>
     <section class="contact text-center">
 		<div class="container">
