@@ -1,4 +1,4 @@
-package WebSMM::Controller::HomeFuncional::Region;
+package WebSMM::Controller::HomeFuncional::Subprefecture;
 use Moose;
 use namespace::autoclean;
 
@@ -6,7 +6,7 @@ BEGIN { extends 'Catalyst::Controller'; }
 
 =head1 NAME
 
-WebSMM::Controller::HomeFuncional::Region - Catalyst Controller
+WebSMM::Controller::HomeFuncional::Subprefecture - Catalyst Controller
 
 =head1 DESCRIPTION
 
@@ -21,7 +21,7 @@ Catalyst Controller.
 
 =cut
 
-sub base :Chained('/homefuncional/base') :PathPart('region') :CaptureArgs(0) {
+sub base :Chained('/homefuncional/base') :PathPart('subprefecture') :CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
 }
@@ -33,10 +33,10 @@ sub object :Chained('base') :PathPart('') :CaptureArgs(1){
     
 	$api->stash_result(
         $c,
-        [ 'regions', $id ],
-        stash => 'region_obj',
+        [ 'subprefectures', $id ],
+        stash => 'subprefecture_obj',
     );
-	use DDP; p $c->stash->{region_obj};	
+	use DDP; p $c->stash->{subprefecture_obj};	
 	
 }
 
@@ -51,7 +51,7 @@ sub index :Chained('base') :PathPart('') :Args(0){
 
     my $api = $c->model('API');
 
-    $api->stash_result(	$c, 'regions' );
+    $api->stash_result(	$c, 'subprefectures' );
 
 }
 

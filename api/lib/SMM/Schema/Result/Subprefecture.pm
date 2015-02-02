@@ -69,6 +69,13 @@ __PACKAGE__->table("subprefecture");
   data_type: 'text'
   is_nullable: 1
 
+=head2 timestamp
+
+  data_type: 'timestamp'
+  default_value: current_timestamp
+  is_nullable: 1
+  original: {default_value => \"now()"}
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -87,6 +94,13 @@ __PACKAGE__->add_columns(
   { data_type => "text", is_nullable => 1 },
   "longitude",
   { data_type => "text", is_nullable => 1 },
+  "timestamp",
+  {
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
+    is_nullable   => 1,
+    original      => { default_value => \"now()" },
+  },
 );
 
 =head1 PRIMARY KEY
@@ -102,6 +116,21 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
+
+=head2 organizations
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::Organization>
+
+=cut
+
+__PACKAGE__->has_many(
+  "organizations",
+  "SMM::Schema::Result::Organization",
+  { "foreign.subprefecture_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
 
 =head2 regions
 
@@ -119,8 +148,58 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-01-27 06:10:00
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:EeUP/wyglnPYOApdBBmlRw
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-02 10:55:22
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Du+CUss6WlSf/iZcQC1o1Q
+
+with 'SMM::Role::Verification';
+with 'SMM::Role::Verification::TransactionalActions::DBIC';
+with 'SMM::Schema::Role::ResultsetFind';
+
+use Data::Verifier;
+use MooseX::Types::Email qw/EmailAddress/;
+use SMM::Types qw /DataStr TimeStr/;
+
+sub verifiers_specs {
+    my $self = shift;
+    return {
+        update => Data::Verifier->new(
+            filters => [qw(trim)],
+            profile => {
+                name => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                acronym => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                latitude => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                longitude => {
+                    required => 0,
+                    type     => 'Str',
+                },
+            }
+        ),
+    };
+}
+
+sub action_specs {
+    my $self = shift;
+    return {
+        update => sub {
+            my %values = shift->valid_values;
+
+            not defined $values{$_} and delete $values{$_} for keys %values;
+
+            my $subprefecture = $self->update( \%values );
+
+            return $subprefecture;
+		}
+	}
+}
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

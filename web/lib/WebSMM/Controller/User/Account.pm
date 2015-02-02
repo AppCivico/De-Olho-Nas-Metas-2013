@@ -41,6 +41,28 @@ sub security :Chained('object') :PathPart('seguranca') :Args(0){
 			
 }
 
+sub edit :Chained('object') :PathPart('editar') :Args(0){
+    my ( $self, $c ) = @_;
+
+	my $api = $c->model('API');
+
+	$api->stash_result(
+		$c,
+		[ 'users', $c->user->id ],
+		stash => 'user_obj',
+	);
+	
+	return unless $c->req->method eq 'POST';
+
+
+	$api->stash_result(
+		$c,
+		[ 'users', $c->user->id ],
+		method => 'PUT',
+		params => $c->req->params,
+	);
+
+}
 __PACKAGE__->meta->make_immutable;
 
 1;

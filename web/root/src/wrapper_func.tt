@@ -29,6 +29,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
 
+    <script src="/static/js/jquery.maskedinput.min.js"></script>
 	<script type="text/javascript" src="/static/js/GeoJSON.js"></script>
 
 <script type="text/javascript"
@@ -59,7 +60,7 @@
                         <a href="/home/goal">Metas</a>
                     </li>
                     <li>
-                        <a href="/home/region">Regiões</a>
+                        <a href="/home/region">Distritos</a>
                     </li>
                     <li>
                         <a href="/home/organization">Conselhos</a>

@@ -13,6 +13,8 @@
 	<link href='http://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Cabin+Sketch' rel='stylesheet' type='text/css'>
 	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/static/js/jquery.maskedinput.min.js"></script>
     <!-- Bootstrap Core CSS -->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
@@ -24,7 +26,24 @@
     <link href="/static/css/style.css" rel="stylesheet">
 	<link rel="icon" type="image/png" href="favicon.png" />
 </head>
+<script>
+jQuery(function($){
+   $("#phone").mask("(99) 9999-9999");
 
+   $("#phone").focusout(function(){
+        var phone, element;
+        element = $(this);
+        element.unmask();
+        phone = element.val().replace(/\D/g, '');
+        if(phone.length > 10) {
+            element.mask("(99) 99999-999?9");
+        } else {
+            element.mask("(99) 9999-9999?9");
+        }
+    }).trigger('focusout');
+});
+
+</script>
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
 
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
@@ -181,7 +200,7 @@
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label>Celular:</label>
-								<input type="telephone" name="phone_number" class="form-control">
+								<input id="phone" type="telephone" name="phone_number" class="form-control">
 							</div>
 						</div>
 					</div>

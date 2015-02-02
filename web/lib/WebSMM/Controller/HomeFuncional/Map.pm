@@ -102,7 +102,27 @@ sub region_project_GET{
 			region_id => $id, 
 		},
     );
-	use DDP; p $c->stash->{geom};
+	$self->status_ok( $c, entity => $c->stash->{geom} );
+}
+
+sub subpref_region :Chained('base') :Args(0) :ActionClass('REST') {}
+
+sub subpref_region_GET{
+    my ( $self, $c ) = @_;
+
+	$c->detach unless $c->req->param('id');
+	$c->detach unless $c->req->param('id') =~ qr/^\d+$/;
+
+    my $api = $c->model('API');
+	my $id = $c->req->param('id');
+
+    $api->stash_result(
+        $c,
+        'subprefectures/geom',
+		params => {
+			subprefecture_id => $id, 
+		},
+    );
 	$self->status_ok( $c, entity => $c->stash->{geom} );
 }
 

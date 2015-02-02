@@ -74,6 +74,9 @@ sub process_edit : Chained('base') : PathPart('user') : Args(1) {
     my $api    = $c->model('API');
     my $params = { %{ $c->req->params } };
     my @r;
+
+	my $avatar = $c->req->upload('avatar');
+
     if ( ref $params->{roles} eq 'ARRAY' ) {
 
         foreach my $r ( @{ $params->{roles} } ) {
@@ -98,6 +101,8 @@ sub process_edit : Chained('base') : PathPart('user') : Args(1) {
     }
 
     my $roles = encode_json( \@r );
+
+	my $path = dir( $c->config->{profile_picture_path})->resolve . '/'. $c->stash->{id};
 
     $params->{roles}        = $roles;
     $params->{change_roles} = 1;
@@ -151,6 +156,40 @@ sub process_user :Chained('base') :PathPart('change_password') :Args(1){
     else {
         $c->detach( '/form/redirect_ok',
             [ '/user/account/security', {}, 'Alterado com sucesso!' ] );
+    }
+
+}
+
+sub process_perfil :Chained('base') :PathPart('edit_perfil') :Args(1){
+    my ( $self, $c, $id ) = @_;
+	
+	my $api    = $c->model('API');
+    my $params = { %{ $c->req->params } };
+	
+	return unless $id =~ /^\d+$/;
+	my $avatar = $c->req->upload('avatar');
+
+	if ($avatar){
+		my $path = dir( $c->config->{profile_picture_path})->resolve . '/'. $id;
+		use DDP; p $path;
+
+		$avatar->copy_to($path.'/'.$id.'.jpg');
+	}
+
+
+
+    $api->stash_result(
+        $c, [ 'users', $id ],
+        method => 'PUT',
+        body   => $params
+    );
+	use DDP; p $c->stash->{status_msg};	
+    if ( $c->stash->{error} ) {
+        $c->detach( '/form/redirect_error', [] );
+    }
+    else {
+        $c->detach( '/form/redirect_ok',
+            [ '/user/account/edit', {}, 'Alterado com sucesso!' ] );
     }
 
 }

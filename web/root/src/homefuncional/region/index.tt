@@ -41,7 +41,7 @@
 		<div class="container">
 			<div class="form">
 				<div class="col-xs-4 cep">
-					Encontre sua região<br />
+					Encontre seu distrito<br />
 					<input type="text" id="txtaddress" name="txtaddress" placeholder="Informe o CEP">
 					<input type="hidden" id="pagetype" value="homeregion">
 					<button id="btnaddress" name="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
@@ -60,14 +60,6 @@
 							</select>
 							</div>
 						</div>
-<!--					<div class="col-xs-6 type">
-							&nbsp;<br />
-							<div class="select-stylized">
-							<select>
-								<option>Bairro
-							</select>
-							</div>
-						</div>-->
 					</div>
 				</div>
 				<div class="clear"></div>

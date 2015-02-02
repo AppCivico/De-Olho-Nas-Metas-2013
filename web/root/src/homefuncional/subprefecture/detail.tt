@@ -43,8 +43,8 @@
 			<div class="form">
 				<div class="col-xs-4 cep">
 					Encontre seu distrito<br />
-					<input type="hidden" id="pagetype" value="regiondetail">
-					<input type="hidden" id="regionid" value="[% region_obj.id %]">
+					<input type="hidden" id="pagetype" value="subprefdetail">
+					<input type="hidden" id="subprefid" value="[% subprefecture_obj.id %]">
 					<input type="text" id="txtaddress" placeholder="Informe o CEP">
 					<button id="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
 				</div>
@@ -74,7 +74,7 @@
 				<div class="col-sm-8">
 				
 					<div class="body">
-						<h1>[%region_obj.name%]</h1>
+						<h1>[%subprefecture_obj.name%]</h1>
 						<p>
 							Liquorice brownie unerdwear.com bonbon brownie croissant croissant. Croissant sugar plum macaroon liquorice I love icing applicake I love gummies. Candy canes icing cotton candy macaroon lollipop. Pudding gummi bears oat cake bear claw chupa chups. I love wafer lollipop chocolate bar. Jujubes I love I love fruitcake I love gummi bears dragée pie ice cream. I love lollipop halvah jelly-o chupa chups liquorice candy canes unerdwear.com I love. Brownie sweet roll liquorice bonbon I love macaroon chocolate bar I love.
 						</p>
@@ -131,25 +131,19 @@
 					
 				</div>
 					<div class="col-sm-4">
-					<div class="list-box list-gold">
-						<span class="header">Subprefeitura</span>
-						<ul>
-							<li><a href="[% c.uri_for_action('/homefuncional/subprefecture/detail',[region_obj.subprefecture.id] ) %]">[%region_obj.subprefecture.name%]</a></li>
-						</ul>
-					</div>
 					
-					<div class="list-box list-green">
-						<span class="header">[% region_obj.projects.size%] Projetos na Região</span>
+					<div class="list-box list-gold">
+						<span class="header">[% region_obj.projects.size%] Regiões</span>
 						<ul>
-							[% IF region_obj.projects.size > 0 %]
+							[% IF subprefecture_obj.regions.size > 0 %]
 
-							[% FOREACH project IN region_obj.projects%]
+							[% FOREACH region IN subprefecture_obj.regions%]
 							
-							<li><a href="[% c.uri_for_action('/homefuncional/project/detail',[project.id] ) %]">[% project.name%]</a></li>
+							<li><a href="[% c.uri_for_action('/homefuncional/region/detail',[region.id] ) %]">[% region.name%]</a></li>
 
 							[% END %]
 							[%ELSE%]
-							<li><a href="">NENHUM PROJETO NA REGIÃO</a></li>
+							<li><a href="">NENHUMA REGIÃO ENCONTRADA</a></li>
 							[% END %]
 						</ul>
 					</div>

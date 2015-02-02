@@ -37,7 +37,7 @@ sub result_GET {
         entity => {
             roles => [ map { $_->name } $user->roles ],
 
-            map { $_ => $attrs{$_}, } qw(id name email type)
+            map { $_ => $attrs{$_}, } qw(id name phone_number username email type)
         }
     );
 }

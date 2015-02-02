@@ -26,7 +26,7 @@ var $maps = function () {
     function initialize() {
 		var mapOptions = {
 			center: new google.maps.LatLng(-23.549035, -46.634438),
-			zoom: 16,
+			zoom: 10,
 		};
 		geocoder = new google.maps.Geocoder();
 
@@ -81,6 +81,7 @@ var $maps = function () {
         			//window.location.href = url;
     			});
 			});
+			map.setZoom(12);
 		});
 	
 	}
@@ -130,7 +131,7 @@ var $maps = function () {
 
 			if (myLatlng){
 				map.setCenter(myLatlng);
-		    	map.setZoom(14);
+		    	map.setZoom(12);
 			}
 		});
 	
@@ -141,7 +142,6 @@ var $maps = function () {
 		myLatlng = new google.maps.LatLng(-23.554070, -46.634438);	
 		$.getJSON('/home/getregions', function(data,status){
 			var json = data;
-			var myLatlng;
 			console.log(json);
 			var infowindow = new google.maps.InfoWindow();
 			$.each(json.geoms, function(i, pj){
@@ -161,12 +161,13 @@ var $maps = function () {
 	            });
 				var url = marker.url;
 
-				google.maps.event.addListener(polygon, "click", function(event) {
+				google.maps.event.addListener(polygon, "mouseover", function(event) {
 
-				var content = '<div style="width:200px;height:60px;" class="project-bubble"><div class="name">';
+				var content = '<div style="width:400px;height:100px;" class="project-bubble"><div class="name">';
 				content += pj.name + '</div>';
-				content += '<div class="description"></div>';
-				content += '<a class="link" href="' + url + '">Veja mais</a>';
+				content += '<div class="description">';
+				content += '<a class="link" href="' + url + '">Distrito</a>';
+				content += '<a class="link" href="' + '/home/subprefecture/' +pj.subprefecture_id+ '">Subprefeitura</a></div>';
 				content += '</div>';
 
 				infowindow.setContent(content);
@@ -181,7 +182,8 @@ var $maps = function () {
 				polygon.setMap(map);	
 			
 			});
-		    	map.setZoom(12);
+		    	map.setCenter(myLatlng);
+		    	map.setZoom(10);
       });	
 	}
 
@@ -204,6 +206,7 @@ var $maps = function () {
 			polygon.setMap(map);	
 
 			$.each(json.projects, function(i, pj){
+				console.log(pj);
 				marker = "";
 				myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
 				marker = new google.maps.Marker({
@@ -254,10 +257,69 @@ var $maps = function () {
 
 			if (myLatlng){
 				map.setCenter(myLatlng);
-		    	map.setZoom(14);
+		    	map.setZoom(12);
 			}
       });	
 	}
+	function marksubprefdetail( subpref_id ){
+		var ib;
+		$.getJSON('/home/subpref_region', { id : subpref_id } ,function(data,status){
+			var json = data;
+			var myLatlng;
+			console.log(data);
+			var infowindow = new google.maps.InfoWindow();
+			$.each(json.regions, function(i, pj){
+				marker = "";
+		    	var geojson = eval('(' + pj.geom_json + ')');
+	            var polygon = new GeoJSON(geojson, 
+					{
+					  "strokeColor": "#FF7800",
+				      "strokeOpacity": 1,
+				      "strokeWeight": 2,
+				      "fillColor": "#46461F",
+				      "fillOpacity": 0.25 });
+
+				marker = new google.maps.Marker({
+		            map: map,
+					url : "/home/region/"+pj.id,
+	            });
+				var url = marker.url;
+
+				google.maps.event.addListener(polygon, "mouseover", function(event) {
+
+					var content = '<div style="width:200px;height:60px;" class="project-bubble"><div class="name">';
+					content += pj.name + '</div>';
+					content += '<div class="description"></div>';
+					content += '<a class="link" href="' + url + '">Veja mais</a>';
+					content += '</div>';
+
+					infowindow.setContent(content);
+					infowindow.setPosition(event.latLng);
+					infowindow.open(map);
+				});
+
+				map.data.addListener('click', function(event) {
+				    event.feature.setProperty('isColorful', true);
+			    });	
+				polygon.getBounds().getCenter();
+				polygon.setMap(map);	
+			
+			});
+				myLatlng = new google.maps.LatLng(json.latitude,json.longitude);	
+				marker = new google.maps.Marker({
+    	            position: myLatlng,
+	                map: map,
+	                url: "/home/subprefecture/"+json.id,
+	                icon: "/static/images/icone_mapa.png"
+        	    });
+
+		    	map.setCenter(myLatlng);
+		    	map.setZoom(12);	
+
+      });	
+	}
+
+
 	function markgoaldetail( goal_id ){
 		$.getJSON('/home/project_map_list', { id : goal_id } ,function(data,status){
 			$.each(data.project, function(i, pj){
@@ -321,14 +383,15 @@ var $maps = function () {
 	}
 
 	return {
-		initialize	      : initialize,
-		loadproject       : loadproject,
-		codeAddress       : codeAddress,
-		setlocal          : setlocal,
-		markprojectdetail : markprojectdetail,
-		markgoaldetail    : markgoaldetail,
-		markregiondetail  : markregiondetail,
-		showregions       : showregions
+		initialize	       : initialize,
+		loadproject        : loadproject,
+		codeAddress        : codeAddress,
+		setlocal           : setlocal,
+		markprojectdetail  : markprojectdetail,
+		markgoaldetail     : markgoaldetail,
+		markregiondetail   : markregiondetail,
+		marksubprefdetail  : marksubprefdetail,
+		showregions        : showregions
 	};
 }();
 
@@ -352,6 +415,10 @@ $(document).ready(function () {
 	if ($("#pagetype").val() == 'homeregion'){
 		$maps.showregions();
 	}		
+	if ($("#pagetype").val() == 'subprefdetail'){
+		$maps.marksubprefdetail($("#subprefid").val());
+	}		
+
 	$("#type").change(function(){
 		var id = $( "#type option:selected" ).val();
 		$("section.map .map-overlay").fadeIn();
