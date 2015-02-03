@@ -154,6 +154,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 project_events
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::ProjectEvent>
+
+=cut
+
+__PACKAGE__->has_many(
+  "project_events",
+  "SMM::Schema::Result::ProjectEvent",
+  { "foreign.project_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 project_prefectures
 
 Type: has_many
@@ -204,9 +219,24 @@ __PACKAGE__->belongs_to(
   },
 );
 
+=head2 user_follow_projects
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-12-23 15:16:41
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:SWYJ410VjbegaBVaLb6Jgw
+Type: has_many
+
+Related object: L<SMM::Schema::Result::UserFollowProject>
+
+=cut
+
+__PACKAGE__->has_many(
+  "user_follow_projects",
+  "SMM::Schema::Result::UserFollowProject",
+  { "foreign.project_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-03 11:41:59
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:HbK0tPYJA/p9mmxJNWZiuw
 
 __PACKAGE__->many_to_many( goals => goal_projects => 'goal');
 

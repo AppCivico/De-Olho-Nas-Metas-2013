@@ -244,6 +244,36 @@ __PACKAGE__->belongs_to(
   },
 );
 
+=head2 project_events_read
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::ProjectEventRead>
+
+=cut
+
+__PACKAGE__->has_many(
+  "project_events_read",
+  "SMM::Schema::Result::ProjectEventRead",
+  { "foreign.user_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 user_follow_projects
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::UserFollowProject>
+
+=cut
+
+__PACKAGE__->has_many(
+  "user_follow_projects",
+  "SMM::Schema::Result::UserFollowProject",
+  { "foreign.user_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 user_roles
 
 Type: has_many
@@ -290,8 +320,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-01-07 07:10:20
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:uiOJ3BM9tdogzfonA52N9A
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-03 11:41:59
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:H78wo1GrNsfKcci+CaqJpA
 
 __PACKAGE__->many_to_many( roles => user_roles => 'role' );
 
