@@ -15,7 +15,7 @@ __PACKAGE__->config(
         order => 'Str'
     },
     result_attr => {
-        prefetch => ['regions']
+        prefetch => ['regions', 'organizations']
     },
     update_roles => [qw/superadmin user admin webapi organization/],
     create_roles => [qw/superadmin admin webapi/],
@@ -37,7 +37,8 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $subprefecture = $c->stash->{subprefecture};
-	use DDP; p $subprefecture;
+	my $name = $subprefecture->organizations->get_column('name');
+
     $self->status_ok(
         $c,
         entity => {
@@ -60,6 +61,17 @@ sub result_GET {
                     } $subprefecture->regions,
                 ),
             ],
+            organization => 
+				(
+                    map {
+                        {
+                            id        => $_->id,
+                            name      => $_->name,
+                        }
+
+                    } $subprefecture->organizations,
+                ),
+
         }
     );
 

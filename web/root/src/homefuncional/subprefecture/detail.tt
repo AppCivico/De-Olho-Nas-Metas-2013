@@ -133,7 +133,7 @@
 					<div class="col-sm-4">
 					
 					<div class="list-box list-gold">
-						<span class="header">[% region_obj.projects.size%] Regiões</span>
+						<span class="header">[% subprefecture_obj.regions.size%] Regiões</span>
 						<ul>
 							[% IF subprefecture_obj.regions.size > 0 %]
 
@@ -147,6 +147,20 @@
 							[% END %]
 						</ul>
 					</div>
+					<div class="list-box list-blue">
+						<span class="header">Conselho</span>
+						<ul>
+							[% IF subprefecture_obj.organization.size > 0 %]
+
+							
+							<li><a href="[% c.uri_for_action('/homefuncional/organization/detail',[subprefecture_obj.organization.id] ) %]">[% subprefecture_obj.organization.name%]</a></li>
+
+							[%ELSE%]
+							<li><a href="">NENHUMA REGIÃO ENCONTRADA</a></li>
+							[% END %]
+						</ul>
+					</div>
+
 					<br /><br />
 					
 				</div>

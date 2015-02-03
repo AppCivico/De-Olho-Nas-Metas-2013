@@ -1,5 +1,6 @@
     
 	[%-CALL assets.include("js/maps.js")%]
+    [%-CALL assets.include("js/infobubble.min.js")%]
 	<section class="map text-center">
 		<div id="filter-map">
 			<div class="contents text-center">
@@ -43,6 +44,9 @@
 				<div class="row">
 					<div class="col-xs-8 nome">
 						Procurar Conselho<br />
+						<input type="hidden" id="pagetype" value="orgdetail">
+						<input type="hidden" id="orgid" value="[% organization_obj.id %]">
+
 						<input type="text" placeholder="Informe o Nome">
 						<button><span class="glyphicon glyphicon-search"></span></button>
 					</div>
@@ -126,11 +130,9 @@
 				</div>
 				<div class="col-sm-4">
 					<div class="list-box list-green">
-						<span class="header">Projetos Prioritários</span>
+						<span class="header">Subprefeitura</span>
 						<ul>
-							<li>São Mateus</li>
-							<li>Pirituba</li>
-							<li>São Miguel</li>
+							<li><a href="[% c.uri_for_action('/homefuncional/subprefecture/detail',[organization_obj.subprefecture.id] ) %]">[% organization_obj.subprefecture.name%]</a></li>
 						</ul>
 					</div>
 					

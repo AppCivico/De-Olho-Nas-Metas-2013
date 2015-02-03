@@ -10,7 +10,7 @@ __PACKAGE__->config(
     result      => 'DB::Organization',
     object_key  => 'organization',
     result_attr => {
-        prefetch => [ { 'city' => 'state' } ]
+        prefetch => [ { 'city' => 'state' }, 'subprefecture' ]
     },
     search_ok => {
         id => 'Int'
@@ -34,7 +34,6 @@ sub result_GET {
 
     my $organization = $c->stash->{organization};
 	
-	use DDP; p $organization->id;	
     $self->status_ok(
         $c,
         entity => {
@@ -70,7 +69,19 @@ sub result_GET {
                           /
                     )
                 }
-            }
+            },
+            subprefecture => 
+                ( 
+                    map {
+                       $_? (+{ 
+                            id         => $_->id,
+                            name       => $_->name,
+							latitude   => $_->latitude,
+							longitude  => $_->longitude,
+                        }):()
+                    } ( $organization->subprefecture ),
+                ),
+
         }
     );
 
@@ -108,7 +119,8 @@ sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
 
 sub list_GET {
     my ( $self, $c ) = @_;
-
+	
+	
     $self->status_ok(
         $c,
         entity => {
@@ -205,6 +217,9 @@ sub complete : Chained('base') : PathPart('complete') : Args(0) {
         }
     );
 
+}
+
+sub subpref :Chained('base') :Args(0) {
 }
 
 1;

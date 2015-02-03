@@ -142,7 +142,24 @@ sub getregions_GET{
 
 }
 
+sub subpref_org :Chained('base') :Args(0) :ActionClass('REST') {}
 
+sub subpref_org_GET{
+    my ( $self, $c ) = @_;
+
+	$c->detach unless $c->req->param('id');
+	$c->detach unless $c->req->param('id') =~ qr/^\d+$/;
+
+    my $api = $c->model('API');
+	my $id = $c->req->param('id');
+
+    $api->stash_result(
+        $c,
+        ['organizations', $id ],
+		stash => 'org_obj',
+    );
+	$self->status_ok( $c, entity => $c->stash->{org_obj} );
+}
 =encoding utf8
 
 =head1 AUTHOR

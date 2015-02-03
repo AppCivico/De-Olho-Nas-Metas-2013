@@ -28,8 +28,6 @@ sub base :Chained('/homefuncional/base') :PathPart('organization') :CaptureArgs(
 
 sub object :Chained('base') :PathPart('') :CaptureArgs(1){
     my ( $self, $c, $id ) = @_;
-	use DDP;
-	p $id;
 
     my $api = $c->model('API');
     $api->stash_result(
@@ -37,15 +35,11 @@ sub object :Chained('base') :PathPart('') :CaptureArgs(1){
         [ 'organizations', $id ],
         stash => 'organization_obj'
     );
-
-	p $c->stash->{organization_obj};
-
-
-
 }
 
 sub detail :Chained('object') :PathPart('') :Args(0){
     my ( $self, $c, $id ) = @_;
+    my $api = $c->model('API');
 }
 
 sub index :Chained('base') :PathPart('') :Args(0){
@@ -53,6 +47,7 @@ sub index :Chained('base') :PathPart('') :Args(0){
 
     my $api = $c->model('API');
 
+    $api->stash_result( $c, 'subprefectures' );
     $api->stash_result( $c, 'organizations' );
 	my $group_by = {};
 	push @{$group_by->{ uc(substr($_->{name}, 0, 1)) }}, $_ for @{$c->stash->{organizations}};

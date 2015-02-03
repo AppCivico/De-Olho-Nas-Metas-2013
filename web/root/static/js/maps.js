@@ -261,6 +261,57 @@ var $maps = function () {
 			}
       });	
 	}
+
+	function markorgdetail( org_id ){
+		$.getJSON('/home/subpref_org',{ id : org_id },function(data,status){
+			var json = data;
+			var myLatlng;
+			console.log(data);
+			var ib;
+			var myLatlng = new google.maps.LatLng(data.subprefecture.latitude,data.subprefecture.longitude);	
+				marker = new google.maps.Marker({
+    	            position: myLatlng,
+	                map: map,
+	                url: "/home/subprefecture/"+data.subprefecture.id,
+	                icon: "/static/images/icone_mapa.png"
+        	    });
+				var url = marker.url;
+				var content = '<div class="project-bubble" ><div class="name">';
+				content += '<a href="/home/subprefecture/'+data.subprefecture.id+'">' + data.subprefecture.name + '</a></div>';
+				content += '</div>';
+
+				google.maps.event.addListener(marker, 'mouseover', function() {
+					if (!ib){
+						ib = new InfoBubble({
+				          map: map,
+				          content: content,
+				          shadowStyle: 0,
+				          padding: 10,
+				          backgroundColor: 'rgb(255,255,255)',
+				          borderRadius: 0,
+				          arrowSize: 15,
+				          borderWidth: 0,
+				          borderColor: '#fff',
+				          disableAutoPan: true,
+				          hideCloseButton: false,
+				          arrowPosition: 50,
+				          arrowStyle: 0,
+				          MaxWidth: 340,
+				          MinHeight: 60
+				        });
+				        ib.open(map, this);
+					}else{
+						ib.setContent(content);
+						ib.open(map, this);
+					}
+    			});
+
+	   		map.setCenter(myLatlng);
+		  	map.setZoom(12);	
+        });	
+
+	}
+
 	function marksubprefdetail( subpref_id ){
 		var ib;
 		$.getJSON('/home/subpref_region', { id : subpref_id } ,function(data,status){
@@ -383,15 +434,16 @@ var $maps = function () {
 	}
 
 	return {
-		initialize	       : initialize,
-		loadproject        : loadproject,
-		codeAddress        : codeAddress,
-		setlocal           : setlocal,
-		markprojectdetail  : markprojectdetail,
-		markgoaldetail     : markgoaldetail,
-		markregiondetail   : markregiondetail,
-		marksubprefdetail  : marksubprefdetail,
-		showregions        : showregions
+		initialize	             : initialize,
+		loadproject              : loadproject,
+		codeAddress              : codeAddress,
+		setlocal                 : setlocal,
+		markprojectdetail        : markprojectdetail,
+		markgoaldetail     	     : markgoaldetail,
+		markregiondetail         : markregiondetail,
+		markorgdetail            : markorgdetail,
+		marksubprefdetail        : marksubprefdetail,
+		showregions              : showregions
 	};
 }();
 
@@ -418,7 +470,9 @@ $(document).ready(function () {
 	if ($("#pagetype").val() == 'subprefdetail'){
 		$maps.marksubprefdetail($("#subprefid").val());
 	}		
-
+	if ($("#pagetype").val() == 'orgdetail'){
+		$maps.markorgdetail($("#orgid").val());
+	}
 	$("#type").change(function(){
 		var id = $( "#type option:selected" ).val();
 		$("section.map .map-overlay").fadeIn();
