@@ -123,15 +123,7 @@ jQuery(function($){
 						<button class="btn btn-yellow">Editar perfil</button>
 					</div>
 					
-					<div class="list-box list-brown">
-						<ul>
-							<li><a href="">Seguindo</a></li>
-							<li><a href="/user/perfil/seguranca">Segurança</a></li>
-							<li><a href="">Linha do tempo</a></li>
-							<li><a href="">Atividades</a></li>
-						</ul>
-					</div>
-					
+				[% INCLUDE 'user/account/menu.tt' %]
 				</div>
 			</div>
 			

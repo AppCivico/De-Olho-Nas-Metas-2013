@@ -1,0 +1,23 @@
+				    [% IF c.check_user_roles('user')%]	
+					<div class="list-box list-brown">
+						<ul>
+							<li><a href="">Seguindo</a></li>
+							<li><a href="/user/perfil/seguranca">Segurança</a></li>
+							<li><a href="">Linha do tempo</a></li>
+							<li><a href="">Atividades</a></li>
+						</ul>
+					</div>
+					[% ELSE %]
+					<div class="list-box list-brown">
+						<ul>
+							<li><a href="/user/perfil/enquete">Enquetes Móveis</a></li>
+							<li><a href="">Campanhas</a></li>
+							<li><a href="">Seguindo</a></li>
+							<li><a href="/user/perfil/seguranca">Segurança</a></li>
+							<li><a href="">Linha do tempo</a></li>
+							<li><a href="">Atividades</a></li>
+						</ul>
+					</div>
+					
+					[%END%]	
+

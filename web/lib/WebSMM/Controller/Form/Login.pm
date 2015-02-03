@@ -34,6 +34,12 @@ sub after_login {
     if ( grep { /^user$/ } $c->user->roles ) {
         $url = '/user/account/index';
     }
+    if ( grep { /^counsil_master$/ } $c->user->roles ) {
+        $url = '/user/account/index';
+    }
+    if ( grep { /^counsil$/ } $c->user->roles ) {
+        $url = '/user/account/index';
+    }
     elsif ( grep { /^admin|organization$/ } $c->user->roles ) {
         $url = '/admin/dashboard/index';
     }

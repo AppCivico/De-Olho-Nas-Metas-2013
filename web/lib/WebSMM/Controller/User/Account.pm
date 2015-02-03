@@ -1,6 +1,8 @@
 package WebSMM::Controller::User::Account;
 use Moose;
 use namespace::autoclean;
+use JSON;
+use utf8;
 
 BEGIN { extends 'Catalyst::Controller' }
 
@@ -15,8 +17,6 @@ sub object : Chained('base') : PathPart('perfil') : CaptureArgs(0) {
 sub index : Chained('object') : PathPart('') : Args(0) {
     my ( $self, $c ) = @_;
 
-#	$c->stash->{avatar} = dir($c->config->{profile_picture_path})->resolve.'/'.$c->user->id.'/'.$c->user->id.'jpg';
-	
 	
 }
 
@@ -61,6 +61,32 @@ sub edit :Chained('object') :PathPart('editar') :Args(0){
 		method => 'PUT',
 		params => $c->req->params,
 	);
+
+}
+
+
+sub survey :Chained('object') :PathPart('enquete') :Args(0){
+    my ( $self, $c ) = @_;
+
+	my $return;
+	my $res;
+
+	my $model = $c->model('API');
+
+	my $url = 'http://dev.monitor.promisetracker.org/api/v1/campaigns';
+	
+	eval{
+		$return = $model->_do_http_req(
+			method  => 'GET',
+			url     => $url,
+			headers => [ Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' ] ,
+		);
+	};
+	
+	my $data = decode_json $return->content;
+	$c->stash->{campaigns} = $data->{payload};
+	use DDP; p $c->stash->{campaigns};
+	warn "lol";
 
 }
 __PACKAGE__->meta->make_immutable;

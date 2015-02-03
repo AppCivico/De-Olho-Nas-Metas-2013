@@ -171,6 +171,9 @@ sub process_perfil :Chained('base') :PathPart('edit_perfil') :Args(1){
 
 	if ($avatar){
 		my $path = dir( $c->config->{profile_picture_path})->resolve . '/'. $id;
+		unless (-e $path){
+			mkdir $path;
+		}
 		use DDP; p $path;
 
 		$avatar->copy_to($path.'/'.$id.'.jpg');

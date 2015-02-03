@@ -149,7 +149,7 @@
 
 							[% END %]
 							[%ELSE%]
-							<li><a href="">NENHUM PROJETO NA REGIÃO</a></li>
+							<li><a >NENHUM PROJETO NA REGIÃO</a></li>
 							[% END %]
 						</ul>
 					</div>

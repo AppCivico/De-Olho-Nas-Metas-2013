@@ -111,16 +111,7 @@
 						<div class="name text-center">[% c.user.name %]</div>
 						<button class="btn btn-yellow"><a href="/user/perfil/editar">Editar perfil</a></button>
 					</div>
-					
-					<div class="list-box list-brown">
-						<ul>
-							<li><a href="">Seguindo</a></li>
-							<li><a href="/user/perfil/seguranca">Segurança</a></li>
-							<li><a href="">Linha do tempo</a></li>
-							<li><a href="">Atividades</a></li>
-						</ul>
-					</div>
-					
+				[% INCLUDE 'user/account/menu.tt' %]
 				</div>
 			</div>
 			

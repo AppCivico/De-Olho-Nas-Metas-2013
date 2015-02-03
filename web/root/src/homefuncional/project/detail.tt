@@ -94,6 +94,28 @@
 	
 					<div style="height: 300px;" id="map">
 					</div>
+					<div class="row social">
+						<div class="col-xs-4">
+							<div class="social-share">
+								<ul>
+									<li class="twitter"><a href="">twitter</a></li>
+									<li class="facebook active"><a href="">facebook</a></li>
+									<li class="googleplus"><a href="">google+</a></li>
+								</ul>
+								<div class="clear"></div>
+							</div>
+						</div>
+						<div class="col-xs-4 text-center">
+							<div class="followers">
+								<div class="icon users2"></div> <span class="caption"><span class="counter">1250</span> seguidores
+							</div>
+						</div>
+						<div class="col-xs-4 text-right">
+							<button class="btn btn-reply">Siga o Projeto</button>
+						</div>
+					</div>
+
+
 						<div class="timeline">
 								<h3 class="section-title">Linha do tempo segundo o cronograma</h3>
 								<div class="chart">
