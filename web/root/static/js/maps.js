@@ -165,9 +165,9 @@ var $maps = function () {
 
 				var content = '<div style="width:400px;height:100px;" class="project-bubble"><div class="name">';
 				content += pj.name + '</div>';
-				content += '<div class="description">';
-				content += '<a class="link" href="' + url + '">Distrito</a>';
-				content += '<a class="link" href="' + '/home/subprefecture/' +pj.subprefecture_id+ '">Subprefeitura</a></div>';
+				content += '<div class="region-bubble-buttons text-center">';
+				content += '<a class="btn btn-yellow" href="' + url + '">Distrito</a>';
+				content += '<a class="btn btn-success" href="' + '/home/subprefecture/' +pj.subprefecture_id+ '">Subprefeitura</a></div>';
 				content += '</div>';
 
 				infowindow.setContent(content);
