@@ -43,16 +43,23 @@ h2{
 .btn-orange{
 	background-color: #f15a24;
 }
-.btn-yellow{
+.btn-yellow,
+.btn-yellow:visited{
 	background-color: #face53;
 }
-.btn-reply{
+.btn-yellow:hover{
+	color: #000000;
+	background-color: #e6be4e;
+}
+.btn-reply,
+.btn-reply:visited{
 	background-color: #42210b;
 	color: #fff;
 	border-radius: 0px;
 }
 .btn-reply:hover{
 	background-color: #703e1c;
+	color: #fff;
 }
 .btn-white{
 	background-color: #ffffff;
@@ -1179,4 +1186,10 @@ table.dataTable.gold thead{
 }
 #disqus_thread{
 	margin: 20px 0;
+}
+.region-bubble-buttons{
+	text-align: center;
+}
+.region-bubble-buttons a.btn{
+	margin: 20px 10px;
 }
