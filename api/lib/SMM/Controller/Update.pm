@@ -97,6 +97,7 @@ sub goal : Chained('base') Args(0) {
     p $url_goal;
     $res     = $self->furl->get( $c->stash->{url} . $url_goal );
     $res_obj = $self->furl->get( $c->stash->{url} . $url_obj );
+	p$res_obj->content;
     my $data_obj = decode_json $res_obj->content;
     my $data     = decode_json $res->content;
 
@@ -204,7 +205,6 @@ sub goal : Chained('base') Args(0) {
         delete $goal->{axis_id};
         delete $goal->{articulation_id};
         delete $goal->{status};
-        delete $goal->{porcentagem};
         delete $goal->{projects};
         delete $goal->{secretaries};
         delete $goal->{created_at};
@@ -215,6 +215,18 @@ sub goal : Chained('base') Args(0) {
 
 
 		my $porcentage = $self->furl->get( $c->stash->{url} . ''); 
+
+        my $goal_porcentage_obj;
+        $goal_porcentage_obj =
+          $c->model('DB::GoalPorcentage')
+          ->search( { goal_id => $goal->{id}} )->next;
+
+        $goal_porcentage_obj =
+          $c->model('DB::GoalPorcentage')
+          ->create( { goal_id=> $goal->{id} , owned => $goal->{porcentagem}->{concluido}, remainder => $goal->{porcentagem}->{restante}   } )
+          unless $goal_porcentage_obj;
+
+        delete $goal->{porcentagem};
 
         my $return_obj;
         $return_obj =

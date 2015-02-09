@@ -362,6 +362,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 goal_porcentages
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::GoalPorcentage>
+
+=cut
+
+__PACKAGE__->has_many(
+  "goal_porcentages",
+  "SMM::Schema::Result::GoalPorcentage",
+  { "foreign.goal_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 goal_projects
 
 Type: has_many
@@ -493,8 +508,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-01-06 17:54:12
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:O1LotN0+B/cM3hoq5czyVg
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-01-06 18:34:45
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:EquAlH3yUqLFiQXfoxB6bw
 
 __PACKAGE__->many_to_many( projects => goal_projects => 'project');
 
