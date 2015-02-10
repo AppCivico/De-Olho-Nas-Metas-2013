@@ -74,6 +74,7 @@ h2{
 .btn-navy,
 .btn-navy:visited{
 	background-color: #00a99d;
+	color: #fff;
 }
 .btn-navy:hover{
 	color: #000000;
@@ -462,6 +463,9 @@ section.map .map-overlay{
 	background-color: #8cc63f;
 	color: #fff;
 }
+.metas-filtro .button{
+	margin-top: 1.3em;
+}
 .metas-filtro button span{
 	color: #fff;
 }
@@ -474,18 +478,23 @@ section.map .map-overlay{
 }
 .metas-filtro.blue button{
 	background-color: #29abe2;
+	color: #fff;
 }
 .metas-filtro.violet button{
 	background-color: #795891;
+	color: #fff;
 }
 .metas-filtro.green button{
 	background-color: #8cc63f;
+	color: #fff;
 }
 .metas-filtro.navy button{
 	background-color: #00a99d;
+	color: #fff;
 }
 .metas-filtro.orange button{
 	background-color: #f7931e;
+	color: #fff;
 }
 .metas-filtro button.disabled{
 	background-color: #828282;
@@ -1004,8 +1013,14 @@ div.icon.chat{
 div.icon.chat2{
 	background-position: -242px 0px;
 }
+div.icon.chat3{
+	background-position: -220px -22px;
+}
 div.icon.eye{
 	background-position: -264px 0px;
+}
+div.icon.results{
+	background-position: 0px -22px;
 }
 div.followers{
 	margin-top: 30px;
@@ -1111,26 +1126,43 @@ h3.dotted{
 	margin-bottom: 20px;
 }
 .enquete-list .item{
-	border-top: 1px dotted #c6c2c0;
-	padding: 10px 0;
+	position: relative;
 }
-.enquete-list .item .title{
-	font-size: 1.4em;
-}
-.enquete-list .item .description{
-	font-size: 0.9em;
+
+.enquete-list .item .status{
+	color: #b3b3b3;
 }
 .enquete-list .item .status.active{
 	color: #8cc63f;
 }
-.enquete-list .item .status.paused{
-	color: #b3b3b3;
+.enquete-list .item .icon-status{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 32px;
+	height: 32px;
+	background-color: #b3b3b3;
 }
-.enquete-list .item a.clone,
-.enquete-list .item a.clone:visited{
+.enquete-list .item .icon-status.active{
+	background-color: #8cc63f;
+}
+.enquete-list .item .icon-status .icon{
+	margin: 5px;
+}
+.enquete-list .item .contents{
+	border-top: 1px dotted #c6c2c0;
+	padding: 10px 0;
+}
+.enquete-list .item .contents a.clone,
+.enquete-list .item .contents a.clone:visited{
 	color: #face53;
 }
-.enquete-list .item a.clone:hover{
+.enquete-list .item .contents a.view-results,
+.enquete-list .item .contents a.view-results:visited{
+	color: #00a99d;
+}
+.enquete-list .item .contents a.clone:hover,
+.enquete-list .item .contents a.view-results:hover{
 	color: #ccc;
 }
 

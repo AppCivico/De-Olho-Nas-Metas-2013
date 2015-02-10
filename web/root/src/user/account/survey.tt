@@ -34,7 +34,7 @@
 		</div>
 		<div class="clear"></div>
     </section>
-	<section class="metas-filtro yellow">
+	<section class="metas-filtro navy">
 		<div class="container">
 			<form>
 				<div class="col-xs-4 cep">
@@ -52,13 +52,8 @@
 							</select>
 							</div>
 						</div>
-						<div class="col-xs-6 type">
-							&nbsp;<br />
-							<div class="select-stylized">
-							<select>
-								<option>Tema
-							</select>
-							</div>
+						<div class="col-xs-6 text-center button">
+							<button class="btn btn-navy">Criar nova enquete</button>
 						</div>
 					</div>
 				</div>
@@ -68,44 +63,42 @@
     </section>
 
 
-	   <section class="metas-detail profile-timeline">
+	   <section class="metas-result enquete-list">
 		<div class="container">
 
-			<div class="row">
-			<form action="/form/edit_perfil/[%c.user.id%]" enctype="multipart/form-data" method="POST">
-				<div class="col-sm-9 .col-md.offset-4">
-					<h3>
-						Enquetes Móveis
-						<button class="btn btn-reply pull-right">Criar nova enquete</button>
-					</h3>
-					[% FOREACH enquete IN campaigns%]	
-					<div class="enquete-list">
-						<div class="row item">
-							<div class="col-xs-1">
-								<div class="icon chat"></div>
+				<h2 class="section-title">Enquetes Móveis</h2>
+
+				[% FOREACH enquete IN campaigns%]	
+				<div class="row item">
+					<div class="contents">
+						<h2>[%enquete.tittle%]</h2>
+						<div class="description">[% enquete.description%]</div>
+						<div class="row">
+							<div class="col-xs-4 text-left">
+								<div class="icon chat[% IF enquete.status != 'active'%]3[% END %]"></div>
+								<span class="status[% IF enquete.status == 'active'%] active[% END %]">
+								[% IF enquete.status == 'active'%]
+									Ativo
+								[% ELSE %]
+									Pausada
+								[% END %]
+								</span>
 							</div>
-							<div class="col-xs-11">
-								<div class="title"><a href="">[%enquete.tittle%] </a></div>
-								<div class="description">[% enquete.description%]</div>
-								<div class="row">
-									<div class="col-xs-6">
-										<span class="status active">[% IF enquete.status == 'active'%]Ativo[%END%]</span>
-									</div>
-									<div class="col-xs-6">
-										<a href="" class="clone"><div class="icon clone"></div> Clonar</a>
-									</div>
-								</div>
+							<div class="col-xs-4 text-center">
+								<a href="" class="clone"><div class="icon clone"></div> Clonar</a>
+							</div>
+							<div class="col-xs-4 text-right">
+								<a href="" class="view-results"><div class="icon results"></div> Ver resultados</a>
 							</div>
 						</div>
 					</div>
-					[% END%]
+					<div class="icon-status [% IF enquete.status == 'active'%]active[% END %]">
+						<div class="icon chat3"></div>
+					</div>
+				</div>
+				[% END%]
 
-				</div>
-				<div class="col-sm-3">
-				[% INCLUDE 'user/account/menu.tt' %]
-				</div>
 			</div>
 			
 		</div>
-    </section>	
-	
+    </section>
