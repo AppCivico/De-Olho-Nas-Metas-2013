@@ -1022,6 +1022,9 @@ div.icon.eye{
 div.icon.results{
 	background-position: 0px -22px;
 }
+div.icon.calendar-orange{
+	background-position: -22px -22px;
+}
 div.followers{
 	margin-top: 30px;
 	font-weight: bold;
@@ -1179,6 +1182,39 @@ h3.dotted{
 	color: #face53;
 	font-weight: bold;
 }
+
+.campaign-list .item .image{
+	position: relative;
+    overflow:hidden;
+    height:220px;
+}
+.campaign-list .item .image img{
+	width: 100%;
+	position: absolute;
+    top:-100%; left:0; right: 0; bottom:-100%;
+    margin: auto;
+}
+.campaign-list .item .description{
+	padding: 20px;
+}
+
+.campaign-list .item a h2{
+	color: #88817b;
+	text-transform: inherit;
+}
+.campaign-list .item a h2:hover{
+	color: #000;
+}
+.campaign-list .item .credits{
+	color: #999;
+	font-size: 1.2em;
+}
+.campaign-list .item .counter{
+	color: #f7931e;
+	font-size: 1.2em;
+	text-transform: uppercase;
+}
+
 table.dataTable{
 	border-collapse: collapse;
 }
