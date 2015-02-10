@@ -1081,6 +1081,30 @@ div.followers{
 	background-color: #f7931e;
 }
 
+.multi-column{
+	-webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
+}
+
+.organization-list{
+	margin-bottom: 20px;
+}
+.organization-list ul{
+	list-style-type: none;
+	padding-bottom: 0;
+	margin: 0;
+}
+.organization-list ul li.item{
+	margin: 0;
+	color: #474135;
+	background-color: #fff;
+	padding: 10px 15px;
+	border-bottom: 1px dotted #c6c2c0;
+}
+.organization-list ul li.index{
+	padding: 10px 15px;
+}
 .events h3{
 	text-transform: uppercase;
 	color: #88817b;
