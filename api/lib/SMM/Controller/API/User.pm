@@ -35,7 +35,7 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $user  = $c->stash->{user};
-
+	use DDP; p $user;
     my %attrs = $user->get_inflated_columns;
     $self->status_ok(
         $c,
@@ -236,7 +236,8 @@ sub user_project_event_all_GET{
 	use DDP; p $result;
 	$self->status_accepted(
         $c,
-        entity =>  $result 
+        entity =>  $result,
+ 
     ),
     if $result;
 
