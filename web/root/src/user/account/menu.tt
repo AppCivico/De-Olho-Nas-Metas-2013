@@ -25,7 +25,6 @@
 							<li><a href="">Atividades</a></li>
 						</ul>
 					</div>
-
 					[% ELSE %]
 					<div class="list-box list-brown">
 						<ul>

@@ -8,6 +8,12 @@ BEGIN { extends 'Catalyst::Controller' }
 
 sub base : Chained('/user/base') : PathPart('') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
+	my $api = $c->model('API');
+	$api->stash_result(
+		$c,
+		[ 'users', $c->user->obj->id ],
+		stash => 'user_roles',
+	);
 
 
 }
@@ -29,8 +35,8 @@ sub index : Chained('object') : PathPart('') : Args(0) {
 		[ 'users/user_project_event', $c->user->obj->id ],
 		stash => 'user_obj',
 	);
+	$c->stash->{user_obj}->{role} = { map { $_ => 1 } @{$c->stash->{user_roles}->{roles}} };
 	use DDP; p $c->stash->{user_obj};
-	$c->stash->{user_obj}->{role} = { map { $_ => 1 } @{$c->stash->{user_obj}->{roles}} };
 
 }
 
@@ -104,7 +110,12 @@ sub follow :Chained('object') :PathPart('seguindo') :Args(0){
 	);
 	use DDP; p $c->stash->{user_obj};
 }
+sub invite :Chained('object') :PathPart('convidar') :Args(0){
+    my ( $self, $c ) = @_;
 
+	my $api = $c->model('API');
+
+}
 sub notification :Chained('object') :PathPart('notificacoes') :Args(0){
     my ( $self, $c ) = @_;
 

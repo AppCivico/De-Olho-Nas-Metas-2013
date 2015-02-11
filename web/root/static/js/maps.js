@@ -441,7 +441,7 @@ var $maps = function () {
 		markprojectdetail        : markprojectdetail,
 		markgoaldetail     	     : markgoaldetail,
 		markregiondetail         : markregiondetail,
-		markorgdetail            : markorgdetail,
+	   	markorgdetail            : markorgdetail,
 		marksubprefdetail        : marksubprefdetail,
 		showregions              : showregions
 	};
