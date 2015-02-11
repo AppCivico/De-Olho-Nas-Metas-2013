@@ -305,7 +305,7 @@ $(document).ready(function () {
 					[% END %]
 					
 					<div class="list-projects">
-						<span class="header">[% project_obj.goal.size %] Meta</span>
+						<span class="header">Meta [% project_obj.goal.id%]</span>
 						<ul class="list-projects">
 							[% FOREACH goal IN project_obj.goal %]
 							<li><a href="[% c.uri_for_action('/homefuncional/goal/detail',[goal.id] ) %]">[%goal.name%]</a></li>

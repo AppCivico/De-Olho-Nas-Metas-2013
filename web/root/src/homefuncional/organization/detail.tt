@@ -1,6 +1,6 @@
     
 	[%-CALL assets.include("js/maps.js")%]
-    [%-CALL assets.include("js/infobubble.min.js")%]
+	[%-CALL assets.include("js/infobubble.min.js")%]
 	<section class="map text-center">
 		<div id="filter-map">
 			<div class="contents text-center">
@@ -38,7 +38,7 @@
 		<div class="clear"></div>
     </section>
 
-	<section class="metas-filtro violet">
+<!--	<section class="metas-filtro violet">
 		<div class="container">
 			<div class="form">
 				<div class="row">
@@ -60,7 +60,7 @@
 				<div class="clear"></div>
 			</div>
 		</div>
-    </section>
+    </section>-->
 
 	   <section class="metas-detail company-detail">
 		<div class="container">

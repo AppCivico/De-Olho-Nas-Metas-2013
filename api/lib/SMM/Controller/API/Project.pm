@@ -66,17 +66,19 @@ sub result_GET {
                   longitude
                   /
             ),
-            goal => [
+            goal => 
                 (
                     map {
                         my $p = $_;
                         (
                                 { id   => $p->goal->id,
-								  name => $p->goal->name },
+				  name => $p->goal->name 
+				},
                           ),
                     } $project->goal_projects,
                 ),
-            ],
+            :w
+
             type => [
                 {
                     id   => $objective->id,

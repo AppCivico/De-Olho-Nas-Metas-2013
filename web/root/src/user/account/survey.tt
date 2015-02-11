@@ -42,6 +42,7 @@
 					<input type="text" placeholder="Informe o CEP">
 					<button><span class="glyphicon glyphicon-search"></span></button>
 				</div>
+				<!--
 				<div class="col-xs-8">
 					<div class="row">
 						<div class="col-xs-6 region">
@@ -56,7 +57,7 @@
 							<button class="btn btn-navy">Criar nova enquete</button>
 						</div>
 					</div>
-				</div>
+				</div>-->'
 				<div class="clear"></div>
 			</form>
 		</div>
