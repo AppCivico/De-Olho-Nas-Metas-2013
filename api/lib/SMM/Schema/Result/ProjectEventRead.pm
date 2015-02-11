@@ -149,6 +149,48 @@ __PACKAGE__->belongs_to(
 # Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-03 11:41:59
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:kndHV7XkOSq6NnF7Pf5DkQ
 
+with 'SMM::Role::Verification';
+with 'SMM::Role::Verification::TransactionalActions::DBIC';
+with 'SMM::Schema::Role::ResultsetFind';
+
+use Data::Verifier;
+use MooseX::Types::Email qw/EmailAddress/;
+use SMM::Types qw /DataStr TimeStr/;
+
+sub verifiers_specs {
+    my $self = shift;
+    return {
+        update => Data::Verifier->new(
+            filters => [qw(trim)],
+            profile => {
+                project_event_id => {
+                    required => 0,
+                    type     => 'Int',
+                },
+                user_id => {
+                    required => 0,
+                    type     => 'Int',
+                },
+            }
+        ),
+    };
+}
+
+sub action_specs {
+    my $self = shift;
+    return {
+        update => sub {
+            my %values = shift->valid_values;
+
+            not defined $values{$_} and delete $values{$_} for keys %values;
+
+            my $project_event_read = $self->update( \%values );
+
+            return $project_event_read;
+        },
+
+    };
+}
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;

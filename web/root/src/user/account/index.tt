@@ -1,4 +1,16 @@
-    <section class="map text-center">
+<script>    
+$(document).ready(function () {
+  $('.close').on('click', function () {
+	var id = $(this).data("id");
+	alert(id);
+	$.post( "/home/project_event_read/visualizado", { user_id: $('#user_id').val(), project_event_id: id  }, function( data ) {
+		console.log(data);
+ 	},"json");	
+  })
+});
+</script>
+
+	<section class="map text-center">
 		<div id="filter-map">
 			<div class="contents text-center">
 				<div class="item">
@@ -42,7 +54,7 @@
 				<div class="col-sm-9">
 				
 					<h3 class="dotted">Notificações Recentes</h3>
-					
+					<input type="hidden" id="user_id" value="[%c.user.obj.id%]"/>	
 					<div class="notification-list">
 						[% FOREACH ufp IN user_obj.user_follow_projects%]
 						
@@ -58,7 +70,7 @@
 								<div class="title">[%pe.text%]</div>
 							</div>
 
-							<button type="button" id="close" class="close" data-id="" data-dismiss="alert" aria-label="Close">
+							<button type="button" id="close" class="close" data-id="[% pe.id%]" data-dismiss="alert" aria-label="Close">
 							  <span aria-hidden="true">&times;</span>
 							</button>
 						</div>
