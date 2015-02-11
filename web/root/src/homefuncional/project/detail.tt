@@ -1,6 +1,5 @@
     
 	[%-CALL assets.include("js/Chart.min.js")%]
-	[%-CALL assets.include("js/chart-line.js")%]
 	[%-CALL assets.include("js/maps.js")%]
 	[%-CALL assets.include("js/infobubble.min.js")%]
 <script>
@@ -40,7 +39,6 @@ $(document).ready(function () {
 	$('#text_comment_counsil').val('');
   })
   $('#comment').on('click', function () {
-	alert('lol');
 	if ($('#text_comment').val() == ""){
 		$('#alert_comment').html('<div class="alert alert-success"><p>Por favor preencha o campo de comentário.</p></div>');
 		return;
@@ -212,7 +210,7 @@ $(document).ready(function () {
 					</div>
 					[% END %]
 
-						<div class="timeline">
+						<!--<div class="timeline">
 								<h3 class="section-title">Linha do tempo segundo o cronograma</h3>
 								<div class="chart">
 									<canvas id="chartline-goal"></canvas>
@@ -225,7 +223,7 @@ $(document).ready(function () {
 										chart_labels = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
 									loadLineGraph(".timeline .chart",chart_labels,chart_data);
 								</script>
-							</div>
+						</div>-->
 							<section class="statistics">
 						<div class="container">
 						

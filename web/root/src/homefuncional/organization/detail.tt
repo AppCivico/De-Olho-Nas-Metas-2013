@@ -38,14 +38,14 @@
 		<div class="clear"></div>
     </section>
 
+	<input type="hidden" id="pagetype" value="orgdetail">
+	<input type="hidden" id="orgid" value="[% organization_obj.id %]">
 <!--	<section class="metas-filtro violet">
 		<div class="container">
 			<div class="form">
 				<div class="row">
 					<div class="col-xs-8 nome">
 						Procurar Conselho<br />
-						<input type="hidden" id="pagetype" value="orgdetail">
-						<input type="hidden" id="orgid" value="[% organization_obj.id %]">
 
 						<input type="text" placeholder="Informe o Nome">
 						<button><span class="glyphicon glyphicon-search"></span></button>
@@ -139,15 +139,8 @@
 					<div id="map" style="height: 300px;>
 					</div>
 					
-<!--					<div class="list-box list-orange">
-						<span class="header">Campanhas</span>
-						<ul>
-							<li><a href="">Campanha 01</a></li>
-							<li><a href="">Campanha 02</a></li>
-							<li><a href="">Campanha 03</a></li>
-						</ul>
-					</div>-->
-					<br /><br />
+					<div class="list-box list-orange">
+					</div>
 					
 				</div>
 			</div>

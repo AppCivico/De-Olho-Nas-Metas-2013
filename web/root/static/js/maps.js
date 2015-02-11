@@ -449,6 +449,7 @@ var $maps = function () {
 
 $(document).ready(function () {
 		$maps.initialize();
+	
 	if ($("#pagetype").val() == 'home'){	
 		$maps.loadproject();
 	}		
