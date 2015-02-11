@@ -1,0 +1,73 @@
+	   <section class="metas-detail page-signup">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-sm-8">
+				
+					<h4 class="green">FAÇA SEU CADASTRO E FIQUE DE OLHO NAS METAS</h4>
+				
+					<form action="/form/user" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label>Nome completo:</label>
+						<input type="text" name="name" class="form-control">
+					</div>
+					
+					<div class="form-group">
+						<label>E-mail:</label>
+						<input type="text" name="email" class="form-control">
+					</div>
+					
+					<div class="form-group">
+						<label>Nome de Usuário (será seu acesso ao sistema):</label>
+						<input type="text" name="username" class="form-control">
+					</div>
+
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label>Criar uma senha:</label>
+								<input type="password" name="password" class="form-control">
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label>Confirme a senha:</label>
+								<input type="password" name="password_confirm" class="form-control">
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label>Celular:</label>
+								<input id="phone" type="telephone" name="phone_number" class="form-control">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="avatar-upload">
+								<img src="/static/css/images/avatar.jpg">
+							</div>
+						</div>
+						<div class="col-sm-8">
+							<div class="form-group">
+								<small>
+									FOTO DO PERFIL<br />
+									Faça upload de uma foto para usar no seu perfil<br /><br />
+								</small>
+								<input type="file" name="avatar">
+							</div>
+						</div>
+					</div>
+					
+					<button type="reset"  class="btn btn-danger pull-left">Limpar</button>
+					<input type="submit" value="Enviar" class="btn btn-success pull-right"/>
+				
+					</form>
+				</div>					
+			</div>
+			
+		</div>
+    </section>
