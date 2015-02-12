@@ -33,14 +33,14 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $organization = $c->stash->{organization};
-	
+
     $self->status_ok(
         $c,
         entity => {
             (
                 map { $_ => $organization->$_, }
                   qw/
-				  id
+                  id
                   name
                   address
                   postal_code
@@ -70,17 +70,20 @@ sub result_GET {
                     )
                 }
             },
-            subprefecture => 
-                ( 
-                    map {
-                       $_? (+{ 
-                            id         => $_->id,
-                            name       => $_->name,
-							latitude   => $_->latitude,
-							longitude  => $_->longitude,
-                        }):()
-                    } ( $organization->subprefecture ),
-                ),
+            subprefecture => (
+                map {
+                    $_
+                      ? (
+                        +{
+                            id        => $_->id,
+                            name      => $_->name,
+                            latitude  => $_->latitude,
+                            longitude => $_->longitude,
+                        }
+                      )
+                      : ()
+                } ( $organization->subprefecture ),
+            ),
 
         }
     );
@@ -119,8 +122,7 @@ sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
 
 sub list_GET {
     my ( $self, $c ) = @_;
-	
-	
+
     $self->status_ok(
         $c,
         entity => {
@@ -219,7 +221,7 @@ sub complete : Chained('base') : PathPart('complete') : Args(0) {
 
 }
 
-sub subpref :Chained('base') :Args(0) {
+sub subpref : Chained('base') : Args(0) {
 }
 
 1;

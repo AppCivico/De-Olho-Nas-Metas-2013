@@ -12,7 +12,7 @@ __PACKAGE__->config(
     result      => 'DB::ProjectEventRead',
     object_key  => 'project_event_read',
     result_attr => {
-        prefetch => ['project_events' ],
+        prefetch => ['project_events'],
     },
 
     update_roles => [qw/superadmin user admin webapi/],
@@ -21,7 +21,8 @@ __PACKAGE__->config(
 );
 with 'SMM::TraitFor::Controller::DefaultCRUD';
 
-sub base : Chained('/api/base') : PathPart('project_event_reads') : CaptureArgs(0) { }
+sub base : Chained('/api/base') : PathPart('project_event_reads') :
+  CaptureArgs(0) { }
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
 
@@ -43,23 +44,22 @@ sub result_GET {
                   ts
                   /
             ),
-            project => 
-                (
-                    map {
-                        my $p = $_;
-                        (
-                            map {
-                                { $_ => $p->$_ }
-                              } qw/
-                              id
-                              name
-                              latitude
-                              longitude
-                              region_id
-                              /
-                          ),
-                    } $project_event_read->project,
-                ),
+            project => (
+                map {
+                    my $p = $_;
+                    (
+                        map {
+                            { $_ => $p->$_ }
+                          } qw/
+                          id
+                          name
+                          latitude
+                          longitude
+                          region_id
+                          /
+                      ),
+                } $project_event_read->project,
+            ),
         }
     );
 
@@ -77,15 +77,19 @@ sub result_DELETE {
 sub result_PUT {
     my ( $self, $c ) = @_;
 
-    my $params = { %{ $c->req->params } };
-    my $project_event_read   = $c->stash->{project_event_read};
+    my $params             = { %{ $c->req->params } };
+    my $project_event_read = $c->stash->{project_event_read};
 
-    $project_event_read->execute( $c, for => 'update', with => $c->req->params );
+    $project_event_read->execute(
+        $c,
+        for  => 'update',
+        with => $c->req->params
+    );
 
     $self->status_accepted(
         $c,
-        location =>
-          $c->uri_for( $self->action_for('result'), [ $project_event_read->id ] )->as_string,
+        location => $c->uri_for( $self->action_for('result'),
+            [ $project_event_read->id ] )->as_string,
         entity => { id => $project_event_read->id }
       ),
       $c->detach
@@ -98,19 +102,20 @@ sub list_GET {
     my ( $self, $c ) = @_;
     my $rs = $c->stash->{collection};
 
-	if ($c->req->param('project_id')){
-		$rs = $rs->search({ project_id => $c->req->param('project_id')});
-	}
-	if ( $c->req->param('approved')){
-    	$rs = $rs->search(
-          { approved => $c->req->param('approved'), active => 1 },
-          {
-			'+select' => [ \q{to_char(me.ts, 'DD/MM/YYYY HH24:MI:SS') AS process_ts}],
-			'+as'     => [ 'process_ts'], 
-            order_by => 'me.ts'
-       	  },
-    	);
-	}
+    if ( $c->req->param('project_id') ) {
+        $rs = $rs->search( { project_id => $c->req->param('project_id') } );
+    }
+    if ( $c->req->param('approved') ) {
+        $rs = $rs->search(
+            { approved => $c->req->param('approved'), active => 1 },
+            {
+                '+select' =>
+                  [ \q{to_char(me.ts, 'DD/MM/YYYY HH24:MI:SS') AS process_ts} ],
+                '+as'    => ['process_ts'],
+                order_by => 'me.ts'
+            },
+        );
+    }
 
     $self->status_ok(
         $c,
@@ -124,19 +129,18 @@ sub list_GET {
                               qw/
                               id
                               text
-                              process_ts                              
+                              process_ts
                               /
                         ),
-						project => 
-							(
-									+{
-										id => $r->{project}->{id},
-										name => $r->{project}->{name},
-										latitude => $r->{project}->{latitude},
-										longitude => $r->{project}->{longitude},
-									 }
-							),			
-                   }
+                        project => (
+                            +{
+                                id        => $r->{project}->{id},
+                                name      => $r->{project}->{name},
+                                latitude  => $r->{project}->{latitude},
+                                longitude => $r->{project}->{longitude},
+                            }
+                        ),
+                      }
                 } $rs->as_hashref->all
             ]
         }
@@ -152,13 +156,11 @@ sub list_POST {
 
     $self->status_created(
         $c,
-        location =>
-          $c->uri_for( $self->action_for('result'), [ 1 ] )->as_string,
+        location => $c->uri_for( $self->action_for('result'), [1] )->as_string,
         entity => {
             project_event_read_id => $project_event_read->id
         }
     );
 }
-
 
 1;

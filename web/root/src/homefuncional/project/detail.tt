@@ -1,6 +1,5 @@
     
 	[%-CALL assets.include("js/Chart.min.js")%]
-	[%-CALL assets.include("js/chart-line.js")%]
 	[%-CALL assets.include("js/maps.js")%]
 	[%-CALL assets.include("js/infobubble.min.js")%]
 <script>
@@ -40,7 +39,6 @@ $(document).ready(function () {
 	$('#text_comment_counsil').val('');
   })
   $('#comment').on('click', function () {
-	alert('lol');
 	if ($('#text_comment').val() == ""){
 		$('#alert_comment').html('<div class="alert alert-success"><p>Por favor preencha o campo de comentário.</p></div>');
 		return;
@@ -48,7 +46,6 @@ $(document).ready(function () {
 
 	var id = $(this).data("id");
 	$.post( "/home/project/comment", { user_id: $(this).data("id"), text: $('#text_comment').val(), project_id : $('#projectid').val() } ,function( data ) {
-		console.log(data);
 		$('#alert_comment').html('<div class="alert alert-success"><p>'+data.message+'</p></div>');
   	},"json");
 
@@ -212,7 +209,7 @@ $(document).ready(function () {
 					</div>
 					[% END %]
 
-						<div class="timeline">
+						<!--<div class="timeline">
 								<h3 class="section-title">Linha do tempo segundo o cronograma</h3>
 								<div class="chart">
 									<canvas id="chartline-goal"></canvas>
@@ -225,7 +222,7 @@ $(document).ready(function () {
 										chart_labels = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
 									loadLineGraph(".timeline .chart",chart_labels,chart_data);
 								</script>
-							</div>
+						</div>-->
 							<section class="statistics">
 						<div class="container">
 						
@@ -255,7 +252,9 @@ $(document).ready(function () {
 						<table id="list_comment" class="table table-striped">
 							<thead>
 								<tr>
-				    	            <th>Comentários </th>
+					                <th>Nome</th>
+				    	            <th>Comentário</th>
+				    	            <th>Data</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -305,11 +304,9 @@ $(document).ready(function () {
 					[% END %]
 					
 					<div class="list-projects">
-						<span class="header">[% project_obj.goal.size %] Meta</span>
+						<span class="header">Meta - [% project_obj.goal.id%]</span>
 						<ul class="list-projects">
-							[% FOREACH goal IN project_obj.goal %]
-							<li><a href="[% c.uri_for_action('/homefuncional/goal/detail',[goal.id] ) %]">[%goal.name%]</a></li>
-							[% END %]
+							<li><a href="[% c.uri_for_action('/homefuncional/goal/detail',[ project_obj.goal.id ] ) %]">[%project_obj.goal.name%]</a></li>
 						</ul>
 					</div>
 					[% IF organizations.size > 0 %]	

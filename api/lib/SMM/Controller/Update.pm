@@ -97,7 +97,7 @@ sub goal : Chained('base') Args(0) {
     p $url_goal;
     $res     = $self->furl->get( $c->stash->{url} . $url_goal );
     $res_obj = $self->furl->get( $c->stash->{url} . $url_obj );
-	p$res_obj->content;
+    p $res_obj->content;
     my $data_obj = decode_json $res_obj->content;
     my $data     = decode_json $res->content;
 
@@ -213,18 +213,20 @@ sub goal : Chained('base') Args(0) {
         $goal->{description}     = delete $goal->{observation};
         $goal->{expected_budget} = delete $goal->{total_cost};
 
-
-		my $porcentage = $self->furl->get( $c->stash->{url} . ''); 
+        my $porcentage = $self->furl->get( $c->stash->{url} . '' );
 
         my $goal_porcentage_obj;
         $goal_porcentage_obj =
-          $c->model('DB::GoalPorcentage')
-          ->search( { goal_id => $goal->{id}} )->next;
+          $c->model('DB::GoalPorcentage')->search( { goal_id => $goal->{id} } )
+          ->next;
 
-        $goal_porcentage_obj =
-          $c->model('DB::GoalPorcentage')
-          ->create( { goal_id=> $goal->{id} , owned => $goal->{porcentagem}->{concluido}, remainder => $goal->{porcentagem}->{restante}   } )
-          unless $goal_porcentage_obj;
+        $goal_porcentage_obj = $c->model('DB::GoalPorcentage')->create(
+            {
+                goal_id   => $goal->{id},
+                owned     => $goal->{porcentagem}->{concluido},
+                remainder => $goal->{porcentagem}->{restante}
+            }
+        ) unless $goal_porcentage_obj;
 
         delete $goal->{porcentagem};
 
@@ -293,15 +295,15 @@ sub prefectures : Chained('base') Args(0) {
 
     my $data = decode_json $res->content;
     p $data;
-	for my $value (@$data){
-		delete $value->{updated_at};
-		delete $value->{created_at};
-		$value->{latitude} = delete $value->{gps_lat};
-		$value->{longitude} = delete $value->{gps_long};
-		$value->{name} = uc $value->{name};
-		$c->model('DB::Subprefecture')->create($value);
-	}
-	
+    for my $value (@$data) {
+        delete $value->{updated_at};
+        delete $value->{created_at};
+        $value->{latitude}  = delete $value->{gps_lat};
+        $value->{longitude} = delete $value->{gps_long};
+        $value->{name}      = uc $value->{name};
+        $c->model('DB::Subprefecture')->create($value);
+    }
+
     $c->res->body('teste');
 }
 sub search_goal : Chained('base') : Args(0) : ActionClass('REST') { }

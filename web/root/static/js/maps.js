@@ -449,6 +449,7 @@ var $maps = function () {
 
 $(document).ready(function () {
 		$maps.initialize();
+	
 	if ($("#pagetype").val() == 'home'){	
 		$maps.loadproject();
 	}		
@@ -473,17 +474,6 @@ $(document).ready(function () {
 	if ($("#pagetype").val() == 'orgdetail'){
 		$maps.markorgdetail($("#orgid").val());
 	}
-	$("#type").change(function(){
-		var id = $( "#type option:selected" ).val();
-		$("section.map .map-overlay").fadeIn();
-     	$.get("/home/project/type",{type_id: id}).done( function(data){
-			$("section.map .map-overlay").fadeOut();
-			document.getElementById("result").innerHTML=data
-       	});
-       	$(".metas-filtro .form .type .select-stylized").removeClass("disabled");
-       	$(".metas-filtro .form .region .select-stylized").addClass("disabled");
-       	$(".metas-filtro .form .cep button").addClass("disabled");
-	});
 
 	$("#type_goal").change(function(){
 		var id = $( "#type_goal option:selected" ).val();
@@ -494,24 +484,50 @@ $(document).ready(function () {
        	});
 	});
 
-	$("#homeregion").change(function(){
-		var id = $( "#homeregion option:selected" ).val();
-		$("section.map .map-overlay").fadeIn();
-     	$.get("/home/project/region",{region_id: id}).done( function(data){
-			$("section.map .map-overlay").fadeOut();
-			document.getElementById("result").innerHTML=data
-       	});
-       	$(".metas-filtro .form .type .select-stylized").addClass("disabled");
-       	$(".metas-filtro .form .region .select-stylized").removeClass("disabled");
-       	$(".metas-filtro .form .cep button").addClass("disabled");
-	});
-
 	$("#goalregion").change(function(){
 		var id = $( "#goalregion option:selected" ).val();
      	$.get("/home/goal/region",{region_id: id}).done( function(data){
 			document.getElementById("result").innerHTML=data
        	});
 	});
+
+	$("#search_pj").click(function() {
+        if($(this).val() != "")
+			var id = $(this).data("id");
+			if ($('#txtaddress').val()){
+		alert('lol');
+				geocoder.geocode({ 'address': $('#txtaddress').val() + ', Brasil', 'region': 'BR' }, function (results, status) {
+					if (status == google.maps.GeocoderStatus.OK) {
+						if (results[0]) {
+							var latitude = results[0].geometry.location.lat();
+							var longitude = results[0].geometry.location.lng();
+		 
+							$('#txtEndereco').val(results[0].formatted_address);
+							$.get("/home/project/search_by_types",{ latitude: latitude, longitude: longitude, type_id: $('#type option:selected').val(), region_id: "" }).done( function(data){
+								$("section.map .map-overlay").fadeOut();
+								document.getElementById("result").innerHTML=data
+							});
+
+							var location = new google.maps.LatLng(latitude, longitude);
+							$maps.setlocal(location);
+						}
+					}
+				});
+			
+			} else {
+
+				$.getJSON('/home/project/search_by_types',{ type_id: $('#type option:selected').val(), region_id: $('#homeregion option:selected').val()},function(data,status){
+				$('#result').html('');
+				$.each(data, function(i,j){
+				var html = '<div class="item row"><div class="col-sm-10 nopadding"><div class="contents pull-left"><div class="description"><h2><a href="[% c.uri_for_action("/homefuncional/goal/detail",['+j.id+'] ) %]">'+j.name+'</a></h2><div class="stats">[% IF goal.region_count > 0 %]<div class="icon regions"></div> <span class="regions"> [% goal.region_count %] [% goal.region_count > 1 ? "Regiões" : "Região" %]</span>[% END %][% IF goal.project_count > 0 %]<div class="icon projects"></div> <span class="projects">[% goal.project_count %] Projeto[% goal.project_count > 1 ? "s" : "" %]</span>[% END %][% IF goal.organization.size > 0 %]<div class="icon organizations"></div> <span class="organizations">3 Organizações</span>[% END %]</div></div></div>';
+
+					$('#result').append(html);
+				});
+
+		    	});
+			}	
+			
+    });
 
 	$("#txtaddress").autocomplete({
 	source: function (request, response) {

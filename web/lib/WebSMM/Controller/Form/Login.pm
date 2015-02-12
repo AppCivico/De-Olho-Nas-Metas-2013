@@ -29,8 +29,8 @@ sub login : Chained('base') : PathPart('login') : Args(0) {
 sub after_login {
     my ( $self, $c ) = @_;
     my $url = \'/';
-	use DDP;
-	p $c->user->roles;
+    use DDP;
+    p $c->user->roles;
     if ( grep { /^user$/ } $c->user->roles ) {
         $url = '/user/account/index';
     }
@@ -51,15 +51,13 @@ sub after_login {
     }
 
     if (   $c->req->params->{redirect_to}
-        && $c->req->params->{redirect_to} =~ /^\// )
-    {
+        && $c->req->params->{redirect_to} =~ /^\// ) {
         $url = $c->req->params->{redirect_to};
         $c->res->redirect($url);
         $c->detach;
     }
 
-    $c->detach( '/form/redirect_ok',
-        [ $url, {}, 'Bem vindo, ' . $c->user->name ] );
+    $c->detach( '/form/redirect_ok', [ $url, {}, 'Bem vindo, ' . $c->user->name ] );
 }
 
 __PACKAGE__->meta->make_immutable;

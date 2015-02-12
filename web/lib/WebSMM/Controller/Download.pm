@@ -17,36 +17,28 @@ Catalyst Controller.
 
 =cut
 
-
 =head2 index
 
 =cut
 
-sub download :Path :Args(0) {
+sub download : Path : Args(0) {
     my ( $self, $c ) = @_;
-	my $csv;
+    my $csv;
 
-	my $api = $c->model('API');
+    my $api = $c->model('API');
 
+    my $json = $api->stash_result( $c, 'preregisters', get_as_content => 1 );
+    use DDP;
+    my $content = decode_json $json;
+    $csv .= "$_->{username},$_->{useremail}\n" for ( @{ $content->{preregisters} } );
+    $c->res->content_type('text/comma-separated-values');
 
-    my $json = $api->stash_result( $c, 'preregisters',
-									  get_as_content => 1 );
-	use DDP;
-	my $content = decode_json $json;
-	$csv .= "$_->{username},$_->{useremail}\n" for (@{$content->{preregisters}});
-	$c->res->content_type('text/comma-separated-values');
+    my $name = q/pre_cadastro.txt/;
+    $c->res->header( 'Content-Disposition', qq[attachment; filename=$name] );
 
-	my $name = q/pre_cadastro.txt/;
-	$c->res->header('Content-Disposition', qq[attachment; filename=$name]);
+    $c->res->body($csv);
 
-	
-	$c->res->body($csv);
-
-
-	
 }
-
-
 
 =encoding utf8
 

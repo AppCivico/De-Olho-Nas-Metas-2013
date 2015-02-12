@@ -13,7 +13,6 @@
 							<li><a href="">Atividades</a></li>
 						</ul>
 					</div>
-
 					[% ELSIF user_obj.role.counsil_master == 1%]
 					<div class="list-box list-brown">
 						<ul>
@@ -26,7 +25,6 @@
 							<li><a href="">Atividades</a></li>
 						</ul>
 					</div>
-				
 					[% ELSE %]
 					<div class="list-box list-brown">
 						<ul>

@@ -15,7 +15,7 @@ __PACKAGE__->config(
         order => 'Str'
     },
     result_attr => {
-        prefetch => ['projects', 'subprefecture']
+        prefetch => [ 'projects', 'subprefecture' ]
     },
     update_roles => [qw/superadmin user admin webapi organization/],
     create_roles => [qw/superadmin admin webapi/],
@@ -27,10 +27,10 @@ sub base : Chained('/api/base') : PathPart('regions') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 }
 
-#'+select' => [ \q{ST_AsGeoJSON(geom) as geom_json}  ], '+as' => [qw(geom_json)], 
+#'+select' => [ \q{ST_AsGeoJSON(geom) as geom_json}  ], '+as' => [qw(geom_json)],
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
-    my ( $self, $c ) = @_;
+my ( $self, $c ) = @_;
 
 sub result : Chained('object') : PathPart('') : Args(0) :
   ActionClass('REST') { }
@@ -39,7 +39,8 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $region = $c->stash->{region};
-	use DDP; p $region;
+    use DDP;
+    p $region;
     $self->status_ok(
         $c,
         entity => {
@@ -53,28 +54,27 @@ sub result_GET {
                   /
             ),
             projects => [
-                ( 
+                (
                     map {
                         {
                             id        => $_->id,
                             name      => $_->name,
-							latitude  => $_->latitude,
-							longitude => $_->longitude
+                            latitude  => $_->latitude,
+                            longitude => $_->longitude
                         }
 
                     } $region->projects,
                 ),
             ],
-            subprefecture => 
-                ( 
-                    map {
-                        {
-                            id        => $_->id,
-                            name      => $_->name,
-                        }
+            subprefecture => (
+                map {
+                    {
+                        id   => $_->id,
+                        name => $_->name,
+                    }
 
-                    } $region->subprefecture,
-                ),
+                } $region->subprefecture,
+            ),
         }
     );
 
@@ -225,52 +225,59 @@ sub latlong : Chained('base') : Args(0) {
                 [ _coords => qq{SRID=4326;POINT($lnglat)} ]
             ],
             {
-				select       => [qw/id/],
+                select       => [qw/id/],
                 result_class => 'DBIx::Class::ResultClass::HashRefInflator',
             }
         )->next;
-		
+
         $self->status_bad_request(
             $c, message => "NENHUMA REGIÃO PRÓXIMA A ESSA LOCALIDADE",
-        ),
-        $c->detach
-		unless $region;
-        $self->status_ok( $c, entity =>  { id => $region->{id} } );
+          ),
+          $c->detach
+          unless $region;
+        $self->status_ok( $c, entity => { id => $region->{id} } );
 
     }
 
 }
-sub regions_map : Chained('base') : PathPart('regions_map') : Args(0) { 
-	my ( $self , $c ) = @_;
-	
-	$c->detach unless $c->req->method eq 'GET';
 
-    my @geoms = $c->model('DB')->resultset('Region')->search( {},{
-			'select' => [ \q{ST_AsGeoJSON(geom,3) as geom_json}  ], 
-			'as' => [qw(geom_json)],
-			'columns' => [qw(id name subprefecture_id)]
-			
-		}
+sub regions_map : Chained('base') : PathPart('regions_map') : Args(0) {
+    my ( $self, $c ) = @_;
+
+    $c->detach unless $c->req->method eq 'GET';
+
+    my @geoms = $c->model('DB')->resultset('Region')->search(
+        {},
+        {
+            'select'  => [ \q{ST_AsGeoJSON(geom,3) as geom_json} ],
+            'as'      => [qw(geom_json)],
+            'columns' => [qw(id name subprefecture_id)]
+
+        }
     )->as_hashref->all;
-    $self->status_ok( $c, entity =>  { geoms => \@geoms } );
-	
+    $self->status_ok( $c, entity => { geoms => \@geoms } );
+
 }
-sub geom : Chained('base') : PathPart('geom') Args(0){
-	my ( $self , $c ) = @_;
 
-	my $id = $c->req->param('region_id') if $c->req->param('region_id') =~ /^\d+$/;
+sub geom : Chained('base') : PathPart('geom') Args(0) {
+    my ( $self, $c ) = @_;
 
-	my ( $geom ) = $c->model('DB')->resultset('Region')->search( 
-		{ 'me.id' => $id },
-		{
-			'+select' => [ \q{ST_AsGeoJSON(geom,3) as geom_json}  ], 
-			'+as' => [qw(geom_json)],
-			columns => [qw( me.id projects.id projects.name projects.latitude projects.longitude)],
-			collapse => 1,
-			join => [qw(projects)]
-		}
+    my $id = $c->req->param('region_id')
+      if $c->req->param('region_id') =~ /^\d+$/;
+
+    my ($geom) = $c->model('DB')->resultset('Region')->search(
+        { 'me.id' => $id },
+        {
+            '+select' => [ \q{ST_AsGeoJSON(geom,3) as geom_json} ],
+            '+as'     => [qw(geom_json)],
+            columns   => [
+                qw( me.id projects.id projects.name projects.latitude projects.longitude)
+            ],
+            collapse => 1,
+            join     => [qw(projects)]
+        }
     )->as_hashref->all;
-    $self->status_ok( $c, entity =>  { geom => $geom } );
+    $self->status_ok( $c, entity => { geom => $geom } );
 }
 
 1;

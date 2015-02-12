@@ -50,8 +50,7 @@ sub forgot_password : Chained('base') : PathPart('forgot_password') : Args(0) {
             $c->detach(
                 '/form/redirect_ok',
                 [
-                    '/forgotpassword/forgot_password',
-                    {},
+                    '/forgotpassword/forgot_password', {},
                     'E-mail enviado com sucesso. Verifique sua caixa de mensagens!'
                 ]
             );

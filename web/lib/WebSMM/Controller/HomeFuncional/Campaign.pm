@@ -16,33 +16,28 @@ Catalyst Controller.
 
 =cut
 
-
 =head2 index
 
 =cut
 
-sub base :Chained('/homefuncional/base') :PathPart('campaign') :CaptureArgs(0) {
+sub base : Chained('/homefuncional/base') : PathPart('campaign') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
 }
 
-sub object :Chained('base') :PathPart('') :CaptureArgs(1){
+sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
     my ( $self, $c, $id ) = @_;
-
 
 }
 
-sub detail :Chained('object') :PathPart('') :Args(0){
+sub detail : Chained('object') : PathPart('') : Args(0) {
     my ( $self, $c, $id ) = @_;
 }
 
-sub index :Chained('base') :PathPart('') :Args(0){
+sub index : Chained('base') : PathPart('') : Args(0) {
     my ( $self, $c ) = @_;
 
-
 }
-
-
 
 =encoding utf8
 

@@ -46,8 +46,7 @@ sub process : Chained('base') : PathPart('check_email') : Args(0) {
             $c->detach(
                 '/form/redirect_ok',
                 [
-                    '/cadastro/cadastro', {}, '',
-                    email => $c->req->params->{email}
+                    '/cadastro/cadastro', {}, '', email => $c->req->params->{email}
                 ]
             );
 

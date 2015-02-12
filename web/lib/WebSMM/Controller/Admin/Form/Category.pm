@@ -24,8 +24,7 @@ sub process : Chained('base') : PathPart('category') : Args(0) {
         $c->detach( '/form/redirect_error', [] );
     }
     else {
-        $c->detach( '/form/redirect_ok',
-            [ '/admin/category/index', {}, 'Cadastrado com sucesso!' ] );
+        $c->detach( '/form/redirect_ok', [ '/admin/category/index', {}, 'Cadastrado com sucesso!' ] );
     }
 
 }
@@ -46,8 +45,7 @@ sub process_edit : Chained('base') : PathPart('category') : Args(1) {
         $c->detach( '/form/redirect_error', [] );
     }
     else {
-        $c->detach( '/form/redirect_ok',
-            [ '/admin/category/index', {}, 'Alterado com sucesso!' ] );
+        $c->detach( '/form/redirect_ok', [ '/admin/category/index', {}, 'Alterado com sucesso!' ] );
     }
 }
 
@@ -62,8 +60,7 @@ sub process_delete : Chained('base') : PathPart('remove_category') : Args(1) {
         $c->detach( '/form/redirect_error', [] );
     }
     else {
-        $c->detach( '/form/redirect_ok',
-            [ '/admin/category/index', {}, 'Removido com sucesso!' ] );
+        $c->detach( '/form/redirect_ok', [ '/admin/category/index', {}, 'Removido com sucesso!' ] );
     }
 }
 

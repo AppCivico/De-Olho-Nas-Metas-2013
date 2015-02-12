@@ -28,8 +28,7 @@ sub process : Chained('base') : PathPart('management') : Args(0) {
         $c->detach( '/form/redirect_error', [] );
     }
     else {
-        $c->detach( '/form/redirect_ok',
-            [ '/admin/management/index', {}, 'Cadastrado com sucesso!' ] );
+        $c->detach( '/form/redirect_ok', [ '/admin/management/index', {}, 'Cadastrado com sucesso!' ] );
     }
 
 }
@@ -52,8 +51,7 @@ sub process_edit : Chained('base') : PathPart('management') : Args(1) {
         $c->detach( '/form/redirect_error', [] );
     }
     else {
-        $c->detach( '/form/redirect_ok',
-            [ '/admin/management/index', {}, 'Alterado com sucesso!' ] );
+        $c->detach( '/form/redirect_ok', [ '/admin/management/index', {}, 'Alterado com sucesso!' ] );
     }
 }
 
@@ -68,13 +66,7 @@ sub process_delete : Chained('base') : PathPart('remove_management') : Args(1) {
         $c->detach( '/form/redirect_error', [] );
     }
     else {
-        $c->detach(
-            '/form/redirect_ok',
-            [
-                '/admin/federalelectoralprocess/index', {},
-                'Removido com sucesso!'
-            ]
-        );
+        $c->detach( '/form/redirect_ok', [ '/admin/federalelectoralprocess/index', {}, 'Removido com sucesso!' ] );
     }
 }
 
@@ -100,8 +92,7 @@ sub process_password : Chained('base') : PathPart('change_management_password')
 
         $c->authenticate( $c->req->params );
 
-        $c->detach( '/form/redirect_ok',
-            [ '/admin/dashboard/index', {}, 'Senha alterada com sucesso!' ] );
+        $c->detach( '/form/redirect_ok', [ '/admin/dashboard/index', {}, 'Senha alterada com sucesso!' ] );
     }
 }
 

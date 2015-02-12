@@ -8,7 +8,7 @@ BEGIN { extends 'Catalyst::Controller::REST' }
 
 __PACKAGE__->config(
     default => 'application/json',
-	
+
     result      => 'DB::Goal',
     object_key  => 'goal',
     result_attr => {
@@ -32,7 +32,6 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $goal = $c->stash->{goal};
-    use DDP;
     my @region_ids;
     @region_ids =
       map  { $_->project->region_id }
@@ -60,7 +59,7 @@ sub result_GET {
                   id
                   name
                   description
-				  expected_budget
+                  expected_budget
                   /
             ),
             goal_projects => {
@@ -168,7 +167,6 @@ sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
 sub list_GET {
     my ( $self, $c ) = @_;
 
-    #	p $c->stash->{collection}->as_hashref->all;
     my $rs = $c->stash->{collection};
 
     if ( $c->req->param('type_id') ) {
@@ -220,7 +218,7 @@ sub list_GET {
     $self->status_ok(
         $c,
         entity => {
-            goals =>  [
+            goals => [
                 map {
                     my $r = $_;
                     +{
@@ -236,8 +234,8 @@ sub list_GET {
                               email
                               website
                               complement
-							  region_count
-							  project_count
+                              region_count
+                              project_count
                               /
                         ),
                         goal_projects => {
@@ -256,16 +254,21 @@ sub list_GET {
 
                             ),
                         },
-                        url    => $c->uri_for_action(
+                        url => $c->uri_for_action(
                             $self->action_for('result'),
                             [ $r->{id} ]
                         )->as_string
                       }
-                } $rs->search(undef, {
-                   '+select' => [\'(select count(distinct p.region_id) from goal_project gp join project p on p.id = gp.project_id where gp.goal_id = me.id)',
-								\'(select count(distinct gp.project_id) from goal_project gp where gp.goal_id = me.id)'],
-                   '+as'     => ['region_count','project_count'],
-                })->as_hashref->all
+                  } $rs->search(
+                    undef,
+                    {
+                        '+select' => [
+                            \'(select count(distinct p.region_id) from goal_project gp join project p on p.id = gp.project_id where gp.goal_id = me.id)',
+                            \'(select count(distinct gp.project_id) from goal_project gp where gp.goal_id = me.id)'
+                        ],
+                        '+as' => [ 'region_count', 'project_count' ],
+                    }
+                  )->as_hashref->all
             ]
         }
     );

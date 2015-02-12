@@ -20,9 +20,9 @@
 
     <!-- Custom Theme CSS -->
     <link href="/static/css/home_style.css" rel="stylesheet">
-<!--	<link href="/static/css/jquery-ui.theme.min.css" rel="stylesheet">-->
+	<link href="/static/css/jquery-ui.theme.min.css" rel="stylesheet">
     <link href="/static/css/jquery-ui.structure.min.css" rel="stylesheet">
-  <!--  <link href="/static/css/jquery-ui.min.css" rel="stylesheet">-->
+    <link href="/static/css/jquery-ui.min.css" rel="stylesheet">
     <link href="/static/css/style.css" rel="stylesheet">
 </head>
 

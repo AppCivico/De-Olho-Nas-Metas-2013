@@ -8,128 +8,116 @@ BEGIN { extends 'Catalyst::Controller' }
 
 sub base : Chained('/user/base') : PathPart('') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
-	my $api = $c->model('API');
-	$api->stash_result(
-		$c,
-		[ 'users', $c->user->obj->id ],
-		stash => 'user_roles',
-	);
-
+    my $api = $c->model('API');
+    $api->stash_result( $c, [ 'users', $c->user->obj->id ], stash => 'user_roles', );
 
 }
 
 sub object : Chained('base') : PathPart('perfil') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
-		
+
 }
 
 sub index : Chained('object') : PathPart('') : Args(0) {
     my ( $self, $c ) = @_;
 
-	$c->detach( '/form/redirect_error', [] ) unless $c->user;
+    $c->detach( '/form/redirect_error', [] ) unless $c->user;
 
-	my $api = $c->model('API');
+    my $api = $c->model('API');
 
-	$api->stash_result(
-		$c,
-		[ 'users/user_project_event', $c->user->obj->id ],
-		stash => 'user_obj',
-	);
-	$c->stash->{user_obj}->{role} = { map { $_ => 1 } @{$c->stash->{user_roles}->{roles}} };
-	use DDP; p $c->stash->{user_obj};
+    $api->stash_result( $c, [ 'users/user_project_event', $c->user->obj->id ], stash => 'user_obj', );
+    $c->stash->{user_obj}->{role} = { map { $_ => 1 } @{ $c->stash->{user_roles}->{roles} } };
+    use DDP;
+    p $c->stash->{user_obj};
 
 }
 
-sub security :Chained('object') :PathPart('seguranca') :Args(0){
+sub security : Chained('object') : PathPart('seguranca') : Args(0) {
     my ( $self, $c ) = @_;
 
-	return unless $c->req->method eq 'POST';	
-	
-	my $api = $c->model('API');
+    return unless $c->req->method eq 'POST';
 
-	$api->stash_result(
-		$c,
-		[ 'users', $c->user->id ],
-		method => 'PUT',
-		params => $c->req->params,
-	);
-			
-}
+    my $api = $c->model('API');
 
-sub edit :Chained('object') :PathPart('editar') :Args(0){
-    my ( $self, $c ) = @_;
-
-	return unless $c->req->method eq 'POST';
-
-	my $api = $c->model('API');
-
-	$api->stash_result(
-		$c,
-		[ 'users', $c->user->id ],
-		method => 'PUT',
-		params => $c->req->params,
-	);
+    $api->stash_result(
+        $c,
+        [ 'users', $c->user->id ],
+        method => 'PUT',
+        params => $c->req->params,
+    );
 
 }
 
-
-sub survey :Chained('object') :PathPart('enquete') :Args(0){
+sub edit : Chained('object') : PathPart('editar') : Args(0) {
     my ( $self, $c ) = @_;
 
-	my $return;
-	my $res;
+    return unless $c->req->method eq 'POST';
 
-	my $model = $c->model('API');
+    my $api = $c->model('API');
 
-	my $url = 'http://dev.monitor.promisetracker.org/api/v1/campaigns';
-	
-	eval{
-		$return = $model->_do_http_req(
-			method  => 'GET',
-			url     => $url,
-			headers => [ Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' ] ,
-		);
-	};
-	
-	my $data = decode_json $return->content;
-	$c->stash->{campaigns} = $data->{payload};
-	use DDP; p $c->stash->{campaigns};
-	warn "lol";
+    $api->stash_result(
+        $c,
+        [ 'users', $c->user->id ],
+        method => 'PUT',
+        params => $c->req->params,
+    );
 
 }
 
-sub follow :Chained('object') :PathPart('seguindo') :Args(0){
+sub survey : Chained('object') : PathPart('enquete') : Args(0) {
     my ( $self, $c ) = @_;
 
-	my $api = $c->model('API');
+    my $return;
+    my $res;
 
-	$api->stash_result(
-		$c,
-		[ 'users', $c->user->id ],
-		stash => 'user_obj',
-	);
-	use DDP; p $c->stash->{user_obj};
+    my $model = $c->model('API');
+
+    my $url = 'http://dev.monitor.promisetracker.org/api/v1/campaigns';
+
+    eval {
+        $return = $model->_do_http_req(
+            method  => 'GET',
+            url     => $url,
+            headers => [ Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' ],
+        );
+    };
+
+    my $data = decode_json $return->content;
+    $c->stash->{campaigns} = $data->{payload};
+    use DDP;
+    p $c->stash->{campaigns};
+    warn "lol";
+
 }
-sub invite :Chained('object') :PathPart('convidar') :Args(0){
+
+sub follow : Chained('object') : PathPart('seguindo') : Args(0) {
     my ( $self, $c ) = @_;
 
-	my $api = $c->model('API');
+    my $api = $c->model('API');
+
+    $api->stash_result( $c, [ 'users', $c->user->id ], stash => 'user_obj', );
+    use DDP;
+    p $c->stash->{user_obj};
+}
+
+sub invite : Chained('object') : PathPart('convidar') : Args(0) {
+    my ( $self, $c ) = @_;
+
+    my $api = $c->model('API');
 
 }
-sub notification :Chained('object') :PathPart('notificacoes') :Args(0){
+
+sub notification : Chained('object') : PathPart('notificacoes') : Args(0) {
     my ( $self, $c ) = @_;
 
-	$c->detach( '/form/redirect_error', [] ) unless $c->user;
+    $c->detach( '/form/redirect_error', [] ) unless $c->user;
 
-	my $api = $c->model('API');
+    my $api = $c->model('API');
 
-	$api->stash_result(
-		$c,
-		[ 'users/user_project_event_all', $c->user->obj->id ],
-		stash => 'user_obj',
-	);
-	use DDP; p $c->stash->{user_obj};
-	$c->stash->{user_obj}->{role} = { map { $_ => 1 } @{$c->stash->{user_obj}->{roles}} };
+    $api->stash_result( $c, [ 'users/user_project_event_all', $c->user->obj->id ], stash => 'user_obj', );
+    use DDP;
+    p $c->stash->{user_obj};
+    $c->stash->{user_obj}->{role} = { map { $_ => 1 } @{ $c->stash->{user_obj}->{roles} } };
 
 }
 __PACKAGE__->meta->make_immutable;

@@ -20,7 +20,8 @@ __PACKAGE__->config(
 );
 with 'SMM::TraitFor::Controller::DefaultCRUD';
 
-sub base : Chained('/api/base') : PathPart('user_follow_project') : CaptureArgs(0) { }
+sub base : Chained('/api/base') : PathPart('user_follow_project') :
+  CaptureArgs(0) { }
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
 
@@ -37,7 +38,8 @@ sub result_GET {
         entity => {
             roles => [ map { $_->name } $user->roles ],
 
-            map { $_ => $attrs{$_}, } qw(id name phone_number username email type)
+            map { $_ => $attrs{$_}, }
+              qw(id name phone_number username email type)
         }
     );
 }
@@ -46,14 +48,21 @@ sub result_PUT {
     my ( $self, $c ) = @_;
 
     my $user_follow_project = $c->stash->{user_follow_project};
-	use DDP;
-    $user_follow_project->execute( $c, for => 'update', with => $c->req->params );
+    use DDP;
+    $user_follow_project->execute(
+        $c,
+        for  => 'update',
+        with => $c->req->params
+    );
 
     $self->status_accepted(
         $c,
-        location =>
-          $c->uri_for( $self->action_for('result'), [ $user_follow_project->id ] )->as_string,
-        entity => { name => $user_follow_project->name, id => $user_follow_project->id }
+        location => $c->uri_for( $self->action_for('result'),
+            [ $user_follow_project->id ] )->as_string,
+        entity => {
+            name => $user_follow_project->name,
+            id   => $user_follow_project->id
+        }
       ),
       $c->detach
       if $user_follow_project;
@@ -63,7 +72,8 @@ sub result_DELETE {
     my ( $self, $c ) = @_;
     my $user_follow_project = $c->stash->{user_follow_project};
 
-	use DDP; p $user_follow_project;
+    use DDP;
+    p $user_follow_project;
     $self->status_gone( $c, message => 'deleted' ), $c->detach
       unless $user_follow_project->active;
 
@@ -106,8 +116,10 @@ sub list_GET {
                               password_defined
                               /
                         ),
-                        roles =>
-                          [ map { $_->{role}{name} } @{ $r->{user_follow_project_roles} } ],
+                        roles => [
+                            map { $_->{role}{name} }
+                              @{ $r->{user_follow_project_roles} }
+                        ],
                         url => $c->uri_for_action( $self->action_for('result'),
                             [ $r->{id} ] )->as_string
                       }
@@ -123,32 +135,31 @@ sub list_GET {
 
 sub list_POST {
     my ( $self, $c ) = @_;
-	
+
     my $user_follow_project = $c->stash->{collection}
       ->execute( $c, for => 'create', with => $c->req->params );
 
-
     $self->status_created(
         $c,
-        location =>
-          $c->uri_for( $self->action_for('result'), [ $user_follow_project->id ] )->as_string,
+        location => $c->uri_for( $self->action_for('result'),
+            [ $user_follow_project->id ] )->as_string,
         entity => {
             id => $user_follow_project->id
         }
     );
 
 }
+
 sub list_DELETE {
     my ( $self, $c ) = @_;
-	
+
     my $user_follow_project = $c->stash->{collection}
       ->execute( $c, for => 'create', with => $c->req->params );
 
-
     $self->status_created(
         $c,
-        location =>
-          $c->uri_for( $self->action_for('result'), [ $user_follow_project->id ] )->as_string,
+        location => $c->uri_for( $self->action_for('result'),
+            [ $user_follow_project->id ] )->as_string,
         entity => {
             id => $user_follow_project->id
         }

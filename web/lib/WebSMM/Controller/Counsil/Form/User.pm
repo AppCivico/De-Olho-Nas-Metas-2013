@@ -15,8 +15,8 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
 
     my $api    = $c->model('API');
     my $params = { %{ $c->req->params } };
-	use DDP;
-	p$params;
+    use DDP;
+    p $params;
     $api->stash_result(
         $c, ['users'],
         method => 'POST',
@@ -65,8 +65,7 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
             $c->detach( '/form/redirect_error', [] );
         }
         else {
-            $c->detach( '/form/redirect_ok',
-                [ '/admin/user/index', {}, 'Cadastrado com sucesso!' ] );
+            $c->detach( '/form/redirect_ok', [ '/admin/user/index', {}, 'Cadastrado com sucesso!' ] );
         }
     }
 }
@@ -115,8 +114,7 @@ sub process_edit : Chained('base') : PathPart('user') : Args(1) {
         $c->detach( '/form/redirect_error', [] );
     }
     else {
-        $c->detach( '/form/redirect_ok',
-            [ '/admin/user/index', {}, 'Alterado com sucesso!' ] );
+        $c->detach( '/form/redirect_ok', [ '/admin/user/index', {}, 'Alterado com sucesso!' ] );
     }
 }
 
@@ -131,8 +129,7 @@ sub process_delete : Chained('base') : PathPart('remove_user') : Args(1) {
         $c->detach( '/form/redirect_error', [] );
     }
     else {
-        $c->detach( '/form/redirect_ok',
-            [ '/admin/customer/index', {}, 'Removido com sucesso!' ] );
+        $c->detach( '/form/redirect_ok', [ '/admin/customer/index', {}, 'Removido com sucesso!' ] );
     }
 }
 

@@ -104,8 +104,7 @@ sub object : Chained('base') : PathPart('dashboard') : CaptureArgs(0) {
             order => 'name'
         }
     );
-    $c->stash->{select_parking_types} = [ map { [ $_->{id}, $_->{name} ] }
-          @{ $c->stash->{vehicle_parking_types} } ];
+    $c->stash->{select_parking_types} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{vehicle_parking_types} } ];
 }
 
 sub index : Chained('object') : PathPart('') : Args(0) {

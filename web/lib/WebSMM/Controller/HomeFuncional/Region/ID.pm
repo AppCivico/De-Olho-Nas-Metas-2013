@@ -6,6 +6,7 @@ use JSON;
 BEGIN { extends 'Catalyst::Controller::REST'; }
 
 __PACKAGE__->config( default => 'application/json' );
+
 =head1 NAME
 
 WebSMM::Controller::HomeFuncional::Region::ID - Catalyst Controller
@@ -18,40 +19,41 @@ Catalyst Controller.
 
 =cut
 
-
 =head2 index
 
 =cut
-sub id :Chained('/homefuncional/region/base') :Args(0) :ActionClass('REST'){}
 
-sub id_GET{
+sub id : Chained('/homefuncional/region/base') : Args(0) : ActionClass('REST') { }
+
+sub id_GET {
     my ( $self, $c ) = @_;
 
-	$c->detach unless $c->req->param('latitude');
-	$c->detach unless $c->req->param('longitude');
-	
-	$c->detach unless $c->req->param('latitude')  =~ qr/^(\-?\d+(\.\d+)?)$/;
-	$c->detach unless $c->req->param('longitude') =~ qr/^(\-?\d+(\.\d+)?)$/;
+    $c->detach unless $c->req->param('latitude');
+    $c->detach unless $c->req->param('longitude');
 
-	my $lnglat = join (q/ /,$c->req->param('longitude'),$c->req->param('latitude'));
+    $c->detach unless $c->req->param('latitude') =~ qr/^(\-?\d+(\.\d+)?)$/;
+    $c->detach unless $c->req->param('longitude') =~ qr/^(\-?\d+(\.\d+)?)$/;
+
+    my $lnglat = join( q/ /, $c->req->param('longitude'), $c->req->param('latitude') );
 
     my $api = $c->model('API');
-			
-	
-	$api->stash_result( 
-		$c, 'regions/latlong',
-		params => {
-			lnglat => $lnglat, 
-		},
-		stash => 'region_id',
-	);
-	if ($c->stash->{region_id}->{error}){
-		$self->status_ok($c, entity => { message => 'NENHUMA REGIÃO ENCONTRADA'});
-	}else{
-		$self->status_ok($c, entity => { id => $c->stash->{region_id}->{id} });	 
-	}
-}
 
+    $api->stash_result(
+        $c,
+        'regions/latlong',
+        params => {
+            lnglat => $lnglat,
+        },
+        stash => 'region_id',
+    );
+
+    if ( $c->stash->{region_id}->{error} ) {
+        $self->status_ok( $c, entity => { message => 'NENHUMA REGIÃO ENCONTRADA' } );
+    }
+    else {
+        $self->status_ok( $c, entity => { id => $c->stash->{region_id}->{id} } );
+    }
+}
 
 =encoding utf8
 

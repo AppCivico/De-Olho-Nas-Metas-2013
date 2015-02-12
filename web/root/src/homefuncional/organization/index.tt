@@ -35,7 +35,7 @@
 		<div class="clear"></div>
     </section>
 
-	<section class="metas-filtro">
+<!--	<section class="metas-filtro">
 		<div class="container">
 			<div class="form">
 				<div class="col-xs-4 cep">
@@ -60,7 +60,7 @@
 
 				<div class="clear"></div>
 		</div>
-    </section>
+    </section>-->
 	<section class="metas-detail search-list">
 		<div class="container">
 			<h2 class="section-title">[%organizations.count.0%] Conselhos Participativos</h2>

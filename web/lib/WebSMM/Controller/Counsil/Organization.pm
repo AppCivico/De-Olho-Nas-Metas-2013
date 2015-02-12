@@ -24,11 +24,7 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
 
     my $api = $c->model('API');
 
-    $api->stash_result(
-        $c,
-        [ 'organizations', $id ],
-        stash => 'organization_obj'
-    );
+    $api->stash_result( $c, [ 'organizations', $id ], stash => 'organization_obj' );
 
 }
 

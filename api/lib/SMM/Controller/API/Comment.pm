@@ -12,7 +12,7 @@ __PACKAGE__->config(
     result      => 'DB::Comment',
     object_key  => 'comment',
     result_attr => {
-        prefetch => ['user', 'project' ],
+        prefetch => [ 'user', 'project' ],
     },
 
     update_roles => [qw/superadmin user admin webapi/],
@@ -43,23 +43,22 @@ sub result_GET {
                   timestamp
                   /
             ),
-            project => 
-                (
-                    map {
-                        my $p = $_;
-                        (
-                            map {
-                                { $_ => $p->$_ }
-                              } qw/
-                              id
-                              name
-                              latitude
-                              longitude
-                              region_id
-                              /
-                          ),
-                    } $comment->project,
-                ),
+            project => (
+                map {
+                    my $p = $_;
+                    (
+                        map {
+                            { $_ => $p->$_ }
+                          } qw/
+                          id
+                          name
+                          latitude
+                          longitude
+                          region_id
+                          /
+                      ),
+                } $comment->project,
+            ),
         }
     );
 
@@ -77,15 +76,16 @@ sub result_DELETE {
 sub result_PUT {
     my ( $self, $c ) = @_;
 
-    my $params = { %{ $c->req->params } };
-    my $comment   = $c->stash->{comment};
+    my $params  = { %{ $c->req->params } };
+    my $comment = $c->stash->{comment};
 
     $comment->execute( $c, for => 'update', with => $c->req->params );
 
     $self->status_accepted(
         $c,
         location =>
-          $c->uri_for( $self->action_for('result'), [ $comment->id ] )->as_string,
+          $c->uri_for( $self->action_for('result'), [ $comment->id ] )
+          ->as_string,
         entity => { id => $comment->id }
       ),
       $c->detach
@@ -98,19 +98,21 @@ sub list_GET {
     my ( $self, $c ) = @_;
     my $rs = $c->stash->{collection};
 
-	if ($c->req->param('project_id')){
-		$rs = $rs->search({ project_id => $c->req->param('project_id')});
-	}
-	if ( $c->req->param('approved')){
-    	$rs = $rs->search(
-          { approved => $c->req->param('approved'), 'me.active' => 1 },
-          {
-			'+select' => [ \q{to_char(me.timestamp, 'DD/MM/YYYY HH24:MI:SS') AS process_ts}],
-			'+as'     => [ 'process_ts'], 
-            order_by => 'me.timestamp'
-       	  },
-    	);
-	}
+    if ( $c->req->param('project_id') ) {
+        $rs = $rs->search( { project_id => $c->req->param('project_id') } );
+    }
+    if ( $c->req->param('approved') ) {
+        $rs = $rs->search(
+            { approved => $c->req->param('approved'), 'me.active' => 1 },
+            {
+                '+select' => [
+                    \q{to_char(me.timestamp, 'DD/MM/YYYY HH24:MI:SS') AS process_ts}
+                ],
+                '+as'    => ['process_ts'],
+                order_by => 'me.timestamp'
+            },
+        );
+    }
 
     $self->status_ok(
         $c,
@@ -124,19 +126,18 @@ sub list_GET {
                               qw/
                               id
                               text
-                              process_ts                              
+                              process_ts
                               /
                         ),
-						project => 
-							(
-									+{
-										id => $r->{project}->{id},
-										name => $r->{project}->{name},
-										latitude => $r->{project}->{latitude},
-										longitude => $r->{project}->{longitude},
-									 }
-							),			
-                   }
+                        project => (
+                            +{
+                                id        => $r->{project}->{id},
+                                name      => $r->{project}->{name},
+                                latitude  => $r->{project}->{latitude},
+                                longitude => $r->{project}->{longitude},
+                            }
+                        ),
+                      }
                 } $rs->as_hashref->all
             ]
         }
@@ -152,13 +153,11 @@ sub list_POST {
 
     $self->status_created(
         $c,
-        location =>
-          $c->uri_for( $self->action_for('result'), [ 1 ] )->as_string,
+        location => $c->uri_for( $self->action_for('result'), [1] )->as_string,
         entity => {
             comment_id => $comment->id
         }
     );
 }
-
 
 1;

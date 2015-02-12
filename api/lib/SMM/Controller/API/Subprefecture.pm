@@ -15,7 +15,7 @@ __PACKAGE__->config(
         order => 'Str'
     },
     result_attr => {
-        prefetch => ['regions', 'organizations']
+        prefetch => [ 'regions', 'organizations' ]
     },
     update_roles => [qw/superadmin user admin webapi organization/],
     create_roles => [qw/superadmin admin webapi/],
@@ -28,7 +28,7 @@ sub base : Chained('/api/base') : PathPart('subprefectures') : CaptureArgs(0) {
 }
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
-    my ( $self, $c ) = @_;
+my ( $self, $c ) = @_;
 
 sub result : Chained('object') : PathPart('') : Args(0) :
   ActionClass('REST') { }
@@ -37,7 +37,7 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $subprefecture = $c->stash->{subprefecture};
-	my $name = $subprefecture->organizations->get_column('name');
+    my $name          = $subprefecture->organizations->get_column('name');
 
     $self->status_ok(
         $c,
@@ -47,30 +47,29 @@ sub result_GET {
                   qw/
                   id
                   name
-				  acronym
+                  acronym
                   /
             ),
             regions => [
-                ( 
+                (
                     map {
                         {
-                            id        => $_->id,
-                            name      => $_->name,
+                            id   => $_->id,
+                            name => $_->name,
                         }
 
                     } $subprefecture->regions,
                 ),
             ],
-            organization => 
-				(
-                    map {
-                        {
-                            id        => $_->id,
-                            name      => $_->name,
-                        }
+            organization => (
+                map {
+                    {
+                        id   => $_->id,
+                        name => $_->name,
+                    }
 
-                    } $subprefecture->organizations,
-                ),
+                } $subprefecture->organizations,
+            ),
 
         }
     );
@@ -89,7 +88,7 @@ sub result_DELETE {
 sub result_PUT {
     my ( $self, $c ) = @_;
 
-    my $params = { %{ $c->req->params } };
+    my $params        = { %{ $c->req->params } };
     my $subprefecture = $c->stash->{subprefecture};
 
     $subprefecture->execute( $c, for => 'update', with => $c->req->params );
@@ -186,8 +185,8 @@ sub complete : Chained('base') : PathPart('complete') : Args(0) {
             $subprefecture = $c->stash->{collection}
               ->execute( $c, for => 'create', with => $c->req->params );
 
-            $c->req->params->{active}    = 1;
-            $c->req->params->{role}      = 'subprefecture';
+            $c->req->params->{active}           = 1;
+            $c->req->params->{role}             = 'subprefecture';
             $c->req->params->{subprefecture_id} = $subprefecture->id;
 
             my $user = $c->model('DB::User')
@@ -207,21 +206,23 @@ sub complete : Chained('base') : PathPart('complete') : Args(0) {
 
 }
 
-sub geom : Chained('base') : PathPart('geom') Args(0){
-	my ( $self , $c ) = @_;
+sub geom : Chained('base') : PathPart('geom') Args(0) {
+    my ( $self, $c ) = @_;
 
-	my $id = $c->req->param('subprefecture_id') if $c->req->param('subprefecture_id') =~ /^\d+$/;
+    my $id = $c->req->param('subprefecture_id')
+      if $c->req->param('subprefecture_id') =~ /^\d+$/;
 
-	my ( $geom ) = $c->model('DB')->resultset('Subprefecture')->search( 
-		{ 'me.id' => $id },
-		{
-			'+select' => [ \q{ST_AsGeoJSON(regions.geom,3) as geom_json}  ], 
-			'+as' => [qw(regions.geom_json)],
-			columns => [qw( me.id me.latitude me.longitude regions.id regions.name)],
-			collapse => 1,
-			join => [qw(regions)]
-		}
+    my ($geom) = $c->model('DB')->resultset('Subprefecture')->search(
+        { 'me.id' => $id },
+        {
+            '+select' => [ \q{ST_AsGeoJSON(regions.geom,3) as geom_json} ],
+            '+as'     => [qw(regions.geom_json)],
+            columns =>
+              [qw( me.id me.latitude me.longitude regions.id regions.name)],
+            collapse => 1,
+            join     => [qw(regions)]
+        }
     )->as_hashref->all;
-    $self->status_ok( $c, entity =>  { geom => $geom } );
+    $self->status_ok( $c, entity => { geom => $geom } );
 }
 1;

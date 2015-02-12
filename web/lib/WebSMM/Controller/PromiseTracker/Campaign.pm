@@ -17,84 +17,77 @@ Catalyst Controller.
 
 =cut
 
-
 =head2 index
 
 =cut
 
-sub base :Chained('/promisetracker/base') :PathPart('campaign') :CaptureArgs(0) {
+sub base : Chained('/promisetracker/base') : PathPart('campaign') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
-	$c->stash->{url} = 'http://dev.monitor.promisetracker.org/api/v1/campaigns';
+    $c->stash->{url} = 'http://dev.monitor.promisetracker.org/api/v1/campaigns';
 }
 
-sub object :Chained('base') :PathPart('') : CaptureArgs(1){
+sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
     my ( $self, $c, $id ) = @_;
-	my $return;
+    my $return;
 
-	$c->detach unless $id =~ /^\d+$/;
-	
-	my $model = $c->model('API');
+    $c->detach unless $id =~ /^\d+$/;
 
-	$c->stash->{url} .= '/'.$id;
+    my $model = $c->model('API');
 
-	eval{
-	    $return = $model->_do_http_req(
-			method => 'GET',
-			url    => $c->stash->{url},
-			headers => [ Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' ] ,
-		);
-	};
+    $c->stash->{url} .= '/' . $id;
 
-	my $json = decode_json $return->content;
-	$c->stash->{campaign} = $json->{payload};
+    eval {
+        $return = $model->_do_http_req(
+            method  => 'GET',
+            url     => $c->stash->{url},
+            headers => [ Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' ],
+        );
+    };
+
+    my $json = decode_json $return->content;
+    $c->stash->{campaign} = $json->{payload};
 }
-sub index :Chained('base') :Args(0){
+
+sub index : Chained('base') : Args(0) {
     my ( $self, $c ) = @_;
-	
-	my $return;
-	my $res;
 
-	my $model = $c->model('API');
+    my $return;
+    my $res;
 
-	my $url = 'http://dev.monitor.promisetracker.org/api/v1/campaigns';
-	
-	eval{
-		$return = $model->_do_http_req(
-			method  => 'GET',
-			url     => $url,
-			headers => [ Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' ] ,
-		);
-	};
-	
-	my $data = decode_json $return->content;
-	$c->stash->{campaigns} = $data->{payload};
+    my $model = $c->model('API');
+
+    my $url = 'http://dev.monitor.promisetracker.org/api/v1/campaigns';
+
+    eval {
+        $return = $model->_do_http_req(
+            method  => 'GET',
+            url     => $url,
+            headers => [ Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' ],
+        );
+    };
+
+    my $data = decode_json $return->content;
+    $c->stash->{campaigns} = $data->{payload};
 }
 
-sub detail :Chained('object') :Args(0){
+sub detail : Chained('object') : Args(0) {
     my ( $self, $c ) = @_;
 }
-sub create :Chained('base') :Args(0){
+
+sub create : Chained('base') : Args(0) {
     my ( $self, $c ) = @_;
-	
-	my $return;
-	my $res;
 
-	my $model = $c->model('API');
+    my $return;
+    my $res;
 
-	my $url = 'http://dev.monitor.promisetracker.org/api/v1/campaigns';
-	
-	eval{
-		$return = $model->_do_http_req(
-			method => 'POST',
-			url    => $url,
-		);
-	};
+    my $model = $c->model('API');
 
-	my $data = decode_json $return->content;
+    my $url = 'http://dev.monitor.promisetracker.org/api/v1/campaigns';
+
+    eval { $return = $model->_do_http_req( method => 'POST', url => $url, ); };
+
+    my $data = decode_json $return->content;
 }
-
-
-
 
 =encoding utf8
 

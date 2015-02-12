@@ -16,38 +16,35 @@ Catalyst Controller.
 
 =cut
 
-
 =head2 index
 
 =cut
 
-sub base :Chained('/') :PathPart('promisetracker') :CaptureArgs(0) {
+sub base : Chained('/') : PathPart('promisetracker') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
-	$c->stash->{template_wrapper} = 'pt';
+    $c->stash->{template_wrapper} = 'pt';
 }
 
-sub object :Chained('base') :PathPart('') :CaptureArgs(1){
+sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
     my ( $self, $c, $id ) = @_;
 
-
 }
 
-sub detail :Chained('object') :PathPart('') :Args(0){
+sub detail : Chained('object') : PathPart('') : Args(0) {
     my ( $self, $c, $id ) = @_;
-	$c->stash->{without_wrapper} = 1;
+    $c->stash->{without_wrapper} = 1;
 }
 
-sub home :Chained('base') :PathPart('') :Args(0){
+sub home : Chained('base') : PathPart('') : Args(0) {
     my ( $self, $c ) = @_;
 
     my $api = $c->model('API');
 
     $api->stash_result( $c, 'goals' );
-	$c->stash->{without_wrapper} = 1;
+    $c->stash->{without_wrapper} = 1;
 
 }
-
 
 =encoding utf8
 

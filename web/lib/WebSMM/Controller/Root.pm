@@ -31,14 +31,13 @@ The root page (/)
 sub index : Path : Args(0) {
     my ( $self, $c ) = @_;
 
-	 $c->res->redirect( $c->uri_for_action('/user/account/index') ), $c->detach
-    	 if $c->user_exists;
-  
-    $c->res->redirect( $c->uri_for_action('/homefuncional/home') );
-		
-	$self->root($c);
+    $c->res->redirect( $c->uri_for_action('/user/account/index') ), $c->detach
+      if $c->user_exists;
 
-	
+    $c->res->redirect( $c->uri_for_action('/homefuncional/home') );
+
+    $self->root($c);
+
 }
 
 #sub more : Chained('') : Path('saiba-mais') : Args(0) {
@@ -149,9 +148,8 @@ sub default : Path {
     eval {
         $c->stash->{body_class} .= ' ' . $maybe_view;
         $c->stash->{body_class} =~ s/\//-/g;
-		$c->stash->{template_wrapper} = 'func';
-        $output =
-          $c->view('TT')->render( $c, "auto/$maybe_view.tt", $c->stash );
+        $c->stash->{template_wrapper} = 'func';
+        $output = $c->view('TT')->render( $c, "auto/$maybe_view.tt", $c->stash );
     };
     if ( $@ && $@ =~ /not found$/ ) {
         $c->response->body('Page not found');

@@ -16,18 +16,16 @@ sub base : Chained('/root') : PathPart('counsil') : CaptureArgs(0) {
         $c->detach( '/form/redirect_error', [] );
     }
 
-#    my $u_data = { %{ $c->user } };
-#    my $u      = $c->req->params->{change_process};
+    #    my $u_data = { %{ $c->user } };
+    #    my $u      = $c->req->params->{change_process};
 
-#    if ( !$u && !$u_data->{password_defined} && grep { /^organization$/ }
-#        $c->user->roles )
-#    {
-#        $c->detach( 'Admin::Organization' => 'change_password' );
-#    }
-
+    #    if ( !$u && !$u_data->{password_defined} && grep { /^organization$/ }
+    #        $c->user->roles )
+    #    {
+    #        $c->detach( 'Admin::Organization' => 'change_password' );
+    #    }
 
     $c->stash->{template_wrapper} = 'counsil';
-
 
 }
 
