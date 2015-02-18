@@ -3,3 +3,5 @@
 dbi_dump*
 web.error.log
 web/root/static/images/user/
+up_api.sh
+up_web.sh
