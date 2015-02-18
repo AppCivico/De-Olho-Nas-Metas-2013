@@ -5,22 +5,28 @@
 <script>
 
 $(document).ready(function () {
-  $('#follow_project').on('click', function () {
-	var id = $(this).data("id");
-	$.post( "/home/project/user_follow_project", { user_id: $(this).data("id"), project_id: $('#projectid').val() }).done(function( data ) {
-		var button_stop = '<button type="button" id="stop_follow_sub" name="stop_follow" class="btn btn-reply" data-id="'+id+'" autocomplete="off">Parar de seguir</button>';
+  $('#follow_or_not').on('click', function () {
+	var id = $(this).data("id"),
+		url,
+		textview;
+	var button = $(this);
+	if ($(this).hasClass('follow')){
+		url = "/home/project/user_follow_project";
+		$(this).removeClass('follow');
+		textview = "Parar de Seguir";	
+	}else{
+		url = "/home/project/user_stop_follow";
+		$(this).addClass('follow');
+		textview = "Siga o Projeto";	
+	}
+	$(this).attr('disabled',true);
+	$.post( url, { user_id: $(this).data("id"), project_id: $('#projectid').val() },function( data ) {
 
-		$('#follow').html(button_stop);
-    });	
-  })
-
-  $('#stop_follow').on('click', function () {
-	var id = $(this).data("id");
-	$.post( "/home/project/user_stop_follow", { user_id: $(this).data("id"), project_id: $('#projectid').val() }, function( data ) {
-		var button_follow = '<button type="button" id="follow_project_sub" class="btn btn-reply" data-id="'+id+'" autocomplete="off">Siga o projeto</button>';
-		console.log(data);
-		$('#follow').html(button_follow);
-  	},"json");	
+		$(button).find("span").html(textview);
+		
+		$(button).attr('disabled',false);
+    },"json")
+	
   })
    
   $('#comment_counsil').on('click', function () {
@@ -161,16 +167,16 @@ $(document).ready(function () {
 								<div class="icon users2"></div> <span class="caption"><span class="counter">[% project_obj.follow_project %]</span> [% IF project_obj.follow_project > 1 %]seguidores [% ELSE %] seguidor [% END %]
 							</div>
 						</div>
-					    [% IF c.user%]	
-							
+						[% IF c.user%]
 						<div id="follow" class="col-xs-4 text-right">							
-							[% UNLESS do_i_follow > 0 %]
-							<button  type="button" id="follow_project" class="btn btn-reply" data-id="[% c.user.obj.id%]" autocomplete="off">Siga o Projeto</button>
-							[% ELSE%]
-							<button  type="button" id="stop_follow" class="btn btn-reply" data-id="[% c.user.obj.id%]" autocomplete="off">Parar de seguir</button>
-							[% END %]
+							<button  type="button" id="follow_or_not" class="btn btn-reply [% do_i_follow > 0 ? "" : "follow"%]" data-id="[% c.user.obj.id%]" autocomplete="off"><span>[% do_i_follow > 0 ? "Parar de Seguir" : "Siga o Projeto" %]</span></button>
 						</div>
-						[% END %]
+						[%ELSE%]
+						<div id="follow" class="col-xs-4 text-right">							
+							<a class="btn btn-reply" href="/register">Siga o Projeto</a>
+						</div>
+
+						[%END%]
 					</div>
 					<div >
 						<table id="list_note" class="table table-striped">
@@ -296,7 +302,7 @@ $(document).ready(function () {
 					</ul>
 				    [% IF project_obj.region.size > 0 %]	
 					<div class="list-regions">
-						<span class="header">Distritos</span>
+						<span class="header">Distrito</span>
 						<ul class="list-regions">
 							<li> <a href="[% c.uri_for_action('/homefuncional/region/detail',[project_obj.region.id] ) %]">[%project_obj.region.name%]</a></li>
 						</ul>

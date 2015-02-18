@@ -2,8 +2,6 @@
 	[%-CALL assets.include("js/maps.js")%]
 	[%-CALL assets.include("js/infobubble.min.js")%]
     <section class="map text-center">
-		<div id="map">
-		</div>
 		<div id="filter-map">
 			<div class="contents text-center">
 				<div class="item">
@@ -86,7 +84,7 @@
 					<div class="contents pull-left">
 						<div class="description">
 							<h2>
-								<a href="[% c.uri_for_action('/homefuncional/goal/detail',[goal.id] ) %]">[% goal.id%] - [%goal.name%]</a>
+								<a href="[% c.uri_for_action('/homefuncional/goal/detail',[goal.id] ) %]">Meta [% goal.id%] - [%goal.name%]</a>
 							</h2>
 							<div class="stats">
 								[% IF goal.region_count > 0 %]

@@ -322,7 +322,7 @@ sub geom : Chained('base') PathPart('geom') : Args(0) {
         {
             '+select' => [ \q{ST_AsGeoJSON(region.geom,3) as geom_json} ],
             '+as'     => [qw(geom_json)],
-            columns   => [qw( me.id region.id region.name)],
+            columns   => [qw( me.id me.latitude me.longitude region.id region.name)],
             collapse  => 1,
             join      => [qw(region)]
         }

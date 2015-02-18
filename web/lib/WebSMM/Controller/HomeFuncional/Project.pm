@@ -134,15 +134,14 @@ sub user_follow_project : Chained('base') : PathPart('user_follow_project') : Ar
         $c,
         'user_follow_project',
         method => 'POST',
-        params => { user_id => $user_id, project_id => $project_id }
+        params => { user_id => $user_id, project_id => $project_id },
     );
-
-    $c->res->status(400), $c->detach unless $c->stash->{id};
+    $c->res->status(400), $c->detach unless $c->stash->{project};
     $c->res->status(200);
     $c->res->content_type('application/json');
     use DDP;
-    p $c->stash->{id};
-    $c->res->body( $c->stash->{id} );
+    p $c->stash->{project};
+    $c->res->body( JSON::encode_json( $c->stash->{project} ) );
 
 }
 

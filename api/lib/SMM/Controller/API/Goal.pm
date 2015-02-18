@@ -100,8 +100,9 @@ sub result_GET {
                     map {
                         my $p = $_;
                         (
+							+{
                             map {
-                                { $_ => $p->project->$_ }
+                                 $_ => $p->project->$_ 
                               } qw/
                               id
                               name
@@ -109,6 +110,7 @@ sub result_GET {
                               longitude
                               region_id
                               /
+							}
                           ),
                     } $goal->goal_projects,
                 ),

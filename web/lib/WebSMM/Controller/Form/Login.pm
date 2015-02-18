@@ -32,13 +32,13 @@ sub after_login {
     use DDP;
     p $c->user->roles;
     if ( grep { /^user$/ } $c->user->roles ) {
-        $url = '/user/account/index';
+        $url = '/homefuncional/home';
     }
     if ( grep { /^counsil_master$/ } $c->user->roles ) {
         $url = '/user/account/index';
     }
     if ( grep { /^counsil$/ } $c->user->roles ) {
-        $url = '/user/account/index';
+        $url = '/homefuncional/home';
     }
     elsif ( grep { /^admin|organization$/ } $c->user->roles ) {
         $url = '/admin/dashboard/index';

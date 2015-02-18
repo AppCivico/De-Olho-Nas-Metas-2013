@@ -106,13 +106,14 @@ var $maps = function () {
 			
 			latlong = polygon.getBounds().getCenter();
 
-			myLatlng = new google.maps.LatLng(latlong.k,latlong.D);	
+			myLatlng = new google.maps.LatLng(json.latitude,json.longitude);	
 			polygon.setMap(map);	
-
 			marker = new google.maps.Marker({
+	                position: myLatlng,
 		            map: map,
-					url : "/home/region/"+json.region.id,
-	            });
+		            icon: "/static/images/icone_mapa.png"
+	        });
+
 			var url = marker.url;
 
 			google.maps.event.addListener(polygon, "click", function(event) {
@@ -373,6 +374,7 @@ var $maps = function () {
 
 	function markgoaldetail( goal_id ){
 		$.getJSON('/home/project_map_list', { id : goal_id } ,function(data,status){
+		
 			$.each(data.project, function(i, pj){
 				marker = "";
 				var myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);
@@ -449,7 +451,6 @@ var $maps = function () {
 
 $(document).ready(function () {
 		$maps.initialize();
-	
 	if ($("#pagetype").val() == 'home'){	
 		$maps.loadproject();
 	}		
