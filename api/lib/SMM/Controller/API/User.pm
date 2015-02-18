@@ -1,6 +1,10 @@
+use common::sense;
 package SMM::Controller::API::User;
 
 use Moose;
+use Data::Dumper;
+
+
 
 BEGIN { extends 'Catalyst::Controller::REST' }
 
@@ -33,7 +37,6 @@ sub result : Chained('object') : PathPart('') : Args(0) :
 
 sub result_GET {
     my ( $self, $c ) = @_;
-
     my $user = $c->stash->{user};
     use DDP;
     p $user;
@@ -123,7 +126,7 @@ sub list_GET {
     if ( $c->req->params->{role} ) {
         $conditions = {
             'role.id' => $c->req->params->{role} == 99
-            ? { 'in' => [ 1, 4, 5, 6, 8 ] }
+            ? { 'in' => [ 1, 4, 5, 6, 8, 11, 12 ] }
             : $c->req->params
               ->{role} #administrative roles, 99 is just to de    fine the undefined
         };
@@ -141,6 +144,8 @@ sub list_GET {
                               qw/
                               id
                               name
+                              username
+                              user_roles 
                               email
                               is_active
                               reset_password_key
@@ -165,9 +170,10 @@ sub list_GET {
 
 sub list_POST {
     my ( $self, $c ) = @_;
-
+    my $params = $c->req->params;
+    $params->{active} = 1;
     my $user = $c->stash->{collection}
-      ->execute( $c, for => 'create', with => $c->req->params );
+      ->execute( $c, for => 'create', with => $params );
 
     $self->status_created(
         $c,

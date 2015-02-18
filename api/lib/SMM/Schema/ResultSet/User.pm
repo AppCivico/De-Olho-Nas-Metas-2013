@@ -26,7 +26,7 @@ sub verifiers_specs {
                     type     => 'Str',
                 },
                 phone_number => {
-                    required => 1,
+                    required => 0,
                     type     => 'Str',
                 },
                 password => {

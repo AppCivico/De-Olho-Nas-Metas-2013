@@ -2,6 +2,7 @@ package SMM::Controller::API::Role;
 
 use Moose;
 use JSON::XS;
+use Data::Dumper;
 
 BEGIN { extends 'Catalyst::Controller::REST' }
 
@@ -44,7 +45,6 @@ sub result_GET {
             ),
         }
     );
-
 }
 
 sub result_DELETE {
@@ -81,14 +81,20 @@ sub list_GET {
     my ( $self, $c ) = @_;
 
     my $rs = $c->stash->{collection};
+    
+    my @roles_chosen;
+    map{ push @roles_chosen,{'me.name' => {like => qq[$_%]}}; } keys %{$c->req->params};
 
-    if ( $c->req->params->{admin} ) {
+#    die "ROLES_CHOSEN: " . Dumper \@roles_chosen;
+
+    if ( @roles_chosen ) {
         $rs = $rs->search(
             {
-                '-or' => [
-                    'me.name' => { 'like' => 'operator' },
-                    'me.name' => { 'like' => 'admin%' },
-                ]
+                '-or' => [ 
+                    #'me.name' => { 'like' => 'operator' },
+                    #'me.name' => { 'like' => 'admin%' },
+                    \@roles_chosen,
+                  ],
             }
         );
     }
@@ -119,7 +125,6 @@ sub list_POST {
     my ( $self, $c ) = @_;
 
     my $params = $c->req->params;
-
     if ( $params->{add_relation} ) {
         my @roles = decode_json( $params->{roles} );
 
