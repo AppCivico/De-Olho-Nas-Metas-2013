@@ -8,7 +8,22 @@
 $(document).ready(function () {
        $('.priceformat').parseNumber({format:"#,###.00",locale: "br" });
        $('.priceformat').formatNumber({format:"#,###.00",locale: "br" });
-});
+
+  $('#comment').on('click', function () {
+	if ($('#text_comment').val() == ""){
+		$('#alert_comment').html('<div class="alert alert-success"><p>Por favor preencha o campo de comentário.</p></div>');
+		return;
+	}
+
+	var id = $(this).data("id");
+	$.post( "/home/goal/comment", { user_id: $(this).data("id"), text: $('#text_comment').val(), goal_id : $('#goalid').val() } ,function( data ) {
+		$('#alert_comment').html('<div class="alert alert-success"><p>'+data.message+'</p></div>');
+  	},"json");
+
+	$('#text_comment').val('');
+	});
+ 
+  });
 </script>
 	<section class="map text-center">
 		<div id="filter-map">
@@ -99,7 +114,7 @@ $(document).ready(function () {
 						</p>
 					</div>
 					<span>Investimento: R$</span><span class="priceformat">[% goal_obj.expected_budget %]> </span>
-					<div class="timeline">
+<!--				<div class="timeline">
 						<h3 class="section-title">Linha do tempo segundo o cronograma</h3>
 						<div class="chart">
 							<canvas id="chartline-goal"></canvas>
@@ -112,22 +127,16 @@ $(document).ready(function () {
 								chart_labels = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
 							loadLineGraph(".timeline .chart",chart_labels,chart_data);
 						</script>
-					</div>
-    <section class="statistics">
-		<div class="container">
-		
-			<h2 class="section-title">Estatísticas de Metas e Projetos</h2>
-			
-			<div class="row">
-				<div class="chart-stats col-sm-3 text-center" color="darkblue">
-					<div class="chart">
-						<canvas id="chart1"></canvas>
-					</div>
-					<div class="chart-label">Progresso</div>
-				</div>
-			</div>
-		</div>
-    </section>
+					</div>-->
+					<section class="statistics">
+						<h2 class="section-title">Progresso</h2>
+						<div class="progress">
+						  <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: [%goal_obj.goal_porcentages.owned%]%;">
+							   [%goal_obj.goal_porcentages.owned%]%
+			              </div>
+						</div>
+
+				    </section>
 
 					<div class="indicators">
 					</div>
@@ -144,12 +153,12 @@ $(document).ready(function () {
 								</tr>
 							</thead>
 							<tbody>
-					[% IF project_obj.comments.size > 0 %]
-					[% FOREACH c IN project_obj.comments%]
+					[% IF goal_obj.comments.size > 0 %]
+					[% FOREACH com IN goal_obj.comments%]
 							<tr>
-								<td>[%c.name%]</td>
-								<td>[%c.description%]</td>
-								<td>[%c.process_ts%]</td>
+								<td>[%com.name%]</td>
+								<td>[%com.description%]</td>
+								<td>[%com.process_ts%]</td>
 							</tr>
 		            [%END%]
 					[% ELSE %]
@@ -161,6 +170,12 @@ $(document).ready(function () {
 							</tbody>
 						</table>
 
+					</div>
+					<div id="alert_comment">
+					</div>
+					<div>						
+						<textarea id="text_comment" class="form-control" rows="2"></textarea>
+						<button  id="comment" type="button" class="btn btn-primary" data-id="[% c.user.obj.id%]">Comentar</button>
 					</div>
 
     	
@@ -183,6 +198,13 @@ $(document).ready(function () {
 					<div id="map" style="height: 300px;">
 					</div>
 					<div class="list-projects">
+						<span class="header">Planeja Sampa</span>
+						<ul class="list-organizations">
+							<a href="http://planejasampa.prefeitura.sp.gov.br/metas/meta/[%goal_obj.id%]">Meta [%goal_obj.id%] - [% goal_obj.name%]</li>
+						</ul>
+					</div>
+				
+					<div class="list-projects">
 						<span class="header">[% goal_obj.project_qt.size %] Projeto[% goal_obj.project_qt.size > 1 ? "s" : "" %] da Meta</span>
 						<ul class="list-projects">
 							[% FOREACH project IN goal_obj.project_qt %]
@@ -190,6 +212,7 @@ $(document).ready(function () {
 							[% END %]
 						</ul>
 					</div>
+
 					[% IF goal_obj.organization.size > 0 %]
 					<div class="list-organizations">
 						<span class="header">3 Organizações</span>
@@ -200,6 +223,7 @@ $(document).ready(function () {
 						</ul>
 					</div>
 					[% END%]
+
 				</div>
 			</div>
 			

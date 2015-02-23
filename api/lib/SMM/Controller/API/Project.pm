@@ -28,7 +28,6 @@ __PACKAGE__->config(
             'approved_project_events.process_ts_fmt',
             'approved_comments.process_ts_fmt'
         ],
-        distinct => 1,
 
     },
     update_roles => [qw/superadmin user admin webapi organization/],
@@ -50,8 +49,6 @@ sub result_GET {
 
     my $follow_project =
       $project->user_follow_projects->search( { active => 1 } )->count;
-    use DDP;
-    p $project->comments;
     my $type;
     $type = $_->goal->objective_id for $project->goal_projects;
 
@@ -73,19 +70,20 @@ sub result_GET {
                   address
                   latitude
                   longitude
+				  project_number
                   /
             ),
-            goal => (
+            goal => {
                 map {
                     my $p = $_;
-                    (
-                        +{
+                   		 
+                        
                             id   => $p->goal->id,
                             name => $p->goal->name
-                        },
-                      ),
-                } $project->goal_projects,
-            ),
+                        
+                      
+                } ( $project->goal_projects ),
+            },
 
             type => [
                 {

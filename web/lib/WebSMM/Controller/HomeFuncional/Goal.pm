@@ -1,6 +1,7 @@
 package WebSMM::Controller::HomeFuncional::Goal;
 use Moose;
 use namespace::autoclean;
+use utf8;
 
 BEGIN { extends 'Catalyst::Controller'; }
 
@@ -28,9 +29,10 @@ sub base : Chained('/homefuncional/base') : PathPart('goal') : CaptureArgs(0) {
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
     my ( $self, $c, $id ) = @_;
-
     my $api = $c->model('API');
     $api->stash_result( $c, [ 'goals', $id ], stash => 'goal_obj' );
+	$c->stash->{goal_obj}->{goal_porcentages}->{owned} = int($c->stash->{goal_obj}->{goal_porcentages}->{owned}); 
+	$c->stash->{goal_obj}->{goal_porcentages}->{remainder} = int($c->stash->{goal_obj}->{goal_porcentages}->{remainder}); 
 
 }
 
@@ -40,6 +42,7 @@ sub detail : Chained('object') : PathPart('') : Args(0) {
     my $api = $c->model('API');
     $api->stash_result( $c, 'objectives' );
     $api->stash_result( $c, 'regions' );
+	
 }
 
 sub index : Chained('base') : PathPart('') : Args(0) {
@@ -81,8 +84,6 @@ sub search_by_types : Chained('base') : Args(0) {
             type_id   => $type_id
         }
     );
-    use DDP;
-    p $c->stash->{goals};
     $c->stash->{without_wrapper} = 1;
 }
 
@@ -105,11 +106,32 @@ sub region_by_cep : Chained('base') : Args(0) {
             lnglat => $lnglat
         }
     );
-    use DDP;
-    p $c->stash->{error};
     $c->stash->{message} = 1 if $c->stash->{error};
     $c->stash->{without_wrapper} = 1;
 
+}
+sub comment : Chained('base') : PathParth('comment') : Args(0) {
+    my ( $self, $c ) = @_;
+
+    my $api = $c->model('API');
+
+    my $user_id    = $c->req->param('user_id');
+    my $text       = $c->req->param('text');
+    my $goal_id = $c->req->param('goal_id');
+	
+	$user_id = 53 unless defined $c->req->param('user_id');
+
+    $api->stash_result(
+        $c,
+        'comment_goals',
+        method => 'POST',
+        params => { user_id => $user_id, description => $text, goal_id => $goal_id }
+    );
+
+    $c->res->status(200);
+    $c->res->content_type('application/json');
+    $c->res->body(
+        JSON::encode_json( { message => 'Seu comentário foi enviado para moderação, aguarde aprovação.' } ) );
 }
 
 =encoding utf8

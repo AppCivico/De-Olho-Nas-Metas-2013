@@ -1,24 +1,12 @@
-package WebSMM::Controller::Admin::Comment;
+package WebSMM::Controller::Admin::CommentGoal;
 use Moose;
 use namespace::autoclean;
 use POSIX;
 
 BEGIN { extends 'Catalyst::Controller' }
 
-sub base : Chained('/admin/base') : PathPart('comentario') : CaptureArgs(0) {
+sub base : Chained('/admin/base') : PathPart('comentario_meta') : CaptureArgs(0) {
     my ( $self, $c, $id ) = @_;
-}
-
-sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
-}
-
-sub index : Chained('base') : PathPart('') : Args(0) {
-    my ( $self, $c ) = @_;
-
-    my $api = $c->model('API');
-    $api->stash_result( $c, 'comment_goals', params => { approved => 'false' } );
-    $api->stash_result( $c, 'comment_projects', params => { approved => 'false' } );
-	use DDP; p $c->stash->{comment_projects};
 }
 
 sub set_accepted : Chained('base') : PathPart('aceito') : Args(0) {
@@ -29,7 +17,7 @@ sub set_accepted : Chained('base') : PathPart('aceito') : Args(0) {
 
     $api->stash_result(
         $c,
-        [ 'comment_projects', $pe ],
+        [ 'comment_goals', $pe ],
         method => 'PUT',
         params => { approved => 1 }
     );
@@ -49,7 +37,7 @@ sub set_removed : Chained('base') : PathPart('remover') : Args(0) {
     p $pe;
     $api->stash_result(
         $c,
-        [ 'comment_projects', $pe ],
+        [ 'comment_goals', $pe ],
         method => 'PUT',
         params => { active => 0 }
     );

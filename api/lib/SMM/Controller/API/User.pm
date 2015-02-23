@@ -35,8 +35,6 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $user = $c->stash->{user};
-    use DDP;
-    p $user;
     my %attrs = $user->get_inflated_columns;
     $self->status_ok(
         $c,
@@ -52,7 +50,10 @@ sub result_GET {
                 map { $_->project_id }
                   $user->user_follow_projects->search( { active => 1 } )->all
             ],
-
+            counsils_i_follow => [
+                map { $_->counsil_id }
+                  $user->user_follow_counsils->search( { active => 1 } )->all
+            ],
             projects => [
 
                 map {
@@ -195,6 +196,23 @@ sub project_POST {
 
     $self->status_accepted( $c, entity => { id => 1 } ), $c->detach
       if $user_project;
+
+}
+sub counsil : Chained('object') : PathPart('counsil') : Args(1) :
+  ActionClass('REST') { }
+
+sub counsil_POST {
+
+    my ( $self, $c, $id ) = @_;
+    my $user = $c->stash->{user};
+
+    my $user_counsil =
+      $user->user_follow_counsils->search( { counsil_id => $id } )
+      ->update( { active => 0 } );
+	my $counsil_count = $c->model('DB::UserFollowCounsil')->search({ active => 1 })->all;
+
+    $self->status_accepted( $c, entity => { counsil_count => $counsil_count } ), $c->detach
+      if $user_counsil;
 
 }
 

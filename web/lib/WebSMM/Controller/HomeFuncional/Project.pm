@@ -1,6 +1,7 @@
 package WebSMM::Controller::HomeFuncional::Project;
 use Moose;
 use namespace::autoclean;
+use JSON;
 use utf8;
 BEGIN { extends 'Catalyst::Controller'; }
 
@@ -41,6 +42,8 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
         stash  => 'project_obj',
         params => { user_id => $user_id ? $user_id : '' }
     );
+	use DDP;
+	p $c->stash->{project_obj};
     if ( $c->user ) {
         $api->stash_result( $c, [ 'users', $c->user->obj->id ], stash => 'user_obj', );
         $c->stash->{user_obj}->{role} = { map { $_ => 1 } @{ $c->stash->{user_obj}->{roles} } };
@@ -141,7 +144,7 @@ sub user_follow_project : Chained('base') : PathPart('user_follow_project') : Ar
     $c->res->content_type('application/json');
     use DDP;
     p $c->stash->{project};
-    $c->res->body( JSON::encode_json( $c->stash->{project} ) );
+    $c->res->body( encode_json( $c->stash->{project} ) );
 
 }
 
@@ -195,9 +198,10 @@ sub comment : Chained('base') : PathParth('comment') : Args(0) {
     my $text       = $c->req->param('text');
     my $project_id = $c->req->param('project_id');
 
+	$user_id = 53 unless $c->req->param('user_id');
     $api->stash_result(
         $c,
-        'comments',
+        'comment_projects',
         method => 'POST',
         params => { user_id => $user_id, description => $text, project_id => $project_id }
     );
@@ -223,10 +227,9 @@ sub search_by_types : Chained('base') : Args(0) {
             type_id   => $type_id
         }
     );
-    $c->res->status(400) unless $c->stash->{projects};
     $c->res->status(200);
-
-    $c->res->body( JSON::encode_json( $c->stash->{projects} ) );
+	use DDP;
+	$c->detach('/form/as_json',[ { projects => $c->stash->{projects} } ]);
 }
 
 =encoding utf8

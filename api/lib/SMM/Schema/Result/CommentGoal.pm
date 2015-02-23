@@ -1,12 +1,12 @@
 use utf8;
-package SMM::Schema::Result::Comment;
+package SMM::Schema::Result::CommentGoal;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
 
 =head1 NAME
 
-SMM::Schema::Result::Comment
+SMM::Schema::Result::CommentGoal
 
 =cut
 
@@ -34,11 +34,11 @@ extends 'DBIx::Class::Core';
 
 __PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
-=head1 TABLE: C<comment>
+=head1 TABLE: C<comment_goal>
 
 =cut
 
-__PACKAGE__->table("comment");
+__PACKAGE__->table("comment_goal");
 
 =head1 ACCESSORS
 
@@ -47,7 +47,7 @@ __PACKAGE__->table("comment");
   data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
-  sequence: 'comment_id_seq'
+  sequence: 'comment_goal_id_seq'
 
 =head2 description
 
@@ -67,13 +67,7 @@ __PACKAGE__->table("comment");
   default_value: false
   is_nullable: 1
 
-=head2 project_id
-
-  data_type: 'integer'
-  is_foreign_key: 1
-  is_nullable: 1
-
-=head2 user_id
+=head2 goal_id
 
   data_type: 'integer'
   is_foreign_key: 1
@@ -85,6 +79,12 @@ __PACKAGE__->table("comment");
   default_value: true
   is_nullable: 1
 
+=head2 user_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -93,7 +93,7 @@ __PACKAGE__->add_columns(
     data_type         => "integer",
     is_auto_increment => 1,
     is_nullable       => 0,
-    sequence          => "comment_id_seq",
+    sequence          => "comment_goal_id_seq",
   },
   "description",
   { data_type => "text", is_nullable => 1 },
@@ -106,12 +106,12 @@ __PACKAGE__->add_columns(
   },
   "approved",
   { data_type => "boolean", default_value => \"false", is_nullable => 1 },
-  "project_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-  "user_id",
+  "goal_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "active",
   { data_type => "boolean", default_value => \"true", is_nullable => 1 },
+  "user_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -128,33 +128,18 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
 
-=head2 goal_comments
-
-Type: has_many
-
-Related object: L<SMM::Schema::Result::GoalComment>
-
-=cut
-
-__PACKAGE__->has_many(
-  "goal_comments",
-  "SMM::Schema::Result::GoalComment",
-  { "foreign.comment_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
-);
-
-=head2 project
+=head2 goal
 
 Type: belongs_to
 
-Related object: L<SMM::Schema::Result::Project>
+Related object: L<SMM::Schema::Result::Goal>
 
 =cut
 
 __PACKAGE__->belongs_to(
-  "project",
-  "SMM::Schema::Result::Project",
-  { id => "project_id" },
+  "goal",
+  "SMM::Schema::Result::Goal",
+  { id => "goal_id" },
   {
     is_deferrable => 0,
     join_type     => "LEFT",
@@ -184,8 +169,60 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-06 12:00:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VbR6BnkP9FbhK6+eZ4DQ2Q
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-19 05:24:40
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:z59tG4kvHsH0QnlA+Fyo8A
+
+with 'SMM::Role::Verification';
+with 'SMM::Role::Verification::TransactionalActions::DBIC';
+with 'SMM::Schema::Role::ResultsetFind';
+
+use Data::Verifier;
+use MooseX::Types::Email qw/EmailAddress/;
+use SMM::Types qw /DataStr TimeStr/;
+
+sub verifiers_specs {
+    my $self = shift;
+    return {
+        update => Data::Verifier->new(
+            filters => [qw(trim)],
+            profile => {
+                description => {
+                    required => 0,
+                    type     => 'Int',
+                },
+                approved => {
+                    required => 0,
+                    type     => 'Bool',
+                },
+                goal_id => {
+                    required => 0,
+                    type     => 'Int',
+                },
+				user_id => {
+					required => 0,
+					type     => 'Int',
+				},
+            }
+        ),
+    };
+}
+
+sub action_specs {
+    my $self = shift;
+    return {
+        update => sub {
+            my %values = shift->valid_values;
+
+            not defined $values{$_} and delete $values{$_} for keys %values;
+
+            my $comment = $self->update( \%values );
+
+            return $comment;
+        },
+
+    };
+}
+
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;
 1;

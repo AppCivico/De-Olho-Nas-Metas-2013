@@ -1,4 +1,4 @@
-package SMM::Schema::ResultSet::Comment;
+package SMM::Schema::ResultSet::UserFollowCounsil;
 use namespace::autoclean;
 
 use utf8;
@@ -22,22 +22,14 @@ sub verifiers_specs {
                     required => 1,
                     type     => 'Int',
                 },
-                description => {
+                counsil_id => {
                     required => 1,
-                    type     => 'Str',
-                },
-                project_id => {
-                    required => 0,
                     type     => 'Int',
                 },
-				goal_id => {
-					required => 0,
-					type     => 'Int',
-				},
-				approved => {
-					required => 0,
-					type     => 'Bool',
-				}
+                active => {
+                    required => 0,
+                    type     => 'Bool',
+                },
             }
         )
     };
@@ -49,9 +41,8 @@ sub action_specs {
         create => sub {
             my %values     = shift->valid_values;
             not defined $values{$_} and delete $values{$_} for keys %values;
-
-            my $comment = $self->create( \%values );
-            return $comment;
+            my $user_follow_counsil = $self->create( \%values );
+            return $user_follow_counsil;
         }
     };
 }

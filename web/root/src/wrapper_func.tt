@@ -31,6 +31,7 @@
 
     <script src="/static/js/jquery.maskedinput.min.js"></script>
 	<script type="text/javascript" src="/static/js/GeoJSON.js"></script>
+	<script type="text/javascript" src="/static/js/mustache.js"></script>
 
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCVRSogQpUwhgvu2GccC7F9rh7B7915qSY&sensor=TRUE">
