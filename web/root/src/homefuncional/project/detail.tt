@@ -229,20 +229,7 @@ $(document).ready(function () {
 									loadLineGraph(".timeline .chart",chart_labels,chart_data);
 								</script>
 						</div>-->
-							<section class="statistics">
-						<div class="container">
-						
-							<h2 class="section-title">Estatísticas de Metas e Projetos</h2>
-							
-							<div class="row">
-								<div class="chart-stats col-sm-3 text-center" color="darkblue">
-									<div class="chart">
-										<canvas id="chart1"></canvas>
-									</div>
-									<div class="chart-label">Progresso</div>
-								</div>
-							</div>
-						</div>
+					<section class="statistics">
 					</section>
 
 
@@ -250,6 +237,19 @@ $(document).ready(function () {
 					</div>
 
 					<div class="indicators">
+						<h2 class="section-title">Progresso Qualitativo</h2>
+						<div id="info">
+						[% IF project_obj.qualitative_progress_1%]<span>Etapa 1:<p>[% project_obj.qualitative_progress_1%]</p></span>[%END%]
+						[% IF project_obj.qualitative_progress_2%]<span>Etapa 2:<p>[% project_obj.qualitative_progress_2%]</p></span>[%END%]
+						[% IF project_obj.qualitative_progress_3%]<span>Etapa 3:<p>[% project_obj.qualitative_progress_3%]</p></span>[%END%]
+						[% IF project_obj.qualitative_progress_4%]<span>Etapa 4:<p>[% project_obj.qualitative_progress_4%]</p></span>[%END%]
+						[% IF project_obj.qualitative_progress_5%]<span>Etapa 5:<p>[% project_obj.qualitative_progress_5%]</p></span>[%END%]
+						[% IF project_obj.qualitative_progress_6%]<span>Etapa 6:<p>[% project_obj.qualitative_progress_6%]</p></span>[%END%]
+						</div>
+						[% IF project_obj.progress_count == 0%]
+						<p>NENHUM PROGRESSO ATÉ O MOMENTO.</p>
+						[%END%]
+						<h2 class="section-title">[% project_obj.progress_count%] de 6</h2>
 					</div>
 
 					<div class="image-gallery">

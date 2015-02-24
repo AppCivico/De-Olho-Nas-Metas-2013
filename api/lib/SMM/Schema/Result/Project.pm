@@ -97,6 +97,36 @@ __PACKAGE__->table("project");
   data_type: 'integer'
   is_nullable: 1
 
+=head2 qualitative_progress_1
+
+  data_type: 'text'
+  is_nullable: 1
+
+=head2 qualitative_progress_2
+
+  data_type: 'text'
+  is_nullable: 1
+
+=head2 qualitative_progress_3
+
+  data_type: 'text'
+  is_nullable: 1
+
+=head2 qualitative_progress_4
+
+  data_type: 'text'
+  is_nullable: 1
+
+=head2 qualitative_progress_5
+
+  data_type: 'text'
+  is_nullable: 1
+
+=head2 qualitative_progress_6
+
+  data_type: 'text'
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -130,6 +160,18 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "project_number",
   { data_type => "integer", is_nullable => 1 },
+  "qualitative_progress_1",
+  { data_type => "text", is_nullable => 1 },
+  "qualitative_progress_2",
+  { data_type => "text", is_nullable => 1 },
+  "qualitative_progress_3",
+  { data_type => "text", is_nullable => 1 },
+  "qualitative_progress_4",
+  { data_type => "text", is_nullable => 1 },
+  "qualitative_progress_5",
+  { data_type => "text", is_nullable => 1 },
+  "qualitative_progress_6",
+  { data_type => "text", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -272,8 +314,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-19 09:56:16
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZUg73mfjHeUu6eEHr95DwA
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-24 04:36:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:BZ4MSpcdVZvG7oXlYrLM5w
 
 __PACKAGE__->has_many(
     approved_comments => 'SMM::Schema::Result::CommentProject',

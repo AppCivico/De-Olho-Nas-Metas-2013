@@ -71,6 +71,12 @@ sub result_GET {
                   description
                   expected_budget
 				  goal_number
+				  qualitative_progress_1
+				  qualitative_progress_2
+				  qualitative_progress_3
+				  qualitative_progress_4
+				  qualitative_progress_5
+				  qualitative_progress_6
                   /
             ),
             goal_projects => {

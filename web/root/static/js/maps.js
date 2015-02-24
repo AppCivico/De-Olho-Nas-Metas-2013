@@ -52,6 +52,7 @@ var $maps = function () {
 
 		$.getJSON('/home/project_map',function(data,status){
 			var json = data;
+			
 			$.each(json, function(i, pj){
 				marker = "";
 				var myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
@@ -96,6 +97,7 @@ var $maps = function () {
         			//window.location.href = url;
     			});
 			});
+			var mc = new MarkerClusterer(map, marker_array);
 			map.setZoom(12);
 		});
 	
@@ -443,6 +445,7 @@ var $maps = function () {
 	    map.setZoom(16);
 	}
 	function render_projects(){
+	var ib;
 	var myLatlng;
 	$.post( "/home/project/search_by_types", { type_id: $('#type option:selected').val(), region_id: $('#homeregion option:selected').val() }, function( data ) {
 					data.plural = (data.projects.length > 1);
@@ -502,6 +505,7 @@ var $maps = function () {
 	}
 function render_project_latlng(){
 		var myLatlng;
+		var ib;
 		geocoder.geocode({ 'address': $('#txtaddress').val() + ', Brasil', 'region': 'BR' }, function (results, status) {
 			if (status == google.maps.GeocoderStatus.OK) {
 				if (results[0]) {
@@ -584,7 +588,7 @@ function render_project_latlng(){
 $(document).ready(function () {
 		$maps.initialize();
 	if ($("#pagetype").val() == 'home'){	
-//		$maps.loadproject();
+		$maps.loadproject();
 	}		
 	if ($("#pagetype").val() == 'homegoal'){	
 		$maps.loadproject();

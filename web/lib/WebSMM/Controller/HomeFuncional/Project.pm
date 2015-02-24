@@ -54,6 +54,12 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
 
 sub detail : Chained('object') : PathPart('') : Args(0) {
     my ( $self, $c, $id ) = @_;
+	my $count = 0;
+	for my $n ( 1 .. 6 ){
+	$count++ if $c->stash->{project_obj}->{'qualitative_progress_'.$n};
+	}
+	$c->stash->{project_obj}->{progress_count} = $count;
+
 }
 
 sub index : Chained('base') : PathPart('') : Args(0) {
