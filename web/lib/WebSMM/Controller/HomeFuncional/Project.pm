@@ -214,6 +214,13 @@ sub comment : Chained('base') : PathParth('comment') : Args(0) {
 
 sub search_by_types : Chained('base') : Args(0) {
     my ( $self, $c ) = @_;
+	my $lat  = $c->req->param('latitude');
+	my $long = $c->req->param('longitude');
+	use DDP; p $c->req->params;
+    $lat  = "" unless $lat =~ qr/^(\-?\d+(\.\d+)?)$/;
+    $long = "" unless $long =~ qr/^(\-?\d+(\.\d+)?)$/;
+
+    my $lnglat = join( q/ /, $long, $lat ) if $lat && $long;
 
     my $type_id   = $c->req->param('type_id');
     my $region_id = $c->req->param('region_id');
@@ -223,12 +230,14 @@ sub search_by_types : Chained('base') : Args(0) {
         $c,
         'projects',
         params => {
-            region_id => $region_id,
-            type_id   => $type_id
+            region_id => $region_id ? $region_id : "",
+            type_id   => $type_id ? $type_id : "",
+			lnglat    => $lnglat ? $lnglat : ""
         }
     );
     $c->res->status(200);
 	use DDP;
+	p $c->stash->{projects};
 	$c->detach('/form/as_json',[ { projects => $c->stash->{projects} } ]);
 }
 
