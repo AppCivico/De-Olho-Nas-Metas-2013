@@ -12,7 +12,7 @@ __PACKAGE__->config(
     result      => 'DB::Comment',
     object_key  => 'comment',
     result_attr => {
-        prefetch => [ 'user', 'project', 'goal'],
+        prefetch => [ 'user', 'project', 'goal' ],
     },
 
     update_roles => [qw/superadmin user admin webapi/],
@@ -101,7 +101,7 @@ sub list_GET {
     if ( $c->req->param('project_id') ) {
         $rs = $rs->search( { project_id => $c->req->param('project_id') } );
     }
-	if ( $c->req->param('goal_id') ) {
+    if ( $c->req->param('goal_id') ) {
         $rs = $rs->search( { goal_id => $c->req->param('goal_id') } );
     }
     if ( $c->req->param('approved') ) {
@@ -140,10 +140,10 @@ sub list_GET {
                                 longitude => $r->{project}->{longitude},
                             }
                         ),
-						goal => (
+                        goal => (
                             +{
-                                id        => $r->{goal}->{id},
-                                name      => $r->{goal}->{name},
+                                id   => $r->{goal}->{id},
+                                name => $r->{goal}->{name},
                             }
                         ),
 

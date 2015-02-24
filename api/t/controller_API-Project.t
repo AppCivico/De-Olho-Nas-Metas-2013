@@ -2,7 +2,6 @@ use strict;
 use warnings;
 use Test::More;
 
-
 use Catalyst::Test 'SMM';
 use SMM::Controller::API::Project;
 

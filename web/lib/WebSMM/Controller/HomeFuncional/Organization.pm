@@ -42,7 +42,6 @@ sub detail : Chained('object') : PathPart('') : Args(0) {
     my ( $self, $c, $id ) = @_;
     my $api = $c->model('API');
 
-
 }
 
 sub index : Chained('base') : PathPart('') : Args(0) {
@@ -93,8 +92,8 @@ sub user_stop_counsil : Chained('base') : PathPart('user_stop_counsil') : Args(0
     my $counsil_id = $c->req->param('counsil_id');
 
     $api->stash_result( $c, [ 'users', $user_id, 'counsil', $counsil_id ], method => 'POST', stash => 'counsil' );
-	use DDP;
-	p$c->stash->{counsil};
+    use DDP;
+    p $c->stash->{counsil};
     $c->res->status(200);
     $c->res->content_type('application/json');
     $c->res->body( JSON::encode_json( $c->stash->{counsil} ) );

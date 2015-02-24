@@ -6,9 +6,7 @@ use SMM::Test::Further;
 
 db_transaction {
 
-	rest_get '/projects'      
-
-
+    rest_get '/projects'
 
 };
 

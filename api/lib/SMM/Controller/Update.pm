@@ -111,8 +111,9 @@ sub goal : Chained('base') Args(0) {
         @secretaries = ();
 
         p $c->stash->{url};
+
         #next
-         # if $c->model('DB::Goal')->search( { name => $goal->{name} } )->next;
+        # if $c->model('DB::Goal')->search( { name => $goal->{name} } )->next;
 
         for my $sec ( @{ $goal->{secretaries} } ) {
             my $return_sec;
@@ -153,8 +154,19 @@ sub goal : Chained('base') Args(0) {
             delete $key->{created_at};
             delete $key->{location_type};
             delete $key->{weight_about_goal};
-			#$c->model('DB::Project')->search({name => $key->{name}})->update({project_number => $key->{id}});	
-			$c->model('DB::Project')->search({name => $key->{name}})->update({ qualitative_progress_1 => $key->{qualitative_progress_1},qualitative_progress_2 => $key->{qualitative_progress_2},qualitative_progress_3 => $key->{qualitative_progress_3},qualitative_progress_4 => $key->{qualitative_progress_4},qualitative_progress_5 => $key->{qualitative_progress_5},qualitative_progress_6 => $key->{qualitative_progress_6} });	
+
+            #$c->model('DB::Project')->search({name => $key->{name}})->update({project_number => $key->{id}});
+            $c->model('DB::Project')->search( { name => $key->{name} } )
+              ->update(
+                {
+                    qualitative_progress_1 => $key->{qualitative_progress_1},
+                    qualitative_progress_2 => $key->{qualitative_progress_2},
+                    qualitative_progress_3 => $key->{qualitative_progress_3},
+                    qualitative_progress_4 => $key->{qualitative_progress_4},
+                    qualitative_progress_5 => $key->{qualitative_progress_5},
+                    qualitative_progress_6 => $key->{qualitative_progress_6}
+                }
+              );
             delete $key->{id};
             delete $key->{budget_executed_2014};
             delete $key->{budget_executed_2016};
@@ -201,7 +213,17 @@ sub goal : Chained('base') Args(0) {
         delete $goal->{created_at};
         delete $goal->{updated_at};
 
-		$c->model('DB::Goal')->search({goal_number => $goal->{id}})->update({ qualitative_progress_1 => $goal->{qualitative_progress_1},qualitative_progress_2 => $goal->{qualitative_progress_2},qualitative_progress_3 => $goal->{qualitative_progress_3},qualitative_progress_4 => $goal->{qualitative_progress_4},qualitative_progress_5 => $goal->{qualitative_progress_5},qualitative_progress_6 => $goal->{qualitative_progress_6} });	
+        $c->model('DB::Goal')->search( { goal_number => $goal->{id} } )
+          ->update(
+            {
+                qualitative_progress_1 => $goal->{qualitative_progress_1},
+                qualitative_progress_2 => $goal->{qualitative_progress_2},
+                qualitative_progress_3 => $goal->{qualitative_progress_3},
+                qualitative_progress_4 => $goal->{qualitative_progress_4},
+                qualitative_progress_5 => $goal->{qualitative_progress_5},
+                qualitative_progress_6 => $goal->{qualitative_progress_6}
+            }
+          );
         $goal->{transversality}  = delete $goal->{transversalidade};
         $goal->{description}     = delete $goal->{observation};
         $goal->{expected_budget} = delete $goal->{total_cost};
@@ -236,8 +258,7 @@ sub goal : Chained('base') Args(0) {
         $goal->{objective_id} = $return_obj->id;
         my $return_goal;
         $return_goal =
-          $c->model('DB::Goal')->search( { id => $goal->{id} } )
-          ->next;
+          $c->model('DB::Goal')->search( { id => $goal->{id} } )->next;
 
         $return_goal = $c->model('DB::Goal')->create($goal) unless $return_goal;
 
@@ -248,15 +269,15 @@ sub goal : Chained('base') Args(0) {
             { result_class => 'DBIx::Class::ResultClass::HashRefInflator', } )
           ->all;
 
-       # for (@projects) {
-       #     next if $goal_vs_proj->{ $return_goal->id }{$_};
-       #     my $lol = $c->model('DB::GoalProject')->create(
-       #         {
-       #             goal_id    => $return_goal->id,
-       #             project_id => $_
-       #         }
-       #     );
-       # }
+        # for (@projects) {
+        #     next if $goal_vs_proj->{ $return_goal->id }{$_};
+        #     my $lol = $c->model('DB::GoalProject')->create(
+        #         {
+        #             goal_id    => $return_goal->id,
+        #             project_id => $_
+        #         }
+        #     );
+        # }
         my $goal_vs_sec = {};
         map { $goal_vs_sec->{ $_->{goal_id} }{ $_->{secretary_id} } }
           $c->model('DB::GoalSecretary')

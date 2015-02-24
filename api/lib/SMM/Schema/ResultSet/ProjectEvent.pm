@@ -46,6 +46,8 @@ sub action_specs {
             my %values     = shift->valid_values;
             not defined $values{$_} and delete $values{$_} for keys %values;
 
+			$self->search({ project_id => $values{project_id}, is_last => 1 })->update({ is_last => undef });
+
             my $project_event = $self->create( \%values );
             return $project_event;
         }

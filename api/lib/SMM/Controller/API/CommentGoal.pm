@@ -12,7 +12,7 @@ __PACKAGE__->config(
     result      => 'DB::CommentGoal',
     object_key  => 'comment_goal',
     result_attr => {
-        prefetch => [ 'user', 'goal'],
+        prefetch => [ 'user', 'goal' ],
     },
 
     update_roles => [qw/superadmin user admin webapi/],
@@ -76,7 +76,7 @@ sub result_DELETE {
 sub result_PUT {
     my ( $self, $c ) = @_;
 
-    my $params  = { %{ $c->req->params } };
+    my $params       = { %{ $c->req->params } };
     my $comment_goal = $c->stash->{comment_goal};
 
     $comment_goal->execute( $c, for => 'update', with => $c->req->params );
@@ -98,7 +98,7 @@ sub list_GET {
     my ( $self, $c ) = @_;
     my $rs = $c->stash->{collection};
 
-	if ( $c->req->param('goal_id') ) {
+    if ( $c->req->param('goal_id') ) {
         $rs = $rs->search( { goal_id => $c->req->param('goal_id') } );
     }
     if ( $c->req->param('approved') ) {
@@ -125,14 +125,14 @@ sub list_GET {
                             map { $_ => $r->{$_} }
                               qw/
                               id
-							  description
+                              description
                               process_ts
                               /
                         ),
-						goal => (
+                        goal => (
                             +{
-                                id        => $r->{goal}->{id},
-                                name      => $r->{goal}->{name},
+                                id   => $r->{goal}->{id},
+                                name => $r->{goal}->{name},
                             }
                         ),
 

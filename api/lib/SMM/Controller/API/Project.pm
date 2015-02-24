@@ -70,24 +70,22 @@ sub result_GET {
                   address
                   latitude
                   longitude
-				  project_number
-				  qualitative_progress_1
-				  qualitative_progress_2
-				  qualitative_progress_3
-				  qualitative_progress_4
-				  qualitative_progress_5
-				  qualitative_progress_6
+                  project_number
+                  qualitative_progress_1
+                  qualitative_progress_2
+                  qualitative_progress_3
+                  qualitative_progress_4
+                  qualitative_progress_5
+                  qualitative_progress_6
                   /
             ),
             goal => {
                 map {
                     my $p = $_;
-                   		 
-                        
-                            id   => $p->goal->id,
-                            name => $p->goal->name
-                        
-                      
+
+                    id     => $p->goal->id,
+                      name => $p->goal->name
+
                 } ( $project->goal_projects ),
             },
 
@@ -178,7 +176,7 @@ sub list_GET {
     my $rs = $c->stash->{collection};
 
     if ( $c->req->param('type_id') ) {
-		warn "type"; 
+        warn "type";
         $c->detach unless $c->req->param('type_id') =~ /^\d+$/;
 
         $rs =
@@ -186,16 +184,24 @@ sub list_GET {
 
     }
     if ( $c->req->param('region_id') ) {
-		warn "region";
+        warn "region";
         $c->detach unless $c->req->param('region_id') =~ /^\d+$/;
 
         $rs = $rs->search( { region_id => $c->req->param('region_id') } );
-		use DDP; p $rs;
 
     }
 
-    if ( $c->req->param('lnglat') ) {	
-		warn ("lnglat");
+    $rs = $rs->search(
+        {
+            -or => [
+                { "approved_project_events.is_last" => 1 },
+                { "approved_project_events.id"      => undef }
+            ]
+        }
+    );
+
+    if ( $c->req->param('lnglat') ) {
+        warn("lnglat");
         $c->detach
           unless $c->req->param('lnglat') =~
           qr/^(\-?\d+(\.\d+)?)\ \s*(\-?\d+(\.\d+)?)$/;
@@ -330,9 +336,10 @@ sub geom : Chained('base') PathPart('geom') : Args(0) {
         {
             '+select' => [ \q{ST_AsGeoJSON(region.geom,3) as geom_json} ],
             '+as'     => [qw(geom_json)],
-            columns   => [qw( me.id me.latitude me.longitude region.id region.name)],
-            collapse  => 1,
-            join      => [qw(region)]
+            columns =>
+              [qw( me.id me.latitude me.longitude region.id region.name)],
+            collapse => 1,
+            join     => [qw(region)]
         }
     )->as_hashref->next;
     $self->status_ok( $c, entity => { geom => $geom } );
