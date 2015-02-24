@@ -2,7 +2,7 @@
 	[%-CALL assets.include("js/maps.js")%]
 	[%-CALL assets.include("js/infobubble.min.js")%]
 <script id="row_template" type="text/template">
-			<h2 class="section-title">{{ projects.length}} Projetos Encontrados</h2>
+			{{#projects.length}}<h2 class="section-title">{{ projects.length}} Projeto{{#plural}}s{{/plural}} Encontrado{{#plural}}s{{/plural}}</h2>{{/projects.length}}
 			{{ #projects }}	
 			<div class="item row">
 				<div class="col-sm-10 nopadding">
@@ -27,35 +27,6 @@
 <script>
 
 $(document).ready(function () {
-	$('#search').on('click', function () {
-		var id = $(this).data("id");
-		if ($('#txtaddress').val() && $('#type option:selected').val() != 'Distrito'){
-			geocoder.geocode({ 'address': $('#txtaddress').val() + ', Brasil', 'region': 'BR' }, function (results, status) {
-				if (status == google.maps.GeocoderStatus.OK) {
-					if (results[0]) {
-						var latitude = results[0].geometry.location.lat();
-						var longitude = results[0].geometry.location.lng();
-	 
-						$('#txtEndereco').val(results[0].formatted_address);
-						$.post("/home/project/search_by_types",{ latitude: latitude, longitude: longitude, type_id: $('#type option:selected').val() }, function(data){
-							$("section.map .map-overlay").fadeOut();
-							document.getElementById("result").innerHTML=data
-						},"json");
-						var location = new google.maps.LatLng(latitude, longitude);
-						$maps.setlocal(location);
-					}
-				}
-			});
-		}else{
-			
-			$.post( "/home/project/search_by_types", { type_id: $('#type option:selected').val(), region_id: $('#homeregion option:selected').val() }, function( data ) {
-				console.log(data);
-				var template = $('#row_template').html();
-   				var html = Mustache.to_html(template, data);
-				$('#result').html(html);
-	    	},"json");	
-		}
-	})
 
 	$("#type").change(function(){
        	$(".metas-filtro .form .type .select-stylized").removeclass("disabled");

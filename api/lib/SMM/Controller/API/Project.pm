@@ -71,6 +71,12 @@ sub result_GET {
                   latitude
                   longitude
 				  project_number
+				  qualitative_progress_1
+				  qualitative_progress_2
+				  qualitative_progress_3
+				  qualitative_progress_4
+				  qualitative_progress_5
+				  qualitative_progress_6
                   /
             ),
             goal => {
@@ -172,6 +178,7 @@ sub list_GET {
     my $rs = $c->stash->{collection};
 
     if ( $c->req->param('type_id') ) {
+		warn "type"; 
         $c->detach unless $c->req->param('type_id') =~ /^\d+$/;
 
         $rs =
@@ -179,13 +186,16 @@ sub list_GET {
 
     }
     if ( $c->req->param('region_id') ) {
+		warn "region";
         $c->detach unless $c->req->param('region_id') =~ /^\d+$/;
 
         $rs = $rs->search( { region_id => $c->req->param('region_id') } );
+		use DDP; p $rs;
 
     }
 
-    if ( $c->req->param('lnglat') ) {
+    if ( $c->req->param('lnglat') ) {	
+		warn ("lnglat");
         $c->detach
           unless $c->req->param('lnglat') =~
           qr/^(\-?\d+(\.\d+)?)\ \s*(\-?\d+(\.\d+)?)$/;

@@ -33,7 +33,6 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
     $api->stash_result( $c, [ 'goals', $id ], stash => 'goal_obj' );
 	$c->stash->{goal_obj}->{goal_porcentages}->{owned} = int($c->stash->{goal_obj}->{goal_porcentages}->{owned}); 
 	$c->stash->{goal_obj}->{goal_porcentages}->{remainder} = int($c->stash->{goal_obj}->{goal_porcentages}->{remainder}); 
-
 }
 
 sub detail : Chained('object') : PathPart('') : Args(0) {
@@ -43,6 +42,12 @@ sub detail : Chained('object') : PathPart('') : Args(0) {
     $api->stash_result( $c, 'objectives' );
     $api->stash_result( $c, 'regions' );
 	
+	my $count = 0;
+	for my $n ( 1 .. 6 ){
+	$count++ if $c->stash->{goal_obj}->{'qualitative_progress_'.$n};
+	}
+	$c->stash->{goal_obj}->{progress_count} = $count;
+
 }
 
 sub index : Chained('base') : PathPart('') : Args(0) {

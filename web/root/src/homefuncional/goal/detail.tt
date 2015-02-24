@@ -139,6 +139,20 @@ $(document).ready(function () {
 				    </section>
 
 					<div class="indicators">
+						<h2 class="section-title">Progresso Qualitativo</h2>
+						<div id="info">
+						[% IF goal_obj.qualitative_progress_1%]<span>Etapa 1:<p>[% goal_obj.qualitative_progress_1%]</p></span>[%END%]
+						[% IF goal_obj.qualitative_progress_2%]<span>Etapa 2:<p>[% goal_obj.qualitative_progress_2%]</p></span>[%END%]
+						[% IF goal_obj.qualitative_progress_3%]<span>Etapa 3:<p>[% goal_obj.qualitative_progress_3%]</p></span>[%END%]
+						[% IF goal_obj.qualitative_progress_4%]<span>Etapa 4:<p>[% goal_obj.qualitative_progress_4%]</p></span>[%END%]
+						[% IF goal_obj.qualitative_progress_5%]<span>Etapa 5:<p>[% goal_obj.qualitative_progress_5%]</p></span>[%END%]
+						[% IF goal_obj.qualitative_progress_6%]<span>Etapa 6:<p>[% goal_obj.qualitative_progress_6%]</p></span>[%END%]
+						[% IF goal_obj.progress_count == 0%]
+							<p>Nenhum progresso até o momento.</p>
+						
+						[%END%]
+						<h2 class="section-title">[% goal_obj.progress_count%] de 6</h2>
+						</div>
 					</div>
 
 					<div class="image-gallery">

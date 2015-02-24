@@ -21,8 +21,22 @@ var $maps = function () {
     var map,
     	infoBubble,
     	addr,
-    	geocoder;
-	
+    	geocoder,
+		marker_array = [];
+
+	function setAllMap(dado){
+		for (var i = 0; i < marker_array.length; i++){
+			marker_array[i].setMap(null);
+		}
+	}
+	function clearMarkers(){
+		setAllMap(null);
+	}
+	function deleteMarkers(){
+		clearMarkers();
+		marker_array = [];
+	}
+
     function initialize() {
 		var mapOptions = {
 			center: new google.maps.LatLng(-23.549035, -46.634438),
@@ -38,6 +52,7 @@ var $maps = function () {
 
 		$.getJSON('/home/project_map',function(data,status){
 			var json = data;
+			
 			$.each(json, function(i, pj){
 				marker = "";
 				var myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
@@ -47,6 +62,7 @@ var $maps = function () {
 	                url: "/home/project/"+pj.id,
 	                icon: "/static/images/icone_mapa.png"
         	    });
+				marker_array.push(marker);
 				var url = marker.url;
 				var content = '<div class="project-bubble"><div class="name">';
 				content += pj.name + '</div>';
@@ -81,16 +97,17 @@ var $maps = function () {
         			//window.location.href = url;
     			});
 			});
+			var mc = new MarkerClusterer(map, marker_array);
 			map.setZoom(12);
 		});
 	
 	}
+
 	function markprojectdetail( project_id ){
 		var ib;
 		var myLatlng;
 		$.getJSON('/home/project_map_single', { id : project_id } ,function(data,status){
 			var json = data;
-			console.log(json);
 			marker = "";
 			var geojson = eval('(' + json.geom_json + ')');
 			var infowindow = new google.maps.InfoWindow();
@@ -143,7 +160,6 @@ var $maps = function () {
 		myLatlng = new google.maps.LatLng(-23.554070, -46.634438);	
 		$.getJSON('/home/getregions', function(data,status){
 			var json = data;
-			console.log(json);
 			var infowindow = new google.maps.InfoWindow();
 			$.each(json.geoms, function(i, pj){
 				marker = "";
@@ -193,7 +209,6 @@ var $maps = function () {
 		$.getJSON('/home/region_project', { id : region_id } ,function(data,status){
 			var json = data;
 			var myLatlng;
-			console.log(json);
 			var geojson = eval('(' + json.geom_json + ')');
 	        var polygon = new GeoJSON(geojson, 
 			{
@@ -207,7 +222,6 @@ var $maps = function () {
 			polygon.setMap(map);	
 
 			$.each(json.projects, function(i, pj){
-				console.log(pj);
 				marker = "";
 				myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
 				marker = new google.maps.Marker({
@@ -252,7 +266,6 @@ var $maps = function () {
 			});
 						
 			var latlong = polygon.getBounds().getCenter();
-			console.log(latlong);
 			myLatlng = new google.maps.LatLng(latlong.k,latlong.D);	
 			
 
@@ -267,7 +280,6 @@ var $maps = function () {
 		$.getJSON('/home/subpref_org',{ id : org_id },function(data,status){
 			var json = data;
 			var myLatlng;
-			console.log(data);
 			var ib;
 			var myLatlng = new google.maps.LatLng(data.subprefecture.latitude,data.subprefecture.longitude);	
 				marker = new google.maps.Marker({
@@ -318,7 +330,6 @@ var $maps = function () {
 		$.getJSON('/home/subpref_region', { id : subpref_id } ,function(data,status){
 			var json = data;
 			var myLatlng;
-			console.log(data);
 			var infowindow = new google.maps.InfoWindow();
 			$.each(json.regions, function(i, pj){
 				marker = "";
@@ -423,7 +434,6 @@ var $maps = function () {
 		});
 	
 	}
-
 	function codeAddress(data){
 		geocoder.geocode({ 'address': data + ', Brasil', 'region': 'BR' }, function (results, status) {
                  return results;
@@ -434,7 +444,130 @@ var $maps = function () {
 		map.setCenter(location);
 	    map.setZoom(16);
 	}
+	function render_projects(){
+	var ib;
+	var myLatlng;
+	$.post( "/home/project/search_by_types", { type_id: $('#type option:selected').val(), region_id: $('#homeregion option:selected').val() }, function( data ) {
+					data.plural = (data.projects.length > 1);
+					var template = $('#row_template').html();
+	   				var html = Mustache.to_html(template, data);
+					$('#result').html(html);
+					$maps.deleteMarkers();
+					console.log(data);	
+					$.each(data.projects, function(i, pj){
+						marker = "";	
+						console.log(pj);
+						myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
+						marker = new google.maps.Marker({
+	    	            	position: myLatlng,
+			                map: map,
+		    	            url: "/home/project/"+pj.id,
+		       		        icon: "/static/images/icone_mapa.png"
+        	   		 	});
+						var url = marker.url;
+						var content = '<div class="project-bubble"><div class="name">';
+						content += pj.name + '</div>';
+						content += '<div class="description"></div>';
+						content += '<a class="link" href="' + url + '">Veja mais</a>';
+						content += '</div>';
+						google.maps.event.addListener(marker, 'mouseover', function() {
+							if (!ib){
+			  	              ib = new InfoBubble({
+						          map: map,
+						          content: content,
+					              shadowStyle: 0,
+						          padding: 10,
+						          backgroundColor: 'rgb(255,255,255)',
+						          borderRadius: 0,
+						          arrowSize: 15,
+						          borderWidth: 0,
+						          borderColor: '#fff',
+						          disableAutoPan: true,
+						          hideCloseButton: false,
+						          arrowPosition: 50,
+				   	      	      arrowStyle: 0,
+				   			      MaxWidth: 340,
+				   	      		  MinHeight: 100
+				   	    	  });
+				       		  ib.open(map, this);
+							}else{
+								ib.setContent(content);
+								//ib.setPosition(myLatlng);
+								ib.open(map, this);
+							}
+        			//window.location.href = url;
+					})
+				  })
+					map.setCenter(myLatlng);
+	    		},"json");
 
+
+	}
+function render_project_latlng(){
+		var myLatlng;
+		var ib;
+		geocoder.geocode({ 'address': $('#txtaddress').val() + ', Brasil', 'region': 'BR' }, function (results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				if (results[0]) {
+					var latitude = results[0].geometry.location.lat();
+					var longitude = results[0].geometry.location.lng();
+					$('#txtEndereco').val(results[0].formatted_address);
+					$.post("/home/project/search_by_types",{ latitude: latitude, longitude: longitude, type_id: $('#type option:selected').val() },function(data){
+						var template = $('#row_template').html();
+	   					var html = Mustache.to_html(template, data);
+						$('#result').html(html);
+						$.each(data.projects, function(i, pj){
+							marker = "";	
+							console.log(pj);
+							myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
+							marker = new google.maps.Marker({
+	    	    	        	position: myLatlng,
+			        	        map: map,
+		    	        	    url: "/home/project/"+pj.id,
+			       		        icon: "/static/images/icone_mapa.png"
+    	    	   		 	});
+							var url = marker.url;
+							var content = '<div class="project-bubble"><div class="name">';
+							content += pj.name + '</div>';
+							content += '<div class="description"></div>';
+							content += '<a class="link" href="' + url + '">Veja mais</a>';
+							content += '</div>';
+							google.maps.event.addListener(marker, 'mouseover', function() {
+								if (!ib){
+			  		              ib = new InfoBubble({
+							          map: map,
+							          content: content,
+					        	      shadowStyle: 0,
+						        	  padding: 10,
+							          backgroundColor: 'rgb(255,255,255)',
+							          borderRadius: 0,
+							          arrowSize: 15,
+							          borderWidth: 0,
+							          borderColor: '#fff',
+							          disableAutoPan: true,
+							          hideCloseButton: false,
+						    	      arrowPosition: 50,
+					   	      	      arrowStyle: 0,
+					   			      MaxWidth: 340,
+					   	      		  MinHeight: 100
+					   	    	  });
+					       		  ib.open(map, this);
+								}else{
+									ib.setContent(content);
+									//ib.setPosition(myLatlng);
+									ib.open(map, this);
+								}
+        				//window.location.href = url;
+						})
+					  })
+					map.setCenter(myLatlng);
+					},"json");
+					var location = new google.maps.LatLng(latitude, longitude);
+					setlocal(location);
+				}
+			}
+		});
+	}
 	return {
 		initialize	             : initialize,
 		loadproject              : loadproject,
@@ -445,7 +578,10 @@ var $maps = function () {
 		markregiondetail         : markregiondetail,
 	   	markorgdetail            : markorgdetail,
 		marksubprefdetail        : marksubprefdetail,
-		showregions              : showregions
+		showregions              : showregions,
+		deleteMarkers 			 : deleteMarkers,
+		render_projects			 : render_projects,
+		render_project_latlng	 : render_project_latlng
 	};
 }();
 
@@ -476,6 +612,7 @@ $(document).ready(function () {
 		$maps.markorgdetail($("#orgid").val());
 	}
 
+
 	$("#type_goal").change(function(){
 		var id = $( "#type_goal option:selected" ).val();
 		$("section.map .map-overlay").fadeIn();
@@ -491,44 +628,20 @@ $(document).ready(function () {
 			document.getElementById("result").innerHTML=data
        	});
 	});
-
-	$("#search_pj").click(function() {
-        if($(this).val() != "")
-			var id = $(this).data("id");
-			if ($('#txtaddress').val()){
-		alert('lol');
-				geocoder.geocode({ 'address': $('#txtaddress').val() + ', Brasil', 'region': 'BR' }, function (results, status) {
-					if (status == google.maps.GeocoderStatus.OK) {
-						if (results[0]) {
-							var latitude = results[0].geometry.location.lat();
-							var longitude = results[0].geometry.location.lng();
-		 
-							$('#txtEndereco').val(results[0].formatted_address);
-							$.get("/home/project/search_by_types",{ latitude: latitude, longitude: longitude, type_id: $('#type option:selected').val(), region_id: "" }).done( function(data){
-								$("section.map .map-overlay").fadeOut();
-								document.getElementById("result").innerHTML=data
-							});
-
-							var location = new google.maps.LatLng(latitude, longitude);
-							$maps.setlocal(location);
-						}
-					}
-				});
-			
+	$('#search').on('click', function () {
+		var ib;
+		var id = $(this).data("id");
+		if ($('#txtaddress').val() && $('type option:selected').val() != 'Distrito'){
+				$maps.render_project_latlng()	
 			} else {
+				$maps.render_projects()
+			}
 
-				$.getJSON('/home/project/search_by_types',{ type_id: $('#type option:selected').val(), region_id: $('#homeregion option:selected').val()},function(data,status){
-				$('#result').html('');
-				$.each(data, function(i,j){
-				var html = '<div class="item row"><div class="col-sm-10 nopadding"><div class="contents pull-left"><div class="description"><h2><a href="[% c.uri_for_action("/homefuncional/goal/detail",['+j.id+'] ) %]">'+j.name+'</a></h2><div class="stats">[% IF goal.region_count > 0 %]<div class="icon regions"></div> <span class="regions"> [% goal.region_count %] [% goal.region_count > 1 ? "Regiões" : "Região" %]</span>[% END %][% IF goal.project_count > 0 %]<div class="icon projects"></div> <span class="projects">[% goal.project_count %] Projeto[% goal.project_count > 1 ? "s" : "" %]</span>[% END %][% IF goal.organization.size > 0 %]<div class="icon organizations"></div> <span class="organizations">3 Organizações</span>[% END %]</div></div></div>';
+	})
 
-					$('#result').append(html);
-				});
 
-		    	});
-			}	
-			
-    });
+
+
 
 	$("#txtaddress").autocomplete({
 	source: function (request, response) {

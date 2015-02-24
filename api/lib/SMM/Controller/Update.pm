@@ -145,12 +145,6 @@ sub goal : Chained('base') Args(0) {
                   unless $return_pref;
                 push( @prefectures, $return_pref->id );
             }
-            delete $key->{qualitative_progress_3};
-            delete $key->{qualitative_progress_5};
-            delete $key->{qualitative_progress_4};
-            delete $key->{qualitative_progress_2};
-            delete $key->{qualitative_progress_1};
-            delete $key->{qualitative_progress_6};
             delete $key->{district};
             delete $key->{goal_id};
             delete $key->{prefectures};
@@ -159,7 +153,8 @@ sub goal : Chained('base') Args(0) {
             delete $key->{created_at};
             delete $key->{location_type};
             delete $key->{weight_about_goal};
-			$c->model('DB::Project')->search({name => $key->{name}})->update({project_number => $key->{id}});	
+			#$c->model('DB::Project')->search({name => $key->{name}})->update({project_number => $key->{id}});	
+			$c->model('DB::Project')->search({name => $key->{name}})->update({ qualitative_progress_1 => $key->{qualitative_progress_1},qualitative_progress_2 => $key->{qualitative_progress_2},qualitative_progress_3 => $key->{qualitative_progress_3},qualitative_progress_4 => $key->{qualitative_progress_4},qualitative_progress_5 => $key->{qualitative_progress_5},qualitative_progress_6 => $key->{qualitative_progress_6} });	
             delete $key->{id};
             delete $key->{budget_executed_2014};
             delete $key->{budget_executed_2016};
@@ -196,12 +191,6 @@ sub goal : Chained('base') Args(0) {
             push( @projects, $return_proj->id )
 
         }
-        delete $goal->{qualitative_progress_3};
-        delete $goal->{qualitative_progress_5};
-        delete $goal->{qualitative_progress_4};
-        delete $goal->{qualitative_progress_2};
-        delete $goal->{qualitative_progress_1};
-        delete $goal->{qualitative_progress_6};
         delete $goal->{schedule_2015_2016};
         delete $goal->{schedule_2013_2014};
         delete $goal->{axis_id};
@@ -211,6 +200,8 @@ sub goal : Chained('base') Args(0) {
         delete $goal->{secretaries};
         delete $goal->{created_at};
         delete $goal->{updated_at};
+
+		$c->model('DB::Goal')->search({goal_number => $goal->{id}})->update({ qualitative_progress_1 => $goal->{qualitative_progress_1},qualitative_progress_2 => $goal->{qualitative_progress_2},qualitative_progress_3 => $goal->{qualitative_progress_3},qualitative_progress_4 => $goal->{qualitative_progress_4},qualitative_progress_5 => $goal->{qualitative_progress_5},qualitative_progress_6 => $goal->{qualitative_progress_6} });	
         $goal->{transversality}  = delete $goal->{transversalidade};
         $goal->{description}     = delete $goal->{observation};
         $goal->{expected_budget} = delete $goal->{total_cost};
@@ -257,15 +248,15 @@ sub goal : Chained('base') Args(0) {
             { result_class => 'DBIx::Class::ResultClass::HashRefInflator', } )
           ->all;
 
-        for (@projects) {
-            next if $goal_vs_proj->{ $return_goal->id }{$_};
-            my $lol = $c->model('DB::GoalProject')->create(
-                {
-                    goal_id    => $return_goal->id,
-                    project_id => $_
-                }
-            );
-        }
+       # for (@projects) {
+       #     next if $goal_vs_proj->{ $return_goal->id }{$_};
+       #     my $lol = $c->model('DB::GoalProject')->create(
+       #         {
+       #             goal_id    => $return_goal->id,
+       #             project_id => $_
+       #         }
+       #     );
+       # }
         my $goal_vs_sec = {};
         map { $goal_vs_sec->{ $_->{goal_id} }{ $_->{secretary_id} } }
           $c->model('DB::GoalSecretary')
@@ -294,8 +285,6 @@ sub prefectures : Chained('base') Args(0) {
     my $model = $c->model('API');
 
     $c->stash->{url} .= 'prefectures';
-
-    p $c->stash->{url};
 
     $res = $self->furl->get( $c->stash->{url} );
 
