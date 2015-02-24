@@ -3,6 +3,7 @@ use Moose;
 use URI;
 use utf8;
 use URI::QueryParam;
+use JSON;
 
 use namespace::autoclean;
 
@@ -87,6 +88,18 @@ sub redirect_error : Private {
 
 }
 
+sub as_json : Private {
+    my ( $self, $c, $data ) = @_;
+
+    $c->res->header( 'Content-type', 'application/json; charset=utf-8' );
+
+    if ( ref $data eq 'HASH' && exists $data->{error} ) {
+        $c->response->status(400);
+    }
+
+    $c->res->body( encode_json($data) );
+
+}
 sub redirect_relogin : Private {
     my ( $self, $c, %args ) = @_;
 

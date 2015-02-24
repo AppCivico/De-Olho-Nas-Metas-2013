@@ -39,7 +39,6 @@ $(document).ready(function () {
 
 	var id = $(this).data("id");
 	$.post( "/home/project/comment_counsil", { user_id: $(this).data("id"), text: $('#text_comment_counsil').val(), project_id : $('#projectid').val() } ,function( data ) {
-		console.log(data);
 		$('#alert').html('<div class="alert alert-success"><p>'+data.message+'</p></div>');
   	},"json");
 

@@ -1,6 +1,7 @@
 package WebSMM::Controller::HomeFuncional::Project;
 use Moose;
 use namespace::autoclean;
+use JSON;
 use utf8;
 BEGIN { extends 'Catalyst::Controller'; }
 
@@ -143,7 +144,7 @@ sub user_follow_project : Chained('base') : PathPart('user_follow_project') : Ar
     $c->res->content_type('application/json');
     use DDP;
     p $c->stash->{project};
-    $c->res->body( JSON::encode_json( $c->stash->{project} ) );
+    $c->res->body( encode_json( $c->stash->{project} ) );
 
 }
 
@@ -226,10 +227,9 @@ sub search_by_types : Chained('base') : Args(0) {
             type_id   => $type_id
         }
     );
-    $c->res->status(400) unless $c->stash->{projects};
     $c->res->status(200);
-
-    $c->res->body( JSON::encode_json( $c->stash->{projects} ) );
+	use DDP;
+	$c->detach('/form/as_json',[ { projects => $c->stash->{projects} } ]);
 }
 
 =encoding utf8

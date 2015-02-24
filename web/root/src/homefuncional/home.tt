@@ -1,14 +1,40 @@
 
 	[%-CALL assets.include("js/maps.js")%]
 	[%-CALL assets.include("js/infobubble.min.js")%]
+<script id="row_template" type="text/template">
+			<h2 class="section-title">12123123123 Projetos Encontrados</h2>
+			{{ #projects }}	
+			<div class="item row">
+				<div class="col-sm-10 nopadding">
+					<div class="contents pull-left">
+						<div class="description">
+							<h2>
+								<a href="/home/project/{{id}}">{{ name }}</a>
+							</h2>
+							<div class="stats">
+								<div class="icon projects"></div> <span class="projects">Meta Associada: {{#goal}}{{name}}{{/goal}}</span>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			{{/projects}}
+			{{^projects}}
+			<h2 class="section-title">Nenhum projeto encontrado.</h2>
+			{{/projects}}
+</script>
 <script>
 
 $(document).ready(function () {
 	$('#search').on('click', function () {
 		var id = $(this).data("id");
-		$.post( "/home/goal/search_by_types", { type_id: $('#type option:selected').val(), region_id: $('#homeregion option:selected').val() }).done(function( data ) {
-			$('#result').html(data);
-	    });	
+		$.post( "/home/project/search_by_types", { type_id: $('#type option:selected').val(), region_id: $('#homeregion option:selected').val() }, function( data ) {
+			console.log(data);
+			var template = $('#row_template').html();
+   			var html = Mustache.to_html(template, data);
+			$('#result').html(html);
+	    },"json");	
 	})
 
 	$("#type").change(function(){
@@ -59,7 +85,7 @@ $(document).ready(function () {
 						</div>
 						<div class="col-xs-4 type">
 							<br />
-							<button type="button" class="btn btn-default" id="search_pj">Pesquisar</button>
+							<button type="button" class="btn btn-default" id="search">Pesquisar</button>
 						</div>
 
 					</div>

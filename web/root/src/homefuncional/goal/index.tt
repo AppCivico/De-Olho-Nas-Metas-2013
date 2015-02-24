@@ -5,7 +5,7 @@
 		<div id="filter-map">
 			<div class="contents text-center">
 				<div class="item">
-					<div class="icon transport">
+				<div class="icon transport">
 					</div>
 				</div>
 				<div class="item">
@@ -17,7 +17,7 @@
 					</div>
 				</div>
 				<div class="item">
-					<div class="icon medic">
+						<div class="icon medic">
 					</div>
 				</div>
 				<div class="item">
