@@ -1,12 +1,12 @@
 use utf8;
-package SMM::Schema::Result::Comment;
+package SMM::Schema::Result::UserFollowCounsil;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
 
 =head1 NAME
 
-SMM::Schema::Result::Comment
+SMM::Schema::Result::UserFollowCounsil
 
 =cut
 
@@ -34,11 +34,11 @@ extends 'DBIx::Class::Core';
 
 __PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
-=head1 TABLE: C<comment>
+=head1 TABLE: C<user_follow_counsil>
 
 =cut
 
-__PACKAGE__->table("comment");
+__PACKAGE__->table("user_follow_counsil");
 
 =head1 ACCESSORS
 
@@ -47,27 +47,9 @@ __PACKAGE__->table("comment");
   data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
-  sequence: 'comment_id_seq'
+  sequence: 'user_follow_counsil_id_seq'
 
-=head2 description
-
-  data_type: 'text'
-  is_nullable: 1
-
-=head2 timestamp
-
-  data_type: 'timestamp'
-  default_value: current_timestamp
-  is_nullable: 1
-  original: {default_value => \"now()"}
-
-=head2 approved
-
-  data_type: 'boolean'
-  default_value: false
-  is_nullable: 1
-
-=head2 project_id
+=head2 counsil_id
 
   data_type: 'integer'
   is_foreign_key: 1
@@ -78,6 +60,13 @@ __PACKAGE__->table("comment");
   data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 1
+
+=head2 ts
+
+  data_type: 'timestamp'
+  default_value: current_timestamp
+  is_nullable: 1
+  original: {default_value => \"now()"}
 
 =head2 active
 
@@ -93,23 +82,19 @@ __PACKAGE__->add_columns(
     data_type         => "integer",
     is_auto_increment => 1,
     is_nullable       => 0,
-    sequence          => "comment_id_seq",
+    sequence          => "user_follow_counsil_id_seq",
   },
-  "description",
-  { data_type => "text", is_nullable => 1 },
-  "timestamp",
+  "counsil_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "user_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "ts",
   {
     data_type     => "timestamp",
     default_value => \"current_timestamp",
     is_nullable   => 1,
     original      => { default_value => \"now()" },
   },
-  "approved",
-  { data_type => "boolean", default_value => \"false", is_nullable => 1 },
-  "project_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-  "user_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "active",
   { data_type => "boolean", default_value => \"true", is_nullable => 1 },
 );
@@ -128,33 +113,18 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
 
-=head2 goal_comments
-
-Type: has_many
-
-Related object: L<SMM::Schema::Result::GoalComment>
-
-=cut
-
-__PACKAGE__->has_many(
-  "goal_comments",
-  "SMM::Schema::Result::GoalComment",
-  { "foreign.comment_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
-);
-
-=head2 project
+=head2 counsil
 
 Type: belongs_to
 
-Related object: L<SMM::Schema::Result::Project>
+Related object: L<SMM::Schema::Result::Organization>
 
 =cut
 
 __PACKAGE__->belongs_to(
-  "project",
-  "SMM::Schema::Result::Project",
-  { id => "project_id" },
+  "counsil",
+  "SMM::Schema::Result::Organization",
+  { id => "counsil_id" },
   {
     is_deferrable => 0,
     join_type     => "LEFT",
@@ -184,8 +154,10 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-06 12:00:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VbR6BnkP9FbhK6+eZ4DQ2Q
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-20 11:02:11
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:BViLtnTKmaKD+C0ZVL/bgg
+
+
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;
 1;

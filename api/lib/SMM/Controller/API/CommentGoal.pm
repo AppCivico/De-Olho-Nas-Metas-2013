@@ -1,4 +1,4 @@
-package SMM::Controller::API::Comment;
+package SMM::Controller::API::CommentGoal;
 
 use Moose;
 use utf8;
@@ -9,10 +9,10 @@ BEGIN { extends 'Catalyst::Controller::REST' }
 __PACKAGE__->config(
     default => 'application/json',
 
-    result      => 'DB::Comment',
-    object_key  => 'comment',
+    result      => 'DB::CommentGoal',
+    object_key  => 'comment_goal',
     result_attr => {
-        prefetch => [ 'user', 'project', 'goal'],
+        prefetch => [ 'user', 'goal'],
     },
 
     update_roles => [qw/superadmin user admin webapi/],
@@ -21,7 +21,7 @@ __PACKAGE__->config(
 );
 with 'SMM::TraitFor::Controller::DefaultCRUD';
 
-sub base : Chained('/api/base') : PathPart('comments') : CaptureArgs(0) { }
+sub base : Chained('/api/base') : PathPart('comment_goals') : CaptureArgs(0) { }
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
 
@@ -31,12 +31,12 @@ sub result : Chained('object') : PathPart('') : Args(0) :
 sub result_GET {
     my ( $self, $c ) = @_;
 
-    my $comment = $c->stash->{comment};
+    my $comment_goal = $c->stash->{comment_goal};
     $self->status_ok(
         $c,
         entity => {
             (
-                map { $_ => $comment->$_, }
+                map { $_ => $comment_goal->$_, }
                   qw/
                   id
                   description
@@ -57,7 +57,7 @@ sub result_GET {
                           region_id
                           /
                       ),
-                } $comment->project,
+                } $comment_goal->project,
             ),
         }
     );
@@ -66,9 +66,9 @@ sub result_GET {
 
 sub result_DELETE {
     my ( $self, $c ) = @_;
-    my $comment = $c->stash->{organization};
+    my $comment_goal = $c->stash->{organization};
 
-    $comment->delete;
+    $comment_goal->delete;
 
     $self->status_no_content($c);
 }
@@ -77,19 +77,19 @@ sub result_PUT {
     my ( $self, $c ) = @_;
 
     my $params  = { %{ $c->req->params } };
-    my $comment = $c->stash->{comment};
+    my $comment_goal = $c->stash->{comment_goal};
 
-    $comment->execute( $c, for => 'update', with => $c->req->params );
+    $comment_goal->execute( $c, for => 'update', with => $c->req->params );
 
     $self->status_accepted(
         $c,
         location =>
-          $c->uri_for( $self->action_for('result'), [ $comment->id ] )
+          $c->uri_for( $self->action_for('result'), [ $comment_goal->id ] )
           ->as_string,
-        entity => { id => $comment->id }
+        entity => { id => $comment_goal->id }
       ),
       $c->detach
-      if $comment;
+      if $comment_goal;
 }
 
 sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
@@ -98,9 +98,6 @@ sub list_GET {
     my ( $self, $c ) = @_;
     my $rs = $c->stash->{collection};
 
-    if ( $c->req->param('project_id') ) {
-        $rs = $rs->search( { project_id => $c->req->param('project_id') } );
-    }
 	if ( $c->req->param('goal_id') ) {
         $rs = $rs->search( { goal_id => $c->req->param('goal_id') } );
     }
@@ -120,7 +117,7 @@ sub list_GET {
     $self->status_ok(
         $c,
         entity => {
-            comments => [
+            comment_goals => [
                 map {
                     my $r = $_;
                     +{
@@ -128,17 +125,9 @@ sub list_GET {
                             map { $_ => $r->{$_} }
                               qw/
                               id
-                              text
+							  description
                               process_ts
                               /
-                        ),
-                        project => (
-                            +{
-                                id        => $r->{project}->{id},
-                                name      => $r->{project}->{name},
-                                latitude  => $r->{project}->{latitude},
-                                longitude => $r->{project}->{longitude},
-                            }
                         ),
 						goal => (
                             +{
@@ -158,14 +147,14 @@ sub list_GET {
 sub list_POST {
     my ( $self, $c ) = @_;
 
-    my $comment = $c->stash->{collection}
+    my $comment_goal = $c->stash->{collection}
       ->execute( $c, for => 'create', with => $c->req->params );
 
     $self->status_created(
         $c,
         location => $c->uri_for( $self->action_for('result'), [1] )->as_string,
         entity => {
-            comment_id => $comment->id
+            comment_goal_id => $comment_goal->id
         }
     );
 }

@@ -97,7 +97,6 @@ sub goal : Chained('base') Args(0) {
     p $url_goal;
     $res     = $self->furl->get( $c->stash->{url} . $url_goal );
     $res_obj = $self->furl->get( $c->stash->{url} . $url_obj );
-    p $res_obj->content;
     my $data_obj = decode_json $res_obj->content;
     my $data     = decode_json $res->content;
 
@@ -112,8 +111,8 @@ sub goal : Chained('base') Args(0) {
         @secretaries = ();
 
         p $c->stash->{url};
-        next
-          if $c->model('DB::Goal')->search( { name => $goal->{name} } )->next;
+        #next
+         # if $c->model('DB::Goal')->search( { name => $goal->{name} } )->next;
 
         for my $sec ( @{ $goal->{secretaries} } ) {
             my $return_sec;
@@ -160,7 +159,11 @@ sub goal : Chained('base') Args(0) {
             delete $key->{created_at};
             delete $key->{location_type};
             delete $key->{weight_about_goal};
+			$c->model('DB::Project')->search({name => $key->{name}})->update({project_number => $key->{id}});	
             delete $key->{id};
+            delete $key->{budget_executed_2014};
+            delete $key->{budget_executed_2016};
+            delete $key->{budget_executed_2015};
 
             $key->{latitude}  = delete $key->{gps_lat};
             $key->{longitude} = delete $key->{gps_long};
@@ -169,7 +172,6 @@ sub goal : Chained('base') Args(0) {
             $return_proj =
               $c->model('DB::Project')->search( { name => $key->{name} } )
               ->next;
-
             $return_proj = $c->model('DB::Project')->create($key)
               unless $return_proj;
 
@@ -241,8 +243,12 @@ sub goal : Chained('base') Args(0) {
           unless $return_obj;
 
         $goal->{objective_id} = $return_obj->id;
+        my $return_goal;
+        $return_goal =
+          $c->model('DB::Goal')->search( { id => $goal->{id} } )
+          ->next;
 
-        my $return_goal = $c->model('DB::Goal')->create($goal);
+        $return_goal = $c->model('DB::Goal')->create($goal) unless $return_goal;
 
         my $goal_vs_proj = {};
         map { $goal_vs_proj->{ $_->{goal_id} }{ $_->{project_id} } }

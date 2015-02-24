@@ -16,7 +16,6 @@ sub base : Chained('/root') : PathPart('') : CaptureArgs(0) {
 sub register : Chained('base') : PathPart('cadastro') : Args(0) {
     my ( $self, $c ) = @_;
     my $api = $c->model('API');
-
     if ( $c->user ) {
         $c->detach( 'Form::Login' => 'after_login' );
     }

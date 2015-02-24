@@ -189,17 +189,32 @@ __PACKAGE__->add_unique_constraint("user_username_key", ["username"]);
 
 =head1 RELATIONS
 
-=head2 comments
+=head2 comment_goals
 
 Type: has_many
 
-Related object: L<SMM::Schema::Result::Comment>
+Related object: L<SMM::Schema::Result::CommentGoal>
 
 =cut
 
 __PACKAGE__->has_many(
-  "comments",
-  "SMM::Schema::Result::Comment",
+  "comment_goals",
+  "SMM::Schema::Result::CommentGoal",
+  { "foreign.user_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 comment_projects
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::CommentProject>
+
+=cut
+
+__PACKAGE__->has_many(
+  "comment_projects",
+  "SMM::Schema::Result::CommentProject",
   { "foreign.user_id" => "self.id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
@@ -289,6 +304,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 user_follow_counsils
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::UserFollowCounsil>
+
+=cut
+
+__PACKAGE__->has_many(
+  "user_follow_counsils",
+  "SMM::Schema::Result::UserFollowCounsil",
+  { "foreign.user_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 user_follow_projects
 
 Type: has_many
@@ -350,8 +380,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-06 09:52:11
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:31XZPppYZ7tNjb8i6NiVbQ
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-20 11:02:11
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Req3Te+YbeLPhbsaU1mmaA
 
 __PACKAGE__->many_to_many( roles => user_roles => 'role' );
 

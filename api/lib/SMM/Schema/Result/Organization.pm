@@ -174,6 +174,21 @@ __PACKAGE__->belongs_to(
   },
 );
 
+=head2 comment_projects
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::CommentProject>
+
+=cut
+
+__PACKAGE__->has_many(
+  "comment_projects",
+  "SMM::Schema::Result::CommentProject",
+  { "foreign.org_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 goal_organizations
 
 Type: has_many
@@ -224,6 +239,21 @@ __PACKAGE__->belongs_to(
   },
 );
 
+=head2 user_follow_counsils
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::UserFollowCounsil>
+
+=cut
+
+__PACKAGE__->has_many(
+  "user_follow_counsils",
+  "SMM::Schema::Result::UserFollowCounsil",
+  { "foreign.counsil_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 users
 
 Type: has_many
@@ -240,8 +270,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-02 10:55:22
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZVDgbUNqNNIn2yAn5xL8Tg
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-20 11:02:11
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:u2sy7NGB6Fej55idYllVPg
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
 with 'SMM::Schema::Role::ResultsetFind';

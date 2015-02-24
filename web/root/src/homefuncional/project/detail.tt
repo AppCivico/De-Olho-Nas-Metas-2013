@@ -23,6 +23,7 @@ $(document).ready(function () {
 	$.post( url, { user_id: $(this).data("id"), project_id: $('#projectid').val() },function( data ) {
 
 		$(button).find("span").html(textview);
+		$('.counter').html(data.project_count);
 		
 		$(button).attr('disabled',false);
     },"json")
@@ -145,7 +146,7 @@ $(document).ready(function () {
 					<div class="body">
 						<h1>[% project_obj.name %]</h1>
 						<p>
-							[% project_obj.description %].
+							[% project_obj.description %]
 						</p>
 					</div>
 	
@@ -265,11 +266,11 @@ $(document).ready(function () {
 							</thead>
 							<tbody>
 					[% IF project_obj.comments.size > 0 %]
-					[% FOREACH c IN project_obj.comments%]
+					[% FOREACH pj IN project_obj.comments%]
 							<tr>
-								<td>[%c.name%]</td>
-								<td>[%c.description%]</td>
-								<td>[%c.process_ts%]</td>
+								<td>[%pj.name%]</td>
+								<td>[%pj.description%]</td>
+								<td>[%pj.process_ts%]</td>
 							</tr>
 		            [%END%]
 					[% ELSE %]
@@ -308,7 +309,13 @@ $(document).ready(function () {
 						</ul>
 					</div>
 					[% END %]
-					
+					<div class="list-projects">
+							<span class="header">Planeja Sampa</span>
+						<ul class="list-projects">
+							<a href="http://planejasampa.prefeitura.sp.gov.br/metas/projeto/[%project_obj.project_number%]">Projeto [%project_obj.id%] - [% project_obj.name%]</li>
+						</ul>
+					</div>
+
 					<div class="list-projects">
 						<span class="header">Meta - [% project_obj.goal.id%]</span>
 						<ul class="list-projects">

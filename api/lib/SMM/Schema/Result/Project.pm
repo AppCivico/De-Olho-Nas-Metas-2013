@@ -92,6 +92,11 @@ __PACKAGE__->table("project");
   is_foreign_key: 1
   is_nullable: 1
 
+=head2 project_number
+
+  data_type: 'integer'
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -123,6 +128,8 @@ __PACKAGE__->add_columns(
   { data_type => "timestamp", is_nullable => 1 },
   "region_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "project_number",
+  { data_type => "integer", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -139,17 +146,17 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
 
-=head2 comments
+=head2 comment_projects
 
 Type: has_many
 
-Related object: L<SMM::Schema::Result::Comment>
+Related object: L<SMM::Schema::Result::CommentProject>
 
 =cut
 
 __PACKAGE__->has_many(
-  "comments",
-  "SMM::Schema::Result::Comment",
+  "comment_projects",
+  "SMM::Schema::Result::CommentProject",
   { "foreign.project_id" => "self.id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
@@ -180,6 +187,21 @@ Related object: L<SMM::Schema::Result::ProjectEvent>
 __PACKAGE__->has_many(
   "project_events",
   "SMM::Schema::Result::ProjectEvent",
+  { "foreign.project_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 project_images
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::ProjectImage>
+
+=cut
+
+__PACKAGE__->has_many(
+  "project_images",
+  "SMM::Schema::Result::ProjectImage",
   { "foreign.project_id" => "self.id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
@@ -250,11 +272,11 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-06 09:52:11
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:bDOkpOkhWOz/ZBnGT/sGYQ
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-19 09:56:16
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZUg73mfjHeUu6eEHr95DwA
 
 __PACKAGE__->has_many(
-    approved_comments => 'SMM::Schema::Result::Comment',
+    approved_comments => 'SMM::Schema::Result::CommentProject',
     sub {
       my $args = shift;
 

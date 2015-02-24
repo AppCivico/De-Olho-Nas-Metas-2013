@@ -1,4 +1,4 @@
-package SMM::Schema::ResultSet::Comment;
+package SMM::Schema::ResultSet::CommentProject;
 use namespace::autoclean;
 
 use utf8;
@@ -26,12 +26,8 @@ sub verifiers_specs {
                     required => 1,
                     type     => 'Str',
                 },
-                project_id => {
-                    required => 0,
-                    type     => 'Int',
-                },
-				goal_id => {
-					required => 0,
+				project_id => {
+					required => 1,
 					type     => 'Int',
 				},
 				approved => {

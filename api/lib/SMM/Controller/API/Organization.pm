@@ -10,7 +10,7 @@ __PACKAGE__->config(
     result      => 'DB::Organization',
     object_key  => 'organization',
     result_attr => {
-        prefetch => [ { 'city' => 'state' }, 'subprefecture' ]
+        prefetch => [ { 'city' => 'state' }, 'subprefecture', 'user_follow_counsils' ]
     },
     search_ok => {
         id => 'Int'
@@ -34,6 +34,9 @@ sub result_GET {
 
     my $organization = $c->stash->{organization};
 
+    my $follow_counsil =
+      $organization->user_follow_counsils->search( { active => 1 } )->count;
+
     $self->status_ok(
         $c,
         entity => {
@@ -52,6 +55,7 @@ sub result_GET {
                   number
                   /
             ),
+			follow_counsil => $follow_counsil, 
             city => {
                 (
                     map { $_ => $organization->city->$_, }

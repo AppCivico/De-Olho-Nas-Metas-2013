@@ -12,7 +12,16 @@ __PACKAGE__->config(
     result      => 'DB::Goal',
     object_key  => 'goal',
     result_attr => {
-        prefetch => [ { 'goal_projects' => 'project' }, 'objective' ]
+        prefetch => [ { 'goal_projects' => 'project' }, 'objective','approved_comments', 'goal_porcentages' ],
+        '+select' => [
+            \q{to_char(approved_comments.timestamp, 'DD/MM/YYYY HH24:MI:SS')},
+        ],
+        '+as' => [
+            'approved_comments.process_ts_fmt'
+        ],
+        distinct => 1,
+		order_by => 'me.id',
+		
     },
 
     update_roles => [qw/superadmin user admin webapi/],
@@ -32,6 +41,7 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $goal = $c->stash->{goal};
+	use DDP; p $c->stash->{goal};
     my @region_ids;
     @region_ids =
       map  { $_->project->region_id }
@@ -60,6 +70,7 @@ sub result_GET {
                   name
                   description
                   expected_budget
+				  goal_number
                   /
             ),
             goal_projects => {
@@ -132,6 +143,34 @@ sub result_GET {
                 ),
             ],
             region => \@region,
+			goal_porcentages => (
+				map {
+					+{
+						owned     => $_->owned,
+						remainder => $_->remainder,
+					}
+
+				} $goal->goal_porcentages,					
+				
+			),
+            comments => [
+                (
+
+                    map {
+                        $_
+                          ? (
+                            +{
+                                id          => $_->id,
+                                description => $_->description,
+                                name        => $_->user->name,
+                                process_ts  => $_->get_column('process_ts_fmt'),
+                                user_id     => $_->user->id
+                            }
+                          )
+                          : ()
+                    } ( $goal->approved_comments ),
+                )
+            ],
         }
     );
 

@@ -189,6 +189,11 @@ __PACKAGE__->table("goal");
   is_foreign_key: 1
   is_nullable: 1
 
+=head2 goal_number
+
+  data_type: 'integer'
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -256,6 +261,8 @@ __PACKAGE__->add_columns(
   { data_type => "text", is_nullable => 1 },
   "objective_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "goal_number",
+  { data_type => "integer", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -290,6 +297,21 @@ __PACKAGE__->belongs_to(
     on_delete     => "NO ACTION",
     on_update     => "NO ACTION",
   },
+);
+
+=head2 comment_goals
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::CommentGoal>
+
+=cut
+
+__PACKAGE__->has_many(
+  "comment_goals",
+  "SMM::Schema::Result::CommentGoal",
+  { "foreign.goal_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 country
@@ -330,21 +352,6 @@ __PACKAGE__->belongs_to(
     on_delete     => "NO ACTION",
     on_update     => "NO ACTION",
   },
-);
-
-=head2 goal_comments
-
-Type: has_many
-
-Related object: L<SMM::Schema::Result::GoalComment>
-
-=cut
-
-__PACKAGE__->has_many(
-  "goal_comments",
-  "SMM::Schema::Result::GoalComment",
-  { "foreign.goal_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 goal_organizations
@@ -508,8 +515,23 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-01-06 18:34:45
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:EquAlH3yUqLFiQXfoxB6bw
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-19 09:56:16
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:kU5W/TNPie4n/qYkUpR6Dw
+
+__PACKAGE__->has_many(
+    approved_comments => 'SMM::Schema::Result::CommentGoal',
+    sub {
+      my $args = shift;
+
+      return {
+        "$args->{foreign_alias}.goal_id" => { -ident => "$args->{self_alias}.id" },
+        "$args->{foreign_alias}.approved"   => 1,
+      };
+    },
+    { cascade_copy => 0, cascade_delete => 0 },
+  );
+
+
 
 __PACKAGE__->many_to_many( projects => goal_projects => 'project');
 
