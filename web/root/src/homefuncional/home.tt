@@ -2,7 +2,7 @@
 	[%-CALL assets.include("js/maps.js")%]
 	[%-CALL assets.include("js/infobubble.min.js")%]
 <script id="row_template" type="text/template">
-			<h2 class="section-title">12123123123 Projetos Encontrados</h2>
+			{{#projects.length}}<h2 class="section-title">{{ projects.length}} Projetos Encontrados</h2>{{/projects.length}}
 			{{ #projects }}	
 			<div class="item row">
 				<div class="col-sm-10 nopadding">
