@@ -76,6 +76,31 @@ __PACKAGE__->table("subprefecture");
   is_nullable: 1
   original: {default_value => \"now()"}
 
+=head2 site
+
+  data_type: 'text'
+  is_nullable: 1
+
+=head2 deputy_mayor
+
+  data_type: 'text'
+  is_nullable: 1
+
+=head2 email
+
+  data_type: 'text'
+  is_nullable: 1
+
+=head2 telephone
+
+  data_type: 'text'
+  is_nullable: 1
+
+=head2 address
+
+  data_type: 'text'
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -101,6 +126,16 @@ __PACKAGE__->add_columns(
     is_nullable   => 1,
     original      => { default_value => \"now()" },
   },
+  "site",
+  { data_type => "text", is_nullable => 1 },
+  "deputy_mayor",
+  { data_type => "text", is_nullable => 1 },
+  "email",
+  { data_type => "text", is_nullable => 1 },
+  "telephone",
+  { data_type => "text", is_nullable => 1 },
+  "address",
+  { data_type => "text", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -148,8 +183,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-02 10:55:22
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Du+CUss6WlSf/iZcQC1o1Q
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-24 11:38:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:DAI7nyLh3SlTWjuaYUYAzA
 
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';

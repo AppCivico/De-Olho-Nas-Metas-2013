@@ -16,10 +16,10 @@ sub index : Chained('base') : PathPart('') : Args(0) {
     my ( $self, $c ) = @_;
 
     my $api = $c->model('API');
-    $api->stash_result( $c, 'comment_goals', params => { approved => 'false' } );
+    $api->stash_result( $c, 'comment_goals',    params => { approved => 'false' } );
     $api->stash_result( $c, 'comment_projects', params => { approved => 'false' } );
-	use DDP;
-	p $c->stash->{comments};
+    use DDP;
+    p $c->stash->{comments};
 }
 
 sub set_accepted : Chained('base') : PathPart('aceito') : Args(0) {
@@ -27,8 +27,8 @@ sub set_accepted : Chained('base') : PathPart('aceito') : Args(0) {
 
     my $api = $c->model('API');
     my $pe  = $c->req->param('pe_id');
-	use DDP;
-	p $c->req->params;
+    use DDP;
+    p $c->req->params;
     $api->stash_result(
         $c,
         [ 'comment_projects', $pe ],

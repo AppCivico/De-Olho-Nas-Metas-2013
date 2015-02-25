@@ -1,0 +1,33 @@
+Subprefeitura;Subprefeito;Site;Email;Telefone;Endereço
+Aricanduva;Quintino Simões Pinto;http://aricanduva.prefeitura.sp.gov.br;aricanduva@prefeitura.sp.gov.br;PABX: 3396-0800;R. Atucuri, 699 - CEP 03411-000
+Butantã;Maria Rosa da Silva;http://butanta.prefeitura.sp.gov.br;butantanap@prefeitura.sp.gov.br;PABX: 3397-4600;R. Ulpiano da Costa Manso, 201 - CEP 05538-000
+Campo Limpo;Sérgio Roberto dos Santos;http://campolimpo.prefeitura.sp.gov.br;campolimpo@prefeitura.sp.gov.br;PABX: 3397-0500;R. Nossa Senhora do Bom Conselho, 59 - CEP 05763-470
+Capela do Socorro;Cleide Pandolfi;http://capeladosocorro.prefeitura.sp.gov.br;capeladosocorro@prefeitura.sp.gov.br;PABX: 3397-2700;R. Cassiano dos Santos, 499 - CEP 04827-000
+Casa Verde;Luiz Fernando Queimadelos Gomez;http://casaverde.prefeitura.sp.gov.br;casaverde@prefeitura.sp.gov.br;PABX: 2813-3250;Av. Ordem e Progresso, 1001 - CEP 02518-130
+Cidade Ademar;Francisco Lo Prete Filho;http://cidadeademar.prefeitura.sp.gov.br;cidadeademar@prefeitura.sp.gov.br;PABX: 5670-7000;Av. Yervant Kissajikain, 416 - CEP 04657-000
+Cidade Tiradentes;Adriana Neves da Silva Morales;http://cidadetiradentes.prefeitura.sp.gov.br;tiradentes@prefeitura.sp.gov.br;PABX: 3396-0000;Estrada do Iguatemi, 2751 - CEP 08375-000
+Ermelino Matarazzo;Sandra Regina Mancilla Lourenço;http://ermelinomatarazzo.prefeitura.sp.gov.br;ermelinomatarazzo@prefeitura.sp.gov.br;PABX: 2048-6585;Av. São Miguel, 5550 - CEP 03871-100
+Freguesia;Bruno Ghizellini Neto;http://freguesia.prefeitura.sp.gov.br;freguesia@prefeitura.sp.gov.br;PABX: 3981-5000;Av. João Marcelino Branco, 95 - CEP 02610-000
+Guaianases;Roberval Dias Torres;http://guaianases.prefeitura.sp.gov.br;guaianazes@prefeitura.sp.gov.br;PABX: 2557-7099;Praça de Estrada Itaquera-Guaianases, 2565 - CEP 08420-000
+Ipiranga;Alcides Gaspareto Júnior;http://ipiranga.prefeitura.sp.gov.br;ipiranga@prefeitura.sp.gov.br;PABX: 2808-3600;R. Lino Coutinho, 444 - CEP 04207 000
+Itaim Paulista;Miguel Ângelo Gianetti;http://itaimpaulista.prefeitura.sp.gov.br;itaimpaulista@prefeitura.sp.gov.br;PABX: 2944-6555;Av. Marechal Tito 3012, CEP: 08115-000
+Itaquera;Mauricio Luis Martins;http://itaquera.prefeitura.sp.gov.br;itaqueragabinete@prefeitura.sp.gov.br;PABX: 2561-6064;R Augusto Carlos Bauman, 851 CEP: 08210-590
+Jabaquara;Wander Geraldo da Silva;http://jabaquara.prefeitura.sp.gov.br;jabaquara@prefeitura.sp.gov.br;PABX: 3397-3200;Av. Engº Armando de Arruda Pereira, 2314 - CEP 04309-011
+Jaçanã/Tremembé;José Carlos Miranda;http://jacana-tremembe.prefeitura.sp.gov.br;tremembe@prefeitura.sp.gov.br;PABX: 3397-1000;Av. Luis Stamatis, 300 - CEP 02260-000
+Lapa;Jackeline Morena de Oliveira;http://lapa.prefeitura.sp.gov.br;lapa@prefeitura.sp.gov.br;PABX: 3396-7500;Rua Guaicurus, 1000 - CEP 05033-002
+M'Boi Mirim;Nerilton Antonio do Amaral;http://mboimirim.prefeitura.sp.gov.br;mboimirim@prefeitura.sp.gov.br;PABX: 3396-8400;Av. Guarapiranga, 1265 - CEP 04902-903
+Mooca;Evando Reis;http://mooca.prefeitura.sp.gov.br;moocagab@prefeitura.sp.gov.br;PABX: 2292-2122;R. Taquari, 549 - CEP 03166-000
+Parelheiros;Nilton Oliveira;http://parelheiros.prefeitura.sp.gov.br;parelheiros@prefeitura.sp.gov.br;PABX: 5926-6500;Av. Sadamu Inoue, 5252 - CEP 04825-000
+Penha;Pedro Guastaferro Junior;http://penha.prefeitura.sp.gov.br;penhanap@prefeitura.sp.gov.br;PABX: 3397-5100;R. Candapuí, 492 - CEP 03621-000
+Perus;Carlos Roberto Massi;http://perus.prefeitura.sp.gov.br;perus@prefeitura.sp.gov.br;PABX: 3396-8600;R. Ylídio Figueiredo, 349 - CEP 05204-020
+Pinheiros;Angelo Salvador Filardo Junior;http://pinheiros.prefeitura.sp.gov.br;pinheiros@prefeitura.sp.gov.br;PABX: 3095-9595;Av. Nações Unidas, 7123 - CEP 05425-070
+Pirituba;Carlos Eduardo Silva Diethelm;http://pirituba.prefeitura.sp.gov.br;pirituba@prefeitura.sp.gov.br;PABX: 3993-6844;Av. Dr. Felipe Pinel, 12 - CEP 02939-000
+Santana/Tucuruvi;Carlos Roberto Candella;http://santana-tucuruvi.prefeitura.sp.gov.br;santanagabinete@prefeitura.sp.gov.br;PABX: 2987-3844;Av. Tucuruvi, 808 - CEP 02304-002
+Santo Amaro;Valderci Malagosini Machado;http://santoamaro.prefeitura.sp.gov.br;santoamaro@prefeitura.sp.gov.br;PABX: 3396-6100;Praça Floriano Peixoto, 54 - CEP 04751-030
+São Mateus;Fabio Santos da Silva;http://saomateus.prefeitura.sp.gov.br;saomateus@prefeitura.sp.gov.br;PABX: 3397-1100;R. Ragueb Chohfi, 1.400 -  CEP 08375-000
+São Miguel;Adalberto Dias de Sousa;http://saomiguel.prefeitura.sp.gov.br;saomiguelpaulista@prefeitura.sp.gov.br;PABX: 2297-9200;R. Ana Flora Pinheiro de Sousa, 76 - CEP 08060-150
+Sapopemba;Nereu Amaral;http://www.prefeitura.sp.gov.br/cidade/secretarias/subprefeituras/sapopemba;;;Av. Sapopemba, 9064 - CEP 03988-000
+Sé;Alcides Amazonas;http://se.prefeitura.sp.gov.br;gabinetese@prefeitura.sp.gov.br;PABX: 3397-1200;R. Álvares Penteado, 49 - CEP 01012-001
+Vila Maria/Vila Guilherme;Gilberto Rossi;http://vilamaria-vilaguilherme.prefeitura.sp.gov.br;vilamariagabinete@prefeitura.sp.gov.br;PABX: 2967-8100;R.General Mendes, 111 - CEP 02127-020
+Vila Mariana;João Carlos da Silva Martins;http://vilamariana.prefeitura.sp.gov.br;vilamariana@prefeitura.sp.gov.br;PABX: 3397-4100;R. José de Magalhães, 500 - CEP 04026-090
+Vila Prudente;Marcello Rinaldi;http://vilaprudente.prefeitura.sp.gov.br;vilaprudentegabineteexp@prefeitura.sp.gov.br;PABX: 3397-0800;Avenida do Oratório, 172 - CEP 03220-000

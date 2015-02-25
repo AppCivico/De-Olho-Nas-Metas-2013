@@ -10,7 +10,8 @@ __PACKAGE__->config(
     result      => 'DB::Organization',
     object_key  => 'organization',
     result_attr => {
-        prefetch => [ { 'city' => 'state' }, 'subprefecture', 'user_follow_counsils' ]
+        prefetch =>
+          [ { 'city' => 'state' }, 'subprefecture', 'user_follow_counsils' ]
     },
     search_ok => {
         id => 'Int'
@@ -55,8 +56,8 @@ sub result_GET {
                   number
                   /
             ),
-			follow_counsil => $follow_counsil, 
-            city => {
+            follow_counsil => $follow_counsil,
+            city           => {
                 (
                     map { $_ => $organization->city->$_, }
                       qw/

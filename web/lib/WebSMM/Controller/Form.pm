@@ -92,7 +92,8 @@ sub as_json : Private {
     my ( $self, $c, $data ) = @_;
 
     $c->res->header( 'Content-type', 'application/json; charset=utf-8' );
-	use DDP; p $data;
+    use DDP;
+    p $data;
     if ( ref $data eq 'HASH' && exists $data->{error} ) {
         $c->response->status(400);
     }
@@ -100,6 +101,7 @@ sub as_json : Private {
     $c->res->body( encode_json($data) );
 
 }
+
 sub redirect_relogin : Private {
     my ( $self, $c, %args ) = @_;
 

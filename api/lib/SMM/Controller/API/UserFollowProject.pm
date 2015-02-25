@@ -138,17 +138,22 @@ sub list_POST {
 
     my $user_follow_project = $c->stash->{collection}
       ->execute( $c, for => 'create', with => $c->req->params );
-	
-	my $project_follow = $c->model('DB::UserFollowProject')->search({ project_id => $user_follow_project->project_id, active => 1 })->count;
+
+    my $project_follow =
+      $c->model('DB::UserFollowProject')
+      ->search(
+        { project_id => $user_follow_project->project_id, active => 1 } )
+      ->count;
 
     $self->status_created(
         $c,
         location => $c->uri_for( $self->action_for('result'),
             [ $user_follow_project->id ] )->as_string,
         entity => {
-	            project => { id => $user_follow_project->id,
-				project_count => $project_follow 
-			},
+            project => {
+                id            => $user_follow_project->id,
+                project_count => $project_follow
+            },
         }
     );
 

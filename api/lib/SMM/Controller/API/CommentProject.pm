@@ -12,7 +12,7 @@ __PACKAGE__->config(
     result      => 'DB::CommentProject',
     object_key  => 'comment_project',
     result_attr => {
-        prefetch => [ 'user', 'project'],
+        prefetch => [ 'user', 'project' ],
     },
 
     update_roles => [qw/superadmin user admin webapi/],
@@ -21,7 +21,8 @@ __PACKAGE__->config(
 );
 with 'SMM::TraitFor::Controller::DefaultCRUD';
 
-sub base : Chained('/api/base') : PathPart('comment_projects') : CaptureArgs(0) { }
+sub base : Chained('/api/base') : PathPart('comment_projects') :
+  CaptureArgs(0) { }
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
 
@@ -76,7 +77,7 @@ sub result_DELETE {
 sub result_PUT {
     my ( $self, $c ) = @_;
 
-    my $params  = { %{ $c->req->params } };
+    my $params          = { %{ $c->req->params } };
     my $comment_project = $c->stash->{comment_project};
 
     $comment_project->execute( $c, for => 'update', with => $c->req->params );
@@ -146,8 +147,8 @@ sub list_GET {
 
 sub list_POST {
     my ( $self, $c ) = @_;
-	use DDP;
-	p $c->req->params;
+    use DDP;
+    p $c->req->params;
     my $comment_project = $c->stash->{collection}
       ->execute( $c, for => 'create', with => $c->req->params );
 

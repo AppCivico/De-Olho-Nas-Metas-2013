@@ -12,16 +12,17 @@ __PACKAGE__->config(
     result      => 'DB::Goal',
     object_key  => 'goal',
     result_attr => {
-        prefetch => [ { 'goal_projects' => 'project' }, 'objective','approved_comments', 'goal_porcentages' ],
+        prefetch => [
+            { 'goal_projects' => 'project' }, 'objective',
+            'approved_comments', 'goal_porcentages'
+        ],
         '+select' => [
             \q{to_char(approved_comments.timestamp, 'DD/MM/YYYY HH24:MI:SS')},
         ],
-        '+as' => [
-            'approved_comments.process_ts_fmt'
-        ],
+        '+as'    => ['approved_comments.process_ts_fmt'],
         distinct => 1,
-		order_by => 'me.id',
-		
+        order_by => 'me.id',
+
     },
 
     update_roles => [qw/superadmin user admin webapi/],
@@ -41,13 +42,15 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $goal = $c->stash->{goal};
-	use DDP; p $c->stash->{goal};
+    use DDP;
+    p $c->stash->{goal};
     my @region_ids;
     @region_ids =
       map  { $_->project->region_id }
       grep { $_->project->region_id } $goal->goal_projects;
     my @region_ids_unique = uniq @region_ids;
     my @region;
+
     if (@region_ids_unique) {
 
         @region = $goal->resultset('Region')->search(
@@ -70,13 +73,13 @@ sub result_GET {
                   name
                   description
                   expected_budget
-				  goal_number
-				  qualitative_progress_1
-				  qualitative_progress_2
-				  qualitative_progress_3
-				  qualitative_progress_4
-				  qualitative_progress_5
-				  qualitative_progress_6
+                  goal_number
+                  qualitative_progress_1
+                  qualitative_progress_2
+                  qualitative_progress_3
+                  qualitative_progress_4
+                  qualitative_progress_5
+                  qualitative_progress_6
                   /
             ),
             goal_projects => {
@@ -117,17 +120,16 @@ sub result_GET {
                     map {
                         my $p = $_;
                         (
-							+{
-                            map {
-                                 $_ => $p->project->$_ 
-                              } qw/
-                              id
-                              name
-                              latitude
-                              longitude
-                              region_id
-                              /
-							}
+                            +{
+                                map { $_ => $p->project->$_ }
+                                  qw/
+                                  id
+                                  name
+                                  latitude
+                                  longitude
+                                  region_id
+                                  /
+                            }
                           ),
                     } $goal->goal_projects,
                 ),
@@ -148,17 +150,17 @@ sub result_GET {
                     } $goal->goal_projects,
                 ),
             ],
-            region => \@region,
-			goal_porcentages => (
-				map {
-					+{
-						owned     => $_->owned,
-						remainder => $_->remainder,
-					}
+            region           => \@region,
+            goal_porcentages => (
+                map {
+                    +{
+                        owned     => $_->owned,
+                        remainder => $_->remainder,
+                      }
 
-				} $goal->goal_porcentages,					
-				
-			),
+                  } $goal->goal_porcentages,
+
+            ),
             comments => [
                 (
 

@@ -31,8 +31,9 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
     my ( $self, $c, $id ) = @_;
     my $api = $c->model('API');
     $api->stash_result( $c, [ 'goals', $id ], stash => 'goal_obj' );
-	$c->stash->{goal_obj}->{goal_porcentages}->{owned} = int($c->stash->{goal_obj}->{goal_porcentages}->{owned}); 
-	$c->stash->{goal_obj}->{goal_porcentages}->{remainder} = int($c->stash->{goal_obj}->{goal_porcentages}->{remainder}); 
+    $c->stash->{goal_obj}->{goal_porcentages}->{owned} = int( $c->stash->{goal_obj}->{goal_porcentages}->{owned} );
+    $c->stash->{goal_obj}->{goal_porcentages}->{remainder} =
+      int( $c->stash->{goal_obj}->{goal_porcentages}->{remainder} );
 }
 
 sub detail : Chained('object') : PathPart('') : Args(0) {
@@ -41,12 +42,12 @@ sub detail : Chained('object') : PathPart('') : Args(0) {
     my $api = $c->model('API');
     $api->stash_result( $c, 'objectives' );
     $api->stash_result( $c, 'regions' );
-	
-	my $count = 0;
-	for my $n ( 1 .. 6 ){
-	$count++ if $c->stash->{goal_obj}->{'qualitative_progress_'.$n};
-	}
-	$c->stash->{goal_obj}->{progress_count} = $count;
+
+    my $count = 0;
+    for my $n ( 1 .. 6 ) {
+        $count++ if $c->stash->{goal_obj}->{ 'qualitative_progress_' . $n };
+    }
+    $c->stash->{goal_obj}->{progress_count} = $count;
 
 }
 
@@ -115,16 +116,17 @@ sub region_by_cep : Chained('base') : Args(0) {
     $c->stash->{without_wrapper} = 1;
 
 }
+
 sub comment : Chained('base') : PathParth('comment') : Args(0) {
     my ( $self, $c ) = @_;
 
     my $api = $c->model('API');
 
-    my $user_id    = $c->req->param('user_id');
-    my $text       = $c->req->param('text');
+    my $user_id = $c->req->param('user_id');
+    my $text    = $c->req->param('text');
     my $goal_id = $c->req->param('goal_id');
-	
-	$user_id = 53 unless defined $c->req->param('user_id');
+
+    $user_id = 53 unless defined $c->req->param('user_id');
 
     $api->stash_result(
         $c,

@@ -85,6 +85,12 @@ __PACKAGE__->table("project_event");
   default_value: true
   is_nullable: 1
 
+=head2 is_last
+
+  data_type: 'boolean'
+  default_value: true
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -111,6 +117,8 @@ __PACKAGE__->add_columns(
   "approved",
   { data_type => "boolean", default_value => \"false", is_nullable => 1 },
   "active",
+  { data_type => "boolean", default_value => \"true", is_nullable => 1 },
+  "is_last",
   { data_type => "boolean", default_value => \"true", is_nullable => 1 },
 );
 
@@ -184,8 +192,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-05 10:06:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:5KAnKo/Ufa+BSnk2Gdg6QA
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-24 11:38:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:cP6QjjNcJQgTTK1KPeRBuQ
 
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';

@@ -34,7 +34,7 @@ sub result : Chained('object') : PathPart('') : Args(0) :
 sub result_GET {
     my ( $self, $c ) = @_;
 
-    my $user = $c->stash->{user};
+    my $user  = $c->stash->{user};
     my %attrs = $user->get_inflated_columns;
     $self->status_ok(
         $c,
@@ -209,9 +209,11 @@ sub counsil_POST {
     my $user_counsil =
       $user->user_follow_counsils->search( { counsil_id => $id } )
       ->update( { active => 0 } );
-	my $counsil_count = $c->model('DB::UserFollowCounsil')->search({ active => 1 })->all;
+    my $counsil_count =
+      $c->model('DB::UserFollowCounsil')->search( { active => 1 } )->all;
 
-    $self->status_accepted( $c, entity => { counsil_count => $counsil_count } ), $c->detach
+    $self->status_accepted( $c, entity => { counsil_count => $counsil_count } ),
+      $c->detach
       if $user_counsil;
 
 }
