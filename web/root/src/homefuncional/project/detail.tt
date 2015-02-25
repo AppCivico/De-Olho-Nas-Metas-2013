@@ -130,16 +130,16 @@ $(document).ready(function () {
 	<section class="metas-filtro">
 		<div class="container">
 			<div class="form row">
-				<div class="col-xs-4 cep">
+				<div class="col-sm-4 cep">
 					Projetos próximos a mim<br />
 					<input type="text" id="txtaddress" name="txtaddress" placeholder="Informe o CEP">
 					<input type="hidden" id="pagetype" value="projectdetail">
 					<input type="hidden" id="projectid" value="[%project_obj.id%]">
 					<button id="btnaddress" name="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
 				</div>
-				<div class="col-xs-8">
+				<div class="col-sm-8">
 					<div class="row">
-						<div class="col-xs-5 region">
+						<div class="col-sm-5 region">
 							por Distrito<br />
 							<div class="select-stylized"><select id="homeregion">
 								<option value="">Distrito</option>
@@ -148,7 +148,7 @@ $(document).ready(function () {
 								[% END %]
 							</select></div>
 						</div>
-						<div class="col-xs-5 type">
+						<div class="col-sm-5 type">
 							por Tema<br />
 							<div class="select-stylized">
 								<select id="type">
@@ -158,7 +158,7 @@ $(document).ready(function () {
 								[% END %]
 							</select></div>
 						</div>
-						<div class="col-xs-2 type">
+						<div class="col-sm-2 type">
 							<br />
 							<button type="button" class="btn btn-default" id="search">Pesquisar</button>
 						</div>
