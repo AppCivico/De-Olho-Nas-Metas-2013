@@ -463,6 +463,9 @@ section.map .map-overlay{
 	background-color: #8cc63f;
 	color: #fff;
 }
+.metas-filtro button:hover{
+	color: #8cc63f;
+}
 .metas-filtro .button{
 	margin-top: 1.3em;
 }
@@ -634,6 +637,14 @@ section.metas-detail .item{
 section.statistics .container{
 	padding-top: 50px;
 	padding-bottom: 50px;
+}
+section.statistics .progress{
+	height: 40px;
+}
+section.statistics .progress-bar{
+	color: #fff;
+	font-size: 2em;
+	padding: 10px;
 }
 
 section.statistics .chart-stats .chart-label{
