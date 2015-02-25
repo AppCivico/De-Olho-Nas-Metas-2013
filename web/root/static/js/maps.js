@@ -454,6 +454,7 @@ var $maps = function () {
 			data.plural = (data.goals.length > 1);
 			var template = $('#row_template').html();
 			var html = Mustache.to_html(template, data);
+			$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
 			$('#result').html(html);
 		},"json");
 	}
@@ -472,6 +473,7 @@ var $maps = function () {
 					$.post("/home/goal/search_by_types",{ latitude: latitude, longitude: longitude, type_id: $('#type option:selected').val() },function(data){
 						var template = $('#row_template').html();
 	   					var html = Mustache.to_html(template, data);
+		   				$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
 						$('#result').html(html);
 					},"json");
 				}
@@ -487,6 +489,7 @@ var $maps = function () {
 					data.plural = (data.projects.length > 1);
 					var template = $('#row_template').html();
 	   				var html = Mustache.to_html(template, data);
+	   				$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
 					$('#result').html(html);
 					$maps.deleteMarkers();
 					$.each(data.projects, function(i, pj){
@@ -554,6 +557,7 @@ function render_project_latlng(){
 					$.post("/home/project/search_by_types",{ latitude: latitude, longitude: longitude, type_id: $('#type option:selected').val() },function(data){
 						var template = $('#row_template').html();
 	   					var html = Mustache.to_html(template, data);
+		   				$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
 						$('#result').html(html);
 						$.each(data.projects, function(i, pj){
 							marker = "";	
@@ -709,24 +713,28 @@ $(document).ready(function () {
 			$("section.map .map-overlay").fadeIn();
  			$.get("/home/project/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
 				$("section.map .map-overlay").fadeOut();
+   				$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
 				document.getElementById("result").innerHTML=data
         	});
         	$maps.setlocal(location);
 		}
 		if ($("#pagetype").val() == 'projectdetail'){		
  			$.get("/home/project/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+   				$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
 				document.getElementById("result").innerHTML=data
         	});
 		}
 		
 		if ($("#pagetype").val() == 'homegoal'){		
  			$.get("/home/goal/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+   				$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
 				document.getElementById("result").innerHTML=data
         	});
 		}
 
 		if ($("#pagetype").val() == 'goaldetail'){		
  			$.get("/home/goal/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+   				$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
 				document.getElementById("result").innerHTML=data
         	});
 		}
@@ -735,6 +743,7 @@ $(document).ready(function () {
 			$.getJSON('/home/region/id',{latitude: ui.item.latitude, longitude: ui.item.longitude},function(data,status){
 				console.log(data.error);
 				if (data.message){
+   				$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
 					document.getElementById("result").innerHTML="<h2 class=\"section-tittle\">"+data.message+"</h2>"
 				}else{
 					window.location.href="/home/region/"+data.id;
@@ -747,8 +756,8 @@ $(document).ready(function () {
         	});
 		}
 			
-       	$(".metas-filtro .form .type .select-stylized").addClass("disabled");
        	$(".metas-filtro .form .region .select-stylized").addClass("disabled");
+		$("select#homeregion")[0].selectedIndex = 0;
        	$(".metas-filtro .form .cep button").removeClass("disabled");
     }
     });

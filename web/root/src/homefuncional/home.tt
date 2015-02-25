@@ -28,15 +28,10 @@
 
 $(document).ready(function () {
 
-	$("#type").change(function(){
-       	$(".metas-filtro .form .type .select-stylized").removeclass("disabled");
-       	$(".metas-filtro .form .region .select-stylized").addclass("disabled");
-       	$(".metas-filtro .form .cep button").addclass("disabled");
-	});
 	$("#homeregion").change(function(){
-       	$(".metas-filtro .form .type .select-stylized").addClass("disabled");
        	$(".metas-filtro .form .region .select-stylized").removeClass("disabled");
        	$(".metas-filtro .form .cep button").addClass("disabled");
+       	$("#txtaddress").val("");
 	});
 
 });
@@ -46,7 +41,7 @@ $(document).ready(function () {
 		<div class="container">
 			<h2 class="title text-center">Ajude a monitorar as Metas da cidade de São Paulo</h2>
 			<h2 class="section-title">Filtre os projetos com as opções abaixo</h2>
-			<div class="form">
+			<div class="form row">
 				<div class="col-xs-4 cep">
 					Filtrar por CEP<br />
 					<input type="text" id="txtaddress" name="txtaddress" placeholder="Informe o CEP">
@@ -55,7 +50,7 @@ $(document).ready(function () {
 				</div>
 				<div class="col-xs-8">
 					<div class="row">
-						<div class="col-xs-4 region">
+						<div class="col-xs-5 region">
 							por Distrito<br />
 							<div class="select-stylized"><select id="homeregion">
 								<option value="">Distrito</option>
@@ -64,7 +59,7 @@ $(document).ready(function () {
 								[% END %]
 							</select></div>
 						</div>
-						<div class="col-xs-4 type">
+						<div class="col-xs-5 type">
 							por Tema<br />
 							<div class="select-stylized">
 								<select id="type">
@@ -74,7 +69,7 @@ $(document).ready(function () {
 								[% END %]
 							</select></div>
 						</div>
-						<div class="col-xs-4 type">
+						<div class="col-xs-2 type">
 							<br />
 							<button type="button" class="btn btn-default" id="search">Pesquisar</button>
 						</div>

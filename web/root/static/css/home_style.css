@@ -463,8 +463,12 @@ section.metas-filtro .form select,
 section.metas-filtro .form button{
 	padding: 5px 10px;
 	font-size: 1.2em;
-	color: #59544b;
-	
+}
+section.metas-filtro form input,
+section.metas-filtro form select,
+section.metas-filtro .form input,
+section.metas-filtro .form select{
+	color: #59544b;	
 }
 section.metas-filtro form input,
 section.metas-filtro form select,
