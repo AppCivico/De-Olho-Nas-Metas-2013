@@ -42,15 +42,15 @@ $(document).ready(function () {
 			<h2 class="title text-center">Ajude a monitorar as Metas da cidade de São Paulo</h2>
 			<h2 class="section-title">Filtre os projetos com as opções abaixo</h2>
 			<div class="form row">
-				<div class="col-xs-4 cep">
+				<div class="col-sm-4 cep">
 					Filtrar por CEP<br />
 					<input type="text" id="txtaddress" name="txtaddress" placeholder="Informe o CEP">
 					<input type="hidden" id="pagetype" value="home">
 					<button id="btnaddress" name="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
 				</div>
-				<div class="col-xs-8">
+				<div class="col-sm-8">
 					<div class="row">
-						<div class="col-xs-5 region">
+						<div class="col-sm-5 region">
 							por Distrito<br />
 							<div class="select-stylized"><select id="homeregion">
 								<option value="">Distrito</option>
@@ -59,7 +59,7 @@ $(document).ready(function () {
 								[% END %]
 							</select></div>
 						</div>
-						<div class="col-xs-5 type">
+						<div class="col-sm-5 type">
 							por Tema<br />
 							<div class="select-stylized">
 								<select id="type">
@@ -69,7 +69,7 @@ $(document).ready(function () {
 								[% END %]
 							</select></div>
 						</div>
-						<div class="col-xs-2 type">
+						<div class="col-sm-2 type">
 							<br />
 							<button type="button" class="btn btn-default" id="search">Pesquisar</button>
 						</div>

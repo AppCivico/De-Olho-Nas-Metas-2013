@@ -331,6 +331,9 @@ footer .logo-footer{
 	background-position: center center;
 }
 
+section.page-login{
+	min-height: 75%;
+}
 
 section.map{
 	background-color: #f0eee4;
