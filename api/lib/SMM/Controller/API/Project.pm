@@ -176,7 +176,7 @@ sub list_GET {
     my $rs = $c->stash->{collection};
 
     if ( $c->req->param('type_id') ) {
-        warn "type";
+
         $c->detach unless $c->req->param('type_id') =~ /^\d+$/;
 
         $rs =
@@ -184,7 +184,6 @@ sub list_GET {
 
     }
     if ( $c->req->param('region_id') ) {
-        warn "region";
         $c->detach unless $c->req->param('region_id') =~ /^\d+$/;
 
         $rs = $rs->search( { region_id => $c->req->param('region_id') } );
@@ -199,9 +198,7 @@ sub list_GET {
             ]
         }
     );
-
     if ( $c->req->param('lnglat') ) {
-        warn("lnglat");
         $c->detach
           unless $c->req->param('lnglat') =~
           qr/^(\-?\d+(\.\d+)?)\ \s*(\-?\d+(\.\d+)?)$/;
@@ -236,12 +233,15 @@ sub list_GET {
             order_by => 'me.name'
         },
     );
+	use DDP;
+	
     $self->status_ok(
         $c,
         entity => {
             projects => [
                 map {
                     my $r = $_;
+					p$r;
                     +{
                         (
                             map { $_ => $r->{$_} }
@@ -266,6 +266,12 @@ sub list_GET {
                                 } @{ $r->{goal_projects} },
                             ),
                         ],
+						( interation => $r->{approved_project_events} ? do {
+							my $x = $r->{approved_project_events}[0];
+                            +{
+                              ( map { $_ => $x->{$_} } qw/id/ ),
+                            }
+						} : undef ),
                         url => $c->uri_for_action(
                             $self->action_for('result'),
                             [ $r->{id} ]
@@ -345,5 +351,17 @@ sub geom : Chained('base') PathPart('geom') : Args(0) {
     $self->status_ok( $c, entity => { geom => $geom } );
 
 }
+sub list_geom : Chained('base') PathPart('list_geom') : Args(0) {
+    my ( $self, $c ) = @_;
 
+    my @geom = $c->model('DB')->resultset('Project')->search(
+        { -and => [ latitude => { '!=' , undef }, longitude => { '!=', undef } ] },
+        {
+            columns =>
+              [qw( id name latitude longitude)],
+        }
+    )->as_hashref->all;
+    $self->status_ok( $c, entity => { geom => \@geom } );
+
+}
 1;

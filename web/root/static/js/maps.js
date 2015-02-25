@@ -22,6 +22,7 @@ var $maps = function () {
     	infoBubble,
     	addr,
     	geocoder,
+		mc,
 		marker_array = [];
 
 	function setAllMap(dado){
@@ -35,6 +36,7 @@ var $maps = function () {
 	function deleteMarkers(){
 		clearMarkers();
 		marker_array = [];
+		mc.clearMarkers();
 	}
 
     function initialize() {
@@ -97,7 +99,7 @@ var $maps = function () {
         			//window.location.href = url;
     			});
 			});
-			var mc = new MarkerClusterer(map, marker_array);
+			mc = new MarkerClusterer(map, marker_array);
 			map.setZoom(12);
 		});
 	
@@ -444,6 +446,40 @@ var $maps = function () {
 		map.setCenter(location);
 	    map.setZoom(16);
 	}
+	function render_goal(){
+		var ib;
+		var myLatlng;
+		$.post( "/home/goal/search_by_types", { type_id: $('#type_goal option:selected').val(), region_id: $('#goalregion option:selected').val() }, function( data ) {
+			console.log(data);
+			data.plural = (data.goals.length > 1);
+			var template = $('#row_template').html();
+			var html = Mustache.to_html(template, data);
+			$('#result').html(html);
+		},"json");
+	}
+	function render_goal_latlng(){
+		var myLatlng;
+		var ib;
+
+		geocoder = new google.maps.Geocoder();
+
+		geocoder.geocode({ 'address': $('#txtaddress').val() + ', Brasil', 'region': 'BR' }, function (results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				if (results[0]) {
+					var latitude = results[0].geometry.location.lat();
+					var longitude = results[0].geometry.location.lng();
+					$('#txtEndereco').val(results[0].formatted_address);
+					$.post("/home/goal/search_by_types",{ latitude: latitude, longitude: longitude, type_id: $('#type option:selected').val() },function(data){
+						var template = $('#row_template').html();
+	   					var html = Mustache.to_html(template, data);
+						$('#result').html(html);
+					},"json");
+				}
+			}
+		});
+	}
+
+
 	function render_projects(){
 	var ib;
 	var myLatlng;
@@ -453,8 +489,9 @@ var $maps = function () {
 	   				var html = Mustache.to_html(template, data);
 					$('#result').html(html);
 					$maps.deleteMarkers();
-					console.log(data);	
 					$.each(data.projects, function(i, pj){
+				
+						if (pj.latitude == 0 && pj.longitude == 0) return;
 						marker = "";	
 						console.log(pj);
 						myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
@@ -464,6 +501,7 @@ var $maps = function () {
 		    	            url: "/home/project/"+pj.id,
 		       		        icon: "/static/images/icone_mapa.png"
         	   		 	});
+						marker_array.push(marker);
 						var url = marker.url;
 						var content = '<div class="project-bubble"><div class="name">';
 						content += pj.name + '</div>';
@@ -498,6 +536,7 @@ var $maps = function () {
         			//window.location.href = url;
 					})
 				  })
+					mc = new MarkerClusterer(map, marker_array);
 					map.setCenter(myLatlng);
 	    		},"json");
 
@@ -581,16 +620,17 @@ function render_project_latlng(){
 		showregions              : showregions,
 		deleteMarkers 			 : deleteMarkers,
 		render_projects			 : render_projects,
-		render_project_latlng	 : render_project_latlng
+		render_project_latlng	 : render_project_latlng,
+		render_goal	 			 : render_goal,
+		render_goal_latlng	 	 : render_goal_latlng
 	};
 }();
 
 $(document).ready(function () {
+	if ($("#pagetype").val() != 'homegoal'){	
 		$maps.initialize();
+	}
 	if ($("#pagetype").val() == 'home'){	
-		$maps.loadproject();
-	}		
-	if ($("#pagetype").val() == 'homegoal'){	
 		$maps.loadproject();
 	}		
 	if ($("#pagetype").val() == 'projectdetail'){	
@@ -613,21 +653,21 @@ $(document).ready(function () {
 	}
 
 
-	$("#type_goal").change(function(){
-		var id = $( "#type_goal option:selected" ).val();
-		$("section.map .map-overlay").fadeIn();
-     	$.get("/home/goal/type",{type_id: id}).done( function(data){
-			$("section.map .map-overlay").fadeOut();
-			document.getElementById("result").innerHTML=data
-       	});
-	});
+//	$("#type_goal").change(function(){
+//		var id = $( "#type_goal option:selected" ).val();
+//		$("section.map .map-overlay").fadeIn();
+//    	$.get("/home/goal/type",{type_id: id}).done( function(data){
+//			$("section.map .map-overlay").fadeOut();
+//			document.getElementById("result").innerHTML=data
+//      	});
+//	});
 
-	$("#goalregion").change(function(){
-		var id = $( "#goalregion option:selected" ).val();
-     	$.get("/home/goal/region",{region_id: id}).done( function(data){
-			document.getElementById("result").innerHTML=data
-       	});
-	});
+//	$("#goalregion").change(function(){
+//		var id = $( "#goalregion option:selected" ).val();
+//    	$.get("/home/goal/region",{region_id: id}).done( function(data){
+//			document.getElementById("result").innerHTML=data
+//      	});
+//	});
 	$('#search').on('click', function () {
 		var ib;
 		var id = $(this).data("id");
@@ -638,10 +678,16 @@ $(document).ready(function () {
 			}
 
 	})
+	$('#searchgoal').on('click', function () {
+		var ib;
+		var id = $(this).data("id");
+		if ($('#txtaddress').val() && $('type option:selected').val() != 'Distrito'){
+				$maps.render_goal_latlng()	
+			} else {
+				$maps.render_goal()
+			}
 
-
-
-
+	})
 
 	$("#txtaddress").autocomplete({
 	source: function (request, response) {

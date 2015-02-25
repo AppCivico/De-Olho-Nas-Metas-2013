@@ -42,8 +42,6 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
         stash  => 'project_obj',
         params => { user_id => $user_id ? $user_id : '' }
     );
-    use DDP;
-    p $c->stash->{project_obj};
     if ( $c->user ) {
         $api->stash_result( $c, [ 'users', $c->user->obj->id ], stash => 'user_obj', );
         $c->stash->{user_obj}->{role} = { map { $_ => 1 } @{ $c->stash->{user_obj}->{roles} } };
@@ -222,8 +220,6 @@ sub search_by_types : Chained('base') : Args(0) {
     my ( $self, $c ) = @_;
     my $lat  = $c->req->param('latitude');
     my $long = $c->req->param('longitude');
-    use DDP;
-    p $c->req->params;
     $lat  = "" unless $lat =~ qr/^(\-?\d+(\.\d+)?)$/;
     $long = "" unless $long =~ qr/^(\-?\d+(\.\d+)?)$/;
 
@@ -243,8 +239,6 @@ sub search_by_types : Chained('base') : Args(0) {
         }
     );
     $c->res->status(200);
-    use DDP;
-    p $c->stash->{projects};
     $c->detach( '/form/as_json', [ { projects => $c->stash->{projects} } ] );
 }
 

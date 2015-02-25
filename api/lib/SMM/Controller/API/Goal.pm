@@ -42,8 +42,6 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $goal = $c->stash->{goal};
-    use DDP;
-    p $c->stash->{goal};
     my @region_ids;
     @region_ids =
       map  { $_->project->region_id }

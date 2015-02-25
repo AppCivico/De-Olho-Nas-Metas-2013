@@ -52,9 +52,8 @@ sub project_map_GET {
 
     my $api = $c->model('API');
 
-    $api->stash_result( $c, 'projects' );
-
-    $self->status_ok( $c, entity => $c->stash->{projects} );
+    $api->stash_result( $c, 'projects/list_geom' );
+    $self->status_ok( $c, entity => $c->stash->{geom} );
 
 }
 
