@@ -2,6 +2,30 @@
 	[%-CALL assets.include("js/Chart.min.js")%]
 	[%-CALL assets.include("js/maps.js")%]
 	[%-CALL assets.include("js/infobubble.min.js")%]
+<script id="row_template" type="text/template">
+			{{#projects.length}}<h2 class="section-title">{{ projects.length}} Projeto{{#plural}}s{{/plural}} Encontrado{{#plural}}s{{/plural}}</h2>{{/projects.length}}
+			{{ #projects }}	
+			<div class="item row">
+				<div class="col-sm-10 nopadding">
+					<div class="contents pull-left">
+						<div class="description">
+							<h2>
+								<a href="/home/project/{{id}}">{{ name }}</a>
+							</h2>
+							<div class="stats">
+								<div class="icon projects"></div> <span class="projects">Meta Associada: {{#goal}}{{name}}{{/goal}}</span>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			{{/projects}}
+			{{^projects}}
+			<h2 class="section-title">Nenhum projeto encontrado.</h2>
+			{{/projects}}
+</script>
+
 <script>
 
 $(document).ready(function () {
@@ -109,28 +133,31 @@ $(document).ready(function () {
 				</div>
 				<div class="col-xs-8">
 					<div class="row">
-						<div class="col-xs-6 region">
-							Filtrar projetos por<br />
-							<div class="select-stylized">
-							<select id="homeregion">
+						<div class="col-xs-4 region">
+							por Distrito<br />
+							<div class="select-stylized"><select id="homeregion">
 								<option value="">Distrito</option>
 								[% FOREACH region IN regions %]
 									<option value="[% region.id %]">[% region.name %]</option>
 								[% END %]
 							</select></div>
 						</div>
-						<div class="col-xs-6 type">
-							&nbsp;<br />
+						<div class="col-xs-4 type">
+							por Tema<br />
 							<div class="select-stylized">
-							<select id="type">
+								<select id="type">
 								<option value="">Temas</option>
 								[% FOREACH type IN objectives %]
 								<option value="[% type.id %]">[% type.name %]</option>
 								[% END %]
 							</select></div>
 						</div>
+						<div class="col-xs-4 type">
+							<br />
+							<button type="button" class="btn btn-default" id="search">Pesquisar</button>
+						</div>
+
 					</div>
-				</div>
 				<div class="clear"></div>
 			</div>
 		</div>

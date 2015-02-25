@@ -1,8 +1,38 @@
 	[%-CALL assets.include("js/maps.js")%]
-	[%-CALL assets.include("js/Chart.min.js")%]
-	[%-CALL assets.include("js/chart-line.js")%]
 	[%-CALL assets.include("js/jshashtable-3.0.js")%]
 	[%-CALL assets.include("js/jquery.numberformatter.min.js")%]
+	<script id="row_template" type="text/template">
+			{{#goals.length}}<h2 class="section-title">{{ goals.length}} Meta{{#plural}}s{{/plural}} Encontrada{{#plural}}s{{/plural}}</h2>{{/goals.length}}
+			{{ #goals }}	
+			<div class="item row">
+				<div class="col-sm-10 nopadding">
+					<div class="contents pull-left">
+						<div class="description">
+							<h2>
+								<a href="/home/goal/{{id}}">Meta {{id}} - {{name}}</a>
+							</h2>
+							<div class="stats">
+								{{#region_count}}
+									<div class="icon regions"></div> <span class="regions"> {{region_count}} Regiões</span>
+								{{/region_count}}
+								{{#project_count}}
+									<div class="icon projects"></div> <span class="projects">{{project_count}} Projetos</span>
+								{{/project_count}}
+							</div>
+
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+
+			{{/goals}}
+			{{^goals}}
+			<h2 class="section-title">Nenhum projeto encontrado.</h2>
+			{{/goals}}
+
+	</script>
+
 <script>
 
 $(document).ready(function () {
@@ -74,27 +104,31 @@ $(document).ready(function () {
 				</div>
 				<div class="col-xs-8">
 					<div class="row">
-						<div class="col-xs-6 region">
-							Filtrar metas por<br />
-							<div class="select-stylized">
-							<select id="goalregion">
+						<div class="col-xs-4 region">
+							por Distrito<br />
+							<div class="select-stylized"><select id="goalregion">
 								<option value="">Distrito</option>
-								[% FOREACH region IN regions%]
-									<option value="[%region.id%]">[% region.name %]</option>
+								[% FOREACH region IN regions %]
+									<option value="[% region.id %]">[% region.name %]</option>
 								[% END %]
 							</select></div>
 						</div>
-						<div class="col-xs-6 type">
-							&nbsp;<br />
-							<div class="select-stylized">
-							<select id="type_goal">
+						<div class="col-xs-4 type">
+							por Tema<br />
+							<div class="select-stylized"><select id="type_goal">
 								<option value="">Temas</option>
 								[% FOREACH type IN objectives %]
 								<option value="[% type.id %]">[% type.name %]</option>
 								[% END %]
 							</select></div>
 						</div>
+						<div class="col-xs-4 type">
+							<br />
+							<button type="button" class="btn btn-default" id="searchgoal">Pesquisar</button>
+						</div>
+
 					</div>
+
 				</div>
 				<div class="clear"></div>
 			</div>

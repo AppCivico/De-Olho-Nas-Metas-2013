@@ -128,7 +128,7 @@
 					</div>
 					
 					<div class="list-box list-green">
-						<span class="header">[% region_obj.projects.size%] Projetos na Região</span>
+						<span class="header">[% region_obj.projects.size%] Projetos neste Distrito</span>
 						<ul>
 							[% IF region_obj.projects.size > 0 %]
 
