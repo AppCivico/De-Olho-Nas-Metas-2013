@@ -233,7 +233,6 @@ sub list_GET {
             order_by => 'me.name'
         },
     );
-	use DDP;
 	
     $self->status_ok(
         $c,
@@ -241,7 +240,6 @@ sub list_GET {
             projects => [
                 map {
                     my $r = $_;
-					p$r;
                     +{
                         (
                             map { $_ => $r->{$_} }
@@ -268,9 +266,7 @@ sub list_GET {
                         ],
 						( interation => $r->{approved_project_events} ? do {
 							my $x = $r->{approved_project_events}[0];
-                            +{
-                              ( map { $_ => $x->{$_} } qw/id/ ),
-                            }
+                              ( map { $x->{$_} } qw/id/ ),
 						} : undef ),
                         url => $c->uri_for_action(
                             $self->action_for('result'),

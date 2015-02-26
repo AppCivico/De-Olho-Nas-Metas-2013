@@ -206,7 +206,7 @@ $(document).ready(function () {
 						</div>
 						[%ELSE%]
 						<div id="follow" class="col-xs-4 text-right">							
-							<a class="btn btn-reply" href="/register">Siga o Projeto</a>
+							<a class="btn btn-reply" href="/cadastro">Siga o Projeto</a>
 						</div>
 
 						[%END%]

@@ -20,14 +20,12 @@
 				</div>
 
 				<div class="notifications">
+					{{#interation}}
 					<div class="notification-icon violet" title="Nova interação do conselheiro" alt="Nova interação do conselheiro">
 						<div class="icon eye2">
 						</div>
 					</div>
-					<div class="notification-icon brown" title="Nova atualização" alt="Nova atualização">
-						<div class="icon check">
-						</div>
-					</div>
+					{{/interation}}
 				</div>
 			</div>
 			{{/projects}}
@@ -47,6 +45,10 @@ $(document).ready(function () {
 
 });
 </script>
+			<!--	<div class="notification-icon brown" title="Nova atualização" alt="Nova atualização">
+						<div class="icon check">
+						</div>
+					</div>-->
 
 	<section class="metas-filtro">
 		<div class="container">
@@ -86,6 +88,7 @@ $(document).ready(function () {
 						</div>
 
 					</div>
+				  </div>
 				<div class="clear"></div>
 			</div>
 		</div>
