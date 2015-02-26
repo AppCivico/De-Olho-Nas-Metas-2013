@@ -575,6 +575,7 @@ section.metas-result{
 
 section.metas-result .item,
 section.metas-detail .item{
+	position: relative;
 	background-color: #fff;
 	font-weight: bold;
 	margin: 15px 0;
@@ -983,11 +984,56 @@ footer .menu-footer li a:hover{
 	margin: 20px 0;
 }
 
+div.notification-icon{
+	width: 30px;
+	height: 30px;
+	display: inline-block;
+	background-image: url("/static/css/images/bg-notification-icon.png");
+	background-repeat: no-repeat;
+}
+
+.metas-detail div.list-organizations,
+.metas-detail div.list-violet{
+	background-color: #795891;
+	margin-bottom: 20px;
+}
+
+div.notification-icon.green{
+	background-color: #8cc63f;
+}
+div.notification-icon.orange{
+	background-color: #f7931e;
+}
+div.notification-icon.gold{
+	background-color: #dea402;
+}
+div.notification-icon.violet{
+	background-color: #795891;
+}
+div.notification-icon.blue{
+	background-color: #00a6cc;
+}
+div.notification-icon.brown{
+	background-color: #703e1c;
+}
+
+section.metas-result .item .notifications,
+section.metas-detail .item .notifications{
+	position: absolute;
+	top: 2px;
+	right: 2px;
+}
+section.metas-result .item .notification-icon,
+section.metas-detail .item .notification-icon{
+	display: block;
+}
+
+
 div.icon{
 	width: 22px;
 	height: 22px;
 	display: inline-block;
-	background-image: url("/static/css/images/icons-meta.png");
+	background-image: url("/static/css/images/icons-meta-2.png");
 	background-repeat: no-repeat;
 	margin-bottom: -6px;
 }
@@ -1043,7 +1089,16 @@ div.followers{
 	margin-top: 30px;
 	font-weight: bold;
 }
+div.icon.eye2{
+	background-position: -264px -22px;
+}
+div.icon.check{
+	background-position: -242px -22px;
+}
 
+div.notification-icon div.icon{
+	margin: 4px;
+}
 .index-results .item{
 	background-color: #fff;
 	margin-bottom: 20px;
