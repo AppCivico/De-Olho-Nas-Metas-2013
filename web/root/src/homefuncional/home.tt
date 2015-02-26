@@ -18,6 +18,17 @@
 					</div>
 					<div class="clear"></div>
 				</div>
+
+				<div class="notifications">
+					<div class="notification-icon violet" title="Nova interação do conselheiro" alt="Nova interação do conselheiro">
+						<div class="icon eye2">
+						</div>
+					</div>
+					<div class="notification-icon brown" title="Nova atualização" alt="Nova atualização">
+						<div class="icon check">
+						</div>
+					</div>
+				</div>
 			</div>
 			{{/projects}}
 			{{^projects}}
