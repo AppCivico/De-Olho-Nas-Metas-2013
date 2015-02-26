@@ -33,7 +33,6 @@ h2{
 }
 
 .btn{
-	background-color: #8cc63f;
 	color: #fff;
 	text-transform: uppercase;
 }
@@ -85,6 +84,14 @@ h2{
 	background-color: #f7931e;
 }
 .btn-orange:hover{
+	color: #000000;
+	background-color: #f4ad5b;
+}
+.btn-red,
+.btn-red:visited{
+	background-color: #f7931e;
+}
+.btn-red:hover{
 	color: #000000;
 	background-color: #f4ad5b;
 }
@@ -1272,7 +1279,7 @@ h3.dotted{
 }
 
 .enquete-detail .form-number{
-	color: #face53;
+	color: #00a99d;
 	font-weight: bold;
 }
 
