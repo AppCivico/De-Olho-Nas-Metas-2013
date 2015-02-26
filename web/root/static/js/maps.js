@@ -450,7 +450,6 @@ var $maps = function () {
 		var ib;
 		var myLatlng;
 		$.post( "/home/goal/search_by_types", { type_id: $('#type_goal option:selected').val(), region_id: $('#goalregion option:selected').val() }, function( data ) {
-			console.log(data);
 			data.plural = (data.goals.length > 1);
 			var template = $('#row_template').html();
 			var html = Mustache.to_html(template, data);
@@ -493,7 +492,6 @@ var $maps = function () {
 				
 						if (pj.latitude == 0 && pj.longitude == 0) return;
 						marker = "";	
-						console.log(pj);
 						myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
 						marker = new google.maps.Marker({
 	    	            	position: myLatlng,
@@ -557,7 +555,6 @@ function render_project_latlng(){
 						$('#result').html(html);
 						$.each(data.projects, function(i, pj){
 							marker = "";	
-							console.log(pj);
 							myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
 							marker = new google.maps.Marker({
 	    	    	        	position: myLatlng,
@@ -733,7 +730,6 @@ $(document).ready(function () {
 
 		if ($("#pagetype").val() == 'homeregion'){		
 			$.getJSON('/home/region/id',{latitude: ui.item.latitude, longitude: ui.item.longitude},function(data,status){
-				console.log(data.error);
 				if (data.message){
 					document.getElementById("result").innerHTML="<h2 class=\"section-tittle\">"+data.message+"</h2>"
 				}else{

@@ -238,6 +238,8 @@ sub search_by_types : Chained('base') : Args(0) {
             lnglat    => $lnglat    ? $lnglat    : ""
         }
     );
+	use DDP;
+	p $c->stash->{projects};
     $c->res->status(200);
     $c->detach( '/form/as_json', [ { projects => $c->stash->{projects} } ] );
 }

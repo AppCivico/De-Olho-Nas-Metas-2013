@@ -13,7 +13,7 @@ $(document).ready(function () {
 	}else{
 		url = "/home/organization/user_stop_counsil";
 		$(this).addClass('follow');
-		textview = "Siga o Projeto";	
+		textview = "Siga o Conselho";	
 	}
 	$(this).attr('disabled',true);
 	$.post( url, { user_id: $(this).data("id"), counsil_id: $('#orgid').val() },function( data ) {
@@ -91,11 +91,11 @@ $(document).ready(function () {
 
 						[% IF c.user%]
 						<div id="follow" class="col-xs-6 text-right">							
-							<button  type="button" id="follow_or_not" class="btn btn-reply [% do_i_follow > 0 ? "" : "follow"%]" data-id="[% c.user.obj.id%]" autocomplete="off"><span>[% do_i_follow > 0 ? "Parar de Seguir" : "Siga o Projeto" %]</span></button>
+							<button  type="button" id="follow_or_not" class="btn btn-reply [% do_i_follow > 0 ? "" : "follow"%]" data-id="[% c.user.obj.id%]" autocomplete="off"><span>[% do_i_follow > 0 ? "Parar de Seguir" : "Siga o Conselho" %]</span></button>
 						</div>
 						[%ELSE%]
 						<div id="follow" class="col-xs-7 text-right">							
-							<a class="btn btn-reply" href="/register">Siga o Projeto</a>
+							<a class="btn btn-reply" href="/cadastro">Siga o Conselho</a>
 						</div>
 
 						[%END%]

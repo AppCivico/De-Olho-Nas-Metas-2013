@@ -80,6 +80,7 @@ $(document).ready(function () {
 						</div>
 
 					</div>
+				  </div>
 				<div class="clear"></div>
 			</div>
 		</div>
