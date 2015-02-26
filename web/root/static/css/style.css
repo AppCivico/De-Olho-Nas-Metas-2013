@@ -305,17 +305,29 @@ footer .logo-footer{
 }
 
 .project-bubble{
+	padding: 10px;
 	font-size: 12pt;
 	position: relative;
 	text-align: left;
+	color: #fff;
 }
 .project-bubble .name{
-	color: #8cc63f;
+	color: #fff;
 	font-weight: bold;
 	text-align: left;
 }
+.project-bubble .name a{
+	color: #fff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 1.2em;
+}
+.project-bubble .name a:hover{
+	text-decoration: underline;
+}
 .project-bubble .description{
 	text-align: left;
+	color: #fff;
 }
 .project-bubble a.link{
 	position: absolute;
