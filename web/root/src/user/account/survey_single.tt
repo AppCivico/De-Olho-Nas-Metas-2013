@@ -64,42 +64,51 @@
     </section>
 
 
-	   <section class="metas-result enquete-list">
+	   <section class="metas-detail enquete-detail">
 		<div class="container">
+		
+			<h1>Nome da Enquete</h1>
+			
+			<div class="description">Unerdwear.com gummi bears bonbon. Cheese cake dessert cupcake. Pastry wafer brownie liquorice. Unerdwear.com gummi bears bonbon.</div>
+			
+			<div class="category">Tecnologia e inovação, Saúde e Meio Ambiente</div>
+			
+			<div class="row">
+				<div class="col-sm-4 text-center">
+					<button class="btn btn-danger">Desativar</button>
+				</div>
+				<div class="col-sm-4 text-center">
+					<button class="btn btn-yellow">Clonar</button>
+				</div>
+				<div class="col-sm-4 text-center">
+					<button class="btn btn-navy">Ver resultados</button>
+				</div>
+			</div>
 
-				<h2 class="section-title">Enquetes Móveis</h2>
-
-				[% FOREACH enquete IN campaigns%]	
+			<h3>
+				Formulário
+				<button class="btn btn-reply pull-right">Editar</button>
+			</h3>
+			
+			<div class="form-list">
 				<div class="row item">
-					<div class="contents">
-						<h2>[%enquete.tittle%]</h2>
-						<div class="description">[% enquete.title%]</div>
-						<div class="row">
-							<div class="col-xs-4 text-left">
-								<div class="icon chat[% IF enquete.status != 'active'%]3[% END %]"></div>
-								<span class="status[% IF enquete.status == 'active'%] active[% END %]">
-								[% IF enquete.status == 'active'%]
-									Ativo
-								[% ELSE %]
-									Pausada
-								[% END %]
-								</span>
-							</div>
-							<div class="col-xs-4 text-center">
-								<a href="" class="clone"><div class="icon clone"></div> Clonar</a>
-							</div>
-							<div class="col-xs-4 text-right">
-								<a href="/user/perfil/enquete/[%enquete.id%]" class="view-results"><div class="icon results"></div> Ver detalhes</a>
-							</div>
-						</div>
+					<div class="col-xs-1">
+						<div class="form-number bold">01.</div>
 					</div>
-					<div class="icon-status [% IF enquete.status == 'active'%]active[% END %]">
-						<div class="icon chat3"></div>
+					<div class="col-xs-11">
+						<div class="form-title">Wafer bonbon soufflé dessert marzipan topping tart caramels liquorice.</a></div>
 					</div>
 				</div>
-				[% END%]
 
+				<div class="row item">
+					<div class="col-xs-1">
+						<div class="form-number bold">02.</div>
+					</div>
+					<div class="col-xs-11">
+						<div class="form-title">Wafer bonbon soufflé dessert marzipan topping tart.</a></div>
+					</div>
+				</div>
 			</div>
-			
+		
 		</div>
-    </section>
+    </section>	
