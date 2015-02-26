@@ -106,10 +106,10 @@
 						<a href="#">Contato</a>
 					</li>
 					<li>
-						<a href="#">Cadastro</a>
+						<a href="/cadastro">Cadastro</a>
 					</li>
 					<li>
-						<a href="#">Entrar</a>
+						<a href="/login">Entrar</a>
 					</li>
 				</ul>
 			</div>
