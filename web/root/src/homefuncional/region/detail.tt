@@ -41,16 +41,16 @@
 	<section class="metas-filtro gold">
 		<div class="container">
 			<div class="form">
-				<div class="col-xs-4 cep">
+				<div class="col-sm-4 cep">
 					Encontre seu distrito<br />
 					<input type="hidden" id="pagetype" value="regiondetail">
 					<input type="hidden" id="regionid" value="[% region_obj.id %]">
 					<input type="text" id="txtaddress" placeholder="Informe o CEP">
 					<button id="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
 				</div>
-				<div class="col-xs-8">
+				<div class="col-sm-8">
 					<div class="row">
-						<div class="col-xs-6 region">
+						<div class="col-sm-6 region">
 							Selecione o Distrito<br />
 							<div class="select-stylized">
 							<select id="region" onchange="location = this.options[this.selectedIndex].value;">

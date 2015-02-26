@@ -52,6 +52,12 @@ $(document).ready(function () {
 
 	$('#text_comment').val('');
 	});
+
+	$("#homeregion").change(function(){
+       	$(".metas-filtro .form .region .select-stylized").removeClass("disabled");
+       	$(".metas-filtro .form .cep button").addClass("disabled");
+       	$("#txtaddress").val("");
+	});
  
   });
 </script>
@@ -60,7 +66,7 @@ $(document).ready(function () {
 			<div class="contents text-center">
 				<div class="item">
 					<div class="icon transport">
-					</div>
+					</div>.addClass("metas-result")
 				</div>
 				<div class="item">
 					<div class="icon home">
@@ -95,16 +101,16 @@ $(document).ready(function () {
 	<section class="metas-filtro">
 		<div class="container">
 			<div class="form">
-				<div class="col-xs-4 cep">
+				<div class="col-sm-4 cep">
 					Metas próximas a mim<br />
 					<input type="hidden" id="pagetype" value="goaldetail">
 					<input type="hidden" id="goalid" value="[% goal_obj.id%]">
 					<input type="text" id="txtaddress" name="txtaddress" placeholder="Informe o CEP">
 					<button id="btnaddress" name="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
 				</div>
-				<div class="col-xs-8">
+				<div class="col-sm-8">
 					<div class="row">
-						<div class="col-xs-4 region">
+						<div class="col-sm-4 region">
 							por Distrito<br />
 							<div class="select-stylized"><select id="goalregion">
 								<option value="">Distrito</option>
@@ -113,7 +119,7 @@ $(document).ready(function () {
 								[% END %]
 							</select></div>
 						</div>
-						<div class="col-xs-4 type">
+						<div class="col-sm-4 type">
 							por Tema<br />
 							<div class="select-stylized"><select id="type_goal">
 								<option value="">Temas</option>
@@ -122,7 +128,7 @@ $(document).ready(function () {
 								[% END %]
 							</select></div>
 						</div>
-						<div class="col-xs-4 type">
+						<div class="col-sm-4 type">
 							<br />
 							<button type="button" class="btn btn-default" id="searchgoal">Pesquisar</button>
 						</div>
@@ -135,7 +141,7 @@ $(document).ready(function () {
 		</div>
     </section>
 
-    <section class="metas-detail">
+    <section class="project-detail metas-detail">
 		<div id="result" class="container">
 
 			<div class="row">
@@ -163,9 +169,9 @@ $(document).ready(function () {
 						</script>
 					</div>-->
 					<section class="statistics">
-						<h2 class="section-title">Progresso</h2>
+						<h3>Progresso</h3>
 						<div class="progress">
-						  <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: [%goal_obj.goal_porcentages.owned%]%;">
+						  <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="[%goal_obj.goal_porcentages.owned%]" aria-valuemin="0" aria-valuemax="100" style="width: [%goal_obj.goal_porcentages.owned%]%;">
 							   [%goal_obj.goal_porcentages.owned%]%
 			              </div>
 						</div>
@@ -173,7 +179,7 @@ $(document).ready(function () {
 				    </section>
 
 					<div class="indicators">
-						<h2 class="section-title">Progresso Qualitativo</h2>
+						<h3>Progresso Qualitativo</h3>
 						<div id="info">
 						[% IF goal_obj.qualitative_progress_1%]<span>Etapa 1:<p>[% goal_obj.qualitative_progress_1%]</p></span>[%END%]
 						[% IF goal_obj.qualitative_progress_2%]<span>Etapa 2:<p>[% goal_obj.qualitative_progress_2%]</p></span>[%END%]

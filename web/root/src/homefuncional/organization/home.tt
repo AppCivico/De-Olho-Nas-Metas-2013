@@ -80,20 +80,20 @@
 	<section class="metas-filtro">
 		<div class="container">
 			<form>
-				<div class="col-xs-4 cep">
+				<div class="col-sm-4 cep">
 					Metas próximas a mim<br />
 					<input type="text" placeholder="Informe o CEP">
 					<button><span class="glyphicon glyphicon-search"></span></button>
 				</div>
-				<div class="col-xs-8">
+				<div class="col-sm-8">
 					<div class="row">
-						<div class="col-xs-6 region">
+						<div class="col-sm-6 region">
 							Filtrar metas por<br />
 							<select>
 								<option>Nome da região
 							</select>
 						</div>
-						<div class="col-xs-6 type">
+						<div class="col-sm-6 type">
 							&nbsp;<br />
 							<select>
 								<option>Esporte e lazer

@@ -38,14 +38,14 @@
 	<section class="metas-filtro">
 		<div class="container">
 			<form>
-				<div class="col-xs-6 cep">
+				<div class="col-sm-6 cep">
 					PROCURAR EMPRESAS<br />
 					<input type="text" placeholder="Informe o Nome">
 					<button><span class="glyphicon glyphicon-search"></span></button>
 				</div>
-				<div class="col-xs-6">
+				<div class="col-sm-6">
 					<div class="row">
-						<div class="col-xs-6 region">
+						<div class="col-sm-6 region">
 							FILTRAR EMPRESAS POR<br />
 							<select>
 								<option>Metas
