@@ -62,8 +62,10 @@ sub edit : Chained('object') : PathPart('editar') : Args(0) {
     );
 
 }
+sub survey :Chained('object') :PathPart(enquete) :CaptureArgs(0){
+}
 
-sub survey : Chained('object') : PathPart('enquete') : Args(0) {
+sub survey_list : Chained('survey') : PathPart('') : Args(0) {
     my ( $self, $c ) = @_;
 
     my $return;
@@ -89,7 +91,7 @@ sub survey : Chained('object') : PathPart('enquete') : Args(0) {
     $c->stash->{campaigns} = $data->{payload};
 
 }
-sub survey_single : Chained('object') : PathPart('enquete') : Args(1) {
+sub survey_single : Chained('survey') : PathPart('detalhe') : Args(1) {
     my ( $self, $c , $id) = @_;
 
     my $return;
@@ -100,8 +102,6 @@ sub survey_single : Chained('object') : PathPart('enquete') : Args(1) {
     my $url = URI->new('http://dev.monitor.promisetracker.org');
 
 	$url->path_segments('api','v1','campaigns',$id);
-	use DDP;
-	p $url;
     eval {
         $return = $model->_do_http_req(
             method  => 'GET',
@@ -111,7 +111,38 @@ sub survey_single : Chained('object') : PathPart('enquete') : Args(1) {
     };
 
     my $data = decode_json $return->content;
-    $c->stash->{campaign} = $data;
+	use DDP;
+    $c->stash->{campaign} = $data->{payload};
+
+	p $c->stash->{campaign};
+}
+sub survey_clone : Chained('survey') : PathPart('clonar') : Args(1) {
+    my ( $self, $c , $id) = @_;
+
+    my $return;
+    my $res;
+
+    my $model = $c->model('API');
+
+    my $url = URI->new('http://dev.monitor.promisetracker.org');
+
+	$url->path_segments('api','v1','campaigns');
+	$url->query_form( username => 'teste2', user_id => 2, campaign_id => 86 );
+
+    eval {
+        $return = $model->_do_http_req(
+            method  => 'POST',
+            url     => $url,
+            headers => [ Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' ],
+        );
+    };
+	
+#    my $data = decode_json $return->content;
+	use DDP;
+	p $return;
+#	p $data;
+	p $url;
+    #$c->stash->{campaign} = $data;
 
 }
 sub follow : Chained('object') : PathPart('seguindo') : Args(0) {

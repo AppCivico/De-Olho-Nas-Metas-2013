@@ -86,10 +86,10 @@
 								</span>
 							</div>
 							<div class="col-xs-4 text-center">
-								<a href="" class="clone"><div class="icon clone"></div> Clonar</a>
+								<a href="/user/perfil/enquete/clonar/[%enquete.id%]" class="clone"><div class="icon clone"></div> Clonar</a>
 							</div>
 							<div class="col-xs-4 text-right">
-								<a href="/user/perfil/enquete/[%enquete.id%]" class="view-results"><div class="icon results"></div> Ver detalhes</a>
+								<a href="/user/perfil/enquete/detalhe/[%enquete.id%]" class="view-results"><div class="icon results"></div> Ver detalhes</a>
 							</div>
 						</div>
 					</div>
