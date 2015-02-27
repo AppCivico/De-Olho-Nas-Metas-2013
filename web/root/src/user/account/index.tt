@@ -1,10 +1,16 @@
 <script>    
 $(document).ready(function () {
   $('.close').on('click', function () {
-	var id = $(this).data("id");
-	$.post( "/home/project_event_read/visualizado", { user_id: $('#user_id').val(), project_event_id: id  }, function( data ) {
-		console.log(data);
- 	},"json");	
+	var id = $(this).data("id"),
+		item = $(this).parent().parent();
+		$(this).addClass("disabled");
+		$(item).addClass("disabled");
+		$(item).find(".col-xs-11").html("Removendo...");
+		$.post( "/home/project_event_read/visualizado", { user_id: $('#user_id').val(), project_event_id: id  }, function( data ) {
+			$(item).fadeOut("fast",function(){
+				$(this).remove();
+			});
+	 	},"json");	
   })
 });
 </script>
@@ -66,13 +72,13 @@ $(document).ready(function () {
 							</div>
 													
 							<div class="col-xs-11">
+								<button type="button" id="close" class="close" data-id="[% pe.id%]" data-dismiss="item" aria-label="Close">
+								  <span aria-hidden="true">&times;</span>
+								</button>
 								<div class="title">O projeto "[% ufp.project.name%]" foi atualizado.</div>
 								<div class="title">[%pe.text%]</div>
 							</div>
 
-							<button type="button" id="close" class="close" data-id="[% pe.id%]" data-dismiss="alert" aria-label="Close">
-							  <span aria-hidden="true">&times;</span>
-							</button>
 						</div>
 						[% END %]
 						[% END %]

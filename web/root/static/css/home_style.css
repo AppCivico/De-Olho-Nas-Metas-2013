@@ -1374,6 +1374,10 @@ table.dataTable.orange thead{
 	padding-bottom: 10px;
 	clear: both;
 }
+.notification-list .item.disabled,
+.activity-list .item.disabled{
+	color: #ccc;
+}
 .activity-list .date{
 	color: #face53;
 	font-weight: bold;
