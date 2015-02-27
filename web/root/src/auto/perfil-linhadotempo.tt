@@ -139,7 +139,7 @@
 						</div>
 					</div>
 					<div class="text-right">
-						<button class="btn btn-reply">Ver todas</button>
+						<button class="btn btn-brown">Ver todas</button>
 					</div>
 					
 					<h3 class="dotted">Atividades recentes</h3>
@@ -170,7 +170,7 @@
 						</div>
 					</div>
 					<div class="text-right">
-						<button class="btn btn-reply">Ver todas</button>
+						<button class="btn btn-brown">Ver todas</button>
 					</div>
 					<br /><br />
 				</div>

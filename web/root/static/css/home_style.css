@@ -45,12 +45,12 @@ h2{
 .btn-yellow{
 	background-color: #face53;
 }
-.btn-reply{
+.btn-brown{
 	background-color: #42210b;
 	color: #fff;
 	border-radius: 0px;
 }
-.btn-reply:hover{
+.btn-brown:hover{
 	background-color: #703e1c;
 }
 .btn-white{

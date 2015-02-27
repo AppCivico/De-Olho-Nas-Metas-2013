@@ -87,7 +87,7 @@
 
 			<h3>
 				Formulário
-				<button class="btn btn-reply pull-right">Editar</button>
+				<button class="btn btn-brown pull-right">Editar</button>
 			</h3>
 			
 			<div class="form-list">

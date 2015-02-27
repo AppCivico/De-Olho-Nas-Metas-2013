@@ -44,19 +44,20 @@ h2{
 }
 .btn-yellow,
 .btn-yellow:visited{
+	color: #703e1c;
 	background-color: #face53;
 }
 .btn-yellow:hover{
 	color: #000000;
 	background-color: #e6be4e;
 }
-.btn-reply,
-.btn-reply:visited{
+.btn-brown,
+.btn-brown:visited{
 	background-color: #42210b;
 	color: #fff;
 	border-radius: 0px;
 }
-.btn-reply:hover{
+.btn-brown:hover{
 	background-color: #703e1c;
 	color: #fff;
 }
@@ -95,6 +96,11 @@ h2{
 	color: #000000;
 	background-color: #f4ad5b;
 }
+
+.green{
+	color: #8cc63f;
+}
+
 .menu-social li a{
 	float: left;
 	text-indent: -999em;
@@ -310,6 +316,7 @@ footer .logo-footer{
 	position: relative;
 	text-align: left;
 	color: #fff;
+	min-width: 200px;
 }
 .project-bubble .name{
 	color: #fff;
@@ -327,6 +334,9 @@ footer .logo-footer{
 }
 .project-bubble .description{
 	text-align: left;
+	color: #fff;
+}
+.project-bubble .description a{
 	color: #fff;
 }
 .project-bubble a.link{
@@ -657,9 +667,8 @@ section.metas-detail .item{
 		border-bottom: 1px dotted #c6c2c0;
 }
 
-section.statistics .container{
-	padding-top: 50px;
-	padding-bottom: 50px;
+section.statistics{
+	margin: 20px 0;
 }
 section.statistics .progress{
 	height: 40px;
@@ -705,7 +714,6 @@ section.search-list{
 .metas-detail h2,
 .metas-detail h3{
 	font-family: "PT Sans";
-	color: #474135;
 }
 .metas-detail h1{
 	font-family: "Cabin";
@@ -872,6 +880,23 @@ div.list-box ul li:before{
 	margin-top: 10px;
 }
 
+.progress-steps{
+	font-size: 1.5em;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-align: left;
+}
+
+.table-progress-steps .number{
+	font-weight: bold;
+	font-size: 2em;
+	padding: 0 5px;
+	vertical-align: top;
+}
+.table-progress-steps .description{
+	padding: 5px 10px;
+}
+
 footer .menu{
 	padding: 5px;
 	text-align: center;
@@ -1017,7 +1042,8 @@ div.notification-icon{
 	margin-bottom: 20px;
 }
 
-div.notification-icon.green{
+div.notification-icon.green,
+div.progress-bar-green{
 	background-color: #8cc63f;
 }
 div.notification-icon.orange{
@@ -1225,6 +1251,7 @@ div.notification-icon div.icon{
 	text-transform: uppercase;
 	color: #88817b;
 	border-top: 1px solid #c6c2c0;
+	border-bottom: 1px dotted #c6c2c0;
 	padding: 10px 0;
 	margin: 10px 0;
 }
