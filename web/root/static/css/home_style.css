@@ -1414,3 +1414,11 @@ table.dataTable.orange thead{
 .region-bubble-buttons a.btn{
 	margin: 20px 10px;
 }
+
+.company-detail .company-avatar{
+	float: left;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	border: 1px solid #d6cab5;
+	padding: 10px;
+}
