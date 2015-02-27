@@ -729,7 +729,8 @@ section.search-list{
 .metas-detail p,
 .metas-detail h1,
 .metas-detail h2,
-.metas-detail h3{
+.metas-detail h3,
+.metas-detail h4{
 	font-family: "PT Sans";
 }
 .metas-detail h1{
@@ -740,6 +741,14 @@ section.search-list{
 
 .metas-detail h3:first-child{
 	margin-top: 20px;
+}
+.metas-detail h4.subtitle{
+	font-size: 1.3em;
+	font-weight: bold;
+	padding: 0;
+	margin: 0;
+	padding-top: 20px;
+	margin-bottom: -20px;
 }
 .metas-detail ul{
 	padding: 0;

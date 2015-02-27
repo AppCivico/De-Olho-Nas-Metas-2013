@@ -176,6 +176,7 @@ $(document).ready(function () {
 				<div class="col-sm-8">
 				
 					<div class="body">
+						<h4 class="subtitle green">Projeto</h4>
 						<h1>[% project_obj.name %]</h1>
 						<p>
 							[% project_obj.description %]
