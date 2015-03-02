@@ -16,14 +16,17 @@ sub parse {
     my $excel = Spreadsheet::XLSX->new($file);
 
     my %expected_header = (
-        id    => qr /\b(id da v.ri.vel|v.ri.vel id)\b/io,
-        date  => qr /\bdata\b/io,
-        value => qr /\bvalor\b/io,
+        Ano_empenho    => qr /\b(AnoEmpenho)\b/io,
+        cod_orgao  => qr /\bcodorgao\b/io,
+        orgao => qr /\borgao\b/io,
 
-        obs    => qr /\bobserva..o\b/io,
-        source => qr /\bfonte\b/io,
+        txt_emp    => qr /\bTxt_Obs_Eph\b/io,
+        Nome_razao => qr /\bNom_Rzao_Soci_Sof\b/io,
 
-        region_id => qr /\b(id da regi.o|regi.o id)\b/io,
+        total_emp => qr /\b(Val_tot_eph)\b/io,
+        Cod_Cpf_Cnpj_Sof => qr /\b(Val_tot_eph)\b/io,
+        liquidado => qr /\b(liquidado)\b/io,
+        meta_number => qr /\b(meta_n_c)\b/io,
     );
 
     my @rows;
@@ -79,23 +82,6 @@ sub parse {
                     $registro->{$header_name} = $value;
                 }
 
-                if ( exists $registro->{id} && exists $registro->{date} && exists $registro->{value} ) {
-
-                    $registro->{date} =
-                        $registro->{date} =~ /^20[0123][0-9]$/       ? $registro->{date} . '-01-01'
-                      : $registro->{date} =~ /^\d{4}\-\d{2}\-\d{2}$/ ? $registro->{date}
-                      :   DateTime::Format::Excel->parse_datetime( $registro->{date} )->ymd;
-                    $ok++;
-
-                    die 'invalid variable id' unless $registro->{id} =~ /^\d+$/;
-                    die 'invalid region id' if $registro->{region_id} && $registro->{region_id} !~ /^\d+$/;
-
-                    push @rows, $registro;
-
-                }
-                else {
-                    $ignored++;
-                }
             }
 
         }

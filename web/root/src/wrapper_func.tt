@@ -19,11 +19,10 @@
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- Custom Theme CSS -->
-    <link href="/static/css/home_style.css" rel="stylesheet">
 	<link href="/static/css/jquery-ui.theme.min.css" rel="stylesheet">
     <link href="/static/css/jquery-ui.structure.min.css" rel="stylesheet">
     <link href="/static/css/jquery-ui.min.css" rel="stylesheet">
-    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/css/home_style.css" rel="stylesheet">
 </head>
 
     <script src="/static/js/jquery-1.10.2.min.js"></script>
@@ -105,10 +104,10 @@
 						<a href="#">Contato</a>
 					</li>
 					<li>
-						<a href="#">Cadastro</a>
+						<a href="/cadastro">Cadastro</a>
 					</li>
 					<li>
-						<a href="#">Entrar</a>
+						<a href="/login">Entrar</a>
 					</li>
 				</ul>
 			</div>

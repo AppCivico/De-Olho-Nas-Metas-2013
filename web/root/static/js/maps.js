@@ -67,9 +67,9 @@ var $maps = function () {
 				marker_array.push(marker);
 				var url = marker.url;
 				var content = '<div class="project-bubble"><div class="name">';
-				content += pj.name + '</div>';
+				content += '<a href="' + url + '">';
+				content += pj.name + '</a></div>';
 				content += '<div class="description"></div>';
-				content += '<a class="link" href="' + url + '">Veja mais</a>';
 				content += '</div>';
 				google.maps.event.addListener(marker, 'mouseover', function() {
 					if (!ib){
@@ -77,12 +77,12 @@ var $maps = function () {
 				          map: map,
 				          content: content,
 				          shadowStyle: 0,
-				          padding: 10,
-				          backgroundColor: 'rgb(255,255,255)',
+				          padding: 0,
+				          backgroundColor: 'rgb(140,198,63)',
 				          borderRadius: 0,
 				          arrowSize: 15,
 				          borderWidth: 0,
-				          borderColor: '#fff',
+				          borderColor: '#8cc63f',
 				          disableAutoPan: true,
 				          hideCloseButton: false,
 				          arrowPosition: 50,
@@ -112,7 +112,6 @@ var $maps = function () {
 			var json = data;
 			marker = "";
 			var geojson = eval('(' + json.geom_json + ')');
-			var infowindow = new google.maps.InfoWindow();
             var polygon = new GeoJSON(geojson, 
 			{
 					  "strokeColor": "#FF7800",
@@ -137,15 +136,36 @@ var $maps = function () {
 
 			google.maps.event.addListener(polygon, "click", function(event) {
 
-				var content = '<div style="width:200px;height:60px;" class="project-bubble"><div class="name">';
-				content += json.region.name + '</div>';
-				content += '<div class="description"></div>';
-				content += '<a class="link" href="' + url + '">Veja mais</a>';
+				var content = '<div class="project-bubble"><div class="name">';
+				content += '<a href="' + url + '">';
+				content += json.region.name + '</a></div>';
 				content += '</div>';
 
-				infowindow.setContent(content);
-				infowindow.setPosition(event.latLng);
-				infowindow.open(map);
+				if (!ib){
+		              ib = new InfoBubble({
+			          map: map,
+			          content: content,
+	        	      shadowStyle: 0,
+		        	  padding: 0,
+			          backgroundColor: 'rgb(222,164,2)',
+			          borderRadius: 0,
+			          arrowSize: 15,
+			          borderWidth: 0,
+			          borderColor: '#dea402',
+			          disableAutoPan: true,
+			          hideCloseButton: false,
+		    	      arrowPosition: 50,
+	   	      	      arrowStyle: 0,
+	   			      MaxWidth: 340,
+	   	      		  MinHeight: 60
+	   	    	  });
+	       		  ib.open(map);
+	       		  ib.setPosition(event.latLng);
+				}else{
+					ib.setContent(content);
+					ib.setPosition(event.latLng);
+					ib.open(map);
+				}
 			});
 
 
@@ -162,7 +182,7 @@ var $maps = function () {
 		myLatlng = new google.maps.LatLng(-23.554070, -46.634438);	
 		$.getJSON('/home/getregions', function(data,status){
 			var json = data;
-			var infowindow = new google.maps.InfoWindow();
+			//var infowindow = new google.maps.InfoWindow();
 			$.each(json.geoms, function(i, pj){
 				marker = "";
 		    	var geojson = eval('(' + pj.geom_json + ')');
@@ -182,27 +202,53 @@ var $maps = function () {
 
 				google.maps.event.addListener(polygon, "mouseover", function(event) {
 
-				var content = '<div style="width:400px;height:100px;" class="project-bubble"><div class="name">';
-				content += pj.name + '</div>';
-				content += '<div class="region-bubble-buttons text-center">';
-				content += '<a class="btn btn-yellow" href="' + url + '">Distrito</a>';
-				content += '<a class="btn btn-success" href="' + '/home/subprefecture/' +pj.subprefecture_id+ '">Subprefeitura</a></div>';
-				content += '</div>';
+					var content = '<div class="project-bubble" style="width: 200px;"><div class="name">';
+					content += '<a href="' + url + '">';
+					content += pj.name + '</a></div>';
+					content += '<div class="description">';
+					content += '<a href="' + '/home/subprefecture/' +pj.subprefecture_id+ '">Distritos</a></div>';
+					content += '</div>';
 
-				infowindow.setContent(content);
-				infowindow.setPosition(event.latLng);
-				infowindow.open(map);
+					if (!ib){
+  		              ib = new InfoBubble({
+				          map: map,
+				          content: content,
+		        	      shadowStyle: 0,
+			        	  padding: 0,
+				          backgroundColor: 'rgb(222,164,2)',
+				          borderRadius: 0,
+				          arrowSize: 15,
+				          borderWidth: 0,
+				          borderColor: '#dea402',
+				          disableAutoPan: true,
+				          hideCloseButton: false,
+			    	      arrowPosition: 50,
+		   	      	      arrowStyle: 0,
+		   			      MaxWidth: 340,
+		   	      		  MinHeight: 120
+		   	    	  });
+		       		  ib.open(map);
+		       		  ib.setPosition(event.latLng);
+					}else{
+						ib.setContent(content);
+						ib.setPosition(event.latLng);
+						ib.open(map);
+					}
+
+					/*infowindow.setContent(content);
+					infowindow.setPosition(event.latLng);
+					infowindow.open(map);*/
 				});
 
 				map.data.addListener('click', function(event) {
-				    event.feature.setProperty('isColorful', true);
-			    });	
+					    event.feature.setProperty('isColorful', true);
+				});	
 				polygon.getBounds().getCenter();
 				polygon.setMap(map);	
-			
+				
 			});
-		    	map.setCenter(myLatlng);
-		    	map.setZoom(10);
+	    	map.setCenter(myLatlng);
+	    	map.setZoom(10);
       });	
 	}
 
@@ -234,9 +280,8 @@ var $maps = function () {
 	            });
 				var url = marker.url;
 				var content = '<div class="project-bubble"><div class="name">';
-				content += pj.name + '</div>';
-				content += '<div class="description"></div>';
-				content += '<a class="link" href="' + url + '">Veja mais</a>';
+				content += '<a href="' + url + '">';
+				content += pj.name + '</a></div>';
 				content += '</div>';
 				google.maps.event.addListener(marker, 'mouseover', function() {
 					if (!ib){
@@ -244,18 +289,18 @@ var $maps = function () {
 				          map: map,
 				          content: content,
 				          shadowStyle: 0,
-				          padding: 10,
-				          backgroundColor: 'rgb(255,255,255)',
+				          padding: 0,
+				          backgroundColor: 'rgb(140,198,63)',
 				          borderRadius: 0,
 				          arrowSize: 15,
 				          borderWidth: 0,
-				          borderColor: '#fff',
+				          borderColor: '#8cc63f',
 				          disableAutoPan: true,
 				          hideCloseButton: false,
 				          arrowPosition: 50,
 				          arrowStyle: 0,
 				          MaxWidth: 340,
-				          MinHeight: 100
+				          MinHeight: 60
 				        });
 				        ib.open(map, this);
 					}else{
@@ -301,12 +346,12 @@ var $maps = function () {
 				          map: map,
 				          content: content,
 				          shadowStyle: 0,
-				          padding: 10,
-				          backgroundColor: 'rgb(255,255,255)',
+				          padding: 0,
+				          backgroundColor: 'rgb(140,198,63)',
 				          borderRadius: 0,
 				          arrowSize: 15,
 				          borderWidth: 0,
-				          borderColor: '#fff',
+				          borderColor: '#8cc63f',
 				          disableAutoPan: true,
 				          hideCloseButton: false,
 				          arrowPosition: 50,
@@ -332,7 +377,6 @@ var $maps = function () {
 		$.getJSON('/home/subpref_region', { id : subpref_id } ,function(data,status){
 			var json = data;
 			var myLatlng;
-			var infowindow = new google.maps.InfoWindow();
 			$.each(json.regions, function(i, pj){
 				marker = "";
 		    	var geojson = eval('(' + pj.geom_json + ')');
@@ -352,15 +396,35 @@ var $maps = function () {
 
 				google.maps.event.addListener(polygon, "mouseover", function(event) {
 
-					var content = '<div style="width:200px;height:60px;" class="project-bubble"><div class="name">';
-					content += pj.name + '</div>';
-					content += '<div class="description"></div>';
-					content += '<a class="link" href="' + url + '">Veja mais</a>';
+					var content = '<div class="project-bubble"><div class="name">';
+					content += '<a href="' + url + '">';
+					content += pj.name + '</a></div>';
 					content += '</div>';
-
-					infowindow.setContent(content);
-					infowindow.setPosition(event.latLng);
-					infowindow.open(map);
+					if (!ib){
+  		              ib = new InfoBubble({
+				          map: map,
+				          content: content,
+		        	      shadowStyle: 0,
+			        	  padding: 0,
+				          backgroundColor: 'rgb(222,164,2)',
+				          borderRadius: 0,
+				          arrowSize: 15,
+				          borderWidth: 0,
+				          borderColor: '#dea402',
+				          disableAutoPan: true,
+				          hideCloseButton: false,
+			    	      arrowPosition: 50,
+		   	      	      arrowStyle: 0,
+		   			      MaxWidth: 340,
+		   	      		  MinHeight: 60
+		   	    	  });
+		       		  ib.open(map);
+		       		  ib.setPosition(event.latLng);
+					}else{
+						ib.setContent(content);
+						ib.setPosition(event.latLng);
+						ib.open(map);
+					}
 				});
 
 				map.data.addListener('click', function(event) {
@@ -370,22 +434,23 @@ var $maps = function () {
 				polygon.setMap(map);	
 			
 			});
-				myLatlng = new google.maps.LatLng(json.latitude,json.longitude);	
-				marker = new google.maps.Marker({
-    	            position: myLatlng,
-	                map: map,
-	                url: "/home/subprefecture/"+json.id,
-	                icon: "/static/images/icone_mapa.png"
-        	    });
+			myLatlng = new google.maps.LatLng(json.latitude,json.longitude);	
+			marker = new google.maps.Marker({
+	            position: myLatlng,
+                map: map,
+                url: "/home/subprefecture/"+json.id,
+                icon: "/static/images/icone_mapa.png"
+    	    });
 
-		    	map.setCenter(myLatlng);
-		    	map.setZoom(12);	
+	    	map.setCenter(myLatlng);
+	    	map.setZoom(12);	
 
       });	
 	}
 
 
 	function markgoaldetail( goal_id ){
+		var ib;
 		$.getJSON('/home/project_map_list', { id : goal_id } ,function(data,status){
 		
 			$.each(data.project, function(i, pj){
@@ -399,9 +464,8 @@ var $maps = function () {
         	    });
 				var url = marker.url;
 				var content = '<div class="project-bubble"><div class="name">';
-				content += pj.name + '</div>';
-				content += '<div class="description"></div>';
-				content += '<a class="link" href="' + url + '">Veja mais</a>';
+				content += '<a href="' + url + '">';
+				content += pj.name + '</a></div>';
 				content += '</div>';
 				google.maps.event.addListener(marker, 'mouseover', function() {
 					if (!ib){
@@ -409,18 +473,18 @@ var $maps = function () {
 				          map: map,
 				          content: content,
 				          shadowStyle: 0,
-				          padding: 10,
-				          backgroundColor: 'rgb(255,255,255)',
+				          padding: 0,
+				          backgroundColor: 'rgb(140,198,63)',
 				          borderRadius: 0,
 				          arrowSize: 15,
 				          borderWidth: 0,
-				          borderColor: '#fff',
+				          borderColor: '#8cc63f',
 				          disableAutoPan: true,
 				          hideCloseButton: false,
 				          arrowPosition: 50,
 				          arrowStyle: 0,
 				          MaxWidth: 340,
-				          MinHeight: 100
+				          MinHeight: 60
 				        });
 				        ib.open(map, this);
 					}else{
@@ -480,7 +544,6 @@ var $maps = function () {
 		});
 	}
 
-
 	function render_projects(){
 	var ib;
 	var myLatlng;
@@ -505,9 +568,8 @@ var $maps = function () {
 						marker_array.push(marker);
 						var url = marker.url;
 						var content = '<div class="project-bubble"><div class="name">';
-						content += pj.name + '</div>';
-						content += '<div class="description"></div>';
-						content += '<a class="link" href="' + url + '">Veja mais</a>';
+						content += '<a href="' + url + '">';
+						content += pj.name + '</a></div>';
 						content += '</div>';
 						google.maps.event.addListener(marker, 'mouseover', function() {
 							if (!ib){
@@ -515,18 +577,18 @@ var $maps = function () {
 						          map: map,
 						          content: content,
 					              shadowStyle: 0,
-						          padding: 10,
-						          backgroundColor: 'rgb(255,255,255)',
+						          padding: 0,
+						          backgroundColor: 'rgb(140,198,63)',
 						          borderRadius: 0,
 						          arrowSize: 15,
 						          borderWidth: 0,
-						          borderColor: '#fff',
+						          borderColor: '#8cc63f',
 						          disableAutoPan: true,
 						          hideCloseButton: false,
 						          arrowPosition: 50,
 				   	      	      arrowStyle: 0,
 				   			      MaxWidth: 340,
-				   	      		  MinHeight: 100
+				   	      		  MinHeight: 60
 				   	    	  });
 				       		  ib.open(map, this);
 							}else{
@@ -543,7 +605,7 @@ var $maps = function () {
 
 
 	}
-function render_project_latlng(){
+	function render_project_latlng(){
 		var myLatlng;
 		var ib;
 		geocoder.geocode({ 'address': $('#txtaddress').val() + ', Brasil', 'region': 'BR' }, function (results, status) {
@@ -568,9 +630,8 @@ function render_project_latlng(){
     	    	   		 	});
 							var url = marker.url;
 							var content = '<div class="project-bubble"><div class="name">';
-							content += pj.name + '</div>';
-							content += '<div class="description"></div>';
-							content += '<a class="link" href="' + url + '">Veja mais</a>';
+							content += '<a href="' + url + '">';
+							content += pj.name + '</a></div>';
 							content += '</div>';
 							google.maps.event.addListener(marker, 'mouseover', function() {
 								if (!ib){
@@ -578,12 +639,12 @@ function render_project_latlng(){
 							          map: map,
 							          content: content,
 					        	      shadowStyle: 0,
-						        	  padding: 10,
-							          backgroundColor: 'rgb(255,255,255)',
+						        	  padding: 0,
+							          backgroundColor: 'rgb(140,198,63)',
 							          borderRadius: 0,
 							          arrowSize: 15,
 							          borderWidth: 0,
-							          borderColor: '#fff',
+							          borderColor: '#8cc63f',
 							          disableAutoPan: true,
 							          hideCloseButton: false,
 						    	      arrowPosition: 50,

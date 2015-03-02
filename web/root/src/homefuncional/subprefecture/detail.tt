@@ -125,10 +125,11 @@
 						<span class="header">[% subprefecture_obj.regions.size%] Distritos</span>
 						<ul>
 							[% IF subprefecture_obj.regions.size > 0 %]
-
+							<li>
 							[% FOREACH region IN subprefecture_obj.regions%]
-							<a href="[% c.uri_for_action('/homefuncional/region/detail',[region.id] ) %]">[% region.name%][% UNLESS region.id == subprefecture_obj.regions.last.id %],[% END%]</a>							
+							<a href="[% c.uri_for_action('/homefuncional/region/detail',[region.id] ) %]">[% region.name%][% UNLESS region.id == subprefecture_obj.regions.last.id %],[% END%]</a>
 							[% END %]
+							</li>
 							[%ELSE%]
 							<li><a href="">NENHUMA REGIÃO ENCONTRADA</a></li>
 							[% END %]

@@ -142,7 +142,7 @@
 			<div class="col-sm-9">
 				<h3>
 					Enquetes Móveis
-					<button class="btn btn-reply pull-right">Criar nova enquete</button>
+					<button class="btn btn-brown pull-right">Criar nova enquete</button>
 				</h3>
 				
 				<div class="enquete-list">

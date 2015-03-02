@@ -3,6 +3,7 @@ use Moose;
 use namespace::autoclean;
 use JSON;
 use utf8;
+use URI;
 
 BEGIN { extends 'Catalyst::Controller' }
 
@@ -27,8 +28,6 @@ sub index : Chained('object') : PathPart('') : Args(0) {
 
     $api->stash_result( $c, [ 'users/user_project_event', $c->user->obj->id ], stash => 'user_obj', );
     $c->stash->{user_obj}->{role} = { map { $_ => 1 } @{ $c->stash->{user_roles}->{roles} } };
-    use DDP;
-    p $c->stash->{user_obj};
 
 }
 
@@ -63,8 +62,10 @@ sub edit : Chained('object') : PathPart('editar') : Args(0) {
     );
 
 }
+sub survey :Chained('object') :PathPart(enquete) :CaptureArgs(0){
+}
 
-sub survey : Chained('object') : PathPart('enquete') : Args(0) {
+sub survey_list : Chained('survey') : PathPart('') : Args(0) {
     my ( $self, $c ) = @_;
 
     my $return;
@@ -72,8 +73,11 @@ sub survey : Chained('object') : PathPart('enquete') : Args(0) {
 
     my $model = $c->model('API');
 
-    my $url = 'http://dev.monitor.promisetracker.org/api/v1/campaigns';
+    my $url = URI->new('http://dev.monitor.promisetracker.org');
 
+	$url->path_segments('api','v1','campaigns');
+	use DDP;
+	p $url;
     eval {
         $return = $model->_do_http_req(
             method  => 'GET',
@@ -83,10 +87,91 @@ sub survey : Chained('object') : PathPart('enquete') : Args(0) {
     };
 
     my $data = decode_json $return->content;
+	p $data;
     $c->stash->{campaigns} = $data->{payload};
-    use DDP;
-    p $c->stash->{campaigns};
-    warn "lol";
+
+}
+sub survey_single : Chained('survey') : PathPart('detalhe') : Args(1) {
+    my ( $self, $c , $id) = @_;
+
+    my $return;
+    my $res;
+
+    my $model = $c->model('API');
+
+    my $url = URI->new('http://dev.monitor.promisetracker.org');
+
+	$url->path_segments('api','v1','campaigns',$id);
+    eval {
+        $return = $model->_do_http_req(
+            method  => 'GET',
+            url     => $url,
+            headers => [ Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' ],
+        );
+    };
+
+    my $data = decode_json $return->content;
+	use DDP;
+    $c->stash->{campaign} = $data->{payload};
+
+	p $c->stash->{campaign};
+}
+sub survey_clone : Chained('survey') : PathPart('clonar') : Args(1) {
+    my ( $self, $c , $id) = @_;
+
+    my $return;
+    my $res;
+
+    my $model = $c->model('API');
+
+    my $url = URI->new('http://dev.monitor.promisetracker.org');
+
+	$url->path_segments('api','v1','campaigns');
+	$url->query_form( username => 'teste2', user_id => 2, campaign_id => 86 );
+
+    eval {
+        $return = $model->_do_http_req(
+            method  => 'POST',
+            url     => $url,
+            headers => [ Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' ],
+        );
+    };
+	
+#    my $data = decode_json $return->content;
+	use DDP;
+	p $return;
+#	p $data;
+	p $url;
+    #$c->stash->{campaign} = $data;
+
+}
+sub survey_create : Chained('survey') : PathPart('criar') : Args(0) {
+    my ( $self, $c , $id) = @_;
+
+    my $return;
+    my $res;
+
+    my $model = $c->model('API');
+
+    my $url = URI->new('http://dev.monitor.promisetracker.org');
+
+	$url->path_segments('api','v1','campaigns');
+	$url->query_form( username => $c->stash->{user_roles}->{organization}, user_id => $c->user->obj->organization_id);
+
+    eval {
+        $return = $model->_do_http_req(
+            method  => 'POST',
+            url     => $url,
+            headers => [ Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' ],
+        );
+    };
+	
+   # my $data = decode_json $return->content;
+	use DDP;
+	p $return;
+#	p $data;
+	p $url;
+    #$c->stash->{campaign} = $data;
 
 }
 
@@ -96,8 +181,6 @@ sub follow : Chained('object') : PathPart('seguindo') : Args(0) {
     my $api = $c->model('API');
 
     $api->stash_result( $c, [ 'users', $c->user->id ], stash => 'user_obj', );
-    use DDP;
-    p $c->stash->{user_obj};
 }
 
 sub invite : Chained('object') : PathPart('convidar') : Args(0) {

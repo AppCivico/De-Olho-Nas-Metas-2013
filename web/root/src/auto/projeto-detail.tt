@@ -166,7 +166,7 @@
 							</div>
 						</div>
 						<div class="col-xs-4 text-right">
-							<button class="btn btn-reply">Siga o Projeto</button>
+							<button class="btn btn-brown">Siga o Projeto</button>
 						</div>
 					</div>
 
@@ -199,7 +199,7 @@
 								<p class="autor">Nome da pessoa</p>
 								<p class="date">em 00/00/0000</p>
 								<p>Carrot cake topping gummi bears tootsie roll tart cupcake. Marshmallow jelly jujubes candy. Bear claw sugar plum applicake sugar plum. Bear claw candy canes powder donut cookie pastry tiramisu. Pudding jelly-o chocolate croissant sesame snaps. Pudding pudding chocolate cake wafer gingerbread gummies.</p>
-								<button class="btn btn-reply">Responder</button>
+								<button class="btn btn-brown">Responder</button>
 							</div>
 						</div>
 						<div class="item reply row">
@@ -210,7 +210,7 @@
 								<p class="autor">Nome da pessoa</p>
 								<p class="date">em 00/00/0000</p>
 								<p>Carrot cake topping gummi bears tootsie roll tart cupcake. Marshmallow jelly jujubes candy. Bear claw sugar plum applicake sugar plum. Bear claw candy canes powder donut cookie pastry tiramisu. Pudding jelly-o chocolate croissant sesame snaps. Pudding pudding chocolate cake wafer gingerbread gummies.</p>
-								<button class="btn btn-reply">Responder</button>
+								<button class="btn btn-brown">Responder</button>
 							</div>
 						</div>
 						<div class="reply">
@@ -220,7 +220,7 @@
 							</div>
 							<div class="form">
 								<textarea cols="40" rows="5" name="reply" id="reply"></textarea>
-								<button class="btn btn-reply">Comentar</button>
+								<button class="btn btn-brown">Comentar</button>
 							</div>
 						</div>
 					</div>

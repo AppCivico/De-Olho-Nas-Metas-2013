@@ -134,6 +134,25 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key("id");
 
+=head1 UNIQUE CONSTRAINTS
+
+=head2 C<project_event_project_id_is_last_key>
+
+=over 4
+
+=item * L</project_id>
+
+=item * L</is_last>
+
+=back
+
+=cut
+
+__PACKAGE__->add_unique_constraint(
+  "project_event_project_id_is_last_key",
+  ["project_id", "is_last"],
+);
+
 =head1 RELATIONS
 
 =head2 project
@@ -192,8 +211,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-24 11:38:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:cP6QjjNcJQgTTK1KPeRBuQ
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-27 12:59:55
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:WjLfIdl4ByVCxdyKp3gaPw
 
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
