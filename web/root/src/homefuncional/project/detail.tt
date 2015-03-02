@@ -176,6 +176,7 @@ $(document).ready(function () {
 				<div class="col-sm-8">
 				
 					<div class="body">
+						<h4 class="subtitle green">Projeto</h4>
 						<h1>[% project_obj.name %]</h1>
 						<p>
 							[% project_obj.description %]
@@ -202,11 +203,11 @@ $(document).ready(function () {
 						</div>
 						[% IF c.user%]
 						<div id="follow" class="col-xs-4 text-right">							
-							<button  type="button" id="follow_or_not" class="btn btn-reply [% do_i_follow > 0 ? "" : "follow"%]" data-id="[% c.user.obj.id%]" autocomplete="off"><span>[% do_i_follow > 0 ? "Parar de Seguir" : "Siga o Projeto" %]</span></button>
+							<button  type="button" id="follow_or_not" class="btn btn-brown [% do_i_follow > 0 ? "" : "follow"%]" data-id="[% c.user.obj.id%]" autocomplete="off"><span>[% do_i_follow > 0 ? "Parar de Seguir" : "Siga o Projeto" %]</span></button>
 						</div>
 						[%ELSE%]
 						<div id="follow" class="col-xs-4 text-right">							
-							<a class="btn btn-reply" href="/cadastro">Siga o Projeto</a>
+							<a class="btn btn-brown" href="/cadastro">Siga o Projeto</a>
 						</div>
 
 						[%END%]
@@ -270,24 +271,39 @@ $(document).ready(function () {
 					</div>
 
 					<div class="indicators">
-						<h2 class="section-title">Progresso Qualitativo</h2>
-						<div id="info">
-						[% IF project_obj.qualitative_progress_1%]<span>Etapa 1:<p>[% project_obj.qualitative_progress_1%]</p></span>[%END%]
-						[% IF project_obj.qualitative_progress_2%]<span>Etapa 2:<p>[% project_obj.qualitative_progress_2%]</p></span>[%END%]
-						[% IF project_obj.qualitative_progress_3%]<span>Etapa 3:<p>[% project_obj.qualitative_progress_3%]</p></span>[%END%]
-						[% IF project_obj.qualitative_progress_4%]<span>Etapa 4:<p>[% project_obj.qualitative_progress_4%]</p></span>[%END%]
-						[% IF project_obj.qualitative_progress_5%]<span>Etapa 5:<p>[% project_obj.qualitative_progress_5%]</p></span>[%END%]
-						[% IF project_obj.qualitative_progress_6%]<span>Etapa 6:<p>[% project_obj.qualitative_progress_6%]</p></span>[%END%]
-						</div>
-						[% IF project_obj.progress_count == 0%]
-						<p>NENHUM PROGRESSO ATÉ O MOMENTO.</p>
+						<h3>Progresso</h3>
+						<div class="progress-steps green">[% project_obj.progress_count%] de 6 etapas</div>
+						<table class="table-progress-steps">
+						[% IF project_obj.qualitative_progress_1%]
+							<tr><td class="number green">1</td><td class="description">[% project_obj.qualitative_progress_1%]</td></tr>
 						[%END%]
-						<h2 class="section-title">[% project_obj.progress_count%] de 6</h2>
+						[% IF project_obj.qualitative_progress_2%]
+							<tr><td class="number green">2</td><td class="description">[% project_obj.qualitative_progress_2%]</td></tr>
+						[%END%]
+						[% IF project_obj.qualitative_progress_3%]
+							<tr><td class="number green">3</td><td class="description">[% project_obj.qualitative_progress_3%]</td></tr>
+						[%END%]
+						[% IF project_obj.qualitative_progress_4%]
+							<tr><td class="number green">4</td><td class="description">[% project_obj.qualitative_progress_4%]</td></tr>
+						[%END%]
+						[% IF project_obj.qualitative_progress_5%]
+							<tr><td class="number green">5</td><td class="description">[% project_obj.qualitative_progress_5%]</td></tr>
+						[%END%]
+						[% IF project_obj.qualitative_progress_6%]
+							<tr><td class="number green">6</td><td class="description">[% project_obj.qualitative_progress_6%]</td></tr>
+						[%END%]
+						</table>
+						[% IF project_obj.progress_count == 0%]
+							<p>Nenhum progresso até o momento.</p>
+						
+						[%END%]
 					</div>
 
 					<div class="image-gallery">
 					</div>
-						<div>
+
+					<div class="comments">
+						<h3>Comentários</h3>
 						<table id="list_comment" class="table table-striped">
 							<thead>
 								<tr>
@@ -315,6 +331,7 @@ $(document).ready(function () {
 						</table>
 
 					</div>
+
 					<div id="alert_comment">
 					</div>
 					<div>						
@@ -344,7 +361,10 @@ $(document).ready(function () {
 					<div class="list-projects">
 							<span class="header">Planeja Sampa</span>
 						<ul class="list-projects">
-							<a href="http://planejasampa.prefeitura.sp.gov.br/metas/projeto/[%project_obj.project_number%]">Projeto [%project_obj.id%] - [% project_obj.name%]</li>
+							<li>
+								<a href="http://planejasampa.prefeitura.sp.gov.br/metas/projeto/[%project_obj.project_number%]">Projeto [%project_obj.id%] - [% project_obj.name%]
+								</a>
+							</li>
 						</ul>
 					</div>
 

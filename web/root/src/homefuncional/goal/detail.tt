@@ -1,4 +1,5 @@
 	[%-CALL assets.include("js/maps.js")%]
+	[%-CALL assets.include("js/infobubble.min.js")%]
 	[%-CALL assets.include("js/jshashtable-3.0.js")%]
 	[%-CALL assets.include("js/jquery.numberformatter.min.js")%]
 	<script id="row_template" type="text/template">
@@ -66,7 +67,7 @@ $(document).ready(function () {
 			<div class="contents text-center">
 				<div class="item">
 					<div class="icon transport">
-					</div>.addClass("metas-result")
+					</div>
 				</div>
 				<div class="item">
 					<div class="icon home">
@@ -170,29 +171,38 @@ $(document).ready(function () {
 					<section class="statistics">
 						<h3>Progresso</h3>
 						<div class="progress">
-						  <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="[%goal_obj.goal_porcentages.owned%]" aria-valuemin="0" aria-valuemax="100" style="width: [%goal_obj.goal_porcentages.owned%]%;">
+						  <div class="progress-bar progress-bar-success progress-bar-green progress-bar-striped" role="progressbar" aria-valuenow="[%goal_obj.goal_porcentages.owned%]" aria-valuemin="0" aria-valuemax="100" style="width: [%goal_obj.goal_porcentages.owned%]%;">
 							   [%goal_obj.goal_porcentages.owned%]%
 			              </div>
 						</div>
-
-				    </section>
-
-					<div class="indicators">
-						<h3>Progresso Qualitativo</h3>
-						<div id="info">
-						[% IF goal_obj.qualitative_progress_1%]<span>Etapa 1:<p>[% goal_obj.qualitative_progress_1%]</p></span>[%END%]
-						[% IF goal_obj.qualitative_progress_2%]<span>Etapa 2:<p>[% goal_obj.qualitative_progress_2%]</p></span>[%END%]
-						[% IF goal_obj.qualitative_progress_3%]<span>Etapa 3:<p>[% goal_obj.qualitative_progress_3%]</p></span>[%END%]
-						[% IF goal_obj.qualitative_progress_4%]<span>Etapa 4:<p>[% goal_obj.qualitative_progress_4%]</p></span>[%END%]
-						[% IF goal_obj.qualitative_progress_5%]<span>Etapa 5:<p>[% goal_obj.qualitative_progress_5%]</p></span>[%END%]
-						[% IF goal_obj.qualitative_progress_6%]<span>Etapa 6:<p>[% goal_obj.qualitative_progress_6%]</p></span>[%END%]
+						<br />
+						<div class="progress-steps green">[% goal_obj.progress_count%] de 6 etapas</div>
+						<table class="table-progress-steps">
+						[% IF goal_obj.qualitative_progress_1%]
+							<tr><td class="number green">1</td><td class="description">[% goal_obj.qualitative_progress_1%]</td></tr>
+						[%END%]
+						[% IF goal_obj.qualitative_progress_2%]
+							<tr><td class="number green">2</td><td class="description">[% goal_obj.qualitative_progress_2%]</td></tr>
+						[%END%]
+						[% IF goal_obj.qualitative_progress_3%]
+							<tr><td class="number green">3</td><td class="description">[% goal_obj.qualitative_progress_3%]</td></tr>
+						[%END%]
+						[% IF goal_obj.qualitative_progress_4%]
+							<tr><td class="number green">4</td><td class="description">[% goal_obj.qualitative_progress_4%]</td></tr>
+						[%END%]
+						[% IF goal_obj.qualitative_progress_5%]
+							<tr><td class="number green">5</td><td class="description">[% goal_obj.qualitative_progress_5%]</td></tr>
+						[%END%]
+						[% IF goal_obj.qualitative_progress_6%]
+							<tr><td class="number green">6</td><td class="description">[% goal_obj.qualitative_progress_6%]</td></tr>
+						[%END%]
+						</table>
 						[% IF goal_obj.progress_count == 0%]
 							<p>Nenhum progresso até o momento.</p>
 						
 						[%END%]
-						<h2 class="section-title">[% goal_obj.progress_count%] de 6</h2>
-						</div>
-					</div>
+
+				    </section>
 
 					<div class="image-gallery">
 					</div>
@@ -228,6 +238,9 @@ $(document).ready(function () {
 
 					</div>
 					<div>
+
+					<div class="comments">
+						<h3>Comentários</h3>
 						<table id="list_comment" class="table table-striped">
 							<thead>
 								<tr>

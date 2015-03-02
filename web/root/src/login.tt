@@ -123,7 +123,7 @@
 							
 						<!--	<span class="forgot-login"><a href="">Esqueceu a senha?</a></span>-->
 						</div>
-						<button class="btn btn-reply pull-right">Entrar</button>
+						<button class="btn btn-brown pull-right">Entrar</button>
 						</form>
 					
 					</div>					

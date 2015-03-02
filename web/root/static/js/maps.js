@@ -206,7 +206,7 @@ var $maps = function () {
 					content += '<a href="' + url + '">';
 					content += pj.name + '</a></div>';
 					content += '<div class="description">';
-					content += '<a href="' + '/home/subprefecture/' +pj.subprefecture_id+ '">Subprefeitura</a></div>';
+					content += '<a href="' + '/home/subprefecture/' +pj.subprefecture_id+ '">Distritos</a></div>';
 					content += '</div>';
 
 					if (!ib){
@@ -450,6 +450,7 @@ var $maps = function () {
 
 
 	function markgoaldetail( goal_id ){
+		var ib;
 		$.getJSON('/home/project_map_list', { id : goal_id } ,function(data,status){
 		
 			$.each(data.project, function(i, pj){
@@ -543,7 +544,6 @@ var $maps = function () {
 		});
 	}
 
-
 	function render_projects(){
 	var ib;
 	var myLatlng;
@@ -605,7 +605,7 @@ var $maps = function () {
 
 
 	}
-function render_project_latlng(){
+	function render_project_latlng(){
 		var myLatlng;
 		var ib;
 		geocoder.geocode({ 'address': $('#txtaddress').val() + ', Brasil', 'region': 'BR' }, function (results, status) {
