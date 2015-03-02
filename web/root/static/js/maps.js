@@ -462,7 +462,9 @@ var $maps = function () {
 					url : "/home/project/"+pj.id,
 	                icon: "/static/images/icone_mapa.png"
         	    });
-				markers.push(marker);
+				if ( pj.latitude != 0 && pj.longitude != 0){
+					markers.push(marker);
+				}
 				var url = marker.url;
 				var content = '<div class="project-bubble"><div class="name">';
 				content += '<a href="' + url + '">';
@@ -496,8 +498,9 @@ var $maps = function () {
 	        		//window.location.href = url;
 	    		});
 			});
-			if (!markers){
-				$('#map').remove();
+
+			if (markers.length == 0){
+				$('#map').hide();
 			}
 
 		    	map.setZoom(8);
