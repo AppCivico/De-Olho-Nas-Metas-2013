@@ -451,8 +451,8 @@ var $maps = function () {
 
 	function markgoaldetail( goal_id ){
 		var ib;
+		var markers = [];
 		$.getJSON('/home/project_map_list', { id : goal_id } ,function(data,status){
-		
 			$.each(data.project, function(i, pj){
 				marker = "";
 				var myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);
@@ -462,6 +462,7 @@ var $maps = function () {
 					url : "/home/project/"+pj.id,
 	                icon: "/static/images/icone_mapa.png"
         	    });
+				markers.push(marker);
 				var url = marker.url;
 				var content = '<div class="project-bubble"><div class="name">';
 				content += '<a href="' + url + '">';
@@ -495,6 +496,9 @@ var $maps = function () {
 	        		//window.location.href = url;
 	    		});
 			});
+			if (!markers){
+				$('#map').remove();
+			}
 
 		    	map.setZoom(8);
 		});
