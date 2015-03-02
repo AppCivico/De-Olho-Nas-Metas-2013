@@ -236,7 +236,6 @@ $(document).ready(function () {
 
 
 					</div>
-					<div>
 
 					<div class="comments">
 						<h3>Comentários</h3>
