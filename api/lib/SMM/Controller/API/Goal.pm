@@ -14,13 +14,12 @@ __PACKAGE__->config(
     result_attr => {
         prefetch => [
             { 'goal_projects' => 'project' }, 'objective',
-            'approved_comments', 'goal_porcentages'
+            'approved_comments', 'goal_porcentages',
         ],
         '+select' => [
             \q{to_char(approved_comments.timestamp, 'DD/MM/YYYY HH24:MI:SS')},
         ],
         '+as'    => ['approved_comments.process_ts_fmt'],
-        distinct => 1,
         order_by => 'me.id',
 
     },
@@ -42,6 +41,8 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $goal = $c->stash->{goal};
+	my @budgets  =  $goal->budgets->all;
+
     my @region_ids;
     @region_ids =
       map  { $_->project->region_id }
@@ -132,6 +133,30 @@ sub result_GET {
                     } $goal->goal_projects,
                 ),
             ],
+            budgets => [
+                (
+                    map {
+                        my $p = $_;
+                        (
+                            +{
+                                map { $_ => $p->$_ }
+                                  qw/
+                                  id
+                                  business_name
+                                  cnpj
+                                  dedicated_value
+                                  liquidated_value
+                                  observation
+                                  dedicated_year
+                                  organ_code
+                                  organ_name
+                                  /
+                            }
+                          ),
+                    } @budgets,
+                ),
+            ],
+
             project_qt => [
                 (
                     map {
@@ -148,6 +173,7 @@ sub result_GET {
                     } $goal->goal_projects,
                 ),
             ],
+
             region           => \@region,
             goal_porcentages => (
                 map {

@@ -145,14 +145,42 @@ sub survey_clone : Chained('survey') : PathPart('clonar') : Args(1) {
     #$c->stash->{campaign} = $data;
 
 }
+sub survey_create : Chained('survey') : PathPart('criar') : Args(0) {
+    my ( $self, $c , $id) = @_;
+
+    my $return;
+    my $res;
+
+    my $model = $c->model('API');
+
+    my $url = URI->new('http://dev.monitor.promisetracker.org');
+
+	$url->path_segments('api','v1','campaigns');
+	$url->query_form( username => $c->stash->{user_roles}->{organization}, user_id => $c->user->obj->organization_id);
+
+    eval {
+        $return = $model->_do_http_req(
+            method  => 'POST',
+            url     => $url,
+            headers => [ Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' ],
+        );
+    };
+	
+   # my $data = decode_json $return->content;
+	use DDP;
+	p $return;
+#	p $data;
+	p $url;
+    #$c->stash->{campaign} = $data;
+
+}
+
 sub follow : Chained('object') : PathPart('seguindo') : Args(0) {
     my ( $self, $c ) = @_;
 
     my $api = $c->model('API');
 
     $api->stash_result( $c, [ 'users', $c->user->id ], stash => 'user_obj', );
-    use DDP;
-    p $c->stash->{user_obj};
 }
 
 sub invite : Chained('object') : PathPart('convidar') : Args(0) {

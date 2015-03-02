@@ -49,6 +49,13 @@ sub detail : Chained('object') : PathPart('') : Args(0) {
     }
     $c->stash->{goal_obj}->{progress_count} = $count;
 
+	my %empresas = map { $_->{business_name} => 1 } @{$c->stash->{goal_obj}->{budgets}};
+	my @lol = sort keys %empresas;	
+	@{$c->stash->{business_names}} = sort keys %empresas;
+	use DDP; p $c->stash->{business_names};
+	p \%empresas;
+	p \@lol;
+	warn "teste";
 }
 
 sub index : Chained('base') : PathPart('') : Args(0) {

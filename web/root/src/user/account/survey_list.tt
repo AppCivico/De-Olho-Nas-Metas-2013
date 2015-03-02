@@ -55,7 +55,7 @@
 							</div>
 						</div>
 						-->
-							<button class="btn btn-navy">Criar nova enquete</button>
+							<a href="/user/perfil/enquete/criar" class="btn btn-navy">Criar nova enquete</a>
 					</div>
 				</div>
 				<div class="clear"></div>

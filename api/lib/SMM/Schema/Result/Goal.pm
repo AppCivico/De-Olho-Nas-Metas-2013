@@ -321,6 +321,21 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
 
+=head2 budgets
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::Budget>
+
+=cut
+
+__PACKAGE__->has_many(
+  "budgets",
+  "SMM::Schema::Result::Budget",
+  { "foreign.goal_number" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 city
 
 Type: belongs_to
@@ -557,8 +572,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-24 04:34:42
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:TSTc12J25SLKJnQC0yFK0g
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-27 12:59:55
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:FaFCyUjHD8+KH4mFRq09hg
 
 __PACKAGE__->has_many(
     approved_comments => 'SMM::Schema::Result::CommentGoal',

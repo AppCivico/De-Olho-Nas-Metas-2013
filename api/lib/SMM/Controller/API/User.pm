@@ -11,7 +11,7 @@ __PACKAGE__->config(
     result_cond => { 'me.active' => 1 },
 
     result_attr => {
-        prefetch => [ { user_follow_projects => 'project' } ],
+        prefetch => [ { user_follow_projects => 'project' }, 'organization' ],
         distinct => 1
     },
     object_key => 'user',
@@ -35,6 +35,8 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $user  = $c->stash->{user};
+	my $x = $user->organization;
+	use DDP; p $x->name;
     my %attrs = $user->get_inflated_columns;
     $self->status_ok(
         $c,
@@ -45,7 +47,7 @@ sub result_GET {
                 map { $_ => $attrs{$_}, }
                   qw(id name phone_number username email type)
             ),
-
+			( organization => $user->organization ? $user->organization->name : undef ),
             projects_i_follow => [
                 map { $_->project_id }
                   $user->user_follow_projects->search( { active => 1 } )->all

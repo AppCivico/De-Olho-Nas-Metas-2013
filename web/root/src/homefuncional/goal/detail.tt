@@ -153,7 +153,6 @@ $(document).ready(function () {
 							[% goal_obj.description %].
 						</p>
 					</div>
-					<span>Investimento: R$</span><span class="priceformat">[% goal_obj.expected_budget %]> </span>
 <!--				<div class="timeline">
 						<h3 class="section-title">Linha do tempo segundo o cronograma</h3>
 						<div class="chart">
@@ -196,6 +195,37 @@ $(document).ready(function () {
 					</div>
 
 					<div class="image-gallery">
+					</div>
+					<div class="list_budget">
+
+						<h3>Orçamento: R$<span class="priceformat">[% goal_obj.expected_budget %]> </span></h3>
+						<table id="list_budgets" class="table table-striped">
+							<thead>
+								<tr>
+					                <th>Nome da Empresa</th>
+				    	            <th>Tarefa</th>
+				    	            <th>Custo</th>
+								</tr>
+							</thead>
+							<tbody>
+					[% IF goal_obj.budgets.size > 0 %]
+					[% FOREACH bc IN goal_obj.budgets%]
+							<tr>
+								<td>[%bc.business_name%]</td>
+								<td>[%bc.observation%]</td>
+								<td class="priceformat">[%bc.dedicated_value%]</td>
+							</tr>
+		            [%END%]
+					[% ELSE %]
+							<tr>
+								<td colspan="3">Nenhum orçamento encontrado.</td>
+							</tr>
+					[% END %]
+	
+							</tbody>
+						</table>
+
+
 					</div>
 					<div>
 						<table id="list_comment" class="table table-striped">
@@ -277,7 +307,16 @@ $(document).ready(function () {
 						</ul>
 					</div>
 					[% END%]
-
+					[% IF business_names.size > 0%]
+					<div class="list-organizations">
+						<span class="header">[%business_names.size%] Empresa[% IF business_names.size > 1%]s[%END%] Relacionada[% IF business_names.size > 1%]s[% END %]</span>
+						<ul class="list-organizations">
+							[% FOREACH bn IN business_names%]					
+							<li>[% bn%]</li>
+							[% END %]
+						</ul>
+					</div>
+					[%END%]
 				</div>
 			</div>
 			
