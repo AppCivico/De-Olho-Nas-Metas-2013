@@ -750,10 +750,14 @@ section.search-list{
 	padding-top: 20px;
 	margin-bottom: -20px;
 }
-.metas-detail ul{
+.metas-detail ul,
+.metas-detail ul.list-arrow{
 	padding: 0;
 	margin: 0;
 	list-style: none;
+}
+.metas-detail ul.list-arrow li{
+	color: #333;
 }
 
 .metas-detail ul li{
@@ -834,7 +838,8 @@ div.list-brown ul li{
 .metas-detail ul.list-regions li:before,
 .metas-detail ul.list-projects li:before,
 .metas-detail ul.list-organizations li:before,
-div.list-box ul li:before{
+div.list-box ul li:before,
+ul.list-arrow li:before{
 	content: "\003E \0020";
 }
 .metas-detail .list-regions .header,

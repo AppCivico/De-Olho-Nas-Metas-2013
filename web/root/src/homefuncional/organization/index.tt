@@ -66,7 +66,7 @@
 			<h2 class="section-title">[%organizations.count.0%] Conselhos Participativos</h2>
 				
 			<div class="row index-results organization-list violet multi-column">
-				<div class="col-sm-12">
+				<div>
 					<ul>
 					[% FOREACH key IN order %]
 					[% UNLESS key == 'count' %]
