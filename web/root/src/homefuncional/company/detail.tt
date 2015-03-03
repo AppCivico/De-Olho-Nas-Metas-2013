@@ -7,13 +7,58 @@ $(document).ready(function () {
        $('.priceformat').formatNumber({format:"#,###.00",locale: "br" });
 });
 </script>
+
 [% FOR cp IN companies%]
-	<dl class="dl-horizontal">
-	[%FOR x IN cp.agg_budgets%]
-		<dt class="priceformat">[% x.1 %]</dt>
-		<dd>[% x.0 %]</dd>
-	[% END%]	
-	</dl>
-	[% cp.business_name %]
-	[% cp.total_value %]
+    <section class="project-detail metas-detail">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-sm-8">
+				
+					<div class="body">
+						<h4 class="subtitle blue">Empresa</h4>
+						<h1>[% cp.business_name %]</h1>
+
+						<div class="list_budget">
+
+							<h3>Total Recebido: <strong>R$<span class="priceformat">[% cp.total_value %]</span></strong></h3>
+							<table id="list_budgets" class="table table-striped">
+								<thead>
+									<tr>
+					    	            <th>Tarefa</th>
+					    	            <th>Custo (R$)</th>
+									</tr>
+								</thead>
+								<tbody>
+						[% IF cp.agg_budgets.size > 0 %]
+						[%FOR x IN cp.agg_budgets%]
+								<tr>
+									<td>[% x.0 %]</td>
+									<td class="priceformat" width="80">[% x.1 %]</td>
+								</tr>
+			            [%END%]
+						[% ELSE %]
+								<tr>
+									<td colspan="3">Nenhum valor encontrado.</td>
+								</tr>
+						[% END %]
+		
+								</tbody>
+							</table>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="list-box list-green">
+						<span class="header">2 Metas associadas</span>
+						<ul class="list-goals">
+							<li><a href="">Liquorice brownie unerdwear</a></li>
+							<li><a href="">Croissant sugar plum</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 [% END%]
