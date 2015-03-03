@@ -45,7 +45,7 @@
 					Encontre seu distrito<br />
 					<input type="hidden" id="pagetype" value="regiondetail">
 					<input type="hidden" id="regionid" value="[% region_obj.id %]">
-					<input type="text" id="txtaddress" placeholder="Informe o CEP">
+					<input type="text" id="txtaddress" placeholder="CEP">
 					<button id="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
 				</div>
 				<div class="col-sm-8">
@@ -81,6 +81,22 @@
 					</div>
 					
 					<div style="height: 300px;" id="map">
+					</div>
+					
+					<div class="projects">
+						<h3>[% region_obj.projects.size%] Projetos neste Distrito</h3>
+						<ul class="list-arrow multi-column-2">
+							[% IF region_obj.projects.size > 0 %]
+
+							[% FOREACH project IN region_obj.projects%]
+							
+							<li><a href="[% c.uri_for_action('/homefuncional/project/detail',[project.id] ) %]">[% project.name%]</a></li>
+
+							[% END %]
+							[%ELSE%]
+							<li>NENHUM PROJETO NA REGIÃO</li>
+							[% END %]
+						</ul>
 					</div>
 
 <!--				<div class="row social">
@@ -124,22 +140,6 @@
 						<span class="header">Subprefeitura</span>
 						<ul>
 							<li><a href="[% c.uri_for_action('/homefuncional/subprefecture/detail',[region_obj.subprefecture.id] ) %]">[%region_obj.subprefecture.name%]</a></li>
-						</ul>
-					</div>
-					
-					<div class="list-box list-green">
-						<span class="header">[% region_obj.projects.size%] Projetos neste Distrito</span>
-						<ul>
-							[% IF region_obj.projects.size > 0 %]
-
-							[% FOREACH project IN region_obj.projects%]
-							
-							<li><a href="[% c.uri_for_action('/homefuncional/project/detail',[project.id] ) %]">[% project.name%]</a></li>
-
-							[% END %]
-							[%ELSE%]
-							<li><a >NENHUM PROJETO NA REGIÃO</a></li>
-							[% END %]
 						</ul>
 					</div>
 					<br /><br />

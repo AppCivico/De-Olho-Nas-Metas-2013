@@ -74,7 +74,7 @@
 				<div class="col-sm-4 cep">
 					Metas próximas a mim<br />
 					<input type="hidden" id="pagetype" value="homegoal">
-					<input type="text" id="txtaddress" name="txtaddress" placeholder="Informe o CEP">
+					<input type="text" id="txtaddress" name="txtaddress" placeholder="CEP">
 					<button id="btnaddress" name="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
 				</div>
 				<div class="col-sm-8">

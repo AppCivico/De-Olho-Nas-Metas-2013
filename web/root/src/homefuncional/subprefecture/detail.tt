@@ -45,7 +45,7 @@
 					Encontre seu distrito<br />
 					<input type="hidden" id="pagetype" value="subprefdetail">
 					<input type="hidden" id="subprefid" value="[% subprefecture_obj.id %]">
-					<input type="text" id="txtaddress" placeholder="Informe o CEP">
+					<input type="text" id="txtaddress" placeholder="CEP">
 					<button id="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
 				</div>
 				<div class="col-sm-8">
@@ -130,7 +130,7 @@
 							[% IF subprefecture_obj.regions.size > 0 %]
 							<li>
 							[% FOREACH region IN subprefecture_obj.regions%]
-							<a href="[% c.uri_for_action('/homefuncional/region/detail',[region.id] ) %]">[% region.name%][% UNLESS region.id == subprefecture_obj.regions.last.id %],[% END%]</a>
+							<a href="[% c.uri_for_action('/homefuncional/region/detail',[region.id] ) %]">[% region.name%]</a>[% UNLESS region.id == subprefecture_obj.regions.last.id %],[% END%]
 							[% END %]
 							</li>
 							[%ELSE%]

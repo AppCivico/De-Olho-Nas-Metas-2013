@@ -105,7 +105,7 @@ $(document).ready(function () {
 					Metas próximas a mim<br />
 					<input type="hidden" id="pagetype" value="goaldetail">
 					<input type="hidden" id="goalid" value="[% goal_obj.id%]">
-					<input type="text" id="txtaddress" name="txtaddress" placeholder="Informe o CEP">
+					<input type="text" id="txtaddress" name="txtaddress" placeholder="CEP">
 					<button id="btnaddress" name="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
 				</div>
 				<div class="col-sm-8">
@@ -205,6 +205,18 @@ $(document).ready(function () {
 
 					<div class="image-gallery">
 					</div>
+
+				
+					<div class="projects">
+						<h3>[% goal_obj.project_qt.size %] Projeto[% goal_obj.project_qt.size > 1 ? "s" : "" %] da Meta</h3>
+						<ul class="list-arrow multi-column">
+							[% FOREACH project IN goal_obj.project_qt %]
+							<li><a href="[% c.uri_for_action('/homefuncional/project/detail',[project.id] ) %]">[%project.name%]</a></li>
+							[% END %]
+						</ul>
+					</div>
+
+
 					<div class="list_budget">
 
 						<h3>Orçamento: <strong>R$<span class="priceformat">[% goal_obj.expected_budget %]</span></strong></h3>
@@ -283,9 +295,9 @@ $(document).ready(function () {
 					<div class="list-regions">
 						<span class="header">Distritos</span>
 						<ul class="list-regions">
-							[% FOREACH region IN goal_obj.region%]
-							<li><a href="[% c.uri_for_action('/homefuncional/region/detail',[region.id] ) %]">[%region.name%]</a></li>
-							[% END %]
+							<li>[% FOREACH region IN goal_obj.region%]
+							<a href="[% c.uri_for_action('/homefuncional/region/detail',[region.id] ) %]">[%region.name%]</a>[% UNLESS region.id == goal_obj.regions.last.id %],[% END%]
+							[% END %]</li>
 						</ul>
 					</div>
 					[% END %]
@@ -296,15 +308,6 @@ $(document).ready(function () {
 						<span class="header">Planeja Sampa</span>
 						<ul class="list-organizations">
 							<a href="http://planejasampa.prefeitura.sp.gov.br/metas/meta/[%goal_obj.id%]">Meta [%goal_obj.id%] - [% goal_obj.name%]</li>
-						</ul>
-					</div>
-				
-					<div class="list-projects">
-						<span class="header">[% goal_obj.project_qt.size %] Projeto[% goal_obj.project_qt.size > 1 ? "s" : "" %] da Meta</span>
-						<ul class="list-projects">
-							[% FOREACH project IN goal_obj.project_qt %]
-							<li><a href="[% c.uri_for_action('/homefuncional/project/detail',[project.id] ) %]">[%project.name%]</a></li>
-							[% END %]
 						</ul>
 					</div>
 

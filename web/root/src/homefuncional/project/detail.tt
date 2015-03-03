@@ -132,7 +132,7 @@ $(document).ready(function () {
 			<div class="form row">
 				<div class="col-sm-4 cep">
 					Projetos próximos a mim<br />
-					<input type="text" id="txtaddress" name="txtaddress" placeholder="Informe o CEP">
+					<input type="text" id="txtaddress" name="txtaddress" placeholder="CEP">
 					<input type="hidden" id="pagetype" value="projectdetail">
 					<input type="hidden" id="projectid" value="[%project_obj.id%]">
 					<button id="btnaddress" name="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
