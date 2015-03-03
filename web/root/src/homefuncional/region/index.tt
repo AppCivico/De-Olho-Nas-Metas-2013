@@ -43,7 +43,7 @@
 			<div class="form">
 				<div class="col-sm-4 cep">
 					Encontre seu distrito<br />
-					<input type="text" id="txtaddress" name="txtaddress" placeholder="Informe o CEP">
+					<input type="text" id="txtaddress" name="txtaddress" placeholder="CEP">
 					<input type="hidden" id="pagetype" value="homeregion">
 					<button id="btnaddress" name="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
 

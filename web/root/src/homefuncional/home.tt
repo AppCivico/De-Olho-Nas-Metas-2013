@@ -56,8 +56,8 @@ $(document).ready(function () {
 			<h2 class="section-title">Filtre os projetos com as opções abaixo</h2>
 			<div class="form row">
 				<div class="col-sm-4 cep">
-					Filtrar por CEP<br />
-					<input type="text" id="txtaddress" name="txtaddress" placeholder="Informe o CEP">
+					Filtrar por CEP ou endereço<br />
+					<input type="text" id="txtaddress" name="txtaddress" placeholder="CEP">
 					<input type="hidden" id="pagetype" value="home">
 					<button id="btnaddress" name="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
 				</div>

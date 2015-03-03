@@ -3,7 +3,7 @@
 			<form>
 				<div class="col-sm-6 cep">
 					Encontre a campanha<br />
-					<input type="text" placeholder="Informe o CEP">
+					<input type="text" placeholder="CEP">
 					<button><span class="glyphicon glyphicon-search"></span></button>
 				</div>
 				<div class="col-sm-6">

@@ -42,7 +42,7 @@
 					Encontre seu console<br />
 					<input type="hidden" id="pagetype" value="regiondetail">
 					<input type="hidden" id="regionid" value="[% region_obj.id %]">
-					<input type="text" id="txtaddress" placeholder="Informe o CEP">
+					<input type="text" id="txtaddress" placeholder="CEP">
 					<button id="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
 				</div>
 				<div class="col-xs-6 cep">

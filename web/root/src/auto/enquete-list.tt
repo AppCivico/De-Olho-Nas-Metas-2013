@@ -109,7 +109,7 @@
 			<form>
 				<div class="col-xs-4 cep">
 					Encontre a enquete<br />
-					<input type="text" placeholder="Informe o CEP">
+					<input type="text" placeholder="CEP">
 					<button><span class="glyphicon glyphicon-search"></span></button>
 				</div>
 				<div class="col-xs-8">
