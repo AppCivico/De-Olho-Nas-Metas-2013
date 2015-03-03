@@ -4,6 +4,7 @@ use namespace::autoclean;
 use DateTime;
 use JSON::XS;
 use Path::Class qw(dir);
+use File::Copy;
 
 BEGIN { extends 'Catalyst::Controller' }
 
@@ -17,15 +18,19 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
     my $api    = $c->model('API');
     my $params = { %{ $c->req->params } };
     use DDP;
+	my $role = 3;
     $params->{active} = 1;
-
+	if ($c->req->param('organization_id')){
+        $c->detach( '/form/redirect_error', [ $params ] ) unless $c->user->check_user_role('counsil_master');
+		$role = 11;
+	}
     my $avatar = $c->req->upload('avatar');
     $api->stash_result(
         $c, ['users'],
         method => 'POST',
         body   => $params
     );
-	p $c->stash->{error};
+	
     if ( $c->stash->{error} ) {
         $c->detach( '/form/redirect_error', [ $params ] );
     }
@@ -36,7 +41,7 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
             @r,
             {
                 user_id => $c->stash->{id},
-                role_id => 3
+                role_id => $role
             }
         );
 
@@ -46,8 +51,9 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
         unless ( -e $path ) {
             mkdir $path;
         }
-
-        $avatar->copy_to( $path . '/' . $c->stash->{id} . '.jpg' );
+		copy('root/static/css/images/avatar.jpg', $path . '/' . $c->stash->{id} . '.jpg')  or die "not open" unless $avatar;
+	
+        $avatar->copy_to( $path . '/' . $c->stash->{id} . '.jpg' ) if $avatar;
 
         $api->stash_result(
             $c, 'roles',
@@ -57,10 +63,12 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
                 add_relation => 1
             }
         );
-		p $c->stash->{error};
         if ( $c->stash->{error} ) {
             $c->detach( '/form/redirect_error', [] );
         }
+		elsif ($params->{organization_id}){
+            $c->detach( '/form/redirect_ok', [ \'/user/perfil/convidar', {}, 'Cadastrado com sucesso!' ] );
+		}
         else {
             $c->detach( '/form/redirect_ok', [ \'/login', {}, 'Cadastrado com sucesso!' ] );
         }

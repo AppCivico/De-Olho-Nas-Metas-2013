@@ -35,7 +35,7 @@ requires 'Catalyst::Plugin::Session::PerUser';
 
 requires 'Template::AutoFilter';
 requires 'Furl';
-
+requires 'Catalyst::Helper::View::Email'; 
 
 requires 'Config::General'; # This should reflect the config file format you've chosen
                  # See Catalyst::Plugin::ConfigLoader for supported formats

@@ -1,4 +1,3 @@
-
 	   <section class="metas-detail page-login">
 		<div class="container">
 
@@ -9,16 +8,15 @@
 					
 						<h2>Acesso</h2>
 						
+						[%IF error_msg %]<div class="alert alert-danger"><p>[%error_msg%]</p></div>[%END%]
 						[%IF status_msg %]<div class="alert alert-success"><p>[%status_msg%]</p></div>[%END%]
 						<form role="form" method="post" action="/form/login">
 						<div class="form-group">
-							<label>Nome de Usuário:</label>
-							<input type="email" name="email" class="form-control login-input">
+							[%input_text('email','E-mail:', req=>1)|none%]
 						</div>
 						
 						<div class="form-group">
-							<label>Senha:</label>
-							<input type="password" name="password" class="form-control login-input">
+							[%input_text('password','Senha:', req=>1, type => 'password')|none%]
 							
 						<!--	<span class="forgot-login"><a href="">Esqueceu a senha?</a></span>-->
 						</div>

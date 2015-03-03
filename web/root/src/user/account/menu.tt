@@ -29,6 +29,7 @@
 					<div class="list-box list-brown">
 						<ul>
 							<li><a href="/user/perfil/enquete">Enquetes Móveis</a></li>
+							<li><a href="/user/perfil/convidar">Convidar</a></li>
 							<li><a href="">Campanhas</a></li>
 							<li><a href="/user/perfil/seguindo">Seguindo</a></li>
 							<li><a href="/user/perfil/seguranca">Segurança</a></li>

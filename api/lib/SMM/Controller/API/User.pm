@@ -11,7 +11,7 @@ __PACKAGE__->config(
     result_cond => { 'me.active' => 1 },
 
     result_attr => {
-        prefetch => [ { user_follow_projects => 'project' }, 'organization' ],
+        prefetch => [ { user_follow_projects => { 'project' => { project_events => 'project_events_read'} } }, 'organization', 'user_follow_counsils' ],
         distinct => 1
     },
     object_key => 'user',
@@ -227,8 +227,10 @@ sub user_project_event_GET {
 
     my ( $self, $c, $id ) = @_;
 
+    #my $user = $c->stash->{user};
     my $user = $c->model('DB::User');
-
+#	my @data = $user->user_follow_projects-search({})
+	
     my ($result) = $user->search(
         {
             'me.id'                       => $id,
@@ -257,22 +259,20 @@ sub user_project_event_GET {
         }
     )->as_hashref->all;
 
-	use DDP; p $result;
-    $self->status_accepted( $c, entity => ( $result ) ),
-      if $result;
+    $self->status_accepted( $c, entity => { notifications => $result } );
 
 }
 
-sub user_project_event_all : Chained('base') :
-  PathPart('user_project_event_all') : Args(1) : ActionClass('REST') { }
+sub user_project_event_all : Chained('object') :
+  PathPart('user_project_event_all') : Args(0) : ActionClass('REST') { }
 
 sub user_project_event_all_GET {
 
-    my ( $self, $c, $id ) = @_;
+    my ( $self, $c ) = @_;
 
     my $user = $c->model('DB::User');
-    my ($result) = $user->search(
-        { 'me.id' => $id, 'me.active' => 1 },
+    my ($result) = $c->stash->{user}->user_follow_projects->search(
+        { 'me.active' => 1 },
         {
             prefetch => [
                 {

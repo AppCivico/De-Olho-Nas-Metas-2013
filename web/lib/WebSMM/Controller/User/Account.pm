@@ -28,7 +28,6 @@ sub index : Chained('object') : PathPart('') : Args(0) {
 
     $api->stash_result( $c, [ 'users/user_project_event', $c->user->obj->id ], stash => 'user_obj', );
 
-	use DDP; p $c->stash->{user_obj};
     $c->stash->{user_obj}->{role} = { map { $_ => 1 } @{ $c->stash->{user_roles}->{roles} } };
 
 }

@@ -61,8 +61,8 @@ $(document).ready(function () {
 					<h3 class="dotted">Notificações Recentes</h3>
 					<input type="hidden" id="user_id" value="[%c.user.obj.id%]"/>	
 					<div class="notification-list">
-						[% IF user_obj.result.user_follow_projects > 0 %]
-						[% FOREACH ufp IN user_obj.result.user_follow_projects%]
+						[% IF user_obj.notifications.size > 0 %]
+						[% FOREACH ufp IN user_obj.notifications.user_follow_projects%]
 						
 						[% FOREACH pe IN ufp.project.project_events%]
 						<div class="item row">
