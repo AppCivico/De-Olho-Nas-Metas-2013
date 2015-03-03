@@ -1,8 +1,8 @@
 <script>
 jQuery(function($){
-   $("#phone").mask("(99) 9999-9999");
+   $("input[name=phone_number]").mask("(99) 9999-9999");
 
-   $("#phone").focusout(function(){
+   $("input[name=phone_number]").focusout(function(){
         var phone, element;
         element = $(this);
         element.unmask();
@@ -70,25 +70,17 @@ jQuery(function($){
 					</div>
 
 					<div class="form-group">
-						<label>Nome completo:</label>
-						<input type="text" name="name" value="[% user_obj.name%]" class="form-control">
+						[%input_text('name','Nome:', req=>0,value => c.user.obj.name)|none%]
 					</div>
 					
 					<div class="form-group">
-						<label>E-mail:</label>
-						<input type="text" name="email" value="[% user_obj.email %]" class="form-control">
+						[%input_text('email','E-mail:', req=>0, value => c.user.obj.email)|none%]
 					</div>
 					
-					<div class="form-group">
-						<label>Nome de Usuário (será seu acesso ao sistema):</label>
-						<input type="text" name="username" value="[% user_obj.username %]" class="form-control">
-					</div>
-
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label>Celular:</label>
-								<input id="phone" type="telephone" name="phone_number" value="[% user_obj.phone_number%]" class="form-control">
+								[%input_text('phone_number','Celular:', req=>0,value => c.user.obj.phone_number)|none%]
 							</div>
 						</div>
 					</div>

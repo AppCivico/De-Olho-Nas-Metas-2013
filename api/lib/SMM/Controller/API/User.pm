@@ -35,8 +35,8 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $user  = $c->stash->{user};
+	use DDP; p $user;
 	my $x = $user->organization;
-	use DDP; p $x->name;
     my %attrs = $user->get_inflated_columns;
     $self->status_ok(
         $c,
@@ -233,7 +233,11 @@ sub user_project_event_GET {
         {
             'me.id'                       => $id,
             'me.active'                   => 1,
-            'project_events_read.user_id' => undef
+			'user_follow_projects.active' => 1 ,
+            'project_events_read.user_id' => undef,
+			'project_events.project_id'   => { '!=' => undef } 
+			
+
         },
         {
             prefetch => [
@@ -253,7 +257,8 @@ sub user_project_event_GET {
         }
     )->as_hashref->all;
 
-    $self->status_accepted( $c, entity => $result ),
+	use DDP; p $result;
+    $self->status_accepted( $c, entity => ( $result ) ),
       if $result;
 
 }

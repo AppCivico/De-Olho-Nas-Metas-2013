@@ -61,8 +61,8 @@ $(document).ready(function () {
 					<h3 class="dotted">Notificações Recentes</h3>
 					<input type="hidden" id="user_id" value="[%c.user.obj.id%]"/>	
 					<div class="notification-list">
-						[% IF user_obj.user_follow_projects > 0 %]
-						[% FOREACH ufp IN user_obj.user_follow_projects%]
+						[% IF user_obj.result.user_follow_projects > 0 %]
+						[% FOREACH ufp IN user_obj.result.user_follow_projects%]
 						
 						[% FOREACH pe IN ufp.project.project_events%]
 						<div class="item row">
@@ -123,10 +123,10 @@ $(document).ready(function () {
 								Pastry wafer brownie liquorice. Unerdwear.com gummi bears bonbon. Cheese cake dessert cupcake. Pastry wafer brownie liquorice. Unerdwear.com gummi bears bonbon.
 							</div>
 						</div>
-					</div>-->
+					</div>
 					<div class="text-right">
 						<button class="btn btn-brown">Ver todas</button>
-					</div>
+					</div>-->
 					<br /><br />
 				</div>
 				<div class="col-sm-3">
