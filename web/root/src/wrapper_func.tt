@@ -22,6 +22,7 @@
 	<link href="/static/css/jquery-ui.theme.min.css" rel="stylesheet">
     <link href="/static/css/jquery-ui.structure.min.css" rel="stylesheet">
     <link href="/static/css/jquery-ui.min.css" rel="stylesheet">
+    <link href="/static/lightbox/css/lightbox.css" rel="stylesheet" />
     <link href="/static/css/home_style.css" rel="stylesheet">
 </head>
 
@@ -122,6 +123,7 @@
     <!-- Core JavaScript Files -->
     <script src="/static/js/bootstrap.min.js"></script>
     <!-- Custom Theme JavaScript -->
+    <script src="/static/lightbox/js/lightbox.js"></script>
     <script src="/static/js/home_site.js"></script>
     <script src="/static/js/Chart.min.js"></script>
     <script src="/static/js/chart.js"></script>

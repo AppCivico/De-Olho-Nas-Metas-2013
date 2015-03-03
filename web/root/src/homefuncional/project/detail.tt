@@ -301,6 +301,17 @@ $(document).ready(function () {
 					</div>
 
 					<div class="image-gallery">
+						<h3>99 imagens relacionadas</h3>
+						<div class="arrow left">
+							<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						</div>
+						<div class="contents">
+							<a href="/static/images/wifisp.jpg" data-lightbox="gallery" data-title="Imagem 1"><img src="/static/images/wifisp.jpg"></a>
+							<a href="/static/images/wifisp.jpg" data-lightbox="gallery" data-title="Imagem 2"><img src="/static/images/wifisp.jpg"></a>
+						</div>
+						<div class="arrow right">
+							<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						</div>
 					</div>
 
 					<div class="comments">
@@ -343,14 +354,16 @@ $(document).ready(function () {
 
 				</div>
 				<div class="col-sm-4">
-					<ul class="list-types project">
-						[% FOREACH type IN project_obj.type%]
-						<li><div class="icon lamp">
-						</div> 
-						[% type.name%]
-						</li>
-						[% END %]
-					</ul>
+					<div class="list-box list-types">
+						<span class="header">Tema(s)</span>
+						<ul>
+							[% FOREACH type IN project_obj.type%]
+							<li>
+							[% type.name%]
+							</li>
+							[% END %]
+						</ul>
+					</div>
 				    [% IF project_obj.region.size > 0 %]	
 					<div class="list-regions">
 						<span class="header">Distrito</span>
@@ -369,7 +382,7 @@ $(document).ready(function () {
 						</ul>
 					</div>
 
-					<div class="list-projects">
+					<div class="list-box list-green">
 						<span class="header">Meta - [% project_obj.goal.id%]</span>
 						<ul class="list-projects">
 							<li><a href="[% c.uri_for_action('/homefuncional/goal/detail',[ project_obj.goal.id ] ) %]">[%project_obj.goal.name%]</a></li>

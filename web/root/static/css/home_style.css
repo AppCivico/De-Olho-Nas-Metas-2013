@@ -767,22 +767,6 @@ section.search-list{
 	color: #ffffff;
 }
 
-.metas-detail ul.list-types{
-	background-color: #8cc63f;
-	margin-top: 20px;
-}
-
-.metas-detail ul.list-types.project{
-	background-color: #88817b;
-}
-
-.metas-detail ul.list-types li{
-	border-bottom: 1px solid #ffffff;
-	padding: 10px;
-}
-.metas-detail ul.list-types li:last-child{
-	border-bottom: none;
-}
 .metas-detail div.list-green{
 	background-color: #8cc63f;
 }
@@ -805,6 +789,9 @@ section.search-list{
 .metas-detail div.list-brown{
 	background-color: #d6cab5;
 }
+.metas-detail div.list-types{
+	background-color: #88817b;
+}
 
 .metas-detail div.list-regions,
 .metas-detail div.list-projects,
@@ -818,7 +805,8 @@ div.list-box:last-child{
 }
 
 div.list-box ul li a,
-div.list-box ul li a:visited{
+div.list-box ul li a:visited,
+div.list-box ul li{
 	color: #fff;
 }
 div.list-box ul li a:hover{
@@ -855,6 +843,7 @@ ul.list-arrow li:before{
 	text-transform: uppercase;
 }
 .metas-detail div.list-regions li a,
+.metas-detail div.list-types li a,
 .metas-detail div.list-projects li a,
 .metas-detail div.list-organizations li a,
 .list-box li a{
@@ -995,7 +984,9 @@ footer .menu-footer li a:hover{
 }
 
 .image-gallery img{
+	padding: 5px;
 	height: 80px;
+	border: 1px solid #d6cab5;
 }
 .image-gallery .arrow{
 	display: inline-block;
