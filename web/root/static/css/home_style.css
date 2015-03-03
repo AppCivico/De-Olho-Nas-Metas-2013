@@ -131,13 +131,18 @@ h2{
 }
 .navbar-fixed-top li a:hover{
 	color: #ffcc66;
-	background-color: transparent;
 }
 .navbar-fixed-top li.highlight a,.navbar-fixed-top li.highlight a:visited{
 	color: #face53;
 }
 .navbar-fixed-top li.highlight a:hover{
 	color: #fff;
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+  text-decoration: none;
+  background-color: #524a40;
 }
 
 .navbar-brand{

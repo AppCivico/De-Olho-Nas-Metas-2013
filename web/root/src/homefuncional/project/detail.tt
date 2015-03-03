@@ -348,7 +348,7 @@ $(document).ready(function () {
 					</div>
 					<div>						
 						<textarea id="text_comment" class="form-control" rows="2"></textarea>
-						<button  id="comment" type="button" class="btn btn-primary" data-id="[% c.user.obj.id%]">Comentar</button>
+						<button  id="comment" type="button" class="btn btn-brown" data-id="[% c.user.obj.id%]">Comentar</button>
 					</div>
 
 
