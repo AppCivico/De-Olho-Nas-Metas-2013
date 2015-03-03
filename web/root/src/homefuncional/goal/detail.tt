@@ -326,7 +326,7 @@ $(document).ready(function () {
 						<span class="header">[%business_names.size%] Empresa[% IF business_names.size > 1%]s[%END%] Relacionada[% IF business_names.size > 1%]s[% END %]</span>
 						<ul class="list-organizations">
 							[% FOREACH bn IN business_names%]					
-							<li>[% bn%]</li>
+							<li><a href="[% c.uri_for_action('/homefuncional/company/detail', [],{ business_name => bn })%]">[% bn %]</a></li>
 							[% END %]
 						</ul>
 					</div>

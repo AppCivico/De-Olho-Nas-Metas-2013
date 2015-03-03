@@ -21,7 +21,7 @@ SET id = "elm_${name}";
 
 
 %]
-<div class="form-group [%IF !DISABLE_MESSAGES && form_error.$name == 'invalid'%]has-error[%ELSIF !DISABLE_MESSAGES && form_error.$name%]has-warning[%END%]">
+<div class="form-group row [%IF !DISABLE_MESSAGES && form_error.$name == 'invalid'%]has-error[%ELSIF !DISABLE_MESSAGES && form_error.$name%]has-warning[%END%]">
     <label class="[%IF opt.label_col%][%opt.label_col%][%ELSE%]col-lg-12[%END%] [%IF opt.control_label == 'YES'%]control-label[%END%]" for="[%id%]">[%label|none%]</label>
     <div class="[%IF opt.input_col%][%opt.input_col%][%ELSE%]col-lg-12[%END%]">
         <div class="[%IF opt.pre || opt.app%]input-group[%END%] [%IF opt.divclass%] [%opt.divclass%][%END%]">

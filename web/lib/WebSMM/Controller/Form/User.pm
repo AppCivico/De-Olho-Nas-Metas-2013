@@ -25,9 +25,9 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
         method => 'POST',
         body   => $params
     );
-
+	p $c->stash->{error};
     if ( $c->stash->{error} ) {
-        $c->detach( '/form/redirect_error', [] );
+        $c->detach( '/form/redirect_error', [ $params ] );
     }
     else {
         my @r;
@@ -57,7 +57,7 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
                 add_relation => 1
             }
         );
-
+		p $c->stash->{error};
         if ( $c->stash->{error} ) {
             $c->detach( '/form/redirect_error', [] );
         }

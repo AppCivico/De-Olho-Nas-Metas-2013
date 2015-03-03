@@ -212,7 +212,8 @@ $(document).ready(function () {
 
 						[%END%]
 					</div>
-					<div >
+					<div>
+						<h3 class="section-title">Comentário dos conselheiros</h3>
 						<table id="list_note" class="table table-striped">
 							<thead>
 								<tr>
@@ -232,7 +233,7 @@ $(document).ready(function () {
 		            [%END%]
 					[% ELSE %]
 							<tr>
-								<td>Nenhuma notificação encontrada</td>
+								<td colspan="3">Nenhuma notificação encontrada</td>
 							</tr>
 					[% END %]
 	
@@ -323,7 +324,7 @@ $(document).ready(function () {
 		            [%END%]
 					[% ELSE %]
 							<tr>
-								<td>Nenhum comentário encontrado</td>
+								<td colspan="3">Nenhum comentário encontrado</td>
 							</tr>
 					[% END %]
 	

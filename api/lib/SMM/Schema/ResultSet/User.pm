@@ -22,7 +22,7 @@ sub verifiers_specs {
                     type     => 'Str',
                 },
                 username => {
-                    required => 1,
+                    required => 0,
                     type     => 'Str',
                 },
                 phone_number => {

@@ -68,6 +68,7 @@ sub redirect_error : Private {
 
     my $host  = $c->req->uri->host;
     my $refer = $c->req->headers->referer;
+	
     if ( !$refer || $refer !~ /^https?:\/\/$host/ ) {
         $refer = $c->uri_for('/');
     }
@@ -80,10 +81,8 @@ sub redirect_error : Private {
             error_msg  => $c->stash->{error},
         }
     );
-
     my $uri = URI->new($refer);
     $uri->query_param( 'mid', $mid );
-
     $c->res->redirect( $uri->as_string );
 
 }

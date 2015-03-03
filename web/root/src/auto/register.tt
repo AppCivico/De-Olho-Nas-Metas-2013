@@ -1,8 +1,8 @@
 <script>
 jQuery(function($){
-   $("#phone").mask("(99) 9999-9999");
+   $("input[name=phone_number]").mask("(99) 9999-9999");
 
-   $("#phone").focusout(function(){
+   $("input[name=phone_number]").focusout(function(){
         var phone, element;
         element = $(this);
         element.unmask();
@@ -99,46 +99,27 @@ jQuery(function($){
 				
 					<h4 class="green">FAÇA SEU CADASTRO E FIQUE DE OLHO NAS METAS</h4>
 				
+					[%IF error_msg %]<div class="alert alert-danger"><p>[%error_msg%]</p></div>[%END%]
 					<form action="/form/user" method="post" enctype="multipart/form-data">
-					<div class="form-group">
-						<label>Nome completo:</label>
-						<input type="text" name="name" class="form-control">
-					</div>
+						[%input_text('name','*Nome:', req=>1)|none%]
 					
-					<div class="form-group">
-						<label>E-mail:</label>
-						<input type="text" name="email" class="form-control">
-					</div>
+						[%input_text('email','*E-mail (será seu acesso ao sistema):', req=>1)|none%]
 					
-					<div class="form-group">
-						<label>Nome de Usuário (será seu acesso ao sistema):</label>
-						<input type="text" name="username" class="form-control">
-					</div>
-
 					<div class="row">
 						<div class="col-sm-6">
-							<div class="form-group">
-								<label>Criar uma senha:</label>
-								<input type="password" name="password" class="form-control">
-							</div>
+								[%input_text('password','*Criar uma senha:', req=>1,type=>'password')|none%]
 						</div>
 						<div class="col-sm-6">
-							<div class="form-group">
-								<label>Confirme a senha:</label>
-								<input type="password" name="password_confirm" class="form-control">
-							</div>
+								[%input_text('password_confirm','*Confirme a senha:', req=>1,type=>'password' )|none%]
 						</div>
 					</div>
 					
 					<div class="row">
 						<div class="col-sm-6">
-							<div class="form-group">
-								<label>Celular:</label>
-								<input id="phone" type="telephone" name="phone_number" class="form-control">
-							</div>
+								[%input_text('phone_number','*Celular:', req=>0)|none%]
 						</div>
 					</div>
-					<div class="row">
+					<div class="row row-padding">
 						<div class="col-sm-4">
 							<div class="avatar-upload">
 								<img src="/static/css/images/avatar.jpg">

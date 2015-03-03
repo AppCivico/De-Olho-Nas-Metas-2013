@@ -1,0 +1,19 @@
+
+[%-CALL assets.include("js/jshashtable-3.0.js")%]
+[%-CALL assets.include("js/jquery.numberformatter.min.js")%]
+
+<script>
+$(document).ready(function () {
+       $('.priceformat').formatNumber({format:"#,###.00",locale: "br" });
+});
+</script>
+[% FOR cp IN companies%]
+	<dl class="dl-horizontal">
+	[%FOR x IN cp.agg_budgets%]
+		<dt class="priceformat">[% x.1 %]</dt>
+		<dd>[% x.0 %]</dd>
+	[% END%]	
+	</dl>
+	[% cp.business_name %]
+	[% cp.total_value %]
+[% END%]
