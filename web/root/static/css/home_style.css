@@ -1167,6 +1167,11 @@ div.followers{
     -moz-column-count: 3; /* Firefox */
     column-count: 3;
 }
+.multi-column-2{
+	-webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+}
 
 .organization-list{
 	margin-bottom: 20px;
