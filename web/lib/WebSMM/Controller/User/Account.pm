@@ -126,6 +126,7 @@ sub survey_clone : Chained('survey') : PathPart('clonar') : Args(1) {
 
     my $url = URI->new('http://dev.monitor.promisetracker.org');
 
+	
 	$url->path_segments('api','v1','campaigns');
 	$url->query_form( username => 'teste2', user_id => 2, campaign_id => 86 );
 
@@ -137,10 +138,14 @@ sub survey_clone : Chained('survey') : PathPart('clonar') : Args(1) {
         );
     };
 	
-#    my $data = decode_json $return->content;
+    my $data = decode_json $return->content;
+	$c->detach( '/form/redirect_error', [] ) unless $data->{status} eq 'success';
+	
 	use DDP;
+	$c->res->redirect($data->{payload}->{redirect_link});
+	$c->res->headers->header(Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201');
 	p $return;
-#	p $data;
+	p $data;
 	p $url;
     #$c->stash->{campaign} = $data;
 

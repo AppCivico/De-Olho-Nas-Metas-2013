@@ -9,6 +9,7 @@
 					
 						<h2>Acesso</h2>
 						
+						[%IF status_msg %]<div class="alert alert-success"><p>[%status_msg%]</p></div>[%END%]
 						<form role="form" method="post" action="/form/login">
 						<div class="form-group">
 							<label>Nome de Usuário:</label>

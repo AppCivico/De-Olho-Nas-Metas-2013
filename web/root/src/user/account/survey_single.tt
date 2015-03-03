@@ -67,11 +67,11 @@
 	   <section class="metas-detail enquete-detail">
 		<div class="container">
 		
-			<h1>Nome da Enquete</h1>
-			
-			<div class="description">Unerdwear.com gummi bears bonbon. Cheese cake dessert cupcake. Pastry wafer brownie liquorice. Unerdwear.com gummi bears bonbon.</div>
-			
-			<div class="category">Tecnologia e inovação, Saúde e Meio Ambiente</div>
+			<h1>[% campaign.title%]</h1>
+			[% IF campaign.description%]
+				<div class="description">[% campaign.description%]</div>
+			[% END%]
+			<!--<div class="category">Tecnologia e inovação, Saúde e Meio Ambiente</div>-->
 			
 			<div class="row">
 				<div class="col-sm-4 text-center">
@@ -87,27 +87,21 @@
 
 			<h3>
 				Formulário
-				<button class="btn btn-brown pull-right">Editar</button>
+<!--				<button class="btn btn-brown pull-right">Editar</button>-->
 			</h3>
 			
 			<div class="form-list">
+				[% FOREACH cpm IN campaign.survey.inputs%]
 				<div class="row item">
 					<div class="col-xs-1">
-						<div class="form-number bold">01.</div>
+						<div class="form-number bold">[% loop.index + 1%].</div>
 					</div>
 					<div class="col-xs-11">
-						<div class="form-title">Wafer bonbon soufflé dessert marzipan topping tart caramels liquorice.</a></div>
+						<div class="form-title">[% cpm.label %]</a></div>
 					</div>
 				</div>
+				[% END %]
 
-				<div class="row item">
-					<div class="col-xs-1">
-						<div class="form-number bold">02.</div>
-					</div>
-					<div class="col-xs-11">
-						<div class="form-title">Wafer bonbon soufflé dessert marzipan topping tart.</a></div>
-					</div>
-				</div>
 			</div>
 		
 		</div>
