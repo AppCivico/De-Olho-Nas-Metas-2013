@@ -355,7 +355,7 @@ $(document).ready(function () {
 				</div>
 				<div class="col-sm-4">
 					<div class="list-box list-types">
-						<span class="header">Tema(s)</span>
+						<span class="header">Tema</span>
 						<ul>
 							[% FOREACH type IN project_obj.type%]
 							<li>
