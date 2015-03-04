@@ -20,12 +20,13 @@ my $schema = SMM::Schema->connect(
 
 my ( $sigla, $name) = split(';',$_);
 
-my @subpref = $schema->resultset('Subprefecture')->all;
+my @regions = $schema->resultset('Region')->all;
 
-for my $x (@subpref){
+for my $x (@regions){
 	#print lc($x->name)."\n";
-	my $name_lc = lc($x->name);
-	$name_lc =~ s/^([a-z])(\S+\ ?)([a-z])/\u$1$2\u$3/i;	
-	print "name: $name_lc\n";
-	$schema->resultset('Subprefecture')->search({ id => $x->id})->update( {name => $name_lc});
+	my $word = join " " , map{ ucfirst $_ } split(/\s+/, lc($x->name));
+
+	print "word: $word\n";
+		
+	$schema->resultset('Region')->search({ id => $x->id})->update( {name => $word});
 }

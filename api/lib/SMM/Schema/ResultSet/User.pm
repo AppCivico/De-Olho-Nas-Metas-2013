@@ -29,6 +29,10 @@ sub verifiers_specs {
                     required => 1,
                     type     => 'Str',
                 },
+                organization_id => {
+                    required => 0,
+                    type     => 'Int',
+                },
                 password => {
                     required  => 1,
                     type      => 'Str',

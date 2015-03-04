@@ -25,5 +25,5 @@ open my $fh, '<:encoding(utf8)', 'data/new_info_subprefecture.txt' or die "nao a
 while(<$fh>){
 	
 	my ( $subprefeitura, $subprefeito, $site, $email , $telefone , $endereco) = split(';',$_);
-	$schema->resultset('Subprefecture')->search({ name  => { ilike => '%'.$subprefeitura.'%' } })->update({ deputy_mayor => $subprefeito, email => $email, site => $site, telephone => $telefone, address => $endereco});
+	$schema->resultset('Subprefecture')->search({ name  => { ilike => '%'.$subprefeitura.'%' } })->update({ email => $email});
 }

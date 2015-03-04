@@ -17,7 +17,7 @@ sub redirect_ok : Private {
 
     my $method = ref $path eq 'SCALAR' ? 'uri_for' : 'uri_for_action';
     $path = ref $path eq 'SCALAR' ? $$path : $path;
-
+	use DDP; p \%args;
     my $a = $c->$method(
         $path,
 
@@ -82,6 +82,7 @@ sub redirect_error : Private {
         }
     );
     my $uri = URI->new($refer);
+	
     $uri->query_param( 'mid', $mid );
     $c->res->redirect( $uri->as_string );
 

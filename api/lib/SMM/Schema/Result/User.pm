@@ -239,6 +239,21 @@ __PACKAGE__->belongs_to(
   },
 );
 
+=head2 email_queues
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::EmailQueue>
+
+=cut
+
+__PACKAGE__->has_many(
+  "email_queues",
+  "SMM::Schema::Result::EmailQueue",
+  { "foreign.recipient_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 goals
 
 Type: has_many
@@ -380,8 +395,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-20 11:02:11
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Req3Te+YbeLPhbsaU1mmaA
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-04 06:44:42
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:fpyL5fLPk29gMHkIOYMecw
 
 __PACKAGE__->many_to_many( roles => user_roles => 'role' );
 
@@ -434,6 +449,10 @@ sub verifiers_specs {
                     type     => 'Str',
                 },
 
+                organization_id => {
+                    required => 0,
+                    type     => 'Int',
+                },
                 role => {
                     required => 0,
                     type     => 'Str',
@@ -505,7 +524,8 @@ sub action_specs {
     };
 }
 
-
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;
+
 1;
+
