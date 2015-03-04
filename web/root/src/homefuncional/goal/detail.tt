@@ -282,7 +282,7 @@ $(document).ready(function () {
 					</div>
 					<div>						
 						<textarea id="text_comment" class="form-control" rows="2"></textarea>
-						<button  id="comment" type="button" class="btn btn-primary" data-id="[% c.user.obj.id%]">Comentar</button>
+						<button  id="comment" type="button" class="btn btn-brown" data-id="[% c.user.obj.id%]">Comentar</button>
 					</div>
 
     	
@@ -307,7 +307,9 @@ $(document).ready(function () {
 					<div class="list-projects">
 						<span class="header">Planeja Sampa</span>
 						<ul class="list-organizations">
-							<a href="http://planejasampa.prefeitura.sp.gov.br/metas/meta/[%goal_obj.id%]">Meta [%goal_obj.id%] - [% goal_obj.name%]</li>
+							<li>
+								<a href="http://planejasampa.prefeitura.sp.gov.br/metas/meta/[%goal_obj.id%]">Meta [%goal_obj.id%] - [% goal_obj.name%]
+							</li>
 						</ul>
 					</div>
 

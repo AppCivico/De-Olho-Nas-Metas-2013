@@ -348,7 +348,7 @@ $(document).ready(function () {
 					</div>
 					<div>						
 						<textarea id="text_comment" class="form-control" rows="2"></textarea>
-						<button  id="comment" type="button" class="btn btn-primary" data-id="[% c.user.obj.id%]">Comentar</button>
+						<button  id="comment" type="button" class="btn btn-brown" data-id="[% c.user.obj.id%]">Comentar</button>
 					</div>
 
 
@@ -372,8 +372,8 @@ $(document).ready(function () {
 						</ul>
 					</div>
 					[% END %]
-					<div class="list-projects">
-							<span class="header">Planeja Sampa</span>
+					<div class="list-box list-projects">
+						<span class="header">Planeja Sampa</span>
 						<ul class="list-projects">
 							<li>
 								<a href="http://planejasampa.prefeitura.sp.gov.br/metas/projeto/[%project_obj.project_number%]">Projeto [%project_obj.id%] - [% project_obj.name%]
@@ -389,7 +389,7 @@ $(document).ready(function () {
 						</ul>
 					</div>
 					[% IF organizations.size > 0 %]	
-					<div class="list-organizations">
+					<div class="list-box list-organizations">
 						<span class="header">3 Organizações</span>
 						<ul class="list-organizations">
 							<li>Organização 01</li>
