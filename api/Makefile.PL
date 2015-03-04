@@ -22,6 +22,7 @@ requires 'Catalyst::Plugin::Session::State::Cookie';
 requires 'Catalyst::Plugin::I18N::DBI';
 requires 'I18N::AcceptLanguage';
 
+requires 'Data::Section::Simple';
 requires 'Catalyst::Authentication::Store::DBIx::Class';
 requires 'Catalyst::Component::InstancePerContext';
 requires 'Catalyst::Plugin::Params::Nested';

@@ -204,6 +204,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 invite_counsils
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::InviteCounsil>
+
+=cut
+
+__PACKAGE__->has_many(
+  "invite_counsils",
+  "SMM::Schema::Result::InviteCounsil",
+  { "foreign.organization_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 managements
 
 Type: has_many
@@ -270,8 +285,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-20 11:02:11
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:u2sy7NGB6Fej55idYllVPg
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-04 06:14:59
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:wVN9CfrV3VUMzI0GqbqIiQ
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
 with 'SMM::Schema::Role::ResultsetFind';

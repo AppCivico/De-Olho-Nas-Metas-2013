@@ -77,8 +77,6 @@ sub survey_list : Chained('survey') : PathPart('') : Args(0) {
     my $url = URI->new('http://dev.monitor.promisetracker.org');
 
 	$url->path_segments('api','v1','campaigns');
-	use DDP;
-	p $url;
     eval {
         $return = $model->_do_http_req(
             method  => 'GET',
@@ -88,7 +86,6 @@ sub survey_list : Chained('survey') : PathPart('') : Args(0) {
     };
 
     my $data = decode_json $return->content;
-	p $data;
     $c->stash->{campaigns} = $data->{payload};
 
 }
@@ -112,10 +109,8 @@ sub survey_single : Chained('survey') : PathPart('detalhe') : Args(1) {
     };
 
     my $data = decode_json $return->content;
-	use DDP;
     $c->stash->{campaign} = $data->{payload};
 
-	p $c->stash->{campaign};
 }
 sub survey_clone : Chained('survey') : PathPart('clonar') : Args(1) {
     my ( $self, $c , $id) = @_;
@@ -148,7 +143,6 @@ sub survey_clone : Chained('survey') : PathPart('clonar') : Args(1) {
 	p $return;
 	p $data;
 	p $url;
-    #$c->stash->{campaign} = $data;
 
 }
 sub survey_create : Chained('survey') : PathPart('criar') : Args(0) {
@@ -204,7 +198,6 @@ sub notification : Chained('object') : PathPart('notificacoes') : Args(0) {
     my $api = $c->model('API');
 
     $api->stash_result( $c, [ 'users/user_project_event_all', $c->user->obj->id ], stash => 'user_obj' );
-	use DDP; p $c->stash->{user_obj}->{result};
     $c->stash->{user_obj}->{role} = { map { $_ => 1 } @{ $c->stash->{user_obj}->{roles} } };
 
 }

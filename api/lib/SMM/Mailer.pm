@@ -1,4 +1,4 @@
-package XiMu::Mailer;
+package SMM::Mailer;
 
 use Moose;
 use Email::Sender::Simple qw(sendmail);
