@@ -67,7 +67,7 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
             $c->detach( '/form/redirect_error', [] );
         }
 		elsif ($params->{organization_id}){
-            $c->detach( '/form/redirect_ok', [ \'/user/perfil/convidar', {}, 'Cadastrado com sucesso!' ] );
+            $c->detach( '/form/redirect_ok', [ \'/user/perfil/convidar', {}, 'Cadastrado com sucesso!', form_ident => $c->req->params->{form_ident} ] );
 		}
         else {
             $c->detach( '/form/redirect_ok', [ \'/login', {}, 'Cadastrado com sucesso!' ] );
