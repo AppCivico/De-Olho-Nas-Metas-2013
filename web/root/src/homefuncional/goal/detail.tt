@@ -288,9 +288,14 @@ $(document).ready(function () {
     	
 				</div>
 				<div class="col-sm-4">
-						<ul class="list-types">
-							<li><div class="icon lamp"></div> [% goal_obj.objective.name%]</li>
+					<div class="list-box list-types">
+						<span class="header">Tema</span>
+						<ul>
+							<li>
+							[% goal_obj.objective.name%]
+							</li>
 						</ul>
+					</div>
 				    [% IF goal_obj.region.size > 0 %]	
 					<div class="list-regions">
 						<span class="header">Distritos</span>
