@@ -17,13 +17,17 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
 
     my $api    = $c->model('API');
     my $params = { %{ $c->req->params } };
-    use DDP;
+    use DDP; p $params;
 	my $role = 3;
     $params->{active} = 1;
-	if ($c->req->param('organization_id')){
+	if ($c->req->param('invite_counsil_master')){
         $c->detach( '/form/redirect_error', [ $params ] ) unless $c->user->check_user_role('counsil_master');
 		$role = 11;
 	}
+	if ($c->req->param('organization_id')){
+		$role = 11;
+	}
+
     my $avatar = $c->req->upload('avatar');
     $api->stash_result(
         $c, ['users'],
@@ -66,7 +70,7 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
         if ( $c->stash->{error} ) {
             $c->detach( '/form/redirect_error', [] );
         }
-		elsif ($params->{organization_id}){
+		elsif ($params->{invite_counsil_master}){
             $c->detach( '/form/redirect_ok', [ \'/user/perfil/convidar', {}, 'Cadastrado com sucesso!', form_ident => $c->req->params->{form_ident} ] );
 		}
         else {

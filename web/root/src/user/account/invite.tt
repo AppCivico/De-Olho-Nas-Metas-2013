@@ -115,6 +115,7 @@ jQuery(function($){
 									</div>
 									
 									[%input_text('organization_id', '' , req=>1, value => c.user.obj.organization_id, type => 'hidden')|none%]
+									[%input_text('invite_counsil_master', '' , req=>1, value => 1, type => 'hidden')|none%]
 									[%input_text('form_ident', '' , req=>1, value => "form", type => 'hidden')|none%]
 									<button type="reset"  class="btn btn-danger pull-left">Limpar</button>
 									<input type="submit" value="Enviar" class="btn btn-success pull-right"/>

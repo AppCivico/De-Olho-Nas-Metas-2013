@@ -63,6 +63,20 @@ sub edit : Chained('object') : PathPart('editar') : Args(0) {
     );
 
 }
+sub counsil_members : Chained('object') : PathPart('membros') : Args(0) {
+    my ( $self, $c ) = @_;
+
+    return unless $c->req->method eq 'GET';
+
+    my $api = $c->model('API');
+    $api->stash_result(
+        $c,
+        [ 'users' ],
+        method => 'GET',
+        params => $c->req->params,
+    );
+
+}
 sub survey :Chained('object') :PathPart(enquete) :CaptureArgs(0){
 }
 

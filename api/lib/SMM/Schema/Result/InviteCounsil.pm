@@ -65,6 +65,12 @@ __PACKAGE__->table("invite_counsil");
   is_foreign_key: 1
   is_nullable: 1
 
+=head2 valid_until
+
+  data_type: 'boolean'
+  default_value: true
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -81,6 +87,8 @@ __PACKAGE__->add_columns(
   { data_type => "text", is_nullable => 0 },
   "organization_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "valid_until",
+  { data_type => "boolean", default_value => \"true", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -118,8 +126,55 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-04 06:14:59
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:IztUfM++nEWfop0I1hdEUw
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-04 13:12:31
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:pfD4YZTjik3kC6y4esXG1g
+with 'SMM::Role::Verification';
+with 'SMM::Role::Verification::TransactionalActions::DBIC';
+with 'SMM::Schema::Role::ResultsetFind';
+
+use Data::Verifier;
+use MooseX::Types::Email qw/EmailAddress/;
+use SMM::Types qw /DataStr TimeStr/;
+
+sub verifiers_specs {
+    my $self = shift;
+    return {
+        update => Data::Verifier->new(
+            filters => [qw(trim)],
+            profile => {
+                email => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                valid_until => {
+                    required => 0,
+                    type     => 'Bool',
+                },
+            }
+        ),
+    };
+}
+
+sub action_specs {
+    my $self = shift;
+    return {
+        update => sub {
+            my %values = shift->valid_values;
+
+            not defined $values{$_} and delete $values{$_} for keys %values;
+
+            my $goal = $self->update( \%values );
+
+            return $goal;
+        },
+
+    };
+}
+
+
+
+
+
 use Data::Section::Simple qw(get_data_section);
 use Template;
 

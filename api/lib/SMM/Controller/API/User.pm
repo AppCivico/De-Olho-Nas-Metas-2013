@@ -16,7 +16,7 @@ __PACKAGE__->config(
     },
     object_key => 'user',
 
-    update_roles => [qw/superadmin admin user/],
+    update_roles => [qw/superadmin admin user counsil counsil_master/],
     create_roles => [qw/superadmin admin/],
     delete_roles => [qw/superadmin admin/],
 
@@ -123,6 +123,11 @@ sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') {
 sub list_GET {
     my ( $self, $c ) = @_;
     my $conditions = undef;
+	my $rs = $c->stash->{collection};
+
+	if ($c->req->params->{organization}){
+		$rs = $rs->search({ organization_id => $c->req->params->{organization}});	
+	}
     if ( $c->req->params->{role} ) {
         $conditions = {
             'role.id' => $c->req->params->{role} == 99
@@ -156,7 +161,7 @@ sub list_GET {
                         url => $c->uri_for_action( $self->action_for('result'),
                             [ $r->{id} ] )->as_string
                       }
-                  } $c->stash->{collection}->search(
+                  } $rs->search(
                     $conditions ? {%$conditions} : undef,
                     { prefetch => [ { user_roles => 'role' } ] }
                   )->as_hashref->all
@@ -168,7 +173,7 @@ sub list_GET {
 
 sub list_POST {
     my ( $self, $c ) = @_;
-
+	use DDP; p $c->req->params;
     my $user = $c->stash->{collection}
       ->execute( $c, for => 'create', with => $c->req->params );
 

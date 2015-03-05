@@ -1,5 +1,6 @@
 package WebSMM::Controller::Register;
 use Moose;
+use utf8;
 use DateTime;
 use JSON::XS;
 use DateTime::Format::Pg;
@@ -19,7 +20,22 @@ sub register : Chained('base') : PathPart('cadastro') : Args(0) {
     if ( $c->user ) {
         $c->detach( 'Form::Login' => 'after_login' );
     }
+	
+	if ($c->req->params->{key}){
 
+		$api->stash_result(
+       		 $c, 'invite_counsil/key_check',
+       		 method => 'POST',
+       		 params => {
+       	   		email 			=> $c->req->params->{email},
+				hash     		=> $c->req->params->{key},
+       		 }
+   		 );
+		if ($c->stash->{error}){
+        	$c->detach( '/form/redirect_ok', [ \'/login',{}, 'A chave informada está expirada.' ] );
+		}
+			
+	}
     if ( $c->req->params->{pre_id} ) {
         $api->stash_result( $c, [ 'pre_registrations', $c->req->params->{pre_id} ], stash => 'pre_registrations' );
     }

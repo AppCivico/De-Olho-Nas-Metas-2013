@@ -27,8 +27,6 @@ sub email_POST {
     my ( $self, $c ) = @_;
 
     my $params = { %{ $c->req->params } };
-    $params->{ip} = $c->req->header('x-real-ip') || $c->req->address;
-	use DDP; p $params;
 	my $dm = $c->stash->{collection}
        ->execute( $c, for => 'create', with => $c->req->params );
 
@@ -42,4 +40,27 @@ sub email_POST {
     $self->status_ok( $c, entity => { message => 'ok' } );
 }
 
+sub key_check : Chained('base') : PathPart('key_check') : Args(0) : ActionClass('REST') {
+    my ( $self, $c ) = @_;
+}
+
+sub key_check_POST {
+    my ( $self, $c ) = @_;
+
+    my $params = { %{ $c->req->params } };
+
+	use DDP; p $params;
+	my $dm = $c->stash->{collection}
+       ->check( for => 'key_check', with => $params );
+	my $outcome = $dm->apply;
+
+    $self->status_bad_request( $c, message => encode_json( $dm->errors ) ),
+    $c->detach
+    unless $dm->success;
+
+    #my $outcome = eval { $dm->get_outcome_for('user.forgot_password.email') };
+    # $c->model('Logger')->( 'sys', "E-mail " . $c->req->param('email') . " requisitou troca de senha.", 'update' );
+
+    $self->status_ok( $c, entity => { message => 'ok' } );
+}
 1;
