@@ -98,6 +98,9 @@ var $maps = function () {
 					}
         			//window.location.href = url;
     			});
+				google.maps.event.addListener(marker, 'click', function(event) {
+					map.setCenter(event.latLng);
+				});
 			});
 			mc = new MarkerClusterer(map, marker_array);
 			map.setZoom(12);
@@ -603,8 +606,8 @@ var $maps = function () {
 								//ib.setPosition(myLatlng);
 								ib.open(map, this);
 							}
-        			//window.location.href = url;
-					})
+        					//window.location.href = url;
+						});
 				  })
 					mc = new MarkerClusterer(map, marker_array);
 					map.setCenter(myLatlng);
