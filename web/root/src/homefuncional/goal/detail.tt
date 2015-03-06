@@ -2,6 +2,8 @@
 	[%-CALL assets.include("js/infobubble.min.js")%]
 	[%-CALL assets.include("js/jshashtable-3.0.js")%]
 	[%-CALL assets.include("js/jquery.numberformatter.min.js")%]
+	[%-CALL assets.include("js/slider/js/bootstrap-slider.js")%]
+	[%-CALL assets.include("js/slider/css/slider.css")%]
 	<script id="row_template" type="text/template">
 			{{#goals.length}}<h2 class="section-title">{{ goals.length}} Meta{{#plural}}s{{/plural}} Encontrada{{#plural}}s{{/plural}}</h2>{{/goals.length}}
 			{{ #goals }}	
@@ -57,6 +59,22 @@ $(document).ready(function () {
        	$(".metas-filtro .form .region .select-stylized").removeClass("disabled");
        	$(".metas-filtro .form .cep button").addClass("disabled");
        	$("#txtaddress").val("");
+	});
+
+	$('.slider-editor').slider();
+
+	$('#progress-editor').slider()
+  		.on('slide', function(ev){
+    		$("#progress-value").val(ev.value);
+    		$('#progress-organization').css('width', ev.value+'%').attr('aria-valuenow', ev.value).html(ev.value+'%');    
+  	});
+	$("#progress-value").bind("keyup",function(e){
+		var value = 0;
+		if ($(this).val() != "" && !isNaN($(this).val())){
+			value = $(this).val();
+		}
+		$('#progress-organization').css('width', value+'%').attr('aria-valuenow', value).html(value+'%');
+		$('#progress-editor').slider('setValue', value);
 	});
  
   });
@@ -201,6 +219,22 @@ $(document).ready(function () {
 							<p>Nenhum progresso até o momento.</p>
 						
 						[%END%]
+
+						<br />
+						<h3>Progresso segundo o Conselho Participativo</h3>
+						<div class="progress">
+						  <div class="progress-bar progress-bar-success progress-bar-violet progress-bar-striped" role="progressbar" aria-valuenow="[%goal_obj.goal_porcentages.owned%]" aria-valuemin="0" aria-valuemax="100" style="width: [%goal_obj.goal_porcentages.owned%]%;" id="progress-organization">
+							   [%goal_obj.goal_porcentages.owned%]%
+			              </div>
+						</div>
+						<div class="progress-editor violet col-xs-12">
+							<input type="text" class="slider-editor" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="[%goal_obj.goal_porcentages.owned%]" data-slider-orientation="horizontal" data-slider-selection="before" data-slider-tooltip="show" id="progress-editor">
+
+							<input id="progress-value" size="3" value="[%goal_obj.goal_porcentages.owned%]"> %
+							<button id="progress-save" class="btn btn-success">Salvar</button>
+							<br clear="all"/>
+						</div>
+						<br />
 
 				    </section>
 
