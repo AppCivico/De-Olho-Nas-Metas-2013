@@ -4,16 +4,18 @@
 			<h3 class="dotted">Projetos seguidos por [%c.user.obj.name%]</h3>
 			[% FOREACH project IN user_obj.projects%]
 			<div class="item row">
+				<!--
 				<div class="col-sm-2 nopadding">
 					<div class="image pull-left"><img src="/static/css/images/meta01.jpg" border="0"></div>
 				</div>
+				-->
 				<div class="col-sm-10 nopadding">
 					<div class="contents pull-left">
 						<div class="description">
 							<h2><a href="/home/project/[%project.id%]">[% project.name%]</h2>
 							<div class="stats">
-								<div class="icon gps"></div> São Mateus, Pirituba e São Miguel
-								<div class="icon eye"></div> <span class="organizations">3</span> organizações acompanham
+								<!--<div class="icon gps"></div> São Mateus, Pirituba e São Miguel-->
+								<!--<div class="icon eye"></div> <span class="organizations">3</span> organizações acompanham-->
 								<button class="btn btn-white">Parar de seguir</button>
 							</div>
 						</div>

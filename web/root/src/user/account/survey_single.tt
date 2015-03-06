@@ -81,7 +81,7 @@
 					<a class="btn btn-yellow" href="/user/perfil/enquete/clonar/[%campaign.id%]">Clonar</a>
 				</div>
 				<div class="col-sm-4 text-center">
-					<a class="btn btn-navy" href="/user/perfil/enquete/entrar/[%campaign.id%]">Clonar</a>
+					<a class="btn btn-navy" href="/user/perfil/enquete/entrar/[%campaign.id%]">Fase Atual</a>
 				</div>
 			</div>
 

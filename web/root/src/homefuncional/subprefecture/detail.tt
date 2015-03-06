@@ -74,7 +74,7 @@
 				<div class="col-sm-8">
 				
 					<div class="body">
-						<h1>[%subprefecture_obj.name%]</h1>
+						<h1>Subprefeitura [%subprefecture_obj.name%]</h1>
 						<p>
 						[% subprefecture_obj.site%]
 						[% subprefecture_obj.deputy_mayor%]
