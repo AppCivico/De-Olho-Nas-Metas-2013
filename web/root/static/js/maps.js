@@ -199,14 +199,13 @@ var $maps = function () {
 					url : "/home/region/"+pj.id,
 	            });
 				var url = marker.url;
-
 				google.maps.event.addListener(polygon, "mouseover", function(event) {
 
-					var content = '<div class="project-bubble" style="width: 200px;"><div class="name">';
-					content += '<a href="' + url + '">';
+					var content = '<div class="project-bubble" style="width: 300px;"><div class="name">';
+					content += 'Distrito: <a href="' + url + '">';
 					content += pj.name + '</a></div>';
-					content += '<div class="description">';
-					content += '<a href="' + '/home/subprefecture/' +pj.subprefecture_id+ '">Distritos</a></div>';
+					content += '<div class="name">';
+					content += 'Subprefeitura: <a href="' + '/home/subprefecture/' +pj.subprefecture_id+ '">'+pj.subprefecture.name+'</a></div>';
 					content += '</div>';
 
 					if (!ib){

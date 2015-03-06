@@ -168,7 +168,7 @@ sub survey_login : Chained('survey') : PathPart('entrar') : Args(1) {
 
     my $url = URI->new('http://dev.monitor.promisetracker.org');
 
-	$url->path_segments('api','v1','campaigns','sign_in');
+	$url->path_segments('users','sign_in');
 	$url->query_form( username => 'teste2', user_id => 2, campaign_id => 86, token => 'c687bd99026769a662e9fc84f5c4e201', locale => 'pt-BR'  );
 
 	$c->res->redirect($url);

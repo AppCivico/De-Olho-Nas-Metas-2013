@@ -39,8 +39,6 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $region = $c->stash->{region};
-    use DDP;
-    p $region;
     $self->status_ok(
         $c,
         entity => {
@@ -249,9 +247,10 @@ sub regions_map : Chained('base') : PathPart('regions_map') : Args(0) {
     my @geoms = $c->model('DB')->resultset('Region')->search(
         {},
         {
+			'join'    => 'subprefecture',
             'select'  => [ \q{ST_AsGeoJSON(geom,3) as geom_json} ],
             'as'      => [qw(geom_json)],
-            'columns' => [qw(id name subprefecture_id)]
+            'columns' => [qw(id name subprefecture_id subprefecture.name)]
 
         }
     )->as_hashref->all;
