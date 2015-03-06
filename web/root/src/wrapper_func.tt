@@ -23,6 +23,7 @@
     <link href="/static/css/jquery-ui.structure.min.css" rel="stylesheet">
     <link href="/static/css/jquery-ui.min.css" rel="stylesheet">
     <link href="/static/lightbox/css/lightbox.css" rel="stylesheet" />
+    <link href="/static/js/jquery.upload/css/jquery.fileupload.css" rel="stylesheet">
     <link href="/static/css/home_style.css" rel="stylesheet">
 </head>
 

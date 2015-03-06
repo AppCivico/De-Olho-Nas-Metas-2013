@@ -1003,7 +1003,9 @@ footer .menu-footer li a:hover{
 	cursor: hand;
 	cursor: pointer;
 }
-
+.image-gallery .upload .btn{
+	border-radius: 0px;
+}
 .social-share{
 	margin: 10px;
 	clear: both;
