@@ -169,25 +169,9 @@ sub survey_login : Chained('survey') : PathPart('entrar') : Args(1) {
     my $url = URI->new('http://dev.monitor.promisetracker.org');
 
 	$url->path_segments('api','v1','campaigns','sign_in');
-	$url->query_form( username => 'teste2', user_id => 2, campaign_id => 86 );
+	$url->query_form( username => 'teste2', user_id => 2, campaign_id => 86, token => 'c687bd99026769a662e9fc84f5c4e201', locale => 'pt-BR'  );
 
-    eval {
-        $return = $model->_do_http_req(
-            method  => 'POST',
-            url     => $url,
-            headers => [ Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' ],
-        );
-    };
-	use DDP;	
-	p $return;
-	my $data = decode_json $return->content;
-	$c->detach( '/form/redirect_error', [] ) unless $data->{status} eq 'success';
-	
-	$c->res->redirect($data->{payload}->{redirect_link});
-	$c->res->headers->header(Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201');
-	p $return;
-	p $data;
-	p $url;
+	$c->res->redirect($url);
 
 }
 sub survey_create : Chained('survey') : PathPart('criar') : Args(0) {
