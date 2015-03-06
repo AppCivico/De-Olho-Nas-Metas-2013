@@ -131,7 +131,7 @@ sub list_GET {
     if ( $c->req->params->{role} ) {
         $conditions = {
             'role.id' => $c->req->params->{role} == 99
-            ? { 'in' => [ 1, 4, 5, 6, 8 ] }
+            ? { 'in' => [ 1, 4, 5, 6, 8, 11,12 ] }
             : $c->req->params
               ->{role} #administrative roles, 99 is just to de    fine the undefined
         };

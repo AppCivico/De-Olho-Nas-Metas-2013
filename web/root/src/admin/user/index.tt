@@ -16,6 +16,7 @@
             <tr>
                 <th>Nome</th>
                 <th>Email</th>
+				<th>Permissão</th>
                 <th>Data de cadastro</th>
             </tr>
             </thead>
@@ -25,6 +26,7 @@
                         <td>[%ur.name%]</td>
                         <td>[%ur.email%]</td>
                         <td>[%format_date_to_human(ur.created_at)%]</td>
+                        <td>[%FOR p IN ur.roles%][%p%][%END%]</td>
                         <td>
                             <a class="btn btn-mini" href="/admin/user/[%ur.id%]">
                                 Editar

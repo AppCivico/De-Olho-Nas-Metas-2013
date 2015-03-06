@@ -57,7 +57,7 @@ sub add : Chained('base') : PathPart('new') : Args(0) {
 
     my $api = $c->model('API');
 
-    $api->stash_result( $c, 'roles', params => { admin => 1 } );
+    $api->stash_result( $c, 'roles' );
 }
 
 __PACKAGE__->meta->make_immutable;
