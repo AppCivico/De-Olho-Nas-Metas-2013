@@ -17,7 +17,6 @@ sub redirect_ok : Private {
 
     my $method = ref $path eq 'SCALAR' ? 'uri_for' : 'uri_for_action';
     $path = ref $path eq 'SCALAR' ? $$path : $path;
-	use DDP; p \%args;
     my $a = $c->$method(
         $path,
 
@@ -92,8 +91,6 @@ sub as_json : Private {
     my ( $self, $c, $data ) = @_;
 
     $c->res->header( 'Content-type', 'application/json; charset=utf-8' );
-    use DDP;
-    p $data;
     if ( ref $data eq 'HASH' && exists $data->{error} ) {
         $c->response->status(400);
     }
