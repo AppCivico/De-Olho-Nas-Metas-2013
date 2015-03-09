@@ -218,6 +218,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 images_projects
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::ImagesProject>
+
+=cut
+
+__PACKAGE__->has_many(
+  "images_projects",
+  "SMM::Schema::Result::ImagesProject",
+  { "foreign.project_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 project_events
 
 Type: has_many
@@ -314,8 +329,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-24 08:03:27
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:NHBHg1CXq4vrXKuwVFk9zQ
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-09 10:18:06
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:s6P2z4U6XGyHaRDo5BApfQ
 
 __PACKAGE__->has_many(
     approved_comments => 'SMM::Schema::Result::CommentProject',

@@ -79,23 +79,6 @@ sub type : Chained('base') : Args(0) {
     $c->stash->{without_wrapper} = 1;
 }
 
-sub search_by_types : Chained('base') : Args(0) {
-    my ( $self, $c ) = @_;
-
-    my $type_id   = $c->req->param('type_id');
-    my $region_id = $c->req->param('region_id');
-    my $api       = $c->model('API');
-
-    my $res = $api->stash_result(
-        $c, 'goals',
-        params => {
-            region_id => $region_id,
-            type_id   => $type_id
-        }
-    );
-    $c->stash->{without_wrapper} = 1;
-}
-
 sub region_by_cep : Chained('base') : Args(0) {
     my ( $self, $c ) = @_;
 

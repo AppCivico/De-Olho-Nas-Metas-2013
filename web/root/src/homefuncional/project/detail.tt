@@ -47,6 +47,7 @@
 <script>
 
 $(document).ready(function () {
+	
   $('#follow_or_not').on('click', function () {
 	var id = $(this).data("id"),
 		url,
@@ -344,7 +345,7 @@ $(document).ready(function () {
 							</div>
 						</div>
 						<div class="upload" style="display: none;">
-						    <form id="fileupload" action="/form/add_image" method="POST" enctype="multipart/form-data">
+						    <form id="fileupload" action="/home/project/[%project_obj.id%]/upload_images" method="POST" enctype="multipart/form-data">
 						        <div class="row fileupload-buttonbar">
 						            <div class="col-lg-7">
 						                <span class="btn btn-success fileinput-button">

@@ -2,7 +2,9 @@ package WebSMM::Controller::HomeFuncional::Project;
 use Moose;
 use namespace::autoclean;
 use JSON;
+use Path::Class qw(dir);
 use utf8;
+use DDP;
 BEGIN { extends 'Catalyst::Controller'; }
 
 =head1 NAME
@@ -36,6 +38,7 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
     my $api = $c->model('API');
     my $user_id = $c->user->obj->id if $c->user;
 
+    $c->stash->{id} = $id;
     $api->stash_result(
         $c,
         [ 'projects', $id ],
@@ -146,8 +149,6 @@ sub user_follow_project : Chained('base') : PathPart('user_follow_project') : Ar
     $c->res->status(400), $c->detach unless $c->stash->{project};
     $c->res->status(200);
     $c->res->content_type('application/json');
-    use DDP;
-    p $c->stash->{project};
     $c->res->body( encode_json( $c->stash->{project} ) );
 
 }
@@ -164,7 +165,7 @@ sub user_stop_follow : Chained('base') : PathPart('user_stop_follow') : Args(0) 
 
     $c->res->status(200);
     $c->res->content_type('application/json');
-    $c->res->body( JSON::encode_json( { message => 'parou de seguir' } ) );
+    $c->res->body( encode_json( { message => 'parou de seguir' } ) );
 
 }
 
@@ -189,8 +190,7 @@ sub comment_counsil : Chained('base') : PathParth('comment_counsil') : Args(0) {
 
     $c->res->status(200);
     $c->res->content_type('application/json');
-    $c->res->body(
-        JSON::encode_json( { message => 'Seu comentário foi enviado para moderação, aguarde aprovação.' } ) );
+    $c->res->body( encode_json( { message => 'Seu comentário foi enviado para moderação, aguarde aprovação.' } ) );
 }
 
 sub comment : Chained('base') : PathParth('comment') : Args(0) {
@@ -212,8 +212,7 @@ sub comment : Chained('base') : PathParth('comment') : Args(0) {
 
     $c->res->status(200);
     $c->res->content_type('application/json');
-    $c->res->body(
-        JSON::encode_json( { message => 'Seu comentário foi enviado para moderação, aguarde aprovação.' } ) );
+    $c->res->body( encode_json( { message => 'Seu comentário foi enviado para moderação, aguarde aprovação.' } ) );
 }
 
 sub search_by_types : Chained('base') : Args(0) {
@@ -238,10 +237,35 @@ sub search_by_types : Chained('base') : Args(0) {
             lnglat    => $lnglat    ? $lnglat    : ""
         }
     );
-	use DDP;
-	p $c->stash->{projects};
     $c->res->status(200);
     $c->detach( '/form/as_json', [ { projects => $c->stash->{projects} } ] );
+}
+
+sub upload_images : Chained('object') : PathPart('upload_images') : Args(0) {
+    my ( $self, $c ) = @_;
+
+    my $api = $c->model('API');
+    $c->detach unless $c->req->method eq 'POST';
+    my $image = $c->req->upload('files[]');
+
+    my $path = dir( $c->config->{project_picture_path} )->resolve . '/' . $c->stash->{id};
+
+    unless ( -e $path ) {
+        mkdir -p $path;
+    }
+
+    $api->stash_result(
+        $c, 'images_project',
+        method => 'POST',
+        body   => { project_id => $c->stash->{id}, name_image => $image->filename }
+    );
+
+    $image->copy_to($path);
+
+    p $image;
+    $c->res->status(200);
+    $c->res->content_type('application/json');
+    $c->res->body( encode_json( {$image} ) );
 }
 
 =encoding utf8
