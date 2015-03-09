@@ -52,6 +52,10 @@ sub verifiers_specs {
                     required => 0,
                     type     => 'Str',
                 },
+                hash => {
+                    required => 0,
+                    type     => 'Str',
+                },
                 email => {
                     required   => 1,
                     type       => EmailAddress,
@@ -109,13 +113,18 @@ sub action_specs {
         create => sub {
             my %values = shift->valid_values;
 
+			use DDP; p \%values;
+
             delete $values{password_confirm};
 
             $values{email} = lc $values{email};
             my $role = delete $values{role};
-
+            my $hash = delete $values{hash};
+            my $organization_id = delete $values{organization_id};
+			if ($hash){
+				$self->resultset('InviteCounsil')->search({ hash => $hash})->update({ valid_until => 0});
+			}
             my $user = $self->create( \%values );
-
             if ($role) {
                 $user->set_roles( { name => $role } );
             }

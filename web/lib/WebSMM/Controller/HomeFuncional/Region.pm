@@ -31,8 +31,6 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
     my $api = $c->model('API');
 
     $api->stash_result( $c, [ 'regions', $id ], stash => 'region_obj', );
-    use DDP;
-    p $c->stash->{region_obj};
 
 }
 

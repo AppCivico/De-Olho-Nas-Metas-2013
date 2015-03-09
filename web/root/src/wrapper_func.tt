@@ -19,10 +19,12 @@
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- Custom Theme CSS -->
+    [% assets.export("css")|none %]    
 	<link href="/static/css/jquery-ui.theme.min.css" rel="stylesheet">
     <link href="/static/css/jquery-ui.structure.min.css" rel="stylesheet">
     <link href="/static/css/jquery-ui.min.css" rel="stylesheet">
     <link href="/static/lightbox/css/lightbox.css" rel="stylesheet" />
+    <link href="/static/js/jquery.upload/css/jquery.fileupload.css" rel="stylesheet">
     <link href="/static/css/home_style.css" rel="stylesheet">
 </head>
 

@@ -703,6 +703,9 @@ section.statistics .progress-bar{
 	font-size: 2em;
 	padding: 10px;
 }
+section.statistics .progress-bar-violet{
+	background-color: #795891;
+}
 
 section.statistics .chart-stats .chart-label{
 	text-align: center;
@@ -1003,7 +1006,9 @@ footer .menu-footer li a:hover{
 	cursor: hand;
 	cursor: pointer;
 }
-
+.image-gallery .upload .btn{
+	border-radius: 0px;
+}
 .social-share{
 	margin: 10px;
 	clear: both;
@@ -1430,4 +1435,15 @@ table.dataTable.orange thead{
 	margin-bottom: 20px;
 	border: 1px solid #d6cab5;
 	padding: 10px;
+}
+
+.slider-editor{
+	width: 38em;
+}
+.progress-editor.violet .slider .slider-selection{
+	background-image: none;
+	background-color: #795891;
+}
+input#progress-value{
+	margin-left: 10px;
 }

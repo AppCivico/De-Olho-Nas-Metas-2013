@@ -54,15 +54,41 @@ sub verifiers_specs {
                 },
             }
         ),
-        check_email => Data::Verifier->new(
-            filters => [qw(trim)],
+		key_check => Data::Verifier->new(
+	        filters => [qw(trim)],
             profile => {
+				hash => {
+                    required   => 1,
+                    type       => 'Str',
+                    post_check => sub {
+                        my $r     = shift;
+                        my $where = {
+                            hash        => $r->get_value('hash'),
+							valid_until => 1
+                        };
+
+                        return $self->search( $where, { rows => 1 } )->count == 1;
+                    }
+                },
                 email => {
-                    required => 1,
-                    type     => EmailAddress
-                }
+                    required   => 1,
+                    type       => EmailAddress,
+                    post_check => sub {
+                        my $r     = shift;
+                        my $where = {
+                            email  		=> $r->get_value('email'),
+							valid_until => 1
+                        };
+
+                        # email precisa conferir com o do dono da chave
+                        return $self->search($where, { rows => 1 } )->count == 1;
+
+                    }
+                },
             }
-        ),
+
+
+		),
     };
 }
 
@@ -98,6 +124,12 @@ sub uri_filter {
 sub action_specs {
     my $self = shift;
     return {
+		key_check => sub {
+	        my %values = shift->valid_values;
+				
+			return 0 unless $self->search( { hash => $values{hash} } )->next;
+           	return 1;
+		},
         create => sub {
             my %values = shift->valid_values;
 
@@ -107,8 +139,10 @@ sub action_specs {
 
             $key = random_regex(q([a-zA-Z0-9]{20}))
               while ( $self->search( { hash => $key },{ rows => 1 } )->next );
-
 			$values{hash} = $key;
+
+            $self->search( { email=> $values{email} } )->update( { valid_until => 'false' } );
+
             my $invite_counsil = $self->create(
                 {
                     organization_id  => $values{organization_id},
@@ -141,7 +175,6 @@ sub action_specs {
                 title   => 'Convite - De Olho Nas Metas',
 
             )->build_email;
-			return 1;
             $self->result_source->schema->resultset('EmailQueue')
               ->create( {  body => $email->as_string, title => $title } );
 

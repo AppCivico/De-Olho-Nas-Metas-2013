@@ -98,6 +98,9 @@ var $maps = function () {
 					}
         			//window.location.href = url;
     			});
+				google.maps.event.addListener(marker, 'click', function(event) {
+					map.setCenter(event.latLng);
+				});
 			});
 			mc = new MarkerClusterer(map, marker_array);
 			map.setZoom(12);
@@ -199,14 +202,13 @@ var $maps = function () {
 					url : "/home/region/"+pj.id,
 	            });
 				var url = marker.url;
-
 				google.maps.event.addListener(polygon, "mouseover", function(event) {
 
-					var content = '<div class="project-bubble" style="width: 200px;"><div class="name">';
-					content += '<a href="' + url + '">';
+					var content = '<div class="project-bubble" style="width: 300px;"><div class="name">';
+					content += 'Distrito: <a href="' + url + '">';
 					content += pj.name + '</a></div>';
-					content += '<div class="description">';
-					content += '<a href="' + '/home/subprefecture/' +pj.subprefecture_id+ '">Distritos</a></div>';
+					content += '<div class="name">';
+					content += 'Subprefeitura: <a href="' + '/home/subprefecture/' +pj.subprefecture_id+ '">'+pj.subprefecture.name+'</a></div>';
 					content += '</div>';
 
 					if (!ib){
@@ -603,8 +605,8 @@ var $maps = function () {
 								//ib.setPosition(myLatlng);
 								ib.open(map, this);
 							}
-        			//window.location.href = url;
-					})
+        					//window.location.href = url;
+						});
 				  })
 					mc = new MarkerClusterer(map, marker_array);
 					map.setCenter(myLatlng);
