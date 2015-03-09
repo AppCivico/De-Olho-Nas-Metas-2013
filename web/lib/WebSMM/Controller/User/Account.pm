@@ -80,8 +80,9 @@ sub counsil_members : Chained('object') : PathPart('membros') : Args(0) {
 sub survey :Chained('object') :PathPart(enquete) :CaptureArgs(0){
 }
 
-sub survey_list : Chained('survey') : PathPart('') : Args(0) {
-    my ( $self, $c ) = @_;
+sub survey_list : Chained('survey') : PathPart('') : Args(1) {
+    my ( $self, $c , $id) = @_;
+
 
     my $return;
     my $res;
@@ -91,6 +92,7 @@ sub survey_list : Chained('survey') : PathPart('') : Args(0) {
     my $url = URI->new('http://dev.monitor.promisetracker.org');
 
 	$url->path_segments('api','v1','campaigns');
+	$url->query_form( donm_org_id => $id );
     eval {
         $return = $model->_do_http_req(
             method  => 'GET',
