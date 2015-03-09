@@ -227,6 +227,8 @@ $(document).ready(function () {
 							   [%goal_obj.goal_porcentages.owned%]%
 			              </div>
 						</div>
+	
+					[% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]	
 						<div class="progress-editor violet col-xs-12">
 							<input type="text" class="slider-editor" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="[%goal_obj.goal_porcentages.owned%]" data-slider-orientation="horizontal" data-slider-selection="before" data-slider-tooltip="show" id="progress-editor">
 
@@ -235,7 +237,7 @@ $(document).ready(function () {
 							<br clear="all"/>
 						</div>
 						<br />
-
+					[% END %]
 				    </section>
 
 					<div class="image-gallery">

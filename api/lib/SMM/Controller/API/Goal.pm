@@ -56,7 +56,9 @@ sub result_GET {
             {
                 id => { '-in' => \@region_ids_unique }
             },
+			
             {
+				order_by     => [qw/name/],
                 select       => [qw/id name/],
                 result_class => 'DBIx::Class::ResultClass::HashRefInflator',
             }

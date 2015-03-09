@@ -92,7 +92,7 @@ sub survey_list : Chained('survey') : PathPart('') : Args(1) {
     my $url = URI->new('http://dev.monitor.promisetracker.org');
 
 	$url->path_segments('api','v1','campaigns');
-	$url->query_form( donm_org_id => $id );
+	$url->query_form( user_id => $id );
     eval {
         $return = $model->_do_http_req(
             method  => 'GET',
@@ -100,7 +100,7 @@ sub survey_list : Chained('survey') : PathPart('') : Args(1) {
             headers => [ Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' ],
         );
     };
-
+	
     my $data = decode_json $return->content;
     $c->stash->{campaigns} = $data->{payload};
 
@@ -140,7 +140,7 @@ sub survey_clone : Chained('survey') : PathPart('clonar') : Args(1) {
 
 	
 	$url->path_segments('api','v1','campaigns');
-	$url->query_form( username => 'teste2', user_id => 2, campaign_id => 86 );
+	$url->query_form( username => $c->user->obj->name , user_id => $c->user->obj->organization_id , campaign_id => $id );
 
     eval {
         $return = $model->_do_http_req(
@@ -153,11 +153,7 @@ sub survey_clone : Chained('survey') : PathPart('clonar') : Args(1) {
     my $data = decode_json $return->content;
 	$c->detach( '/form/redirect_error', [] ) unless $data->{status} eq 'success';
 	
-	use DDP;
 	$c->res->redirect($data->{payload}->{redirect_link});
-	p $return;
-	p $data;
-	p $url;
 
 }
 sub survey_login : Chained('survey') : PathPart('entrar') : Args(1) {
