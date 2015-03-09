@@ -25,7 +25,7 @@ my @subpref = $schema->resultset('Subprefecture')->all;
 for my $x (@subpref){
 	#print lc($x->name)."\n";
 	my $name_lc = lc($x->name);
-	$name_lc =~ ucfirst($name_lc);	
-	print "name: $name_lc\n";
-	$schema->resultset('Subprefecture')->search({ id => $x->id})->update( {name => $name_lc});
+	my $name_ok = ucfirst($name_lc);	
+	print "name: $name_ok\n";
+	$schema->resultset('Subprefecture')->search({ id => $x->id})->update( {name => $name_ok});
 }

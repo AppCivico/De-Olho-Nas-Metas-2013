@@ -1,4 +1,4 @@
-package SMM::Schema::ResultSet::Campaign;
+package SMM::Schema::ResultSet::Event;
 use namespace::autoclean;
 
 use utf8;
@@ -36,8 +36,8 @@ sub action_specs {
     return {
         create => sub {
             my %values  = shift->valid_values;
-            my $campaign = $self->create( \%values );
-            return $campaign;
+            my $event = $self->create( \%values );
+            return $event;
         }
     };
 }

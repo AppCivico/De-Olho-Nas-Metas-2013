@@ -72,7 +72,7 @@
 				<div class="row item">
 					<div class="contents">
 						<h2>[%enquete.tittle%]</h2>
-						<div class="description"> [% IF enquete.tittle %][% enquete.title%][% ELSE %] Sem descrição [%END%]</div>
+						<div class="description"> [% IF enquete.title %][% enquete.title%][% ELSE %] Sem descrição [%END%]</div>
 						<div class="row">
 							<div class="col-xs-4 text-left">
 								<div class="icon chat[% IF enquete.status != 'active'%]3[% END %]"></div>
