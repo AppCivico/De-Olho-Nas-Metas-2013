@@ -1,7 +1,8 @@
-    <section class="metas-detail">
+    <section class="metas-result">
 		<div class="container">
 		
-			<h3 class="dotted">Projetos seguidos por [%c.user.obj.name%]</h3>
+			<h2 class="section-title">Projetos seguidos por [%c.user.obj.name%]</h2>
+			
 			[% FOREACH project IN user_obj.projects%]
 			<div class="item row">
 				<!--
