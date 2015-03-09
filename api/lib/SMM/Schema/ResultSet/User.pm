@@ -113,8 +113,6 @@ sub action_specs {
         create => sub {
             my %values = shift->valid_values;
 
-			use DDP; p \%values;
-
             delete $values{password_confirm};
 
             $values{email} = lc $values{email};
