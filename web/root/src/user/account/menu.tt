@@ -16,7 +16,7 @@
 					[% ELSIF user_obj.role.counsil_master == 1%]
 					<div class="list-box list-brown">
 						<ul>
-							<li><a href="/user/perfil/enquete">Enquetes Móveis</a></li>
+							<li><a href="/user/perfil/enquete/[% c.user.obj.organization_id%]">Enquetes Móveis</a></li>
 							<li><a href="/user/perfil/convidar">Convidar</a></li>
 							<li><a href="">Campanhas</a></li>
 							<li><a href="/user/perfil/seguindo">Seguindo</a></li>
