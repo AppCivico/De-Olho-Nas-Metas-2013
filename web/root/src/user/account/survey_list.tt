@@ -55,7 +55,7 @@
 						</div>
 						-->
 						
-						<a href="/user/perfil/enquete/criar" class="btn btn-navy btn-right">Criar nova enquete</a>
+						<a target="_blank" href="/user/perfil/enquete/criar" class="btn btn-navy btn-right">Criar nova enquete</a>
 				</div>
 				<div class="clear"></div>
 			</form>
@@ -72,7 +72,7 @@
 				<div class="row item">
 					<div class="contents">
 						<h2>[%enquete.tittle%]</h2>
-						<div class="description"> [% IF enquete.title %][% enquete.title%][% ELSE %] Sem descrição [%END%]</div>
+						<div class="description"><a href="/user/perfil/enquete/entrar/[%enquete.id%]"> [% IF enquete.title %][% enquete.title%][% ELSE %] Sem descrição [%END%]</a></div>
 						<div class="row">
 							<div class="col-xs-4 text-left">
 								<div class="icon chat[% IF enquete.status != 'active'%]3[% END %]"></div>
@@ -85,11 +85,13 @@
 								</span>
 							</div>
 							<div class="col-xs-4 text-center">
-								<a href="/user/perfil/enquete/clonar/[%enquete.id%]" class="clone"><div class="icon clone"></div> Clonar</a>
+								<a target="_blank" href="/user/perfil/enquete/clonar/[%enquete.id%]" class="clone"><div class="icon clone"></div> Clonar</a>
 							</div>
+							[% UNLESS enquete.status == 'draft'%]
 							<div class="col-xs-4 text-right">
 								<a href="/user/perfil/enquete/detalhe/[%enquete.id%]" class="view-results"><div class="icon results"></div> Ver detalhes</a>
 							</div>
+							[% END %]
 						</div>
 					</div>
 					<div class="icon-status [% IF enquete.status == 'active'%]active[% END %]">

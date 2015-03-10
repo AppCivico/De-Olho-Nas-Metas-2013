@@ -162,18 +162,20 @@ sub result_GET {
             ],
             progress_goal_counsil => [
                 (
+				  
                     map {
                         my $p = $_;
+						$p ?
                         (
                             +{
                                 map { $_ => $p->$_ }
                                   qw/
-                                  id
                                   owned
                                   remainder                                  
                                   /
                             }
-                          ),
+                          )
+						: ()
                     } @progress_goal_counsil,
                 ),
             ],
