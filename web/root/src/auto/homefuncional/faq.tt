@@ -1,0 +1,13 @@
+	<section class="page-content faq">
+		<div class="container">
+			<h2 class="title">Perguntas Frenquentes</h2>
+			<div class="row">
+				<div class="col-sm-8 col-md-offset-2">
+					<p>
+						Em breve
+					</p>
+				</div>
+			</div>
+			<br>
+		</div>
+    </section>

@@ -98,13 +98,13 @@
 			<div class="container">
 				<ul class="menu-footer">
 					<li>
-						<a href="#">Sobre</a>
+						<a href="/homefuncional/sobre">Sobre</a>
 					</li>
 					<li>
-						<a href="#">Perguntas Frequentes</a>
+						<a href="/homefuncional/faq">Perguntas Frequentes</a>
 					</li>
 					<li>
-						<a href="#">Contato</a>
+						<a href="/homefuncional/contato">Contato</a>
 					</li>
 					<li>
 						<a href="/cadastro">Cadastro</a>

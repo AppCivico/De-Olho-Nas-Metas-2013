@@ -125,14 +125,16 @@
 								<td><div class="icon gps3"></div></td>
 								<td>
 									[% subprefecture_obj.address%]<br />
-									[% subprefecture_obj.telephone%]
+									[% subprefecture_obj.telephone%]<br />
+									<a href="mailto:[% subprefecture_obj.email%]">[% subprefecture_obj.email%]</a>
 								</td>
 							</tr>
 							[% IF subprefecture_obj.site != "" %]
 							<tr>
 								<td><div class="icon globe"></div></td>
 								<td>
-									<a href="[% subprefecture_obj.site%]" target="_blank">[% subprefecture_obj.site%]</a>
+									<a href="[% subprefecture_obj.site%]" target="_blank">[% subprefecture_obj.site%]</a><br />
+									<a href="mailto:[% subprefecture_obj.email%]">[% subprefecture_obj.email%]</a>			
 								</td>
 							</tr>
 							[% END %]
