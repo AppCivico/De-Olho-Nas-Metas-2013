@@ -92,11 +92,12 @@ sub result_GET {
             images => [
                 map {
                     my $p = $_;
+					$p ? 
 					(
 					+{
 					map { $_ => $p->$_ } qw/name_image/
 					}
-					),
+					): ()
 
                 } @images,
             ],
