@@ -55,7 +55,7 @@
 						</div>
 						-->
 						
-						<a href="/user/perfil/enquete/criar" class="btn btn-navy btn-right">Criar nova enquete</a>
+						<a href="/user/perfil/enquete/criar" target="_blank" class="btn btn-navy btn-right">Criar nova enquete</a>
 				</div>
 
 				<div class="clear"></div>

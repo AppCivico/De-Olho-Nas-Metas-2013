@@ -7,8 +7,7 @@ use SMM::Schema;
 use FindBin qw($Bin);
 use lib "$Bin/../files";
 use File::Basename;
-use Geo::Google::PolylineEncoder;
-
+use DDP;
 use Catalyst::Test q(SMM);
 my $config = SMM->config;
 
@@ -23,9 +22,19 @@ my ( $sigla, $name) = split(';',$_);
 my @subpref = $schema->resultset('Subprefecture')->all;
 
 for my $x (@subpref){
-	#print lc($x->name)."\n";
-	my $name_lc = lc($x->name);
-	my $name_ok = ucfirst($name_lc);	
-	print "name: $name_ok\n";
-	$schema->resultset('Subprefecture')->search({ id => $x->id})->update( {name => $name_ok});
+	print lc($x->name)."\n";
+	my @work_split = split (/\//,$x->name) if $x->name =~ /\//;	
+	my $work;
+	my @words;
+	p @work_split;
+	if ((scalar @work_split) > 0){
+		for my $w (@work_split){
+		 @words = join " " , map{ ucfirst $_ } split(/\s+/, lc($w));
+		}
+		p @words;
+	warn "lol";
+	}
+	#my $word = join " " , map{ ucfirst $_ } split(/\s+/, lc($x->name));
+	#print "name: $word\n";
+#	$schema->resultset('Subprefecture')->search({ id => $x->id})->update( {name => $word});
 }
