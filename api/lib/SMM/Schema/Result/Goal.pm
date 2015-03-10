@@ -511,6 +511,21 @@ __PACKAGE__->belongs_to(
   },
 );
 
+=head2 progress_goal_counsils
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::ProgressGoalCounsil>
+
+=cut
+
+__PACKAGE__->has_many(
+  "progress_goal_counsils",
+  "SMM::Schema::Result::ProgressGoalCounsil",
+  { "foreign.goal_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 state
 
 Type: belongs_to
@@ -572,8 +587,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-27 12:59:55
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:FaFCyUjHD8+KH4mFRq09hg
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-09 20:21:15
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZpQBuUavz8vbuhh2EtVBcw
 
 __PACKAGE__->has_many(
     approved_comments => 'SMM::Schema::Result::CommentGoal',

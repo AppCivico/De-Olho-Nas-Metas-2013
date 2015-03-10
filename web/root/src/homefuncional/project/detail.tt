@@ -331,14 +331,15 @@ $(document).ready(function () {
 					</div>
 
 					<div class="image-gallery">
-						<h3>99 imagens relacionadas <button class="btn btn-brown pull-right" id="add-gallery">Enviar imagens</button></h3>
+						<h3>[% project_obj.images.size%] imagens relacionadas <button class="btn btn-brown pull-right" id="add-gallery">Enviar imagens</button></h3>
 						<div class="gallery">
 							<div class="arrow left">
 								<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 							</div>
 							<div class="contents">
-								<a href="/static/images/wifisp.jpg" data-lightbox="gallery" data-title="Imagem 1"><img src="/static/images/wifisp.jpg"></a>
-								<a href="/static/images/wifisp.jpg" data-lightbox="gallery" data-title="Imagem 2"><img src="/static/images/wifisp.jpg"></a>
+								[% FOR img IN project_obj.images%]
+								<a href="[% img.name_image %]" data-lightbox="gallery" data-title="Imagem 1"><img src="[% img.name_image%]"></a>
+								[% END %]
 							</div>
 							<div class="arrow right">
 								<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>

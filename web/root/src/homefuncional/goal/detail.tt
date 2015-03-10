@@ -41,18 +41,24 @@
 $(document).ready(function () {
        $('.priceformat').formatNumber({format:"#,###.00",locale: "br" });
 
-  $('#comment').on('click', function () {
-	if ($('#text_comment').val() == ""){
-		$('#alert_comment').html('<div class="alert alert-success"><p>Por favor preencha o campo de comentário.</p></div>');
-		return;
-	}
+    $('#comment').on('click', function () {
+		if ($('#text_comment').val() == ""){
+			$('#alert_comment').html('<div class="alert alert-success"><p>Por favor preencha o campo de comentário.</p></div>');
+			return;
+		}
 
-	var id = $(this).data("id");
-	$.post( "/home/goal/comment", { user_id: $(this).data("id"), text: $('#text_comment').val(), goal_id : $('#goalid').val() } ,function( data ) {
-		$('#alert_comment').html('<div class="alert alert-success"><p>'+data.message+'</p></div>');
-  	},"json");
+		var id = $(this).data("id");
+		$.post( "/home/goal/comment", { user_id: $(this).data("id"), text: $('#text_comment').val(), goal_id : $('#goalid').val() } ,function( data ) {
+			$('#alert_comment').html('<div class="alert alert-success"><p>'+data.message+'</p></div>');
+  		},"json");
 
-	$('#text_comment').val('');
+		$('#text_comment').val('');
+	});
+	$('#progress-save').on('click', function () {
+		$.post( "/home/goal/set_progress", { owned : $('#progress-value').val(), goal_id : $('#goalid').val() } ,function( data ) {
+			$('#alert_progress').html('<div class="alert alert-success"><p>'+data.message+'</p></div>');
+  		},"json");
+
 	});
 
 	$("#homeregion").change(function(){
@@ -223,16 +229,36 @@ $(document).ready(function () {
 						<br />
 						<h3>Progresso segundo o Conselho Participativo</h3>
 						<div class="progress">
+						[% IF goal_obj.progress_goal_counsil.size > 0 %]
+							[% FOR gpc IN goal_obj.progress_goal_counsil%]
+							<div class="progress-bar progress-bar-success progress-bar-violet progress-bar-striped" role="progressbar" aria-valuenow="[%gpc.owned%]" aria-valuemin="0" aria-valuemax="100" style="width: [%gpc.owned%]%;" id="progress-organization">
+						   [%gpc.owned%]%
+			                </div>
+							[% END%]
+
+						[%ELSE%]	
 						  <div class="progress-bar progress-bar-success progress-bar-violet progress-bar-striped" role="progressbar" aria-valuenow="[%goal_obj.goal_porcentages.owned%]" aria-valuemin="0" aria-valuemax="100" style="width: [%goal_obj.goal_porcentages.owned%]%;" id="progress-organization">
 							   [%goal_obj.goal_porcentages.owned%]%
 			              </div>
+						[%END%]
 						</div>
 	
-					[% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]	
+					[% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]
+							
+						<div id="alert_progress"></div>
 						<div class="progress-editor violet col-xs-12">
-							<input type="text" class="slider-editor" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="[%goal_obj.goal_porcentages.owned%]" data-slider-orientation="horizontal" data-slider-selection="before" data-slider-tooltip="show" id="progress-editor">
+						[% IF goal_obj.progress_goal_counsil.size > 0 %]
+							[% FOR gpc IN goal_obj.progress_goal_counsil%]
+							<input type="text" class="slider-editor" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="[%gpc.owned%]" data-slider-orientation="horizontal" data-slider-selection="before" data-slider-tooltip="show" id="progress-editor">
+							<input id="progress-value" size="3" value="[%gpc.owned%]"> %
+							[% END%]
 
+						[%ELSE%]	
+							<input type="text" class="slider-editor" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="[%goal_obj.goal_porcentages.owned%]" data-slider-orientation="horizontal" data-slider-selection="before" data-slider-tooltip="show" id="progress-editor">
 							<input id="progress-value" size="3" value="[%goal_obj.goal_porcentages.owned%]"> %
+
+						[%END%]
+	
 							<button id="progress-save" class="btn btn-success">Salvar</button>
 							<br clear="all"/>
 						</div>
@@ -315,8 +341,7 @@ $(document).ready(function () {
 						</table>
 
 					</div>
-					<div id="alert_comment">
-					</div>
+					<div id="alert_comment"></div>
 					<div>						
 						<textarea id="text_comment" class="form-control" rows="2"></textarea>
 						<button  id="comment" type="button" class="btn btn-brown" data-id="[% c.user.obj.id%]">Comentar</button>

@@ -34,6 +34,14 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
     $c->stash->{goal_obj}->{goal_porcentages}->{owned} = int( $c->stash->{goal_obj}->{goal_porcentages}->{owned} );
     $c->stash->{goal_obj}->{goal_porcentages}->{remainder} =
       int( $c->stash->{goal_obj}->{goal_porcentages}->{remainder} );
+
+    if ( $c->user ) {
+        $api->stash_result( $c, [ 'users', $c->user->obj->id ], stash => 'user_obj', );
+        $c->stash->{user_obj}->{role} = { map { $_ => 1 } @{ $c->stash->{user_obj}->{roles} } };
+
+        $c->stash->{do_i_follow} = grep { $_ eq $id } @{ $c->stash->{user_obj}->{projects_i_follow} };
+    }
+
 }
 
 sub detail : Chained('object') : PathPart('') : Args(0) {
@@ -52,6 +60,7 @@ sub detail : Chained('object') : PathPart('') : Args(0) {
 	my %empresas = map { $_->{business_name} => 1 } @{$c->stash->{goal_obj}->{budgets}};
 	my @lol = sort keys %empresas;	
 	@{$c->stash->{business_names}} = sort keys %empresas;
+	use DDP; p $c->stash->{goal_obj};
 }
 
 sub index : Chained('base') : PathPart('') : Args(0) {
@@ -126,6 +135,30 @@ sub comment : Chained('base') : PathParth('comment') : Args(0) {
     $c->res->body(
         JSON::encode_json( { message => 'Seu comentário foi enviado para moderação, aguarde aprovação.' } ) );
 }
+sub set_progress : Chained('base') : PathParth('set_progress') : Args(0) {
+    my ( $self, $c ) = @_;
+
+    my $api = $c->model('API');
+
+    my $owned = $c->req->param('owned');
+    my $goal_id = $c->req->param('goal_id');
+
+	my $remainder = 100 - $owned;
+    $api->stash_result(
+        $c,
+        'progress_goal_counsil',
+        method => 'POST',
+        params => { owned => $owned, remainder => $remainder, goal_id => $goal_id }
+    );
+	my $interation = 'O conselheiro '.$c->user->obj->name. ' alterou a porcentagem para '. $owned.'%';
+
+
+    $c->res->status(200);
+    $c->res->content_type('application/json');
+    $c->res->body(
+        JSON::encode_json( { message => 'Alteração realizada com sucesso.' } ) );
+}
+
 
 sub search_by_types : Chained('base') : Args(0) {
     my ( $self, $c ) = @_;
