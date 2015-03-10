@@ -50,6 +50,7 @@ sub result_GET {
     my $follow_project =
       $project->user_follow_projects->search( { active => 1 } )->count;
     my $type;
+	my @images = $project->images_projects->all;
     $type = $_->goal->objective_id for $project->goal_projects;
 
     my $objective =
@@ -88,6 +89,17 @@ sub result_GET {
 
                 } ( $project->goal_projects ),
             },
+            images => [
+                map {
+                    my $p = $_;
+					(
+					+{
+					map { $_ => $p->$_ } qw/name_image/
+					}
+					),
+
+                } @images,
+            ],
 
             type => [
                 {
