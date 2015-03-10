@@ -242,6 +242,41 @@ $(document).ready(function () {
 
 						[%END%]
 					</div>
+					<section class="statistics">
+						<h3>Progresso</h3>
+						<div class="progress">
+						[% USE Math; Progress = Math.int(Math.rand(100)); %]
+						  <div class="progress-bar progress-bar-success progress-bar-green progress-bar-striped" role="progressbar" aria-valuenow="[% Progress %]" aria-valuemin="0" aria-valuemax="100" style="width: [% Progress %]%;">
+							   [% Progress %]%
+			              </div>
+						</div>
+						<br />
+						<div class="progress-steps green">[% project_obj.progress_count%] de 6 etapas</div>
+						<table class="table-progress-steps">
+						[% IF project_obj.qualitative_progress_1%]
+							<tr><td class="number green">1</td><td class="description">[% project_obj.qualitative_progress_1%]</td></tr>
+						[%END%]
+						[% IF project_obj.qualitative_progress_2%]
+							<tr><td class="number green">2</td><td class="description">[% project_obj.qualitative_progress_2%]</td></tr>
+						[%END%]
+						[% IF project_obj.qualitative_progress_3%]
+							<tr><td class="number green">3</td><td class="description">[% project_obj.qualitative_progress_3%]</td></tr>
+						[%END%]
+						[% IF project_obj.qualitative_progress_4%]
+							<tr><td class="number green">4</td><td class="description">[% project_obj.qualitative_progress_4%]</td></tr>
+						[%END%]
+						[% IF project_obj.qualitative_progress_5%]
+							<tr><td class="number green">5</td><td class="description">[% project_obj.qualitative_progress_5%]</td></tr>
+						[%END%]
+						[% IF project_obj.qualitative_progress_6%]
+							<tr><td class="number green">6</td><td class="description">[% project_obj.qualitative_progress_6%]</td></tr>
+						[%END%]
+						</table>
+						[% IF project_obj.progress_count == 0%]
+							<p>Nenhum progresso até o momento.</p>
+						
+						[%END%]
+					</section>
 					<div>
 						<h3 class="section-title">Comentário dos conselheiros</h3>
 						<table id="list_note" class="table table-striped">
@@ -294,40 +329,7 @@ $(document).ready(function () {
 									loadLineGraph(".timeline .chart",chart_labels,chart_data);
 								</script>
 						</div>-->
-					<section class="statistics">
-					</section>
-
-
 					<div class="timeline">
-					</div>
-
-					<div class="indicators">
-						<h3>Progresso</h3>
-						<div class="progress-steps green">[% project_obj.progress_count%] de 6 etapas</div>
-						<table class="table-progress-steps">
-						[% IF project_obj.qualitative_progress_1%]
-							<tr><td class="number green">1</td><td class="description">[% project_obj.qualitative_progress_1%]</td></tr>
-						[%END%]
-						[% IF project_obj.qualitative_progress_2%]
-							<tr><td class="number green">2</td><td class="description">[% project_obj.qualitative_progress_2%]</td></tr>
-						[%END%]
-						[% IF project_obj.qualitative_progress_3%]
-							<tr><td class="number green">3</td><td class="description">[% project_obj.qualitative_progress_3%]</td></tr>
-						[%END%]
-						[% IF project_obj.qualitative_progress_4%]
-							<tr><td class="number green">4</td><td class="description">[% project_obj.qualitative_progress_4%]</td></tr>
-						[%END%]
-						[% IF project_obj.qualitative_progress_5%]
-							<tr><td class="number green">5</td><td class="description">[% project_obj.qualitative_progress_5%]</td></tr>
-						[%END%]
-						[% IF project_obj.qualitative_progress_6%]
-							<tr><td class="number green">6</td><td class="description">[% project_obj.qualitative_progress_6%]</td></tr>
-						[%END%]
-						</table>
-						[% IF project_obj.progress_count == 0%]
-							<p>Nenhum progresso até o momento.</p>
-						
-						[%END%]
 					</div>
 
 					<div class="image-gallery">

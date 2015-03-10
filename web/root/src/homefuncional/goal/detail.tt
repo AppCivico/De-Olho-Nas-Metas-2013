@@ -260,9 +260,8 @@ $(document).ready(function () {
 						[%END%]
 	
 							<button id="progress-save" class="btn btn-success">Salvar</button>
-							<br clear="all"/>
 						</div>
-						<br />
+						<br clear="all"/>
 					[% END %]
 				    </section>
 

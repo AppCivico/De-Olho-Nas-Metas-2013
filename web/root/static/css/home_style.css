@@ -1020,6 +1020,10 @@ footer .menu-footer li a:hover{
 .image-gallery .upload .btn{
 	border-radius: 0px;
 }
+
+.image-gallery #add-gallery{
+	margin-top: -6px;
+}
 .social-share{
 	margin: 10px;
 	clear: both;
