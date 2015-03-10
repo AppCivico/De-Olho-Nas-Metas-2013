@@ -134,6 +134,10 @@ $(document).ready(function () {
 		</div>
 		<div class="clear"></div>
     </section>
-		<div id="result" name="name" class="container">
+    <section class="metas-result">
+		<div class="container">
+			<div id="result" name="name" class="container">
+			</div>
 		</div>
+    </section>
 	
