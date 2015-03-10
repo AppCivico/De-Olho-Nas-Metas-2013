@@ -2,7 +2,7 @@ package WebSMM::Controller::HomeFuncional::Company;
 use Moose;
 use namespace::autoclean;
 use utf8;
-
+use List::MoreUtils qw/uniq/;
 BEGIN { extends 'Catalyst::Controller'; }
 
 =head1 NAME
@@ -30,10 +30,16 @@ sub detail : Chained('base') : PathPart('') : Args(0) {
 
     my $api = $c->model('API');
     $api->stash_result( $c, 'companies', params => $c->req->params );
+	use DDP;
+	p $c->stash->{companies};
+
 	foreach my $n (@{$c->stash->{companies}}){
 		$_ = [split /\|/, $_] for @{$n->{agg_budgets}};
+		$n->{goals} = [ uniq @{$n->{goals}} ];
+		$_ = [split /\|/, $_] for @{$n->{goals}};
+		
 	}
-	use DDP; p $c->stash->{companies};
+	p $c->stash->{companies};
 }
 
 

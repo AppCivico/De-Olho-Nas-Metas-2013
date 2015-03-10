@@ -92,7 +92,7 @@ sub survey_list : Chained('survey') : PathPart('') : Args(1) {
     my $url = URI->new('http://dev.monitor.promisetracker.org');
 
 	$url->path_segments('api','v1','campaigns');
-	$url->query_form( user_id => $id );
+	#$url->query_form( user_id => $id );
     eval {
         $return = $model->_do_http_req(
             method  => 'GET',
@@ -123,7 +123,7 @@ sub survey_single : Chained('survey') : PathPart('detalhe') : Args(1) {
             headers => [ Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' ],
         );
     };
-
+	use DDP; p $return;
     my $data = decode_json $return->content;
     $c->stash->{campaign} = $data->{payload};
 

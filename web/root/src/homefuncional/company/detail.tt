@@ -51,11 +51,12 @@ $(document).ready(function () {
 				</div>
 				<div class="col-sm-4">
 					<div class="list-box list-green">
-						<span class="header">2 Metas associadas</span>
+						<span class="header">[%cp.goals.size%] Meta[% IF cp.goals.size > 1%]s[% END%] associada[% IF cp.goals.size > 1 %]s[% END %]</span>
+						[% FOREACH g IN cp.goals%]
 						<ul class="list-goals">
-							<li><a href="">Liquorice brownie unerdwear</a></li>
-							<li><a href="">Croissant sugar plum</a></li>
+							<li><a href="[% c.uri_for_action('/homefuncional/goal/detail',[ g.0 ] ) %]">[% g.1 %]</a></li>
 						</ul>
+						[% END%]
 					</div>
 				</div>
 			</div>
