@@ -92,7 +92,7 @@ sub survey_list : Chained('survey') : PathPart('') : Args(1) {
     my $url = URI->new('http://dev.monitor.promisetracker.org');
 
 	$url->path_segments('api','v1','campaigns');
-	#$url->query_form( user_id => $id );
+	$url->query_form( user_id => $id );
     eval {
         $return = $model->_do_http_req(
             method  => 'GET',
@@ -183,7 +183,7 @@ sub survey_create : Chained('survey') : PathPart('criar') : Args(0) {
     my $url = URI->new('http://dev.monitor.promisetracker.org');
 
 	$url->path_segments('api','v1','campaigns');
-	$url->query_form( username => 'teste2', user_id => 2, campaign_id => 86 );
+	$url->query_form( username => 'teste2', user_id => $c->user->obj->organization_id );
 
     eval {
         $return = $model->_do_http_req(
