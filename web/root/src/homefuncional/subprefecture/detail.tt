@@ -140,7 +140,7 @@
 							[% END %]
 						</table>
 						[% IF subprefecture_obj.deputy_mayor != "" %]
-						<span class="header">Prefeito</span>
+						<span class="header">Subprefeito</span>
 						<ul>
 							<li>
 								[% subprefecture_obj.deputy_mayor%]
