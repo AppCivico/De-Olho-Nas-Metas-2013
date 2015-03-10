@@ -78,10 +78,10 @@
 					<button class="btn btn-danger">Desativar</button>
 				</div>-->
 				<div class="col-sm-4 text-center">
-					<a class="btn btn-yellow" href="/user/perfil/enquete/clonar/[%campaign.id%]">Clonar</a>
+					<a class="btn btn-yellow" href="/user/perfil/enquete/clonar/[%campaign.id%]" target="_blank">Clonar</a>
 				</div>
 				<div class="col-sm-4 text-center">
-					<a class="btn btn-navy" href="/user/perfil/enquete/entrar/[%campaign.id%]">Fase Atual</a>
+					<a class="btn btn-navy" href="/user/perfil/enquete/entrar/[%campaign.id%]" target="_blank">Editar</a>
 				</div>
 			</div>
 

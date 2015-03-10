@@ -35,7 +35,6 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $user  = $c->stash->{user};
-	use DDP; p $user;
 	my $x = $user->organization;
     my %attrs = $user->get_inflated_columns;
     $self->status_ok(
