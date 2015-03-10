@@ -77,7 +77,7 @@ $(document).ready(function () {
 					<div class="body">
 						<h1>Conselho participativo de [% organization_obj.name%]</h1>
 						<p><img src="/static/css/images/avatar_organization.jpg" class="company-avatar col-sm-4">
-							Liquorice brownie unerdwear.com bonbon brownie croissant croissant. Croissant sugar plum macaroon liquorice I love icing applicake I love gummies. Candy canes icing cotton candy macaroon lollipop. Pudding gummi bears oat cake bear claw chupa chups. I love wafer lollipop chocolate bar. Jujubes I love I love fruitcake I love gummi bears dragée pie ice cream. I love lollipop halvah jelly-o chupa chups liquorice candy canes unerdwear.com I love. Brownie sweet roll liquorice bonbon I love macaroon chocolate bar I love.
+							
 						</p>
 						<br clear="all"/>
 					</div>

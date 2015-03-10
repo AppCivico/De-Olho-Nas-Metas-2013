@@ -376,6 +376,7 @@ footer .logo-footer{
 }
 
 
+.metas-detail, .metas-results,
 section.page-login{
 	min-height: 75%;
 }
@@ -824,6 +825,9 @@ div.list-box ul li a:hover{
 	color: #ccc;
 }
 
+div.list-box table{
+	margin: 10px 0;
+}
 div.list-box table tr td .icon{
 	opacity: 0.5;
 	margin: 0px 5px 0px 0px;
