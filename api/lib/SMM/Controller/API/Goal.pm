@@ -42,7 +42,9 @@ sub result_GET {
 
     my $goal = $c->stash->{goal};
 	my @budgets  =  $goal->budgets->all;
+	my @progress_goal_counsil  =  $goal->progress_goal_counsils->search(undef,{ created_at => { '<', 'now()' }, rows => 1, order_by => { -desc => 'created_at'} })->next;
 
+	use DDP; p @progress_goal_counsil;
     my @region_ids;
     @region_ids =
       map  { $_->project->region_id }
@@ -156,6 +158,23 @@ sub result_GET {
                             }
                           ),
                     } @budgets,
+                ),
+            ],
+            progress_goal_counsil => [
+                (
+                    map {
+                        my $p = $_;
+                        (
+                            +{
+                                map { $_ => $p->$_ }
+                                  qw/
+                                  id
+                                  owned
+                                  remainder                                  
+                                  /
+                            }
+                          ),
+                    } @progress_goal_counsil,
                 ),
             ],
 
