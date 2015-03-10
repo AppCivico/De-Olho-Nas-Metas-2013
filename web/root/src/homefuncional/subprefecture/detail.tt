@@ -120,15 +120,23 @@
 					
 					<div class="list-box list-gold">
 						<span class="header">Subprefeitura [%subprefecture_obj.name%]</span>
-						<ul>
-							<li>
-								[% subprefecture_obj.address%]<br />
-								[% subprefecture_obj.telephone%]
-							</li>
-						[% IF subprefecture_obj.site != "" %]
-							<li><a href="[% subprefecture_obj.site%]" target="_blank">[% subprefecture_obj.site%]</a></li>
-						[% END %]
-						</ul>
+						<table>
+							<tr>
+								<td><div class="icon gps3"></div></td>
+								<td>
+									[% subprefecture_obj.address%]<br />
+									[% subprefecture_obj.telephone%]
+								</td>
+							</tr>
+							[% IF subprefecture_obj.site != "" %]
+							<tr>
+								<td><div class="icon globe"></div></td>
+								<td>
+									<a href="[% subprefecture_obj.site%]" target="_blank">[% subprefecture_obj.site%]</a>
+								</td>
+							</tr>
+							[% END %]
+						</table>
 						[% IF subprefecture_obj.deputy_mayor != "" %]
 						<span class="header">Prefeito</span>
 						<ul>

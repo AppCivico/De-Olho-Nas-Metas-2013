@@ -134,8 +134,8 @@
 						<div class="text-center">
 							<br />
 							<img class="img-responsive" src="/static/css/images/img-login.png" border="0">
-							
-							<p>Cupcake brownie croissant bonbon brownie. Jelly beans sugar plum ice cream gummies sesame snaps ice cream.</p>
+							<br />
+							<p>Bem vindo ao sistema De Olho nas Metas. Faça o login ao lado ou cadastre-se através do link abaixo:</p>
 						    <form role="form" method="post" action="/cadastro">	
 								<button class="btn btn-success">Faça seu Cadastro</button>
 							</form>
