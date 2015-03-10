@@ -74,13 +74,7 @@
 				<div class="col-sm-8">
 				
 					<div class="body">
-						<h1>Subprefeitura [%subprefecture_obj.name%]</h1>
-						<p>
-						[% subprefecture_obj.site%]
-						[% subprefecture_obj.deputy_mayor%]
-						[% subprefecture_obj.address%]
-						[% subprefecture_obj.telephone%]
-						</p>
+						<h1>[%subprefecture_obj.name%]</h1>
 					</div>
 					
 					<div style="height: 300px;" id="map">
@@ -125,6 +119,24 @@
 					<div class="col-sm-4">
 					
 					<div class="list-box list-gold">
+						<span class="header">Subprefeitura [%subprefecture_obj.name%]</span>
+						<ul>
+							<li>
+								[% subprefecture_obj.address%]<br />
+								[% subprefecture_obj.telephone%]
+							</li>
+						[% IF subprefecture_obj.site != "" %]
+							<li><a href="[% subprefecture_obj.site%]" target="_blank">[% subprefecture_obj.site%]</a></li>
+						[% END %]
+						</ul>
+						[% IF subprefecture_obj.deputy_mayor != "" %]
+						<span class="header">Prefeito</span>
+						<ul>
+							<li>
+								[% subprefecture_obj.deputy_mayor%]
+							</li>
+						</ul>
+						[% END %]
 						<span class="header">[% subprefecture_obj.regions.size%] Distritos</span>
 						<ul>
 							[% IF subprefecture_obj.regions.size > 0 %]
