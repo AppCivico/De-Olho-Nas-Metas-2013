@@ -29,7 +29,7 @@ sub index : Chained('object') : PathPart('') : Args(0) {
     $api->stash_result( $c, [ 'users/user_project_event', $c->user->obj->id ], stash => 'user_obj', );
 
     $c->stash->{user_obj}->{role} = { map { $_ => 1 } @{ $c->stash->{user_roles}->{roles} } };
-
+	use DDP; p $c->stash->{user_roles};
 }
 
 sub security : Chained('object') : PathPart('seguranca') : Args(0) {
@@ -93,6 +93,7 @@ sub survey_list : Chained('survey') : PathPart('') : Args(1) {
 
 	$url->path_segments('api','v1','campaigns');
 	$url->query_form( user_id => $id );
+	p $url;
     eval {
         $return = $model->_do_http_req(
             method  => 'GET',
@@ -101,8 +102,9 @@ sub survey_list : Chained('survey') : PathPart('') : Args(1) {
         );
     };
 	
-    my $data = decode_json $return->content;	
-	use DDP; p $data;
+	use DDP; p $return;
+	
+    my $data = decode_json $return->content unless $return->content =~ /html/;	
     $c->stash->{campaigns} = $data->{payload};
 
 }

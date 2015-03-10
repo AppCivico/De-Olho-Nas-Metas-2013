@@ -46,7 +46,7 @@ sub result_GET {
                 map { $_ => $attrs{$_}, }
                   qw(id name phone_number username email type)
             ),
-			( organization => $user->organization ? $user->organization->name : undef ),
+			( organization => $user->organization ? { name => $user->organization->name, id => $user->organization->id } : undef ),
             projects_i_follow => [
                 map { $_->project_id }
                   $user->user_follow_projects->search( { active => 1 } )->all

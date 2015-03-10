@@ -67,7 +67,7 @@
 		<div class="container">
 
 				<h2 class="section-title">Enquetes Móveis</h2>
-
+				[% IF campaigns.size > 0%]
 				[% FOREACH enquete IN campaigns%]	
 				<div class="row item">
 					<div class="contents">
@@ -98,6 +98,15 @@
 						<div class="icon chat3"></div>
 					</div>
 				</div>
+				[% END%]
+		
+				[% ELSE %]
+				<div class="row item">
+					<div class="contents">
+						<h2>Nenhuma enquete encontrada</h2>
+					</div>
+				</div>
+		
 				[% END%]
 
 			</div>
