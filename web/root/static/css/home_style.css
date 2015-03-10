@@ -1469,3 +1469,14 @@ table.dataTable.orange thead{
 input#progress-value{
 	margin-left: 10px;
 }
+
+.page-content{
+	background-color: #fcf0cc;
+	color: #666056;
+	font-size: 18px;
+	padding: 40px 0;
+}
+.page-content h2{
+	text-align: center;
+	font-family: "Cabin Sketch";
+}
