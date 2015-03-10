@@ -9,6 +9,7 @@ sub base : Chained('/admin/base') : PathPart('user') : CaptureArgs(0) {
 
     my $api = $c->model('API');
     $api->stash_result( $c, 'roles', params => { admin => 1 } );
+    $api->stash_result( $c, 'organizations' );
     $c->stash->{users} =
       [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{roles} } ];
 }
@@ -58,6 +59,7 @@ sub add : Chained('base') : PathPart('new') : Args(0) {
     my $api = $c->model('API');
 
     $api->stash_result( $c, 'roles' );
+	use DDP; p $c->stash->{organizations};
 }
 
 __PACKAGE__->meta->make_immutable;
