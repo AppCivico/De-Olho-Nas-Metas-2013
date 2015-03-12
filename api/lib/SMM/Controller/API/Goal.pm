@@ -147,6 +147,7 @@ sub result_GET {
                                   qw/
                                   id
                                   business_name
+                                  business_name_url
                                   cnpj
                                   dedicated_value
                                   liquidated_value

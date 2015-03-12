@@ -100,6 +100,11 @@ __PACKAGE__->table("budget");
   data_type: 'text'
   is_nullable: 1
 
+=head2 business_name_url
+
+  data_type: 'text'
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -129,6 +134,8 @@ __PACKAGE__->add_columns(
   "organ_code",
   { data_type => "integer", is_nullable => 1 },
   "organ_name",
+  { data_type => "text", is_nullable => 1 },
+  "business_name_url",
   { data_type => "text", is_nullable => 1 },
 );
 
@@ -167,8 +174,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-02 08:36:08
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:pLdyGhlWO0UH/DOybHXRSg
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-11 07:27:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:BTGWIqpMA4veD/lvssgx0Q
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

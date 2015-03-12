@@ -99,12 +99,13 @@ sub survey_list : Chained('survey') : PathPart('') : Args(1) {
             method  => 'GET',
             url     => $url,
             headers => [ Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' ],
+
         );
     };
 	
 	use DDP; p $return;
 	
-    my $data = decode_json $return->content unless $return->content =~ /html/;	
+    my $data = decode_json $return->content;	
     $c->stash->{campaigns} = $data->{payload};
 
 }

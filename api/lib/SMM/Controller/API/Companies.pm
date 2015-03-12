@@ -18,7 +18,7 @@ sub list_GET {
     my $rs = $c->model('DB::ViewCompanies');
 
 	$self->status_ok( $c , entity => { companies => [
-		$rs->search(undef, { bind => [ $c->req->params->{business_name} ], result_class => 'DBIx::Class::ResultClass::HashRefInflator' } )->next
+		$rs->search(undef, { bind => [ $c->req->params->{business_name_url} ], result_class => 'DBIx::Class::ResultClass::HashRefInflator' } )->next
 	 ] })	
 
 }

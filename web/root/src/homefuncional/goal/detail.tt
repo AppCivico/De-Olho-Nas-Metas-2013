@@ -294,7 +294,7 @@ $(document).ready(function () {
 					[% IF goal_obj.budgets.size > 0 %]
 					[% FOREACH bc IN goal_obj.budgets%]
 							<tr>
-								<td><a href="[% c.uri_for_action('/homefuncional/company/detail', [],{ business_name => bc.business_name })%]">[%bc.business_name%]</a></td>
+								<td><a href="[% c.uri_for_action('/homefuncional/company/detail', [bc.business_name_url])%]">[%bc.business_name%]</a></td>
 								<td>[%bc.observation%]</td>
 								<td class="priceformat" width="80">[%bc.dedicated_value%]</td>
 							</tr>
@@ -396,7 +396,7 @@ $(document).ready(function () {
 						<span class="header">[%business_names.size%] Empresa[% IF business_names.size > 1%]s[%END%] Relacionada[% IF business_names.size > 1%]s[% END %]</span>
 						<ul class="list-organizations">
 							[% FOREACH bn IN business_names%]					
-							<li><a href="[% c.uri_for_action('/homefuncional/company/detail', [],{ business_name => bn })%]">[% bn %]</a></li>
+							<li><a href="[% c.uri_for_action('/homefuncional/company/detail', [ bn.url] )%]">[% bn.name %]</a></li>
 							[% END %]
 						</ul>
 					</div>

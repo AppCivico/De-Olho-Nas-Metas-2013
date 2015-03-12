@@ -24,12 +24,15 @@ Catalyst Controller.
 sub base : Chained('/homefuncional/base') : PathPart('company') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 }
-
-sub detail : Chained('base') : PathPart('') : Args(0) {
-    my ( $self, $c, $id ) = @_;
+sub object : Chained('base') :PathPart('') : CaptureArgs(1) {
+	my ( $self, $c, $name ) = @_;
+	$c->stash->{company} = $name;
+}
+sub detail : Chained('object')  : Args(0) {
+    my ( $self, $c ) = @_;
 
     my $api = $c->model('API');
-    $api->stash_result( $c, 'companies', params => $c->req->params );
+    $api->stash_result( $c, 'companies', params => { business_name_url => $c->stash->{company} } );
 	use DDP;
 	p $c->stash->{companies};
 

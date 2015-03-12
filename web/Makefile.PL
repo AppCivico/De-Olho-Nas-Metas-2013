@@ -36,7 +36,7 @@ requires 'Catalyst::Plugin::Session::PerUser';
 requires 'Template::AutoFilter';
 requires 'Furl';
 requires 'Catalyst::Helper::View::Email'; 
-
+requires 'File::MoreUtil;
 requires 'Config::General'; # This should reflect the config file format you've chosen
                  # See Catalyst::Plugin::ConfigLoader for supported formats
 test_requires 'Test::More' => '0.88';
