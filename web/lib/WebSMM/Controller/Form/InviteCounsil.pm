@@ -11,22 +11,24 @@ sub base : Chained('/form/root') : PathPart('') : CaptureArgs(0) { }
 sub invite_counsil : Chained('base') : PathPart('invite_counsil') : Args(0) {
     my ( $self, $c ) = @_;
 
-    my $api  = $c->model('API');
-	
+    my $api = $c->model('API');
+
     $api->stash_result(
-        $c, 'invite_counsil/email',
+        $c,
+        'invite_counsil/email',
         method => 'POST',
         params => {
-            email 			=> $c->req->params->{email},
-			organization_id => $c->req->params->{organization_id}
+            email           => $c->req->params->{email},
+            organization_id => $c->req->params->{organization_id}
         }
     );
-	if ($c->stash->{error}){
-	
-	   $c->detach( '/form/redirect_error', [] );
-	}
+    if ( $c->stash->{error} ) {
 
-    $c->detach( '/form/redirect_ok', [ \'/user/perfil/convidar', {}, 'Convite enviado com sucesso!', form_ident => $c->req->params->{form_ident} ] );
+        $c->detach( '/form/redirect_error', [] );
+    }
+
+    $c->detach( '/form/redirect_ok',
+        [ \'/user/perfil/convidar', {}, 'Convite enviado com sucesso!', form_ident => $c->req->params->{form_ident} ] );
 }
 
 __PACKAGE__->meta->make_immutable;

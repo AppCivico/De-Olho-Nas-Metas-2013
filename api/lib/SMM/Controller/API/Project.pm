@@ -50,7 +50,7 @@ sub result_GET {
     my $follow_project =
       $project->user_follow_projects->search( { active => 1 } )->count;
     my $type;
-	my @images = $project->images_projects->all;
+    my @images = $project->images_projects->all;
     $type = $_->goal->objective_id for $project->goal_projects;
 
     my $objective =
@@ -92,12 +92,7 @@ sub result_GET {
             images => [
                 map {
                     my $p = $_;
-					$p ? 
-					(
-					+{
-					map { $_ => $p->$_ } qw/name_image/
-					}
-					): ()
+                    $p ? ( +{ map { $_ => $p->$_ } qw/name_image/ } ) : ()
 
                 } @images,
             ],
@@ -246,7 +241,7 @@ sub list_GET {
             order_by => 'me.name'
         },
     );
-	
+
     $self->status_ok(
         $c,
         entity => {
@@ -277,10 +272,14 @@ sub list_GET {
                                 } @{ $r->{goal_projects} },
                             ),
                         ],
-						( interation => $r->{approved_project_events} ? do {
-							my $x = $r->{approved_project_events}[0];
-                              ( map { $x->{$_} } qw/id/ ),
-						} : undef ),
+                        (
+                            interation => $r->{approved_project_events}
+                            ? do {
+                                my $x = $r->{approved_project_events}[0];
+                                ( map { $x->{$_} } qw/id/ ),;
+                              }
+                            : undef
+                        ),
                         url => $c->uri_for_action(
                             $self->action_for('result'),
                             [ $r->{id} ]
@@ -360,14 +359,17 @@ sub geom : Chained('base') PathPart('geom') : Args(0) {
     $self->status_ok( $c, entity => { geom => $geom } );
 
 }
+
 sub list_geom : Chained('base') PathPart('list_geom') : Args(0) {
     my ( $self, $c ) = @_;
 
     my @geom = $c->model('DB')->resultset('Project')->search(
-        { -and => [ latitude => { '!=' , undef }, longitude => { '!=', undef } ] },
         {
-            columns =>
-              [qw( id name latitude longitude)],
+            -and =>
+              [ latitude => { '!=', undef }, longitude => { '!=', undef } ]
+        },
+        {
+            columns => [qw( id name latitude longitude)],
         }
     )->as_hashref->all;
     $self->status_ok( $c, entity => { geom => \@geom } );

@@ -23,13 +23,16 @@ sub index : Chained('object') : PathPart('') : Args(0) {
     my ( $self, $c ) = @_;
 
     $c->detach( '/form/redirect_error', [] ) unless $c->user;
-
+	
+	
     my $api = $c->model('API');
 
     $api->stash_result( $c, [ 'users/user_project_event', $c->user->obj->id ], stash => 'user_obj', );
 
     $c->stash->{user_obj}->{role} = { map { $_ => 1 } @{ $c->stash->{user_roles}->{roles} } };
-	use DDP; p $c->stash->{user_roles};
+	use DDP; p $c->stash->{user_obj}->{role};
+	$c->detach('/form/redirect_ok', [ '/admin/dashboard/index']) if $c->stash->{user_obj}->{role}->{admin};
+	p $c->stash->{user_roles};
 }
 
 sub security : Chained('object') : PathPart('seguranca') : Args(0) {
@@ -62,6 +65,17 @@ sub edit : Chained('object') : PathPart('editar') : Args(0) {
         params => $c->req->params,
     );
 
+}
+sub campaign : Chained('object') : PathPart('campanhas') : Args(0) {
+    my ( $self, $c ) = @_;
+
+    $c->detach( '/form/redirect_error', [] ) unless $c->user;
+
+    my $api = $c->model('API');
+
+    $api->stash_result( $c,  'campaigns',  params => { user_id => $c->user->obj->id } );
+
+    $c->stash->{user_obj}->{role} = { map { $_ => 1 } @{ $c->stash->{user_roles}->{roles} } };
 }
 sub counsil_members : Chained('object') : PathPart('membros') : Args(0) {
     my ( $self, $c ) = @_;

@@ -1,25 +1,28 @@
-package SMM::Controller::API::ProgressGoalCounsil;
+package SMM::Controller::API::Campaign;
 
 use Moose;
 use utf8;
-use List::MoreUtils qw(uniq);
 
 BEGIN { extends 'Catalyst::Controller::REST' }
 
 __PACKAGE__->config(
     default => 'application/json',
 
-    result     => 'DB::ProgressGoalCounsil',
-    object_key => 'pgc',
-
-    update_roles => [qw/superadmin user admin webapi/],
+    result     => 'DB::Campaign',
+    object_key => 'campaign',
+    search_ok  => {
+        'me.id' => 'Int'
+    },
+    result_attr => {
+        prefetch => ['events'],
+    },
+    update_roles => [qw/superadmin user admin webapi organization/],
     create_roles => [qw/superadmin admin webapi/],
     delete_roles => [qw/superadmin admin webapi/],
 );
 with 'SMM::TraitFor::Controller::DefaultCRUD';
 
-sub base : Chained('/api/base') : PathPart('progress_goal_counsil') :
-  CaptureArgs(0) { }
+sub base : Chained('/api/base') : PathPart('campaigns') : CaptureArgs(0) { }
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
 
@@ -28,17 +31,20 @@ sub result : Chained('object') : PathPart('') : Args(0) :
 
 sub result_GET {
     my ( $self, $c ) = @_;
+    my $campaigns = $c->stash->{campaigns};
 
-    my $goal = $c->stash->{goal};
     $self->status_ok(
         $c,
         entity => {
             (
-                map { $_ => $goal->$_, }
+                map { $_ => $campaigns->$_, }
                   qw/
                   id
-                  owned
-                  remainder
+                  name
+                  description
+                  date_exec
+                  created_at
+                  user_id
                   /
             ),
         }
@@ -48,9 +54,9 @@ sub result_GET {
 
 sub result_DELETE {
     my ( $self, $c ) = @_;
-    my $goal = $c->stash->{organization};
+    my $campaigns = $c->stash->{organization};
 
-    $goal->delete;
+    $campaigns->delete;
 
     $self->status_no_content($c);
 }
@@ -58,19 +64,20 @@ sub result_DELETE {
 sub result_PUT {
     my ( $self, $c ) = @_;
 
-    my $params = { %{ $c->req->params } };
-    my $goal   = $c->stash->{organization};
+    my $params    = { %{ $c->req->params } };
+    my $campaigns = $c->stash->{organization};
 
-    $goal->execute( $c, for => 'update', with => $c->req->params );
+    $campaigns->execute( $c, for => 'update', with => $c->req->params );
 
     $self->status_accepted(
         $c,
         location =>
-          $c->uri_for( $self->action_for('result'), [ $goal->id ] )->as_string,
-        entity => { id => $goal->id }
+          $c->uri_for( $self->action_for('result'), [ $campaigns->id ] )
+          ->as_string,
+        entity => { id => $campaigns->id }
       ),
       $c->detach
-      if $goal;
+      if $campaigns;
 }
 
 sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
@@ -80,10 +87,14 @@ sub list_GET {
 
     my $rs = $c->stash->{collection};
 
+    if ( $c->req->param('user_id') ) {
+        $rs = $rs->search( { 'me.user_id' => $c->req->param('user_id') } );
+    }
+
     $self->status_ok(
         $c,
         entity => {
-            pgc => [
+            campaignss => [
                 map {
                     my $r = $_;
                     +{
@@ -91,9 +102,11 @@ sub list_GET {
                             map { $_ => $r->{$_} }
                               qw/
                               id
-                              owned
-                              remainder
-                              goal_id
+                              name
+                              description
+                              date_exec
+                              created_at
+                              user_id
                               /
                         ),
                       }
@@ -106,15 +119,16 @@ sub list_GET {
 sub list_POST {
     my ( $self, $c ) = @_;
 
-    my $goal = $c->stash->{collection}
+    my $campaigns = $c->stash->{collection}
       ->execute( $c, for => 'create', with => $c->req->params );
 
     $self->status_created(
         $c,
         location =>
-          $c->uri_for( $self->action_for('result'), [ $goal->id ] )->as_string,
+          $c->uri_for( $self->action_for('result'), [ $campaigns->id ] )
+          ->as_string,
         entity => {
-            id => $goal->id
+            id => $campaigns->id
         }
     );
 }
@@ -122,15 +136,16 @@ sub list_POST {
 sub complete : Chained('base') : PathPart('complete') : Args(0) {
     my ( $self, $c ) = @_;
 
-    my $goal;
+    my $campaigns;
 
     $c->model('DB')->txn_do(
         sub {
-            #$goal = $c->stash->{collection}->execute( $c, for => 'create', with => $c->req->params );
+            $campaigns = $c->stash->{collection}
+              ->execute( $c, for => 'create', with => $c->req->params );
 
-            $c->req->params->{active}  = 1;
-            $c->req->params->{role}    = 'goal';
-            $c->req->params->{goal_id} = $goal->id;
+            $c->req->params->{active}       = 1;
+            $c->req->params->{role}         = 'campaigns';
+            $c->req->params->{campaigns_id} = $campaigns->id;
 
             my $user = $c->model('DB::User')
               ->execute( $c, for => 'create', with => $c->req->params );
@@ -140,9 +155,10 @@ sub complete : Chained('base') : PathPart('complete') : Args(0) {
     $self->status_created(
         $c,
         location =>
-          $c->uri_for( $self->action_for('result'), [ $goal->id ] )->as_string,
+          $c->uri_for( $self->action_for('result'), [ $campaigns->id ] )
+          ->as_string,
         entity => {
-            id => $goal->id
+            id => $campaigns->id
         }
     );
 

@@ -26,6 +26,10 @@ sub verifiers_specs {
                     required => 0,
                     type     => 'Str',
                 },
+                user_id => {
+                    required => 0,
+                    type     => 'Str',
+                },
             }
         )
     };

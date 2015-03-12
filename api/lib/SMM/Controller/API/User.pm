@@ -11,7 +11,14 @@ __PACKAGE__->config(
     result_cond => { 'me.active' => 1 },
 
     result_attr => {
-        prefetch => [ { user_follow_projects => { 'project' => { project_events => 'project_events_read'} } }, 'organization', 'user_follow_counsils' ],
+        prefetch => [
+            {
+                user_follow_projects =>
+                  { 'project' => { project_events => 'project_events_read' } }
+            },
+            'organization',
+            'user_follow_counsils'
+        ],
         distinct => 1
     },
     object_key => 'user',
@@ -35,7 +42,7 @@ sub result_GET {
     my ( $self, $c ) = @_;
 
     my $user  = $c->stash->{user};
-	my $x = $user->organization;
+    my $x     = $user->organization;
     my %attrs = $user->get_inflated_columns;
     $self->status_ok(
         $c,
@@ -46,7 +53,14 @@ sub result_GET {
                 map { $_ => $attrs{$_}, }
                   qw(id name phone_number username email type)
             ),
-			( organization => $user->organization ? { name => $user->organization->name, id => $user->organization->id } : undef ),
+            (
+                organization => $user->organization
+                ? {
+                    name => $user->organization->name,
+                    id   => $user->organization->id
+                  }
+                : undef
+            ),
             projects_i_follow => [
                 map { $_->project_id }
                   $user->user_follow_projects->search( { active => 1 } )->all
@@ -122,15 +136,16 @@ sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') {
 sub list_GET {
     my ( $self, $c ) = @_;
     my $conditions = undef;
-	my $rs = $c->stash->{collection};
+    my $rs         = $c->stash->{collection};
 
-	if ($c->req->params->{organization}){
-		$rs = $rs->search({ organization_id => $c->req->params->{organization}});	
-	}
+    if ( $c->req->params->{organization} ) {
+        $rs =
+          $rs->search( { organization_id => $c->req->params->{organization} } );
+    }
     if ( $c->req->params->{role} ) {
         $conditions = {
             'role.id' => $c->req->params->{role} == 99
-            ? { 'in' => [ 1, 4, 5, 6, 8, 11,12 ] }
+            ? { 'in' => [ 1, 4, 5, 6, 8, 11, 12 ] }
             : $c->req->params
               ->{role} #administrative roles, 99 is just to de    fine the undefined
         };
@@ -172,7 +187,8 @@ sub list_GET {
 
 sub list_POST {
     my ( $self, $c ) = @_;
-	use DDP; p $c->req->params;
+    use DDP;
+    p $c->req->params;
     my $user = $c->stash->{collection}
       ->execute( $c, for => 'create', with => $c->req->params );
 
@@ -233,16 +249,16 @@ sub user_project_event_GET {
 
     #my $user = $c->stash->{user};
     my $user = $c->model('DB::User');
-#	my @data = $user->user_follow_projects-search({})
-	
+
+    #	my @data = $user->user_follow_projects-search({})
+
     my ($result) = $user->search(
         {
             'me.id'                       => $id,
             'me.active'                   => 1,
-			'user_follow_projects.active' => 1 ,
+            'user_follow_projects.active' => 1,
             'project_events_read.user_id' => undef,
-			'project_events.project_id'   => { '!=' => undef } 
-			
+            'project_events.project_id'   => { '!=' => undef }
 
         },
         {

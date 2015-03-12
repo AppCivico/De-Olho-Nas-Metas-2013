@@ -189,6 +189,21 @@ __PACKAGE__->add_unique_constraint("user_username_key", ["username"]);
 
 =head1 RELATIONS
 
+=head2 campaigns
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::Campaign>
+
+=cut
+
+__PACKAGE__->has_many(
+  "campaigns",
+  "SMM::Schema::Result::Campaign",
+  { "foreign.user_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 comment_goals
 
 Type: has_many
@@ -251,6 +266,21 @@ __PACKAGE__->has_many(
   "email_queues",
   "SMM::Schema::Result::EmailQueue",
   { "foreign.recipient_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 events
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::Event>
+
+=cut
+
+__PACKAGE__->has_many(
+  "events",
+  "SMM::Schema::Result::Event",
+  { "foreign.user_id" => "self.id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
@@ -395,8 +425,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-04 06:44:42
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:fpyL5fLPk29gMHkIOYMecw
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-12 13:18:06
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:tPMM/Rr8iTA7C2/fHNK/mQ
 
 __PACKAGE__->many_to_many( roles => user_roles => 'role' );
 

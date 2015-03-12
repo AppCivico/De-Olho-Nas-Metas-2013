@@ -66,6 +66,17 @@ __PACKAGE__->table("campaign");
   is_nullable: 1
   original: {default_value => \"now()"}
 
+=head2 user_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
+=head2 name
+
+  data_type: 'text'
+  is_nullable: 0
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -87,6 +98,10 @@ __PACKAGE__->add_columns(
     is_nullable   => 1,
     original      => { default_value => \"now()" },
   },
+  "user_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "name",
+  { data_type => "text", is_nullable => 0 },
 );
 
 =head1 PRIMARY KEY
@@ -118,9 +133,29 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 user
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-09 16:26:38
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:d4nUthPpwCUUitkm+VEEcw
+Type: belongs_to
+
+Related object: L<SMM::Schema::Result::User>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "user",
+  "SMM::Schema::Result::User",
+  { id => "user_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-12 13:18:06
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:aIT7n78uOEL6Fjzkaz6phA
 
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
@@ -144,7 +179,7 @@ sub verifiers_specs {
                     required => 1,
                     type     => 'Str',
                 },
-                campaign_id => {
+                user_id => {
                     required => 0,
                     type     => 'Int',
                 },
