@@ -54,11 +54,6 @@ __PACKAGE__->table("campaign");
   data_type: 'text'
   is_nullable: 1
 
-=head2 date_exec
-
-  data_type: 'timestamp'
-  is_nullable: 1
-
 =head2 created_at
 
   data_type: 'timestamp'
@@ -77,6 +72,16 @@ __PACKAGE__->table("campaign");
   data_type: 'text'
   is_nullable: 0
 
+=head2 start_in
+
+  data_type: 'date'
+  is_nullable: 0
+
+=head2 end_on
+
+  data_type: 'date'
+  is_nullable: 0
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -89,8 +94,6 @@ __PACKAGE__->add_columns(
   },
   "description",
   { data_type => "text", is_nullable => 1 },
-  "date_exec",
-  { data_type => "timestamp", is_nullable => 1 },
   "created_at",
   {
     data_type     => "timestamp",
@@ -102,6 +105,10 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "name",
   { data_type => "text", is_nullable => 0 },
+  "start_in",
+  { data_type => "date", is_nullable => 0 },
+  "end_on",
+  { data_type => "date", is_nullable => 0 },
 );
 
 =head1 PRIMARY KEY
@@ -154,8 +161,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-12 13:18:06
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:aIT7n78uOEL6Fjzkaz6phA
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-12 15:47:42
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:urytreDEyAIjgpE4Lb3Y3Q
 
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
@@ -175,9 +182,13 @@ sub verifiers_specs {
                     required => 1,
                     type     => 'Str',
                 },
-                date_exec => {
+                start_in=> {
                     required => 1,
-                    type     => 'Str',
+                    type     => 'DateTime',
+                },
+                end_on=> {
+                    required => 1,
+                    type     => 'DateTime',
                 },
                 user_id => {
                     required => 0,

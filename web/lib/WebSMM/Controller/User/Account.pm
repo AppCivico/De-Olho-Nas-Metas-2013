@@ -30,9 +30,7 @@ sub index : Chained('object') : PathPart('') : Args(0) {
     $api->stash_result( $c, [ 'users/user_project_event', $c->user->obj->id ], stash => 'user_obj', );
 
     $c->stash->{user_obj}->{role} = { map { $_ => 1 } @{ $c->stash->{user_roles}->{roles} } };
-	use DDP; p $c->stash->{user_obj}->{role};
 	$c->detach('/form/redirect_ok', [ '/admin/dashboard/index']) if $c->stash->{user_obj}->{role}->{admin};
-	p $c->stash->{user_roles};
 }
 
 sub security : Chained('object') : PathPart('seguranca') : Args(0) {
@@ -74,6 +72,7 @@ sub campaign : Chained('object') : PathPart('campanhas') : Args(0) {
     my $api = $c->model('API');
 
     $api->stash_result( $c,  'campaigns',  params => { user_id => $c->user->obj->id } );
+	use DDP; p $c->stash->{campaigns};
 
     $c->stash->{user_obj}->{role} = { map { $_ => 1 } @{ $c->stash->{user_roles}->{roles} } };
 }

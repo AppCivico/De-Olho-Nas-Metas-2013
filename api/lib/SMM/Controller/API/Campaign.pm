@@ -94,7 +94,7 @@ sub list_GET {
     $self->status_ok(
         $c,
         entity => {
-            campaignss => [
+            campaigns => [
                 map {
                     my $r = $_;
                     +{
@@ -104,7 +104,8 @@ sub list_GET {
                               id
                               name
                               description
-                              date_exec
+                              start_in
+                              end_on
                               created_at
                               user_id
                               /

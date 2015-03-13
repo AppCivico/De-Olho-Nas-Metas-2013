@@ -1,21 +1,28 @@
-<script>    
-$(document).ready(function () {
-  $('.close').on('click', function () {
-	var id = $(this).data("id"),
-		item = $(this).parent().parent();
-		$(this).addClass("disabled");
-		$(item).addClass("disabled");
-		$(item).find(".col-xs-11").html("Removendo...");
-		$.post( "/home/project_event_read/visualizado", { user_id: $('#user_id').val(), project_event_id: id  }, function( data ) {
-			$(item).fadeOut("fast",function(){
-				$(this).remove();
-			});
-	 	},"json");	
-  })
+
+[%-CALL assets.include("js/date-picker/bootstrap-datepicker.js")%]
+[%-CALL assets.include("js/date-picker/bootstrap-datepicker.pt-BR.js")%]
+[%-CALL assets.include("css/date-picker/datepicker.css")%]
+<script>
+jQuery(function($){
+   $('.datepicker').datepicker();
+   $("input[name=phone_number]").mask("(99) 9999-9999");
+
+   $("input[name=phone_number]").focusout(function(){
+        var phone, element;
+        element = $(this);
+        element.unmask();
+        phone = element.val().replace(/\D/g, '');
+        if(phone.length > 10) {
+            element.mask("(99) 99999-999?9");
+        } else {
+            element.mask("(99) 9999-9999?9");
+        }
+    }).trigger('focusout');
 });
+
 </script>
 
-	<section class="map text-center">
+	    <section class="map text-center">
 		<div id="filter-map">
 			<div class="contents text-center">
 				<div class="item">
@@ -56,55 +63,62 @@ $(document).ready(function () {
 		<div class="container">
 
 			<div class="row">
-				<div class="col-sm-9">
-				
-					<h3 class="dotted">Campanhas Criadas</h3>
-					<input type="hidden" id="user_id" value="[%c.user.obj.id%]"/>	
-					<div class="notification-list">
-						[ FOR cpg IN campaigns]
-									
-						[%END%]
-					</div>
-					[% IF user_follow_project.size > 0%]
-					<div class="text-right">
-						<button id="see_all" class="btn "><a href="/user/perfil/notificacoes">Ver todas</a></button>
-					</div>
-					[% END %]
+
+
+					<br /><br />
+				<div class="col-sm-9 .col-md.offset-4">
+					<section class="tabs">
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" [% IF !body.form_ident && !form_ident%]class="active"[%END%]><a href="#tab-campanhas" aria-controls="projetos" role="tab" data-toggle="tab">Campanhas</a></li>
+							<li role="presentation" [% IF body.form_ident == 'form' OR form_ident == 'form' %]class="active"[%END%]><a href="#tab-cadastrar" aria-controls="metas" role="tab" data-toggle="tab">Cadastrar</a></li>
+						</ul>
+					</section>
 					
-<!--				<h3 class="dotted">Atividades recentes</h3>
-					<div class="activity-list">
-						<div class="item">
-							<div class="date">
-								00/00/0000
-							</div>
-							<div class="title">
-								Pastry wafer brownie liquorice. Unerdwear.com gummi bears bonbon. Cheese cake dessert cupcake. Pastry wafer brownie liquorice. Unerdwear.com gummi bears bonbon.
-							</div>
+					<section class="projetos-result">
+						<div class="tab-content">
+
+								<div role="tabpanel" id="tab-cadastrar" class="tab-pane [% IF body.form_ident == 'form' OR form_ident =='form' %]active[%END%] ">
+									<h4 class="green">CADASTRE UMA NOVA CAMPANHA</h4>
+									[% IF body.form_ident == 'form' OR form_ident == 'form'%]
+									[%IF status_msg %]<div class="alert alert-success"><p>[%status_msg%]</p></div>[%END%]
+									[%IF error_msg %]<div class="alert alert-danger"><p>[%error_msg%]</p></div>[%END%]
+									[% END%]
+									<form action="/home/campaign/set_campaign" method="post" enctype="multipart/form-data">
+										[%input_text('name','Nome:', req=>1)|none%]
+									
+										[%input_text('description','Descrição:', req=>1)|none%]
+									
+									<div class="row">
+										<div class="col-sm-6">
+	            								[%input_text('start_in','Data Começo', classes => ['span3', 'date' ,'datepicker'], req => 0)|none%]
+												[%input_text('end_on','Data Final:', classes => ['span3' , 'date', 'datepicker'],req=>0)|none%]
+										</div>
+									</div>
+									
+									[%input_text('form_ident', '' , req=>1, value => "form", type => 'hidden')|none%]
+									<button type="reset"  class="btn btn-danger pull-left">Limpar</button>
+									<input type="submit" value="Cadastrar" class="btn btn-success pull-right"/>
+								
+									</form>
+
+								</div>
+								<div role="tabpanel" id="tab-campanhas" class="tab-pane [% IF !body.form_ident && !form_ident%]active[%END%] ">
+									[% IF campaigns.size > 0%]
+									[%FOR cpg IN campaigns%]
+										<a>[% cpg.name %]</a>
+									[% END %]
+									[% ELSE%]
+										<a>Nenhuma campanha cadastrada</a>
+									[% END %]
+								</div>
+
 						</div>
-						<div class="item">
-							<div class="date">
-								00/00/0000
-							</div>
-							<div class="title">
-								Pastry wafer brownie liquorice. Unerdwear.com gummi bears bonbon. Cheese cake dessert cupcake. Pastry wafer brownie liquorice. Unerdwear.com gummi bears bonbon.
-							</div>
-						</div>
-						<div class="item">
-							<div class="date">
-								00/00/0000
-							</div>
-							<div class="title">
-								Pastry wafer brownie liquorice. Unerdwear.com gummi bears bonbon. Cheese cake dessert cupcake. Pastry wafer brownie liquorice. Unerdwear.com gummi bears bonbon.
-							</div>
-						</div>
-					</div>
-					<div class="text-right">
-						<button class="btn btn-brown">Ver todas</button>
-					</div>-->
+					</section>
+
 					<br /><br />
 				</div>
 				<div class="col-sm-3">
-								[% INCLUDE 'user/account/menu.tt' %]
+				[% INCLUDE 'user/account/menu.tt' %]
 				</div>
 			</div>
 			
