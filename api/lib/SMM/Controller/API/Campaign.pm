@@ -9,7 +9,7 @@ __PACKAGE__->config(
     default => 'application/json',
 
     result     => 'DB::Campaign',
-    object_key => 'campaign',
+    object_key => 'campaigns',
     search_ok  => {
         'me.id' => 'Int'
     },
@@ -33,18 +33,19 @@ sub result_GET {
     my ( $self, $c ) = @_;
     my $campaigns = $c->stash->{campaigns};
 
+	use DDP; p $campaigns;
     $self->status_ok(
         $c,
         entity => {
             (
-                map { $_ => $campaigns->$_, }
+                map { $_ => $campaigns->$_."", }
                   qw/
-                  id
-                  name
-                  description
-                  date_exec
-                  created_at
-                  user_id
+			 	  name
+				  description
+				  created_at
+				  start_in
+				  end_on
+				  user_id
                   /
             ),
         }
@@ -87,10 +88,12 @@ sub list_GET {
 
     my $rs = $c->stash->{collection};
 
+    use DDP;
+    p $rs->as_hashref->all;
     if ( $c->req->param('user_id') ) {
         $rs = $rs->search( { 'me.user_id' => $c->req->param('user_id') } );
     }
-
+    use DDP;
     $self->status_ok(
         $c,
         entity => {
@@ -110,6 +113,13 @@ sub list_GET {
                               user_id
                               /
                         ),
+                        events => [
+                            map {
+                                my $e = $_;
+                                p $e;
+                                ( +{ map { $_ => $e->{$_} } qw/id/ } )
+                            } @{ $r->{events} },
+                        ],
                       }
                 } $rs->as_hashref->all
             ]

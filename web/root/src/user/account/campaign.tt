@@ -2,9 +2,13 @@
 [%-CALL assets.include("js/date-picker/bootstrap-datepicker.js")%]
 [%-CALL assets.include("js/date-picker/bootstrap-datepicker.pt-BR.js")%]
 [%-CALL assets.include("css/date-picker/datepicker.css")%]
+[%-CALL assets.include("js/Moment.js")%]
+[%-CALL assets.include("css/bootstrap-datetimepicker.css")%]
+[%-CALL assets.include("js/bootstrap-datetimepicker.min.js")%]
 <script>
 jQuery(function($){
    $('.datepicker').datepicker();
+   $('.datetimepicker1').datetimepicker();
    $("input[name=phone_number]").mask("(99) 9999-9999");
 
    $("input[name=phone_number]").focusout(function(){
@@ -70,7 +74,8 @@ jQuery(function($){
 					<section class="tabs">
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation" [% IF !body.form_ident && !form_ident%]class="active"[%END%]><a href="#tab-campanhas" aria-controls="projetos" role="tab" data-toggle="tab">Campanhas</a></li>
-							<li role="presentation" [% IF body.form_ident == 'form' OR form_ident == 'form' %]class="active"[%END%]><a href="#tab-cadastrar" aria-controls="metas" role="tab" data-toggle="tab">Cadastrar</a></li>
+							<li role="presentation" [% IF body.form_ident == 'form' OR form_ident == 'form' %]class="active"[%END%]><a href="#tab-cadastrar" aria-controls="metas" role="tab" data-toggle="tab">Cadastrar Campanhas</a></li>
+							<li role="presentation" [% IF body.form_ident == 'event' OR form_ident == 'event' %]class="active"[%END%]><a href="#tab-eventos" aria-controls="metas" role="tab" data-toggle="tab">Cadastrar Eventos</a></li>
 						</ul>
 					</section>
 					
@@ -95,13 +100,87 @@ jQuery(function($){
 										</div>
 									</div>
 									
+									<div class="row row-padding">
+										<div class="col-sm-4">
+											<div class="avatar-upload">
+												<img src="/static/css/images/avatar.jpg">
+											</div>
+										</div>
+										<div class="col-sm-8">
+											<div class="form-group">
+												<small>
+													FOTO DO PERFIL<br />
+													Faça upload de uma foto para usar no seu perfil<br /><br />
+												</small>
+												<input type="file" name="avatar">
+											</div>
+										</div>
+									</div>
 									[%input_text('form_ident', '' , req=>1, value => "form", type => 'hidden')|none%]
 									<button type="reset"  class="btn btn-danger pull-left">Limpar</button>
 									<input type="submit" value="Cadastrar" class="btn btn-success pull-right"/>
+
 								
 									</form>
 
 								</div>
+								<div role="tabpanel" id="tab-eventos" class="tab-pane [% IF body.form_ident == 'event' OR form_ident =='event' %]active[%END%] ">
+									<h4 class="green">CADASTRE UM NOVO EVENTO</h4>
+									[% IF body.form_ident == 'event' OR form_ident == 'event'%]
+									[%IF status_msg %]<div class="alert alert-success"><p>[%status_msg%]</p></div>[%END%]
+									[%IF error_msg %]<div class="alert alert-danger"><p>[%error_msg%]</p></div>[%END%]
+									[% END%]
+									<form action="/home/event/set_event" method="post" enctype="multipart/form-data">
+										[%input_text('name','Nome:', req=>1)|none%]
+									
+										[%input_text('description','Descrição:', req=>1)|none%]
+									
+									<div class="row">
+										<div class="col-sm-6">
+														[%input_text('date','Data', classes => ['input-group', 'date' ,'datetimepicker1'],  req => 0)|none%]
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group row">
+												<label class="col-lg-12 " for="elm_active">Campanha</label>
+												<div class="col-lg-12">
+													<select name="campaign_id" class="form-control">
+													<option>Selecione</option>	
+													[%FOREACH cpg IN campaigns%]
+														<option value="[% cpg.id %]">[%cpg.name%]</option>
+													[%END%]
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row row-padding">
+										<div class="col-sm-4">
+											<div class="avatar-upload">
+												<img src="/static/css/images/avatar.jpg">
+											</div>
+										</div>
+										<div class="col-sm-8">
+											<div class="form-group">
+												<small>
+													FOTO DO PERFIL<br />
+													Faça upload de uma foto para usar no seu perfil<br /><br />
+												</small>
+												<input type="file" name="avatar">
+											</div>
+										</div>
+									</div>
+									[%input_text('form_ident', '' , req=>1, value => "event", type => 'hidden')|none%]
+									<button type="reset"  class="btn btn-danger pull-left">Limpar</button>
+									<input type="submit" value="Cadastrar" class="btn btn-success pull-right"/>
+
+								
+									</form>
+
+								</div>
+
 								<div role="tabpanel" id="tab-campanhas" class="tab-pane [% IF !body.form_ident && !form_ident%]active[%END%] ">
 									[% IF campaigns.size > 0%]
 									[%FOR cpg IN campaigns%]

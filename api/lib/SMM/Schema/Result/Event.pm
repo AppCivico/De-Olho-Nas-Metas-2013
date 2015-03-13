@@ -54,7 +54,7 @@ __PACKAGE__->table("event");
   data_type: 'text'
   is_nullable: 1
 
-=head2 date_exec
+=head2 date
 
   data_type: 'timestamp'
   is_nullable: 0
@@ -95,7 +95,7 @@ __PACKAGE__->add_columns(
   },
   "description",
   { data_type => "text", is_nullable => 1 },
-  "date_exec",
+  "date",
   { data_type => "timestamp", is_nullable => 0 },
   "campaign_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
@@ -167,8 +167,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-12 13:18:06
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:yumPuyvP/ynRFnBploFltQ
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-13 10:27:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:qAtsbdXMG5Bq+28NzUx7TA
 
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
@@ -184,11 +184,15 @@ sub verifiers_specs {
         update => Data::Verifier->new(
             filters => [qw(trim)],
             profile => {
+                name => {
+                    required => 1,
+                    type     => 'Str',
+                },
                 description => {
                     required => 1,
                     type     => 'Str',
                 },
-                date_exec => {
+                date => {
                     required => 1,
                     type     => 'Str',
                 },

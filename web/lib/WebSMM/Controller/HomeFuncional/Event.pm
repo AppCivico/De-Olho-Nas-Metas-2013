@@ -1,4 +1,4 @@
-package WebSMM::Controller::HomeFuncional::Campaign;
+package WebSMM::Controller::HomeFuncional::Event;
 use Moose;
 use namespace::autoclean;
 
@@ -6,7 +6,7 @@ BEGIN { extends 'Catalyst::Controller'; }
 
 =head1 NAME
 
-WebSMM::Controller::HomeFuncional::Campaign - Catalyst Controller
+WebSMM::Controller::HomeFuncional::Event - Catalyst Controller
 
 =head1 DESCRIPTION
 
@@ -20,7 +20,7 @@ Catalyst Controller.
 
 =cut
 
-sub base : Chained('/homefuncional/base') : PathPart('campaign') : CaptureArgs(0) {
+sub base : Chained('/homefuncional/base') : PathPart('event') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
 }
@@ -28,33 +28,18 @@ sub base : Chained('/homefuncional/base') : PathPart('campaign') : CaptureArgs(0
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
     my ( $self, $c, $id ) = @_;
 
-	my $api = $c->model('API');
-
-	$api->stash_result(
-        $c,
-        [ 'campaigns', $id ],
-		stash => 'campaign_obj'
-    );
-
 }
 
 sub detail : Chained('object') : PathPart('') : Args(0) {
     my ( $self, $c, $id ) = @_;
-	use DDP; p $c->stash->{campaign_obj};
 }
 
 sub index : Chained('base') : PathPart('') : Args(0) {
     my ( $self, $c ) = @_;
-	my $api = $c->model('API');
-	$api->stash_result(
-        $c,
-        'campaigns'
-    );
 
-	use DDP; p $c->stash->{campaigns};
 }
 
-sub set_campaign :Chained('base') :Args(0){
+sub set_event :Chained('base') :Args(0){
     my ( $self, $c ) = @_;
 
 	$c->detach unless $c->req->method eq 'POST';
@@ -68,7 +53,7 @@ sub set_campaign :Chained('base') :Args(0){
 
 	$api->stash_result(
         $c,
-        'campaigns',
+        'events',
         method => 'POST',
         body => $params,
     );

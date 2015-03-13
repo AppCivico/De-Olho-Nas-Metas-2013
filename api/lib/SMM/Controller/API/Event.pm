@@ -9,7 +9,7 @@ __PACKAGE__->config(
     default => 'application/json',
 
     result     => 'DB::Event',
-    object_key => 'event',
+    object_key => 'events',
     search_ok  => {
         id => 'Int'
     },
