@@ -15,6 +15,13 @@ __PACKAGE__->config(
     },
     result_attr => {
         prefetch => ['events'],
+	    '+select' => [
+            \q{to_char(events.date, 'DD/MM/YYYY HH24:MI:SS')},
+            \q{to_char(start_in, 'DD/MM/YYYY HH24:MI:SS')},
+            \q{to_char(end_on, 'DD/MM/YYYY HH24:MI:SS')},
+        ],
+        '+as'    => ['events.date_fmt','start_in_fmt','end_on_fmt'],
+
     },
     update_roles => [qw/superadmin user admin webapi organization/],
     create_roles => [qw/superadmin admin webapi/],
@@ -38,16 +45,29 @@ sub result_GET {
         $c,
         entity => {
             (
-                map { $_ => $campaigns->$_."", }
+                map { $_ => $campaigns->$_, }
                   qw/
-			 	  name
-				  description
-				  created_at
-				  start_in
-				  end_on
-				  user_id
+			 	  name          
+				  description  
+				  created_at   
+				  user_id      
                   /
             ),
+            events => [
+                        map {
+                               my $e = $_;
+                                p $e;
+                                ( +{ 
+									  
+									 id => $e->id,
+									 name => $e->name,
+									 description => $e->description,
+									 date => $e->date,
+								   }
+								)
+                            } ( $campaigns->events ) ,
+                        ],
+
         }
     );
 

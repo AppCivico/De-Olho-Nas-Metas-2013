@@ -106,7 +106,6 @@ sub survey_list : Chained('survey') : PathPart('') : Args(1) {
 
 	$url->path_segments('api','v1','campaigns');
 	$url->query_form( user_id => $id );
-	p $url;
     eval {
         $return = $model->_do_http_req(
             method  => 'GET',
@@ -156,9 +155,11 @@ sub survey_clone : Chained('survey') : PathPart('clonar') : Args(1) {
 
     my $url = URI->new('http://dev.monitor.promisetracker.org');
 
+	my $organization_name = $c->stash->{user_roles}->{organization}->{name};
+	my $organization_id = $c->stash->{user_roles}->{organization}->{id};
 	
 	$url->path_segments('api','v1','campaigns');
-	$url->query_form( username => $c->user->obj->name , user_id => $c->user->obj->organization_id , campaign_id => $id );
+	$url->query_form( username => $organization_name , user_id => $organization_id , campaign_id => $id );
 
     eval {
         $return = $model->_do_http_req(
@@ -182,10 +183,13 @@ sub survey_login : Chained('survey') : PathPart('entrar') : Args(1) {
 
     my $model = $c->model('API');
 
+	my $organization_name = $c->stash->{user_roles}->{organization}->{name};
+	my $organization_id = $c->stash->{user_roles}->{organization}->{id};
+
     my $url = URI->new('http://dev.monitor.promisetracker.org');
 
-	$url->path_segments('users','sign_in');
-	$url->query_form( username => 'teste2', user_id => 2, campaign_id => 86, token => 'c687bd99026769a662e9fc84f5c4e201', locale => 'pt-BR'  );
+	$url->path_segments('api','v1','users','sign_in');
+	$url->query_form( username => $organization_name, user_id => $organization_id, campaign_id => $id, token => 'c687bd99026769a662e9fc84f5c4e201', locale => 'pt-BR'  );
 
 	$c->res->redirect($url);
 
@@ -201,7 +205,7 @@ sub survey_create : Chained('survey') : PathPart('criar') : Args(0) {
     my $url = URI->new('http://dev.monitor.promisetracker.org');
 
 	$url->path_segments('api','v1','campaigns');
-	$url->query_form( username => 'teste2', user_id => $c->user->obj->organization_id );
+	$url->query_form( username => $c->user->obj->name, user_id => $c->user->obj->organization_id );
 
     eval {
         $return = $model->_do_http_req(
