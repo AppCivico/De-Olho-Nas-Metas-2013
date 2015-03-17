@@ -2,6 +2,7 @@ package SMM::Controller::API::Campaign;
 
 use Moose;
 use utf8;
+use DateTime;
 
 BEGIN { extends 'Catalyst::Controller::REST' }
 
@@ -45,11 +46,13 @@ sub result_GET {
         $c,
         entity => {
             (
-                map { $_ => $campaigns->$_, }
+                map {  p ($campaigns->$_->datetime) if ref $campaigns->$_ eq 'DateTime'; $_ => ref $campaigns->$_ eq 'DateTime' ? $campaigns->$_->datetime : $campaigns->$_ }
                   qw/
 			 	  name          
 				  description  
-				  created_at   
+				  created_at
+				  start_in
+				  end_on
 				  user_id      
                   /
             ),
@@ -62,7 +65,7 @@ sub result_GET {
 									 id => $e->id,
 									 name => $e->name,
 									 description => $e->description,
-									 date => $e->date,
+									 date => $e->date->datetime,
 								   }
 								)
                             } ( $campaigns->events ) ,
