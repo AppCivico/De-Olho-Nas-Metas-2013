@@ -11,9 +11,8 @@ sub base : Chained('/api/base') : PathPart('companies') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 }
 
-sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
 
-sub result : Chained('object') : PathPart('') : Args(0) : ActionClass('REST') { }
+sub result : Chained('base') : PathPart('result') : Args(0) : ActionClass('REST') { }
 
 sub result_GET {
     my ( $self, $c ) = @_;
@@ -37,7 +36,7 @@ sub result_GET {
 
 }
 
-sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
+sub list : Chained('base') : PathPart('list') : Args(0) : ActionClass('REST') { }
 
 sub list_GET {
     my ( $self, $c ) = @_;

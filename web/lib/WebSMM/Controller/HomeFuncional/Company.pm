@@ -3,6 +3,7 @@ use Moose;
 use namespace::autoclean;
 use utf8;
 use List::MoreUtils qw/uniq/;
+use DDP;
 BEGIN { extends 'Catalyst::Controller'; }
 
 =head1 NAME
@@ -33,13 +34,13 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
 sub index :Chained('base') :PathPart('') :Args(0){
     my ( $self, $c ) = @_;
     my $api = $c->model('API');
-    $api->stash_result( $c, 'companies' );
+    $api->stash_result( $c, 'companies/list' );
 }
 sub detail : Chained('object') : Args(0) {
     my ( $self, $c ) = @_;
 
     my $api = $c->model('API');
-    $api->stash_result( $c, 'companies', params => { business_name_url => $c->stash->{company} } );
+    $api->stash_result( $c, 'companies/result', params => { business_name_url => $c->stash->{company} } );
 
     foreach my $n ( @{ $c->stash->{companies} } ) {
         $_ = [ split /\|/, $_ ] for @{ $n->{agg_budgets} };
@@ -47,7 +48,7 @@ sub detail : Chained('object') : Args(0) {
         $_ = [ split /\|/, $_ ] for @{ $n->{goals} };
 
     }
-    p $c->stash->{companies};
+    p $c->stash->{company_obj};
 }
 
 =encoding utf8
