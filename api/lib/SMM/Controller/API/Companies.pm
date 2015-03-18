@@ -11,9 +11,11 @@ sub base : Chained('/api/base') : PathPart('companies') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 }
 
-sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
+sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
 
-sub list_GET {
+sub result : Chained('object') : PathPart('') : Args(0) : ActionClass('REST') { }
+
+sub result_GET {
     my ( $self, $c ) = @_;
     my $rs = $c->model('DB::ViewCompanies');
 
@@ -34,5 +36,34 @@ sub list_GET {
       )
 
 }
+
+sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
+
+sub list_GET {
+    my ( $self, $c ) = @_;
+
+    my $rs = $c->model('DB::ViewCompanies');
+
+    $self->status_ok(
+        $c,
+        entity => {
+            companies => [
+                map {
+                    my $r = $_;
+                    +{
+                        (
+                            map { $_ => $r->{$_} }
+                              qw/
+                              id
+                              /
+                        ),
+                      }
+                } $rs->search(undef, { result_class =>
+                           'DBIx::Class::ResultClass::HashRefInflator'})->all
+            ]
+        }
+    );
+}
+
 
 1;

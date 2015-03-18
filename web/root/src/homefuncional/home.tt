@@ -9,7 +9,7 @@
 					<div class="contents pull-left">
 						<div class="description">
 							<h2>
-								<a href="/home/project/{{id}}">{{ name }}</a>
+								<a href="/home/project/{{id}}" target="_blank">{{ name }}</a>
 							</h2>
 							<div class="stats">
 								<div class="icon projects"></div> <span class="projects">Meta Associada: {{#goal}}{{name}}{{/goal}}</span>

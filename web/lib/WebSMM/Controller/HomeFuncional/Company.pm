@@ -30,13 +30,16 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
     $c->stash->{company} = $name;
 }
 
+sub index :Chained('base') :PathPart('') :Args(0){
+    my ( $self, $c ) = @_;
+    my $api = $c->model('API');
+    $api->stash_result( $c, 'companies' );
+}
 sub detail : Chained('object') : Args(0) {
     my ( $self, $c ) = @_;
 
     my $api = $c->model('API');
     $api->stash_result( $c, 'companies', params => { business_name_url => $c->stash->{company} } );
-    use DDP;
-    p $c->stash->{companies};
 
     foreach my $n ( @{ $c->stash->{companies} } ) {
         $_ = [ split /\|/, $_ ] for @{ $n->{agg_budgets} };

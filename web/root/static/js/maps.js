@@ -763,7 +763,7 @@ $(document).ready(function () {
 	$("#txtaddress").autocomplete({
 	source: function (request, response) {
 	   geocoder = new google.maps.Geocoder();
-       geocoder.geocode({ 'address': request.term + ', Brasil', 'region': 'BR' }, function (results, status) {
+       geocoder.geocode({ 'address': request.term + ', São Paulo - SP' , 'language': 'pt-BR','region': 'br'  }, function (results, status) {
           response($.map(results, function (item) {
                 return {
                     label: item.formatted_address,

@@ -121,6 +121,7 @@ sub action_specs {
 			if ($hash){
 				$self->resultset('InviteCounsil')->search({ hash => $hash})->update({ valid_until => 0});
 			}
+			use DDP; p \%values;
             my $user = $self->create( \%values );
             if ($role) {
                 $user->set_roles( { name => $role } );

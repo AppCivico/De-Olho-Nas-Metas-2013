@@ -52,7 +52,6 @@ sub result_GET {
     )->next;
 
     use DDP;
-    p @progress_goal_counsil;
     my @region_ids;
     @region_ids =
       map  { $_->project->region_id }

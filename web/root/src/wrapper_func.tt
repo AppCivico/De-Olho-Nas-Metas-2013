@@ -71,6 +71,9 @@
                     <li>
                         <a href="/home/campaign">Campanhas</a>
                     </li>
+                    <li>
+                        <a href="/home/company">Empresas</a>
+                    </li>
 					[% IF c.user %]
                     <li >
                         <a href="[%c.uri_for_action('/user/account/index')%]" class="navbar-link"> Olá [%c.user.name%]</a>
