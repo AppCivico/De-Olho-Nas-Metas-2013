@@ -176,7 +176,7 @@ $(document).ready(function () {
 						<p>
 							[% goal_obj.description %].
 						</p>
-					<h3>INVESTIMENTO TOTAL DA META: <strong>R$<span class="priceformat">[% goal_obj.expected_budget %]</span></strong></h3>
+					<h3>INVESTIMENTO TOTAL PREVISTO: <strong>R$<span class="priceformat">[% goal_obj.expected_budget %]</span></strong></h3>
 					</div>
 <!--				<div class="timeline">
 						<h3 class="section-title">Linha do tempo segundo o cronograma</h3>
@@ -286,7 +286,7 @@ $(document).ready(function () {
 							<thead>
 								<tr>
 					                <th>Nome da Empresa</th>
-				    	            <th>Tarefa</th>
+				    	            <th>Descrição da despesa</th>
 				    	            <th>Custo (R$)</th>
 								</tr>
 							</thead>
