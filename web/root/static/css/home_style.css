@@ -1249,6 +1249,25 @@ div.followers{
 	font-size: 0.9em;
 	margin-top: 10px;
 }
+
+.event-list ul li .contents{
+	padding-left: 20px;
+}
+.event-list ul li .glyphicon{
+	color: #f7931e;
+}
+.event-list ul li .date{
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #333;
+}
+.event-list ul li .name{
+	font-size: 1.4em;
+}
+.event-list ul li .description{
+	font-size: 1em;
+	color: #999;
+}
 .metas-detail h3{
 	font-size: 1.4em;
 	text-transform: uppercase;
@@ -1262,6 +1281,16 @@ div.followers{
 	margin: 0;
 }
 
+.campaign-detail{
+	padding: 20px 0;
+}
+
+.campaign-image{
+	float: left;
+	padding: 5px;
+	margin: 0 10px 10px 0;
+	border: 1px solid #e0e0e0;
+}
 h3.dotted{
 	border-bottom: 1px dotted #c6c2c0;
 }
@@ -1484,4 +1513,8 @@ input#progress-value{
 .page-content h2{
 	text-align: center;
 	font-family: "Cabin Sketch";
+}
+
+.invite .tab-pane button{
+	margin-left: 5px;
 }

@@ -94,9 +94,6 @@
 							[% END %]
 						</div>
 					</div>
-					<div class="icon-status [% IF enquete.status == 'active'%]active[% END %]">
-						<div class="icon chat3"></div>
-					</div>
 				</div>
 				[% END%]
 		
