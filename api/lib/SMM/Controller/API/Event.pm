@@ -14,7 +14,7 @@ __PACKAGE__->config(
         id => 'Int'
     },
     result_attr => {
-        prefetch => ['campaigns'],
+        prefetch => ['campaign'],
     },
     update_roles => [qw/superadmin user admin webapi organization/],
     create_roles => [qw/superadmin admin webapi/],
@@ -37,12 +37,12 @@ sub result_GET {
         $c,
         entity => {
             (
-                map { $_ => $events->$_, }
+                map { $_ => ref $events->$_ eq 'DateTime' ? $events->$_->datetime : $events->$_}
                   qw/
                   id
                   name
                   description
-                  date_exec
+                  date
                   created_at
                   campaign_id
                   user_id
@@ -88,14 +88,10 @@ sub list_GET {
 
     my $rs = $c->stash->{collection};
 
-    if ( $c->req->param('user_id') ) {
-        $rs = $rs->search( { user_id => $c->req->param('user_id') } );
-    }
-
     $self->status_ok(
         $c,
         entity => {
-            eventss => [
+            events => [
                 map {
                     my $r = $_;
                     +{
@@ -105,7 +101,7 @@ sub list_GET {
                               id
                               name
                               description
-                              date_exec
+                              date
                               campaign_id
                               created_at
                               user_id
