@@ -3,6 +3,7 @@ use Moose;
 use namespace::autoclean;
 use utf8;
 use List::MoreUtils qw/uniq/;
+use List::Util qw/sum/;
 use DDP;
 BEGIN { extends 'Catalyst::Controller'; }
 
@@ -28,28 +29,36 @@ sub base : Chained('/homefuncional/base') : PathPart('company') : CaptureArgs(0)
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
     my ( $self, $c, $name ) = @_;
-    $c->stash->{company} = $name;
+    my $api = $c->model('API');
+
+	my $company = $api->get_result( $c, 'companies', params => { name_url => $name } );
+	$c->stash->{company} = $company->{companies}[0];
 }
 
 sub index :Chained('base') :PathPart('') :Args(0){
     my ( $self, $c ) = @_;
     my $api = $c->model('API');
-    $api->stash_result( $c, 'companies/list' );
+    $api->stash_result( $c, 'companies' );
 }
 sub detail : Chained('object') : Args(0) {
     my ( $self, $c ) = @_;
 
     my $api = $c->model('API');
-    $api->stash_result( $c, 'companies/result', params => { business_name_url => $c->stash->{company} } );
+    $api->stash_result( $c, [ 'companies', $c->stash->{company}->{id},'budgets' ] );
+    $api->stash_result( $c, [ 'companies', $c->stash->{company}->{id},'goals' ] );
 
-    foreach my $n ( @{ $c->stash->{companies} } ) {
-        $_ = [ split /\|/, $_ ] for @{ $n->{agg_budgets} };
-        $n->{goals} = [ uniq @{ $n->{goals} } ];
-        $_ = [ split /\|/, $_ ] for @{ $n->{goals} };
-
-    }
-    p $c->stash->{company_obj};
+	use DDP; p $c->stash->{goals};	
+	$c->stash->{sum_budgets} = sum map { $_->{dedicated_value} } @{$c->stash->{budgets}};
+	
+#    foreach my $n ( @{ $c->stash->{companies} } ) {
+#        $_ = [ split /\|/, $_ ] for @{ $n->{agg_budgets} };
+#        $n->{goals} = [ uniq @{ $n->{goals} } ];
+#        $_ = [ split /\|/, $_ ] for @{ $n->{goals} };
+#
+#    }
+#    p $c->stash->{company_obj};
 }
+
 
 =encoding utf8
 
