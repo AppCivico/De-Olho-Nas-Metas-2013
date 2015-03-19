@@ -103,6 +103,9 @@ h2{
 .blue{
 	color: #29abe2;
 }
+.orange{
+	color: #f7931e;
+}
 .menu-social li a{
 	float: left;
 	text-indent: -999em;
@@ -1569,4 +1572,7 @@ input#progress-value{
 }
 .cal1 .clndr .clndr-controls .month {
 	text-transform: uppercase;
+}
+.event-detail .list-orange .header{
+	font-size: 1.6em;
 }
