@@ -231,12 +231,11 @@ sub counsil_POST {
     my $user_counsil =
       $user->user_follow_counsils->search( { counsil_id => $id } )
       ->update( { active => 0 } );
+		
     my $counsil_count =
-      $c->model('DB::UserFollowCounsil')->search( { active => 1 } )->all;
-
-    $self->status_accepted( $c, entity => { counsil_count => $counsil_count } ),
-      $c->detach
-      if $user_counsil;
+      $c->model('DB::UserFollowCounsil')->search( { counsil_id => $id , active => 1 } )->count;
+	use DDP; p $counsil_count;
+    $self->status_accepted( $c, entity => { counsil_count => $counsil_count } );
 
 }
 
