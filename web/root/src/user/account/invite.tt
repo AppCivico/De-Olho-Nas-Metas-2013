@@ -69,7 +69,7 @@ jQuery(function($){
 						</ul>
 					</section>
 					
-					<section class="projetos-result">
+					<section class="projetos-result invite">
 						<div class="tab-content">
 
 								<div role="tabpanel" id="tab-form" class="tab-pane [% IF body.form_ident == 'form' OR form_ident =='form' OR !form_ident && !body.form_ident%]active[%END%]">
