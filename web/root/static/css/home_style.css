@@ -1250,19 +1250,26 @@ div.followers{
 	margin-top: 10px;
 }
 
+.event-list ul{
+	margin-top: 60px;
+}
+.event-list ul li{
+	margin-bottom: 10px;
+}
 .event-list ul li .contents{
-	padding-left: 20px;
+	color: #88817b;
 }
 .event-list ul li .glyphicon{
 	color: #f7931e;
 }
 .event-list ul li .date{
-	font-size: 1.2em;
+	font-size: 1.8em;
 	font-weight: bold;
-	color: #333;
+	color: #fbb03b;
 }
 .event-list ul li .name{
-	font-size: 1.4em;
+	font-size: 1.8em;
+	color: #88817b;
 }
 .event-list ul li .description{
 	font-size: 1em;
@@ -1517,4 +1524,49 @@ input#progress-value{
 
 .invite .tab-pane button{
 	margin-left: 5px;
+}
+
+/* CALENDAR */
+.cal1 .clndr .clndr-table .header-days {
+	background: #f0eee4;
+}
+.cal1 .clndr .clndr-table .header-days .header-day {
+	border-left: 1px solid #f0eee4;
+	border-top: 1px solid #f0eee4;
+	color: #88817b;
+	font-size: 1.4em;
+}
+.cal1 .clndr .clndr-table tr .day .day-contents {
+	color: #88817b;
+}
+.cal1 .clndr .clndr-table tr .day {
+	border-left: 1px solid #f0eee4;
+	border-top: 1px solid #f0eee4;
+}
+.cal1 .clndr .clndr-table tr:last-child .day, .cal1 .clndr .clndr-table tr:last-child .my-day {
+	border-bottom: 1px solid #f0eee4;
+}
+.cal1 .clndr .clndr-table tr .day:last-child {
+	border-right: 1px solid #f0eee4;
+}
+.cal1 .clndr .clndr-table .header-days .header-day:last-child {
+	border-right: 1px solid #f0eee4;
+}
+.cal1 .clndr .clndr-table tr .day.event, .cal1 .clndr .clndr-table tr .day.my-event {
+	background: #fbb03b;
+}
+.cal1 .clndr .clndr-table tr .day .day-contents{
+	font-size: 1.2em;
+}
+.cal1 .clndr .clndr-table tr .day.event .day-contents{
+	color: #fff;
+}
+.cal1 .clndr .clndr-table tr .day.event:hover, .cal1 .clndr .clndr-table tr .day.my-event:hover {
+	background: #ffc469;
+}
+.cal1 .clndr .clndr-table tr .day.today, .cal1 .clndr .clndr-table tr .day.my-today {
+	background: #ebd800;
+}
+.cal1 .clndr .clndr-controls .month {
+	text-transform: uppercase;
 }
