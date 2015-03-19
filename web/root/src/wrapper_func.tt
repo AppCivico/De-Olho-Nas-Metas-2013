@@ -76,6 +76,10 @@
                     <li>
                         <a href="/home/campaign">Campanhas</a>
                     </li>
+				    <li>
+                        <a href="/home/event">Eventos</a>
+                    </li>
+
                     <li>
                         <a href="/home/company">Empresas</a>
                     </li>

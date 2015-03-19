@@ -46,7 +46,7 @@ sub result_GET {
         $c,
         entity => {
             (
-                map {  p ($campaigns->$_->datetime) if ref $campaigns->$_ eq 'DateTime'; $_ => ref $campaigns->$_ eq 'DateTime' ? $campaigns->$_->datetime : $campaigns->$_ }
+                map {  $_ => ref $campaigns->$_ eq 'DateTime' ? $campaigns->$_->datetime : $campaigns->$_ }
                   qw/
 			 	  name          
 				  description  

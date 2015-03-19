@@ -26,7 +26,7 @@ __PACKAGE__->result_source_instance->view_definition(
 		sum(dedicated_value::numeric) as total_value,
         array_agg( replace(observation, E'|', ' ') || E'|' || dedicated_value   ) as agg_budgets
     FROM budget b JOIN goal g  ON b.goal_number = g.goal_number
-         GROUP BY 1, b.goal_number, b.business_name_url ORDER BY 3
+        WHERE business_name_url = ? GROUP BY 1,  b.business_name_url ORDER BY 3
 ]
 );
 

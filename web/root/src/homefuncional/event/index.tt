@@ -1,0 +1,3 @@
+[% FOR e IN events%]
+	[%e.name%]
+[% END %]

@@ -28,15 +28,28 @@ sub base : Chained('/homefuncional/base') : PathPart('event') : CaptureArgs(0) {
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
     my ( $self, $c, $id ) = @_;
 
+	my $api = $c->model('API');
+
+	$api->stash_result(
+        $c,
+        [ 'events', $id ],
+		stash => 'event_obj'
+    );
+
 }
 
 sub detail : Chained('object') : PathPart('') : Args(0) {
     my ( $self, $c, $id ) = @_;
+	use DDP; p $c->stash->{event_obj};
 }
 
 sub index : Chained('base') : PathPart('') : Args(0) {
     my ( $self, $c ) = @_;
 
+	my $api = $c->model('API');
+	
+	$api->stash_result($c, 'events');
+	use DDP; p $c->stash->{events};
 }
 
 sub set_event :Chained('base') :Args(0){

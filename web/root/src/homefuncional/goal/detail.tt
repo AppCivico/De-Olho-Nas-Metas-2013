@@ -287,7 +287,8 @@ $(document).ready(function () {
 								<tr>
 					                <th>Nome da Empresa</th>
 				    	            <th>Descrição da despesa</th>
-				    	            <th>Custo (R$)</th>
+				    	            <th style="white-space: nowrap">Valor Empenhado (R$)</th>
+				    	            <th style="white-space: nowrap">Valor Liquidado (R$)</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -296,7 +297,8 @@ $(document).ready(function () {
 							<tr>
 								<td><a href="[% c.uri_for_action('/homefuncional/company/detail', [bc.business_name_url])%]">[%bc.business_name%]</a></td>
 								<td>[%bc.observation%]</td>
-								<td class="priceformat" width="80">[%bc.dedicated_value%]</td>
+								<td class="priceformat"  width="80">[%bc.dedicated_value%]</td>
+								<td class="priceformat"  width="80">[%bc.liquidated_value%]</td>
 							</tr>
 		            [%END%]
 					[% ELSE %]
