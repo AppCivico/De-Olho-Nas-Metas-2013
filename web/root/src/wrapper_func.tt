@@ -41,7 +41,7 @@
     <script src="/static/js/clndr/clndr.js"></script>
 
 <script type="text/javascript"
-	src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCVRSogQpUwhgvu2GccC7F9rh7B7915qSY&sensor=TRUE">
+	src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCVRSogQpUwhgvu2GccC7F9rh7B7915qSY&sensor=TRUE&language=pt-br">
 </script>
 
 <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>

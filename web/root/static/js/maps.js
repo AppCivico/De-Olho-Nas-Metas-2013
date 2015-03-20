@@ -36,7 +36,8 @@ var $maps = function () {
 	function deleteMarkers(){
 		clearMarkers();
 		marker_array = [];
-		mc.clearMarkers();
+// 		mc.clearMarkers();
+		clearMarkers();
 	}
 
     function initialize() {
@@ -51,7 +52,7 @@ var $maps = function () {
 
 	function loadproject(){
 		var ib;
-
+		
 		$.getJSON('/home/project_map',function(data,status){
 			var json = data;
 			
@@ -102,7 +103,7 @@ var $maps = function () {
 					map.setCenter(event.latLng);
 				});
 			});
-			mc = new MarkerClusterer(map, marker_array);
+// 			mc = new MarkerClusterer(map, marker_array);
 			map.setZoom(12);
 		});
 	
@@ -554,67 +555,67 @@ var $maps = function () {
 	}
 
 	function render_projects(){
-	var ib;
-	var myLatlng;
-	$.post( "/home/project/search_by_types", { type_id: $('#type option:selected').val(), region_id: $('#homeregion option:selected').val() }, function( data ) {
-					$("#map").addClass("search");
-					data.plural = (data.projects.length > 1);
-					var template = $('#row_template').html();
-	   				var html = Mustache.to_html(template, data);
-	   				$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
-					$('#result').html(html);
-					$maps.deleteMarkers();
-					$.each(data.projects, function(i, pj){
-				
-						if (pj.latitude == 0 && pj.longitude == 0) return;
-						marker = "";	
-						myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
-						marker = new google.maps.Marker({
-	    	            	position: myLatlng,
-			                map: map,
-		    	            url: "/home/project/"+pj.id,
-		       		        icon: "/static/images/icone_mapa.png"
-        	   		 	});
-						marker_array.push(marker);
-						var url = marker.url;
-						var content = '<div class="project-bubble"><div class="name">';
-						content += '<a href="' + url + '">';
-						content += pj.name + '</a></div>';
-						content += '</div>';
-						google.maps.event.addListener(marker, 'mouseover', function() {
-							if (!ib){
-			  	              ib = new InfoBubble({
-						          map: map,
-						          content: content,
-					              shadowStyle: 0,
-						          padding: 0,
-						          backgroundColor: 'rgb(140,198,63)',
-						          borderRadius: 0,
-						          arrowSize: 15,
-						          borderWidth: 0,
-						          borderColor: '#8cc63f',
-						          disableAutoPan: true,
-						          hideCloseButton: false,
-						          arrowPosition: 50,
-				   	      	      arrowStyle: 0,
-				   			      MaxWidth: 340,
-				   	      		  MinHeight: 60
-				   	    	  });
-				       		  ib.open(map, this);
-							}else{
-								ib.setContent(content);
-								//ib.setPosition(myLatlng);
-								ib.open(map, this);
-							}
-        					//window.location.href = url;
+		var ib;
+		var myLatlng;
+		$.post( "/home/project/search_by_types", { type_id: $('#type option:selected').val(), region_id: $('#homeregion option:selected').val() }, function( data ) {
+			$("#map").addClass("search");
+
+			data.plural = (data.projects.length > 1);
+			var template = $('#row_template').html();
+			var html = Mustache.to_html(template, data);
+			$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
+			$('#result').html(html);
+			$maps.deleteMarkers();
+			$.each(data.projects, function(i, pj){
+		
+				if (pj.latitude == 0 && pj.longitude == 0) return;
+				marker = "";	
+				myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
+				marker = new google.maps.Marker({
+					position: myLatlng,
+					map: map,
+					url: "/home/project/"+pj.id,
+					icon: "/static/images/icone_mapa.png"
+				});
+				marker_array.push(marker);
+				var url = marker.url;
+				var content = '<div class="project-bubble"><div class="name">';
+				content += '<a href="' + url + '">';
+				content += pj.name + '</a></div>';
+				content += '</div>';
+				google.maps.event.addListener(marker, 'mouseover', function() {
+					if (!ib){
+						ib = new InfoBubble({
+							map: map,
+							content: content,
+							shadowStyle: 0,
+							padding: 0,
+							backgroundColor: 'rgb(140,198,63)',
+							borderRadius: 0,
+							arrowSize: 15,
+							borderWidth: 0,
+							borderColor: '#8cc63f',
+							disableAutoPan: true,
+							hideCloseButton: false,
+							arrowPosition: 50,
+							arrowStyle: 0,
+							MaxWidth: 340,
+							MinHeight: 60
 						});
-				  })
-					mc = new MarkerClusterer(map, marker_array);
-					map.setCenter(myLatlng);
-	    		},"json");
-
-
+						ib.open(map, this);
+					}else{
+						ib.setContent(content);
+						//ib.setPosition(myLatlng);
+						ib.open(map, this);
+					}
+					//window.location.href = url;
+				});
+			})
+// 					mc = new MarkerClusterer(map, marker_array);
+			map.setCenter(myLatlng);
+		},"json");
 	}
+	
 	function render_project_latlng(){
 		var myLatlng;
 		var ib;
@@ -763,10 +764,18 @@ $(document).ready(function () {
 
 	$("#txtaddress").autocomplete({
 	source: function (request, response) {
-		 alert('lol');
 	   geocoder = new google.maps.Geocoder();
-       geocoder.geocode({ 'address': request.term + ', São Paulo - SP' , 'language': 'pt-BR','region': 'br'  }, function (results, status) {
+// 	   console.log('address' request.term + ', São Paulo - SP' , 'language': 'pt-br','region': 'br');
+       geocoder.geocode({
+			address: request.term,
+			region: 'BR',
+ 			componentRestrictions: { 
+				country: 'BR',
+				administrativeArea: 'SP'
+			}
+	}, function (results, status) {
           response($.map(results, function (item) {
+			  console.log('ta chegando aqui');
                 return {
                     label: item.formatted_address,
                     value: item.formatted_address,
@@ -777,6 +786,7 @@ $(document).ready(function () {
        })
     },
     select: function (event, ui) {
+		console.log(ui);
         var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
 		if ($("#pagetype").val() == 'home'){		
 			$("section.map .map-overlay").fadeIn();
