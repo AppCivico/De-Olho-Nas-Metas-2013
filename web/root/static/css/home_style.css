@@ -1604,3 +1604,10 @@ input#progress-value{
 .event-detail .list-orange .glyphicon{
 	font-size: 1.8em;
 }
+.abc-list{
+	padding-bottom: 20px;
+}
+.abc-list a{
+	padding: 10px;
+	font-size: 1.2em;
+}

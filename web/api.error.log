@@ -3480,3 +3480,4 @@ Setting gid to "1002 1002 27 1002"
     user_id       40
 }
 [error] Caught exception in SMM::Controller::API::Project->result "Can't call method "id" on an undefined value at lib/SMM/Controller/API/Project.pm line 132."
+[error] Caught exception in SMM::Controller::API::Project->result "Can't call method "id" on an undefined value at lib/SMM/Controller/API/Project.pm line 132."

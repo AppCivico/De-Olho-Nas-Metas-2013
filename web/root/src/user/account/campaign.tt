@@ -1,4 +1,5 @@
 
+[%-CALL assets.include("js/maps.js")%]
 [%-CALL assets.include("js/date-picker/bootstrap-datepicker.js")%]
 [%-CALL assets.include("js/date-picker/bootstrap-datepicker.pt-BR.js")%]
 [%-CALL assets.include("css/date-picker/datepicker.css")%]
@@ -65,7 +66,7 @@ jQuery(function($){
 
 	   <section class="metas-detail profile-timeline">
 		<div class="container">
-
+      <input type="hidden" id="pagetype" value="campaign_user">
 			<div class="row">
 
 
@@ -81,7 +82,6 @@ jQuery(function($){
 					
 					<section class="projetos-result">
 						<div class="tab-content">
-
 								<div role="tabpanel" id="tab-cadastrar" class="tab-pane [% IF body.form_ident == 'form' OR form_ident =='form' %]active[%END%] ">
 									<h4 class="green">CADASTRE UMA NOVA CAMPANHA</h4>
 									[% IF body.form_ident == 'form' OR form_ident == 'form'%]
@@ -99,7 +99,11 @@ jQuery(function($){
 												[%input_text('end_on','Data Final:', classes => ['span3' , 'date', 'datepicker'],req=>0)|none%]
 										</div>
 									</div>
-									
+ 									<div class="row">
+										<div class="col-sm-6">
+															<input type="text" id="txtaddress" name="txtaddress" placeholder="CEP">
+										</div>
+									</div>  								
 									<div class="row row-padding">
 										<div class="col-sm-4">
 											<div class="avatar-upload">
