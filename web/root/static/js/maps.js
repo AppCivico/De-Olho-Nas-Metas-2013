@@ -63,7 +63,7 @@ var $maps = function () {
     	            position: myLatlng,
 	                map: map,
 	                url: "/home/project/"+pj.id,
-	                icon: "/static/images/icone_mapa.png"
+	                icon: "/static/images/marker_donm.png"
         	    });
 				marker_array.push(marker);
 				var url = marker.url;
@@ -133,7 +133,7 @@ var $maps = function () {
 			marker = new google.maps.Marker({
 	                position: myLatlng,
 		            map: map,
-		            icon: "/static/images/icone_mapa.png"
+		            icon: "/static/images/marker_donm.png"
 	        });
 
 			var url = marker.url;
@@ -279,7 +279,7 @@ var $maps = function () {
 	                position: myLatlng,
 		            map: map,
 					url : "/home/project/"+pj.id,
-		            icon: "/static/images/icone_mapa.png"
+		            icon: "/static/images/marker_donm.png"
 	            });
 				var url = marker.url;
 				var content = '<div class="project-bubble"><div class="name">';
@@ -336,7 +336,7 @@ var $maps = function () {
     	            position: myLatlng,
 	                map: map,
 	                url: "/home/subprefecture/"+data.subprefecture.id,
-	                icon: "/static/images/icone_mapa.png"
+	                icon: "/static/images/marker_donm.png"
         	    });
 				var url = marker.url;
 				var content = '<div class="project-bubble" ><div class="name">';
@@ -442,7 +442,7 @@ var $maps = function () {
 	            position: myLatlng,
                 map: map,
                 url: "/home/subprefecture/"+json.id,
-                icon: "/static/images/icone_mapa.png"
+                icon: "/static/images/marker_donm.png"
     	    });
 
 	    	map.setCenter(myLatlng);
@@ -463,7 +463,7 @@ var $maps = function () {
     	            position: myLatlng,
 	                map: map,
 					url : "/home/project/"+pj.id,
-	                icon: "/static/images/icone_mapa.png"
+	                icon: "/static/images/marker_donm.png"
         	    });
 				if ( pj.latitude != 0 && pj.longitude != 0){
 					markers.push(marker);
@@ -575,7 +575,7 @@ var $maps = function () {
 					position: myLatlng,
 					map: map,
 					url: "/home/project/"+pj.id,
-					icon: "/static/images/icone_mapa.png"
+					icon: "/static/images/marker_donm.png"
 				});
 				marker_array.push(marker);
 				var url = marker.url;
@@ -637,7 +637,7 @@ var $maps = function () {
 	    	    	        	position: myLatlng,
 			        	        map: map,
 		    	        	    url: "/home/project/"+pj.id,
-			       		        icon: "/static/images/icone_mapa.png"
+			       		        icon: "/static/images/marker_donm.png"
     	    	   		 	});
 							var url = marker.url;
 							var content = '<div class="project-bubble"><div class="name">';
