@@ -79,7 +79,7 @@ jQuery(function($){
 							<li role="presentation" [% IF body.form_ident == 'event' OR form_ident == 'event' %]class="active"[%END%]><a href="#tab-eventos" aria-controls="metas" role="tab" data-toggle="tab">Cadastrar Eventos</a></li>
 						</ul>
 					</section>
-					
+
 					<section class="projetos-result">
 						<div class="tab-content">
 								<div role="tabpanel" id="tab-cadastrar" class="tab-pane [% IF body.form_ident == 'form' OR form_ident =='form' %]active[%END%] ">
