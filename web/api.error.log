@@ -1,0 +1,3483 @@
+Process Backgrounded
+2015/03/10-00:56:49 Starman::Server (type Net::Server::PreFork) starting! pid(16836)
+Resolved [*]:3060 to [0.0.0.0]:3060, IPv4
+Binding to TCP port 3060 on host 0.0.0.0 with IPv4
+Setting gid to "1002 1002 27 1002"
+[error] Could not find authentication realm 'default'
+[error] Could not find authentication realm 'default'
+Process Backgrounded
+2015/03/10-09:34:37 Starman::Server (type Net::Server::PreFork) starting! pid(27557)
+Resolved [*]:3060 to [0.0.0.0]:3060, IPv4
+Binding to TCP port 3060 on host 0.0.0.0 with IPv4
+Setting gid to "1002 1002 27 1002"
+[error] Could not find authentication realm 'default'
+Process Backgrounded
+2015/03/10-09:58:34 Starman::Server (type Net::Server::PreFork) starting! pid(28123)
+Resolved [*]:3060 to [0.0.0.0]:3060, IPv4
+Binding to TCP port 3060 on host 0.0.0.0 with IPv4
+Setting gid to "1002 1002 27 1002"
+[error] Could not find authentication realm 'default'
+[error] Could not find authentication realm 'default'
+Process Backgrounded
+2015/03/10-10:09:03 Starman::Server (type Net::Server::PreFork) starting! pid(28672)
+Resolved [*]:3060 to [0.0.0.0]:3060, IPv4
+Binding to TCP port 3060 on host 0.0.0.0 with IPv4
+Setting gid to "1002 1002 27 1002"
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  relation "progress_goal_counsil" does not exist
+LINE 1: ..."."owned", "me"."goal_id", "me"."created_at" FROM "progress_...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."remainder", "me"."owned", "me"."goal_id", "me"."created_at" FROM "progress_goal_counsil" "me" WHERE ( "me"."goal_id" = ? ) ORDER BY "created_at" DESC LIMIT ?" with ParamValues: 1='93', 2='1'] at lib/SMM/Controller/API/Goal.pm line 45
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  relation "progress_goal_counsil" does not exist
+LINE 1: ..."."owned", "me"."goal_id", "me"."created_at" FROM "progress_...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."remainder", "me"."owned", "me"."goal_id", "me"."created_at" FROM "progress_goal_counsil" "me" WHERE ( "me"."goal_id" = ? ) ORDER BY "created_at" DESC LIMIT ?" with ParamValues: 1='93', 2='1'] at lib/SMM/Controller/API/Goal.pm line 45
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  relation "progress_goal_counsil" does not exist
+LINE 1: ..."."owned", "me"."goal_id", "me"."created_at" FROM "progress_...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."remainder", "me"."owned", "me"."goal_id", "me"."created_at" FROM "progress_goal_counsil" "me" WHERE ( "me"."goal_id" = ? ) ORDER BY "created_at" DESC LIMIT ?" with ParamValues: 1='93', 2='1'] at lib/SMM/Controller/API/Goal.pm line 45
+Process Backgrounded
+2015/03/10-12:14:32 Starman::Server (type Net::Server::PreFork) starting! pid(31870)
+Resolved [*]:3060 to [0.0.0.0]:3060, IPv4
+Binding to TCP port 3060 on host 0.0.0.0 with IPv4
+Setting gid to "1002 1002 27 1002"
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  relation "progress_goal_counsil" does not exist
+LINE 1: ..."."owned", "me"."goal_id", "me"."created_at" FROM "progress_...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."remainder", "me"."owned", "me"."goal_id", "me"."created_at" FROM "progress_goal_counsil" "me" WHERE ( "me"."goal_id" = ? ) ORDER BY "created_at" DESC LIMIT ?" with ParamValues: 1='91', 2='1'] at lib/SMM/Controller/API/Goal.pm line 45
+Process Backgrounded
+2015/03/10-12:42:17 Starman::Server (type Net::Server::PreFork) starting! pid(541)
+Resolved [*]:3060 to [0.0.0.0]:3060, IPv4
+Binding to TCP port 3060 on host 0.0.0.0 with IPv4
+Setting gid to "1002 1002 27 1002"
+\ {
+    active             1,
+    avatar             "eu1.jpg",
+    email              "gfvizzotto@gmail.com",
+    hash               "",
+    name               "Gianfrancesco",
+    organization_id    "",
+    password           "takeiteasy",
+    password_confirm   "takeiteasy",
+    phone_number       "(11) 9692-58780"
+}
+\ {
+    active             1,
+    avatar             "eu1.jpg",
+    email              "gfvizzotto@gmail.com",
+    hash               "",
+    name               "Gianfrancesco",
+    organization_id    "",
+    password           "takeiteasy",
+    password_confirm   "takeiteasy",
+    phone_number       "(11) 9692-58780"
+}
+\ {
+    active             1,
+    avatar             "eu1.jpg",
+    email              "gian.vizzotto@eokoe.com",
+    hash               "",
+    name               "Gianfrancesco",
+    organization_id    "",
+    password           "takeiteasy",
+    password_confirm   "takeiteasy",
+    phone_number       "(11) 96925-8780"
+}
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 12:49:42.916714",
+                goal_id      104,
+                id           6,
+                owned        54,
+                remainder    46
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 12:49:42.916714",
+                goal_id      104,
+                id           6,
+                owned        54,
+                remainder    46
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[error] Caught exception in SMM::Controller::API::Project->result "Can't call method "id" on an undefined value at lib/SMM/Controller/API/Project.pm line 136."
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+Process Backgrounded
+2015/03/10-13:53:26 Starman::Server (type Net::Server::PreFork) starting! pid(2697)
+Resolved [*]:3060 to [0.0.0.0]:3060, IPv4
+Binding to TCP port 3060 on host 0.0.0.0 with IPv4
+Setting gid to "1002 1002 27 1002"
+\ {
+    active             1,
+    email              "airton@teste.com",
+    name               "Airton",
+    password           123456,
+    password_confirm   123456,
+    phone_number       "(11) 11111-1111",
+    roles              11
+}
+\ {
+    active             1,
+    email              "conselheiro@teste.com.br",
+    name               "Conselheiro Teste",
+    password           "teste",
+    password_confirm   "teste",
+    phone_number       "(11) 11111-1111",
+    roles              11
+}
+\ {
+    active             1,
+    email              "marcia@teste.com",
+    name               "Marcia",
+    password           123456,
+    password_confirm   123456,
+    phone_number       "(11) 11111-1111",
+    roles              11
+}
+\ {
+    active             1,
+    email              "marta@teste.com",
+    name               "Marta",
+    password           123456,
+    password_confirm   123456,
+    phone_number       "(11) 11111-1111",
+    roles              11
+}
+\ {
+    active             1,
+    email              "ariela@teste.com",
+    name               "Ariela",
+    password           123456,
+    password_confirm   123456,
+    phone_number       "(11) 11111-1111",
+    roles              11
+}
+\ {
+    active             1,
+    email              "marcia@donm.org.br",
+    name               "marcia",
+    organization_id    4,
+    password           123456,
+    password_confirm   123456,
+    phone_number       "(00) 00000-0000",
+    roles              11
+}
+\ {
+    active             1,
+    email              "marta@donm.org.br",
+    name               "Marta",
+    organization_id    4,
+    password           123456,
+    password_confirm   123456,
+    phone_number       "(11) 11111-1111",
+    roles              11
+}
+\ {
+    active             1,
+    email              "ariela@donm.org.br",
+    name               "ariela",
+    organization_id    4,
+    password           123456,
+    password_confirm   123456,
+    phone_number       "(00) 00000-0000",
+    roles              11
+}
+\ {
+    active             1,
+    email              "ariela@donm.org.br",
+    name               "Ariela",
+    organization_id    4,
+    password           123456,
+    password_confirm   123456,
+    phone_number       "(11) 11111-1111",
+    roles              11
+}
+\ {
+    active             1,
+    email              "ariela@donm.org.br",
+    name               "Ariela",
+    organization_id    4,
+    password           123456,
+    password_confirm   123456,
+    phone_number       "(11) 1111-1111",
+    roles              11
+}
+\ {
+    active             1,
+    email              "airton@donm.org.br",
+    name               "Airton",
+    organization_id    2,
+    password           123456,
+    password_confirm   123456,
+    phone_number       "(11) 11111-1111",
+    roles              11
+}
+\ {
+    active             1,
+    email              "marcia@donm.org.br",
+    name               "marcia",
+    organization_id    4,
+    password           123456,
+    password_confirm   123456,
+    phone_number       "(00) 00000-0000",
+    roles              11
+}
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+\ {
+    active             1,
+    avatar             "LOGO-AMAM.png",
+    email              "amam@amam-moema.org",
+    hash               "",
+    name               "AMAM - Associação dos Moradores e Amigos de Moema",
+    organization_id    "",
+    password           "2923abvz",
+    password_confirm   "2923abvz",
+    phone_number       "(11) 98326-1328"
+}
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+1
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+\ {
+    active             1,
+    email              "jose@donm.org.br",
+    name               "José",
+    organization_id    32,
+    password           123456,
+    password_confirm   123456,
+    phone_number       "(11) 11111-1111",
+    roles              11
+}
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+\ {
+    description   "Não conheço este projeto. Procurei onde exatamente ele fica e não achei.",
+    project_id    2915,
+    user_id       102
+}
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+\ {
+    description   "Este campo é para comentários de cidadãos que não são conselheiros?",
+    project_id    4054,
+    user_id       101
+}
+\ {
+    active             1,
+    email              "lgrv@damianifx.com.br",
+    hash               "",
+    name               "Luis Guilherme Damiani",
+    organization_id    "",
+    password           "blabla",
+    password_confirm   "blabla",
+    phone_number       "(11) 99101-1164"
+}
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+Process Backgrounded
+2015/03/10-16:13:45 Starman::Server (type Net::Server::PreFork) starting! pid(5676)
+Resolved [*]:3060 to [0.0.0.0]:3060, IPv4
+Binding to TCP port 3060 on host 0.0.0.0 with IPv4
+Setting gid to "1002 1002 27 1002"
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[error] Caught exception in SMM::Controller::API::Project->result "Can't call method "id" on an undefined value at lib/SMM/Controller/API/Project.pm line 137."
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+\ {
+    active             1,
+    email              "leoburd@media.mit.edu",
+    name               "Leo Burd",
+    organization_id    28,
+    password           "123mudar",
+    password_confirm   "123mudar",
+    phone_number       "(11) 11111-1111",
+    roles              11
+}
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+\ {
+    id          9,
+    useremail   "renanzao@email.com",
+    username    "renanzao"
+}
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+\ {
+    id          9,
+    useremail   "renanzao@email.com",
+    username    "renanzao"
+}
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+\ {
+    description   "",
+    project_id    "",
+    user_id       53
+}
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+Process Backgrounded
+2015/03/17-13:51:08 Starman::Server (type Net::Server::PreFork) starting! pid(29666)
+Resolved [*]:3060 to [0.0.0.0]:3060, IPv4
+Binding to TCP port 3060 on host 0.0.0.0 with IPv4
+Setting gid to "1002 1002 27 1002"
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='91'] at lib/SMM/Controller/API/Goal.pm line 44
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='3'] at lib/SMM/Controller/API/Goal.pm line 44
+\ {
+    description   "comentario lelio",
+    project_id    3330,
+    user_id       53
+}
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='2'] at lib/SMM/Controller/API/Goal.pm line 44
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='1'] at lib/SMM/Controller/API/Goal.pm line 44
+\ {
+    description   "Nuetsra Mendoza ha observado el proyecto",
+    project_id    3040,
+    user_id       53
+}
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='96'] at lib/SMM/Controller/API/Goal.pm line 44
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='23'] at lib/SMM/Controller/API/Goal.pm line 44
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='6'] at lib/SMM/Controller/API/Goal.pm line 44
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='23'] at lib/SMM/Controller/API/Goal.pm line 44
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='93'] at lib/SMM/Controller/API/Goal.pm line 44
+\ {
+    active             1,
+    email              "lucenir@hotmail.com",
+    hash               "",
+    name               "Lucenir Gomes",
+    organization_id    "",
+    password           "ilotupe2",
+    password_confirm   "ilotupe2",
+    phone_number       "(71) 9167-0572"
+}
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='93'] at lib/SMM/Controller/API/Goal.pm line 44
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='93'] at lib/SMM/Controller/API/Goal.pm line 44
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='17'] at lib/SMM/Controller/API/Goal.pm line 44
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='10'] at lib/SMM/Controller/API/Goal.pm line 44
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='17'] at lib/SMM/Controller/API/Goal.pm line 44
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='48'] at lib/SMM/Controller/API/Goal.pm line 44
+\ {
+    description   "Essa meta é muito importante!",
+    project_id    4497,
+    user_id       109
+}
+\ {
+    description   "comentario lelio",
+    project_id    2882,
+    user_id       53
+}
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='89'] at lib/SMM/Controller/API/Goal.pm line 44
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='9'] at lib/SMM/Controller/API/Goal.pm line 44
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='27'] at lib/SMM/Controller/API/Goal.pm line 44
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='1'] at lib/SMM/Controller/API/Goal.pm line 44
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='10'] at lib/SMM/Controller/API/Goal.pm line 44
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='2'] at lib/SMM/Controller/API/Goal.pm line 44
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='1'] at lib/SMM/Controller/API/Goal.pm line 44
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='10'] at lib/SMM/Controller/API/Goal.pm line 44
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='3'] at lib/SMM/Controller/API/Goal.pm line 44
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='2'] at lib/SMM/Controller/API/Goal.pm line 44
+[error] DBIx::Class::Storage::DBI::_dbh_execute(): DBI Exception: DBD::Pg::st execute failed: ERROR:  column me.business_name_url does not exist
+LINE 1: ...ated_year", "me"."organ_code", "me"."organ_name", "me"."busi...
+                                                             ^ [for Statement "SELECT "me"."id", "me"."business_name", "me"."cnpj", "me"."goal_number", "me"."dedicated_value", "me"."liquidated_value", "me"."observation", "me"."contract_code", "me"."dedicated_year", "me"."organ_code", "me"."organ_name", "me"."business_name_url" FROM "budget" "me" WHERE ( "me"."goal_number" = ? )" with ParamValues: 1='89'] at lib/SMM/Controller/API/Goal.pm line 44
+Process Backgrounded
+2015/03/17-14:29:09 Starman::Server (type Net::Server::PreFork) starting! pid(30491)
+Resolved [*]:3060 to [0.0.0.0]:3060, IPv4
+Binding to TCP port 3060 on host 0.0.0.0 with IPv4
+Setting gid to "1002 1002 27 1002"
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+\ {
+    active             1,
+    email              "latam@donm.org.br",
+    name               "Teste Latam",
+    organization_id    24,
+    password           123456,
+    password_confirm   123456,
+    phone_number       "(11) 11111-1111",
+    roles              11
+}
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+\ {
+    description   "comentario",
+    project_id    3482,
+    user_id       53
+}
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+\ {
+    description   "comentario con lo gconsejero lelio",
+    project_id    2882,
+    user_id       110
+}
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+\ {
+    description   "comentario",
+    project_id    2806,
+    user_id       53
+}
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+\ {
+    description   "Meta importante!! Teste treinamento!!",
+    project_id    4543,
+    user_id       110
+}
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+\ {
+    description   "comentario",
+    project_id    4770,
+    user_id       110
+}
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-17 14:42:58.82972",
+                goal_id      10,
+                id           9,
+                owned        30,
+                remainder    70
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-17 14:42:58.82972",
+                goal_id      10,
+                id           9,
+                owned        30,
+                remainder    70
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+\ {
+    description   "",
+    project_id    "",
+    user_id       53
+}
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 12:50:00.227888",
+                goal_id      104,
+                id           8,
+                owned        34,
+                remainder    66
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 12:50:00.227888",
+                goal_id      104,
+                id           8,
+                owned        34,
+                remainder    66
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 12:50:00.227888",
+                goal_id      104,
+                id           8,
+                owned        34,
+                remainder    66
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 12:50:00.227888",
+                goal_id      104,
+                id           8,
+                owned        34,
+                remainder    66
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+\ {
+    description   "",
+    project_id    "",
+    user_id       53
+}
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-09 21:44:17.110771",
+                goal_id      1,
+                id           4,
+                owned        47,
+                remainder    53
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] SMM::Model::DB::ProgressGoalCounsil  {
+        Parents       SMM::Schema::Result::ProgressGoalCounsil
+        public methods (1) : in_storage
+        private methods (0)
+        internals: {
+            _column_data     {
+                created_at   "2015-03-10 05:49:58.193463",
+                goal_id      3,
+                id           5,
+                owned        58,
+                remainder    42
+            },
+            _in_storage      1,
+            _result_source   DBIx::Class::ResultSource::Table
+        }
+    }
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+[
+    [0] undef
+]
+Process Backgrounded
+2015/03/20-15:28:29 Starman::Server (type Net::Server::PreFork) starting! pid(25133)
+Resolved [*]:3060 to [0.0.0.0]:3060, IPv4
+Binding to TCP port 3060 on host 0.0.0.0 with IPv4
+Setting gid to "1002 1002 27 1002"
+Process Backgrounded
+2015/03/20-15:29:09 Starman::Server (type Net::Server::PreFork) starting! pid(25171)
+Resolved [*]:3060 to [0.0.0.0]:3060, IPv4
+Binding to TCP port 3060 on host 0.0.0.0 with IPv4
+Setting gid to "1002 1002 27 1002"
+\ {
+    created_at     "2015-03-13 11:24:09.615276",
+    description    123123123123123132,
+    end_on         "2015-03-11",
+    end_on_fmt     "11/03/2015 00:00:00",
+    events         [],
+    id             7,
+    name           333333333333,
+    start_in       "2015-01-27",
+    start_in_fmt   "27/01/2015 00:00:00",
+    user_id        40
+}
+\ {
+    campaign_id   3,
+    created_at    "2015-03-13 11:14:17.367196",
+    date          "2015-03-13 15:14:00",
+    date_fmt      "13/03/2015 15:14:00",
+    description   123123123123,
+    id            2,
+    name          "asSDAS",
+    user_id       40
+}
+\ {
+    campaign_id   5,
+    created_at    "2015-03-13 11:23:18.651173",
+    date          "2015-03-02 15:23:00",
+    date_fmt      "02/03/2015 15:23:00",
+    description   4444444444,
+    id            3,
+    name          55555555,
+    user_id       40
+}
+\ {
+    campaign_id   6,
+    created_at    "2015-03-13 10:55:41.363472",
+    date          "2015-03-10 14:55:00",
+    date_fmt      "10/03/2015 14:55:00",
+    description   "asdasdasd",
+    id            1,
+    name          "asaasasd",
+    user_id       40
+}
+\ {
+    created_at     "2015-03-13 11:24:09.615276",
+    description    123123123123123132,
+    end_on         "2015-03-11",
+    end_on_fmt     "11/03/2015 00:00:00",
+    events         [],
+    id             7,
+    name           333333333333,
+    start_in       "2015-01-27",
+    start_in_fmt   "27/01/2015 00:00:00",
+    user_id        40
+}
+\ {
+    campaign_id   3,
+    created_at    "2015-03-13 11:14:17.367196",
+    date          "2015-03-13 15:14:00",
+    date_fmt      "13/03/2015 15:14:00",
+    description   123123123123,
+    id            2,
+    name          "asSDAS",
+    user_id       40
+}
+\ {
+    campaign_id   5,
+    created_at    "2015-03-13 11:23:18.651173",
+    date          "2015-03-02 15:23:00",
+    date_fmt      "02/03/2015 15:23:00",
+    description   4444444444,
+    id            3,
+    name          55555555,
+    user_id       40
+}
+\ {
+    campaign_id   6,
+    created_at    "2015-03-13 10:55:41.363472",
+    date          "2015-03-10 14:55:00",
+    date_fmt      "10/03/2015 14:55:00",
+    description   "asdasdasd",
+    id            1,
+    name          "asaasasd",
+    user_id       40
+}
+\ {
+    active             1,
+    email              "teste_con@email.com",
+    name               "teste_con",
+    organization_id    30,
+    password           "testecon",
+    password_confirm   "testecon",
+    phone_number       "(12) 31231-2312",
+    roles              11
+}
+\ {
+    created_at     "2015-03-13 11:24:09.615276",
+    description    123123123123123132,
+    end_on         "2015-03-11",
+    end_on_fmt     "11/03/2015 00:00:00",
+    events         [],
+    id             7,
+    name           333333333333,
+    start_in       "2015-01-27",
+    start_in_fmt   "27/01/2015 00:00:00",
+    user_id        40
+}
+\ {
+    campaign_id   3,
+    created_at    "2015-03-13 11:14:17.367196",
+    date          "2015-03-13 15:14:00",
+    date_fmt      "13/03/2015 15:14:00",
+    description   123123123123,
+    id            2,
+    name          "asSDAS",
+    user_id       40
+}
+\ {
+    campaign_id   5,
+    created_at    "2015-03-13 11:23:18.651173",
+    date          "2015-03-02 15:23:00",
+    date_fmt      "02/03/2015 15:23:00",
+    description   4444444444,
+    id            3,
+    name          55555555,
+    user_id       40
+}
+\ {
+    campaign_id   6,
+    created_at    "2015-03-13 10:55:41.363472",
+    date          "2015-03-10 14:55:00",
+    date_fmt      "10/03/2015 14:55:00",
+    description   "asdasdasd",
+    id            1,
+    name          "asaasasd",
+    user_id       40
+}
+[error] Caught exception in SMM::Controller::API::Project->result "Can't call method "id" on an undefined value at lib/SMM/Controller/API/Project.pm line 132."
+[error] Caught exception in SMM::Controller::API::Project->result "Can't call method "id" on an undefined value at lib/SMM/Controller/API/Project.pm line 132."

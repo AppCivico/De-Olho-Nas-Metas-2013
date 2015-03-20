@@ -109,4 +109,3 @@ sub base : Chained('logged_in') : PathPart('') : CaptureArgs(0) {
 __PACKAGE__->config( default => 'application/json' );
 
 1;
-

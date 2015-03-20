@@ -237,7 +237,7 @@ $(document).ready(function () {
 						</div>
 						[%ELSE%]
 						<div id="follow" class="col-xs-4 text-right">							
-							<a class="btn btn-brown" href="/cadastro">Siga o Projeto</a>
+							<a class="btn btn-brown" href="/login">Siga o Projeto</a>
 						</div>
 
 						[%END%]
@@ -278,7 +278,7 @@ $(document).ready(function () {
 						[%END%]
 					</section>
 					<div>
-						<h3 class="section-title">Comentário dos conselheiros</h3>
+						<h3>Comentário dos conselheiros</h3>
 						<table id="list_note" class="table table-striped">
 							<thead>
 								<tr>
@@ -311,7 +311,7 @@ $(document).ready(function () {
 					</div>
 					<div id="disqus_thread">						
 						<textarea id="text_comment_counsil" class="form-control" rows="2"></textarea>
-						<button  type="button" id="comment_counsil" class="btn btn-principal" data-id="[% c.user.obj.id%]" autocomplete="off">Inserir</button>
+						<button  type="button" id="comment_counsil" class="btn btn-violet" data-id="[% c.user.obj.id%]" autocomplete="off">Comentar</button>
 					</div>
 					[% END %]
 
