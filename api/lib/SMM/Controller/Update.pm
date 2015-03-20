@@ -99,6 +99,9 @@ sub goal : Chained('base') Args(0) {
     $res_obj = $self->furl->get( $c->stash->{url} . $url_obj );
     my $data_obj = decode_json $res_obj->content;
     my $data     = decode_json $res->content;
+    use DDP;
+    p $data;
+    exit;
 
     #	p $data_obj;
 
@@ -155,7 +158,7 @@ sub goal : Chained('base') Args(0) {
             delete $key->{location_type};
             delete $key->{weight_about_goal};
 
-            #$c->model('DB::Project')->search({name => $key->{name}})->update({project_number => $key->{id}});
+#$c->model('DB::Project')->search({name => $key->{name}})->update({project_number => $key->{id}});
             $c->model('DB::Project')->search( { name => $key->{name} } )
               ->update(
                 {
