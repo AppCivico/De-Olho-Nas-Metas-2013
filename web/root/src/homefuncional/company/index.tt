@@ -1,6 +1,11 @@
+[% FOR ca IN options %]
+
+<a href="[% c.uri_for_action('/homefuncional/company/index',[],{ option => ca })%]">[%ca%]</a>
+[% END %]
 <ul>
 [% FOREACH cp IN companies%]
 
 <li><a href="[% c.uri_for_action('/homefuncional/company/detail',[cp.name_url] ) %]">[%cp.name%]</a></li>
 [%END%]
 </ul>
+
