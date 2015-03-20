@@ -149,7 +149,8 @@ sub default : Path {
         $c->stash->{body_class} .= ' ' . $maybe_view;
         $c->stash->{body_class} =~ s/\//-/g;
         $c->stash->{template_wrapper} = 'func';
-        $output = $c->view('TT')->render( $c, "auto/$maybe_view.tt", $c->stash );
+        $output =
+          $c->view('TT')->render( $c, "auto/$maybe_view.tt", $c->stash );
     };
     if ( $@ && $@ =~ /not found$/ ) {
         $c->response->body('Page not found');
