@@ -700,7 +700,6 @@ var $maps = function () {
 
 $(document).ready(function () {
 	if ($("#pagetype").val() != 'homegoal'){	
-	alert('lol');
 		$maps.initialize();
 	}
 	if ($("#pagetype").val() == 'home'){	
