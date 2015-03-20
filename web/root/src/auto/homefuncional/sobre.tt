@@ -16,21 +16,6 @@
 						<br><br>
 					</p>
 					<br>
-					<div class="about-logos text-center">
-						<div class="col-sm-4">
-							Realização<br>
-							<a href="http://www.nossasaopaulo.org.br" target="_blank"><img src="/static/css/images/logo-rnsp.png" border="0"></a>
-						</div>
-						<div class="col-sm-4 text-center">
-							Patrocínio<br>
-							<a href="http://www.avinaamericas.org" target="_blank"><img src="/static/css/images/logo-avina.png" border="0"></a>
-						</div>
-						<div class="col-sm-4 text-center">
-							Parceiro<br>
-							<a href="http://civic.mit.edu/" target="_blank"><img src="/static/css/images/logo-civic.png" border="0"></a>
-						</div>
-					</div>
-					<br>
 					<p>
 						<strong>Sobre a Rede Nossa São Paulo</strong>
 						<br><br>
@@ -59,6 +44,21 @@
 						<br><br>
 						Unindo dois programas altamente reconhecidos do MIT -- um famoso por inventar futuros tecnológicos alternativos, e outro por analizar o potencial de transformação social e cultural da mídia -- o Centro de Mídias Cívicas é um esforço conjunto do MIT Media Lab e do MIT Comparative Media Studies.						
 					</p>
+					<br>
+					<div class="about-logos text-center">
+						<div class="col-sm-4">
+							Realização<br>
+							<a href="http://www.nossasaopaulo.org.br" target="_blank"><img src="/static/css/images/logo-rnsp.png" border="0"></a>
+						</div>
+						<div class="col-sm-4 text-center">
+							Apoio<br>
+							<a href="http://www.avinaamericas.org" target="_blank"><img src="/static/css/images/logo-avina.png" border="0"></a>
+						</div>
+						<div class="col-sm-4 text-center">
+							Parceiro<br>
+							<a href="http://civic.mit.edu/" target="_blank"><img src="/static/css/images/logo-civic.png" border="0"></a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

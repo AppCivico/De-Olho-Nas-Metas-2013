@@ -12,7 +12,6 @@
 						<ul>
 							<li><a href="">Seguindo</a></li>
 							<li><a href="/user/perfil/seguranca">Segurança</a></li>
-							<li><a href="">Linha do tempo</a></li>
 							<li><a href="">Atividades</a></li>
 						</ul>
 					</div>
@@ -25,18 +24,17 @@
 							<li><a href="/user/perfil/campanhas">Campanhas</a></li>
 							<li><a href="/user/perfil/seguindo">Seguindo</a></li>
 							<li><a href="/user/perfil/seguranca">Segurança</a></li>
-
 						</ul>
 					</div>
 					[% ELSE %]
 					<div class="list-box list-brown">
 						<ul>
 							<li><a href="/user/perfil/enquete/[% user_roles.organization.id%]">Enquetes Móveis</a></li>
+							<li><a href="/user/perfil/convidar">Convidar</a></li>
+							<li><a href="/user/perfil/membros?organization=[%c.user.obj.organization_id%]">Membros do seu conselho</a></li>
 							<li><a href="/user/perfil/campanhas">Campanhas</a></li>
 							<li><a href="/user/perfil/seguindo">Seguindo</a></li>
 							<li><a href="/user/perfil/seguranca">Segurança</a></li>
 						</ul>
 					</div>
 					[%END%]
-					
-

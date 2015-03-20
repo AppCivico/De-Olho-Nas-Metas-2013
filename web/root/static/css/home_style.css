@@ -39,9 +39,25 @@ h2{
 .btn:hover{
 	color: #e0e0e0;
 }
-.btn-orange{
+.btn-orange,
+.btn-orange:visited{
+	color: #fff;
 	background-color: #f15a24;
 }
+.btn-orange:hover{
+	color: #fff;
+	background-color: #f67041;
+}
+.btn-violet,
+.btn-violet:visited{
+	color: #fff;
+	background-color: #795891;
+}
+.btn-violet:hover{
+	color: #fff;
+	background-color: #8c67a7;
+}
+
 .btn-yellow,
 .btn-yellow:visited{
 	color: #703e1c;
@@ -55,7 +71,6 @@ h2{
 .btn-brown:visited{
 	background-color: #42210b;
 	color: #fff;
-	border-radius: 0px;
 }
 .btn-brown:hover{
 	background-color: #703e1c;
@@ -79,14 +94,6 @@ h2{
 .btn-navy:hover{
 	color: #000000;
 	background-color: #14c9bc;
-}
-.btn-orange,
-.btn-orange:visited{
-	background-color: #f7931e;
-}
-.btn-orange:hover{
-	color: #000000;
-	background-color: #f4ad5b;
 }
 .btn-red,
 .btn-red:visited{
@@ -227,6 +234,14 @@ section h2{
 section h2.section-title{
 	text-align: center;
 	color: #8d8577;
+	padding-top: 0px;
+	padding-bottom: 5px;
+}
+section h3.section-title{
+	text-align: center;
+	color: #8d8577;
+	padding-top: 0px;
+	padding-bottom: 5px;
 }
 
 
@@ -309,6 +324,13 @@ footer .logo-footer{
 #map{
 	width: 100%;
 	height: 600px;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-position: center center;
+}
+#map.search{
+	width: 100%;
+	height: 500px;
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	background-position: center center;
@@ -843,6 +865,9 @@ div.list-brown ul li a,
 div.list-brown ul li a:visited,
 div.list-brown ul li{
 	color: #42210b;
+}
+div.list-brown ul li a:hover{
+	color: #000;
 }
 .metas-detail div.list-regions li,
 .metas-detail div.list-projects li,
@@ -1575,4 +1600,7 @@ input#progress-value{
 }
 .event-detail .list-orange .header{
 	font-size: 1.6em;
+}
+.event-detail .list-orange .glyphicon{
+	font-size: 1.8em;
 }

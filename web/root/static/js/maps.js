@@ -557,6 +557,7 @@ var $maps = function () {
 	var ib;
 	var myLatlng;
 	$.post( "/home/project/search_by_types", { type_id: $('#type option:selected').val(), region_id: $('#homeregion option:selected').val() }, function( data ) {
+					$("#map").addClass("search");
 					data.plural = (data.projects.length > 1);
 					var template = $('#row_template').html();
 	   				var html = Mustache.to_html(template, data);

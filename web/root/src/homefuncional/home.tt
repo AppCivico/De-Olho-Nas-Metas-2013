@@ -53,7 +53,7 @@ $(document).ready(function () {
 	<section class="metas-filtro">
 		<div class="container">
 			<h2 class="title text-center">Ajude a monitorar as Metas da cidade de São Paulo</h2>
-			<h2 class="section-title">Filtre os projetos com as opções abaixo</h2>
+			<h3 class="section-title">Use os filtros abaixo para ver os projetos no mapa</h3>
 			<div class="form row">
 				<div class="col-sm-4 cep">
 					Filtrar por CEP ou endereço<br />
