@@ -36,7 +36,8 @@ var $maps = function () {
 	function deleteMarkers(){
 		clearMarkers();
 		marker_array = [];
-		mc.clearMarkers();
+// 		mc.clearMarkers();
+		clearMarkers();
 	}
 
     function initialize() {
@@ -51,7 +52,7 @@ var $maps = function () {
 
 	function loadproject(){
 		var ib;
-
+		
 		$.getJSON('/home/project_map',function(data,status){
 			var json = data;
 			
@@ -102,7 +103,7 @@ var $maps = function () {
 					map.setCenter(event.latLng);
 				});
 			});
-			mc = new MarkerClusterer(map, marker_array);
+// 			mc = new MarkerClusterer(map, marker_array);
 			map.setZoom(12);
 		});
 	
@@ -554,9 +555,9 @@ var $maps = function () {
 	}
 
 	function render_projects(){
-	var ib;
-	var myLatlng;
-	$.post( "/home/project/search_by_types", { type_id: $('#type option:selected').val(), region_id: $('#homeregion option:selected').val() }, function( data ) {
+		var ib;
+		var myLatlng;
+		$.post( "/home/project/search_by_types", { type_id: $('#type option:selected').val(), region_id: $('#homeregion option:selected').val() }, function( data ) {
 					data.plural = (data.projects.length > 1);
 					var template = $('#row_template').html();
 	   				var html = Mustache.to_html(template, data);
@@ -608,7 +609,7 @@ var $maps = function () {
         					//window.location.href = url;
 						});
 				  })
-					mc = new MarkerClusterer(map, marker_array);
+// 					mc = new MarkerClusterer(map, marker_array);
 					map.setCenter(myLatlng);
 	    		},"json");
 
@@ -763,8 +764,17 @@ $(document).ready(function () {
 	$("#txtaddress").autocomplete({
 	source: function (request, response) {
 	   geocoder = new google.maps.Geocoder();
-       geocoder.geocode({ 'address': request.term + ', São Paulo - SP' , 'language': 'pt-BR','region': 'br'  }, function (results, status) {
+// 	   console.log('address' request.term + ', São Paulo - SP' , 'language': 'pt-br','region': 'br');
+       geocoder.geocode({
+			address: request.term,
+			region: 'BR',
+ 			componentRestrictions: { 
+				country: 'BR',
+				administrativeArea: 'SP'
+			}
+	}, function (results, status) {
           response($.map(results, function (item) {
+			  console.log('ta chegando aqui');
                 return {
                     label: item.formatted_address,
                     value: item.formatted_address,
@@ -775,6 +785,7 @@ $(document).ready(function () {
        })
     },
     select: function (event, ui) {
+		console.log(ui);
         var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
 		if ($("#pagetype").val() == 'home'){		
 			$("section.map .map-overlay").fadeIn();
