@@ -3333,3 +3333,13 @@ Setting gid to "1002 1002 27 1002"
 [
     [0] undef
 ]
+Process Backgrounded
+2015/03/20-15:28:29 Starman::Server (type Net::Server::PreFork) starting! pid(25133)
+Resolved [*]:3060 to [0.0.0.0]:3060, IPv4
+Binding to TCP port 3060 on host 0.0.0.0 with IPv4
+Setting gid to "1002 1002 27 1002"
+Process Backgrounded
+2015/03/20-15:29:09 Starman::Server (type Net::Server::PreFork) starting! pid(25171)
+Resolved [*]:3060 to [0.0.0.0]:3060, IPv4
+Binding to TCP port 3060 on host 0.0.0.0 with IPv4
+Setting gid to "1002 1002 27 1002"
