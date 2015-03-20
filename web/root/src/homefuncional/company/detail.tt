@@ -8,7 +8,6 @@ $(document).ready(function () {
 });
 </script>
 
-[% FOR cp IN companies%]
     <section class="project-detail metas-detail">
 		<div class="container">
 
@@ -17,24 +16,24 @@ $(document).ready(function () {
 				
 					<div class="body">
 						<h4 class="subtitle blue">Empresa</h4>
-						<h1>[% cp.business_name %]</h1>
+						<h1>[% company.name %]</h1>
 
 						<div class="list_budget">
 
-							<h3>Total Recebido: <strong>R$<span class="priceformat">[% cp.total_value %]</span></strong></h3>
+							<h3>Total Recebido: <strong>R$<span class="priceformat">[% sum_budgets %]</span></strong></h3>
 							<table id="list_budgets" class="table table-striped">
 								<thead>
 									<tr>
-					    	            <th>Tarefa</th>
+					    	            <th>Descrição da despesa</th>
 					    	            <th>Custo (R$)</th>
 									</tr>
 								</thead>
 								<tbody>
-						[% IF cp.agg_budgets.size > 0 %]
-						[%FOR x IN cp.agg_budgets%]
+						[% IF budgets.size > 0 %]
+						[%FOR x IN budgets%]
 								<tr>
-									<td>[% x.0 %]</td>
-									<td class="priceformat" width="80">[% x.1 %]</td>
+									<td>[% x.observation %]</td>
+									<td class="priceformat" width="80">[% x.dedicated_value %]</td>
 								</tr>
 			            [%END%]
 						[% ELSE %]
@@ -51,10 +50,10 @@ $(document).ready(function () {
 				</div>
 				<div class="col-sm-4">
 					<div class="list-box list-green">
-						<span class="header">[%cp.goals.size%] Meta[% IF cp.goals.size > 1%]s[% END%] associada[% IF cp.goals.size > 1 %]s[% END %]</span>
-						[% FOREACH g IN cp.goals%]
+						<span class="header">[%goals.size%] Meta[% IF goals.size > 1%]s[% END%] associada[% IF goals.size > 1 %]s[% END %]</span>
+						[% FOREACH g IN goals%]
 						<ul class="list-goals">
-							<li><a href="[% c.uri_for_action('/homefuncional/goal/detail',[ g.0 ] ) %]">[% g.1 %]</a></li>
+							<li><a href="[% c.uri_for_action('/homefuncional/goal/detail',[ g.id ] ) %]">[% g.name %]</a></li>
 						</ul>
 						[% END%]
 					</div>
@@ -62,4 +61,4 @@ $(document).ready(function () {
 			</div>
 		</div>
 	</section>
-[% END%]
+

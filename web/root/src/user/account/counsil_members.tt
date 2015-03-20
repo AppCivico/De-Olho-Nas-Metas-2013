@@ -58,7 +58,7 @@ $(document).ready(function () {
 			<div class="row">
 				<div class="col-sm-9">
 				
-					<h3 class="dotted">Membros de sua Organização</h3>
+					<h3 class="dotted">Membros do Conselho: [% user_roles.organization.name%]</h3>
 					<table class="table table-striped table-condensed">
 					<col style="width: 25%">
 					<col style="width: 25%">

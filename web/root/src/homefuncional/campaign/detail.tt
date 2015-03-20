@@ -1,0 +1,133 @@
+<script>
+
+var calendars = {};
+
+moment.locale('pt-br');
+
+$(document).ready(function() {
+
+	var eventArray = [
+		[% FOREACH event IN campaign_obj.events%]
+			{ startDate: '[% event.date.substr(0, 10) %]', endDate: '[% event.date.substr(0, 10) %]', title: '[% event.name%]' },
+		[% END%]
+		];
+
+	calendars.clndr1 = $('.cal1').clndr({
+		events: eventArray,
+		clickEvents: {
+		  click: function(target) {
+		    console.log(target);
+		  },
+		  nextMonth: function() {
+		    console.log('next month.');
+		  },
+		  previousMonth: function() {
+		    console.log('previous month.');
+		  },
+		  onMonthChange: function() {
+		    console.log('month changed.');
+		  },
+		  nextYear: function() {
+		    console.log('next year.');
+		  },
+		  previousYear: function() {
+		    console.log('previous year.');
+		  },
+		  onYearChange: function() {
+		    console.log('year changed.');
+		  }
+		},
+		multiDayEvents: {
+		  startDate: 'startDate',
+		  endDate: 'endDate',
+		  singleDay: 'date'
+		},
+		showAdjacentMonths: true,
+		adjacentDaysChangeMonth: false
+	});
+});	
+
+// bind both clndrs to the left and right arrow keys
+$(document).keydown( function(e) {
+	if(e.keyCode == 37) {
+	  // left arrow
+	  calendars.clndr1.back();
+	}
+	if(e.keyCode == 39) {
+	  // right arrow
+	  calendars.clndr1.forward();
+	}
+});	
+</script>
+
+	<section class="metas-filtro orange">
+		<div class="container">
+			<form>
+				<div class="col-sm-6 cep">
+					Encontre a campanha<br />
+					<input type="text" placeholder="CEP">
+					<button><span class="glyphicon glyphicon-search"></span></button>
+				</div>
+				<div class="col-sm-6">
+					<div class="row">
+						<div class="col-sm-12 region">
+							Filtrar Campanha<br />
+							<div class="select-stylized">
+							<select>
+								<option>Nome da região
+							</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</form>
+		</div>
+    </section>
+
+   <section class="metas-detail region-detail">
+	<div id="result" class="container">
+
+		<div class="row">
+			<div class="col-sm-12">
+				<section class="campaign-detail">
+					<div class="row">
+						<div class="col-sm-12">
+							<img src="/static/css/images/meta01.jpg" border="0" class="campaign-image"><h1>[%campaign_obj.name%]</h1><br />
+							<p>[%campaign_obj.description%]</p>
+						</div>
+					</div>
+				</section>
+
+				<section class="event-list">
+					<h3>Participe dos Eventos</h3>
+					<div class="row">
+						<div class="col-sm-5">
+						    <div class="cal1">
+						    </div>
+    					</div>
+						<div class="col-sm-7">
+							<ul>
+								[% IF campaign_obj.events.size > 0 %]
+								<li>
+								[% FOREACH event IN campaign_obj.events%]
+								<span class="date">[% ymd_to_human(event.date)%]</span>
+								<p class="contents">  
+									<a href="[% c.uri_for_action('/homefuncional/event/detail',[event.id] ) %]" class="name">[% event.name%]</a>[% UNLESS event.id == campaign_obj.events.last.id %]
+									<p>[%event.description%]</p>
+								</p>
+								[% END%]
+								[% END %]
+								</li>
+								[%ELSE%]
+								<li>NENHUM EVENTO ENCONTRADO</li>
+								[% END %]
+							</ul>
+						</div>
+					</div>
+				</section>
+	
+			</div>
+		</div>
+	</div>
+    </section>

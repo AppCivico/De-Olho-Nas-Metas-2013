@@ -1,4 +1,4 @@
-package Zeta::Types;
+package SMM::Types;
 our $ONLY_DIGITY = sub { my ($val) = @_; $val =~ s/[^0-9]//g; $val };
 
 use MooseX::Types -declare => [

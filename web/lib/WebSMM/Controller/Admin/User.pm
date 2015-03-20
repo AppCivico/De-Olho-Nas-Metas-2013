@@ -59,7 +59,8 @@ sub add : Chained('base') : PathPart('new') : Args(0) {
     my $api = $c->model('API');
 
     $api->stash_result( $c, 'roles' );
-	use DDP; p $c->stash->{organizations};
+    use DDP;
+    p $c->stash->{organizations};
 }
 
 __PACKAGE__->meta->make_immutable;

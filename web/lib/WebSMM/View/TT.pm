@@ -77,6 +77,28 @@ sub format_cnpj_to_human {
     return "$a.$b.$c/$d-$e";
 }
 
+sub ymd_to_human {
+    my ( $self, $c, $str, $opts ) = @_;
+    return '' unless $str;
+ 
+    $str = "$str";
+    $str =~ s/(\d{4})-(\d{2})-(\d{2})/$3\/$2\/$1/;
+ 
+    $str =~ s/T/ /;
+ 
+    if ( length $str > 16 ) {
+        if ( exists $opts->{crop} && $opts->{crop} eq 'seconds' ) {
+            substr( $str, 19 ) = '' if ( length $str > 19 );
+        }
+        else {
+            substr( $str, 16 ) = '';
+        }
+    }
+ 
+    return $str;
+ 
+}
+
 sub birthdate_to_age {
     my ( $self, $ref, $date ) = @_;
 

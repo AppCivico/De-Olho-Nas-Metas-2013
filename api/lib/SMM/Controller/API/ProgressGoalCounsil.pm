@@ -9,8 +9,8 @@ BEGIN { extends 'Catalyst::Controller::REST' }
 __PACKAGE__->config(
     default => 'application/json',
 
-    result      => 'DB::ProgressGoalCounsil',
-    object_key  => 'pgc',
+    result     => 'DB::ProgressGoalCounsil',
+    object_key => 'pgc',
 
     update_roles => [qw/superadmin user admin webapi/],
     create_roles => [qw/superadmin admin webapi/],
@@ -18,7 +18,8 @@ __PACKAGE__->config(
 );
 with 'SMM::TraitFor::Controller::DefaultCRUD';
 
-sub base : Chained('/api/base') : PathPart('progress_goal_counsil') : CaptureArgs(0) { }
+sub base : Chained('/api/base') : PathPart('progress_goal_counsil') :
+  CaptureArgs(0) { }
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
 
@@ -91,12 +92,12 @@ sub list_GET {
                               qw/
                               id
                               owned
-							  remainder
-							  goal_id
+                              remainder
+                              goal_id
                               /
                         ),
                       }
-                  } $rs->as_hashref->all
+                } $rs->as_hashref->all
             ]
         }
     );

@@ -48,10 +48,10 @@ sub result_GET {
                   id
                   name
                   acronym
-				  site
-				  deputy_mayor
-				  address
-				  telephone
+                  site
+                  deputy_mayor
+                  address
+                  telephone
                   /
             ),
             regions => [

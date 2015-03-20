@@ -18,11 +18,23 @@ sub verifiers_specs {
         create => Data::Verifier->new(
             filters => [qw(trim)],
             profile => {
+                name => {
+                    required => 1,
+                    type     => 'Str',
+                },
                 description => {
                     required => 1,
                     type     => 'Str',
                 },
-                date_exec => {
+                date => {
+                    required => 1,
+                    type     => 'Str',
+                },
+                campaign_id => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                user_id => {
                     required => 0,
                     type     => 'Str',
                 },

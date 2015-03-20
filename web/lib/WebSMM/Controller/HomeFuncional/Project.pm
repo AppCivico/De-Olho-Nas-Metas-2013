@@ -60,7 +60,8 @@ sub detail : Chained('object') : PathPart('') : Args(0) {
         $count++ if $c->stash->{project_obj}->{ 'qualitative_progress_' . $n };
     }
     $c->stash->{project_obj}->{progress_count} = $count;
-	use DDP; p $c->stash->{project_obj};
+    use DDP;
+    p $c->stash->{project_obj};
 }
 
 sub index : Chained('base') : PathPart('') : Args(0) {
@@ -253,22 +254,27 @@ sub upload_images : Chained('object') : PathPart('upload_images') : Args(0) {
     unless ( -e $path ) {
         mkdir $path;
     }
-	my $address_html = '/static/images/project/'.$c->stash->{id}.'/';
+    my $address_html = '/static/images/project/' . $c->stash->{id} . '/';
     $api->stash_result(
         $c, 'images_project',
         method => 'POST',
-        body   => { project_id => $c->stash->{id}, name_image => $address_html.$image->filename }
+        body   => { project_id => $c->stash->{id}, name_image => $address_html . $image->filename }
     );
-	my $data = { name => $image->filename, size => $image->size, url => $path.'/'.$image->filename, deleteUrl => $path.'/'.$image->filename };
-	my $response = ();
-	push (@{$response->{files}},  $data );
-	p $response;
-    $image->copy_to($path.'/'.$image->filename);
+    my $data = {
+        name      => $image->filename,
+        size      => $image->size,
+        url       => $path . '/' . $image->filename,
+        deleteUrl => $path . '/' . $image->filename
+    };
+    my $response = ();
+    push( @{ $response->{files} }, $data );
+    p $response;
+    $image->copy_to( $path . '/' . $image->filename );
 
     p $image;
     $c->res->status(200);
     $c->res->content_type('application/json');
-    $c->res->body( encode_json( $response ) );
+    $c->res->body( encode_json($response) );
 }
 
 =encoding utf8

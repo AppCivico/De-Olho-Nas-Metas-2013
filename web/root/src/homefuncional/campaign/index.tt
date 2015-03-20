@@ -30,42 +30,20 @@
 		
 			<div class="campaign-list">
 				<div class="row">
+					[% FOR cpg IN campaigns%]
 					<div class="col-sm-4">
 						<div class="item">
 							<div class="image">
 								<img src="/static/css/images/meta01.jpg" border="0">
 							</div>
 							<div class="description">
-								<a href=""><h2>Pastry wafer brownie liquorice. Unerdwear.com gummi bears bonbon. Cheesecake dessert cupcake</h2></a>
+								<a href="[% c.uri_for_action('/homefuncional/campaign/detail',[cpg.id])%]"><h2>[% cpg.name%]</h2></a>
 								<p class="credits">Organizada por: Nome da Organização</p>
-								<div class="counter text-right"><div class="icon calendar-orange"></div> 4 EVENTOS</div>
+								<div class="counter text-right"><div class="icon calendar-orange"></div> [% cpg.events.size %] EVENTO[% IF cpg.events.size > 1%]S[% END %]</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-4">
-						<div class="item">
-							<div class="image">
-								<img src="/static/css/images/meta01.jpg" border="0">
-							</div>
-							<div class="description">
-								<a href=""><h2>Pastry wafer brownie liquorice. Unerdwear.com gummi bears bonbon. Cheesecake dessert cupcake</h2></a>
-								<p class="credits">Organizada por: Nome da Organização</p>
-								<div class="counter text-right"><div class="icon calendar-orange"></div> 4 EVENTOS</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="item">
-							<div class="image">
-								<img src="/static/css/images/meta01.jpg" border="0">
-							</div>
-							<div class="description">
-								<a href=""><h2>Pastry wafer brownie liquorice. Unerdwear.com gummi bears bonbon. Cheesecake dessert cupcake</h2></a>
-								<p class="credits">Organizada por: Nome da Organização</p>
-								<div class="counter text-right"><div class="icon calendar-orange"></div> 4 EVENTOS</div>
-							</div>
-						</div>
-					</div>
+					[% END %]
 				</div>
 			</div>
 		</div>

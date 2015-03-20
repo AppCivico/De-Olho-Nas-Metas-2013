@@ -2,6 +2,7 @@ package WebSMM::Controller::HomeFuncional::Goal;
 use Moose;
 use namespace::autoclean;
 use utf8;
+use List::MoreUtils qw/uniq/;
 
 BEGIN { extends 'Catalyst::Controller'; }
 
@@ -56,11 +57,11 @@ sub detail : Chained('object') : PathPart('') : Args(0) {
         $count++ if $c->stash->{goal_obj}->{ 'qualitative_progress_' . $n };
     }
     $c->stash->{goal_obj}->{progress_count} = $count;
+    my @empresas;
+    my %uniqs = map { $_->{business_name} => { name => $_->{business_name}, url => $_->{business_name_url} } }
+      @{ $c->stash->{goal_obj}->{budgets} };
 
-	my %empresas = map { $_->{business_name} => 1 } @{$c->stash->{goal_obj}->{budgets}};
-	my @lol = sort keys %empresas;	
-	@{$c->stash->{business_names}} = sort keys %empresas;
-	use DDP; p $c->stash->{goal_obj};
+    $c->stash->{business_names} = [ sort { $a->{name} cmp $b->{name} } values %uniqs ];
 }
 
 sub index : Chained('base') : PathPart('') : Args(0) {
@@ -135,30 +136,28 @@ sub comment : Chained('base') : PathParth('comment') : Args(0) {
     $c->res->body(
         JSON::encode_json( { message => 'Seu comentário foi enviado para moderação, aguarde aprovação.' } ) );
 }
+
 sub set_progress : Chained('base') : PathParth('set_progress') : Args(0) {
     my ( $self, $c ) = @_;
 
     my $api = $c->model('API');
 
-    my $owned = $c->req->param('owned');
+    my $owned   = $c->req->param('owned');
     my $goal_id = $c->req->param('goal_id');
 
-	my $remainder = 100 - $owned;
+    my $remainder = 100 - $owned;
     $api->stash_result(
         $c,
         'progress_goal_counsil',
         method => 'POST',
         params => { owned => $owned, remainder => $remainder, goal_id => $goal_id }
     );
-	my $interation = 'O conselheiro '.$c->user->obj->name. ' alterou a porcentagem para '. $owned.'%';
-
+    my $interation = 'O conselheiro ' . $c->user->obj->name . ' alterou a porcentagem para ' . $owned . '%';
 
     $c->res->status(200);
     $c->res->content_type('application/json');
-    $c->res->body(
-        JSON::encode_json( { message => 'Alteração realizada com sucesso.' } ) );
+    $c->res->body( JSON::encode_json( { message => 'Alteração realizada com sucesso.' } ) );
 }
-
 
 sub search_by_types : Chained('base') : Args(0) {
     my ( $self, $c ) = @_;
@@ -174,8 +173,7 @@ sub search_by_types : Chained('base') : Args(0) {
     my $api       = $c->model('API');
 
     my $res = $api->stash_result(
-        $c,
-        'goals',
+        $c, 'goals',
         params => {
             region_id => $region_id ? $region_id : "",
             type_id   => $type_id   ? $type_id   : "",
@@ -185,7 +183,6 @@ sub search_by_types : Chained('base') : Args(0) {
     $c->res->status(200);
     $c->detach( '/form/as_json', [ { goals => $c->stash->{goals} } ] );
 }
-
 
 =encoding utf8
 

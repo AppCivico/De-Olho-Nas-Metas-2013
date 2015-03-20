@@ -39,9 +39,25 @@ h2{
 .btn:hover{
 	color: #e0e0e0;
 }
-.btn-orange{
+.btn-orange,
+.btn-orange:visited{
+	color: #fff;
 	background-color: #f15a24;
 }
+.btn-orange:hover{
+	color: #fff;
+	background-color: #f67041;
+}
+.btn-violet,
+.btn-violet:visited{
+	color: #fff;
+	background-color: #795891;
+}
+.btn-violet:hover{
+	color: #fff;
+	background-color: #8c67a7;
+}
+
 .btn-yellow,
 .btn-yellow:visited{
 	color: #703e1c;
@@ -55,7 +71,6 @@ h2{
 .btn-brown:visited{
 	background-color: #42210b;
 	color: #fff;
-	border-radius: 0px;
 }
 .btn-brown:hover{
 	background-color: #703e1c;
@@ -80,14 +95,6 @@ h2{
 	color: #000000;
 	background-color: #14c9bc;
 }
-.btn-orange,
-.btn-orange:visited{
-	background-color: #f7931e;
-}
-.btn-orange:hover{
-	color: #000000;
-	background-color: #f4ad5b;
-}
 .btn-red,
 .btn-red:visited{
 	background-color: #f7931e;
@@ -103,6 +110,9 @@ h2{
 .blue{
 	color: #29abe2;
 }
+.orange{
+	color: #f7931e;
+}
 .menu-social li a{
 	float: left;
 	text-indent: -999em;
@@ -117,6 +127,9 @@ h2{
 }
 .menu-social li.facebook a{
 	background-position: -36px 0px;
+}
+.navbar-toggle i{
+	color: #fff;
 }
 
 .navbar-fixed-top{
@@ -220,7 +233,15 @@ section h2{
 
 section h2.section-title{
 	text-align: center;
-	color: #666056;
+	color: #8d8577;
+	padding-top: 0px;
+	padding-bottom: 5px;
+}
+section h3.section-title{
+	text-align: center;
+	color: #8d8577;
+	padding-top: 0px;
+	padding-bottom: 5px;
 }
 
 
@@ -303,6 +324,13 @@ footer .logo-footer{
 #map{
 	width: 100%;
 	height: 600px;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-position: center center;
+}
+#map.search{
+	width: 100%;
+	height: 500px;
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	background-position: center center;
@@ -838,6 +866,9 @@ div.list-brown ul li a:visited,
 div.list-brown ul li{
 	color: #42210b;
 }
+div.list-brown ul li a:hover{
+	color: #000;
+}
 .metas-detail div.list-regions li,
 .metas-detail div.list-projects li,
 .metas-detail div.list-organizations li,
@@ -983,7 +1014,10 @@ footer .menu-footer li a:hover{
 }	
 @media(max-width:767px) {	
 	body{
-		margin-top: 0;
+		margin-top: 56px;
+	}
+	.navbar-brand{
+		padding: 10px;
 	}
 }
 
@@ -1243,6 +1277,32 @@ div.followers{
 	font-size: 0.9em;
 	margin-top: 10px;
 }
+
+.event-list ul{
+	margin-top: 60px;
+}
+.event-list ul li{
+	margin-bottom: 10px;
+}
+.event-list ul li .contents{
+	color: #88817b;
+}
+.event-list ul li .glyphicon{
+	color: #f7931e;
+}
+.event-list ul li .date{
+	font-size: 1.8em;
+	font-weight: bold;
+	color: #fbb03b;
+}
+.event-list ul li .name{
+	font-size: 1.8em;
+	color: #88817b;
+}
+.event-list ul li .description{
+	font-size: 1em;
+	color: #999;
+}
 .metas-detail h3{
 	font-size: 1.4em;
 	text-transform: uppercase;
@@ -1256,6 +1316,16 @@ div.followers{
 	margin: 0;
 }
 
+.campaign-detail{
+	padding: 20px 0;
+}
+
+.campaign-image{
+	float: left;
+	padding: 5px;
+	margin: 0 10px 10px 0;
+	border: 1px solid #e0e0e0;
+}
 h3.dotted{
 	border-bottom: 1px dotted #c6c2c0;
 }
@@ -1478,4 +1548,59 @@ input#progress-value{
 .page-content h2{
 	text-align: center;
 	font-family: "Cabin Sketch";
+}
+
+.invite .tab-pane button{
+	margin-left: 5px;
+}
+
+/* CALENDAR */
+.cal1 .clndr .clndr-table .header-days {
+	background: #f0eee4;
+}
+.cal1 .clndr .clndr-table .header-days .header-day {
+	border-left: 1px solid #f0eee4;
+	border-top: 1px solid #f0eee4;
+	color: #88817b;
+	font-size: 1.4em;
+}
+.cal1 .clndr .clndr-table tr .day .day-contents {
+	color: #88817b;
+}
+.cal1 .clndr .clndr-table tr .day {
+	border-left: 1px solid #f0eee4;
+	border-top: 1px solid #f0eee4;
+}
+.cal1 .clndr .clndr-table tr:last-child .day, .cal1 .clndr .clndr-table tr:last-child .my-day {
+	border-bottom: 1px solid #f0eee4;
+}
+.cal1 .clndr .clndr-table tr .day:last-child {
+	border-right: 1px solid #f0eee4;
+}
+.cal1 .clndr .clndr-table .header-days .header-day:last-child {
+	border-right: 1px solid #f0eee4;
+}
+.cal1 .clndr .clndr-table tr .day.event, .cal1 .clndr .clndr-table tr .day.my-event {
+	background: #fbb03b;
+}
+.cal1 .clndr .clndr-table tr .day .day-contents{
+	font-size: 1.2em;
+}
+.cal1 .clndr .clndr-table tr .day.event .day-contents{
+	color: #fff;
+}
+.cal1 .clndr .clndr-table tr .day.event:hover, .cal1 .clndr .clndr-table tr .day.my-event:hover {
+	background: #ffc469;
+}
+.cal1 .clndr .clndr-table tr .day.today, .cal1 .clndr .clndr-table tr .day.my-today {
+	background: #ebd800;
+}
+.cal1 .clndr .clndr-controls .month {
+	text-transform: uppercase;
+}
+.event-detail .list-orange .header{
+	font-size: 1.6em;
+}
+.event-detail .list-orange .glyphicon{
+	font-size: 1.8em;
 }

@@ -23,13 +23,14 @@ sub index : Chained('object') : PathPart('') : Args(0) {
     my ( $self, $c ) = @_;
 
     $c->detach( '/form/redirect_error', [] ) unless $c->user;
-
+	
+	
     my $api = $c->model('API');
 
     $api->stash_result( $c, [ 'users/user_project_event', $c->user->obj->id ], stash => 'user_obj', );
 
     $c->stash->{user_obj}->{role} = { map { $_ => 1 } @{ $c->stash->{user_roles}->{roles} } };
-	use DDP; p $c->stash->{user_roles};
+	$c->detach('/form/redirect_ok', [ '/admin/dashboard/index']) if $c->stash->{user_obj}->{role}->{admin};
 }
 
 sub security : Chained('object') : PathPart('seguranca') : Args(0) {
@@ -63,6 +64,18 @@ sub edit : Chained('object') : PathPart('editar') : Args(0) {
     );
 
 }
+sub campaign : Chained('object') : PathPart('campanhas') : Args(0) {
+    my ( $self, $c ) = @_;
+
+    $c->detach( '/form/redirect_error', [] ) unless $c->user;
+
+    my $api = $c->model('API');
+
+    $api->stash_result( $c,  'campaigns',  params => { user_id => $c->user->obj->id } );
+	use DDP; p $c->stash->{campaigns};
+
+    $c->stash->{user_obj}->{role} = { map { $_ => 1 } @{ $c->stash->{user_roles}->{roles} } };
+}
 sub counsil_members : Chained('object') : PathPart('membros') : Args(0) {
     my ( $self, $c ) = @_;
 
@@ -93,18 +106,18 @@ sub survey_list : Chained('survey') : PathPart('') : Args(1) {
 
 	$url->path_segments('api','v1','campaigns');
 	$url->query_form( user_id => $id );
-	p $url;
     eval {
         $return = $model->_do_http_req(
             method  => 'GET',
             url     => $url,
             headers => [ Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' ],
+
         );
     };
 	
 	use DDP; p $return;
 	
-    my $data = decode_json $return->content unless $return->content =~ /html/;	
+    my $data = decode_json $return->content;	
     $c->stash->{campaigns} = $data->{payload};
 
 }
@@ -142,9 +155,11 @@ sub survey_clone : Chained('survey') : PathPart('clonar') : Args(1) {
 
     my $url = URI->new('http://dev.monitor.promisetracker.org');
 
+	my $organization_name = $c->stash->{user_roles}->{organization}->{name};
+	my $organization_id = $c->stash->{user_roles}->{organization}->{id};
 	
 	$url->path_segments('api','v1','campaigns');
-	$url->query_form( username => $c->user->obj->name , user_id => $c->user->obj->organization_id , campaign_id => $id );
+	$url->query_form( username => $organization_name , user_id => $organization_id , campaign_id => $id );
 
     eval {
         $return = $model->_do_http_req(
@@ -168,10 +183,13 @@ sub survey_login : Chained('survey') : PathPart('entrar') : Args(1) {
 
     my $model = $c->model('API');
 
+	my $organization_name = $c->stash->{user_roles}->{organization}->{name};
+	my $organization_id = $c->stash->{user_roles}->{organization}->{id};
+
     my $url = URI->new('http://dev.monitor.promisetracker.org');
 
-	$url->path_segments('users','sign_in');
-	$url->query_form( username => 'teste2', user_id => 2, campaign_id => 86, token => 'c687bd99026769a662e9fc84f5c4e201', locale => 'pt-BR'  );
+	$url->path_segments('api','v1','users','sign_in');
+	$url->query_form( username => $organization_name, user_id => $organization_id, campaign_id => $id, token => 'c687bd99026769a662e9fc84f5c4e201', locale => 'pt-BR'  );
 
 	$c->res->redirect($url);
 
@@ -187,7 +205,7 @@ sub survey_create : Chained('survey') : PathPart('criar') : Args(0) {
     my $url = URI->new('http://dev.monitor.promisetracker.org');
 
 	$url->path_segments('api','v1','campaigns');
-	$url->query_form( username => 'teste2', user_id => $c->user->obj->organization_id );
+	$url->query_form( username => $c->user->obj->name, user_id => $c->user->obj->organization_id );
 
     eval {
         $return = $model->_do_http_req(

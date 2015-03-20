@@ -176,7 +176,7 @@ $(document).ready(function () {
 						<p>
 							[% goal_obj.description %].
 						</p>
-					<h3>INVESTIMENTO TOTAL DA META: <strong>R$<span class="priceformat">[% goal_obj.expected_budget %]</span></strong></h3>
+					<h3>INVESTIMENTO TOTAL PREVISTO: <strong>R$<span class="priceformat">[% goal_obj.expected_budget %]</span></strong></h3>
 					</div>
 <!--				<div class="timeline">
 						<h3 class="section-title">Linha do tempo segundo o cronograma</h3>
@@ -193,7 +193,7 @@ $(document).ready(function () {
 						</script>
 					</div>-->
 					<section class="statistics">
-						<h3>Progresso</h3>
+						<h3>Progresso de acordo com a prefeitura</h3>
 						<div class="progress">
 						  <div class="progress-bar progress-bar-success progress-bar-green progress-bar-striped" role="progressbar" aria-valuenow="[%goal_obj.goal_porcentages.owned%]" aria-valuemin="0" aria-valuemax="100" style="width: [%goal_obj.goal_porcentages.owned%]%;">
 							   [%goal_obj.goal_porcentages.owned%]%
@@ -227,7 +227,7 @@ $(document).ready(function () {
 						[%END%]
 
 						<br />
-						<h3>Progresso segundo o Conselho Participativo</h3>
+						<!--<h3>Progresso segundo o Conselho Participativo</h3>
 						<div class="progress">
 						[% IF goal_obj.progress_goal_counsil.size > 0 %]
 							[% FOR gpc IN goal_obj.progress_goal_counsil%]
@@ -242,7 +242,7 @@ $(document).ready(function () {
 			              </div>
 						[%END%]
 						</div>
-	
+						-->
 					[% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]
 							
 						<div id="alert_progress"></div>
@@ -286,17 +286,19 @@ $(document).ready(function () {
 							<thead>
 								<tr>
 					                <th>Nome da Empresa</th>
-				    	            <th>Tarefa</th>
-				    	            <th>Custo (R$)</th>
+				    	            <th>Descrição da despesa</th>
+				    	            <th style="white-space: nowrap">Valor Empenhado (R$)</th>
+				    	            <th style="white-space: nowrap">Valor Liquidado (R$)</th>
 								</tr>
 							</thead>
 							<tbody>
 					[% IF goal_obj.budgets.size > 0 %]
 					[% FOREACH bc IN goal_obj.budgets%]
 							<tr>
-								<td><a href="[% c.uri_for_action('/homefuncional/company/detail', [],{ business_name => bc.business_name })%]">[%bc.business_name%]</a></td>
+								<td><a href="[% c.uri_for_action('/homefuncional/company/detail', [bc.business_name_url])%]">[%bc.business_name%]</a></td>
 								<td>[%bc.observation%]</td>
-								<td class="priceformat" width="80">[%bc.dedicated_value%]</td>
+								<td class="priceformat"  width="80">[%bc.dedicated_value%]</td>
+								<td class="priceformat"  width="80">[%bc.liquidated_value%]</td>
 							</tr>
 		            [%END%]
 					[% ELSE %]
@@ -396,7 +398,7 @@ $(document).ready(function () {
 						<span class="header">[%business_names.size%] Empresa[% IF business_names.size > 1%]s[%END%] Relacionada[% IF business_names.size > 1%]s[% END %]</span>
 						<ul class="list-organizations">
 							[% FOREACH bn IN business_names%]					
-							<li><a href="[% c.uri_for_action('/homefuncional/company/detail', [],{ business_name => bn })%]">[% bn %]</a></li>
+							<li><a href="[% c.uri_for_action('/homefuncional/company/detail', [ bn.url] )%]">[% bn.name %]</a></li>
 							[% END %]
 						</ul>
 					</div>

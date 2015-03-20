@@ -557,6 +557,7 @@ var $maps = function () {
 	var ib;
 	var myLatlng;
 	$.post( "/home/project/search_by_types", { type_id: $('#type option:selected').val(), region_id: $('#homeregion option:selected').val() }, function( data ) {
+					$("#map").addClass("search");
 					data.plural = (data.projects.length > 1);
 					var template = $('#row_template').html();
 	   				var html = Mustache.to_html(template, data);
@@ -763,7 +764,7 @@ $(document).ready(function () {
 	$("#txtaddress").autocomplete({
 	source: function (request, response) {
 	   geocoder = new google.maps.Geocoder();
-       geocoder.geocode({ 'address': request.term + ', Brasil', 'region': 'BR' }, function (results, status) {
+       geocoder.geocode({ 'address': request.term + ', São Paulo - SP' , 'language': 'pt-BR','region': 'br'  }, function (results, status) {
           response($.map(results, function (item) {
                 return {
                     label: item.formatted_address,

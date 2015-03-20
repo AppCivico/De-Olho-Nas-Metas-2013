@@ -14,8 +14,7 @@ __PACKAGE__->config(
         id => 'Int'
     },
     result_attr => {
-        prefetch => [   'projects' 
-        ],
+        prefetch => ['projects'],
     },
     update_roles => [qw/superadmin user admin webapi organization/],
     create_roles => [qw/superadmin admin webapi/],
@@ -23,7 +22,8 @@ __PACKAGE__->config(
 );
 with 'SMM::TraitFor::Controller::DefaultCRUD';
 
-sub base : Chained('/api/base') : PathPart('images_project') : CaptureArgs(0) { }
+sub base : Chained('/api/base') : PathPart('images_project') :
+  CaptureArgs(0) { }
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
 
@@ -41,7 +41,7 @@ sub result_GET {
                 map { $_ => $images_project->$_, }
                   qw/
                   id
-				  project_id
+                  project_id
                   name_image
                   /
             ),
@@ -62,7 +62,7 @@ sub result_DELETE {
 sub result_PUT {
     my ( $self, $c ) = @_;
 
-    my $params  = { %{ $c->req->params } };
+    my $params         = { %{ $c->req->params } };
     my $images_project = $c->stash->{organization};
 
     $images_project->execute( $c, for => 'update', with => $c->req->params );
@@ -100,10 +100,8 @@ sub list_GET {
                               name_image
                               /
                         ),
-                        url => $c->uri_for_action(
-                            $self->action_for('result'),
-                            [ $r->{id} ]
-                        )->as_string
+                        url => $c->uri_for_action( $self->action_for('result'),
+                            [ $r->{id} ] )->as_string
                       }
                 } $rs->as_hashref->all
             ]
@@ -138,8 +136,8 @@ sub complete : Chained('base') : PathPart('complete') : Args(0) {
             $images_project = $c->stash->{collection}
               ->execute( $c, for => 'create', with => $c->req->params );
 
-            $c->req->params->{active}     = 1;
-            $c->req->params->{role}       = 'images_project';
+            $c->req->params->{active}            = 1;
+            $c->req->params->{role}              = 'images_project';
             $c->req->params->{images_project_id} = $images_project->id;
 
             my $user = $c->model('DB::User')

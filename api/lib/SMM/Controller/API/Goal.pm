@@ -40,11 +40,18 @@ sub result : Chained('object') : PathPart('') : Args(0) :
 sub result_GET {
     my ( $self, $c ) = @_;
 
-    my $goal = $c->stash->{goal};
-	my @budgets  =  $goal->budgets->all;
-	my @progress_goal_counsil  =  $goal->progress_goal_counsils->search(undef,{ created_at => { '<', 'now()' }, rows => 1, order_by => { -desc => 'created_at'} })->next;
+    my $goal                  = $c->stash->{goal};
+    my @budgets               = $goal->budgets->all;
+    my @progress_goal_counsil = $goal->progress_goal_counsils->search(
+        undef,
+        {
+            created_at => { '<', 'now()' },
+            rows       => 1,
+            order_by => { -desc => 'created_at' }
+        }
+    )->next;
 
-	use DDP; p @progress_goal_counsil;
+    use DDP;
     my @region_ids;
     @region_ids =
       map  { $_->project->region_id }
@@ -58,9 +65,9 @@ sub result_GET {
             {
                 id => { '-in' => \@region_ids_unique }
             },
-			
+
             {
-				order_by     => [qw/name/],
+                order_by     => [qw/name/],
                 select       => [qw/id name/],
                 result_class => 'DBIx::Class::ResultClass::HashRefInflator',
             }
@@ -147,6 +154,7 @@ sub result_GET {
                                   qw/
                                   id
                                   business_name
+                                  business_name_url
                                   cnpj
                                   dedicated_value
                                   liquidated_value
@@ -162,20 +170,20 @@ sub result_GET {
             ],
             progress_goal_counsil => [
                 (
-				  
+
                     map {
                         my $p = $_;
-						$p ?
-                        (
+                        $p
+                          ? (
                             +{
                                 map { $_ => $p->$_ }
                                   qw/
                                   owned
-                                  remainder                                  
+                                  remainder
                                   /
                             }
                           )
-						: ()
+                          : ()
                     } @progress_goal_counsil,
                 ),
             ],

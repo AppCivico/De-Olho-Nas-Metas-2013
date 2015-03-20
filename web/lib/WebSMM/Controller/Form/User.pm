@@ -17,17 +17,17 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
 
     my $api    = $c->model('API');
     my $params = { %{ $c->req->params } };
-	
-	my $role = 3;
+
+    my $role = 3;
 
     $params->{active} = 1;
-	if ($c->req->param('invite_counsil_master')){
-        $c->detach( '/form/redirect_error', [ $params ] ) unless $c->user->check_user_role('counsil_master');
-		$role = 11;
-	}
-	if ($c->req->param('organization_id')){
-		$role = 11;
-	}
+    if ( $c->req->param('invite_counsil_master') ) {
+        $c->detach( '/form/redirect_error', [$params] ) unless $c->user->check_user_role('counsil_master');
+        $role = 11;
+    }
+    if ( $c->req->param('organization_id') ) {
+        $role = 11;
+    }
 
     my $avatar = $c->req->upload('avatar');
     $api->stash_result(
@@ -35,9 +35,9 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
         method => 'POST',
         body   => $params
     );
-	
+
     if ( $c->stash->{error} ) {
-        $c->detach( '/form/redirect_error', [ $params ] );
+        $c->detach( '/form/redirect_error', [$params] );
     }
     else {
         my @r;
@@ -56,8 +56,10 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
         unless ( -e $path ) {
             mkdir $path;
         }
-		copy('root/static/css/images/avatar.jpg', $path . '/' . $c->stash->{id} . '.jpg')  or die "not open" unless $avatar;
-	
+        copy( 'root/static/css/images/avatar.jpg', $path . '/' . $c->stash->{id} . '.jpg' )
+          or die "not open"
+          unless $avatar;
+
         $avatar->copy_to( $path . '/' . $c->stash->{id} . '.jpg' ) if $avatar;
 
         $api->stash_result(
@@ -71,9 +73,14 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
         if ( $c->stash->{error} ) {
             $c->detach( '/form/redirect_error', [] );
         }
-		elsif ($params->{invite_counsil_master}){
-            $c->detach( '/form/redirect_ok', [ \'/user/perfil/convidar', {}, 'Cadastrado com sucesso!', form_ident => $c->req->params->{form_ident} ] );
-		}
+        elsif ( $params->{invite_counsil_master} ) {
+            $c->detach(
+                '/form/redirect_ok',
+                [
+                    \'/user/perfil/convidar', {}, 'Cadastrado com sucesso!', form_ident => $c->req->params->{form_ident}
+                ]
+            );
+        }
         else {
             $c->detach( '/form/redirect_ok', [ \'/login', {}, 'Cadastrado com sucesso!' ] );
         }

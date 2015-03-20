@@ -118,10 +118,10 @@ sub action_specs {
             $values{email} = lc $values{email};
             my $role = delete $values{role};
             my $hash = delete $values{hash};
-            my $organization_id = delete $values{organization_id};
 			if ($hash){
 				$self->resultset('InviteCounsil')->search({ hash => $hash})->update({ valid_until => 0});
 			}
+			use DDP; p \%values;
             my $user = $self->create( \%values );
             if ($role) {
                 $user->set_roles( { name => $role } );

@@ -19,7 +19,8 @@ sub base : Chained('/api/base') : PathPart('invite_counsil') : CaptureArgs(0) {
       or $self->status_forbidden( $c, message => "access denied" ), $c->detach;
 }
 
-sub email : Chained('base') : PathPart('email') : Args(0) : ActionClass('REST') {
+sub email : Chained('base') : PathPart('email') : Args(0) : ActionClass('REST')
+{
     my ( $self, $c ) = @_;
 }
 
@@ -27,8 +28,8 @@ sub email_POST {
     my ( $self, $c ) = @_;
 
     my $params = { %{ $c->req->params } };
-	my $dm = $c->stash->{collection}
-       ->execute( $c, for => 'create', with => $c->req->params );
+    my $dm     = $c->stash->{collection}
+      ->execute( $c, for => 'create', with => $c->req->params );
 
     # $self->status_bad_request( $c, message => encode_json( $dm->errors ) ),
     #   $c->detach
@@ -40,7 +41,8 @@ sub email_POST {
     $self->status_ok( $c, entity => { message => 'ok' } );
 }
 
-sub key_check : Chained('base') : PathPart('key_check') : Args(0) : ActionClass('REST') {
+sub key_check : Chained('base') : PathPart('key_check') : Args(0) :
+  ActionClass('REST') {
     my ( $self, $c ) = @_;
 }
 
@@ -49,14 +51,15 @@ sub key_check_POST {
 
     my $params = { %{ $c->req->params } };
 
-	use DDP; p $params;
-	my $dm = $c->stash->{collection}
-       ->check( for => 'key_check', with => $params );
-	my $outcome = $dm->apply;
+    use DDP;
+    p $params;
+    my $dm =
+      $c->stash->{collection}->check( for => 'key_check', with => $params );
+    my $outcome = $dm->apply;
 
     $self->status_bad_request( $c, message => encode_json( $dm->errors ) ),
-    $c->detach
-    unless $dm->success;
+      $c->detach
+      unless $dm->success;
 
     #my $outcome = eval { $dm->get_outcome_for('user.forgot_password.email') };
     # $c->model('Logger')->( 'sys', "E-mail " . $c->req->param('email') . " requisitou troca de senha.", 'update' );

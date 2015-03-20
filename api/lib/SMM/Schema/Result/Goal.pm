@@ -371,6 +371,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 companies
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::Company>
+
+=cut
+
+__PACKAGE__->has_many(
+  "companies",
+  "SMM::Schema::Result::Company",
+  { "foreign.goal_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 country
 
 Type: belongs_to
@@ -587,8 +602,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-09 20:21:15
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZpQBuUavz8vbuhh2EtVBcw
+# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-18 14:34:14
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:5roU+Y4xo6jk9jmYvrKVug
 
 __PACKAGE__->has_many(
     approved_comments => 'SMM::Schema::Result::CommentGoal',
