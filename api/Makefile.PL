@@ -48,6 +48,8 @@ requires 'DateTime::Format::Duration';
 requires 'DateTimeX::Easy';
 requires 'DateTime::Format::Pg';
 requires 'Catalyst::View::TT';
+requires 'Moose';
+requires 'CatalystX-Eta';
 
 requires 'Geo::Coder::Google';
 requires 'Text::Iconv';

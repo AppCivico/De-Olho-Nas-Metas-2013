@@ -699,6 +699,7 @@ var $maps = function () {
 
 $(document).ready(function () {
 	if ($("#pagetype").val() != 'homegoal'){	
+	alert('lol');
 		$maps.initialize();
 	}
 	if ($("#pagetype").val() == 'home'){	
@@ -762,6 +763,7 @@ $(document).ready(function () {
 
 	$("#txtaddress").autocomplete({
 	source: function (request, response) {
+		 alert('lol');
 	   geocoder = new google.maps.Geocoder();
        geocoder.geocode({ 'address': request.term + ', São Paulo - SP' , 'language': 'pt-BR','region': 'br'  }, function (results, status) {
           response($.map(results, function (item) {
@@ -785,6 +787,8 @@ $(document).ready(function () {
         	});
         	$maps.setlocal(location);
 		}
+ 		if ($("#pagetype").val() == 'campaign_user'){		
+		} 
 		if ($("#pagetype").val() == 'projectdetail'){		
  			$.get("/home/project/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
    				$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
