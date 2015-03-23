@@ -72,6 +72,7 @@ sub result_GET {
                   latitude
                   longitude
                   project_number
+                  porcentage
                   qualitative_progress_1
                   qualitative_progress_2
                   qualitative_progress_3

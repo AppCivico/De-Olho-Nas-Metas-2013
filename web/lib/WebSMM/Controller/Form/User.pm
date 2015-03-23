@@ -22,7 +22,8 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
 
     $params->{active} = 1;
     if ( $c->req->param('invite_counsil_master') ) {
-        $c->detach( '/form/redirect_error', [$params] ) unless $c->user->check_user_role('counsil_master');
+        $c->detach( '/form/redirect_error', [$params] )
+          unless $c->user->check_user_role('counsil_master');
         $role = 11;
     }
     if ( $c->req->param('organization_id') ) {
@@ -52,11 +53,15 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
 
         my $roles = encode_json( \@r );
 
-        my $path = dir( $c->config->{profile_picture_path} )->resolve . '/' . $c->stash->{id};
+        my $path = dir( $c->config->{profile_picture_path} )->resolve . '/'
+          . $c->stash->{id};
         unless ( -e $path ) {
             mkdir $path;
         }
-        copy( 'root/static/css/images/avatar.jpg', $path . '/' . $c->stash->{id} . '.jpg' )
+        copy(
+            'root/static/css/images/avatar.jpg',
+            $path . '/' . $c->stash->{id} . '.jpg'
+          )
           or die "not open"
           unless $avatar;
 
@@ -77,12 +82,15 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
             $c->detach(
                 '/form/redirect_ok',
                 [
-                    \'/user/perfil/convidar', {}, 'Cadastrado com sucesso!', form_ident => $c->req->params->{form_ident}
+                    \'/user/perfil/convidar', {},
+                    'Cadastrado com sucesso!',
+                    form_ident => $c->req->params->{form_ident}
                 ]
             );
         }
         else {
-            $c->detach( '/form/redirect_ok', [ \'/login', {}, 'Cadastrado com sucesso!' ] );
+            $c->detach( '/form/redirect_ok',
+                [ \'/login', {}, 'Cadastrado com sucesso!' ] );
         }
     }
 }
@@ -121,7 +129,8 @@ sub process_edit : Chained('base') : PathPart('user') : Args(1) {
 
     my $roles = encode_json( \@r );
 
-    my $path = dir( $c->config->{profile_picture_path} )->resolve . '/' . $c->stash->{id};
+    my $path = dir( $c->config->{profile_picture_path} )->resolve . '/'
+      . $c->stash->{id};
 
     $params->{roles}        = $roles;
     $params->{change_roles} = 1;
@@ -136,7 +145,8 @@ sub process_edit : Chained('base') : PathPart('user') : Args(1) {
         $c->detach( '/form/redirect_error', [] );
     }
     else {
-        $c->detach( '/form/redirect_ok', [ '/admin/user/index', {}, 'Alterado com sucesso!' ] );
+        $c->detach( '/form/redirect_ok',
+            [ '/admin/user/index', {}, 'Alterado com sucesso!' ] );
     }
 }
 
@@ -151,7 +161,8 @@ sub process_delete : Chained('base') : PathPart('remove_user') : Args(1) {
         $c->detach( '/form/redirect_error', [] );
     }
     else {
-        $c->detach( '/form/redirect_ok', [ '/admin/customer/index', {}, 'Removido com sucesso!' ] );
+        $c->detach( '/form/redirect_ok',
+            [ '/admin/customer/index', {}, 'Removido com sucesso!' ] );
     }
 }
 
@@ -171,7 +182,8 @@ sub process_user : Chained('base') : PathPart('change_password') : Args(1) {
         $c->detach( '/form/redirect_error', [] );
     }
     else {
-        $c->detach( '/form/redirect_ok', [ '/user/account/security', {}, 'Alterado com sucesso!' ] );
+        $c->detach( '/form/redirect_ok',
+            [ '/user/account/security', {}, 'Alterado com sucesso!' ] );
     }
 
 }
@@ -186,7 +198,8 @@ sub process_perfil : Chained('base') : PathPart('edit_perfil') : Args(1) {
     my $avatar = $c->req->upload('avatar');
 
     if ($avatar) {
-        my $path = dir( $c->config->{profile_picture_path} )->resolve . '/' . $id;
+        my $path =
+          dir( $c->config->{profile_picture_path} )->resolve . '/' . $id;
         unless ( -e $path ) {
             mkdir $path;
         }
@@ -207,7 +220,8 @@ sub process_perfil : Chained('base') : PathPart('edit_perfil') : Args(1) {
         $c->detach( '/form/redirect_error', [] );
     }
     else {
-        $c->detach( '/form/redirect_ok', [ '/user/account/edit', {}, 'Alterado com sucesso!' ] );
+        $c->detach( '/form/redirect_ok',
+            [ '/user/account/edit', {}, 'Alterado com sucesso!' ] );
     }
 
 }

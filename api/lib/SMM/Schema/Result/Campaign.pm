@@ -82,6 +82,21 @@ __PACKAGE__->table("campaign");
   data_type: 'date'
   is_nullable: 0
 
+=head2 address
+
+  data_type: 'text'
+  is_nullable: 1
+
+=head2 latitude
+
+  data_type: 'text'
+  is_nullable: 1
+
+=head2 longitude
+
+  data_type: 'text'
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -109,6 +124,12 @@ __PACKAGE__->add_columns(
   { data_type => "date", is_nullable => 0 },
   "end_on",
   { data_type => "date", is_nullable => 0 },
+  "address",
+  { data_type => "text", is_nullable => 1 },
+  "latitude",
+  { data_type => "text", is_nullable => 1 },
+  "longitude",
+  { data_type => "text", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -161,8 +182,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-12 15:47:42
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:urytreDEyAIjgpE4Lb3Y3Q
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-03-21 18:58:51
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:bjV6t0Kzk8cFg3mgNjkQgg
 
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';

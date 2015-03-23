@@ -50,6 +50,9 @@ var $maps = function () {
    	    map = new google.maps.Map(document.getElementById("map"),mapOptions);
     }
 
+	function loadgeocoder(){
+		geocoder = new google.maps.Geocoder();
+	}
 	function loadproject(){
 		var ib;
 		
@@ -683,6 +686,7 @@ var $maps = function () {
 	return {
 		initialize	             : initialize,
 		loadproject              : loadproject,
+		loadgeocoder             : loadgeocoder,
 		codeAddress              : codeAddress,
 		setlocal                 : setlocal,
 		markprojectdetail        : markprojectdetail,
@@ -700,7 +704,7 @@ var $maps = function () {
 }();
 
 $(document).ready(function () {
-	if ($("#pagetype").val() != 'homegoal'){	
+	if ($("#pagetype").val() != 'homegoal' && $("#pagetype").val() != 'campaign_user'){	
 		$maps.initialize();
 	}
 	if ($("#pagetype").val() == 'home'){	
@@ -711,6 +715,9 @@ $(document).ready(function () {
 	}		
 	if ($("#pagetype").val() == 'goaldetail'){
 		$maps.markgoaldetail($("#goalid").val());
+	}	
+	if ($("#pagetype").val() == 'campaign_user'){
+		$maps.loadgeocoder();
 	}		
 	if ($("#pagetype").val() == 'regiondetail'){
 		$maps.markregiondetail($("#regionid").val());
@@ -775,7 +782,6 @@ $(document).ready(function () {
 			}
 	}, function (results, status) {
           response($.map(results, function (item) {
-			  console.log('ta chegando aqui');
                 return {
                     label: item.formatted_address,
                     value: item.formatted_address,
@@ -796,7 +802,9 @@ $(document).ready(function () {
         	});
         	$maps.setlocal(location);
 		}
- 		if ($("#pagetype").val() == 'campaign_user'){		
+ 		if ($("#pagetype").val() == 'campaign_user'){
+				
+				$('#latlng').val(location);
 		} 
 		if ($("#pagetype").val() == 'projectdetail'){		
  			$.get("/home/project/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
@@ -828,6 +836,8 @@ $(document).ready(function () {
 					window.location.href="/home/region/"+data.id;
 				}
         	});
+
+			  $("select#homeregion")[0].selectedIndex = 0;
 		}
 		if ($("#pagetype").val() == 'regiondetail'){			
  			$.get("/home/region/id",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
@@ -836,7 +846,6 @@ $(document).ready(function () {
 		}
 			
        	$(".metas-filtro .form .region .select-stylized").addClass("disabled");
-		$("select#homeregion")[0].selectedIndex = 0;
        	$(".metas-filtro .form .cep button").removeClass("disabled");
     }
     });

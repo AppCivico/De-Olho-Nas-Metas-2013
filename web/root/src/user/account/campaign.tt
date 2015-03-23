@@ -79,7 +79,7 @@ jQuery(function($){
 							<li role="presentation" [% IF body.form_ident == 'event' OR form_ident == 'event' %]class="active"[%END%]><a href="#tab-eventos" aria-controls="metas" role="tab" data-toggle="tab">Cadastrar Eventos</a></li>
 						</ul>
 					</section>
-					
+
 					<section class="projetos-result">
 						<div class="tab-content">
 								<div role="tabpanel" id="tab-cadastrar" class="tab-pane [% IF body.form_ident == 'form' OR form_ident =='form' %]active[%END%] ">
@@ -99,6 +99,13 @@ jQuery(function($){
 												[%input_text('end_on','Data Final:', classes => ['span3' , 'date', 'datepicker'],req=>0)|none%]
 										</div>
 									</div>
+ 									<div class="form-group row">
+
+										<label class="col-lg-12 " for="elm_end_on">Endereço:</label>
+											<div class="col-lg-12">
+												<input id="txtaddress" name="txtaddress" type="text" class="txtaddress form-control" size="3">
+												<input type="hidden" id="latlng" name="latlng" type="text" class="form-control" size="3">
+																																																			</div>
  									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group row ">

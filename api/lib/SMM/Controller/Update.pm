@@ -5,6 +5,7 @@ use JSON;
 use utf8;
 use Furl;
 use Data::Dumper;
+use URI;
 
 BEGIN { extends 'Catalyst::Controller::REST'; }
 
@@ -26,7 +27,7 @@ Catalyst Controller.
 
 sub base : Chained('/') : PathPart('') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
-    $c->stash->{url} = 'http://planejasampa.prefeitura.sp.gov.br/metas/api/';
+    $c->stash->{url} = 'http://planejasampa.prefeitura.sp.gov.br/metas/api';
 }
 
 sub document : Chained('base') Args(0) {
@@ -40,7 +41,7 @@ sub document : Chained('base') Args(0) {
     $c->stash->{url} .= 'goals';
 
     p $c->stash->{url};
-
+    exit;
     $res = eval {
         $return = $model->_do_http_req(
             method => 'GET',
@@ -324,6 +325,23 @@ sub prefectures : Chained('base') Args(0) {
     }
 
     $c->res->body('teste');
+}
+
+sub project_types : Chained('base') : Args(0) {
+    my ( $self, $c ) = @_;
+    my $return;
+    my $res;
+
+    use DDP;
+    my $model = $c->model('API');
+
+    my $url = URI->new("http://planejasampa.prefeitura.sp.gov.br");
+    $url->path_segments( 'metas', 'api', 'projects', 'types' );
+    p $url->as_string;
+    $res = $self->furl->get( $url->as_string );
+
+    p $res;
+    my $data = decode_json $res->content;
 }
 sub search_goal : Chained('base') : Args(0) : ActionClass('REST') { }
 

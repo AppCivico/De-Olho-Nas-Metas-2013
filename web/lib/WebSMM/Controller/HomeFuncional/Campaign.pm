@@ -1,6 +1,8 @@
 package WebSMM::Controller::HomeFuncional::Campaign;
 use Moose;
 use namespace::autoclean;
+use Path::Class qw(dir);
+use File::Copy;
 
 BEGIN { extends 'Catalyst::Controller'; }
 
@@ -20,7 +22,8 @@ Catalyst Controller.
 
 =cut
 
-sub base : Chained('/homefuncional/base') : PathPart('campaign') : CaptureArgs(0) {
+sub base : Chained('/homefuncional/base') : PathPart('campaign') :
+  CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
 }
@@ -28,61 +31,76 @@ sub base : Chained('/homefuncional/base') : PathPart('campaign') : CaptureArgs(0
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
     my ( $self, $c, $id ) = @_;
 
-	my $api = $c->model('API');
+    my $api = $c->model('API');
 
-	$api->stash_result(
-        $c,
-        [ 'campaigns', $id ],
-		stash => 'campaign_obj'
-    );
+    $api->stash_result( $c, [ 'campaigns', $id ], stash => 'campaign_obj' );
 
 }
 
 sub detail : Chained('object') : PathPart('') : Args(0) {
     my ( $self, $c, $id ) = @_;
-	use DDP; p $c->stash->{campaign_obj};
 }
 
 sub index : Chained('base') : PathPart('') : Args(0) {
     my ( $self, $c ) = @_;
-	my $api = $c->model('API');
-	$api->stash_result(
-        $c,
-        'campaigns'
-    );
+    my $api = $c->model('API');
+    $api->stash_result( $c, 'campaigns' );
 
-	use DDP; p $c->stash->{campaigns};
 }
 
-sub set_campaign :Chained('base') :Args(0){
+sub set_campaign : Chained('base') : Args(0) {
     my ( $self, $c ) = @_;
 
-	$c->detach unless $c->req->method eq 'POST';
-	my $api = $c->model('API');
-
+    $c->detach unless $c->req->method eq 'POST';
+    my $api = $c->model('API');
 
     my $params = { %{ $c->req->params } };
-
-
-	$params->{user_id} = $c->user->obj->id;
-
-	$api->stash_result(
+    use DDP;
+    p $params;
+    $params->{user_id} = $c->user->obj->id;
+    $params->{latlng} =~ s/\(|\)//;
+    p $params->{latlng};
+    $api->stash_result(
         $c,
         'campaigns',
         method => 'POST',
-        body => $params,
+        body   => $params,
     );
-	if ($c->stash->{error}){
-		$c->detach('/form/redirect_error', []);
-	}
+
+    if ( $c->stash->{error} ) {
+        $c->detach( '/form/redirect_error', [] );
+    }
+    use DDP;
+    p $c->stash->{id};
+
+    my $avatar = $c->req->upload('avatar');
+
+    my $path = dir( $c->config->{campaign_picture_path} )->resolve . '/'
+      . $c->stash->{id};
+
+    unless ( -e $path ) {
+        mkdir $path;
+    }
+    copy(
+        'root/static/css/images/avatar.jpg',
+        $path . '/' . $c->stash->{id} . '.jpg'
+      )
+      or die "not open"
+      unless $avatar;
+
+    $avatar->copy_to( $path . '/' . $c->stash->{id} . '.jpg' ) if $avatar;
+
     $c->detach(
-                '/form/redirect_ok',
-                [
-                    \'/user/perfil/campanhas', {}, 'Cadastrado com sucesso!', form_ident => $c->req->params->{form_ident}
-                ]
-            );
+        '/form/redirect_ok',
+        [
+            \'/user/perfil/campanhas', {},
+            'Cadastrado com sucesso!',
+            form_ident => $c->req->params->{form_ident}
+        ]
+    );
 
 }
+
 =encoding utf8
 
 =head1 AUTHOR

@@ -242,7 +242,6 @@ $(document).ready(function () {
 			              </div>
 						[%END%]
 						</div>
-						-->
 					[% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]
 							
 						<div id="alert_progress"></div>
@@ -263,6 +262,7 @@ $(document).ready(function () {
 						</div>
 						<br clear="all"/>
 					[% END %]
+					-->
 				    </section>
 
 					<div class="image-gallery">

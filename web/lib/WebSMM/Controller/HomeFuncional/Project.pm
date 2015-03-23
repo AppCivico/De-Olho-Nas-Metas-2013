@@ -23,7 +23,8 @@ Catalyst Controller.
 
 =cut
 
-sub base : Chained('/homefuncional/base') : PathPart('project') : CaptureArgs(0) {
+sub base : Chained('/homefuncional/base') : PathPart('project') :
+  CaptureArgs(0) {
     my ( $self, $c ) = @_;
     my $api = $c->model('API');
 
@@ -46,10 +47,16 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
         params => { user_id => $user_id ? $user_id : '' }
     );
     if ( $c->user ) {
-        $api->stash_result( $c, [ 'users', $c->user->obj->id ], stash => 'user_obj', );
-        $c->stash->{user_obj}->{role} = { map { $_ => 1 } @{ $c->stash->{user_obj}->{roles} } };
+        $api->stash_result(
+            $c,
+            [ 'users', $c->user->obj->id ],
+            stash => 'user_obj',
+        );
+        $c->stash->{user_obj}->{role} =
+          { map { $_ => 1 } @{ $c->stash->{user_obj}->{roles} } };
 
-        $c->stash->{do_i_follow} = grep { $_ eq $id } @{ $c->stash->{user_obj}->{projects_i_follow} };
+        $c->stash->{do_i_follow} =
+          grep { $_ eq $id } @{ $c->stash->{user_obj}->{projects_i_follow} };
     }
 }
 
@@ -62,6 +69,7 @@ sub detail : Chained('object') : PathPart('') : Args(0) {
     $c->stash->{project_obj}->{progress_count} = $count;
     use DDP;
     p $c->stash->{project_obj};
+    warn "LOLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL";
 }
 
 sub index : Chained('base') : PathPart('') : Args(0) {
@@ -116,7 +124,8 @@ sub region_by_cep : Chained('base') : Args(0) {
     $c->detach unless $c->req->param('latitude') =~ qr/^(\-?\d+(\.\d+)?)$/;
     $c->detach unless $c->req->param('longitude') =~ qr/^(\-?\d+(\.\d+)?)$/;
 
-    my $lnglat = join( q/ /, $c->req->param('longitude'), $c->req->param('latitude') );
+    my $lnglat =
+      join( q/ /, $c->req->param('longitude'), $c->req->param('latitude') );
 
     my $api = $c->model('API');
 
@@ -132,7 +141,8 @@ sub region_by_cep : Chained('base') : Args(0) {
 
 }
 
-sub user_follow_project : Chained('base') : PathPart('user_follow_project') : Args(0) {
+sub user_follow_project : Chained('base') : PathPart('user_follow_project') :
+  Args(0) {
 
     my ( $self, $c ) = @_;
 
@@ -154,7 +164,8 @@ sub user_follow_project : Chained('base') : PathPart('user_follow_project') : Ar
 
 }
 
-sub user_stop_follow : Chained('base') : PathPart('user_stop_follow') : Args(0) {
+sub user_stop_follow : Chained('base') : PathPart('user_stop_follow') : Args(0)
+{
     my ( $self, $c ) = @_;
 
     my $api = $c->model('API');
@@ -162,7 +173,11 @@ sub user_stop_follow : Chained('base') : PathPart('user_stop_follow') : Args(0) 
     my $user_id    = $c->req->param('user_id');
     my $project_id = $c->req->param('project_id');
 
-    $api->stash_result( $c, [ 'users', $user_id, 'project', $project_id ], method => 'POST', );
+    $api->stash_result(
+        $c,
+        [ 'users', $user_id, 'project', $project_id ],
+        method => 'POST',
+    );
 
     $c->res->status(200);
     $c->res->content_type('application/json');
@@ -183,15 +198,24 @@ sub comment_counsil : Chained('base') : PathParth('comment_counsil') : Args(0) {
         $c,
         'project_events',
         method => 'POST',
-        params => { user_id => $user_id, text => $text, project_id => $project_id }
+        params =>
+          { user_id => $user_id, text => $text, project_id => $project_id }
     );
 
     $api->stash_result( $c, 'project_events',
-        params => { project_id => $project_id, approved => 'true', active => 1 } );
+        params =>
+          { project_id => $project_id, approved => 'true', active => 1 } );
 
     $c->res->status(200);
     $c->res->content_type('application/json');
-    $c->res->body( encode_json( { message => 'Seu comentário foi enviado para moderação, aguarde aprovação.' } ) );
+    $c->res->body(
+        encode_json(
+            {
+                message =>
+'Seu comentário foi enviado para moderação, aguarde aprovação.'
+            }
+        )
+    );
 }
 
 sub comment : Chained('base') : PathParth('comment') : Args(0) {
@@ -208,12 +232,23 @@ sub comment : Chained('base') : PathParth('comment') : Args(0) {
         $c,
         'comment_projects',
         method => 'POST',
-        params => { user_id => $user_id, description => $text, project_id => $project_id }
+        params => {
+            user_id     => $user_id,
+            description => $text,
+            project_id  => $project_id
+        }
     );
 
     $c->res->status(200);
     $c->res->content_type('application/json');
-    $c->res->body( encode_json( { message => 'Seu comentário foi enviado para moderação, aguarde aprovação.' } ) );
+    $c->res->body(
+        encode_json(
+            {
+                message =>
+'Seu comentário foi enviado para moderação, aguarde aprovação.'
+            }
+        )
+    );
 }
 
 sub search_by_types : Chained('base') : Args(0) {
@@ -249,16 +284,21 @@ sub upload_images : Chained('object') : PathPart('upload_images') : Args(0) {
     $c->detach unless $c->req->method eq 'POST';
     my $image = $c->req->upload('files[]');
 
-    my $path = dir( $c->config->{project_picture_path} )->resolve . '/' . $c->stash->{id};
+    my $path = dir( $c->config->{project_picture_path} )->resolve . '/'
+      . $c->stash->{id};
 
     unless ( -e $path ) {
         mkdir $path;
     }
     my $address_html = '/static/images/project/' . $c->stash->{id} . '/';
     $api->stash_result(
-        $c, 'images_project',
+        $c,
+        'images_project',
         method => 'POST',
-        body   => { project_id => $c->stash->{id}, name_image => $address_html . $image->filename }
+        body   => {
+            project_id => $c->stash->{id},
+            name_image => $address_html . $image->filename
+        }
     );
     my $data = {
         name      => $image->filename,
