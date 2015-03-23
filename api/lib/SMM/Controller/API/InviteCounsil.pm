@@ -66,4 +66,10 @@ sub key_check_POST {
 
     $self->status_ok( $c, entity => { message => 'ok' } );
 }
+
+# sub contact_admin_council : Chained('base') : PathPart('contact_admin_council') : Args(0) {
+# 	my( $self, $c ) = @_;
+# 	
+# 	$c->
+# }
 1;
