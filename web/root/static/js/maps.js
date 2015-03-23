@@ -68,7 +68,7 @@ var $maps = function () {
 				marker_array.push(marker);
 				var url = marker.url;
 				var content = '<div class="project-bubble"><div class="name">';
-				content += '<a href="' + url + '">';
+				content += '<a href="' + url + '" target="_blank" >';
 				content += pj.name + '</a></div>';
 				content += '<div class="description"></div>';
 				content += '</div>';
@@ -580,7 +580,7 @@ var $maps = function () {
 				marker_array.push(marker);
 				var url = marker.url;
 				var content = '<div class="project-bubble"><div class="name">';
-				content += '<a href="' + url + '">';
+				content += '<a href="' + url + '" target="_blank">';
 				content += pj.name + '</a></div>';
 				content += '</div>';
 				google.maps.event.addListener(marker, 'mouseover', function() {
@@ -641,7 +641,7 @@ var $maps = function () {
     	    	   		 	});
 							var url = marker.url;
 							var content = '<div class="project-bubble"><div class="name">';
-							content += '<a href="' + url + '">';
+							content += '<a href="' + url + '" target="_blank">';
 							content += pj.name + '</a></div>';
 							content += '</div>';
 							google.maps.event.addListener(marker, 'mouseover', function() {
@@ -786,7 +786,6 @@ $(document).ready(function () {
        })
     },
     select: function (event, ui) {
-		console.log(ui);
         var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
 		if ($("#pagetype").val() == 'home'){		
 			$("section.map .map-overlay").fadeIn();
