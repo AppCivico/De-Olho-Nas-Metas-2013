@@ -8,7 +8,7 @@
 [%-CALL assets.include("js/bootstrap-datetimepicker.min.js")%]
 <script>
 jQuery(function($){
-   $('.datepicker').datepicker({ format : 'dd/mm/yyyy'});
+   $('.datepicker').datepicker();
    $('.datetimepicker1').datetimepicker();
    $("input[name=phone_number]").mask("(99) 9999-9999");
 

@@ -129,7 +129,7 @@ __PACKAGE__->table("project");
 
 =head2 porcentage
 
-  data_type: 'text'
+  data_type: 'numeric'
   is_nullable: 1
 
 =cut
@@ -178,7 +178,7 @@ __PACKAGE__->add_columns(
   "qualitative_progress_1",
   { data_type => "text", is_nullable => 1 },
   "porcentage",
-  { data_type => "text", is_nullable => 1 },
+  { data_type => "numeric", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -285,6 +285,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 project_progresses
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::ProjectProgress>
+
+=cut
+
+__PACKAGE__->has_many(
+  "project_progresses",
+  "SMM::Schema::Result::ProjectProgress",
+  { "foreign.project_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 project_regions
 
 Type: has_many
@@ -336,8 +351,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-03-21 18:58:51
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1i2jsMCjXsEhTiTVBV1uBg
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-03-23 16:23:04
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:aC9ORqb8+YJD876m/xIkrQ
 
 __PACKAGE__->has_many(
     approved_comments => 'SMM::Schema::Result::CommentProject',

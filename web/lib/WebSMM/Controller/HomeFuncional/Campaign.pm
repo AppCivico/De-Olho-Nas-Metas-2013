@@ -1,6 +1,8 @@
 package WebSMM::Controller::HomeFuncional::Campaign;
 use Moose;
 use namespace::autoclean;
+use Path::Class qw(dir);
+use File::Copy;
 
 BEGIN { extends 'Catalyst::Controller'; }
 
@@ -55,24 +57,29 @@ sub set_campaign : Chained('base') : Args(0) {
     my $params = { %{ $c->req->params } };
     use DDP;
     p $params;
-
     $params->{user_id} = $c->user->obj->id;
-
+    $params->{latlng} =~ s/(|)//;
+    p $params->{latlng};
     $api->stash_result(
         $c,
         'campaigns',
         method => 'POST',
         body   => $params,
     );
+
     if ( $c->stash->{error} ) {
         $c->detach( '/form/redirect_error', [] );
     }
+    use DDP;
+    p $c->stash->{id};
+
     my $avatar = $c->req->upload('avatar');
 
     my $path = dir( $c->config->{campaign_picture_path} )->resolve . '/'
       . $c->stash->{id};
+
     unless ( -e $path ) {
-        mkdir -p $path;
+        mkdir $path;
     }
     copy(
         'root/static/css/images/avatar.jpg',

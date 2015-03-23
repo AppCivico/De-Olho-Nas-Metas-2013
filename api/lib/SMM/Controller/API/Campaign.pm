@@ -50,6 +50,7 @@ sub result_GET {
                       ? $campaigns->$_->datetime
                       : $campaigns->$_
                   } qw/
+                  id
                   name
                   description
                   created_at

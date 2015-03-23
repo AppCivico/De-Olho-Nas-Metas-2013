@@ -1,4 +1,4 @@
-    
+
 	[%-CALL assets.include("js/Chart.min.js")%]
 	[%-CALL assets.include("js/maps.js")%]
 	[%-CALL assets.include("js/infobubble.min.js")%]
@@ -243,13 +243,13 @@ $(document).ready(function () {
 						[%END%]
 					</div>
 					<section class="statistics">
-						<h3>Progresso</h3>
+						<h3>Progresso de acordo com a prefeitura</h3>
 						<div class="progress">
-						[% USE Math; Progress = Math.int(Math.rand(100)); %]
-						  <div class="progress-bar progress-bar-success progress-bar-green progress-bar-striped" role="progressbar" aria-valuenow="[% Progress %]" aria-valuemin="0" aria-valuemax="100" style="width: [% Progress %]%;">
-							   [% Progress %]%
-			              </div>
-						</div>
+						    <div class="progress-bar progress-bar-success progress-bar-green progress-bar-str    iped" role="progressbar" aria-valuenow="[%project_obj.porcentage%]" aria-valuemin="0"     aria-valuemax="100" style="width: [%project_obj.porcentage%]%;">
+						    [%project_obj.porcentage%]%
+						   </div>
+						 </div>
+
 						<br />
 						<div class="progress-steps green">[% project_obj.progress_count%] de 6 etapas</div>
 						<table class="table-progress-steps">
@@ -273,7 +273,7 @@ $(document).ready(function () {
 						[%END%]
 						</table>
 						[% IF project_obj.progress_count == 0%]
-							<p>Nenhum progresso até o momento.</p>
+							<p>Sem destaques sobre esse projeto.</p>
 						
 						[%END%]
 					</section>

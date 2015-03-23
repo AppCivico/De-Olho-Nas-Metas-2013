@@ -93,7 +93,7 @@ $(document).keydown( function(e) {
 				<section class="campaign-detail">
 					<div class="row">
 						<div class="col-sm-12">
-							<img src="/static/css/images/meta01.jpg" border="0" class="campaign-image"><h1>[%campaign_obj.name%]</h1><br />
+							<img src="/static/images/campaign/[% campaign_obj.id %]/[%campaign_obj.id%].jpg" border="0" class="campaign-image"><h1>[%campaign_obj.name%]</h1><br />
 							<p>[%campaign_obj.description%]</p>
 						</div>
 					</div>
