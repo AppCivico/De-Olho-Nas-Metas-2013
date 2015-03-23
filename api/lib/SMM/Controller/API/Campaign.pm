@@ -153,6 +153,28 @@ sub list_GET {
 sub list_POST {
     my ( $self, $c ) = @_;
 
+    if (    defined $c->req->params->{latitude}
+        and defined $c->req->params->{longitude} )
+    {
+        $c->req->params->{longitude} =~ s/ //g;
+        $c->req->params->{latitude} =~ s/ //g;
+        my $lnglat =
+          $c->req->params->{longitude} . ' ' . $c->req->params->{latitude};
+        my $region = $c->model('DB')->resultset('Region')->search_rs(
+
+            \[
+                q{ST_Intersects(me.geom::geography, ?::geography )},
+                [ _coords => qq{SRID=4326;POINT($lnglat)} ]
+            ],
+            {
+                select       => [qw/id/],
+                result_class => 'DBIx::Class::ResultClass::HashRefInflator',
+            }
+        )->next;
+        use DDP;
+        p $region;
+        $c->req->params->{region_id} = $region->{id} if $region;
+    }
     my $campaigns = $c->stash->{collection}
       ->execute( $c, for => 'create', with => $c->req->params );
 

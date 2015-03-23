@@ -36,16 +36,19 @@ for my $key (
   )
 {
     $data{ $ref->{Document}[0]->{Folder}[0]->{Placemark}->{$key}->{name}[0] } =
-      $ref->{Document}[0]->{Folder}[0]->{Placemark}->{$key}->{MultiGeometry}[0]->{Polygon}[0]->{outerBoundaryIs}[0]->{LinearRing}[0]->{coordinates}[0] if exists $ref->{Document}[0]->{Folder}[0]->{Placemark}->{$key}->{name}[0];
+      $ref->{Document}[0]->{Folder}[0]->{Placemark}->{$key}->{MultiGeometry}[0]
+      ->{Polygon}[0]->{outerBoundaryIs}[0]->{LinearRing}[0]->{coordinates}[0]
+      if
+      exists $ref->{Document}[0]->{Folder}[0]->{Placemark}->{$key}->{name}[0];
 }
 my @vecs;
-foreach my $place ( keys %data) {
+foreach my $place ( keys %data ) {
     my $str = $data{$place};
-     
-	my $with_zero =
+
+    my $with_zero =
       $str =~ /(?:-?\d+(?:\.\d+)?\,\s?-?\d+(?:\.\d+)?,\d+(?:\.\d+)?)/;
-    
-	if ($with_zero) {
+
+    if ($with_zero) {
         $str =~ s/^\s+//;
         $str =~ s/\s+$//;
     }
@@ -61,7 +64,7 @@ foreach my $place ( keys %data) {
             push @pos, [ $1, $2 ];
         }
     }
-	p $place unless grep {defined($_)} @pos;
+    p $place unless grep { defined($_) } @pos;
 
     push @vecs,
       {
@@ -70,23 +73,23 @@ foreach my $place ( keys %data) {
       };
 
 }
-for ( @vecs){
-	my @line;
-	for my $lol (@{$_->{latlng}}){
-		
-		push @line, join (q/ /, $lol->[0], $lol->[1] );
-	}
-	print "\n$_->{name}\n";
-	my $polygon = join (q/,/, @line);
+for (@vecs) {
+    my @line;
+    for my $lol ( @{ $_->{latlng} } ) {
 
-		 $schema->resultset('Region')->create(
-			{ geom => \['ST_GeomFromText((?),4326)',
-				 [ p => "POLYGON(($polygon))" ]
-				],
-			  name => $_->{name},
-			  lat  => 1,
-			  long => 1
-			 });
+        push @line, join( q/ /, $lol->[0], $lol->[1] );
+    }
+    print "\n$_->{name}\n";
+    my $polygon = join( q/,/, @line );
+
+    $schema->resultset('Region')->create(
+        {
+            geom =>
+              \[ 'ST_GeomFromText((?),4326)', [ p => "POLYGON(($polygon))" ] ],
+            name => $_->{name},
+            lat  => 1,
+            long => 1
+        }
+    );
 
 }
-
