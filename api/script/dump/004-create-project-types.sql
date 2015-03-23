@@ -5,3 +5,4 @@ create table project_progress ( project_id integer references project(id) not nu
 alter table project drop column porcentage;
 alter table project add column porcentage numeric;
 
+alter table campaign add column region_id integer references region(id);

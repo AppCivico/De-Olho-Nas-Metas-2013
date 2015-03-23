@@ -99,13 +99,6 @@ jQuery(function($){
 												[%input_text('end_on','Data Final:', classes => ['span3' , 'date', 'datepicker'],req=>0)|none%]
 										</div>
 									</div>
- 									<div class="form-group row">
-
-										<label class="col-lg-12 " for="elm_end_on">Endereço:</label>
-											<div class="col-lg-12">
-												<input id="txtaddress" name="txtaddress" type="text" class="txtaddress form-control" size="3">
-												<input type="hidden" id="latlng" name="latlng" type="text" class="form-control" size="3">
-																																																			</div>
  									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group row ">
@@ -113,6 +106,7 @@ jQuery(function($){
 											    <div class="col-lg-12">
 											        <div class=" ">
 											            <input type="text" id="txtaddress" name="txtaddress" placeholder="CEP" class="form-control">
+																							<input type="hidden" id="latlng" name="latlng" type="text" class="form-control" size="3">
 											        </div>
 											    </div>
 											</div>

@@ -111,6 +111,21 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
 
+=head2 campaigns
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::Campaign>
+
+=cut
+
+__PACKAGE__->has_many(
+  "campaigns",
+  "SMM::Schema::Result::Campaign",
+  { "foreign.region_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 project_regions
 
 Type: has_many
@@ -162,8 +177,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-01-27 06:10:00
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:rcMPzM1A6BZqTS1zEGeCpw
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-03-23 18:48:19
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+P9Ygcd873mzFqNZJnqkRg
 
 
 with 'SMM::Role::Verification';

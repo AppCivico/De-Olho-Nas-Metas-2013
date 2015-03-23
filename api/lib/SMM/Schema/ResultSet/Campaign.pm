@@ -62,6 +62,10 @@ sub verifiers_specs {
                     required => 0,
                     type     => 'Str',
                 },
+                region_id => {
+                    required => 0,
+                    type     => 'Int',
+                },
             }
         )
     };
