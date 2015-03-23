@@ -98,6 +98,8 @@ jQuery(function($){
 				<div class="col-sm-8">
 				
 					<h4 class="green">FAÇA SEU CADASTRO E FIQUE DE OLHO NAS METAS</h4>
+					
+					<a class="btn btn-warning" href="/conselho/contato">Conselheiro? Clique aqui!</a>
 				
 					[%IF error_msg %]<div class="alert alert-danger"><p>[%error_msg%]</p></div>[%END%]
 					<form action="/form/user" method="post" enctype="multipart/form-data">
