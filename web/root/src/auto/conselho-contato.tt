@@ -1,0 +1,121 @@
+<script>
+jQuery(function($){
+   $("input[name=phone_number]").mask("(99) 9999-9999");
+
+   $("input[name=phone_number]").focusout(function(){
+        var phone, element;
+        element = $(this);
+        element.unmask();
+        phone = element.val().replace(/\D/g, '');
+        if(phone.length > 10) {
+            element.mask("(99) 99999-999?9");
+        } else {
+            element.mask("(99) 9999-9999?9");
+        }
+    }).trigger('focusout');
+});
+</script>
+
+    <section class="map text-center">
+		<div id="filter-map">
+			<div class="contents text-center">
+				<div class="item">
+					<div class="icon transport">
+					</div>
+				</div>
+				<div class="item">
+					<div class="icon home">
+					</div>
+				</div>
+				<div class="item selected">
+					<div class="icon lamp">
+					</div>
+				</div>
+				<div class="item">
+					<div class="icon medic">
+					</div>
+				</div>
+				<div class="item">
+					<div class="icon paint">
+					</div>
+				</div>
+				<div class="item">
+					<div class="icon globe">
+					</div>
+				</div>
+				<div class="item">
+					<div class="icon balloon">
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="clear"></div>
+    </section>
+
+    <section class="map text-center">
+		<div id="filter-map">
+			<div class="contents text-center">
+				<div class="item">
+					<div class="icon transport">
+					</div>
+				</div>
+				<div class="item">
+					<div class="icon home">
+					</div>
+				</div>
+				<div class="item selected">
+					<div class="icon lamp">
+					</div>
+				</div>
+				<div class="item">
+					<div class="icon medic">
+					</div>
+				</div>
+				<div class="item">
+					<div class="icon paint">
+					</div>
+				</div>
+				<div class="item">
+					<div class="icon globe">
+					</div>
+				</div>
+				<div class="item">
+					<div class="icon balloon">
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="clear"></div>
+    </section>
+	   <section class="metas-detail page-signup">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-sm-6">
+					<h4 class="green">Entre em contato conosco</h4>
+					<h5>A equipe do De Olho nas Metas enviará uma mensagem ao e-mail informado neste formulário, com os seus dados para acesso.</h5>
+					
+					[%IF error_msg %]<div class="alert alert-danger"><p>[%error_msg%]</p></div>[%END%]
+					<form action="/form/contact_admin_council" method="post">
+						[%input_text('name','*Nome:', req=>1)|none%]
+					
+						[%input_text('email','*E-mail:', req=>1)|none%]
+					<div class="row">
+						<div class="col-sm-6">
+								[%input_text('phone_number','*Celular:', req=>0)|none%]
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-sm-6">
+								[%input_text('council','*Conselho participativo de que é membro:', req=>1)|none%]
+						</div>
+					</div>
+					<input type="submit" value="Enviar" class="btn btn-success pull-right"/>
+					</form>
+				</div>
+			</div>
+		</div>
+    </section>

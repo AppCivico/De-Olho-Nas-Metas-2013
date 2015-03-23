@@ -71,6 +71,12 @@ sub registration_successfully : Chained('base') : PathPart('registration_success
     $c->stash( template => 'user/account/success.tt' );
 }
 
+sub counselor_contact : Chained('base') : PathPart('conselho/contato') : Args(0) {
+	my ( $self, $c ) = @_;
+	
+	$c->stash( template => 'auto/conselho-contato.tt' );
+}
+
 __PACKAGE__->meta->make_immutable;
 
 1;
