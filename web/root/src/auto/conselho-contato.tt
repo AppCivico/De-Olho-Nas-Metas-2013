@@ -16,86 +16,13 @@ jQuery(function($){
 });
 </script>
 
-    <section class="map text-center">
-		<div id="filter-map">
-			<div class="contents text-center">
-				<div class="item">
-					<div class="icon transport">
-					</div>
-				</div>
-				<div class="item">
-					<div class="icon home">
-					</div>
-				</div>
-				<div class="item selected">
-					<div class="icon lamp">
-					</div>
-				</div>
-				<div class="item">
-					<div class="icon medic">
-					</div>
-				</div>
-				<div class="item">
-					<div class="icon paint">
-					</div>
-				</div>
-				<div class="item">
-					<div class="icon globe">
-					</div>
-				</div>
-				<div class="item">
-					<div class="icon balloon">
-					</div>
-				</div>
-				<div class="clear"></div>
-			</div>
-		</div>
-		<div class="clear"></div>
-    </section>
-
-    <section class="map text-center">
-		<div id="filter-map">
-			<div class="contents text-center">
-				<div class="item">
-					<div class="icon transport">
-					</div>
-				</div>
-				<div class="item">
-					<div class="icon home">
-					</div>
-				</div>
-				<div class="item selected">
-					<div class="icon lamp">
-					</div>
-				</div>
-				<div class="item">
-					<div class="icon medic">
-					</div>
-				</div>
-				<div class="item">
-					<div class="icon paint">
-					</div>
-				</div>
-				<div class="item">
-					<div class="icon globe">
-					</div>
-				</div>
-				<div class="item">
-					<div class="icon balloon">
-					</div>
-				</div>
-				<div class="clear"></div>
-			</div>
-		</div>
-		<div class="clear"></div>
-    </section>
-	   <section class="metas-detail page-signup">
+	<section class="metas-detail page-signup">
 		<div class="container">
 
 			<div class="row">
-				<div class="col-sm-6">
-					<h4 class="green">Entre em contato conosco</h4>
-					<h5>A equipe do De Olho nas Metas enviará uma mensagem ao e-mail informado neste formulário, com os seus dados para acesso.</h5>
+				<div class="col-sm-6 col-sm-offset-3">
+					<h2 class="green">Solicitar acesso</h2>
+					<h5>Preencha o formulário abaixo para solicitar acesso ao sistema. A equipe do De Olho nas Metas enviará os dados para acesso no e-mail informado neste formulário.</h5>
 					
 					[%IF error_msg %]<div class="alert alert-danger"><p>[%error_msg%]</p></div>[%END%]
 					<form action="/form/contact_admin_council" method="post">
