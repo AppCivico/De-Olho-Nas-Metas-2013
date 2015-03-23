@@ -281,7 +281,7 @@ $(document).ready(function () {
 
 					<div class="list_budget">
 
-						<h3>ORÇAMENTO</h3>
+						<h3>Execução Financeira da Meta - Contratados</h3>
 						<table id="list_budgets" class="table table-striped">
 							<thead>
 								<tr>
@@ -309,7 +309,7 @@ $(document).ready(function () {
 	
 							</tbody>
 						</table>
-
+						<h4><b>Fonte das informações:</b> Tribunal de Contas do Município de São Paulo</h4>
 
 					</div>
 
