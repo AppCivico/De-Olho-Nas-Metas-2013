@@ -314,11 +314,18 @@ ul.faq li .a{
 }
 
 footer{
+	position: relative;
 	background-color: #3d3934;
 }
 
 footer .logo-footer{
 	padding: 40px 0 0 0;
+}
+
+footer .logo-eokoe{
+	position: absolute;
+	bottom: 0;
+	right: 0;
 }
 
 #map{

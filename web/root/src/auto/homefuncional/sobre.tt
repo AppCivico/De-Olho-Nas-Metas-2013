@@ -38,21 +38,50 @@
 						Inventando novas tecnologias que facilitam e incentivam a geração de conteúdos e ações políticas, estudam o impacto destas tecnologias, e coordenam processos colaborativos de design em Boston, nos Estados Unidos como um todo, e em outras partes do mundo.
 						<br /><br />
 						Unindo dois programas altamente reconhecidos do MIT -- um famoso por inventar futuros tecnológicos alternativos, e outro por analizar o potencial de transformação social e cultural da mídia -- o Centro de Mídias Cívicas é um esforço conjunto do MIT Media Lab e do MIT Comparative Media Studies.
+						<br /><br />
+						
+						<strong>Sobre o Tribunal de Contas do Município de São Paulo</strong>
+						<br /><br />
+						O Tribunal de Contas do Município de São Paulo é um órgão de controle externo cuja missão é a de fiscalizar a gestão dos recursos públicos do Município de São Paulo, de modo a assegurar que sejam arrecadados e aplicados em conformidade com os princípios da legalidade, legitimidade e economicidade, tendo em vista a plena satisfação do interesse público.
+						<br /><br />
+						Para isso, o TCM realiza auditorias sobre as contas municipais e fiscaliza os gastos públicos de maneira concomitante por meio de análises de editais de licitação e de acompanhamentos da execução de obras, contratos e convênios.
+						<br /><br />
+						O TCM possui importante papel na avaliação das políticas públicas, dos programas de governo e de seus resultados.
+						<br /><br />
+
+						<strong>Sobre a Eokoe</strong>
+						<br /><br />
+						A Eokoe é uma empresa especializada em tecnologia. Nossa missão é atender aos objetivos de negócios dos nossos clientes. Acreditamos que nosso apoio no desenvolvimento de softwares, sistemas e aplicações WEB é uma forma para as empresas se revolucionarem.<br /><br />
+						O conhecimento é a parte mais valiosa de um produto, e nós da Eokoe queremos transformar o seu conhecimento em tecnologia.
+						<br /><br />
+
 					</p>
 					<br>
 					<div class="about-logos text-center">
-						<div class="col-sm-4">
-							Realização<br>
-							<a href="http://www.nossasaopaulo.org.br" target="_blank"><img src="/static/css/images/logo-rnsp.png" border="0"></a>
+						<div class="row">
+							<div class="col-sm-6 text-center">
+								Realização<br><br>
+								<a href="http://www.nossasaopaulo.org.br" target="_blank"><img src="/static/css/images/logo-rnsp.png" border="0"></a>
+							</div>
+							<div class="col-sm-6 text-center">
+								Apoio<br><br>
+								<a href="http://www.avinaamericas.org" target="_blank"><img src="/static/css/images/logo-avina.png" border="0"></a>
+							</div>
 						</div>
-						<div class="col-sm-4 text-center">
-							Apoio<br>
-							<a href="http://www.avinaamericas.org" target="_blank"><img src="/static/css/images/logo-avina.png" border="0"></a>
+						<br /><br />
+						<div class="row text-center">
+							Parceiros<br><br>
+							<div class="col-sm-4 text-center">
+								<a href="http://civic.mit.edu/" target="_blank"><img src="/static/css/images/logo-mit.png" border="0"></a>
+							</div>
+							<div class="col-sm-4 text-center">
+								<a href="http://www.tcm.sp.gov.br/" target="_blank" title="Tribunal de Contas do Município de São Paulo" alt="Tribunal de Contas do Município de São Paulo"><img src="/static/css/images/logo-tcm.png" border="0"></a>
+							</div>
+							<div class="col-sm-4 text-center">
+								<a href="http://www.eokoe.com/" target="_blank"><img src="/static/css/images/logo-eokoe.png" border="0"></a>
+							</div>
 						</div>
-						<div class="col-sm-4 text-center">
-							Parceiro<br>
-							<a href="http://civic.mit.edu/" target="_blank"><img src="/static/css/images/logo-civic.png" border="0"></a>
-						</div>
+						<br /><br />
 					</div>
 				</div>
 			</div>
