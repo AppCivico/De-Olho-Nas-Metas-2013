@@ -58,7 +58,7 @@ sub set_campaign : Chained('base') : Args(0) {
     use DDP;
     p $params;
     $params->{user_id} = $c->user->obj->id;
-    $params->{latlng} =~ s/(|)//;
+    $params->{latlng} =~ s/\(|\)//;
     p $params->{latlng};
     $api->stash_result(
         $c,
