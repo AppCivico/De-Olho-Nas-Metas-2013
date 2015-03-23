@@ -127,6 +127,11 @@ __PACKAGE__->table("project");
   data_type: 'text'
   is_nullable: 1
 
+=head2 porcentage
+
+  data_type: 'text'
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -171,6 +176,8 @@ __PACKAGE__->add_columns(
   "qualitative_progress_2",
   { data_type => "text", is_nullable => 1 },
   "qualitative_progress_1",
+  { data_type => "text", is_nullable => 1 },
+  "porcentage",
   { data_type => "text", is_nullable => 1 },
 );
 
@@ -329,8 +336,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-09 10:18:06
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:s6P2z4U6XGyHaRDo5BApfQ
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-03-21 18:58:51
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1i2jsMCjXsEhTiTVBV1uBg
 
 __PACKAGE__->has_many(
     approved_comments => 'SMM::Schema::Result::CommentProject',

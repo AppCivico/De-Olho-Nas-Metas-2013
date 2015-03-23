@@ -15,13 +15,13 @@ __PACKAGE__->config(
         'me.id' => 'Int'
     },
     result_attr => {
-        prefetch => ['events'],
-	    '+select' => [
+        prefetch  => ['events'],
+        '+select' => [
             \q{to_char(events.date, 'DD/MM/YYYY HH24:MI:SS')},
             \q{to_char(start_in, 'DD/MM/YYYY HH24:MI:SS')},
             \q{to_char(end_on, 'DD/MM/YYYY HH24:MI:SS')},
         ],
-        '+as'    => ['events.date_fmt','start_in_fmt','end_on_fmt'],
+        '+as' => [ 'events.date_fmt', 'start_in_fmt', 'end_on_fmt' ],
 
     },
     update_roles => [qw/superadmin user admin webapi organization/],
@@ -41,35 +41,38 @@ sub result_GET {
     my ( $self, $c ) = @_;
     my $campaigns = $c->stash->{campaigns};
 
-	use DDP; p $campaigns;
     $self->status_ok(
         $c,
         entity => {
             (
-                map {  $_ => ref $campaigns->$_ eq 'DateTime' ? $campaigns->$_->datetime : $campaigns->$_ }
-                  qw/
-			 	  name          
-				  description  
-				  created_at
-				  start_in
-				  end_on
-				  user_id      
+                map {
+                        $_ => ref $campaigns->$_ eq 'DateTime'
+                      ? $campaigns->$_->datetime
+                      : $campaigns->$_
+                  } qw/
+                  name
+                  description
+                  created_at
+                  start_in
+                  end_on
+                  user_id
                   /
             ),
             events => [
-                        map {
-                               my $e = $_;
-                                p $e;
-                                ( +{ 
-									  
-									 id => $e->id,
-									 name => $e->name,
-									 description => $e->description,
-									 date => $e->date->datetime,
-								   }
-								)
-                            } ( $campaigns->events ) ,
-                        ],
+                map {
+                    my $e = $_;
+                    p $e;
+                    (
+                        +{
+
+                            id          => $e->id,
+                            name        => $e->name,
+                            description => $e->description,
+                            date        => $e->date->datetime,
+                        }
+                      )
+                } ( $campaigns->events ),
+            ],
 
         }
     );
@@ -111,12 +114,9 @@ sub list_GET {
 
     my $rs = $c->stash->{collection};
 
-    use DDP;
-    p $rs->as_hashref->all;
     if ( $c->req->param('user_id') ) {
         $rs = $rs->search( { 'me.user_id' => $c->req->param('user_id') } );
     }
-    use DDP;
     $self->status_ok(
         $c,
         entity => {
@@ -139,7 +139,6 @@ sub list_GET {
                         events => [
                             map {
                                 my $e = $_;
-                                p $e;
                                 ( +{ map { $_ => $e->{$_} } qw/id/ } )
                             } @{ $r->{events} },
                         ],

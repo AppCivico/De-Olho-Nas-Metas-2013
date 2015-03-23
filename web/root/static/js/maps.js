@@ -803,7 +803,9 @@ $(document).ready(function () {
         	});
         	$maps.setlocal(location);
 		}
- 		if ($("#pagetype").val() == 'campaign_user'){		
+ 		if ($("#pagetype").val() == 'campaign_user'){
+				
+				$('#latlng').val(location);
 		} 
 		if ($("#pagetype").val() == 'projectdetail'){		
  			$.get("/home/project/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
@@ -835,6 +837,8 @@ $(document).ready(function () {
 					window.location.href="/home/region/"+data.id;
 				}
         	});
+
+			  $("select#homeregion")[0].selectedIndex = 0;
 		}
 		if ($("#pagetype").val() == 'regiondetail'){			
  			$.get("/home/region/id",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
@@ -843,7 +847,6 @@ $(document).ready(function () {
 		}
 			
        	$(".metas-filtro .form .region .select-stylized").addClass("disabled");
-		$("select#homeregion")[0].selectedIndex = 0;
        	$(".metas-filtro .form .cep button").removeClass("disabled");
     }
     });
