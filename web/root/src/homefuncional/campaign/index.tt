@@ -12,6 +12,10 @@
 							Filtrar Campanha<br />
 							<div class="select-stylized">
 							<select>
+ 							<option value="">Distrito</option>
+							 [% FOREACH region IN regions %]
+								   <option value="[% region.id %]">[% region.name %]</option>
+								[% END %]
 								<option>Nome da região
 							</select>
 							</div>

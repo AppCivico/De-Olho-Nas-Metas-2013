@@ -97,6 +97,12 @@ __PACKAGE__->table("campaign");
   data_type: 'text'
   is_nullable: 1
 
+=head2 region_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -130,6 +136,8 @@ __PACKAGE__->add_columns(
   { data_type => "text", is_nullable => 1 },
   "longitude",
   { data_type => "text", is_nullable => 1 },
+  "region_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -161,6 +169,26 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 region
+
+Type: belongs_to
+
+Related object: L<SMM::Schema::Result::Region>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "region",
+  "SMM::Schema::Result::Region",
+  { id => "region_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
 =head2 user
 
 Type: belongs_to
@@ -182,8 +210,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-03-21 18:58:51
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:bjV6t0Kzk8cFg3mgNjkQgg
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-03-23 18:48:19
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ypps7Z1N96c8i+I61GHxXw
 
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';

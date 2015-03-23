@@ -45,6 +45,7 @@ sub index : Chained('base') : PathPart('') : Args(0) {
     my ( $self, $c ) = @_;
     my $api = $c->model('API');
     $api->stash_result( $c, 'campaigns' );
+    $api->stash_result( $c, 'regions' );
 
 }
 
@@ -58,8 +59,12 @@ sub set_campaign : Chained('base') : Args(0) {
     use DDP;
     p $params;
     $params->{user_id} = $c->user->obj->id;
-    $params->{latlng} =~ s/\(|\)//;
-    p $params->{latlng};
+    $params->{latlng} =~ s/\(|\)//g;
+
+    ( $params->{latitude}, $params->{longitude} ) = split ',',
+      $params->{latlng};
+
+    $params->{address} = delete $params->{txtaddress};
     $api->stash_result(
         $c,
         'campaigns',

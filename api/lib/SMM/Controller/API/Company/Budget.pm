@@ -7,7 +7,8 @@ BEGIN { extends 'Catalyst::Controller::REST' }
 
 __PACKAGE__->config( default => 'application/json' );
 
-sub base : Chained('/api/company/object') : PathPart('budgets') : CaptureArgs(0) { }
+sub base : Chained('/api/company/object') : PathPart('budgets') :
+  CaptureArgs(0) { }
 
 sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
 
@@ -35,13 +36,20 @@ sub list_GET {
                               id
                               business_name
                               business_name_url
-							  dedicated_value
-							  observation
+                              dedicated_value
+                              liquidated_value
+                              observation
                               /
                         ),
 
                       }
-                } $rs->search(undef,{result_class => 'DBIx::Class::ResultClass::HashRefInflator'})->all
+                  } $rs->search(
+                    undef,
+                    {
+                        result_class =>
+                          'DBIx::Class::ResultClass::HashRefInflator'
+                    }
+                  )->all
             ]
         }
     );
