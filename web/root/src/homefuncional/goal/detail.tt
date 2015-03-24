@@ -1,4 +1,5 @@
 	[%-CALL assets.include("js/maps.js")%]
+	[%-CALL assets.include("js/facebook.js")%]
 	[%-CALL assets.include("js/infobubble.min.js")%]
 	[%-CALL assets.include("js/jshashtable-3.0.js")%]
 	[%-CALL assets.include("js/jquery.numberformatter.min.js")%]
@@ -35,6 +36,9 @@
 			{{/goals}}
 
 	</script>
+	
+	<!-- Twitter social plugin -->
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
 <script>
 
@@ -164,6 +168,12 @@ $(document).ready(function () {
 			</div>
 		</div>
     </section>
+    
+    <!-- Social plugins twitter-->
+	<a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt" data-hashtags="deolhonasmetas">Tweetar</a>
+	
+	<!-- Social plugin facebook -->
+	<div class="fb-share-button" data-href="http://deolhonasmetas.org.br/home/goal/[%goal_obj.id%]" data-layout="button_count"></div>
 
     <section class="project-detail metas-detail">
 		<div id="result" class="container">

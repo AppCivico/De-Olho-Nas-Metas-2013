@@ -1,6 +1,7 @@
 
 	[%-CALL assets.include("js/Chart.min.js")%]
 	[%-CALL assets.include("js/maps.js")%]
+	[%-CALL assets.include("js/facebook.js")%]
 	[%-CALL assets.include("js/infobubble.min.js")%]
 	[%-CALL assets.include("js/jquery.upload/js/vendor/jquery.ui.widget.js")%]
 	[%-CALL assets.include("js/jquery.upload/js/jquery.iframe-transport.js")%]
@@ -120,6 +121,10 @@ $(document).ready(function () {
 
 });
 </script>
+
+<!-- Twitter social plugin -->
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
 	<section class="map text-center">
 		<div id="filter-map">
 			<div class="contents text-center">
@@ -231,6 +236,15 @@ $(document).ready(function () {
 								<div class="icon users2"></div> <span class="caption"><span class="counter">[% project_obj.follow_project %]</span> [% IF project_obj.follow_project > 1 %]seguidores [% ELSE %] seguidor [% END %]
 							</div>
 						</div>
+						
+						
+						<!-- Social plugins twitter-->
+						<a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt" data-hashtags="deolhonasmetas">Tweetar</a>
+						
+						<!-- Social plugin facebook -->
+						<div class="fb-share-button" data-href="http://deolhonasmetas.org.br/home/project/[%project_obj.id%]" data-layout="button_count"></div>
+						
+						
 						[% IF c.user%]
 						<div id="follow" class="col-xs-4 text-right">							
 							<button  type="button" id="follow_or_not" class="btn btn-brown [% do_i_follow > 0 ? "" : "follow"%]" data-id="[% c.user.obj.id%]" autocomplete="off"><span>[% do_i_follow > 0 ? "Parar de Seguir" : "Siga o Projeto" %]</span></button>
@@ -445,7 +459,7 @@ $(document).ready(function () {
 						<span class="header">Planeja Sampa</span>
 						<ul class="list-projects">
 							<li>
-								<a href="http://planejasampa.prefeitura.sp.gov.br/metas/projeto/[%project_obj.project_number%]">Projeto [%project_obj.id%] - [% project_obj.name%]
+								<a href="http://planejasampa.prefeitura.sp.gov.br/metas/projeto/[%project_obj.project_number%]" target="_blank">Projeto [%project_obj.id%] - [% project_obj.name%]
 								</a>
 							</li>
 						</ul>
