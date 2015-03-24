@@ -62,7 +62,6 @@ sub result_GET {
             events => [
                 map {
                     my $e = $_;
-                    p $e;
                     (
                         +{
 
