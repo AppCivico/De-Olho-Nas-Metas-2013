@@ -39,6 +39,8 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
 
 sub detail : Chained('object') : PathPart('') : Args(0) {
     my ( $self, $c, $id ) = @_;
+    my $api = $c->model('API');
+    $api->stash_result( $c, 'regions' );
 }
 
 sub index : Chained('base') : PathPart('') : Args(0) {

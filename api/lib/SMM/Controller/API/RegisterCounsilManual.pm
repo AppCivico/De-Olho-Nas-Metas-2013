@@ -1,4 +1,4 @@
-package SMM::Controller::API::InviteCounsil;
+package SMM::Controller::API::RegisterCounsilManual;
 
 use namespace::autoclean;
 use JSON qw(encode_json);
@@ -12,10 +12,11 @@ BEGIN { extends 'Catalyst::Controller::REST' }
 
 __PACKAGE__->config( default => 'application/json' );
 
-sub base : Chained('/api/base') : PathPart('invite_counsil') : CaptureArgs(0) {
+sub base : Chained('/api/base') : PathPart('register_counsil_manual') :
+  CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
-    $c->stash->{collection} = $c->model('DB::InviteCounsil')
+    $c->stash->{collection} = $c->model('DB::RegisterCounsilManual')
       or $self->status_forbidden( $c, message => "access denied" ), $c->detach;
 }
 
@@ -28,7 +29,9 @@ sub email_POST {
     my ( $self, $c ) = @_;
 
     my $params = { %{ $c->req->params } };
-    my $dm     = $c->stash->{collection}
+    use DDP;
+    p $params;
+    my $dm = $c->stash->{collection}
       ->execute( $c, for => 'create', with => $c->req->params );
 
     # $self->status_bad_request( $c, message => encode_json( $dm->errors ) ),

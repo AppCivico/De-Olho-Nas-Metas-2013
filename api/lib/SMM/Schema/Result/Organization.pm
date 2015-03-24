@@ -154,6 +154,21 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
 
+=head2 campaigns
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::Campaign>
+
+=cut
+
+__PACKAGE__->has_many(
+  "campaigns",
+  "SMM::Schema::Result::Campaign",
+  { "foreign.organization_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 city
 
 Type: belongs_to
@@ -285,8 +300,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-04 06:14:59
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:wVN9CfrV3VUMzI0GqbqIiQ
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-03-24 04:54:52
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:NdJsV90rWz33nmj04OLIlQ
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
 with 'SMM::Schema::Role::ResultsetFind';

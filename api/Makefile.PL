@@ -77,6 +77,8 @@ requires 'Furl';
 requires 'MooseX::NonMoose';
 requires 'Catalyst::Restarter';
 requires 'Data::Section::Simple';
+requires 'FindBin::libs';
+requires 'Log::Log4perl';
 
 requires 'Template::Tiny';
 requires 'MIME::Lite';

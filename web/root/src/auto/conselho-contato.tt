@@ -23,7 +23,7 @@ jQuery(function($){
 				<div class="col-sm-6 col-sm-offset-3">
 					<h2 class="green">Solicitar acesso</h2>
 					<h5>Preencha o formulário abaixo para solicitar acesso ao sistema. A equipe do De Olho nas Metas enviará os dados para acesso no e-mail informado neste formulário.</h5>
-					
+					[%IF status_msg %]<div class="alert alert-success"><p>[%status_msg%]</p></div>[%END%]
 					[%IF error_msg %]<div class="alert alert-danger"><p>[%error_msg%]</p></div>[%END%]
 					<form action="/form/contact_admin_council" method="post">
 						[%input_text('name','*Nome:', req=>1)|none%]

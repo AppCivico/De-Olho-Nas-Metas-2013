@@ -29,7 +29,6 @@
 							 [% FOREACH region IN regions %]
 								   <option value="[% region.id %]">[% region.name %]</option>
 								[% END %]
-								<option>Nome da região
 							</select>
 							</div>
 						</div>

@@ -127,9 +127,15 @@ __PACKAGE__->table("project");
   data_type: 'text'
   is_nullable: 1
 
-=head2 porcentage
+=head2 percentage
 
   data_type: 'numeric'
+  is_nullable: 1
+
+=head2 type
+
+  data_type: 'integer'
+  is_foreign_key: 1
   is_nullable: 1
 
 =cut
@@ -177,8 +183,10 @@ __PACKAGE__->add_columns(
   { data_type => "text", is_nullable => 1 },
   "qualitative_progress_1",
   { data_type => "text", is_nullable => 1 },
-  "porcentage",
+  "percentage",
   { data_type => "numeric", is_nullable => 1 },
+  "type",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -270,6 +278,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 project_milestones
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::ProjectMilestone>
+
+=cut
+
+__PACKAGE__->has_many(
+  "project_milestones",
+  "SMM::Schema::Result::ProjectMilestone",
+  { "foreign.project_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 project_prefectures
 
 Type: has_many
@@ -335,6 +358,26 @@ __PACKAGE__->belongs_to(
   },
 );
 
+=head2 type
+
+Type: belongs_to
+
+Related object: L<SMM::Schema::Result::ProjectType>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "type",
+  "SMM::Schema::Result::ProjectType",
+  { id => "type" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
 =head2 user_follow_projects
 
 Type: has_many
@@ -351,8 +394,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-03-23 16:23:04
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:aC9ORqb8+YJD876m/xIkrQ
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-03-24 03:05:02
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:oMlRn50EPVTBcJEgY6ujMQ
 
 __PACKAGE__->has_many(
     approved_comments => 'SMM::Schema::Result::CommentProject',

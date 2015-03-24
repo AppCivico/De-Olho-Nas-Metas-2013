@@ -103,6 +103,12 @@ __PACKAGE__->table("campaign");
   is_foreign_key: 1
   is_nullable: 1
 
+=head2 organization_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -138,6 +144,8 @@ __PACKAGE__->add_columns(
   { data_type => "text", is_nullable => 1 },
   "region_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "organization_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -167,6 +175,26 @@ __PACKAGE__->has_many(
   "SMM::Schema::Result::Event",
   { "foreign.campaign_id" => "self.id" },
   { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 organization
+
+Type: belongs_to
+
+Related object: L<SMM::Schema::Result::Organization>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "organization",
+  "SMM::Schema::Result::Organization",
+  { id => "organization_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
 =head2 region
@@ -210,8 +238,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-03-23 18:48:19
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ypps7Z1N96c8i+I61GHxXw
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-03-24 04:54:52
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:lyX8ClkE1FtKPoitC/e2mA
 
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';

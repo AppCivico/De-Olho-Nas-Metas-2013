@@ -9,7 +9,9 @@ sub base : Chained('/root') : PathPart('user') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
     if ( !$c->user && !grep { /^user$/ }
-        $c->user->roles && !grep { /^counsil$/ } $c->user->roles && !grep { /^counsil_master$/ } $c->user->roles ) {
+        $c->user->roles && !grep { /^counsil$/ }
+        $c->user->roles && !grep { /^counsil_master$/ } $c->user->roles )
+    {
         $c->detach( '/form/redirect_error', [] );
     }
 

@@ -243,13 +243,14 @@ $(document).ready(function () {
 						[%END%]
 					</div>
 					<section class="statistics">
+						[% IF project_obj.percentage != ""%]
 						<h3>Progresso de acordo com a prefeitura</h3>
 						<div class="progress">
-						    <div class="progress-bar progress-bar-success progress-bar-green progress-bar-str    iped" role="progressbar" aria-valuenow="[%project_obj.porcentage%]" aria-valuemin="0"     aria-valuemax="100" style="width: [%project_obj.porcentage%]%;">
-						    [%project_obj.porcentage%]%
+						    <div class="progress-bar progress-bar-success progress-bar-green progress-bar-str    iped" role="progressbar" aria-valuenow="[%project_obj.percentage%]" aria-valuemin="0"     aria-valuemax="100" style="width: [%project_obj.percentage%]%;">
+						    [%project_obj.percentage%]%
 						   </div>
 						 </div>
-
+      [% END %]
 						<br />
 						<div class="progress-steps green">[% project_obj.progress_count%] de 6 etapas</div>
 						<table class="table-progress-steps">

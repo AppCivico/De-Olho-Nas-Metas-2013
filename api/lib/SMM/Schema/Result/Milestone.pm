@@ -1,12 +1,12 @@
 use utf8;
-package SMM::Schema::Result::ProjectType;
+package SMM::Schema::Result::Milestone;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
 
 =head1 NAME
 
-SMM::Schema::Result::ProjectType
+SMM::Schema::Result::Milestone
 
 =cut
 
@@ -34,11 +34,11 @@ extends 'DBIx::Class::Core';
 
 __PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
-=head1 TABLE: C<project_types>
+=head1 TABLE: C<milestones>
 
 =cut
 
-__PACKAGE__->table("project_types");
+__PACKAGE__->table("milestones");
 
 =head1 ACCESSORS
 
@@ -47,12 +47,29 @@ __PACKAGE__->table("project_types");
   data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
-  sequence: 'project_types_id_seq'
+  sequence: 'milestones_id_seq'
 
 =head2 name
 
   data_type: 'text'
   is_nullable: 0
+
+=head2 project_type_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
+=head2 percentage
+
+  data_type: 'integer'
+  is_nullable: 1
+
+=head2 sequence
+
+  accessor: 'column_sequence'
+  data_type: 'integer'
+  is_nullable: 1
 
 =cut
 
@@ -62,10 +79,16 @@ __PACKAGE__->add_columns(
     data_type         => "integer",
     is_auto_increment => 1,
     is_nullable       => 0,
-    sequence          => "project_types_id_seq",
+    sequence          => "milestones_id_seq",
   },
   "name",
   { data_type => "text", is_nullable => 0 },
+  "project_type_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "percentage",
+  { data_type => "integer", is_nullable => 1 },
+  "sequence",
+  { accessor => "column_sequence", data_type => "integer", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -82,21 +105,6 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
 
-=head2 milestones
-
-Type: has_many
-
-Related object: L<SMM::Schema::Result::Milestone>
-
-=cut
-
-__PACKAGE__->has_many(
-  "milestones",
-  "SMM::Schema::Result::Milestone",
-  { "foreign.project_type_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
-);
-
 =head2 project_milestones
 
 Type: has_many
@@ -108,43 +116,34 @@ Related object: L<SMM::Schema::Result::ProjectMilestone>
 __PACKAGE__->has_many(
   "project_milestones",
   "SMM::Schema::Result::ProjectMilestone",
-  { "foreign.project_type_id" => "self.id" },
+  { "foreign.milestone" => "self.id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 project_progresses
+=head2 project_type
 
-Type: has_many
+Type: belongs_to
 
-Related object: L<SMM::Schema::Result::ProjectProgress>
+Related object: L<SMM::Schema::Result::ProjectType>
 
 =cut
 
-__PACKAGE__->has_many(
-  "project_progresses",
-  "SMM::Schema::Result::ProjectProgress",
-  { "foreign.milestone_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
-);
-
-=head2 projects
-
-Type: has_many
-
-Related object: L<SMM::Schema::Result::Project>
-
-=cut
-
-__PACKAGE__->has_many(
-  "projects",
-  "SMM::Schema::Result::Project",
-  { "foreign.type" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+__PACKAGE__->belongs_to(
+  "project_type",
+  "SMM::Schema::Result::ProjectType",
+  { id => "project_type_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-03-24 02:47:30
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:O6ENqn9wc3zWcBy3+FLdHg
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-03-24 03:18:53
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:8mgfvRKUG4RDJFiEeQhP7w
+
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;
