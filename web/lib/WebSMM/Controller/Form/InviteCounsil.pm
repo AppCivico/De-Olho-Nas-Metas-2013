@@ -65,7 +65,7 @@ sub contact_admin_council : Chained('base') : PathPart('contact_admin_council')
         '/form/redirect_ok',
         [
             \'/conselho/contato', {},
-            'Convite enviado com sucesso!',
+            'E-mail enviado com sucesso, entraremos em contato em breve!',
             form_ident => $c->req->params->{form_ident}
         ]
     );
