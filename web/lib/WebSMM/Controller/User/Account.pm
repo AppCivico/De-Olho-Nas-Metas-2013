@@ -239,7 +239,7 @@ sub survey_create : Chained('survey') : PathPart('criar') : Args(0) {
 
     my $model = $c->model('API');
 
-    my $url = URI->new('http://dev.monitor.promisetracker.org');
+    my $url = URI->new('http://monitor.promisetracker.org');
 
     $url->path_segments( 'api', 'v1', 'campaigns' );
     $url->query_form(
