@@ -334,7 +334,8 @@ $(document).ready(function () {
 					</div>
 
 					<div class="image-gallery">
-						<h3>[% project_obj.images.size%] imagens relacionadas [% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]<button class="btn btn-brown pull-right" id="add-gallery">Enviar imagens</button>[% END%]</h3>
+						[%#<h3>[% project_obj.images.size%] imagens relacionadas [% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]<button class="btn btn-brown pull-right" id="add-gallery">Enviar imagens</button>[% END%]</h3>#%]
+						<h3>[% project_obj.images.size%] imagens relacionadas <button class="btn btn-brown pull-right" id="add-gallery">Enviar imagens</button></h3>
 						<div class="gallery">
 							<div class="arrow left">
 								<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
