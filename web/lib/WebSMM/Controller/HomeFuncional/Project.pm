@@ -67,9 +67,9 @@ sub detail : Chained('object') : PathPart('') : Args(0) {
         $count++ if $c->stash->{project_obj}->{ 'qualitative_progress_' . $n };
     }
     $c->stash->{project_obj}->{progress_count} = $count;
-    use DDP;
-    p $c->stash->{project_obj};
-    warn "LOLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL";
+#     use DDP;
+#     p $c->stash->{project_obj};
+#     warn "LOLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL";
 }
 
 sub index : Chained('base') : PathPart('') : Args(0) {
