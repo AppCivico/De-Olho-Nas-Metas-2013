@@ -83,8 +83,8 @@ sub campaign : Chained('object') : PathPart('campanhas') : Args(0) {
 
     $api->stash_result( $c, 'campaigns',
         params => { user_id => $c->user->obj->id } );
-    use DDP;
-    p $c->stash->{campaigns};
+
+    $api->stash_result( $c, 'goals' );
 
     $c->stash->{user_obj}->{role} =
       { map { $_ => 1 } @{ $c->stash->{user_roles}->{roles} } };

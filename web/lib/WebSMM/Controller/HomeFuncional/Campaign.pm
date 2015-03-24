@@ -106,6 +106,47 @@ sub set_campaign : Chained('base') : Args(0) {
 
 }
 
+sub search_by_district : Chained('base') : Args(0) {
+    my ( $self, $c ) = @_;
+
+    $c->detach unless $c->req->method eq 'POST';
+    my $api = $c->model('API');
+
+    $api->stash_result( $c, 'campaigns',
+        params => { district_id => $c->req->params->{district_id} } );
+
+    if ( $c->stash->{error} ) {
+        $c->detach( '/form/redirect_error', [] );
+    }
+    $c->stash->{without_wrapper} = 1;
+
+}
+
+sub region_by_cep : Chained('base') : Args(0) {
+    my ( $self, $c ) = @_;
+
+    $c->detach unless $c->req->param('latitude');
+    $c->detach unless $c->req->param('longitude');
+
+    $c->detach unless $c->req->param('latitude') =~ qr/^(\-?\d+(\.\d+)?)$/;
+    $c->detach unless $c->req->param('longitude') =~ qr/^(\-?\d+(\.\d+)?)$/;
+
+    my $lnglat =
+      join( q/ /, $c->req->param('longitude'), $c->req->param('latitude') );
+
+    my $api = $c->model('API');
+
+    my $res = $api->stash_result(
+        $c,
+        'campaigns',
+        params => {
+            lnglat => $lnglat
+        }
+    );
+    $c->stash->{message} = 1 if $c->stash->{error};
+    $c->stash->{without_wrapper} = 1;
+}
+
 =encoding utf8
 
 =head1 AUTHOR
