@@ -91,7 +91,7 @@ jQuery(function($){
 									<form action="/home/campaign/set_campaign" method="post" enctype="multipart/form-data">
 										[%input_text('name','Nome:', req=>1)|none%]
 									
-										[%input_text('description','Descrição:', req=>1)|none%]
+										[%input_text('description','Descrição:', req=>1, textbox=>1)|none%]
 									
 									<div class="row">
 										<div class="col-sm-6">
