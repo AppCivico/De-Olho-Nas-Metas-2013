@@ -25,7 +25,8 @@ $(document).ready(function () {
 								<thead>
 									<tr>
 					    	            <th>Descrição da despesa</th>
-					    	            <th>Custo (R$)</th>
+					    	            <th>Valor empenhado (R$)</th>
+					    	            <th>Valor liquidado (R$)</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -34,6 +35,11 @@ $(document).ready(function () {
 								<tr>
 									<td>[% x.observation %]</td>
 									<td class="priceformat" width="80">[% x.dedicated_value %]</td>
+									[%IF x.liquidated_value%]
+										<td class="priceformat"  width="80">[%x.liquidated_value%]</td>
+									[%ELSE%]
+										<td width="80">--</td>
+									[%END%]
 								</tr>
 			            [%END%]
 						[% ELSE %]

@@ -69,18 +69,8 @@ sub detail : Chained('object') : Args(0) {
     $api->stash_result( $c,
         [ 'companies', $c->stash->{company}->{id}, 'goals' ] );
 
-    use DDP;
-    p $c->stash->{goals};
     $c->stash->{sum_budgets} =
       sum map { $_->{dedicated_value} } @{ $c->stash->{budgets} };
-
-    #    foreach my $n ( @{ $c->stash->{companies} } ) {
-    #        $_ = [ split /\|/, $_ ] for @{ $n->{agg_budgets} };
-    #        $n->{goals} = [ uniq @{ $n->{goals} } ];
-    #        $_ = [ split /\|/, $_ ] for @{ $n->{goals} };
-    #
-    #    }
-    #    p $c->stash->{company_obj};
 }
 
 =encoding utf8

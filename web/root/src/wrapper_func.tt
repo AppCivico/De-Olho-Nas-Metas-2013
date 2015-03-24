@@ -70,15 +70,15 @@
                     <li>
                         <a href="/home/region">Distritos</a>
                     </li>
-                    <li>
+                    <!--<li>
                         <a href="/home/organization">Conselhos</a>
-                    </li>
+                    </li>-->
                     <li>
                         <a href="/home/campaign">Campanhas</a>
                     </li>
-				    <li>
+				    <!--<li>
                         <a href="/home/event">Eventos</a>
-                    </li>
+                    </li>-->
 
                     <li>
                         <a href="/home/company">Empresas</a>
@@ -132,6 +132,9 @@
 				<img src="/static/css/images/logo-footer.png" border="0" class="logo-footer">
 			</div>
 		</div>
+        <div class="logo-eokoe">
+            <a href="http://www.eokoe.com/?ref=donm" target="_blank"><img src="/static/css/images/developed_eokoe.png" border="0"></a>
+        </div>
 	</footer>
 	
     <!-- Core JavaScript Files -->
