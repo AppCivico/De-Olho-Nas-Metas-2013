@@ -1,17 +1,30 @@
+	[%-CALL assets.include("js/maps.js")%]
+	<script>
+	$(document).ready(function () {
+	 $("#homedistricts").change(function(){
+
+	   $.post( "/home/campaign/search_by_district", { district_id: $('#homedistricts option:selected').val() }, function( data ) {
+						$('#result').html(data);		
+				})
+
+		});
+	});
+
+	</script>
 	<section class="metas-filtro orange">
 		<div class="container">
 			<form>
 				<div class="col-sm-6 cep">
 					Encontre a campanha<br />
-					<input type="text" placeholder="CEP">
-					<button><span class="glyphicon glyphicon-search"></span></button>
+					<input type="text" id="txtaddress" placeholder="CEP">
 				</div>
 				<div class="col-sm-6">
 					<div class="row">
 						<div class="col-sm-12 region">
 							Filtrar Campanha<br />
 							<div class="select-stylized">
-							<select>
+							<input type="hidden" id="pagetype" value="campaignhome">
+							<select id="homedistricts">
  							<option value="">Distrito</option>
 							 [% FOREACH region IN regions %]
 								   <option value="[% region.id %]">[% region.name %]</option>
@@ -28,7 +41,7 @@
     </section>
 
     <section class="metas-result">
-		<div class="container">
+		<div id="result" class="container">
 
 			<h2 class="section-title">Participe das campanhas</h2>
 		

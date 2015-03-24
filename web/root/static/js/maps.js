@@ -704,7 +704,7 @@ var $maps = function () {
 }();
 
 $(document).ready(function () {
-	if ($("#pagetype").val() != 'homegoal' && $("#pagetype").val() != 'campaign_user'){	
+	if ($("#pagetype").val() != 'homegoal' && $("#pagetype").val() != 'campaign_user' && $("#pagetype").val() != 'campaigndetail' && $("#pagetype").val() != 'campaignhome') {	
 		$maps.initialize();
 	}
 	if ($("#pagetype").val() == 'home'){	
@@ -717,6 +717,12 @@ $(document).ready(function () {
 		$maps.markgoaldetail($("#goalid").val());
 	}	
 	if ($("#pagetype").val() == 'campaign_user'){
+		$maps.loadgeocoder();
+	}		
+	if ($("#pagetype").val() == 'campaignhome'){
+		$maps.loadgeocoder();
+	}		
+	if ($("#pagetype").val() == 'campaigndetail'){
 		$maps.loadgeocoder();
 	}		
 	if ($("#pagetype").val() == 'regiondetail'){
@@ -819,9 +825,14 @@ $(document).ready(function () {
 				document.getElementById("result").innerHTML=data
         	});
 		}
-
-		if ($("#pagetype").val() == 'goaldetail'){		
- 			$.get("/home/goal/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+ 		if ($("#pagetype").val() == 'campaignhome'){		
+ 			$.get("/home/campaign/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+   				$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
+				document.getElementById("result").innerHTML=data
+        	});
+		} 
+		if ($("#pagetype").val() == 'campaigndetail'){		
+ 			$.get("/home/campaign/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
    				$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
 				document.getElementById("result").innerHTML=data
         	});

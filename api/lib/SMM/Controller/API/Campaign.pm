@@ -114,7 +114,34 @@ sub list_GET {
     my ( $self, $c ) = @_;
 
     my $rs = $c->stash->{collection};
+    if ( $c->req->param('lnglat') ) {
+        $c->detach
+          unless $c->req->param('lnglat') =~
+          qr/^(\-?\d+(\.\d+)?)\ \s*(\-?\d+(\.\d+)?)$/;
+        my $lnglat = $c->req->param('lnglat');
 
+        my $region = $c->model('DB')->resultset('Region')->search_rs(
+
+            \[
+                q{ST_Intersects(me.geom::geography, ?::geography )},
+                [ _coords => qq{SRID=4326;POINT($lnglat)} ]
+            ],
+            {
+                select       => [qw/id/],
+                result_class => 'DBIx::Class::ResultClass::HashRefInflator',
+            }
+        )->single;
+        $self->status_bad_request(
+            $c, message => "NENHUMA CAMPANHA PRÓXIMA A LOCALIDADE",
+          ),
+          $c->detach
+          unless $region;
+        $rs = $rs->search( { 'region_id' => $region->{id} } );
+    }
+    if ( $c->req->param('district_id') ) {
+        $rs =
+          $rs->search( { 'me.region_id' => $c->req->param('district_id') } );
+    }
     if ( $c->req->param('user_id') ) {
         $rs = $rs->search( { 'me.user_id' => $c->req->param('user_id') } );
     }
