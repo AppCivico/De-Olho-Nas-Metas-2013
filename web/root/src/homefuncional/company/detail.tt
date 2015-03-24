@@ -35,7 +35,7 @@ $(document).ready(function () {
 								<tr>
 									<td>[% x.observation %]</td>
 									<td class="priceformat" width="80">[% x.dedicated_value %]</td>
-									[%IF bc.liquidated_value%]
+									[%IF x.liquidated_value%]
 										<td class="priceformat"  width="80">[%x.liquidated_value%]</td>
 									[%ELSE%]
 										<td width="80">--</td>
