@@ -213,6 +213,17 @@ $(document).ready(function () {
 					<div class="body">
 						<h4 class="subtitle green">Projeto</h4>
 						<h1>[% project_obj.name %]</h1>
+						<div class="share-buttons">
+							<div class="twitter">
+							<!-- Social plugins twitter-->
+							<a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt" data-hashtags="deolhonasmetas">Tweetar</a>
+							</div>
+							<div class="facebook">
+							<!-- Social plugin facebook -->
+							<div class="fb-share-button" data-href="http://deolhonasmetas.org.br/home/project/[%project_obj.id%]" data-layout="button_count"></div>
+							</div>
+						</div>
+						<br clear="all"/>
 						<p>
 							[% project_obj.description %]
 						</p>
@@ -221,36 +232,18 @@ $(document).ready(function () {
 					<div style="height: 300px;" id="map">
 					</div>
 					<div class="row social">
-						<div class="col-xs-4">
-<!--							<div class="social-share">
-								<ul>
-									<li class="twitter"><a href="">twitter</a></li>
-									<li class="facebook active"><a href="">facebook</a></li>
-									<li class="googleplus"><a href="">google+</a></li>
-								</ul>
-								<div class="clear"></div>
-							</div>-->
-						</div>
-						<div class="col-xs-4 text-center">
+						<div class="col-xs-6">
 							<div class="followers">
 								<div class="icon users2"></div> <span class="caption"><span class="counter">[% project_obj.follow_project %]</span> [% IF project_obj.follow_project > 1 %]seguidores [% ELSE %] seguidor [% END %]
 							</div>
 						</div>
 						
-						
-						<!-- Social plugins twitter-->
-						<a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt" data-hashtags="deolhonasmetas">Tweetar</a>
-						
-						<!-- Social plugin facebook -->
-						<div class="fb-share-button" data-href="http://deolhonasmetas.org.br/home/project/[%project_obj.id%]" data-layout="button_count"></div>
-						
-						
 						[% IF c.user%]
-						<div id="follow" class="col-xs-4 text-right">							
+						<div id="follow" class="col-xs-6 text-right">							
 							<button  type="button" id="follow_or_not" class="btn btn-brown [% do_i_follow > 0 ? "" : "follow"%]" data-id="[% c.user.obj.id%]" autocomplete="off"><span>[% do_i_follow > 0 ? "Parar de Seguir" : "Siga o Projeto" %]</span></button>
 						</div>
 						[%ELSE%]
-						<div id="follow" class="col-xs-4 text-right">							
+						<div id="follow" class="col-xs-6 text-right">							
 							<a class="btn btn-brown" href="/login">Siga o Projeto</a>
 						</div>
 

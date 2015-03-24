@@ -168,12 +168,6 @@ $(document).ready(function () {
 			</div>
 		</div>
     </section>
-    
-    <!-- Social plugins twitter-->
-	<a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt" data-hashtags="deolhonasmetas">Tweetar</a>
-	
-	<!-- Social plugin facebook -->
-	<div class="fb-share-button" data-href="http://deolhonasmetas.org.br/home/goal/[%goal_obj.id%]" data-layout="button_count"></div>
 
     <section class="project-detail metas-detail">
 		<div id="result" class="container">
@@ -186,8 +180,20 @@ $(document).ready(function () {
 						<p>
 							[% goal_obj.description %].
 						</p>
-					<h3>INVESTIMENTO TOTAL PREVISTO: <strong>R$<span class="priceformat">[% goal_obj.expected_budget %]</span></strong></h3>
+
+						<div class="share-buttons">
+							<div class="twitter">
+						    <!-- Social plugins twitter-->
+							<a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt" data-hashtags="deolhonasmetas">Tweetar</a>
+							</div>
+							<div class="facebook">
+							<!-- Social plugin facebook -->
+							<div class="fb-share-button" data-href="http://deolhonasmetas.org.br/home/goal/[%goal_obj.id%]" data-layout="button_count"></div>
+							</div>
+						</div>
+						<br clear="all"/>
 					</div>
+					<h3>INVESTIMENTO TOTAL PREVISTO: <strong>R$<span class="priceformat">[% goal_obj.expected_budget %]</span></strong></h3>
 <!--				<div class="timeline">
 						<h3 class="section-title">Linha do tempo segundo o cronograma</h3>
 						<div class="chart">

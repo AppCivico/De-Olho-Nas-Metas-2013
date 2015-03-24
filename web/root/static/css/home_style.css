@@ -412,7 +412,8 @@ footer .logo-eokoe{
 
 
 .metas-detail,
-section.page-login{
+section.page-login,
+section.campaign-result{
 	min-height: 75%;
 }
 
@@ -1617,4 +1618,14 @@ input#progress-value{
 .abc-list a{
 	padding: 10px;
 	font-size: 1.2em;
+}
+.share-buttons{
+	clear: both;
+}
+.share-buttons .facebook,
+.share-buttons .twitter{
+	float: left;
+}
+.share-buttons .facebook{
+	clear: right;
 }
