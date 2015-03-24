@@ -154,6 +154,58 @@ sub action_specs {
         },
     };
 }
+use Data::Section::Simple qw(get_data_section);
+use Template;
+
+use SMM::Mailer::Template;
+use DateTime::Format::Strptime;
+
+my $strp = DateTime::Format::Strptime->new(
+    pattern   => '%d/%m/%y %T',
+    locale    => 'pt_BR',
+    time_zone => 'local',
+);
+
+my $tt = Template->new();
+
+use DateTime;
+use MIME::Base64 qw(decode_base64);
+
+sub _build_email {
+    my ( $self, $email, $title, $content ) = @_;
+
+    my $data = '';
+
+    my $wrapper = get_data_section('body.tt');
+
+    my $env = {
+        year => DateTime->now( time_zone => 'local' )->year,
+
+        partner_name => 'b-metria',
+        url          => 'http://192.168.1.161:5040',
+        web_url      => 'http://192.168.1.161:5040',
+        title        => $title
+
+    };
+
+    my $processed_content = '';
+    $tt->process( \$content, $env, \$processed_content );
+    $tt->process( \$wrapper, { content => $processed_content, %$env }, \$data );
+
+    $email->attach(
+        Type => 'text/html; charset=UTF-8',
+        Data => $data,
+    );
+
+    $email->attach(
+        Type     => 'image/png',
+        Id       => 'logo.png',
+        Encoding => 'base64',
+        Data     => decode_base64( get_data_section('logo.png') ),
+    );
+    return $email;
+
+}
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;

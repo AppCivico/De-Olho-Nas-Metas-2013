@@ -1,4 +1,5 @@
 use utf8;
+
 package SMM::Schema::Result::Project;
 
 # Created by DBIx::Class::Schema::Loader
@@ -32,7 +33,8 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
+__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
+    "PassphraseColumn" );
 
 =head1 TABLE: C<project>
 
@@ -141,52 +143,52 @@ __PACKAGE__->table("project");
 =cut
 
 __PACKAGE__->add_columns(
-  "id",
-  {
-    data_type         => "integer",
-    is_auto_increment => 1,
-    is_nullable       => 0,
-    sequence          => "project_id_seq",
-  },
-  "name",
-  { data_type => "text", is_nullable => 0 },
-  "address",
-  { data_type => "text", is_nullable => 1 },
-  "latitude",
-  { data_type => "text", is_nullable => 1 },
-  "longitude",
-  { data_type => "text", is_nullable => 1 },
-  "budget_executed",
-  { data_type => "double precision", is_nullable => 1 },
-  "created_at",
-  {
-    data_type     => "timestamp",
-    default_value => \"current_timestamp",
-    is_nullable   => 1,
-    original      => { default_value => \"now()" },
-  },
-  "updated_at",
-  { data_type => "timestamp", is_nullable => 1 },
-  "region_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-  "project_number",
-  { data_type => "integer", is_nullable => 1 },
-  "qualitative_progress_6",
-  { data_type => "text", is_nullable => 1 },
-  "qualitative_progress_5",
-  { data_type => "text", is_nullable => 1 },
-  "qualitative_progress_4",
-  { data_type => "text", is_nullable => 1 },
-  "qualitative_progress_3",
-  { data_type => "text", is_nullable => 1 },
-  "qualitative_progress_2",
-  { data_type => "text", is_nullable => 1 },
-  "qualitative_progress_1",
-  { data_type => "text", is_nullable => 1 },
-  "percentage",
-  { data_type => "numeric", is_nullable => 1 },
-  "type",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+    "id",
+    {
+        data_type         => "integer",
+        is_auto_increment => 1,
+        is_nullable       => 0,
+        sequence          => "project_id_seq",
+    },
+    "name",
+    { data_type => "text", is_nullable => 0 },
+    "address",
+    { data_type => "text", is_nullable => 1 },
+    "latitude",
+    { data_type => "text", is_nullable => 1 },
+    "longitude",
+    { data_type => "text", is_nullable => 1 },
+    "budget_executed",
+    { data_type => "double precision", is_nullable => 1 },
+    "created_at",
+    {
+        data_type     => "timestamp",
+        default_value => \"current_timestamp",
+        is_nullable   => 1,
+        original      => { default_value => \"now()" },
+    },
+    "updated_at",
+    { data_type => "timestamp", is_nullable => 1 },
+    "region_id",
+    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+    "project_number",
+    { data_type => "integer", is_nullable => 1 },
+    "qualitative_progress_6",
+    { data_type => "text", is_nullable => 1 },
+    "qualitative_progress_5",
+    { data_type => "text", is_nullable => 1 },
+    "qualitative_progress_4",
+    { data_type => "text", is_nullable => 1 },
+    "qualitative_progress_3",
+    { data_type => "text", is_nullable => 1 },
+    "qualitative_progress_2",
+    { data_type => "text", is_nullable => 1 },
+    "qualitative_progress_1",
+    { data_type => "text", is_nullable => 1 },
+    "percentage",
+    { data_type => "numeric", is_nullable => 1 },
+    "type",
+    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -212,10 +214,10 @@ Related object: L<SMM::Schema::Result::CommentProject>
 =cut
 
 __PACKAGE__->has_many(
-  "comment_projects",
-  "SMM::Schema::Result::CommentProject",
-  { "foreign.project_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "comment_projects",
+    "SMM::Schema::Result::CommentProject",
+    { "foreign.project_id" => "self.id" },
+    { cascade_copy         => 0, cascade_delete => 0 },
 );
 
 =head2 goal_projects
@@ -227,10 +229,10 @@ Related object: L<SMM::Schema::Result::GoalProject>
 =cut
 
 __PACKAGE__->has_many(
-  "goal_projects",
-  "SMM::Schema::Result::GoalProject",
-  { "foreign.project_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "goal_projects",
+    "SMM::Schema::Result::GoalProject",
+    { "foreign.project_id" => "self.id" },
+    { cascade_copy         => 0, cascade_delete => 0 },
 );
 
 =head2 images_projects
@@ -242,10 +244,10 @@ Related object: L<SMM::Schema::Result::ImagesProject>
 =cut
 
 __PACKAGE__->has_many(
-  "images_projects",
-  "SMM::Schema::Result::ImagesProject",
-  { "foreign.project_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "images_projects",
+    "SMM::Schema::Result::ImagesProject",
+    { "foreign.project_id" => "self.id" },
+    { cascade_copy         => 0, cascade_delete => 0 },
 );
 
 =head2 project_events
@@ -257,10 +259,10 @@ Related object: L<SMM::Schema::Result::ProjectEvent>
 =cut
 
 __PACKAGE__->has_many(
-  "project_events",
-  "SMM::Schema::Result::ProjectEvent",
-  { "foreign.project_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "project_events",
+    "SMM::Schema::Result::ProjectEvent",
+    { "foreign.project_id" => "self.id" },
+    { cascade_copy         => 0, cascade_delete => 0 },
 );
 
 =head2 project_images
@@ -272,10 +274,10 @@ Related object: L<SMM::Schema::Result::ProjectImage>
 =cut
 
 __PACKAGE__->has_many(
-  "project_images",
-  "SMM::Schema::Result::ProjectImage",
-  { "foreign.project_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "project_images",
+    "SMM::Schema::Result::ProjectImage",
+    { "foreign.project_id" => "self.id" },
+    { cascade_copy         => 0, cascade_delete => 0 },
 );
 
 =head2 project_milestones
@@ -287,10 +289,10 @@ Related object: L<SMM::Schema::Result::ProjectMilestone>
 =cut
 
 __PACKAGE__->has_many(
-  "project_milestones",
-  "SMM::Schema::Result::ProjectMilestone",
-  { "foreign.project_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "project_milestones",
+    "SMM::Schema::Result::ProjectMilestone",
+    { "foreign.project_id" => "self.id" },
+    { cascade_copy         => 0, cascade_delete => 0 },
 );
 
 =head2 project_prefectures
@@ -302,10 +304,10 @@ Related object: L<SMM::Schema::Result::ProjectPrefecture>
 =cut
 
 __PACKAGE__->has_many(
-  "project_prefectures",
-  "SMM::Schema::Result::ProjectPrefecture",
-  { "foreign.project_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "project_prefectures",
+    "SMM::Schema::Result::ProjectPrefecture",
+    { "foreign.project_id" => "self.id" },
+    { cascade_copy         => 0, cascade_delete => 0 },
 );
 
 =head2 project_progresses
@@ -317,10 +319,10 @@ Related object: L<SMM::Schema::Result::ProjectProgress>
 =cut
 
 __PACKAGE__->has_many(
-  "project_progresses",
-  "SMM::Schema::Result::ProjectProgress",
-  { "foreign.project_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "project_progresses",
+    "SMM::Schema::Result::ProjectProgress",
+    { "foreign.project_id" => "self.id" },
+    { cascade_copy         => 0, cascade_delete => 0 },
 );
 
 =head2 project_regions
@@ -332,10 +334,10 @@ Related object: L<SMM::Schema::Result::ProjectRegion>
 =cut
 
 __PACKAGE__->has_many(
-  "project_regions",
-  "SMM::Schema::Result::ProjectRegion",
-  { "foreign.project_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "project_regions",
+    "SMM::Schema::Result::ProjectRegion",
+    { "foreign.project_id" => "self.id" },
+    { cascade_copy         => 0, cascade_delete => 0 },
 );
 
 =head2 region
@@ -347,15 +349,15 @@ Related object: L<SMM::Schema::Result::Region>
 =cut
 
 __PACKAGE__->belongs_to(
-  "region",
-  "SMM::Schema::Result::Region",
-  { id => "region_id" },
-  {
-    is_deferrable => 0,
-    join_type     => "LEFT",
-    on_delete     => "NO ACTION",
-    on_update     => "NO ACTION",
-  },
+    "region",
+    "SMM::Schema::Result::Region",
+    { id => "region_id" },
+    {
+        is_deferrable => 0,
+        join_type     => "LEFT",
+        on_delete     => "NO ACTION",
+        on_update     => "NO ACTION",
+    },
 );
 
 =head2 type
@@ -367,15 +369,15 @@ Related object: L<SMM::Schema::Result::ProjectType>
 =cut
 
 __PACKAGE__->belongs_to(
-  "type",
-  "SMM::Schema::Result::ProjectType",
-  { id => "type" },
-  {
-    is_deferrable => 0,
-    join_type     => "LEFT",
-    on_delete     => "NO ACTION",
-    on_update     => "NO ACTION",
-  },
+    "type",
+    "SMM::Schema::Result::ProjectType",
+    { id => "type" },
+    {
+        is_deferrable => 0,
+        join_type     => "LEFT",
+        on_delete     => "NO ACTION",
+        on_update     => "NO ACTION",
+    },
 );
 
 =head2 user_follow_projects
@@ -387,12 +389,11 @@ Related object: L<SMM::Schema::Result::UserFollowProject>
 =cut
 
 __PACKAGE__->has_many(
-  "user_follow_projects",
-  "SMM::Schema::Result::UserFollowProject",
-  { "foreign.project_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "user_follow_projects",
+    "SMM::Schema::Result::UserFollowProject",
+    { "foreign.project_id" => "self.id" },
+    { cascade_copy         => 0, cascade_delete => 0 },
 );
-
 
 # Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-03-24 03:05:02
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:oMlRn50EPVTBcJEgY6ujMQ
@@ -400,29 +401,31 @@ __PACKAGE__->has_many(
 __PACKAGE__->has_many(
     approved_comments => 'SMM::Schema::Result::CommentProject',
     sub {
-      my $args = shift;
+        my $args = shift;
 
-      return {
-        "$args->{foreign_alias}.project_id" => { -ident => "$args->{self_alias}.id" },
-        "$args->{foreign_alias}.approved"   => 1,
-      };
+        return {
+            "$args->{foreign_alias}.project_id" =>
+              { -ident => "$args->{self_alias}.id" },
+            "$args->{foreign_alias}.approved" => 1,
+        };
     },
     { cascade_copy => 0, cascade_delete => 0 },
-  );
+);
 
 __PACKAGE__->has_many(
     approved_project_events => 'SMM::Schema::Result::ProjectEvent',
     sub {
-      my $args = shift;
+        my $args = shift;
 
-      return {
-        "$args->{foreign_alias}.project_id" => { -ident => "$args->{self_alias}.id" },
-        "$args->{foreign_alias}.approved"   => 1,
-      };
+        return {
+            "$args->{foreign_alias}.project_id" =>
+              { -ident => "$args->{self_alias}.id" },
+            "$args->{foreign_alias}.approved" => 1,
+        };
     },
     { cascade_copy => 0, cascade_delete => 0 },
-  );
-__PACKAGE__->many_to_many( goals => goal_projects => 'goal');
+);
+__PACKAGE__->many_to_many( goals => goal_projects => 'goal' );
 
 __PACKAGE__->many_to_many( prefectures => project_prefectures => 'prefecture' );
 
@@ -476,7 +479,6 @@ sub action_specs {
 
     };
 }
-
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;

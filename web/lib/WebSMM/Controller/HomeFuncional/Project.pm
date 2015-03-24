@@ -69,8 +69,7 @@ sub detail : Chained('object') : PathPart('') : Args(0) {
     $c->stash->{project_obj}->{progress_count} = $count;
     use DDP;
     p $c->stash->{project_obj};
-
-    warn "LOLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL";
+    warn "lol";
 }
 
 sub index : Chained('base') : PathPart('') : Args(0) {
