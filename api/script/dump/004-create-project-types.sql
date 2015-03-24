@@ -10,3 +10,6 @@ alter table campaign add column region_id integer references region(id);
 ALTER TABLE CAMPAIGN add column address text;
 alter table campaign add column latitude text;
 alter table campaign add column longitude text;
+alter table project add column percentage numeric;
+alter table project add column type integer;
+
