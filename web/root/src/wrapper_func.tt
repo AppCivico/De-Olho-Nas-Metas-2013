@@ -27,6 +27,8 @@
     <link href="/static/js/jquery.upload/css/jquery.fileupload.css" rel="stylesheet">
     <link href="/static/js/clndr/styles/clndr.css" rel="stylesheet" />
     <link href="/static/css/home_style.css" rel="stylesheet">
+    <link href="/static/css/images/favicon.png" rel="icon" type="image/x-icon" />
+    <link href="/static/css/images/favicon.png" rel="shortcut icon" type="image/x-icon" />
 </head>
 
     <script src="/static/js/jquery-1.10.2.min.js"></script>

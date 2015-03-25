@@ -1629,3 +1629,7 @@ input#progress-value{
 .share-buttons .facebook{
 	clear: right;
 }
+.sobre p,
+.faq p{
+	text-align: justify;
+}
