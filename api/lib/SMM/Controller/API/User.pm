@@ -145,7 +145,7 @@ sub list_GET {
     if ( $c->req->params->{role} ) {
         $conditions = {
             'role.id' => $c->req->params->{role} == 99
-            ? { 'in' => [ 1, 4, 5, 6, 8, 11, 12 ] }
+            ? { 'in' => [ 1, 3, 4, 5, 6, 8, 11, 12 ] }
             : $c->req->params
               ->{role} #administrative roles, 99 is just to de    fine the undefined
         };
@@ -231,10 +231,12 @@ sub counsil_POST {
     my $user_counsil =
       $user->user_follow_counsils->search( { counsil_id => $id } )
       ->update( { active => 0 } );
-		
+
     my $counsil_count =
-      $c->model('DB::UserFollowCounsil')->search( { counsil_id => $id , active => 1 } )->count;
-	use DDP; p $counsil_count;
+      $c->model('DB::UserFollowCounsil')
+      ->search( { counsil_id => $id, active => 1 } )->count;
+    use DDP;
+    p $counsil_count;
     $self->status_accepted( $c, entity => { counsil_count => $counsil_count } );
 
 }
