@@ -59,7 +59,7 @@ while (1) {
                         push @others, qw/staff@b-cam.com.br/;
                     }
                     else {
-                        push @others, qw/renatocron@b-cam.com.br/;
+                        push @others, qw/renan.carvalho@eokoe.com/;
                     }
 
                     print DateTime->now( time_zone => 'local' )

@@ -12,7 +12,7 @@ BEGIN {
     $password = $ENV{SENDGRID_PASSWORD} || die 'ENV SENDGRID_PASSWORD MISSING';
 }
 
-has from      => ( is => 'ro', default    => 'no-reply@b-metria.com.br' );
+has from      => ( is => 'ro', default    => 'no-reply@deolhonasmetas.com.br' );
 has transport => ( is => 'ro', lazy_build => 1 );
 
 sub _build_transport {

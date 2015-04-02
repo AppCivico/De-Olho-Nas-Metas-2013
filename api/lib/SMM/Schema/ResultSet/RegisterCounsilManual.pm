@@ -79,7 +79,7 @@ sub action_specs {
                 {
                     phone_number => $values{phone_number},
                     council      => $values{council},
-                    email        => 'renan.azevedo.carvalho@gmail.com',
+                    email        => 'clara@isps.org.br',
                     name         => $values{name}
                 }
             );
