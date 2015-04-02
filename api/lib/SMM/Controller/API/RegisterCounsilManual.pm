@@ -34,13 +34,6 @@ sub email_POST {
     my $dm = $c->stash->{collection}
       ->execute( $c, for => 'create', with => $c->req->params );
 
-    # $self->status_bad_request( $c, message => encode_json( $dm->errors ) ),
-    #   $c->detach
-    #   unless $dm->success;
-
-#my $outcome = eval { $dm->get_outcome_for('user.forgot_password.email') };
-# $c->model('Logger')->( 'sys', "E-mail " . $c->req->param('email') . " requisitou troca de senha.", 'update' );
-
     $self->status_ok( $c, entity => { message => 'ok' } );
 }
 

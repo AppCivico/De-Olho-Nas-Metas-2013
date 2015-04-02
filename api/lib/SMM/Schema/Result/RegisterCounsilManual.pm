@@ -181,7 +181,7 @@ sub _build_email {
     my $env = {
         year => DateTime->now( time_zone => 'local' )->year,
 
-        partner_name => 'b-metria',
+        partner_name => 'deolhonasmetas',
         url          => 'http://192.168.1.161:5040',
         web_url      => 'http://192.168.1.161:5040',
         title        => $title
@@ -197,12 +197,6 @@ sub _build_email {
         Data => $data,
     );
 
-    $email->attach(
-        Type     => 'image/png',
-        Id       => 'logo.png',
-        Encoding => 'base64',
-        Data     => decode_base64( get_data_section('logo.png') ),
-    );
     return $email;
 
 }
@@ -210,3 +204,48 @@ sub _build_email {
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;
 1;
+
+__DATA__
+
+
+@@ body.tt
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>De Olho Nas Metas: Informativo</title>
+</head>
+<body style="padding: 0; margin: 0; background-color: #FAFAFA;">
+<table cellspacing="0" cellpadding="0" border="0" width="100%" height="100%" style="background-color: #FAFAFA;">
+    <tr>
+        <td align="center" vertical-align="top">
+      <table cellspacing="0" cellpadding="6" border="0" width="638">
+        <tr>
+          <td align="center" vertical-align="top" style="background-color: #00a99d;">
+            <!--// header //-->
+
+            <table cellspacing="0" cellpadding="0" border="0">
+              <tr>
+                <td style="background-color: #ffffff; text-align: left;" bgcolor="#ffffff" width="638">
+                  <table border="0" width="100%"><tr><td>
+                    <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                      <tr>
+                        <td style="vertical-align: top; padding: 50px;font-family: arial, verdana;">
+                            [%content%]
+                        </td>
+                      </tr>
+                    </table>
+                  </td></tr></table>
+                </td>
+              </tr>            </table> 
+            </table> 
+
+          </td>
+        </tr>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
