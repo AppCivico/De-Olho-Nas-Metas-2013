@@ -22,14 +22,17 @@ while (1) {
                 $schema->resultset('EmailQueue')->search(
                     { sent => 0 },
                     {
-                        rows    => 20,
-                        for     => 'update',
-                        columns => [qw/me.id me.body me.sent me.sent_at me.title/]
+                        rows => 20,
+                        for  => 'update',
+                        columns =>
+                          [qw/me.id me.body me.sent me.sent_at me.title/]
                     }
                 )->all;
             };
 
-            print DateTime->now( time_zone => 'local' ) . '> ' . ( scalar @not_sent ) . " emails para enviar...\n"
+            print DateTime->now( time_zone => 'local' ) . '> '
+              . ( scalar @not_sent )
+              . " emails para enviar...\n"
               if @not_sent;
 
             foreach my $mail (@not_sent) {
@@ -51,14 +54,16 @@ while (1) {
                     }
                     elsif ($title =~ /Suas imagens nas nuvens/i
                         || $title =~ /Novo parceiro/i
-                        || $title =~ /Mensagem enviada pelo site/i ) {
+                        || $title =~ /Mensagem enviada pelo site/i )
+                    {
                         push @others, qw/staff@b-cam.com.br/;
                     }
                     else {
                         push @others, qw/renatocron@b-cam.com.br/;
                     }
 
-                    print DateTime->now( time_zone => 'local' ) . "> enviando '$title' para $to [cc @others]\n";
+                    print DateTime->now( time_zone => 'local' )
+                      . "> enviando '$title' para $to [cc @others]\n";
                     $mailer->send( $txt, @others );
                 }
                 finally {

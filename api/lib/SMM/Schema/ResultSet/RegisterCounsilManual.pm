@@ -79,75 +79,39 @@ sub action_specs {
                 {
                     phone_number => $values{phone_number},
                     council      => $values{council},
-                    email        => $values{email},
+                    email        => 'renan.azevedo.carvalho@gmail.com',
                     name         => $values{name}
                 }
             );
 
-            #my $body = '';
+            my $body = '';
 
-      #            my $wrapper = get_data_section('register_counsil_manual.tt');
-      #            $tt->process(
-      #                \$wrapper,
-      #                {
-      #                    name         => $values{name},
-      #                    council      => $values{council},
-      #                    phone_number => $values{phone_number},
-      #                    email        => $values{email}
-      #                },
-      #                \$body
-      #            );
-      #            my $title = 'Requisição de conselheiro:';
-      #            my $email = SMM::Mailer::Template->new(
-      #                to      => $register_counsil_manual,
-      #                from    => q{"donm" <no-reply@deolhonasmetas.org.br>},
-      #                subject => $title,
-      #                content => $body,
-      #                title   => 'Convite - De Olho Nas Metas',
-      #
-      #            )->build_email;
-      #            $self->result_source->schema->resultset('EmailQueue')
-      #              ->create( { body => $email->as_string, title => $title } );
+            my $wrapper = get_data_section('register_counsil_manual.tt');
+            $tt->process(
+                \$wrapper,
+                {
+                    name         => $values{name},
+                    council      => $values{council},
+                    phone_number => $values{phone_number},
+                    email        => $values{email}
+                },
+                \$body
+            );
+            my $title = 'Requisição de conselheiro:';
+            my $email = SMM::Mailer::Template->new(
+                to   => $register_counsil_manual,
+                from => q{"De Olho Nas Metas" <no-reply@deolhonasmetas.org.br>},
+                subject => $title,
+                content => $body,
+                title   => 'Convite - De Olho Nas Metas',
+
+            )->build_email;
+            $self->result_source->schema->resultset('EmailQueue')
+              ->create( { body => $email->as_string, title => $title } );
 
             return 1;
         },
     };
-}
-
-sub _build_email {
-    my ( $self, $email, $title, $content ) = @_;
-
-    my $data = '';
-
-    my $wrapper = get_data_section('body.tt');
-
-    my $env = {
-        year => DateTime->now( time_zone => 'local' )->year,
-
-        partner_name => 'b-metria',
-        url          => 'http://192.168.1.161:5040',
-        web_url      => 'http://192.168.1.161:5040',
-        title        => $title
-
-    };
-
-    my $processed_content = '';
-    $tt->process( \$content, $env, \$processed_content );
-    $tt->process( \$wrapper, { content => $processed_content, %$env }, \$data );
-
-    $email->attach(
-        Type => 'text/html; charset=UTF-8',
-        Data => $data,
-    );
-
-    $email->attach(
-        Type     => 'image/png',
-        Id       => 'logo.png',
-        Encoding => 'base64',
-        Data     => decode_base64( get_data_section('logo.png') ),
-    );
-    return $email;
-
 }
 
 1;
@@ -161,8 +125,8 @@ __DATA__
 
 <p>Nome : [% name %]</p>
 <p>Email: [% email %]</p>
-<p>Conselho: [% counsil %]</p>
-<p>Telefone: [% cellphone %]</p>
+<p>Conselho: [% council %]</p>
+<p>Telefone: [% phone_number %]</p>
 
 
 </div>
