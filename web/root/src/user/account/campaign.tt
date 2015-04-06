@@ -6,6 +6,8 @@
 [%-CALL assets.include("js/Moment.js")%]
 [%-CALL assets.include("css/bootstrap-datetimepicker.css")%]
 [%-CALL assets.include("js/bootstrap-datetimepicker.min.js")%]
+[%-CALL assets.include("js/tinyeditor/tiny.editor.css")%]
+<script type="text/javascript" src="/static/js/tinyeditor/tiny.editor.js"></script>
 <script>
 jQuery(function($){
    $('.datepicker').datepicker();
@@ -23,6 +25,10 @@ jQuery(function($){
             element.mask("(99) 9999-9999?9");
         }
     }).trigger('focusout');
+
+   $("#tab-cadastrar input[type=submit]").click(function(e){
+   	editor.post();
+   });
 });
 
 </script>
@@ -92,6 +98,35 @@ jQuery(function($){
 										[%input_text('name','Nome:', req=>1)|none%]
 									
 										[%input_text('description','Descrição:', req=>1, textbox=>1)|none%]
+						                <script>
+						                    var editor = new TINY.editor.edit('editor', {
+						                        id: 'elm_description',
+						                        width: '100%',
+						                        height: '120',
+						                        cssclass: 'tinyeditor',
+						                        controlclass: 'tinyeditor-control',
+						                        rowclass: 'tinyeditor-header',
+						                        dividerclass: 'tinyeditor-divider',
+						                        controls: ['bold', 'italic', 'underline', 'strikethrough', '|', 'subscript', 'superscript', '|',
+						                            'orderedlist', 'unorderedlist', '|', 'outdent', 'indent', '|', 'leftalign',
+						                            'centeralign', 'rightalign', 'blockjustify', '|', 'unformat', '|', 'undo', 'redo', 'n',
+						                            'size', 'style', '|', 'image', 'hr', 'link', 'unlink'
+						                        ],
+						                        footer: true,
+						                        fonts: ['Asap'],
+						                        xhtml: true,
+						                        bodyid: 'editor',
+						                        footerclass: 'tinyeditor-footer',
+						                        toggle: {
+						                            text: 'código-fonte',
+						                            activetext: 'wysiwyg',
+						                            cssclass: 'toggle'
+						                        },
+						                        resize: {
+						                            cssclass: 'resize'
+						                        }
+						                    });
+						                </script>
 									<div class="row">
 										<div class="col-sm-6">
 	            								[%input_text('start_in','Data Começo:', classes => ['span3', 'date' ,'datepicker'], req => 0)|none%]
