@@ -114,13 +114,15 @@ sub action_specs {
             my %values = shift->valid_values;
 
             delete $values{password_confirm};
-
+            use DDP;
+            p %values;
             $values{email} = lc $values{email};
             my $role = delete $values{role};
             my $hash = delete $values{hash};
-			if ($hash){
-				$self->resultset('InviteCounsil')->search({ hash => $hash})->update({ valid_until => 0});
-			}
+            if ($hash) {
+                $self->resultset('InviteCounsil')->search( { hash => $hash } )
+                  ->update( { valid_until => 0 } );
+            }
             my $user = $self->create( \%values );
             if ($role) {
                 $user->set_roles( { name => $role } );
@@ -133,4 +135,3 @@ sub action_specs {
 }
 
 1;
-

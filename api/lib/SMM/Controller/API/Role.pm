@@ -92,7 +92,7 @@ sub list_GET {
             }
         );
     }
-
+    $rs = $rs->search( undef, { order_by => [qw/me.name/] } );
     $self->status_ok(
         $c,
         entity => {

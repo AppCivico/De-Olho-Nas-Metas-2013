@@ -1,4 +1,5 @@
 use utf8;
+
 package SMM::Schema::Result::User;
 
 # Created by DBIx::Class::Schema::Loader
@@ -32,7 +33,8 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
+__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
+    "PassphraseColumn" );
 
 =head1 TABLE: C<user>
 
@@ -113,40 +115,40 @@ __PACKAGE__->table("user");
 =cut
 
 __PACKAGE__->add_columns(
-  "id",
-  {
-    data_type         => "integer",
-    is_auto_increment => 1,
-    is_nullable       => 0,
-    sequence          => "user_id_seq",
-  },
-  "name",
-  { data_type => "text", is_nullable => 0 },
-  "email",
-  { data_type => "text", is_nullable => 0 },
-  "active",
-  { data_type => "boolean", default_value => \"true", is_nullable => 0 },
-  "created_at",
-  {
-    data_type     => "timestamp",
-    default_value => \"current_timestamp",
-    is_nullable   => 0,
-    original      => { default_value => \"now()" },
-  },
-  "password",
-  { data_type => "text", is_nullable => 0 },
-  "created_by",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-  "type",
-  { data_type => "varchar", is_nullable => 1, size => 12 },
-  "organization_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-  "username",
-  { data_type => "text", is_nullable => 1 },
-  "phone_number",
-  { data_type => "text", is_nullable => 1 },
-  "image_perfil",
-  { data_type => "text", is_nullable => 1 },
+    "id",
+    {
+        data_type         => "integer",
+        is_auto_increment => 1,
+        is_nullable       => 0,
+        sequence          => "user_id_seq",
+    },
+    "name",
+    { data_type => "text", is_nullable => 0 },
+    "email",
+    { data_type => "text", is_nullable => 0 },
+    "active",
+    { data_type => "boolean", default_value => \"true", is_nullable => 0 },
+    "created_at",
+    {
+        data_type     => "timestamp",
+        default_value => \"current_timestamp",
+        is_nullable   => 0,
+        original      => { default_value => \"now()" },
+    },
+    "password",
+    { data_type => "text", is_nullable => 0 },
+    "created_by",
+    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+    "type",
+    { data_type => "varchar", is_nullable => 1, size => 12 },
+    "organization_id",
+    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+    "username",
+    { data_type => "text", is_nullable => 1 },
+    "phone_number",
+    { data_type => "text", is_nullable => 1 },
+    "image_perfil",
+    { data_type => "text", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -173,7 +175,7 @@ __PACKAGE__->set_primary_key("id");
 
 =cut
 
-__PACKAGE__->add_unique_constraint("user_email_key", ["email"]);
+__PACKAGE__->add_unique_constraint( "user_email_key", ["email"] );
 
 =head2 C<user_username_key>
 
@@ -185,7 +187,7 @@ __PACKAGE__->add_unique_constraint("user_email_key", ["email"]);
 
 =cut
 
-__PACKAGE__->add_unique_constraint("user_username_key", ["username"]);
+__PACKAGE__->add_unique_constraint( "user_username_key", ["username"] );
 
 =head1 RELATIONS
 
@@ -198,10 +200,10 @@ Related object: L<SMM::Schema::Result::Campaign>
 =cut
 
 __PACKAGE__->has_many(
-  "campaigns",
-  "SMM::Schema::Result::Campaign",
-  { "foreign.user_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "campaigns",
+    "SMM::Schema::Result::Campaign",
+    { "foreign.user_id" => "self.id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 =head2 comment_goals
@@ -213,10 +215,10 @@ Related object: L<SMM::Schema::Result::CommentGoal>
 =cut
 
 __PACKAGE__->has_many(
-  "comment_goals",
-  "SMM::Schema::Result::CommentGoal",
-  { "foreign.user_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "comment_goals",
+    "SMM::Schema::Result::CommentGoal",
+    { "foreign.user_id" => "self.id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 =head2 comment_projects
@@ -228,10 +230,10 @@ Related object: L<SMM::Schema::Result::CommentProject>
 =cut
 
 __PACKAGE__->has_many(
-  "comment_projects",
-  "SMM::Schema::Result::CommentProject",
-  { "foreign.user_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "comment_projects",
+    "SMM::Schema::Result::CommentProject",
+    { "foreign.user_id" => "self.id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 =head2 created_by
@@ -243,15 +245,15 @@ Related object: L<SMM::Schema::Result::User>
 =cut
 
 __PACKAGE__->belongs_to(
-  "created_by",
-  "SMM::Schema::Result::User",
-  { id => "created_by" },
-  {
-    is_deferrable => 0,
-    join_type     => "LEFT",
-    on_delete     => "NO ACTION",
-    on_update     => "NO ACTION",
-  },
+    "created_by",
+    "SMM::Schema::Result::User",
+    { id => "created_by" },
+    {
+        is_deferrable => 0,
+        join_type     => "LEFT",
+        on_delete     => "NO ACTION",
+        on_update     => "NO ACTION",
+    },
 );
 
 =head2 email_queues
@@ -263,10 +265,10 @@ Related object: L<SMM::Schema::Result::EmailQueue>
 =cut
 
 __PACKAGE__->has_many(
-  "email_queues",
-  "SMM::Schema::Result::EmailQueue",
-  { "foreign.recipient_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "email_queues",
+    "SMM::Schema::Result::EmailQueue",
+    { "foreign.recipient_id" => "self.id" },
+    { cascade_copy           => 0, cascade_delete => 0 },
 );
 
 =head2 events
@@ -278,10 +280,9 @@ Related object: L<SMM::Schema::Result::Event>
 =cut
 
 __PACKAGE__->has_many(
-  "events",
-  "SMM::Schema::Result::Event",
-  { "foreign.user_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "events", "SMM::Schema::Result::Event",
+    { "foreign.user_id" => "self.id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 =head2 goals
@@ -293,10 +294,9 @@ Related object: L<SMM::Schema::Result::Goal>
 =cut
 
 __PACKAGE__->has_many(
-  "goals",
-  "SMM::Schema::Result::Goal",
-  { "foreign.user_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "goals", "SMM::Schema::Result::Goal",
+    { "foreign.user_id" => "self.id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 =head2 organization
@@ -308,15 +308,15 @@ Related object: L<SMM::Schema::Result::Organization>
 =cut
 
 __PACKAGE__->belongs_to(
-  "organization",
-  "SMM::Schema::Result::Organization",
-  { id => "organization_id" },
-  {
-    is_deferrable => 0,
-    join_type     => "LEFT",
-    on_delete     => "NO ACTION",
-    on_update     => "NO ACTION",
-  },
+    "organization",
+    "SMM::Schema::Result::Organization",
+    { id => "organization_id" },
+    {
+        is_deferrable => 0,
+        join_type     => "LEFT",
+        on_delete     => "NO ACTION",
+        on_update     => "NO ACTION",
+    },
 );
 
 =head2 project_events
@@ -328,10 +328,10 @@ Related object: L<SMM::Schema::Result::ProjectEvent>
 =cut
 
 __PACKAGE__->has_many(
-  "project_events",
-  "SMM::Schema::Result::ProjectEvent",
-  { "foreign.user_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "project_events",
+    "SMM::Schema::Result::ProjectEvent",
+    { "foreign.user_id" => "self.id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 =head2 project_events_read
@@ -343,10 +343,10 @@ Related object: L<SMM::Schema::Result::ProjectEventRead>
 =cut
 
 __PACKAGE__->has_many(
-  "project_events_read",
-  "SMM::Schema::Result::ProjectEventRead",
-  { "foreign.user_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "project_events_read",
+    "SMM::Schema::Result::ProjectEventRead",
+    { "foreign.user_id" => "self.id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 =head2 user_follow_counsils
@@ -358,10 +358,10 @@ Related object: L<SMM::Schema::Result::UserFollowCounsil>
 =cut
 
 __PACKAGE__->has_many(
-  "user_follow_counsils",
-  "SMM::Schema::Result::UserFollowCounsil",
-  { "foreign.user_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "user_follow_counsils",
+    "SMM::Schema::Result::UserFollowCounsil",
+    { "foreign.user_id" => "self.id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 =head2 user_follow_projects
@@ -373,10 +373,10 @@ Related object: L<SMM::Schema::Result::UserFollowProject>
 =cut
 
 __PACKAGE__->has_many(
-  "user_follow_projects",
-  "SMM::Schema::Result::UserFollowProject",
-  { "foreign.user_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "user_follow_projects",
+    "SMM::Schema::Result::UserFollowProject",
+    { "foreign.user_id" => "self.id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 =head2 user_roles
@@ -388,10 +388,10 @@ Related object: L<SMM::Schema::Result::UserRole>
 =cut
 
 __PACKAGE__->has_many(
-  "user_roles",
-  "SMM::Schema::Result::UserRole",
-  { "foreign.user_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "user_roles",
+    "SMM::Schema::Result::UserRole",
+    { "foreign.user_id" => "self.id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 =head2 user_sessions
@@ -403,10 +403,10 @@ Related object: L<SMM::Schema::Result::UserSession>
 =cut
 
 __PACKAGE__->has_many(
-  "user_sessions",
-  "SMM::Schema::Result::UserSession",
-  { "foreign.user_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "user_sessions",
+    "SMM::Schema::Result::UserSession",
+    { "foreign.user_id" => "self.id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 =head2 users
@@ -418,12 +418,10 @@ Related object: L<SMM::Schema::Result::User>
 =cut
 
 __PACKAGE__->has_many(
-  "users",
-  "SMM::Schema::Result::User",
-  { "foreign.created_by" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "users", "SMM::Schema::Result::User",
+    { "foreign.created_by" => "self.id" },
+    { cascade_copy         => 0, cascade_delete => 0 },
 );
-
 
 # Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-12 13:18:06
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:tPMM/Rr8iTA7C2/fHNK/mQ
@@ -501,15 +499,16 @@ sub verifiers_specs {
                         return 1;
                     }
                 },
-				current_password => {
+                current_password => {
                     required   => 0,
                     type       => 'Str',
                     post_check => sub {
                         my $r = shift;
-                        return $self->check_password( $r->get_value('current_password') );
+                        return $self->check_password(
+                            $r->get_value('current_password') );
                     },
                 },
- 
+
                 password => {
                     required   => 0,
                     type       => 'Str',
@@ -523,8 +522,10 @@ sub verifiers_specs {
                     },
                     post_check => sub {
                         my $r = shift;
-                        return $r->get_value('password') eq $r->get_value('password_confirm')
-                          && $self->check_password( $r->get_value('current_password') );
+                        return $r->get_value('password') eq
+                          $r->get_value('password_confirm')
+                          && $self->check_password(
+                            $r->get_value('current_password') );
                     },
                 },
             },
@@ -541,13 +542,15 @@ sub action_specs {
 
             not defined $values{$_} and delete $values{$_} for keys %values;
 
-			delete $values{password_confirm};
+            delete $values{password_confirm};
             delete $values{current_password};
 
-            my $new_role = delete $values{role};
+            my $new_role = delete $values{roles};
 
             my $user = $self->update( \%values );
-            $user->set_roles( { name => $new_role } ) if $new_role;
+            use DDP;
+            p $new_role;
+            $user->set_roles( { id => $new_role } ) if $new_role;
             return $user;
         },
 
@@ -558,4 +561,3 @@ sub action_specs {
 __PACKAGE__->meta->make_immutable;
 
 1;
-
