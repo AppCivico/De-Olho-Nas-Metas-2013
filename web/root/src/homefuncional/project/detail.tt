@@ -348,7 +348,7 @@ $(document).ready(function () {
 							</div>
 							<div class="contents">
 								[% FOR img IN project_obj.images%]
-								<a href="[% img.name_image %]" data-lightbox="gallery" data-title="[% img.description %]"><img src="[% img.name_image%]"></a>
+								<a href="[% img.name_image %]" data-lightbox="gallery" data-title="Descrição: [% img.description %]<br>Enviado por: "><img src="[% img.name_image%]"></a>
 								[% END %]
 							</div>
 							<div class="arrow right">
@@ -500,7 +500,7 @@ $(document).ready(function () {
             <span class="preview"></span>
         </td>
         <td>
-        	<input type="text" name="description[]" placeholder="Insira uma descrição" class="description">
+        				<input type="text" name="description" placeholder="Insira uma descrição" class="description">
             <p class="name">{%=file.name%}</p>
             <strong class="error text-danger"></strong>
         </td>
