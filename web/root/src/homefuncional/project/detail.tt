@@ -73,7 +73,10 @@ $(document).ready(function () {
     },"json")
 	
   })
-   
+   $('#yes').on('click', function () {
+
+   })   
+
   $('#comment_counsil').on('click', function () {
 
 	if ($('#text_comment_counsil').val() == ""){
@@ -257,6 +260,12 @@ $(document).ready(function () {
 						    [%project_obj.percentage%]%
 						   </div>
 						 </div>
+							<h2>Você acredita na porcentagem estabelecidade pela prefeitura ?</h2>
+						
+						<button >Sim
+						</button>
+						<button >Não
+						</button>
       [% END %]
 						<br />
 						<div class="progress-steps green">[% project_obj.progress_count%] de 6 etapas</div>
@@ -341,20 +350,26 @@ $(document).ready(function () {
 					</div>
 
 					<div class="image-gallery">
+
+					 [% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]	
 						<h3>[% project_obj.images.size%] imagens relacionadas <button class="btn btn-brown pull-right" id="add-gallery">Enviar imagens</button></h3>
+						[%END%]
+						[% IF project_obj.images.size > 0%]
 						<div class="gallery">
 							<div class="arrow left">
 								<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 							</div>
 							<div class="contents">
+								
 								[% FOR img IN project_obj.images%]
-								<a href="[% img.name_image %]" data-lightbox="gallery" data-title="Descrição: [% img.description %]<br>Enviado por: "><img src="[% img.name_image%]"></a>
+								<a href="[% img.name_image %]" data-lightbox="gallery" data-title="Descrição: [% img.description %]<br>Enviado por: [% img.user%]"><img src="[% img.name_image%]"></a>
 								[% END %]
 							</div>
 							<div class="arrow right">
 								<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 							</div>
 						</div>
+						[%END%]
 						<div class="upload" style="display: none;">
 						    <form id="fileupload" action="/home/project/[%project_obj.id%]/upload_images" method="POST" enctype="multipart/form-data">
 						        <div class="row fileupload-buttonbar">
@@ -434,8 +449,9 @@ $(document).ready(function () {
 						<span class="header">Tema</span>
 						<ul>
 							[% FOREACH type IN project_obj.type%]
-							<li>
-							[% type.name%]
+							<input type="hidden" id="objective_type_project_id" value="[%type.id%]"/>
+							<li><a href="" class="objective_type_project" value="[%type.id%]">
+       [%type.name%]
 							</li>
 							[% END %]
 						</ul>

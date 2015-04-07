@@ -58,6 +58,9 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
         $c->stash->{do_i_follow} =
           grep { $_ eq $id } @{ $c->stash->{user_obj}->{projects_i_follow} };
     }
+    use DDP;
+    p $c->stash->{user_obj};
+    warn "l";
 }
 
 sub detail : Chained('object') : PathPart('') : Args(0) {
@@ -67,6 +70,9 @@ sub detail : Chained('object') : PathPart('') : Args(0) {
         $count++ if $c->stash->{project_obj}->{ 'qualitative_progress_' . $n };
     }
     $c->stash->{project_obj}->{progress_count} = $count;
+    use DDP;
+    p $c->stash->{project_obj};
+    warn "ha";
 }
 
 sub index : Chained('base') : PathPart('') : Args(0) {
@@ -299,6 +305,7 @@ sub upload_images : Chained('object') : PathPart('upload_images') : Args(0) {
             user_id     => $user_id
         }
     );
+
     my $data = {
         name      => $image->filename,
         size      => $image->size,
@@ -311,6 +318,7 @@ sub upload_images : Chained('object') : PathPart('upload_images') : Args(0) {
     $image->copy_to( $path . '/' . $image->filename );
 
     p $image;
+    p $c->stash->{images_project};
     $c->res->status(200);
     $c->res->content_type('application/json');
     $c->res->body( encode_json($response) );

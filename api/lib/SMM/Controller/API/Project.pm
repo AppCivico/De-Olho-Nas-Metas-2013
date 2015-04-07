@@ -50,17 +50,14 @@ sub result_GET {
     my $follow_project =
       $project->user_follow_projects->search( { active => 1 } )->count;
     my $type;
-    my @images = $project->images_projects->search(
-        undef,
-        {
-            prefetch => 'user',
-            result_class =>
-        }
-    )->all;
+    my @images =
+      $project->images_projects->search( undef, { prefetch => 'user' } )->all;
+    use DDP;
+    p @images;
     $type = $_->goal->objective_id for $project->goal_projects;
 
     my $objective =
-      $project->resultset(' Objective ')->search( { id => $type } )->next;
+      $project->resultset('Objective')->search( { id => $type } )->next;
     my $region;
 
     ($region) = map { { id => $_->id, name => $_->name } } $project->region
@@ -101,7 +98,13 @@ sub result_GET {
                 map {
                     my $p = $_;
                     $p
-                      ? ( +{ map { $_ => $p->$_ } qw/name_image description/ } )
+                      ? (
+                        +{
+                            name_image  => $p->name_image,
+                            description => $p->description,
+                            user        => $p->user ? $p->user->name : ""
+                        }
+                      )
                       : ()
 
                 } @images,
@@ -132,11 +135,8 @@ sub result_GET {
                                 id         => $_->id,
                                 text       => $_->text,
                                 name       => $_->user->name,
-                                process_ts => $_->get_column(
-                                    ' process_ts_fmt
-              '
-                                ),
-                                id_user => $_->user->id
+                                process_ts => $_->get_column('process_ts_fmt'),
+                                id_user    => $_->user->id
                             }
                           )
                           : ()
@@ -154,11 +154,8 @@ sub result_GET {
                                 id          => $_->id,
                                 description => $_->description,
                                 name        => $_->user->name,
-                                process_ts  => $_->get_column(
-                                    ' process_ts_fmt
-              '
-                                ),
-                                user_id => $_->user->id
+                                process_ts  => $_->get_column('process_ts_fmt'),
+                                user_id     => $_->user->id
                             }
                           )
                           : ()
@@ -186,12 +183,12 @@ sub result_PUT {
     my $params  = { %{ $c->req->params } };
     my $project = $c->stash->{organization};
 
-    $project->execute( $c, for => ' update ', with => $c->req->params );
+    $project->execute( $c, for => 'update', with => $c->req->params );
 
     $self->status_accepted(
         $c,
         location =>
-          $c->uri_for( $self->action_for(' result '), [ $project->id ] )
+          $c->uri_for( $self->action_for('result'), [ $project->id ] )
           ->as_string,
         entity => { id => $project->id }
       ),
@@ -199,29 +196,24 @@ sub result_PUT {
       if $project;
 }
 
-sub list : Chained(' base ') : PathPart('') : Args(0) : ActionClass(' REST
-  ') { }
+sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
 
 sub list_GET {
     my ( $self, $c ) = @_;
     my $rs = $c->stash->{collection};
 
-    if ( $c->req->param(' type_id ') ) {
+    if ( $c->req->param('type_id') ) {
 
-        $c->detach unless $c->req->param(' type_id ') =~ /^\d+$/;
+        $c->detach unless $c->req->param('type_id') =~ /^\d+$/;
 
-        $rs = $rs->search(
-            {
-                ' goal
-              . objective_id ' => $c->req->param(' type_id ')
-            }
-        );
+        $rs =
+          $rs->search( { 'goal.objective_id' => $c->req->param('type_id') } );
 
     }
-    if ( $c->req->param(' region_id ') ) {
-        $c->detach unless $c->req->param(' region_id ') =~ /^\d+$/;
+    if ( $c->req->param('region_id') ) {
+        $c->detach unless $c->req->param('region_id') =~ /^\d+$/;
 
-        $rs = $rs->search( { region_id => $c->req->param(' region_id ') } );
+        $rs = $rs->search( { region_id => $c->req->param('region_id') } );
 
     }
 
@@ -233,12 +225,12 @@ sub list_GET {
             ]
         }
     );
-    if ( $c->req->param(' lnglat ') ) {
+    if ( $c->req->param('lnglat') ) {
         $c->detach
-          unless $c->req->param(' lnglat ') =~
+          unless $c->req->param('lnglat') =~
           qr/^(\-?\d+(\.\d+)?)\ \s*(\-?\d+(\.\d+)?)$/;
-        my $lnglat = $c->req->param(' lnglat ');
-        my @teste  = $c->model(' DB ')->resultset(' Region ')->search_rs(
+        my $lnglat = $c->req->param('lnglat');
+        my @teste  = $c->model('DB')->resultset('Region')->search_rs(
 
             \[
                 q{ST_Intersects(me.geom::geography, ?::geography )},
@@ -246,7 +238,7 @@ sub list_GET {
             ],
             {
                 select       => [qw/id name/],
-                result_class => ' DBIx::Class::ResultClass::HashRefInflator ',
+                result_class => 'DBIx::Class::ResultClass::HashRefInflator',
             }
         )->all;
 
@@ -258,14 +250,14 @@ sub list_GET {
         }
         $rs = $rs->search( { region_id => $teste[0]->{id} } );
     }
-    if ( $c->req->param(' goal_id ') ) {
+    if ( $c->req->param('goal_id') ) {
 
-        $rs = $rs->search( { ' goal . id ' => $c->req->param(' goal_id ') } );
+        $rs = $rs->search( { 'goal.id' => $c->req->param('goal_id') } );
     }
     $rs = $rs->search(
         undef,
         {
-            order_by => ' me . name '
+            order_by => 'me.name'
         },
     );
 
@@ -308,7 +300,7 @@ sub list_GET {
                             : undef
                         ),
                         url => $c->uri_for_action(
-                            $self->action_for(' result '),
+                            $self->action_for('result'),
                             [ $r->{id} ]
                         )->as_string
                       }
@@ -322,12 +314,12 @@ sub list_POST {
     my ( $self, $c ) = @_;
 
     my $project = $c->stash->{collection}
-      ->execute( $c, for => ' create ', with => $c->req->params );
+      ->execute( $c, for => 'create', with => $c->req->params );
 
     $self->status_created(
         $c,
         location =>
-          $c->uri_for( $self->action_for(' result '), [ $project->id ] )
+          $c->uri_for( $self->action_for('result'), [ $project->id ] )
           ->as_string,
         entity => {
             id => $project->id
@@ -335,29 +327,29 @@ sub list_POST {
     );
 }
 
-sub complete : Chained(' base ') : PathPart(' complete ') : Args(0) {
+sub complete : Chained('base') : PathPart('complete') : Args(0) {
     my ( $self, $c ) = @_;
 
     my $project;
 
-    $c->model(' DB ')->txn_do(
+    $c->model('DB')->txn_do(
         sub {
             $project = $c->stash->{collection}
-              ->execute( $c, for => ' create ', with => $c->req->params );
+              ->execute( $c, for => 'create', with => $c->req->params );
 
             $c->req->params->{active}     = 1;
-            $c->req->params->{role}       = ' project ';
+            $c->req->params->{role}       = 'project';
             $c->req->params->{project_id} = $project->id;
 
-            my $user = $c->model(' DB::User ')
-              ->execute( $c, for => ' create ', with => $c->req->params );
+            my $user = $c->model('DB::User')
+              ->execute( $c, for => 'create', with => $c->req->params );
         }
     );
 
     $self->status_created(
         $c,
         location =>
-          $c->uri_for( $self->action_for(' result '), [ $project->id ] )
+          $c->uri_for( $self->action_for('result'), [ $project->id ] )
           ->as_string,
         entity => {
             id => $project->id
@@ -366,17 +358,17 @@ sub complete : Chained(' base ') : PathPart(' complete ') : Args(0) {
 
 }
 
-sub geom : Chained(' base ') PathPart(' geom ') : Args(0) {
+sub geom : Chained('base') PathPart('geom') : Args(0) {
     my ( $self, $c ) = @_;
 
-    my $id = $c->req->param(' project_id ')
-      if $c->req->param(' project_id ') =~ /^\d+$/;
+    my $id = $c->req->param('project_id')
+      if $c->req->param('project_id') =~ /^\d+$/;
 
-    my ($geom) = $c->model(' DB ')->resultset(' Project ')->search(
-        { ' me . id ' => $id },
+    my ($geom) = $c->model('DB')->resultset('Project')->search(
+        { 'me.id' => $id },
         {
-            ' + select ' => [ \q{ST_AsGeoJSON(region.geom,3) as geom_json} ],
-            ' + as '     => [qw(geom_json)],
+            '+select' => [ \q{ST_AsGeoJSON(region.geom,3) as geom_json} ],
+            '+as'     => [qw(geom_json)],
             columns =>
               [qw( me.id me.latitude me.longitude region.id region.name)],
             collapse => 1,
@@ -387,13 +379,13 @@ sub geom : Chained(' base ') PathPart(' geom ') : Args(0) {
 
 }
 
-sub list_geom : Chained(' base ') PathPart(' list_geom ') : Args(0) {
+sub list_geom : Chained('base') PathPart('list_geom') : Args(0) {
     my ( $self, $c ) = @_;
 
-    my @geom = $c->model(' DB ')->resultset(' Project ')->search(
+    my @geom = $c->model('DB')->resultset('Project')->search(
         {
             -and =>
-              [ latitude => { ' != ', undef }, longitude => { ' != ', undef } ]
+              [ latitude => { '!=', undef }, longitude => { '!=', undef } ]
         },
         {
             columns => [qw( id name latitude longitude)],

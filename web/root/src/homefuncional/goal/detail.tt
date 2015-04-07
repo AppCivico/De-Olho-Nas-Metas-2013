@@ -373,7 +373,8 @@ $(document).ready(function () {
 					<div class="list-box list-types">
 						<span class="header">Tema</span>
 						<ul>
-							<li>
+							<input type="hidden" id="objective_type_goal_id" value="[%goal_obj.objective.id%]"/>
+							<li><a href="" class="objective_type_goal" value="[%goal_obj.objective.id%]">
 							[% goal_obj.objective.name%]
 							</li>
 						</ul>

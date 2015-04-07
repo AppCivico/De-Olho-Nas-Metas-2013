@@ -774,7 +774,28 @@ $(document).ready(function () {
 			}
 
 	})
+ $('.objective_type_goal').on('click', function ( e) {
+ 		$.post( "/home/goal/search_by_types", { type_id: $('#objective_type_goal_id').val() }, function( data ) {
+							data.plural = (data.goals.length > 1);
+							var template = $('#row_template').html();
+							var html = Mustache.to_html(template, data);
+							$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
+							$('#result').html(html);
+		 },"json"); 
+   e.preventDefault();
+ }) 
+ $('.objective_type_project').on('click', function ( e) {
+ 		$.post( "/home/project/search_by_types", { type_id: $('#objective_type_project_id').val() }, function( data ) {
+			$("#map").addClass("search");
 
+			data.plural = (data.projects.length > 1);
+			var template = $('#row_template').html();
+			var html = Mustache.to_html(template, data);
+			$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
+			$('#result').html(html);
+		 },"json"); 
+   e.preventDefault();
+ })  
 	$("#txtaddress").autocomplete({
 	source: function (request, response) {
 	   geocoder = new google.maps.Geocoder();
