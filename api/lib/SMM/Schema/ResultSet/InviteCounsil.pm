@@ -54,20 +54,21 @@ sub verifiers_specs {
                 },
             }
         ),
-		key_check => Data::Verifier->new(
-	        filters => [qw(trim)],
+        key_check => Data::Verifier->new(
+            filters => [qw(trim)],
             profile => {
-				hash => {
+                hash => {
                     required   => 1,
                     type       => 'Str',
                     post_check => sub {
                         my $r     = shift;
                         my $where = {
                             hash        => $r->get_value('hash'),
-							valid_until => 1
+                            valid_until => 1
                         };
 
-                        return $self->search( $where, { rows => 1 } )->count == 1;
+                        return $self->search( $where, { rows => 1 } )->count ==
+                          1;
                     }
                 },
                 email => {
@@ -76,19 +77,19 @@ sub verifiers_specs {
                     post_check => sub {
                         my $r     = shift;
                         my $where = {
-                            email  		=> $r->get_value('email'),
-							valid_until => 1
+                            email       => $r->get_value('email'),
+                            valid_until => 1
                         };
 
                         # email precisa conferir com o do dono da chave
-                        return $self->search($where, { rows => 1 } )->count == 1;
+                        return $self->search( $where, { rows => 1 } )->count ==
+                          1;
 
                     }
                 },
-            }
+              }
 
-
-		),
+        ),
     };
 }
 
@@ -111,7 +112,8 @@ our $URI_ESCAPES;
 sub uri_filter {
     my $text = shift;
 
-    $URI_ESCAPES ||= { map { ( chr($_), sprintf( "%%%02X", $_ ) ) } ( 0 .. 255 ), };
+    $URI_ESCAPES ||=
+      { map { ( chr($_), sprintf( "%%%02X", $_ ) ) } ( 0 .. 255 ), };
 
     if ( $] >= 5.008 && utf8::is_utf8($text) ) {
         utf8::encode($text);
@@ -124,12 +126,12 @@ sub uri_filter {
 sub action_specs {
     my $self = shift;
     return {
-		key_check => sub {
-	        my %values = shift->valid_values;
-				
-			return 0 unless $self->search( { hash => $values{hash} } )->next;
-           	return 1;
-		},
+        key_check => sub {
+            my %values = shift->valid_values;
+
+            return 0 unless $self->search( { hash => $values{hash} } )->next;
+            return 1;
+        },
         create => sub {
             my %values = shift->valid_values;
 
@@ -138,16 +140,17 @@ sub action_specs {
             my $key = random_regex(q([a-zA-Z0-9]{20}));
 
             $key = random_regex(q([a-zA-Z0-9]{20}))
-              while ( $self->search( { hash => $key },{ rows => 1 } )->next );
-			$values{hash} = $key;
+              while ( $self->search( { hash => $key }, { rows => 1 } )->next );
+            $values{hash} = $key;
 
-            $self->search( { email=> $values{email} } )->update( { valid_until => 'false' } );
+            $self->search( { email => $values{email} } )
+              ->update( { valid_until => 'false' } );
 
             my $invite_counsil = $self->create(
                 {
-                    organization_id  => $values{organization_id},
-                    hash             => $values{hash},
-                    email            => $values{email}
+                    organization_id => $values{organization_id},
+                    hash            => $values{hash},
+                    email           => $values{email}
                 }
             );
 
@@ -157,12 +160,13 @@ sub action_specs {
             $tt->process(
                 \$wrapper,
                 {
-                    date             => DateTime->now( formatter => $strp, time_zone => 'local' ),
-                    web_url          => '[% web_url %]',
-					secret_key       => $key,
-					email            => $values{email},
-					organization_id  => $values{organization_id},
-                    email_uri        => &uri_filter( $values{email} )
+                    date =>
+                      DateTime->now( formatter => $strp, time_zone => 'local' ),
+                    web_url         => '[% web_url %]',
+                    secret_key      => $key,
+                    email           => $values{email},
+                    organization_id => $values{organization_id},
+                    email_uri       => &uri_filter( $values{email} )
                 },
                 \$body
             );
@@ -176,7 +180,7 @@ sub action_specs {
 
             )->build_email;
             $self->result_source->schema->resultset('EmailQueue')
-              ->create( {  body => $email->as_string, title => $title } );
+              ->create( { body => $email->as_string, title => $title } );
 
             return 1;
         },
@@ -211,7 +215,3 @@ encontram-se informações sobre o horário e o endereço IP da máquina de
 onde partiu a solicitação.</p>
 
 </div>
-
-
-
-

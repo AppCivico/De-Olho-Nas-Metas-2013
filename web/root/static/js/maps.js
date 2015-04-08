@@ -50,6 +50,9 @@ var $maps = function () {
    	    map = new google.maps.Map(document.getElementById("map"),mapOptions);
     }
 
+	function loadgeocoder(){
+		geocoder = new google.maps.Geocoder();
+	}
 	function loadproject(){
 		var ib;
 		
@@ -63,12 +66,12 @@ var $maps = function () {
     	            position: myLatlng,
 	                map: map,
 	                url: "/home/project/"+pj.id,
-	                icon: "/static/images/icone_mapa.png"
+	                icon: "/static/images/marker_donm.png"
         	    });
 				marker_array.push(marker);
 				var url = marker.url;
 				var content = '<div class="project-bubble"><div class="name">';
-				content += '<a href="' + url + '">';
+				content += '<a href="' + url + '" target="_blank" >';
 				content += pj.name + '</a></div>';
 				content += '<div class="description"></div>';
 				content += '</div>';
@@ -133,7 +136,7 @@ var $maps = function () {
 			marker = new google.maps.Marker({
 	                position: myLatlng,
 		            map: map,
-		            icon: "/static/images/icone_mapa.png"
+		            icon: "/static/images/marker_donm.png"
 	        });
 
 			var url = marker.url;
@@ -279,7 +282,7 @@ var $maps = function () {
 	                position: myLatlng,
 		            map: map,
 					url : "/home/project/"+pj.id,
-		            icon: "/static/images/icone_mapa.png"
+		            icon: "/static/images/marker_donm.png"
 	            });
 				var url = marker.url;
 				var content = '<div class="project-bubble"><div class="name">';
@@ -336,7 +339,7 @@ var $maps = function () {
     	            position: myLatlng,
 	                map: map,
 	                url: "/home/subprefecture/"+data.subprefecture.id,
-	                icon: "/static/images/icone_mapa.png"
+	                icon: "/static/images/marker_donm.png"
         	    });
 				var url = marker.url;
 				var content = '<div class="project-bubble" ><div class="name">';
@@ -442,7 +445,7 @@ var $maps = function () {
 	            position: myLatlng,
                 map: map,
                 url: "/home/subprefecture/"+json.id,
-                icon: "/static/images/icone_mapa.png"
+                icon: "/static/images/marker_donm.png"
     	    });
 
 	    	map.setCenter(myLatlng);
@@ -463,7 +466,7 @@ var $maps = function () {
     	            position: myLatlng,
 	                map: map,
 					url : "/home/project/"+pj.id,
-	                icon: "/static/images/icone_mapa.png"
+	                icon: "/static/images/marker_donm.png"
         	    });
 				if ( pj.latitude != 0 && pj.longitude != 0){
 					markers.push(marker);
@@ -575,12 +578,12 @@ var $maps = function () {
 					position: myLatlng,
 					map: map,
 					url: "/home/project/"+pj.id,
-					icon: "/static/images/icone_mapa.png"
+					icon: "/static/images/marker_donm.png"
 				});
 				marker_array.push(marker);
 				var url = marker.url;
 				var content = '<div class="project-bubble"><div class="name">';
-				content += '<a href="' + url + '">';
+				content += '<a href="' + url + '" target="_blank">';
 				content += pj.name + '</a></div>';
 				content += '</div>';
 				google.maps.event.addListener(marker, 'mouseover', function() {
@@ -637,11 +640,11 @@ var $maps = function () {
 	    	    	        	position: myLatlng,
 			        	        map: map,
 		    	        	    url: "/home/project/"+pj.id,
-			       		        icon: "/static/images/icone_mapa.png"
+			       		        icon: "/static/images/marker_donm.png"
     	    	   		 	});
 							var url = marker.url;
 							var content = '<div class="project-bubble"><div class="name">';
-							content += '<a href="' + url + '">';
+							content += '<a href="' + url + '" target="_blank">';
 							content += pj.name + '</a></div>';
 							content += '</div>';
 							google.maps.event.addListener(marker, 'mouseover', function() {
@@ -683,6 +686,7 @@ var $maps = function () {
 	return {
 		initialize	             : initialize,
 		loadproject              : loadproject,
+		loadgeocoder             : loadgeocoder,
 		codeAddress              : codeAddress,
 		setlocal                 : setlocal,
 		markprojectdetail        : markprojectdetail,
@@ -700,7 +704,7 @@ var $maps = function () {
 }();
 
 $(document).ready(function () {
-	if ($("#pagetype").val() != 'homegoal'){	
+	if ($("#pagetype").val() != 'homegoal' && $("#pagetype").val() != 'campaign_user' && $("#pagetype").val() != 'campaigndetail' && $("#pagetype").val() != 'campaignhome') {	
 		$maps.initialize();
 	}
 	if ($("#pagetype").val() == 'home'){	
@@ -711,6 +715,15 @@ $(document).ready(function () {
 	}		
 	if ($("#pagetype").val() == 'goaldetail'){
 		$maps.markgoaldetail($("#goalid").val());
+	}	
+	if ($("#pagetype").val() == 'campaign_user'){
+		$maps.loadgeocoder();
+	}		
+	if ($("#pagetype").val() == 'campaignhome'){
+		$maps.loadgeocoder();
+	}		
+	if ($("#pagetype").val() == 'campaigndetail'){
+		$maps.loadgeocoder();
 	}		
 	if ($("#pagetype").val() == 'regiondetail'){
 		$maps.markregiondetail($("#regionid").val());
@@ -775,7 +788,6 @@ $(document).ready(function () {
 			}
 	}, function (results, status) {
           response($.map(results, function (item) {
-			  console.log('ta chegando aqui');
                 return {
                     label: item.formatted_address,
                     value: item.formatted_address,
@@ -786,7 +798,6 @@ $(document).ready(function () {
        })
     },
     select: function (event, ui) {
-		console.log(ui);
         var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
 		if ($("#pagetype").val() == 'home'){		
 			$("section.map .map-overlay").fadeIn();
@@ -797,7 +808,9 @@ $(document).ready(function () {
         	});
         	$maps.setlocal(location);
 		}
- 		if ($("#pagetype").val() == 'campaign_user'){		
+ 		if ($("#pagetype").val() == 'campaign_user'){
+				
+				$('#latlng').val(location);
 		} 
 		if ($("#pagetype").val() == 'projectdetail'){		
  			$.get("/home/project/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
@@ -812,9 +825,14 @@ $(document).ready(function () {
 				document.getElementById("result").innerHTML=data
         	});
 		}
-
-		if ($("#pagetype").val() == 'goaldetail'){		
- 			$.get("/home/goal/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+ 		if ($("#pagetype").val() == 'campaignhome'){		
+ 			$.get("/home/campaign/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+   				$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
+				document.getElementById("result").innerHTML=data
+        	});
+		} 
+		if ($("#pagetype").val() == 'campaigndetail'){		
+ 			$.get("/home/campaign/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
    				$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
 				document.getElementById("result").innerHTML=data
         	});
@@ -829,6 +847,8 @@ $(document).ready(function () {
 					window.location.href="/home/region/"+data.id;
 				}
         	});
+
+			  $("select#homeregion")[0].selectedIndex = 0;
 		}
 		if ($("#pagetype").val() == 'regiondetail'){			
  			$.get("/home/region/id",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
@@ -837,7 +857,6 @@ $(document).ready(function () {
 		}
 			
        	$(".metas-filtro .form .region .select-stylized").addClass("disabled");
-		$("select#homeregion")[0].selectedIndex = 0;
        	$(".metas-filtro .form .cep button").removeClass("disabled");
     }
     });

@@ -15,13 +15,13 @@ __PACKAGE__->config(
         'me.id' => 'Int'
     },
     result_attr => {
-        prefetch => ['events'],
-	    '+select' => [
+        prefetch  => ['events'],
+        '+select' => [
             \q{to_char(events.date, 'DD/MM/YYYY HH24:MI:SS')},
             \q{to_char(start_in, 'DD/MM/YYYY HH24:MI:SS')},
             \q{to_char(end_on, 'DD/MM/YYYY HH24:MI:SS')},
         ],
-        '+as'    => ['events.date_fmt','start_in_fmt','end_on_fmt'],
+        '+as' => [ 'events.date_fmt', 'start_in_fmt', 'end_on_fmt' ],
 
     },
     update_roles => [qw/superadmin user admin webapi organization/],
@@ -41,35 +41,38 @@ sub result_GET {
     my ( $self, $c ) = @_;
     my $campaigns = $c->stash->{campaigns};
 
-	use DDP; p $campaigns;
     $self->status_ok(
         $c,
         entity => {
             (
-                map {  $_ => ref $campaigns->$_ eq 'DateTime' ? $campaigns->$_->datetime : $campaigns->$_ }
-                  qw/
-			 	  name          
-				  description  
-				  created_at
-				  start_in
-				  end_on
-				  user_id      
+                map {
+                        $_ => ref $campaigns->$_ eq 'DateTime'
+                      ? $campaigns->$_->datetime
+                      : $campaigns->$_
+                  } qw/
+                  id
+                  name
+                  description
+                  created_at
+                  start_in
+                  end_on
+                  user_id
                   /
             ),
             events => [
-                        map {
-                               my $e = $_;
-                                p $e;
-                                ( +{ 
-									  
-									 id => $e->id,
-									 name => $e->name,
-									 description => $e->description,
-									 date => $e->date->datetime,
-								   }
-								)
-                            } ( $campaigns->events ) ,
-                        ],
+                map {
+                    my $e = $_;
+                    (
+                        +{
+
+                            id          => $e->id,
+                            name        => $e->name,
+                            description => $e->description,
+                            date        => $e->date->datetime,
+                        }
+                      )
+                } ( $campaigns->events ),
+            ],
 
         }
     );
@@ -110,13 +113,37 @@ sub list_GET {
     my ( $self, $c ) = @_;
 
     my $rs = $c->stash->{collection};
+    if ( $c->req->param('lnglat') ) {
+        $c->detach
+          unless $c->req->param('lnglat') =~
+          qr/^(\-?\d+(\.\d+)?)\ \s*(\-?\d+(\.\d+)?)$/;
+        my $lnglat = $c->req->param('lnglat');
 
-    use DDP;
-    p $rs->as_hashref->all;
+        my $region = $c->model('DB')->resultset('Region')->search_rs(
+
+            \[
+                q{ST_Intersects(me.geom::geography, ?::geography )},
+                [ _coords => qq{SRID=4326;POINT($lnglat)} ]
+            ],
+            {
+                select       => [qw/id/],
+                result_class => 'DBIx::Class::ResultClass::HashRefInflator',
+            }
+        )->single;
+        $self->status_bad_request(
+            $c, message => "NENHUMA CAMPANHA PRÓXIMA A LOCALIDADE",
+          ),
+          $c->detach
+          unless $region;
+        $rs = $rs->search( { 'region_id' => $region->{id} } );
+    }
+    if ( $c->req->param('district_id') ) {
+        $rs =
+          $rs->search( { 'me.region_id' => $c->req->param('district_id') } );
+    }
     if ( $c->req->param('user_id') ) {
         $rs = $rs->search( { 'me.user_id' => $c->req->param('user_id') } );
     }
-    use DDP;
     $self->status_ok(
         $c,
         entity => {
@@ -139,7 +166,6 @@ sub list_GET {
                         events => [
                             map {
                                 my $e = $_;
-                                p $e;
                                 ( +{ map { $_ => $e->{$_} } qw/id/ } )
                             } @{ $r->{events} },
                         ],
@@ -153,6 +179,28 @@ sub list_GET {
 sub list_POST {
     my ( $self, $c ) = @_;
 
+    if (    defined $c->req->params->{latitude}
+        and defined $c->req->params->{longitude} )
+    {
+        $c->req->params->{longitude} =~ s/ //g;
+        $c->req->params->{latitude} =~ s/ //g;
+        my $lnglat =
+          $c->req->params->{longitude} . ' ' . $c->req->params->{latitude};
+        my $region = $c->model('DB')->resultset('Region')->search_rs(
+
+            \[
+                q{ST_Intersects(me.geom::geography, ?::geography )},
+                [ _coords => qq{SRID=4326;POINT($lnglat)} ]
+            ],
+            {
+                select       => [qw/id/],
+                result_class => 'DBIx::Class::ResultClass::HashRefInflator',
+            }
+        )->next;
+        use DDP;
+        p $region;
+        $c->req->params->{region_id} = $region->{id} if $region;
+    }
     my $campaigns = $c->stash->{collection}
       ->execute( $c, for => 'create', with => $c->req->params );
 

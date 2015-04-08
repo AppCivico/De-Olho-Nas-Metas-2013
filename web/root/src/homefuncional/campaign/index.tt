@@ -1,18 +1,34 @@
+	[%-CALL assets.include("js/maps.js")%]
+	<script>
+	$(document).ready(function () {
+	 $("#homedistricts").change(function(){
+
+	   $.post( "/home/campaign/search_by_district", { district_id: $('#homedistricts option:selected').val() }, function( data ) {
+						$('#result').html(data);		
+				})
+
+		});
+	});
+
+	</script>
 	<section class="metas-filtro orange">
 		<div class="container">
 			<form>
 				<div class="col-sm-6 cep">
 					Encontre a campanha<br />
-					<input type="text" placeholder="CEP">
-					<button><span class="glyphicon glyphicon-search"></span></button>
+					<input type="text" id="txtaddress" placeholder="CEP">
 				</div>
 				<div class="col-sm-6">
 					<div class="row">
 						<div class="col-sm-12 region">
 							Filtrar Campanha<br />
 							<div class="select-stylized">
-							<select>
-								<option>Nome da região
+							<input type="hidden" id="pagetype" value="campaignhome">
+							<select id="homedistricts">
+ 							<option value="">Distrito</option>
+							 [% FOREACH region IN regions %]
+								   <option value="[% region.id %]">[% region.name %]</option>
+								[% END %]
 							</select>
 							</div>
 						</div>
@@ -23,28 +39,33 @@
 		</div>
     </section>
 
-    <section class="metas-result">
-		<div class="container">
+    <section class="metas-result campaign-result">
+		<div id="result" class="container">
 
-			<h2 class="section-title">Participe das campanhas</h2>
-		
-			<div class="campaign-list">
-				<div class="row">
-					[% FOR cpg IN campaigns%]
-					<div class="col-sm-4">
-						<div class="item">
-							<div class="image">
-								<img src="/static/css/images/meta01.jpg" border="0">
+			[% IF campaigns.size > 0 %]
+				<h2 class="section-title">Participe das campanhas</h2>
+			
+				<div class="campaign-list">
+					<div class="row">
+							[% FOR cpg IN campaigns%]
+							<div class="col-sm-4">
+								<div class="item">
+									<div class="image">
+										<img src="/static/images/campaign/[% cpg.id%]/[%cpg.id%].jpg" border="0">
+									</div>
+									<div class="description">
+										<a href="[% c.uri_for_action('/homefuncional/campaign/detail',[cpg.id])%]"><h2>[% cpg.name%]</h2></a>
+										<p class="credits">Organizada por: Nome da Organização</p>
+										<div class="counter text-right"><div class="icon calendar-orange"></div> [% cpg.events.size %] EVENTO[% IF cpg.events.size > 1%]S[% END %]</div>
+									</div>
+								</div>
 							</div>
-							<div class="description">
-								<a href="[% c.uri_for_action('/homefuncional/campaign/detail',[cpg.id])%]"><h2>[% cpg.name%]</h2></a>
-								<p class="credits">Organizada por: Nome da Organização</p>
-								<div class="counter text-right"><div class="icon calendar-orange"></div> [% cpg.events.size %] EVENTO[% IF cpg.events.size > 1%]S[% END %]</div>
-							</div>
+							[% END %]
 						</div>
-					</div>
-					[% END %]
 				</div>
-			</div>
+			[% ELSE %]
+				<br /><br /><br />
+				<h2 class="section-title">Nenhuma campanha encontrada</h2>
+			[% END %]
 		</div>
     </section>

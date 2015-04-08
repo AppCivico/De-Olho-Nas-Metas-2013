@@ -4,6 +4,10 @@ dbi_dump*
 web.error.log
 web/root/static/images/user/
 web/root/static/images/project/
+web/root/static/images/campaign/
 web/session_data/
-web/websmm_local.conf
+web/*.conf
 web/api.error.log
+web/session_data/*
+/web/websmm_local.conf*
+

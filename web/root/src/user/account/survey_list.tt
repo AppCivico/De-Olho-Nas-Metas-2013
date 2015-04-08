@@ -55,7 +55,7 @@
 						</div>
 						-->
 						
-						<a target="_blank" href="/user/perfil/enquete/criar" class="btn btn-navy btn-right">Criar nova enquete</a>
+						<a target="_blank" href="/user/perfil/enquete/criar" class="btn btn-navy btn-right">Criar nova campanha móvel</a>
 				</div>
 				<div class="clear"></div>
 			</form>
@@ -66,7 +66,7 @@
 	   <section class="metas-result enquete-list">
 		<div class="container">
 
-				<h2 class="section-title">Enquetes Móveis</h2>
+				<h2 class="section-title">Campanha de dados móveis</h2>
 				[% IF campaigns.size > 0%]
 				[% FOREACH enquete IN campaigns%]	
 				<div class="row item">

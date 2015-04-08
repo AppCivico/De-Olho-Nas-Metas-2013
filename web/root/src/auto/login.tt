@@ -34,6 +34,7 @@
 							<br />
 							<p>Bem vindo ao sistema De Olho nas Metas. Faça o login ao lado ou cadastre-se através do link abaixo:</p>
 								<a class="btn btn-success" href="/cadastro">Faça seu Cadastro</a>
+								<a class="btn btn-warning" href="/conselho/contato">Conselheiro? Clique aqui!</a>
 						</div>
 				
 					</div>

@@ -35,8 +35,8 @@ sub email_POST {
     #   $c->detach
     #   unless $dm->success;
 
-    #my $outcome = eval { $dm->get_outcome_for('user.forgot_password.email') };
-    # $c->model('Logger')->( 'sys', "E-mail " . $c->req->param('email') . " requisitou troca de senha.", 'update' );
+#my $outcome = eval { $dm->get_outcome_for('user.forgot_password.email') };
+# $c->model('Logger')->( 'sys', "E-mail " . $c->req->param('email') . " requisitou troca de senha.", 'update' );
 
     $self->status_ok( $c, entity => { message => 'ok' } );
 }
@@ -61,9 +61,15 @@ sub key_check_POST {
       $c->detach
       unless $dm->success;
 
-    #my $outcome = eval { $dm->get_outcome_for('user.forgot_password.email') };
-    # $c->model('Logger')->( 'sys', "E-mail " . $c->req->param('email') . " requisitou troca de senha.", 'update' );
+#my $outcome = eval { $dm->get_outcome_for('user.forgot_password.email') };
+# $c->model('Logger')->( 'sys', "E-mail " . $c->req->param('email') . " requisitou troca de senha.", 'update' );
 
     $self->status_ok( $c, entity => { message => 'ok' } );
 }
+
+# sub contact_admin_council : Chained('base') : PathPart('contact_admin_council') : Args(0) {
+# 	my( $self, $c ) = @_;
+#
+# 	$c->
+# }
 1;

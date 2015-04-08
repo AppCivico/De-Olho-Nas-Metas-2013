@@ -401,7 +401,7 @@ sub complete : Chained('base') : PathPart('complete') : Args(0) {
 
     $c->model('DB')->txn_do(
         sub {
-            #$goal = $c->stash->{collection}->execute( $c, for => 'create', with => $c->req->params );
+#$goal = $c->stash->{collection}->execute( $c, for => 'create', with => $c->req->params );
 
             $c->req->params->{active}  = 1;
             $c->req->params->{role}    = 'goal';
@@ -423,4 +423,38 @@ sub complete : Chained('base') : PathPart('complete') : Args(0) {
 
 }
 
+sub names : Chained('base') : PathPart('names') : Args(0) {
+    my ( $self, $c ) = @_;
+
+    my $goal;
+
+    $c->model('DB')->txn_do(
+        sub {
+            my @goal =
+              $c->model('DB::Goal')
+              ->search( undef, { select => qw/id name/, as => qw/name/ } );
+        }
+    );
+    $self->status_ok(
+        $c,
+        entity => {
+            goals => [
+                map {
+                    my $r = $_;
+                    (
+                        map { $_ => $r->{$_} }
+                          qw/
+                          id
+                          name
+                          /
+                      ),
+                  } $c->model('DB::Goal')
+                  ->search( undef,
+                    { select => qw/id name/, as => qw/id name/ } )
+                  ->as_hashref->all
+            ],
+        }
+      )
+
+}
 1;

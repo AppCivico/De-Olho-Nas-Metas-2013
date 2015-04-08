@@ -1,3 +1,4 @@
+[%-CALL assets.include("js/maps.js")%]
 <script>
 
 var calendars = {};
@@ -5,7 +6,13 @@ var calendars = {};
 moment.locale('pt-br');
 
 $(document).ready(function() {
-
+	 $("#homedistricts").change(function(){
+											   
+	    $.post( "/home/campaign/search_by_district", { district_id: $('#homedistricts option:selected').val() }, function( data ) {
+	    $('#result').html(data);
+	  })
+													   
+	});
 	var eventArray = [
 		[% FOREACH event IN campaign_obj.events%]
 			{ startDate: '[% event.date.substr(0, 10) %]', endDate: '[% event.date.substr(0, 10) %]', title: '[% event.name%]' },
@@ -65,7 +72,8 @@ $(document).keydown( function(e) {
 			<form>
 				<div class="col-sm-6 cep">
 					Encontre a campanha<br />
-					<input type="text" placeholder="CEP">
+					<input type="hidden" id="pagetype" value="campaigndetail">
+					<input type="text" id="txtaddress" placeholder="CEP">
 					<button><span class="glyphicon glyphicon-search"></span></button>
 				</div>
 				<div class="col-sm-6">
@@ -73,9 +81,12 @@ $(document).keydown( function(e) {
 						<div class="col-sm-12 region">
 							Filtrar Campanha<br />
 							<div class="select-stylized">
-							<select>
-								<option>Nome da região
-							</select>
+							 <select id="homedistricts">
+							      <option value="">Distrito</option>
+							   [% FOREACH region IN regions %]
+							      <option value="[% region.id %]">[% region.name %]</option>
+							   [% END %]
+        </select>
 							</div>
 						</div>
 					</div>
@@ -93,7 +104,7 @@ $(document).keydown( function(e) {
 				<section class="campaign-detail">
 					<div class="row">
 						<div class="col-sm-12">
-							<img src="/static/css/images/meta01.jpg" border="0" class="campaign-image"><h1>[%campaign_obj.name%]</h1><br />
+							<img src="/static/images/campaign/[% campaign_obj.id %]/[%campaign_obj.id%].jpg" border="0" class="campaign-image"><h1>[%campaign_obj.name%]</h1><br />
 							<p>[%campaign_obj.description%]</p>
 						</div>
 					</div>

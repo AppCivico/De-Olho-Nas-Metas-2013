@@ -2,7 +2,7 @@ package SMM::Controller::API::Project;
 
 use Moose;
 use utf8;
-
+use DDP;
 BEGIN { extends 'Catalyst::Controller::REST' }
 
 __PACKAGE__->config(
@@ -59,7 +59,7 @@ sub result_GET {
 
     ($region) = map { { id => $_->id, name => $_->name } } $project->region
       if $project->region;
-
+    p $project->goal_projects;
     $self->status_ok(
         $c,
         entity => {
@@ -72,6 +72,7 @@ sub result_GET {
                   latitude
                   longitude
                   project_number
+                  percentage
                   qualitative_progress_1
                   qualitative_progress_2
                   qualitative_progress_3
@@ -83,6 +84,7 @@ sub result_GET {
             goal => {
                 map {
                     my $p = $_;
+                    p $p;
 
                     id     => $p->goal->id,
                       name => $p->goal->name
@@ -97,12 +99,17 @@ sub result_GET {
                 } @images,
             ],
 
-            type => [
-                {
-                    id   => $objective->id,
-                    name => $objective->name
-                },
-            ],
+            (
+                type => $objective
+                ? [
+                    {
+                        id   => $objective->id,
+                        name => $objective->name
+                    },
+
+                  ]
+                : undef
+            ),
             region => $region,
 
             follow_project => $follow_project,
@@ -125,11 +132,12 @@ sub result_GET {
                     } ( $project->approved_project_events ),
                 )
             ],
+
             comments => [
                 (
 
                     map {
-                        $_
+                        defined $_ && $_->id
                           ? (
                             +{
                                 id          => $_->id,

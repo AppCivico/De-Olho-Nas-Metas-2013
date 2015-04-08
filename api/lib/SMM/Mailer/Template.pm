@@ -20,7 +20,7 @@ my %assets = ( 'logo.png' => 'image/png', );
 
 sub build_email {
     my ( $self, $fixed_to ) = @_;
-	
+
     my ( $user, $to );
     if ( ref $self->to && $self->to->can('_build_email') ) {
         $user = $self->to;
@@ -43,4 +43,3 @@ sub build_email {
 }
 
 1;
-
