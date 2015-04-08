@@ -1,5 +1,4 @@
 use utf8;
-
 package SMM::Schema::Result::InviteCounsil;
 
 # Created by DBIx::Class::Schema::Loader
@@ -33,8 +32,7 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
-    "PassphraseColumn" );
+__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
 =head1 TABLE: C<invite_counsil>
 
@@ -73,24 +71,38 @@ __PACKAGE__->table("invite_counsil");
   default_value: true
   is_nullable: 1
 
+=head2 created_at
+
+  data_type: 'timestamp'
+  default_value: current_timestamp
+  is_nullable: 1
+  original: {default_value => \"now()"}
+
 =cut
 
 __PACKAGE__->add_columns(
-    "id",
-    {
-        data_type         => "integer",
-        is_auto_increment => 1,
-        is_nullable       => 0,
-        sequence          => "invite_counsil_id_seq",
-    },
-    "email",
-    { data_type => "text", is_nullable => 0 },
-    "hash",
-    { data_type => "text", is_nullable => 0 },
-    "organization_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-    "valid_until",
-    { data_type => "boolean", default_value => \"true", is_nullable => 1 },
+  "id",
+  {
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+    sequence          => "invite_counsil_id_seq",
+  },
+  "email",
+  { data_type => "text", is_nullable => 0 },
+  "hash",
+  { data_type => "text", is_nullable => 0 },
+  "organization_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "valid_until",
+  { data_type => "boolean", default_value => \"true", is_nullable => 1 },
+  "created_at",
+  {
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
+    is_nullable   => 1,
+    original      => { default_value => \"now()" },
+  },
 );
 
 =head1 PRIMARY KEY
@@ -116,19 +128,20 @@ Related object: L<SMM::Schema::Result::Organization>
 =cut
 
 __PACKAGE__->belongs_to(
-    "organization",
-    "SMM::Schema::Result::Organization",
-    { id => "organization_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "organization",
+  "SMM::Schema::Result::Organization",
+  { id => "organization_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-04 13:12:31
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:pfD4YZTjik3kC6y4esXG1g
+
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-08 17:24:06
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:cESI09qWzbuD0iWGMWYkLQ
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
 with 'SMM::Schema::Role::ResultsetFind';

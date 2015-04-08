@@ -121,6 +121,13 @@ jQuery(function($){
 								[%input_text('phone_number','Celular:', req=>0)|none%]
 						</div>
 					</div>
+     <div class="row">
+ 				[%checkbox('accept_email','Aceita receber notificações por e-mail ?', checked => 1)|none%]
+					</div>
+					<div class="row">
+     [%checkbox('accept_sms','Aceita receber notificações por sms ?', checked => 1)|none%]
+					</div>
+					<br>
 					<div class="row row-padding">
 						<div class="col-sm-4">
 							<div class="avatar-upload">
@@ -137,7 +144,7 @@ jQuery(function($){
 							</div>
 						</div>
 					</div>
-						
+
 					<input type="hidden" name="organization_id" value="[%c.req.params.organization_id%]" class="btn btn-success pull-right"/>
 					<input type="hidden" name="hash" value="[%c.req.params.key%]" class="btn btn-success pull-right"/>
 					<button type="reset"  class="btn btn-danger pull-left">Limpar</button>

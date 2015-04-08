@@ -74,6 +74,14 @@ sub verifiers_specs {
                     required => 0,
                     type     => 'Bool'
                 },
+                accept_email => {
+                    required => 0,
+                    type     => 'Bool'
+                },
+                accept_sms => {
+                    required => 0,
+                    type     => 'Bool'
+                },
             },
         ),
         login => Data::Verifier->new(
@@ -113,9 +121,10 @@ sub action_specs {
         create => sub {
             my %values = shift->valid_values;
 
+            not defined $values{$_} and delete $values{$_} for keys %values;
+
             delete $values{password_confirm};
-            use DDP;
-            p %values;
+
             $values{email} = lc $values{email};
             my $role = delete $values{role};
             my $hash = delete $values{hash};

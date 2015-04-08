@@ -110,6 +110,18 @@ __PACKAGE__->table("user");
   data_type: 'text'
   is_nullable: 1
 
+=head2 accept_sms
+
+  data_type: 'boolean'
+  default_value: false
+  is_nullable: 1
+
+=head2 accept_email
+
+  data_type: 'boolean'
+  default_value: false
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -147,6 +159,10 @@ __PACKAGE__->add_columns(
   { data_type => "text", is_nullable => 1 },
   "image_perfil",
   { data_type => "text", is_nullable => 1 },
+  "accept_sms",
+  { data_type => "boolean", default_value => \"false", is_nullable => 1 },
+  "accept_email",
+  { data_type => "boolean", default_value => \"false", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -440,8 +456,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-06 17:04:43
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:qrZ6aauGhgU1/prqT69YgA
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-08 17:32:06
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xBNt1lDxkG4PW54snaupqQ
 
 __PACKAGE__->many_to_many( roles => user_roles => 'role' );
 
