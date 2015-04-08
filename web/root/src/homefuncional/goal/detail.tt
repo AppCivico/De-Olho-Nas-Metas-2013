@@ -184,7 +184,7 @@ $(document).ready(function () {
 						<div class="share-buttons">
 							<div class="twitter">
 						    <!-- Social plugins twitter-->
-							<a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt" data-hashtags="deolhonasmetas">Tweetar</a>
+							<a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt"  data-hashtags="deolhonasmetas">Tweetar</a>
 							</div>
 							<div class="facebook">
 							<!-- Social plugin facebook -->
