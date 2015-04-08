@@ -21,6 +21,8 @@ requires 'Catalyst::Plugin::Session::Store::FastMmap';
 requires 'Catalyst::Plugin::Session::State::Cookie';
 requires 'Catalyst::Plugin::I18N::DBI';
 requires 'I18N::AcceptLanguage';
+requires 'FindBin::libs';
+requires 'Log::Log4perl';
 
 requires 'Data::Section::Simple';
 requires 'Catalyst::Authentication::Store::DBIx::Class';
