@@ -97,10 +97,8 @@ jQuery(function($){
 			<div class="row">
 				<div class="col-sm-8">
 				
-					<h4 class="green">FAÇA SEU CADASTRO E FIQUE DE OLHO NAS METAS</h4>
+					<h4 class="green">FAÇA SEU CADASTRO CONSELHEIRO E FIQUE DE OLHO NAS METAS</h4>
 					
-					<a class="btn btn-warning" href="/conselho/contato">Conselheiro? Clique aqui!</a>
-				
 					[%IF error_msg %]<div class="alert alert-danger"><p>[%error_msg%]</p></div>[%END%]
 					<form action="/form/user" method="post" enctype="multipart/form-data">
 						[%input_text('name','*Nome:', req=>1)|none%]
@@ -118,7 +116,7 @@ jQuery(function($){
 					
 					<div class="row">
 						<div class="col-sm-6">
-								[%input_text('phone_number','Celular:', req=>0)|none%]
+								[%input_text('phone_number','*Celular:', req=>0)|none%]
 						</div>
 					</div>
 					<div class="row row-padding">

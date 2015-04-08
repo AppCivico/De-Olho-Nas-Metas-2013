@@ -268,7 +268,7 @@ $(document).ready(function () {
 						</button>
       [% END %]
 						<br />
-						<div class="progress-steps green">[% project_obj.progress_count%] de 6 etapas</div>
+						<div class="progress-steps green">[% project_obj.progress_count%] de 6 etapas completas</div>
 						<table class="table-progress-steps">
 						[% IF project_obj.qualitative_progress_1%]
 							<tr><td class="number green">1</td><td class="description">[% project_obj.qualitative_progress_1%]</td></tr>

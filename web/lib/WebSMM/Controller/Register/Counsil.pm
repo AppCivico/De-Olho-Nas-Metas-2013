@@ -1,4 +1,4 @@
-package WebSMM::Controller::Register;
+package WebSMM::Controller::Register::Counsil;
 use Moose;
 use utf8;
 use DateTime;
@@ -8,13 +8,13 @@ use namespace::autoclean;
 
 BEGIN { extends 'Catalyst::Controller' }
 
-sub base : Chained('/root') : PathPart('') : CaptureArgs(0) {
+sub base : Chained('/register/base') : PathPart('cadastro') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
     $c->response->headers->header( 'charset' => 'utf-8' );
     $c->stash->{template_wrapper} = 'func';
 }
 
-sub register : Chained('base') : PathPart('cadastro') : Args(0) {
+sub register : Chained('base') : PathPart('conselho') : Args(0) {
     my ( $self, $c ) = @_;
     my $api = $c->model('API');
     if ( $c->user ) {
@@ -68,21 +68,7 @@ sub register : Chained('base') : PathPart('cadastro') : Args(0) {
         }
     }
 
-    $c->stash->{template} = 'auto/register.tt';
-}
-
-sub registration_successfully : Chained('base') :
-  PathPart('registration_successfully') : Args(0) {
-    my ( $self, $c ) = @_;
-
-    $c->stash( template => 'user/account/success.tt' );
-}
-
-sub counselor_contact : Chained('base') : PathPart('conselho/contato') :
-  Args(0) {
-    my ( $self, $c ) = @_;
-
-    $c->stash( template => 'auto/conselho-contato.tt' );
+    $c->stash->{template} = 'auto/register_counsil.tt';
 }
 
 __PACKAGE__->meta->make_immutable;

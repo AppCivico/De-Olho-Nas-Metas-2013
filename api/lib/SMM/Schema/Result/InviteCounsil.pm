@@ -199,9 +199,9 @@ sub _build_email {
     my $env = {
         year => DateTime->now( time_zone => 'local' )->year,
 
-        partner_name => 'b-metria',
-        url          => 'http://192.168.1.161:5040',
-        web_url      => 'http://192.168.1.161:5040',
+        partner_name => 'deolhonasmetas',
+        url          => 'www.deolhonasmetas.org.br',
+        web_url      => 'http://localhost:5040',
         title        => $title
 
     };
@@ -250,13 +250,6 @@ __DATA__
             <!--// header //-->
             <table cellspacing="0" cellpadding="0" border="0" width="638" style="background-color: #00a99d;">
               <tr>
-                <td style="padding: 10px 20px;">
-                  <div style="text-align: left;">
-                    <a href="https://www.b-metria.com.br" target="_blank"><img src="cid:logo.png" alt="b-metria" border="0"/></a>
-                  </div>
-                </td>
-              </tr>
-              <tr>
                 <td style="padding: 20px;">
                   <p style="font-family: arial, verdana; font-size: 16pt; color: #FFFFFF; text-align: left; margin: 0; padding: 0;">[%title%]</p>
                 </td>
@@ -281,14 +274,6 @@ __DATA__
             </table>
             <!--// footer //-->
             <table cellspacing="0" cellpadding="0" border="0" width="638" style="background-color: #f0b14e;">
-              <tr>
-                <td style="background-color: #f0b14e; padding: 10px;">
-                  <p style="font-family: tahoma, verdana, arial; font-size: 10pt; color: #000;">
-                    Dúvidas? Faça login em <a href="https://www.deolhonasmetas.org.br" target="_blank" style="color: #00a99d; text-decoration: none;">https://www.deolhonasmetas.org.br</a> e acesse o menu “Suporte”<br>
-                    &copy; b-metria 2014. Todos os direitos reservados.<br>
-                  </p>
-                </td>
-              </tr>
             </table>
             <!--// fim footer //-->
 

@@ -58,9 +58,6 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
         $c->stash->{do_i_follow} =
           grep { $_ eq $id } @{ $c->stash->{user_obj}->{projects_i_follow} };
     }
-    use DDP;
-    p $c->stash->{user_obj};
-    warn "l";
 }
 
 sub detail : Chained('object') : PathPart('') : Args(0) {
@@ -70,9 +67,6 @@ sub detail : Chained('object') : PathPart('') : Args(0) {
         $count++ if $c->stash->{project_obj}->{ 'qualitative_progress_' . $n };
     }
     $c->stash->{project_obj}->{progress_count} = $count;
-    use DDP;
-    p $c->stash->{project_obj};
-    warn "ha";
 }
 
 sub index : Chained('base') : PathPart('') : Args(0) {
