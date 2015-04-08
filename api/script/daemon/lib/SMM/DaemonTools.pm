@@ -1,6 +1,6 @@
 BEGIN {
-   #    die "*** Attention ***\n\nAWS_ACCESS_KEY_ID not defined. Exiting...\n\n"     unless $ENV{AWS_ACCESS_KEY_ID};
-   #    die "*** Attention ***\n\nAWS_SECRET_ACCESS_KEY not defined. Exiting...\n\n" unless $ENV{AWS_SECRET_ACCESS_KEY};
+#    die "*** Attention ***\n\nAWS_ACCESS_KEY_ID not defined. Exiting...\n\n"     unless $ENV{AWS_ACCESS_KEY_ID};
+#    die "*** Attention ***\n\nAWS_SECRET_ACCESS_KEY not defined. Exiting...\n\n" unless $ENV{AWS_SECRET_ACCESS_KEY};
 }
 
 package SMM::DaemonTools;
@@ -99,7 +99,7 @@ sub GET_SCHEMA {
     my $db_pass = $ENV{SMM_DB_PASS} || 'no-password';
     my $db_port = $ENV{SMM_DB_PORT} || '5432';
     my $db_user = $ENV{SMM_DB_USER} || 'postgres';
-    my $db_name = $ENV{SMM_DB_NAME} || 'smm_db';
+    my $db_name = $ENV{SMM_DB_NAME} || 'smm';
 
     SMM::Schema->connect(
         "dbi:Pg:host=$db_host;port=$db_port;dbname=$db_name",
@@ -133,7 +133,9 @@ sub GET_S3 {
         my $ua_cache = LWP::ConnCache->new();
         $ua_cache->total_capacity(5);
 
-        my $ua = LWP::UserAgent::Determined->new( requests_redirectable => [qw(GET HEAD DELETE PUT POST)], );
+        my $ua =
+          LWP::UserAgent::Determined->new(
+            requests_redirectable => [qw(GET HEAD DELETE PUT POST)], );
         $ua->timing('1,2,4,8,16,32');
         $ua->conn_cache($ua_cache);
 

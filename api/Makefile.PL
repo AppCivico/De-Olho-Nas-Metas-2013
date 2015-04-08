@@ -50,7 +50,7 @@ requires 'DateTime::Format::Pg';
 requires 'Catalyst::View::TT';
 requires 'Moose';
 requires 'CatalystX-Eta';
-
+requires 'DBIx::Class::Schema::Loader';
 requires 'Geo::Coder::Google';
 requires 'Text::Iconv';
 requires 'Email::Sender';
@@ -77,6 +77,8 @@ requires 'Furl';
 requires 'MooseX::NonMoose';
 requires 'Catalyst::Restarter';
 requires 'Data::Section::Simple';
+requires 'FindBin::libs';
+requires 'Log::Log4perl';
 
 requires 'Template::Tiny';
 requires 'MIME::Lite';

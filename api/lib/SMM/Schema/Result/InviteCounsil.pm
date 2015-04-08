@@ -1,4 +1,5 @@
 use utf8;
+
 package SMM::Schema::Result::InviteCounsil;
 
 # Created by DBIx::Class::Schema::Loader
@@ -32,7 +33,8 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
+__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
+    "PassphraseColumn" );
 
 =head1 TABLE: C<invite_counsil>
 
@@ -74,21 +76,21 @@ __PACKAGE__->table("invite_counsil");
 =cut
 
 __PACKAGE__->add_columns(
-  "id",
-  {
-    data_type         => "integer",
-    is_auto_increment => 1,
-    is_nullable       => 0,
-    sequence          => "invite_counsil_id_seq",
-  },
-  "email",
-  { data_type => "text", is_nullable => 0 },
-  "hash",
-  { data_type => "text", is_nullable => 0 },
-  "organization_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-  "valid_until",
-  { data_type => "boolean", default_value => \"true", is_nullable => 1 },
+    "id",
+    {
+        data_type         => "integer",
+        is_auto_increment => 1,
+        is_nullable       => 0,
+        sequence          => "invite_counsil_id_seq",
+    },
+    "email",
+    { data_type => "text", is_nullable => 0 },
+    "hash",
+    { data_type => "text", is_nullable => 0 },
+    "organization_id",
+    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+    "valid_until",
+    { data_type => "boolean", default_value => \"true", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -114,17 +116,16 @@ Related object: L<SMM::Schema::Result::Organization>
 =cut
 
 __PACKAGE__->belongs_to(
-  "organization",
-  "SMM::Schema::Result::Organization",
-  { id => "organization_id" },
-  {
-    is_deferrable => 0,
-    join_type     => "LEFT",
-    on_delete     => "NO ACTION",
-    on_update     => "NO ACTION",
-  },
+    "organization",
+    "SMM::Schema::Result::Organization",
+    { id => "organization_id" },
+    {
+        is_deferrable => 0,
+        join_type     => "LEFT",
+        on_delete     => "NO ACTION",
+        on_update     => "NO ACTION",
+    },
 );
-
 
 # Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-04 13:12:31
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:pfD4YZTjik3kC6y4esXG1g
@@ -171,10 +172,6 @@ sub action_specs {
     };
 }
 
-
-
-
-
 use Data::Section::Simple qw(get_data_section);
 use Template;
 
@@ -203,7 +200,7 @@ sub _build_email {
         year => DateTime->now( time_zone => 'local' )->year,
 
         partner_name => 'b-metria',
-        url      => 'http://192.168.1.161:5040',
+        url          => 'http://192.168.1.161:5040',
         web_url      => 'http://192.168.1.161:5040',
         title        => $title
 
@@ -227,8 +224,6 @@ sub _build_email {
     return $email;
 
 }
-
-
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;

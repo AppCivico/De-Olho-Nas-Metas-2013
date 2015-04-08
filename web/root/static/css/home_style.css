@@ -314,11 +314,18 @@ ul.faq li .a{
 }
 
 footer{
+	position: relative;
 	background-color: #3d3934;
 }
 
 footer .logo-footer{
 	padding: 40px 0 0 0;
+}
+
+footer .logo-eokoe{
+	position: absolute;
+	bottom: 0;
+	right: 0;
 }
 
 #map{
@@ -405,7 +412,8 @@ footer .logo-footer{
 
 
 .metas-detail,
-section.page-login{
+section.page-login,
+section.campaign-result{
 	min-height: 75%;
 }
 
@@ -1610,4 +1618,18 @@ input#progress-value{
 .abc-list a{
 	padding: 10px;
 	font-size: 1.2em;
+}
+.share-buttons{
+	clear: both;
+}
+.share-buttons .facebook,
+.share-buttons .twitter{
+	float: left;
+}
+.share-buttons .facebook{
+	clear: right;
+}
+.sobre p,
+.faq p{
+	text-align: justify;
 }

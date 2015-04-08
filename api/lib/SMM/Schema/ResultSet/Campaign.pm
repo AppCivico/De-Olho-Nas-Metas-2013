@@ -26,34 +26,45 @@ sub verifiers_specs {
                     required => 1,
                     type     => 'Str',
                 },
+                latitude => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                longitude => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                address => {
+                    required => 0,
+                    type     => 'Str',
+                },
                 start_in => {
                     required => 0,
                     type     => DataStr,
-					post_check => sub {
-                        my $r = shift;
-						use DDP; p $r;
-						return 0 unless  $r->get_value('start_in') <
-                          $r->get_value('end_on');
-						return 1;
 
-                    },
+                    #post_check => sub {
+                    #    my $r = shift;
+                    #    use DDP;
+                    #    p $r;
+                    #    return 0
+                    #      unless $r->get_value('start_in') <
+                    #      $r->get_value('end_on');
+                    #    return 1;
+
+                    #  },
 
                 },
                 end_on => {
                     required => 0,
                     type     => DataStr,
-					post_check => sub {
-                        my $r = shift;
-                        return 0 unless  $r->get_value('start_in') <
-                          $r->get_value('end_on');
-						return 1;
-						
-                    },
-
                 },
                 user_id => {
                     required => 0,
                     type     => 'Str',
+                },
+                region_id => {
+                    required => 0,
+                    type     => 'Int',
                 },
             }
         )
@@ -64,7 +75,10 @@ sub action_specs {
     my $self = shift;
     return {
         create => sub {
-            my %values  = shift->valid_values;
+            use DDP;
+            my %values = shift->valid_values;
+
+            p %values;
             my $campaign = $self->create( \%values );
             return $campaign;
         }

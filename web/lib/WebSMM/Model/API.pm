@@ -76,8 +76,8 @@ sub stash_result {
                 exists $opts{body} ? ( body => $opts{body} ) : ()
             );
         };
-        #print STDERR $res->as_string;
-		use DDP;
+        print STDERR $res->as_string;
+        use DDP;
     }
     if ($@) {
         $c->stash( error => "$method $endpoint", error_content => $@ );
@@ -136,7 +136,7 @@ sub stash_result {
 
         $c->stash(
             error =>
-              "ERROR WHILE $method $endpoint CODE ${\$res->code} ISN'T $opts{exp_code}",
+"ERROR WHILE $method $endpoint CODE ${\$res->code} ISN'T $opts{exp_code}",
             error_content => $res->content,
             error_code    => $res->code,
             error_url     => $url
