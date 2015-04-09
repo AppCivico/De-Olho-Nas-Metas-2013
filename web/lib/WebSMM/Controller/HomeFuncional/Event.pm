@@ -55,8 +55,10 @@ sub set_event : Chained('base') : Args(0) {
     my $api = $c->model('API');
 
     my $params = { %{ $c->req->params } };
-
-    $params->{user_id} = $c->user->obj->id;
+    use DDP;
+    p $params;
+    $params->{description} = delete $params->{description_event};
+    $params->{user_id}     = $c->user->obj->id;
 
     $api->stash_result(
         $c,

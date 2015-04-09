@@ -134,7 +134,6 @@ $(document).ready(function () {
 					<input type="hidden" id="pagetype" value="goaldetail">
 					<input type="hidden" id="goalid" value="[% goal_obj.id%]">
 					<input type="text" id="txtaddress" name="txtaddress" placeholder="CEP">
-					<button id="btnaddress" name="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
 				</div>
 				<div class="col-sm-8">
 					<div class="row">
