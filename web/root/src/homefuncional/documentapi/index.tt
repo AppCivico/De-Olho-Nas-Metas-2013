@@ -86,8 +86,8 @@
     </thead>
     <tbody>
         <tr>
-            <th><pre><a data-animated-anchor href="#sample_of_indicators">/indicators</a></pre></th>
-            <td>Lista de todos os indicadores</td>
+            <th><pre><a data-animated-anchor href="#sample_of_indicators">/goals</a></pre></th>
+            <td>Lista de todas as metas</td>
             <td>
             Filtros:
             <ul class="list-unstyled list-param">
@@ -98,12 +98,12 @@
             </td>
         </tr>
         <tr>
-            <th><pre><a data-animated-anchor href="#sample_of_users">/users</a></pre></th>
+            <th><pre><a data-animated-anchor href="#sample_of_users">/projects</a></pre></th>
             <td>Lista de todos os usuários e sua cidade</td>
             <td>-</td>
         </tr>
         <tr>
-            <th><pre><a data-animated-anchor href="#sample_of_cities">/cities</a></pre></th>
+            <th><pre><a data-animated-anchor href="#sample_of_cities">/</a></pre></th>
             <td>Lista de todas as cidades</td>
             <td>-</td>
         </tr>

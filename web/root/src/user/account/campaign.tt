@@ -28,7 +28,12 @@ jQuery(function($){
 
    $("#tab-cadastrar input[type=submit]").click(function(e){
    	editor.post();
+   	editor_objetivo.post();
+   	editor_texto.post();
    });
+    $("#tab-eventos input[type=submit]").click(function(e){
+   	editor_description_event.post();
+   }); 
 });
 
 </script>
@@ -129,7 +134,7 @@ jQuery(function($){
 						                </script>
  										[%input_text('objective','Objetivo:', req=>1, textbox=>1)|none%]
 						                <script>
-						                    var editor_objetivo = new TINY.editor.edit('editor', {
+						                    var editor_objetivo = new TINY.editor.edit('editor_objetivo', {
 						                        id: 'elm_objective',
 						                        width: '100%',
 						                        height: '120',
@@ -159,7 +164,7 @@ jQuery(function($){
 						                </script> 
   										[%input_text('free_text','Texto livre:', req=>0, textbox=>1)|none%]
 						                <script>
-						                    var editor_texto = new TINY.editor.edit('editor', {
+						                    var editor_texto = new TINY.editor.edit('editor_texto', {
 						                        id: 'elm_free_text',
 						                        width: '100%',
 						                        height: '120',
@@ -243,7 +248,7 @@ jQuery(function($){
 									
 											[%input_text('description_event','Descrição:', req=>1, textbox=>1)|none%]
 						                <script>
-						                    var editor_description_event = new TINY.editor.edit('editor', {
+						                    var editor_description_event = new TINY.editor.edit('editor_description_event', {
 						                        id: 'elm_description_event',
 						                        width: '99%',
 						                        height: '120',

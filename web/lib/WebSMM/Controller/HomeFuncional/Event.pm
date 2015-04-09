@@ -58,7 +58,8 @@ sub set_event : Chained('base') : Args(0) {
     use DDP;
     p $params;
     $params->{description} = delete $params->{description_event};
-    $params->{user_id}     = $c->user->obj->id;
+    delete $params->{campaign_id} if $params->{campaign_id} eq 'Selecione';
+    $params->{user_id} = $c->user->obj->id;
 
     $api->stash_result(
         $c,

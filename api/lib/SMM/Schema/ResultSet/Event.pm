@@ -47,8 +47,8 @@ sub action_specs {
     my $self = shift;
     return {
         create => sub {
-            my %values  = shift->valid_values;
-            my $event = $self->create( \%values );
+            my %values = shift->valid_values;
+            my $event  = $self->create( \%values );
             return $event;
         }
     };

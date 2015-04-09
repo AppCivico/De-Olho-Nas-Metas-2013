@@ -109,6 +109,22 @@ __PACKAGE__->table("campaign");
   is_foreign_key: 1
   is_nullable: 1
 
+=head2 free_text
+
+  data_type: 'text'
+  is_nullable: 1
+
+=head2 objective
+
+  data_type: 'text'
+  is_nullable: 0
+
+=head2 project_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -145,6 +161,12 @@ __PACKAGE__->add_columns(
   "region_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "organization_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "free_text",
+  { data_type => "text", is_nullable => 1 },
+  "objective",
+  { data_type => "text", is_nullable => 0 },
+  "project_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
@@ -197,6 +219,26 @@ __PACKAGE__->belongs_to(
   },
 );
 
+=head2 project
+
+Type: belongs_to
+
+Related object: L<SMM::Schema::Result::Project>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "project",
+  "SMM::Schema::Result::Project",
+  { id => "project_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
 =head2 region
 
 Type: belongs_to
@@ -238,8 +280,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-03-24 04:54:52
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:lyX8ClkE1FtKPoitC/e2mA
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-09 19:22:43
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VvvSxHTIFTfXq5J/eKZpNA
 
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
