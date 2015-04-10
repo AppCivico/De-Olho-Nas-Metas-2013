@@ -15,7 +15,8 @@ sub base : Chained('/user/base') : PathPart('') : CaptureArgs(0) {
         [ 'users', $c->user->obj->id ],
         stash => 'user_roles',
     );
-
+    use DDP;
+    p $c->stash->{user_roles};
 }
 
 sub object : Chained('base') : PathPart('perfil') : CaptureArgs(0) {
@@ -135,11 +136,14 @@ sub survey_list : Chained('survey') : PathPart('') : Args(1) {
     };
 
     use DDP;
-    p$return;
-   $c->stash->{error_msg}= "Não foi possível conectar ao sistema de campanhas móveis, por favor tente mais tarde.", $c->detach unless $return->code eq 200;
+    p $return;
+    $c->stash->{error_msg} =
+"Não foi possível conectar ao sistema de campanhas móveis, por favor tente mais tarde.",
+      $c->detach
+      unless $return->code eq 200;
 
     my $data = decode_json $return->content;
-    
+
     $c->stash->{campaigns} = $data->{payload};
 
 }
@@ -269,6 +273,20 @@ sub survey_create : Chained('survey') : PathPart('criar') : Args(0) {
     $c->res->headers->header(
         Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' );
 
+}
+
+sub counsil : Chained('object') : PathPart('conselho') : Args(0) {
+    my ( $self, $c ) = @_;
+
+    my $api = $c->model('API');
+
+    $api->stash_result(
+        $c,
+        [ 'organizations', $c->user->obj->organization_id ],
+        stash => 'organization_obj',
+    );
+    $c->stash->{user_obj}->{role} =
+      { map { $_ => 1 } @{ $c->stash->{user_roles}->{roles} } };
 }
 
 sub follow : Chained('object') : PathPart('seguindo') : Args(0) {
