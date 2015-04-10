@@ -119,7 +119,7 @@ sub survey_list : Chained('survey') : PathPart('') : Args(1) {
 
     my $model = $c->model('API');
 
-    my $url = URI->new('http://dev.monitor.promisetracker.org');
+    my $url = URI->new('http://monitor.dev.promisetracker.org');
 
     $url->path_segments( 'api', 'v1', 'campaigns' );
     $url->query_form( user_id => $id );
@@ -135,9 +135,11 @@ sub survey_list : Chained('survey') : PathPart('') : Args(1) {
     };
 
     use DDP;
-    p $return;
+    p$return;
+   $c->stash->{error_msg}= "Não foi possível conectar ao sistema de campanhas móveis, por favor tente mais tarde.", $c->detach unless $return->code eq 200;
 
     my $data = decode_json $return->content;
+    
     $c->stash->{campaigns} = $data->{payload};
 
 }
@@ -150,7 +152,7 @@ sub survey_single : Chained('survey') : PathPart('detalhe') : Args(1) {
 
     my $model = $c->model('API');
 
-    my $url = URI->new('http://dev.monitor.promisetracker.org');
+    my $url = URI->new('http://monitor.dev.promisetracker.org');
 
     $url->path_segments( 'api', 'v1', 'campaigns', $id );
     $url->query_form( user_id => $c->user->obj->organization_id );
@@ -178,7 +180,7 @@ sub survey_clone : Chained('survey') : PathPart('clonar') : Args(1) {
 
     my $model = $c->model('API');
 
-    my $url = URI->new('http://dev.monitor.promisetracker.org');
+    my $url = URI->new('http://monitor.dev.promisetracker.org');
 
     my $organization_name = $c->stash->{user_roles}->{organization}->{name};
     my $organization_id   = $c->stash->{user_roles}->{organization}->{id};
@@ -219,7 +221,7 @@ sub survey_login : Chained('survey') : PathPart('entrar') : Args(1) {
     my $organization_name = $c->stash->{user_roles}->{organization}->{name};
     my $organization_id   = $c->stash->{user_roles}->{organization}->{id};
 
-    my $url = URI->new('http://dev.monitor.promisetracker.org');
+    my $url = URI->new('http://monitor.dev.promisetracker.org');
 
     $url->path_segments( 'api', 'v1', 'users', 'sign_in' );
     $url->query_form(
@@ -242,7 +244,7 @@ sub survey_create : Chained('survey') : PathPart('criar') : Args(0) {
 
     my $model = $c->model('API');
 
-    my $url = URI->new('http://monitor.promisetracker.org');
+    my $url = URI->new('http://monitor.dev.promisetracker.org');
 
     $url->path_segments( 'api', 'v1', 'campaigns' );
     $url->query_form(
@@ -263,13 +265,9 @@ sub survey_create : Chained('survey') : PathPart('criar') : Args(0) {
     $c->detach( '/form/redirect_error', [] )
       unless $data->{status} eq 'success';
 
-    use DDP;
     $c->res->redirect( $data->{payload}->{redirect_link} );
     $c->res->headers->header(
         Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' );
-    p $return;
-    p $data;
-    p $url;
 
 }
 

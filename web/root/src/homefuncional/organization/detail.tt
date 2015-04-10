@@ -103,8 +103,8 @@ $(document).ready(function () {
 
 					</div>
 					
-					
 					<div class="events">
+						<!--
 						<h3>Participe dos Eventos</h3>
 						<div class="date-row row">
 							<div class="col-xs-1">
@@ -132,8 +132,8 @@ $(document).ready(function () {
 								</div>
 							</div>
 						</div>
+				-->	
 					</div>
-					
 				</div>
 				<div class="col-sm-4">
 					<div class="list-box list-green">

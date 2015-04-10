@@ -101,6 +101,7 @@
 				<div class="row item">
 					<div class="contents">
 						[%IF error_msg %]<div class="alert alert-danger"><p>[%error_msg%]</p></div>[%END%]
+
 						<h2>Nenhuma campanha móvel encontrada</h2>
 					</div>
 				</div>
