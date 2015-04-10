@@ -15,7 +15,7 @@ __PACKAGE__->config(
         'me.id' => 'Int'
     },
     result_attr => {
-        prefetch  => ['events'],
+        prefetch  => [ 'events', 'organization' ],
         '+select' => [
             \q{to_char(events.date, 'DD/MM/YYYY HH24:MI:SS')},
             \q{to_char(start_in, 'DD/MM/YYYY HH24:MI:SS')},
@@ -40,7 +40,6 @@ sub result : Chained('object') : PathPart('') : Args(0) :
 sub result_GET {
     my ( $self, $c ) = @_;
     my $campaigns = $c->stash->{campaigns};
-
     $self->status_ok(
         $c,
         entity => {
@@ -73,7 +72,6 @@ sub result_GET {
                       )
                 } ( $campaigns->events ),
             ],
-
         }
     );
 
@@ -144,12 +142,14 @@ sub list_GET {
     if ( $c->req->param('user_id') ) {
         $rs = $rs->search( { 'me.user_id' => $c->req->param('user_id') } );
     }
+    use DDP;
     $self->status_ok(
         $c,
         entity => {
             campaigns => [
                 map {
                     my $r = $_;
+
                     +{
                         (
                             map { $_ => $r->{$_} }
@@ -168,6 +168,12 @@ sub list_GET {
                                 my $e = $_;
                                 ( +{ map { $_ => $e->{$_} } qw/id/ } )
                             } @{ $r->{events} },
+                        ],
+                        organizations => [
+                            map {
+                                my $e = $_;
+                                ( +{ map { $_ => $e->{$_} } qw/id name/ } )
+                            } $r->{organization},
                         ],
                       }
                 } $rs->as_hashref->all

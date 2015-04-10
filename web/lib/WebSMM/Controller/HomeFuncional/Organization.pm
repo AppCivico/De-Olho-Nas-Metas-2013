@@ -2,6 +2,7 @@ package WebSMM::Controller::HomeFuncional::Organization;
 use Moose;
 use namespace::autoclean;
 use JSON;
+use Path::Class qw(dir);
 
 BEGIN { extends 'Catalyst::Controller'; }
 
@@ -35,6 +36,8 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
         [ 'organizations', $id ],
         stash => 'organization_obj'
     );
+    use DDP;
+    p $c->stash->{organization_obj};
     if ( $c->user ) {
         $api->stash_result(
             $c,
@@ -123,14 +126,14 @@ sub edit : Chained('base') : PathPart('edit') : Args(0) {
 
     my $api = $c->model('API');
 
-    my $counsil_id = $c->req->param('counsil_id');
-
     my $params = { %{ $c->req->params } };
 
-    my $organization_id = delete $params->{organization_id};
+    my $organization_id = $c->user->obj->organization_id;
 
+    use DDP;
+    p $params;
     $api->stash_result(
-        $c, [ 'users', $organization_id ],
+        $c, [ 'organizations', $organization_id ],
         params => $params,
         method => 'PUT',
     );

@@ -17,7 +17,8 @@ __PACKAGE__->config(
         id => 'Int'
     },
 
-    update_roles => [qw/superadmin user admin webapi organization/],
+    update_roles =>
+      [qw/superadmin user admin webapi organization counsil counsil_master/],
     create_roles => [qw/superadmin admin webapi/],
     delete_roles => [qw/superadmin admin webapi/],
 );
@@ -35,6 +36,10 @@ sub result_GET {
 
     my $organization = $c->stash->{organization};
 
+    my @campaigns =
+      $organization->campaigns->search( undef, { prefetch => 'events' } )->all;
+    use DDP;
+    p @campaigns;
     my $follow_counsil =
       $organization->user_follow_counsils->search( { active => 1 } )->count;
 
@@ -75,6 +80,42 @@ sub result_GET {
                     )
                 }
             },
+            events => [
+                map {
+                    my $c = $_;
+                    map {
+                        my $e = $_;
+                        (
+                            +{
+
+                                id          => $e->id,
+                                name        => $e->name,
+                                description => $e->description,
+                                date        => $e->date->datetime,
+
+                            }
+                          )
+                      } ( $c->events ),
+                  } (@campaigns),
+
+            ],
+            campaigns => [
+                map {
+                    my $e = $_;
+                    (
+                        +{
+
+                            id          => $e->id,
+                            name        => $e->name,
+                            description => $e->description,
+                            start_in    => $e->start_in->datetime,
+                            end_on      => $e->end_on->datetime,
+                            address     => $e->address,
+                        }
+                      )
+                  } (@campaigns),
+
+            ],
             subprefecture => (
                 map {
                     $_

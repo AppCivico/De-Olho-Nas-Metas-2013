@@ -48,7 +48,9 @@ sub index : Chained('base') : PathPart('') : Args(0) {
     my $api = $c->model('API');
     $api->stash_result( $c, 'campaigns' );
     $api->stash_result( $c, 'regions' );
-
+    use DDP;
+    p $c->stash->{campaigns};
+    warn "campaign";
 }
 
 sub set_campaign : Chained('base') : Args(0) {

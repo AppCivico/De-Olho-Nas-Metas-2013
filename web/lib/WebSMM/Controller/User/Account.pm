@@ -15,8 +15,8 @@ sub base : Chained('/user/base') : PathPart('') : CaptureArgs(0) {
         [ 'users', $c->user->obj->id ],
         stash => 'user_roles',
     );
-    use DDP;
-    p $c->stash->{user_roles};
+    $c->stash->{user_obj}->{role} =
+      { map { $_ => 1 } @{ $c->stash->{user_roles}->{roles} } };
 }
 
 sub object : Chained('base') : PathPart('perfil') : CaptureArgs(0) {
@@ -39,8 +39,7 @@ sub index : Chained('object') : PathPart('') : Args(0) {
 
     $c->stash->{user_obj}->{role} =
       { map { $_ => 1 } @{ $c->stash->{user_roles}->{roles} } };
-    use DDP;
-    p $c->stash->{user_obj};
+
     $c->detach( '/form/redirect_ok', ['/admin/dashboard/index'] )
       if $c->stash->{user_obj}->{role}->{admin};
 
@@ -75,7 +74,6 @@ sub edit : Chained('object') : PathPart('editar') : Args(0) {
         method => 'PUT',
         params => $c->req->params,
     );
-
 }
 
 sub campaign : Chained('object') : PathPart('campanhas') : Args(0) {
@@ -285,6 +283,8 @@ sub counsil : Chained('object') : PathPart('conselho') : Args(0) {
         [ 'organizations', $c->user->obj->organization_id ],
         stash => 'organization_obj',
     );
+    use DDP;
+    p $c->stash->{organization_obj};
     $c->stash->{user_obj}->{role} =
       { map { $_ => 1 } @{ $c->stash->{user_roles}->{roles} } };
 }
