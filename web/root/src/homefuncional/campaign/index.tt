@@ -55,7 +55,8 @@
 									</div>
 									<div class="description">
 										<a href="[% c.uri_for_action('/homefuncional/campaign/detail',[cpg.id])%]"><h2>[% cpg.name%]</h2></a>
-										<p class="credits">Organizada por: Nome da Organização</p>
+										<p class="credits">Organizada por: [%cpg.organizations.name%]  
+						     </p>
 										<div class="counter text-right"><div class="icon calendar-orange"></div> [% cpg.events.size %] EVENTO[% IF cpg.events.size > 1%]S[% END %]</div>
 									</div>
 								</div>

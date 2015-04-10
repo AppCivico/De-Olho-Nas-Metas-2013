@@ -57,7 +57,7 @@ sub login_POST {
 
     $c->model('DB::User')
       ->execute( $c, for => 'login', with => $c->req->params );
-
+    $c->req->params->{active} = 1;
     if ( $c->authenticate( $c->req->params ) ) {
         my $item = $c->user->sessions->create(
             {

@@ -1,12 +1,15 @@
 
 [%-CALL assets.include("js/jshashtable-3.0.js")%]
 [%-CALL assets.include("js/jquery.numberformatter.min.js")%]
+[%-CALL assets.include("js/facebook.js")%]
 
 <script>
 $(document).ready(function () {
        $('.priceformat').formatNumber({format:"#,###.00",locale: "br" });
 });
 </script>
+ <!-- Twitter social plugin -->
+	 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
     <section class="project-detail metas-detail">
 		<div class="container">
@@ -17,7 +20,18 @@ $(document).ready(function () {
 					<div class="body">
 						<h4 class="subtitle blue">Empresa</h4>
 						<h1>[% company.name %]</h1>
-
+      <div class="share-buttons">
+						  <div class="twitter">
+						  <!-- Social plugins twitter-->
+						    <a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt"  data-hashtags="deolhonasmetas">Tweetar</a>
+								</div>
+						  <div class="facebook">
+																																																		       <!-- Social plugin facebook -->
+									<div class="fb-share-button" data-href="http://www.deolhonasmetas.org.br/home/company/[%company.name_url%]/detail" data-layout="button_count"></div>
+									
+								</div>
+						</div>
+      <br>
 						<div class="list_budget">
 
 							<h3>Total Recebido: <strong>R$<span class="priceformat">[% sum_budgets %]</span></strong></h3>

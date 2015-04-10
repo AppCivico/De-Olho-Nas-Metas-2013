@@ -50,7 +50,10 @@ sub result_GET {
     my $follow_project =
       $project->user_follow_projects->search( { active => 1 } )->count;
     my $type;
-    my @images = $project->images_projects->all;
+    my @images =
+      $project->images_projects->search( undef, { prefetch => 'user' } )->all;
+    use DDP;
+    p @images;
     $type = $_->goal->objective_id for $project->goal_projects;
 
     my $objective =
@@ -94,7 +97,15 @@ sub result_GET {
             images => [
                 map {
                     my $p = $_;
-                    $p ? ( +{ map { $_ => $p->$_ } qw/name_image/ } ) : ()
+                    $p
+                      ? (
+                        +{
+                            name_image  => $p->name_image,
+                            description => $p->description,
+                            user        => $p->user ? $p->user->name : ""
+                        }
+                      )
+                      : ()
 
                 } @images,
             ],

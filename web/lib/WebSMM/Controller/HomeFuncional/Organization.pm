@@ -2,6 +2,7 @@ package WebSMM::Controller::HomeFuncional::Organization;
 use Moose;
 use namespace::autoclean;
 use JSON;
+use Path::Class qw(dir);
 
 BEGIN { extends 'Catalyst::Controller'; }
 
@@ -21,7 +22,8 @@ Catalyst Controller.
 
 =cut
 
-sub base : Chained('/homefuncional/base') : PathPart('organization') : CaptureArgs(0) {
+sub base : Chained('/homefuncional/base') : PathPart('organization') :
+  CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
 }
@@ -29,11 +31,23 @@ sub base : Chained('/homefuncional/base') : PathPart('organization') : CaptureAr
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
     my ( $self, $c, $id ) = @_;
     my $api = $c->model('API');
-    $api->stash_result( $c, [ 'organizations', $id ], stash => 'organization_obj' );
+    $api->stash_result(
+        $c,
+        [ 'organizations', $id ],
+        stash => 'organization_obj'
+    );
+    use DDP;
+    p $c->stash->{organization_obj};
     if ( $c->user ) {
-        $api->stash_result( $c, [ 'users', $c->user->obj->id ], stash => 'user_obj', );
-        $c->stash->{user_obj}->{role} = { map { $_ => 1 } @{ $c->stash->{user_obj}->{roles} } };
-        $c->stash->{do_i_follow} = grep { $_ eq $id } @{ $c->stash->{user_obj}->{counsils_i_follow} };
+        $api->stash_result(
+            $c,
+            [ 'users', $c->user->obj->id ],
+            stash => 'user_obj',
+        );
+        $c->stash->{user_obj}->{role} =
+          { map { $_ => 1 } @{ $c->stash->{user_obj}->{roles} } };
+        $c->stash->{do_i_follow} =
+          grep { $_ eq $id } @{ $c->stash->{user_obj}->{counsils_i_follow} };
     }
 
 }
@@ -52,14 +66,16 @@ sub index : Chained('base') : PathPart('') : Args(0) {
     $api->stash_result( $c, 'subprefectures' );
     $api->stash_result( $c, 'organizations' );
     my $group_by = {};
-    push @{ $group_by->{ uc( substr( $_->{name}, 0, 1 ) ) } }, $_ for @{ $c->stash->{organizations} };
+    push @{ $group_by->{ uc( substr( $_->{name}, 0, 1 ) ) } }, $_
+      for @{ $c->stash->{organizations} };
     push @{ $group_by->{count} }, scalar( @{ $c->stash->{organizations} } );
     $c->stash->{organizations} = $group_by;
     my @order = sort keys %$group_by;
     $c->stash->{order} = \@order;
 }
 
-sub user_follow_counsil : Chained('base') : PathPart('user_follow_counsil') : Args(0) {
+sub user_follow_counsil : Chained('base') : PathPart('user_follow_counsil') :
+  Args(0) {
 
     my ( $self, $c ) = @_;
 
@@ -83,7 +99,8 @@ sub user_follow_counsil : Chained('base') : PathPart('user_follow_counsil') : Ar
 
 }
 
-sub user_stop_counsil : Chained('base') : PathPart('user_stop_counsil') : Args(0) {
+sub user_stop_counsil : Chained('base') : PathPart('user_stop_counsil') :
+  Args(0) {
     my ( $self, $c ) = @_;
 
     my $api = $c->model('API');
@@ -91,7 +108,57 @@ sub user_stop_counsil : Chained('base') : PathPart('user_stop_counsil') : Args(0
     my $user_id    = $c->req->param('user_id');
     my $counsil_id = $c->req->param('counsil_id');
 
-    $api->stash_result( $c, [ 'users', $user_id, 'counsil', $counsil_id ], method => 'POST', stash => 'counsil' );
+    $api->stash_result(
+        $c, [ 'users', $user_id, 'counsil', $counsil_id ],
+        method => 'POST',
+        stash  => 'counsil'
+    );
+    use DDP;
+    p $c->stash->{counsil};
+    $c->res->status(200);
+    $c->res->content_type('application/json');
+    $c->res->body( JSON::encode_json( $c->stash->{counsil} ) );
+
+}
+
+sub edit : Chained('base') : PathPart('edit') : Args(0) {
+    my ( $self, $c ) = @_;
+
+    my $api = $c->model('API');
+
+    my $params = { %{ $c->req->params } };
+
+    my $organization_id = $c->user->obj->organization_id;
+
+    use DDP;
+    p $params;
+    $api->stash_result(
+        $c, [ 'organizations', $organization_id ],
+        params => $params,
+        method => 'PUT',
+    );
+    if ( $c->stash->{error} ) {
+        $c->detach( '/form/redirect_error', [] );
+    }
+
+    my $avatar = $c->req->upload('avatar');
+
+    if ($avatar) {
+        my $path =
+          dir( $c->config->{organization_picture_path} )->resolve . '/'
+          . $organization_id;
+        unless ( -e $path ) {
+            mkdir $path;
+        }
+        use DDP;
+        p $path;
+
+        $avatar->copy_to( $path . '/' . $organization_id . '.jpg' );
+    }
+
+    $c->detach( '/form/redirect_ok',
+        [ \'/user/perfil/conselho', {}, 'Cadastrado com sucesso!', ] );
+
     use DDP;
     p $c->stash->{counsil};
     $c->res->status(200);

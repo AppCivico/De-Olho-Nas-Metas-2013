@@ -71,9 +71,9 @@
                     <li>
                         <a href="/home/region">Distritos</a>
                     </li>
-                    <!--<li>
+                    <li>
                         <a href="/home/organization">Conselhos</a>
-                    </li>-->
+                    </li>
                     <li>
                         <a href="/home/campaign">Campanhas</a>
                     </li>
@@ -86,7 +86,7 @@
                     </li>
 					[% IF c.user %]
                     <li >
-                        <a href="[%c.uri_for_action('/user/account/index')%]" class="navbar-link"> Olá [%c.user.name%]</a>
+                        <a href="[%c.uri_for_action('/user/account/index')%]" class="navbar-link"> Perfil e ferramentas</a>
                     </li>
                     <li >
 						<a href="[%c.uri_for('/logout')%]">Sair</a>

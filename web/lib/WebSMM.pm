@@ -65,7 +65,8 @@ __PACKAGE__->config(
         expose_methods => [
             'days_of_week_human',   'hour_human',
             'format_date_to_human', 'format_cnpj_to_human',
-            'birthdate_to_age',     'meter_to_kilometer', 'ymd_to_human'
+            'birthdate_to_age',     'meter_to_kilometer',
+            'ymd_to_human',         'month_name'
         ]
     },
 );

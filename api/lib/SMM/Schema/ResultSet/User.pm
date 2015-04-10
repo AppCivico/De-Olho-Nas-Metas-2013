@@ -26,7 +26,7 @@ sub verifiers_specs {
                     type     => 'Str',
                 },
                 phone_number => {
-                    required => 1,
+                    required => 0,
                     type     => 'Str',
                 },
                 organization_id => {
@@ -74,6 +74,14 @@ sub verifiers_specs {
                     required => 0,
                     type     => 'Bool'
                 },
+                accept_email => {
+                    required => 0,
+                    type     => 'Bool'
+                },
+                accept_sms => {
+                    required => 0,
+                    type     => 'Bool'
+                },
             },
         ),
         login => Data::Verifier->new(
@@ -113,14 +121,17 @@ sub action_specs {
         create => sub {
             my %values = shift->valid_values;
 
+            not defined $values{$_} and delete $values{$_} for keys %values;
+
             delete $values{password_confirm};
 
             $values{email} = lc $values{email};
             my $role = delete $values{role};
             my $hash = delete $values{hash};
-			if ($hash){
-				$self->resultset('InviteCounsil')->search({ hash => $hash})->update({ valid_until => 0});
-			}
+            if ($hash) {
+                $self->resultset('InviteCounsil')->search( { hash => $hash } )
+                  ->update( { valid_until => 0 } );
+            }
             my $user = $self->create( \%values );
             if ($role) {
                 $user->set_roles( { name => $role } );
@@ -133,4 +144,3 @@ sub action_specs {
 }
 
 1;
-

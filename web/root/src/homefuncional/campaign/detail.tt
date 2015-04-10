@@ -1,4 +1,8 @@
 [%-CALL assets.include("js/maps.js")%]
+[%-CALL assets.include("js/facebook.js")%]
+ <!-- Twitter social plugin -->
+	 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
 <script>
 
 var calendars = {};
@@ -103,12 +107,25 @@ $(document).keydown( function(e) {
 			<div class="col-sm-12">
 				<section class="campaign-detail">
 					<div class="row">
-						<div class="col-sm-12">
-							<img src="/static/images/campaign/[% campaign_obj.id %]/[%campaign_obj.id%].jpg" border="0" class="campaign-image"><h1>[%campaign_obj.name%]</h1><br />
+						<div class="col-sm-5">
+							<img src="/static/images/campaign/[% campaign_obj.id %]/[%campaign_obj.id%].jpg" border="0" class="img-responsive campaign-image">
+						</div>
+						<div class="col-sm-7">
+							<h1>[%campaign_obj.name%]</h1><br />
 							<p>[%campaign_obj.description%]</p>
 						</div>
 					</div>
 				</section>
+     <div class="share-buttons">
+					   <div class="twitter">
+					   <!-- Social plugins twitter-->
+					     <a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt"  data-hashtags="deolhonasmetas">Tweetar</a>
+					   </div>
+					   <div class="facebook">
+					   <!-- Social plugin facebook -->
+					     <div class="fb-share-button" data-href="http://deolhonasmetas.org.br/home/goal/[%goal_obj.id%]" data-layout="button_count"></div>
+					   </div>
+					</div>
 
 				<section class="event-list">
 					<h3>Participe dos Eventos</h3>

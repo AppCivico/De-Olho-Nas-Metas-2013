@@ -150,7 +150,7 @@ sub list_GET {
               ->{role} #administrative roles, 99 is just to de    fine the undefined
         };
     }
-
+    $rs = $rs->search( undef, { order_by => [qw/me.name/] } );
     $self->status_ok(
         $c,
         entity => {

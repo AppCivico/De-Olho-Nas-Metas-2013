@@ -6,6 +6,8 @@
 [%-CALL assets.include("js/Moment.js")%]
 [%-CALL assets.include("css/bootstrap-datetimepicker.css")%]
 [%-CALL assets.include("js/bootstrap-datetimepicker.min.js")%]
+[%-CALL assets.include("js/tinyeditor/tiny.editor.css")%]
+<script type="text/javascript" src="/static/js/tinyeditor/tiny.editor.js"></script>
 <script>
 jQuery(function($){
    $('.datepicker').datepicker();
@@ -23,6 +25,15 @@ jQuery(function($){
             element.mask("(99) 9999-9999?9");
         }
     }).trigger('focusout');
+
+   $("#tab-cadastrar input[type=submit]").click(function(e){
+   	editor.post();
+   	editor_objetivo.post();
+   	editor_texto.post();
+   });
+    $("#tab-eventos input[type=submit]").click(function(e){
+   	editor_description_event.post();
+   }); 
 });
 
 </script>
@@ -92,6 +103,95 @@ jQuery(function($){
 										[%input_text('name','Nome:', req=>1)|none%]
 									
 										[%input_text('description','Descrição:', req=>1, textbox=>1)|none%]
+						                <script>
+						                    var editor = new TINY.editor.edit('editor', {
+						                        id: 'elm_description',
+						                        width: '99%',
+						                        height: '120',
+						                        cssclass: 'tinyeditor',
+						                        controlclass: 'tinyeditor-control',
+						                        rowclass: 'tinyeditor-header',
+						                        dividerclass: 'tinyeditor-divider',
+						                        controls: ['bold', 'italic', 'underline', 'strikethrough', '|', 'subscript', 'superscript', '|',
+						                            'orderedlist', 'unorderedlist', '|', 'outdent', 'indent', '|', 'leftalign',
+						                            'centeralign', 'rightalign', 'blockjustify', '|', 'unformat', '|', 'undo', 'redo', 'n',
+						                            'size', 'style', '|', 'image', 'hr', 'link', 'unlink'
+						                        ],
+						                        footer: true,
+						                        fonts: ['Asap'],
+						                        xhtml: true,
+						                        bodyid: 'editor',
+						                        footerclass: 'tinyeditor-footer',
+						                        toggle: {
+						                            text: 'código-fonte',
+						                            activetext: 'wysiwyg',
+						                            cssclass: 'toggle'
+						                        },
+						                        resize: {
+						                            cssclass: 'resize'
+						                        }
+						                    });
+						                </script>
+ 										[%input_text('objective','Objetivo:', req=>1, textbox=>1)|none%]
+						                <script>
+						                    var editor_objetivo = new TINY.editor.edit('editor_objetivo', {
+						                        id: 'elm_objective',
+						                        width: '100%',
+						                        height: '120',
+						                        cssclass: 'tinyeditor',
+						                        controlclass: 'tinyeditor-control',
+						                        rowclass: 'tinyeditor-header',
+						                        dividerclass: 'tinyeditor-divider',
+						                        controls: ['bold', 'italic', 'underline', 'strikethrough', '|', 'subscript', 'superscript', '|',
+						                            'orderedlist', 'unorderedlist', '|', 'outdent', 'indent', '|', 'leftalign',
+						                            'centeralign', 'rightalign', 'blockjustify', '|', 'unformat', '|', 'undo', 'redo', 'n',
+						                            'size', 'style', '|', 'image', 'hr', 'link', 'unlink'
+						                        ],
+						                        footer: true,
+						                        fonts: ['Asap'],
+						                        xhtml: true,
+						                        bodyid: 'editor',
+						                        footerclass: 'tinyeditor-footer',
+						                        toggle: {
+						                            text: 'código-fonte',
+						                            activetext: 'wysiwyg',
+						                            cssclass: 'toggle'
+						                        },
+						                        resize: {
+						                            cssclass: 'resize'
+						                        }
+						                    });
+						                </script> 
+  										[%input_text('free_text','Texto livre:', req=>0, textbox=>1)|none%]
+						                <script>
+						                    var editor_texto = new TINY.editor.edit('editor_texto', {
+						                        id: 'elm_free_text',
+						                        width: '100%',
+						                        height: '120',
+						                        cssclass: 'tinyeditor',
+						                        controlclass: 'tinyeditor-control',
+						                        rowclass: 'tinyeditor-header',
+						                        dividerclass: 'tinyeditor-divider',
+						                        controls: ['bold', 'italic', 'underline', 'strikethrough', '|', 'subscript', 'superscript', '|',
+						                            'orderedlist', 'unorderedlist', '|', 'outdent', 'indent', '|', 'leftalign',
+						                            'centeralign', 'rightalign', 'blockjustify', '|', 'unformat', '|', 'undo', 'redo', 'n',
+						                            'size', 'style', '|', 'image', 'hr', 'link', 'unlink'
+						                        ],
+						                        footer: true,
+						                        fonts: ['Asap'],
+						                        xhtml: true,
+						                        bodyid: 'editor',
+						                        footerclass: 'tinyeditor-footer',
+						                        toggle: {
+						                            text: 'código-fonte',
+						                            activetext: 'wysiwyg',
+						                            cssclass: 'toggle'
+						                        },
+						                        resize: {
+						                            cssclass: 'resize'
+						                        }
+						                    });
+						                </script>  
 									<div class="row">
 										<div class="col-sm-6">
 	            								[%input_text('start_in','Data Começo:', classes => ['span3', 'date' ,'datepicker'], req => 0)|none%]
@@ -101,7 +201,7 @@ jQuery(function($){
  									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group row ">
-											    <label class="col-lg-12 " for="elm_end_on">CEP:</label>
+											    <label class="col-lg-12 " for="elm_end_on">CEP ou Endereço:</label>
 											    <div class="col-lg-12">
 											        <div class=" ">
 											            <input type="text" id="txtaddress" name="txtaddress" placeholder="CEP" class="form-control">
@@ -146,8 +246,36 @@ jQuery(function($){
 									<form action="/home/event/set_event" method="post" enctype="multipart/form-data">
 										[%input_text('name','Nome:', req=>1)|none%]
 									
-										[%input_text('description','Descrição:', req=>1)|none%]
-									
+											[%input_text('description_event','Descrição:', req=>1, textbox=>1)|none%]
+						                <script>
+						                    var editor_description_event = new TINY.editor.edit('editor_description_event', {
+						                        id: 'elm_description_event',
+						                        width: '99%',
+						                        height: '120',
+						                        cssclass: 'tinyeditor',
+						                        controlclass: 'tinyeditor-control',
+						                        rowclass: 'tinyeditor-header',
+						                        dividerclass: 'tinyeditor-divider',
+						                        controls: ['bold', 'italic', 'underline', 'strikethrough', '|', 'subscript', 'superscript', '|',
+						                            'orderedlist', 'unorderedlist', '|', 'outdent', 'indent', '|', 'leftalign',
+						                            'centeralign', 'rightalign', 'blockjustify', '|', 'unformat', '|', 'undo', 'redo', 'n',
+						                            'size', 'style', '|', 'image', 'hr', 'link', 'unlink'
+						                        ],
+						                        footer: true,
+						                        fonts: ['Asap'],
+						                        xhtml: true,
+						                        bodyid: 'editor',
+						                        footerclass: 'tinyeditor-footer',
+						                        toggle: {
+						                            text: 'código-fonte',
+						                            activetext: 'wysiwyg',
+						                            cssclass: 'toggle'
+						                        },
+						                        resize: {
+						                            cssclass: 'resize'
+						                        }
+						                    });
+						                </script> 								
 									<div class="row">
 										<div class="col-sm-6">
 														[%input_text('date','Data:', classes => ['input-group', 'date' ,'datetimepicker1'],  req => 0)|none%]

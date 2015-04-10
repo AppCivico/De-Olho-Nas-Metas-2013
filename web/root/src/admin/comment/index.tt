@@ -25,6 +25,7 @@ $(document).ready(function () {
  
     $('.remover_meta').on('click', function () {
       var id = $(this).data("id");
+						alert(id);
    	  $.post( "/admin/comentario_meta/remover", { pe_id: $(this).data("id"), }).done(function( data ) {
    	  $('#control_'+id).html('') 
 	 });	
@@ -55,7 +56,7 @@ $(document).ready(function () {
 									</h2>
 									<p> [%com.description%]</p>
 									<div id="control_[%com.id%]">
-										<button type="button" id="accepted" data-id="[%com.id%]" class="aceitar btn btn-success">Aceitar</button>  <button type="button" id="removed" class="remover btn btn-danger">Remover</button>
+										<button type="button" id="accepted" data-id="[%com.id%]" class="aceitar btn btn-success">Aceitar</button>  <button type="button" data-id="[%com.id%]" id="removed" class="remover btn btn-danger">Remover</button>
 									</div>	
 								</div>
 							</div>
@@ -79,7 +80,7 @@ $(document).ready(function () {
 									</h2>
 									<p> [%comg.description%]</p>
 									<div id="control_[%comg.id%]">
-										<button type="button" id="accepted" data-id="[%comg.id%]" class="aceitar_meta btn btn-success">Aceitar</button>  <button type="button" id="removed" class="remover_meta btn btn-danger">Remover</button>
+										<button type="button" id="accepted" data-id="[%comg.id%]" class="aceitar_meta btn btn-success">Aceitar</button>  <button type="button" data-id="[%comg.id%]"id="removed" class="remover_meta btn btn-danger">Remover</button>
 									</div>	
 								</div>
 							</div>

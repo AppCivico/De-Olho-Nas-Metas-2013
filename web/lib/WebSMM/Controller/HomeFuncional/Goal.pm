@@ -32,15 +32,22 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
     my ( $self, $c, $id ) = @_;
     my $api = $c->model('API');
     $api->stash_result( $c, [ 'goals', $id ], stash => 'goal_obj' );
-    $c->stash->{goal_obj}->{goal_porcentages}->{owned} = int( $c->stash->{goal_obj}->{goal_porcentages}->{owned} );
+    $c->stash->{goal_obj}->{goal_porcentages}->{owned} =
+      int( $c->stash->{goal_obj}->{goal_porcentages}->{owned} );
     $c->stash->{goal_obj}->{goal_porcentages}->{remainder} =
       int( $c->stash->{goal_obj}->{goal_porcentages}->{remainder} );
 
     if ( $c->user ) {
-        $api->stash_result( $c, [ 'users', $c->user->obj->id ], stash => 'user_obj', );
-        $c->stash->{user_obj}->{role} = { map { $_ => 1 } @{ $c->stash->{user_obj}->{roles} } };
+        $api->stash_result(
+            $c,
+            [ 'users', $c->user->obj->id ],
+            stash => 'user_obj',
+        );
+        $c->stash->{user_obj}->{role} =
+          { map { $_ => 1 } @{ $c->stash->{user_obj}->{roles} } };
 
-        $c->stash->{do_i_follow} = grep { $_ eq $id } @{ $c->stash->{user_obj}->{projects_i_follow} };
+        $c->stash->{do_i_follow} =
+          grep { $_ eq $id } @{ $c->stash->{user_obj}->{projects_i_follow} };
     }
 
 }
@@ -58,10 +65,13 @@ sub detail : Chained('object') : PathPart('') : Args(0) {
     }
     $c->stash->{goal_obj}->{progress_count} = $count;
     my @empresas;
-    my %uniqs = map { $_->{business_name} => { name => $_->{business_name}, url => $_->{business_name_url} } }
-      @{ $c->stash->{goal_obj}->{budgets} };
+    my %uniqs = map {
+        $_->{business_name} =>
+          { name => $_->{business_name}, url => $_->{business_name_url} }
+    } @{ $c->stash->{goal_obj}->{budgets} };
 
-    $c->stash->{business_names} = [ sort { $a->{name} cmp $b->{name} } values %uniqs ];
+    $c->stash->{business_names} =
+      [ sort { $a->{name} cmp $b->{name} } values %uniqs ];
 }
 
 sub index : Chained('base') : PathPart('') : Args(0) {
@@ -98,7 +108,8 @@ sub region_by_cep : Chained('base') : Args(0) {
     $c->detach unless $c->req->param('latitude') =~ qr/^(\-?\d+(\.\d+)?)$/;
     $c->detach unless $c->req->param('longitude') =~ qr/^(\-?\d+(\.\d+)?)$/;
 
-    my $lnglat = join( q/ /, $c->req->param('longitude'), $c->req->param('latitude') );
+    my $lnglat =
+      join( q/ /, $c->req->param('longitude'), $c->req->param('latitude') );
 
     my $api = $c->model('API');
 
@@ -122,19 +133,27 @@ sub comment : Chained('base') : PathParth('comment') : Args(0) {
     my $text    = $c->req->param('text');
     my $goal_id = $c->req->param('goal_id');
 
-    $user_id = 53 unless defined $c->req->param('user_id');
-
+    $user_id = 53 if $c->req->param('user_id') eq "";
+    use DDP;
+    p $user_id;
     $api->stash_result(
         $c,
         'comment_goals',
         method => 'POST',
-        params => { user_id => $user_id, description => $text, goal_id => $goal_id }
+        params =>
+          { user_id => $user_id, description => $text, goal_id => $goal_id }
     );
 
     $c->res->status(200);
     $c->res->content_type('application/json');
     $c->res->body(
-        JSON::encode_json( { message => 'Seu comentário foi enviado para moderação, aguarde aprovação.' } ) );
+        JSON::encode_json(
+            {
+                message =>
+'Seu comentário foi enviado para moderação, aguarde aprovação.'
+            }
+        )
+    );
 }
 
 sub set_progress : Chained('base') : PathParth('set_progress') : Args(0) {
@@ -150,13 +169,22 @@ sub set_progress : Chained('base') : PathParth('set_progress') : Args(0) {
         $c,
         'progress_goal_counsil',
         method => 'POST',
-        params => { owned => $owned, remainder => $remainder, goal_id => $goal_id }
+        params =>
+          { owned => $owned, remainder => $remainder, goal_id => $goal_id }
     );
-    my $interation = 'O conselheiro ' . $c->user->obj->name . ' alterou a porcentagem para ' . $owned . '%';
+    my $interation =
+        'O conselheiro '
+      . $c->user->obj->name
+      . ' alterou a porcentagem para '
+      . $owned . '%';
 
     $c->res->status(200);
     $c->res->content_type('application/json');
-    $c->res->body( JSON::encode_json( { message => 'Alteração realizada com sucesso.' } ) );
+    $c->res->body(
+        JSON::encode_json(
+            { message => 'Alteração realizada com sucesso.' }
+        )
+    );
 }
 
 sub search_by_types : Chained('base') : Args(0) {

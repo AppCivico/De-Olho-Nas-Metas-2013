@@ -33,12 +33,17 @@ sub register : Chained('base') : PathPart('cadastro') : Args(0) {
             }
         );
         if ( $c->stash->{error} ) {
-            $c->detach( '/form/redirect_ok', [ \'/login', {}, 'A chave informada está expirada.' ] );
+            $c->detach( '/form/redirect_ok',
+                [ \'/login', {}, 'A chave informada está expirada.' ] );
         }
 
     }
     if ( $c->req->params->{pre_id} ) {
-        $api->stash_result( $c, [ 'pre_registrations', $c->req->params->{pre_id} ], stash => 'pre_registrations' );
+        $api->stash_result(
+            $c,
+            [ 'pre_registrations', $c->req->params->{pre_id} ],
+            stash => 'pre_registrations'
+        );
     }
 
     if ( exists( $c->stash->{form_error}{birth_date} ) ) {
@@ -50,9 +55,10 @@ sub register : Chained('base') : PathPart('cadastro') : Args(0) {
 
         $form->format_date( $body, 'birth_date' );
 
-        #TODO  limpar a string com uma regex retirando os caracteres que vem com a mascara de data
+#TODO  limpar a string com uma regex retirando os caracteres que vem com a mascara de data
         if ( $body->{birth_date} != '--' ) {
-            my $dt = DateTime::Format::Pg->parse_datetime( $body->{birth_date} );
+            my $dt =
+              DateTime::Format::Pg->parse_datetime( $body->{birth_date} );
 
             my $interval = $now->subtract_datetime($dt);
 
@@ -65,16 +71,18 @@ sub register : Chained('base') : PathPart('cadastro') : Args(0) {
     $c->stash->{template} = 'auto/register.tt';
 }
 
-sub registration_successfully : Chained('base') : PathPart('registration_successfully') : Args(0) {
+sub registration_successfully : Chained('base') :
+  PathPart('registration_successfully') : Args(0) {
     my ( $self, $c ) = @_;
 
     $c->stash( template => 'user/account/success.tt' );
 }
 
-sub counselor_contact : Chained('base') : PathPart('conselho/contato') : Args(0) {
-	my ( $self, $c ) = @_;
-	
-	$c->stash( template => 'auto/conselho-contato.tt' );
+sub counselor_contact : Chained('base') : PathPart('conselho/contato') :
+  Args(0) {
+    my ( $self, $c ) = @_;
+
+    $c->stash( template => 'auto/conselho-contato.tt' );
 }
 
 __PACKAGE__->meta->make_immutable;

@@ -1,5 +1,4 @@
 use utf8;
-
 package SMM::Schema::Result::RegisterCounsilManual;
 
 # Created by DBIx::Class::Schema::Loader
@@ -33,8 +32,7 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
-    "PassphraseColumn" );
+__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
 =head1 TABLE: C<register_counsil_manual>
 
@@ -71,24 +69,38 @@ __PACKAGE__->table("register_counsil_manual");
   data_type: 'text'
   is_nullable: 0
 
+=head2 created_at
+
+  data_type: 'timestamp'
+  default_value: current_timestamp
+  is_nullable: 1
+  original: {default_value => \"now()"}
+
 =cut
 
 __PACKAGE__->add_columns(
-    "id",
-    {
-        data_type         => "integer",
-        is_auto_increment => 1,
-        is_nullable       => 0,
-        sequence          => "register_counsil_manual_id_seq",
-    },
-    "email",
-    { data_type => "text", is_nullable => 0 },
-    "phone_number",
-    { data_type => "text", is_nullable => 0 },
-    "council",
-    { data_type => "text", is_nullable => 0 },
-    "name",
-    { data_type => "text", is_nullable => 0 },
+  "id",
+  {
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+    sequence          => "register_counsil_manual_id_seq",
+  },
+  "email",
+  { data_type => "text", is_nullable => 0 },
+  "phone_number",
+  { data_type => "text", is_nullable => 0 },
+  "council",
+  { data_type => "text", is_nullable => 0 },
+  "name",
+  { data_type => "text", is_nullable => 0 },
+  "created_at",
+  {
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
+    is_nullable   => 1,
+    original      => { default_value => \"now()" },
+  },
 );
 
 =head1 PRIMARY KEY
@@ -103,8 +115,9 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key("id");
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-03-24 06:23:03
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:PZE/80sVOJV+h00OxhDwRg
+
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-02 12:58:29
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:cdm2lMwNeijNIXeSLAH8oQ
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
 with 'SMM::Schema::Role::ResultsetFind';

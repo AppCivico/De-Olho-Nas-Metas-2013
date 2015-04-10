@@ -29,13 +29,6 @@ sub verifiers_specs {
                     required   => 1,
                     type       => EmailAddress,
                     post_check => sub {
-                        my $r = shift;
-                        return 0
-                          if (
-                            $self->find(
-                                { email => lc $r->get_value('email') }
-                            )
-                          );
                         return 1;
                     }
                 },
@@ -128,12 +121,13 @@ sub action_specs {
     return {
         key_check => sub {
             my %values = shift->valid_values;
-
             return 0 unless $self->search( { hash => $values{hash} } )->next;
             return 1;
         },
         create => sub {
             my %values = shift->valid_values;
+
+            my $db = $self;
 
 #            my $user = $self->schema->resultset('InviteCounsil')->search( { email => $values{email} } )->first;
 
@@ -141,10 +135,10 @@ sub action_specs {
 
             $key = random_regex(q([a-zA-Z0-9]{20}))
               while ( $self->search( { hash => $key }, { rows => 1 } )->next );
-            $values{hash} = $key;
 
-            $self->search( { email => $values{email} } )
-              ->update( { valid_until => 'false' } );
+            $values{hash} = $key;
+            $self->search( { email => lc $values{email} } )
+              ->update( { valid_until => 0 } );
 
             my $invite_counsil = $self->create(
                 {
@@ -170,10 +164,10 @@ sub action_specs {
                 },
                 \$body
             );
-            my $title = 'b-metria: Solicitação de nova senha';
+            my $title = 'De Olho nas Metas: Convite de conselheiro';
             my $email = SMM::Mailer::Template->new(
                 to      => $invite_counsil,
-                from    => q{"b-metria" <no-reply@b-metria.com.br>},
+                from    => q{"donm" <no-reply@deolhonasmetas.org.br>},
                 subject => $title,
                 content => $body,
                 title   => 'Convite - De Olho Nas Metas',
@@ -202,16 +196,13 @@ __DATA__
 <p>Data: [% date %]</p>
 <p> Código: [% secret_key %]</p>
 
-<p>Para efetuar a alteração, basta acessar o link abaixo e digitar a
-nova senha de acesso, este acesso é válido apenas pelas 2 horas
-seguintes a solicitação realizada através do sistema da b-datum.</p>
+<p>Prezad@ Conselheir@, 
+			Você foi convidad@ para participar do programa De Olho nas Metas. Clique aqui para participar!. 
+			Abraços. 
+			Equipe do De Olho nas Metas.
+</p>
 
-
-<p><a href="[% web_url %]/cadastro?key=[% secret_key  %]&email=[%email_uri%]">
+<p><a href="[% web_url %]/cadastro?key=[% secret_key  %]&email=[%email_uri%]&organization_id=[%organization_id%]">
   [% web_url %]/cadastro?key=[% secret_key %]&email=[%email_uri%]&organization_id=[%organization_id%]</a></p>
-
-<p>Caso você não tenha solicitado esta alteração de senha, acima
-encontram-se informações sobre o horário e o endereço IP da máquina de
-onde partiu a solicitação.</p>
 
 </div>

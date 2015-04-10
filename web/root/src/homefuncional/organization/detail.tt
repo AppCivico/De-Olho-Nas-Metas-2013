@@ -102,38 +102,74 @@ $(document).ready(function () {
 						[%END%]
 
 					</div>
-					
-					
+     [% IF organization_obj.campaigns.size > 0%]
 					<div class="events">
-						<h3>Participe dos Eventos</h3>
+						<h3>Participe das Campanhas</h3>
+						[% FOR e IN organization_obj.campaigns%]
 						<div class="date-row row">
 							<div class="col-xs-1">
 								<div class="day">
-									28
+									[% ymd_to_human(e.start_in).substr(0,2)%]
 								</div>
 								<div class="month">
-									Nov
+									
+									[% month_name(e.start_in)%]
 								</div>
 							</div>
 							<div class="col-xs-11">
 								<div class="item">
-									<div class="title">Nome da campanha</div>
-									<div class="description">Pastry wafer brownie liquorice. Unerdwear.com gummi cupcake bears bonbon. Cheesecake dessert cupcake.</div>
+									<div class="title">[%e.name%]</div>
+									<div class="description">[%e.description%].</div>
 									<div class="footer">
 										<div class="row">
 											<div class="col-sm-6">
-												<div class="icon clock"></div> Sábado, 28/12/2014 às 15h
+												<div class="icon clock"></div> De: [%ymd_to_human(e.start_in)%] Até: [%ymd_to_human(e.end_on)%] 
 											</div>
 											<div class="col-sm-6">
-												<div class="icon gps"></div> Nome do local
+												<div class="icon gps"></div> [%e.address%]
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+      [% END%]
 					</div>
-					
+					[%END%] 
+
+					[% IF organization_obj.events.size > 0%]
+					<div class="events">
+						<h3>Participe dos Eventos</h3>
+						[% FOR e IN organization_obj.events%]
+						<div class="date-row row">
+							<div class="col-xs-1">
+								<div class="day">
+									[%ymd_to_human(e.date).substr(0,2)%]
+								</div>
+								<div class="month">
+									[%month_name(e.date)%]
+								</div>
+							</div>
+							<div class="col-xs-11">
+								<div class="item">
+									<div class="title">[%e.name%]</div>
+									<div class="description">[%e.description%].</div>
+									<div class="footer">
+										<div class="row">
+											<div class="col-sm-6">
+												<div class="icon clock"></div> [%ymd_to_human(e.date)%] 
+											</div>
+											<!--<div class="col-sm-6">
+												<div class="icon gps"></div> Nome do local
+											</div>-->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+      [% END%]
+					</div>
+					[%END%]
 				</div>
 				<div class="col-sm-4">
 					<div class="list-box list-green">

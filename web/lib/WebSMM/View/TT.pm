@@ -80,12 +80,12 @@ sub format_cnpj_to_human {
 sub ymd_to_human {
     my ( $self, $c, $str, $opts ) = @_;
     return '' unless $str;
- 
+
     $str = "$str";
     $str =~ s/(\d{4})-(\d{2})-(\d{2})/$3\/$2\/$1/;
- 
+
     $str =~ s/T/ /;
- 
+
     if ( length $str > 16 ) {
         if ( exists $opts->{crop} && $opts->{crop} eq 'seconds' ) {
             substr( $str, 19 ) = '' if ( length $str > 19 );
@@ -94,9 +94,39 @@ sub ymd_to_human {
             substr( $str, 16 ) = '';
         }
     }
- 
+
     return $str;
- 
+
+}
+
+sub month_name {
+    my ( $self, $c, $str, $opts ) = @_;
+    return '' unless $str;
+    warn
+      'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
+    $str = "$str";
+    $str =~ s/(\d{4})-(\d{2})-(\d{2})/$3\/$2\/$1/;
+    $str =~ s/T/ /;
+
+    substr( $str, 10 ) = '';
+
+    $str =~ s/(\d{2})\/(\d{2})\/(\d{4})/$2/;
+    my $months = {
+        '01' => 'JAN',
+        '02' => 'FEV',
+        '03' => 'MAR',
+        '04' => 'ABR',
+        '05' => 'MAI',
+        '06' => 'JUN',
+        '07' => 'JUL',
+        '08' => 'AGO',
+        '09' => 'SET',
+        '10' => 'OUT',
+        '11' => 'NOV',
+        '12' => 'DEZ'
+    };
+    return $months->{$str};
+
 }
 
 sub birthdate_to_age {

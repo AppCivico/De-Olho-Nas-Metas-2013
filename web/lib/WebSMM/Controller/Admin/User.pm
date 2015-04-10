@@ -47,10 +47,15 @@ sub edit : Chained('object') : PathPart('') : Args(0) {
 
     my $api = $c->model('API');
 
-    $api->stash_result( $c, 'roles', params => { admin => 1 } );
+    $api->stash_result( $c, 'roles' );
     my $r = $c->stash->{active_roles};
     $c->stash->{roles} =
-      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{roles} } ];
+      [ map { { id => $_->{id}, name => $_->{name} } }
+          @{ $c->stash->{roles} } ];
+    warn "teste";
+    use DDP;
+    p $c->stash->{roles};
+    warn "after";
 }
 
 sub add : Chained('base') : PathPart('new') : Args(0) {

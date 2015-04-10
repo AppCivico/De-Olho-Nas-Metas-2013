@@ -1,5 +1,4 @@
 use utf8;
-
 package SMM::Schema::Result::InviteCounsil;
 
 # Created by DBIx::Class::Schema::Loader
@@ -33,8 +32,7 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
-    "PassphraseColumn" );
+__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
 =head1 TABLE: C<invite_counsil>
 
@@ -73,24 +71,38 @@ __PACKAGE__->table("invite_counsil");
   default_value: true
   is_nullable: 1
 
+=head2 created_at
+
+  data_type: 'timestamp'
+  default_value: current_timestamp
+  is_nullable: 1
+  original: {default_value => \"now()"}
+
 =cut
 
 __PACKAGE__->add_columns(
-    "id",
-    {
-        data_type         => "integer",
-        is_auto_increment => 1,
-        is_nullable       => 0,
-        sequence          => "invite_counsil_id_seq",
-    },
-    "email",
-    { data_type => "text", is_nullable => 0 },
-    "hash",
-    { data_type => "text", is_nullable => 0 },
-    "organization_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-    "valid_until",
-    { data_type => "boolean", default_value => \"true", is_nullable => 1 },
+  "id",
+  {
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+    sequence          => "invite_counsil_id_seq",
+  },
+  "email",
+  { data_type => "text", is_nullable => 0 },
+  "hash",
+  { data_type => "text", is_nullable => 0 },
+  "organization_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "valid_until",
+  { data_type => "boolean", default_value => \"true", is_nullable => 1 },
+  "created_at",
+  {
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
+    is_nullable   => 1,
+    original      => { default_value => \"now()" },
+  },
 );
 
 =head1 PRIMARY KEY
@@ -116,19 +128,20 @@ Related object: L<SMM::Schema::Result::Organization>
 =cut
 
 __PACKAGE__->belongs_to(
-    "organization",
-    "SMM::Schema::Result::Organization",
-    { id => "organization_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "organization",
+  "SMM::Schema::Result::Organization",
+  { id => "organization_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-04 13:12:31
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:pfD4YZTjik3kC6y4esXG1g
+
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-08 17:24:06
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:cESI09qWzbuD0iWGMWYkLQ
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
 with 'SMM::Schema::Role::ResultsetFind';
@@ -199,9 +212,9 @@ sub _build_email {
     my $env = {
         year => DateTime->now( time_zone => 'local' )->year,
 
-        partner_name => 'b-metria',
-        url          => 'http://192.168.1.161:5040',
-        web_url      => 'http://192.168.1.161:5040',
+        partner_name => 'deolhonasmetas',
+        url          => 'www.deolhonasmetas.org.br',
+        web_url      => 'http://localhost:5040',
         title        => $title
 
     };
@@ -250,13 +263,6 @@ __DATA__
             <!--// header //-->
             <table cellspacing="0" cellpadding="0" border="0" width="638" style="background-color: #00a99d;">
               <tr>
-                <td style="padding: 10px 20px;">
-                  <div style="text-align: left;">
-                    <a href="https://www.b-metria.com.br" target="_blank"><img src="cid:logo.png" alt="b-metria" border="0"/></a>
-                  </div>
-                </td>
-              </tr>
-              <tr>
                 <td style="padding: 20px;">
                   <p style="font-family: arial, verdana; font-size: 16pt; color: #FFFFFF; text-align: left; margin: 0; padding: 0;">[%title%]</p>
                 </td>
@@ -281,14 +287,6 @@ __DATA__
             </table>
             <!--// footer //-->
             <table cellspacing="0" cellpadding="0" border="0" width="638" style="background-color: #f0b14e;">
-              <tr>
-                <td style="background-color: #f0b14e; padding: 10px;">
-                  <p style="font-family: tahoma, verdana, arial; font-size: 10pt; color: #000;">
-                    Dúvidas? Faça login em <a href="https://www.deolhonasmetas.org.br" target="_blank" style="color: #00a99d; text-decoration: none;">https://www.deolhonasmetas.org.br</a> e acesse o menu “Suporte”<br>
-                    &copy; b-metria 2014. Todos os direitos reservados.<br>
-                  </p>
-                </td>
-              </tr>
             </table>
             <!--// fim footer //-->
 

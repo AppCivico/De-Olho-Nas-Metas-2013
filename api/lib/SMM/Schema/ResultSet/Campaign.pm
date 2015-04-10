@@ -26,6 +26,14 @@ sub verifiers_specs {
                     required => 1,
                     type     => 'Str',
                 },
+                free_text => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                objective => {
+                    required => 1,
+                    type     => 'Str',
+                },
                 latitude => {
                     required => 0,
                     type     => 'Str',
@@ -61,6 +69,10 @@ sub verifiers_specs {
                 user_id => {
                     required => 0,
                     type     => 'Str',
+                },
+                organization_id => {
+                    required => 1,
+                    type     => 'Int',
                 },
                 region_id => {
                     required => 0,

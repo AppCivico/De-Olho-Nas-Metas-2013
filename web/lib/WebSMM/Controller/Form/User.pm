@@ -101,7 +101,8 @@ sub process_edit : Chained('base') : PathPart('user') : Args(1) {
     my $api    = $c->model('API');
     my $params = { %{ $c->req->params } };
     my @r;
-
+    use DDP;
+    p $params;
     my $avatar = $c->req->upload('avatar');
 
     if ( ref $params->{roles} eq 'ARRAY' ) {

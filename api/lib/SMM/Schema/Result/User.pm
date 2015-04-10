@@ -110,6 +110,18 @@ __PACKAGE__->table("user");
   data_type: 'text'
   is_nullable: 1
 
+=head2 accept_sms
+
+  data_type: 'boolean'
+  default_value: false
+  is_nullable: 1
+
+=head2 accept_email
+
+  data_type: 'boolean'
+  default_value: false
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -147,6 +159,10 @@ __PACKAGE__->add_columns(
   { data_type => "text", is_nullable => 1 },
   "image_perfil",
   { data_type => "text", is_nullable => 1 },
+  "accept_sms",
+  { data_type => "boolean", default_value => \"false", is_nullable => 1 },
+  "accept_email",
+  { data_type => "boolean", default_value => \"false", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -299,6 +315,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 images_projects
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::ImagesProject>
+
+=cut
+
+__PACKAGE__->has_many(
+  "images_projects",
+  "SMM::Schema::Result::ImagesProject",
+  { "foreign.user_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 organization
 
 Type: belongs_to
@@ -425,8 +456,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-12 13:18:06
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:tPMM/Rr8iTA7C2/fHNK/mQ
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-08 17:32:06
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xBNt1lDxkG4PW54snaupqQ
 
 __PACKAGE__->many_to_many( roles => user_roles => 'role' );
 
@@ -501,15 +532,16 @@ sub verifiers_specs {
                         return 1;
                     }
                 },
-				current_password => {
+                current_password => {
                     required   => 0,
                     type       => 'Str',
                     post_check => sub {
                         my $r = shift;
-                        return $self->check_password( $r->get_value('current_password') );
+                        return $self->check_password(
+                            $r->get_value('current_password') );
                     },
                 },
- 
+
                 password => {
                     required   => 0,
                     type       => 'Str',
@@ -523,8 +555,10 @@ sub verifiers_specs {
                     },
                     post_check => sub {
                         my $r = shift;
-                        return $r->get_value('password') eq $r->get_value('password_confirm')
-                          && $self->check_password( $r->get_value('current_password') );
+                        return $r->get_value('password') eq
+                          $r->get_value('password_confirm')
+                          && $self->check_password(
+                            $r->get_value('current_password') );
                     },
                 },
             },
@@ -541,13 +575,15 @@ sub action_specs {
 
             not defined $values{$_} and delete $values{$_} for keys %values;
 
-			delete $values{password_confirm};
+            delete $values{password_confirm};
             delete $values{current_password};
 
-            my $new_role = delete $values{role};
+            my $new_role = delete $values{roles};
 
             my $user = $self->update( \%values );
-            $user->set_roles( { name => $new_role } ) if $new_role;
+            use DDP;
+            p $new_role;
+            $user->set_roles( { id => $new_role } ) if $new_role;
             return $user;
         },
 
@@ -558,4 +594,3 @@ sub action_specs {
 __PACKAGE__->meta->make_immutable;
 
 1;
-

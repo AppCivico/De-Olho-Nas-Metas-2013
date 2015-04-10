@@ -279,11 +279,11 @@ sub upload_images : Chained('object') : PathPart('upload_images') : Args(0) {
 
     my $api = $c->model('API');
     $c->detach unless $c->req->method eq 'POST';
-    my $image = $c->req->upload('files[]');
-
-    my $path = dir( $c->config->{project_picture_path} )->resolve . '/'
+    my $image  = $c->req->upload('files[]');
+    my $params = { %{ $c->req->params } };
+    my $path   = dir( $c->config->{project_picture_path} )->resolve . '/'
       . $c->stash->{id};
-
+    my $user_id = $c->user->obj->id if $c->user;
     unless ( -e $path ) {
         mkdir $path;
     }
@@ -293,10 +293,13 @@ sub upload_images : Chained('object') : PathPart('upload_images') : Args(0) {
         'images_project',
         method => 'POST',
         body   => {
-            project_id => $c->stash->{id},
-            name_image => $address_html . $image->filename
+            project_id  => $c->stash->{id},
+            name_image  => $address_html . $image->filename,
+            description => $params->{description},
+            user_id     => $user_id
         }
     );
+
     my $data = {
         name      => $image->filename,
         size      => $image->size,
@@ -309,6 +312,7 @@ sub upload_images : Chained('object') : PathPart('upload_images') : Args(0) {
     $image->copy_to( $path . '/' . $image->filename );
 
     p $image;
+    p $c->stash->{images_project};
     $c->res->status(200);
     $c->res->content_type('application/json');
     $c->res->body( encode_json($response) );

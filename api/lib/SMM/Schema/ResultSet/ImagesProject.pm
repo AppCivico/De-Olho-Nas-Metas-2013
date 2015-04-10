@@ -26,6 +26,14 @@ sub verifiers_specs {
                     required => 1,
                     type     => 'Str',
                 },
+                description => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                user_id => {
+                    required => 0,
+                    type     => 'Int',
+                },
             }
         )
     };
@@ -35,7 +43,7 @@ sub action_specs {
     my $self = shift;
     return {
         create => sub {
-            my %values  = shift->valid_values;
+            my %values         = shift->valid_values;
             my $images_project = $self->create( \%values );
             return $images_project;
         }

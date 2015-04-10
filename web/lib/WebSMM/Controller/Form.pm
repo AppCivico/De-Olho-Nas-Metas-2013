@@ -71,7 +71,6 @@ sub redirect_error : Private {
     if ( !$refer || $refer !~ /^https?:\/\/$host/ ) {
         $refer = $c->uri_for('/');
     }
-
     my $mid = $c->set_error_msg(
         {
             #%args,
