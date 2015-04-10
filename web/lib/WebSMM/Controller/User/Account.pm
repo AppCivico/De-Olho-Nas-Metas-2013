@@ -261,7 +261,6 @@ sub survey_create : Chained('survey') : PathPart('criar') : Args(0) {
             ],
         );
     };
-
     my $data = decode_json $return->content;
     $c->detach( '/form/redirect_error', [] )
       unless $data->{status} eq 'success';
