@@ -71,9 +71,9 @@
                     <li>
                         <a href="/home/region">Distritos</a>
                     </li>
-                    <!--<li>
+                    <li>
                         <a href="/home/organization">Conselhos</a>
-                    </li>-->
+                    </li>
                     <li>
                         <a href="/home/campaign">Campanhas</a>
                     </li>
