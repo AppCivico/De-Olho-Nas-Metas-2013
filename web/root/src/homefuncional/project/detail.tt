@@ -260,14 +260,7 @@ $(document).ready(function () {
 						    [%project_obj.percentage%]%
 						   </div>
 						</div>
-      <a  href="http://planejasampa.prefeitura.sp.gov.br/metas/projeto/[%project_obj.project_number%]">Progresso no planeja sampa</a>
-						<h2>Você acredita na porcentagem estabelecidade pela prefeitura ?</h2>
-						
-						<button >Sim
-						</button>
-						<button >Não
-						</button>
-      [% END %]
+						[% END %]
 						<br />
 						<div class="progress-steps green">[% project_obj.progress_count%] de 6 etapas completas</div>
 						<table class="table-progress-steps">
@@ -295,6 +288,25 @@ $(document).ready(function () {
 						
 						[%END%]
 					</section>
+					<br />
+					<section class="planejasampa">
+						<h3>Progresso no <img src="/static/css/images/logo-planejasampa.png"></h3>
+						<div class="row">
+							<div class="col-xs-offset-1 col-xs-10">
+		      					<p><a  href="http://planejasampa.prefeitura.sp.gov.br/metas/projeto/[%project_obj.project_number%]"><strong>Clique aqui</strong></a> para acompanhar o andamento do projeto no site Planeja Sampa</p>
+							</div>
+						</div>
+      				</section>
+      				<br />
+					<section class="questions">
+						<h3>Você acredita na porcentagem estabelecida pela prefeitura?</h3>
+						<div class="row">
+							<div class="col-xs-offset-1 col-xs-10">
+								<button class="btn btn-info">Sim</button> <button class="btn btn-warning">Não</button>
+							</div>
+						</div>
+					</section>
+					<br />
 					<div>
 						<h3>Comentários dos conselheiros</h3>
 						<table id="list_note" class="table table-striped">
@@ -353,7 +365,7 @@ $(document).ready(function () {
 					<div class="image-gallery">
 
 					 [% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]	
-						<h3>[% project_obj.images.size%] imagens relacionadas <button class="btn btn-brown pull-right" id="add-gallery">Enviar imagens</button></h3>
+						<h3>[% IF project_obj.images.size > 0%][% project_obj.images.size%] imagens relacionadas[% ELSE %]Nenhuma imagem cadastrada[% END %] <button class="btn btn-brown pull-right" id="add-gallery">Enviar imagens</button></h3>
 						[%END%]
 						[% IF project_obj.images.size > 0%]
 						<div class="gallery">
