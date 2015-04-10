@@ -1633,3 +1633,6 @@ input#progress-value{
 .faq p{
 	text-align: justify;
 }
+.bootstrap-datetimepicker-widget *{
+	color: #000;
+}
