@@ -201,7 +201,7 @@ jQuery(function($){
  									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group row ">
-											    <label class="col-lg-12 " for="elm_end_on">CEP:</label>
+											    <label class="col-lg-12 " for="elm_end_on">CEP ou Endereço:</label>
 											    <div class="col-lg-12">
 											        <div class=" ">
 											            <input type="text" id="txtaddress" name="txtaddress" placeholder="CEP" class="form-control">
