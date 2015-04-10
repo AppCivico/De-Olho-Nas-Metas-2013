@@ -76,7 +76,7 @@ $(document).ready(function () {
 				
 					<div class="body">
 						<h1>Conselho participativo de [% organization_obj.name%]</h1>
-						<p><img src="/static/css/images/avatar_organization.jpg" class="company-avatar col-sm-4">
+						<p><img src="/static/images/organization/[%organization_obj.id%]/[%organization_obj.id%].jpg" class="company-avatar col-sm-4">
 							
 						</p>
 						<br clear="all"/>
