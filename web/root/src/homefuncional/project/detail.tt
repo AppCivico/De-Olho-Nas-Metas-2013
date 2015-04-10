@@ -256,11 +256,12 @@ $(document).ready(function () {
 						[% IF project_obj.percentage != ""%]
 						<h3>Progresso de acordo com a prefeitura</h3>
 						<div class="progress">
-						    <div class="progress-bar progress-bar-success progress-bar-green progress-bar-str    iped" role="progressbar" aria-valuenow="[%project_obj.percentage%]" aria-valuemin="0"     aria-valuemax="100" style="width: [%project_obj.percentage%]%;">
+						   <div class="progress-bar progress-bar-success progress-bar-green progress-bar-str    iped" role="progressbar" aria-valuenow="[%project_obj.percentage%]" aria-valuemin="0"     aria-valuemax="100" style="width: [%project_obj.percentage%]%;">
 						    [%project_obj.percentage%]%
 						   </div>
-						 </div>
-							<h2>Você acredita na porcentagem estabelecidade pela prefeitura ?</h2>
+						</div>
+      <a  href="http://planejasampa.prefeitura.sp.gov.br/metas/projeto/[%project_obj.project_number%]">Progresso no planeja sampa</a>
+						<h2>Você acredita na porcentagem estabelecidade pela prefeitura ?</h2>
 						
 						<button >Sim
 						</button>
