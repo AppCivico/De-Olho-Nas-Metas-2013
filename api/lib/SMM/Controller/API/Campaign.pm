@@ -3,6 +3,7 @@ package SMM::Controller::API::Campaign;
 use Moose;
 use utf8;
 use DateTime;
+use DDP;
 
 BEGIN { extends 'Catalyst::Controller::REST' }
 
@@ -169,12 +170,10 @@ sub list_GET {
                                 ( +{ map { $_ => $e->{$_} } qw/id/ } )
                             } @{ $r->{events} },
                         ],
-                        organizations => [
-                            map {
-                                my $e = $_;
-                                ( +{ map { $_ => $e->{$_} } qw/id name/ } )
-                            } $r->{organization},
-                        ],
+                        organizations => {
+                            id   => $r->{organization}->{id},
+                            name => $r->{organization}->{name}
+                        },
                       }
                 } $rs->as_hashref->all
             ]
