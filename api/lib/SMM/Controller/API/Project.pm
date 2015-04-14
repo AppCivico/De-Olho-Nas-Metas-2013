@@ -52,17 +52,41 @@ sub result_GET {
     my $type;
     my @images =
       $project->images_projects->search( undef, { prefetch => 'user' } )->all;
-    use DDP;
-    p @images;
     $type = $_->goal->objective_id for $project->goal_projects;
+
+    my @pap = $project->project_accept_porcentages->search(
+        {},
+        {
+            select   => [ 'accepted', \'count(1)' ],
+            as       => [qw/accepted qtde/],
+            group_by => ['accepted'],
+            result_class => 'DBIx::Class::ResultClass::HashRefInflator',
+        }
+    )->all;
+    use DDP;
+    p @pap;
+    my @pap_user = $project->project_accept_porcentages->search(
+        {},
+        {
+            select       => ['user_id'],
+            as           => [qw/user/],
+            group_by     => ['user_id'],
+            result_class => 'DBIx::Class::ResultClass::HashRefInflator',
+        }
+    )->all;
 
     my $objective =
       $project->resultset('Objective')->search( { id => $type } )->next;
     my $region;
 
-    ($region) = map { { id => $_->id, name => $_->name } } $project->region
+    ($region) = map {
+        {
+            id               => $_->id,
+            name             => $_->name,
+            subprefecture_id => $_->subprefecture_id
+        }
+      } $project->region
       if $project->region;
-    p $project->goal_projects;
     $self->status_ok(
         $c,
         entity => {
@@ -143,8 +167,9 @@ sub result_GET {
                     } ( $project->approved_project_events ),
                 )
             ],
-
-            comments => [
+            statistic      => \@pap,
+            users_question => \@pap_user,
+            comments       => [
                 (
 
                     map {
