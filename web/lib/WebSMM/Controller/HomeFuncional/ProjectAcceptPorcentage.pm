@@ -40,7 +40,6 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
 
     $c->stash->{project_id} = $id;
 
-    my $api = $c->model('API');
     $api->stash_result(
         $c,
         'project_accept_porcentage',
