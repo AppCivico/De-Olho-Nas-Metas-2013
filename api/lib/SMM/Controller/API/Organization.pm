@@ -57,8 +57,6 @@ sub result_GET {
                   phone
                   email
                   website
-                  complement
-                  number
                   /
             ),
             follow_counsil => $follow_counsil,
