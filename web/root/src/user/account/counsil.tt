@@ -27,7 +27,6 @@ jQuery(function($){
     }).trigger('focusout');
 
     $("input[type=submit]").click(function(e){
-				alert(1);
    	editor.post();
    }); 
 });
