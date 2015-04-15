@@ -32,7 +32,7 @@
 																					<option>Selecione</option>	
 																					[%FOREACH r IN roles%]
 																			  [% UNLESS r.name == 'superadmin' && r.name == 'webapi-1'%]
-																					<option value="[% r.id %]">[%r.name%]</option>
+																					<option value="[% r.id %]">[%IF r.name == 'counsil'%]Conselheiro[%ELSIF r.name == 'counsil_master'%]Conselheiro Master[%ELSIF r.name == 'user'%]Usuário[%ELSIF r.name == 'admin'%]Administrador</option>
 																					[%END%]
 																					[%END%]
 																				</select>
