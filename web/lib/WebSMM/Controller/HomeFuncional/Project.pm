@@ -67,6 +67,19 @@ sub detail : Chained('object') : PathPart('') : Args(0) {
         $count++ if $c->stash->{project_obj}->{ 'qualitative_progress_' . $n };
     }
     $c->stash->{project_obj}->{progress_count} = $count;
+
+    $c->stash->{users_question} =
+      { map { $_->{user} => 1 }
+          @{ $c->stash->{project_obj}->{users_question} } };
+    $c->stash->{statistic} =
+      { map { ( $_->{accepted} == 0 ? 'no' : 'yes' ) => $_->{qtde} }
+          @{ $c->stash->{project_obj}->{statistic} } };
+    use DDP;
+    p $c->stash->{statistic};
+    p $c->stash->{user_obj}->{organization}->{subprefecture_id};
+    p $c->stash->{project_obj}->{region};
+    warn '1';
+
 }
 
 sub index : Chained('base') : PathPart('') : Args(0) {

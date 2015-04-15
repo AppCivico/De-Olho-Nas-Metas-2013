@@ -57,8 +57,6 @@ sub result_GET {
                   phone
                   email
                   website
-                  complement
-                  number
                   /
             ),
             follow_counsil => $follow_counsil,
@@ -168,7 +166,9 @@ sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
 
 sub list_GET {
     my ( $self, $c ) = @_;
+    my $rs = $c->stash->{collection};
 
+    $rs = $rs->search( undef, { order_by => { -asc => [qw/me.name/] } } );
     $self->status_ok(
         $c,
         entity => {
@@ -213,7 +213,7 @@ sub list_GET {
                             [ $r->{id} ]
                         )->as_string
                       }
-                } $c->stash->{collection}->as_hashref->all
+                } $rs->as_hashref->all
             ]
         }
     );

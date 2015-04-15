@@ -215,6 +215,15 @@ $(document).ready(function () {
 			              </div>
 						</div>
 						<br />
+ 					<section class="planejasampa">
+	       <h3>Progresso no <img src="/static/css/images/logo-planejasampa.png"></h3>
+	       <div class="row">
+	        <div class="col-xs-offset-1 col-xs-10">
+	              <p><a  href="http://planejasampa.prefeitura.sp.gov.br/metas/meta/[%goal_obj.id%]" target="_blank"><strong>Clique aqui</strong></a> para acompanhar o andamento     do projeto no site Planeja Sampa</p>
+	        </div>
+	       </div>
+	     </section>
+      <br>
 						<div class="progress-steps green">[% goal_obj.progress_count%] de 6 etapas completas</div>
 						<table class="table-progress-steps">
 						[% IF goal_obj.qualitative_progress_1%]

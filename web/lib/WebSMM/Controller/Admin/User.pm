@@ -8,10 +8,13 @@ sub base : Chained('/admin/base') : PathPart('user') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
     my $api = $c->model('API');
-    $api->stash_result( $c, 'roles', params => { admin => 1 } );
+    $api->stash_result( $c, 'roles' );
     $api->stash_result( $c, 'organizations' );
     $c->stash->{users} =
       [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{roles} } ];
+    use DDP;
+    p $c->stash->{roles};
+    warn '1';
 }
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
@@ -29,13 +32,17 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
 sub index : Chained('base') : PathPart('') : Args(0) {
     my ( $self, $c ) = @_;
 
-    my $api = $c->model('API');
-
+    my $api    = $c->model('API');
+    my $params = { %{ $c->req->params } };
+    use DDP;
+    $params->{role} = "" if $params->{role} eq '--';
+    p $params;
     $api->stash_result(
         $c, 'users',
         params => {
-            role => $c->req->params->{role} ? $c->req->params->{role} : 99,
+            role => $params->{role} ? $params->{role} : 99,
             filters => 1,
+            params  => { name => $params->{name}, role => $params->{role} },
             order   => 'me.name'
         }
     );
@@ -52,10 +59,6 @@ sub edit : Chained('object') : PathPart('') : Args(0) {
     $c->stash->{roles} =
       [ map { { id => $_->{id}, name => $_->{name} } }
           @{ $c->stash->{roles} } ];
-    warn "teste";
-    use DDP;
-    p $c->stash->{roles};
-    warn "after";
 }
 
 sub add : Chained('base') : PathPart('new') : Args(0) {

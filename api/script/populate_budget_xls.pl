@@ -18,7 +18,7 @@ my $schema = SMM::Schema->connect(
     $config->{'Model::DB'}{connect_info}{password}
 );
 
-my $excel = Spreadsheet::XLSX->new('data/METAS_TUDO_splited.xlsx');
+my $excel = Spreadsheet::XLSX->new( $ARGV[0] );
 
 my %expected_header = (
     Ano_empenho => qr /\b(AnoEmpenho)\b/io,
@@ -31,7 +31,8 @@ my %expected_header = (
     total_emp        => qr /\b(Val_tot_eph)\b/io,
     Cod_Cpf_Cnpj_Sof => qr /\b(Cod_Cpf_Cnpj_Sof)\b/io,
     liquidado        => qr /\b(liquidado)\b/io,
-    meta_number      => qr /\b(meta_n_c)\b/io
+    meta_number      => qr /\b(meta_n_c)\b/io,
+    code_emp         => qr /\b(Cod_eph)\b/io,
 );
 
 my @rows;
@@ -66,12 +67,9 @@ for my $worksheet ( @{ $excel->{Worksheet} } ) {
             }
         }
         else {
-            warn "here";
-
-            # aqui você pode verificar se foram encontrados todos os campos que você precisa
-            # neste caso, achar apenas 1 cabeçalho já é o suficiente
+# aqui você pode verificar se foram encontrados todos os campos que você precisa
+# neste caso, achar apenas 1 cabeçalho já é o suficiente
             my $registro = {};
-
             foreach my $header_name ( keys %$header_map ) {
                 my $col = $header_map->{$header_name};
 
@@ -81,45 +79,141 @@ for my $worksheet ( @{ $excel->{Worksheet} } ) {
                 my $value = $cell->value();
                 utf8::decode($value);
 
-                # aqui é uma regra que você escolhe, pois as vezes o valor da célula pode ser nulo
+# aqui é uma regra que você escolhe, pois as vezes o valor da célula pode ser nulo
                 next if !defined $value || $value =~ /^\s*$/;
                 $value =~ s/^\s+//;
                 $value =~ s/\s+$//;
                 $registro->{$header_name} = $value;
             }
-            use DDP;
-            p $registro;
+            eval {
+                $schema->txn_do(
+                    sub {
+                        if ( $registro->{meta_number} =~ /\// ) {
+                            my @goals = split( '/', $registro->{meta_number} );
 
-            #eval {
-            #   $schema->txn_do(
-            #      sub {
-            $schema->resultset('Budget')->create(
-                {
-                    business_name => $registro->{Nome_razao},
-                    cpnj          => $registro->{Cod_Cpf_Cnpj_Sof},
-                    goal_number   => $registro->{meta_number} eq "dup"
-                    ? undef
-                    : $schema->resultset('Goal')
-                      ->search( { goal_number => $registro->{meta_number} } )
-                      ->next->id,
-                    dedicated_value  => $registro->{total_emp},
-                    liquidated_value => $registro->{liquidado},
-                    observation      => $registro->{txt_emp},
-                    dedicated_year   => $registro->{Ano_empenho},
-                    organ_code       => $registro->{cod_orgao},
-                    organ_name       => $registro->{orgao}
+                            for my $v_goal (@goals) {
 
-                }
-            );
+                                my $budget =
+                                  $schema->resultset('Budget')->search(
+                                    {
+                                        code_emp => $registro->{code_emp},
+                                        dedicated_year =>
+                                          $registro->{Ano_empenho},
+                                        goal_number => $v_goal,
+                                    }
+                                  )->single;
+                                warn 'loll';
+                                if ($budget) {
+                                    $budget->update(
+                                        {
+                                            business_name =>
+                                              $registro->{Nome_razao},
+                                            cpnj =>
+                                              $registro->{Cod_Cpf_Cnpj_Sof},
+                                            goal_number =>
+                                              $registro->{meta_number},
+                                            dedicated_value =>
+                                              $registro->{total_emp},
+                                            liquidated_value =>
+                                              $registro->{liquidado},
+                                            observation => $registro->{txt_emp},
+                                            dedicated_year =>
+                                              $registro->{Ano_empenho},
+                                            organ_code =>
+                                              $registro->{cod_orgao},
+                                            organ_name => $registro->{orgao},
+                                            code_emp   => $registro->{code_emp}
 
-            #         die 'rollback';
-            #     }
-            # );
-            #}
+                                        }
+                                    );
+                                }
+                                else {
+                                    $schema->resultset('Budget')->create(
+                                        {
+                                            business_name =>
+                                              $registro->{Nome_razao},
+                                            cpnj =>
+                                              $registro->{Cod_Cpf_Cnpj_Sof},
+                                            goal_number =>
+                                              $registro->{meta_number},
+                                            dedicated_value =>
+                                              $registro->{total_emp},
+                                            liquidated_value =>
+                                              $registro->{liquidado},
+                                            observation => $registro->{txt_emp},
+                                            dedicated_year =>
+                                              $registro->{Ano_empenho},
+                                            organ_code =>
+                                              $registro->{cod_orgao},
+                                            organ_name => $registro->{orgao},
+                                            code_emp   => $registro->{code_emp}
+
+                                        }
+                                    );
+                                }
+                            }
+                        }
+                        else {
+                            use DDP;
+                            p $registro;
+                            warn 'registro2';
+
+                            warn 'budget';
+                            p $budget;
+                            warn 'budget2';
+                            if ($budget) {
+
+                                my $bd = $schema->resultset('Budget')->update(
+                                    {
+                                        business_name =>
+                                          $registro->{Nome_razao},
+                                        cpnj => $registro->{Cod_Cpf_Cnpj_Sof},
+                                        goal_number => $registro->{meta_number},
+                                        dedicated_value =>
+                                          $registro->{total_emp},
+                                        liquidated_value =>
+                                          $registro->{liquidado},
+                                        observation => $registro->{txt_emp},
+                                        dedicated_year =>
+                                          $registro->{Ano_empenho},
+                                        organ_code => $registro->{cod_orgao},
+                                        organ_name => $registro->{orgao}
+
+                                    }
+                                );
+                                my %data = $bd->get_dirty_columns;
+
+                            }
+                            else {
+                                warn 'create';
+                                $schema->resultset('Budget')->create(
+                                    {
+                                        business_name =>
+                                          $registro->{Nome_razao},
+                                        cpnj => $registro->{Cod_Cpf_Cnpj_Sof},
+                                        goal_number => $registro->{meta_number},
+                                        dedicated_value =>
+                                          $registro->{total_emp},
+                                        liquidated_value =>
+                                          $registro->{liquidado},
+                                        observation => $registro->{txt_emp},
+                                        dedicated_year =>
+                                          $registro->{Ano_empenho},
+                                        organ_code => $registro->{cod_orgao},
+                                        organ_name => $registro->{orgao}
+
+                                    }
+                                );
+                            }
+                        }
+
+                        die 'rollback';
+                    }
+                );
+            }
 
         }
     }
 }
 warn $@;
 die $@ unless $@ =~ /rollback/;
-

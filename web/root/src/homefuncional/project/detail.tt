@@ -73,10 +73,20 @@ $(document).ready(function () {
     },"json")
 	
   })
-   $('#yes').on('click', function () {
-
+   $('#accept').on('click', function () {
+						$.post( '/home/project_accept_porcentage/' + $('#projectid').val() + '/accepted', { project_id: $('#projectid').val(), accepted: 1 },function( data ) {
+				  console.log(data);
+					 $('#alert_question').html('<div class="alert alert-success"><p>'+data.message+'</p></div>');
+					 $('#content_question').html('');
+						},"json")
    })   
-
+   $('#no_accept').on('click', function () {
+						$.post( '/home/project_accept_porcentage/'+ $('#projectid').val() + '/accepted', { project_id: $('#projectid').val(), accepted: 0 },function( data ) {
+						console.log(data);
+						$('#alert_question').html('<div class="alert alert-success"><p>'+data.message+'</p></div>');
+					 $('#content_question').html('');
+      },"json")
+   })    
   $('#comment_counsil').on('click', function () {
 
 	if ($('#text_comment_counsil').val() == ""){
@@ -296,16 +306,33 @@ $(document).ready(function () {
 		      					<p><a  href="http://planejasampa.prefeitura.sp.gov.br/metas/projeto/[%project_obj.project_number%]" target="_blank"><strong>Clique aqui</strong></a> para acompanhar o andamento do projeto no site Planeja Sampa</p>
 							</div>
 						</div>
-      				</section>
+     </section>
       				<br />
-			<!--		<section class="questions">
-						<h3>Você acredita na porcentagem estabelecida pela prefeitura?</h3>
-						<div class="row">
-							<div class="col-xs-offset-1 col-xs-10">
-								<button class="btn btn-info">Sim</button> <button class="btn btn-warning">Não</button>
-							</div>
-						</div>
-					</section> -->
+						[% IF project_obj.region.subprefecture_id == user_obj.organization.subprefecture_id%]
+      [% SET user_id = user_obj.id%]
+					 [% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]	
+						[% IF users_question.$user_id == 1%]
+										<h3>Opiniões dos conselheiros sobre o progresso</h3>
+										Conselheiros concordaram:	[%statistic.yes || 0%]
+										Conselheiros não concordaram:	[%statistic.no || 0%]
+					 [%ELSE%]
+									<section class="questions">
+										<h3>Você acredita na porcentagem estabelecida pela prefeitura?</h3>
+										<div class="row">
+											<div id="alert_question">
+											</div>
+											<div id="content_question" class="col-xs-offset-1 col-xs-10">
+												<button id="accept" name="accept" class="btn btn-info">Sim</button> <button id="no_accept" name="no_accept" class="btn btn-warning">Não</button>
+											</div>
+										</div>
+									</section>
+							[%END%]
+				 	[%END%]
+						[%ELSE%]
+										<h3>Opiniões dos conselheiros sobre o progresso</h3>
+ 									Conselheiros concordaram:	[%statistic.yes || 0%]
+										Conselheiros não concordaram:	[%statistic.no || 0%] 
+      [%END%]
 					<br />
 					<div>
 						<h3>Comentários dos conselheiros</h3>

@@ -101,39 +101,12 @@ sub process_edit : Chained('base') : PathPart('user') : Args(1) {
     my $api    = $c->model('API');
     my $params = { %{ $c->req->params } };
     my @r;
-    use DDP;
-    p $params;
+
     my $avatar = $c->req->upload('avatar');
-
-    if ( ref $params->{roles} eq 'ARRAY' ) {
-
-        foreach my $r ( @{ $params->{roles} } ) {
-            push(
-                @r,
-                {
-                    user_id => $id,
-                    role_id => $r
-                }
-            );
-        }
-
-    }
-    else {
-        push(
-            @r,
-            {
-                user_id => $id,
-                role_id => $params->{roles}
-            }
-        );
-    }
-
-    my $roles = encode_json( \@r );
 
     my $path = dir( $c->config->{profile_picture_path} )->resolve . '/'
       . $c->stash->{id};
 
-    $params->{roles}        = $roles;
     $params->{change_roles} = 1;
 
     $api->stash_result(

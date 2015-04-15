@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-sm-3 col-md-2 sidebar">
 			<ul class="nav nav-sidebar">
-				<li class=""><a href="/admin/dashboard">Dashboard</a></li>
+				<li class=""><a href="/admin/dashboard">Início</a></li>
 				<!--<li><a href="#">Perfil</a></li>
 				<li><a href="#">Usuários</a></li>-->
 				[%IF role_controller == 'admin'%]

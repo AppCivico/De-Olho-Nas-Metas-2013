@@ -58,7 +58,6 @@ var $maps = function () {
 		
 		$.getJSON('/home/project_map',function(data,status){
 			var json = data;
-			
 			$.each(json, function(i, pj){
 				marker = "";
 				var myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	

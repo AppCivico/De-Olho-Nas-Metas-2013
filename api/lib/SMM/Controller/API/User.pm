@@ -44,6 +44,7 @@ sub result_GET {
     my $user  = $c->stash->{user};
     my $x     = $user->organization;
     my %attrs = $user->get_inflated_columns;
+    my @pap   = $user->project_accept_porcentages->all;
     $self->status_ok(
         $c,
         entity => {
@@ -56,8 +57,9 @@ sub result_GET {
             (
                 organization => $user->organization
                 ? {
-                    name => $user->organization->name,
-                    id   => $user->organization->id
+                    name             => $user->organization->name,
+                    id               => $user->organization->id,
+                    subprefecture_id => $user->organization->subprefecture_id
                   }
                 : undef
             ),
@@ -141,6 +143,10 @@ sub list_GET {
     if ( $c->req->params->{organization} ) {
         $rs =
           $rs->search( { organization_id => $c->req->params->{organization} } );
+    }
+    if ( $c->req->params->{name} ) {
+        $rs->search(
+            { name => { like => '%' . $c->req->params->{name} . '%' } } );
     }
     if ( $c->req->params->{role} ) {
         $conditions = {

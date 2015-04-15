@@ -23,6 +23,7 @@ Catalyst Controller.
 =cut
 
 sub base : Chained('/') : PathPart('home') : CaptureArgs(0) {
+
     my ( $self, $c ) = @_;
 
     $c->stash->{template_wrapper} = 'func';

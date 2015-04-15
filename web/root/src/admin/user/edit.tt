@@ -18,20 +18,22 @@
             [%input_text('password_confirm','Confirmação de senha', req=>1, type => 'password')|none%]
 			[%input_text('phone_number','Celular:', req=>0,value => user_obj.phone_number)|none%]
             
-												<label>Permissões Atuais:</label>
+												<label>Permissão Atual:</label>
 												[% FOR p IN user_obj.roles %]
-												<a>[%p%]</a>
+												<a>[%IF p == 'counsil'%]Conselheiro[%ELSIF p == 'counsil_master'%]Conselheiro Master[%ELSIF p == 'user'%]Usuário[%ELSIF p == 'admin'%]Administrador[%END%]</a>
 												[%END%]
 												<br>
 												<br>
 												
             <div class="form-group">
-																<label class="col-lg-12 " for="elm_active">Permissões</label>
+																<label class="col-lg-12 " for="elm_active">Editar Permissão:</label>
 																<div class="col-lg-12">
-																				<select name="roles" class="form-control">
+																				<select name="role" class="form-control">
 																					<option>Selecione</option>	
 																					[%FOREACH r IN roles%]
-																					<option value="[% r.id %]">[%r.name%]</option>
+																			  [% UNLESS r.name == 'superadmin' && r.name == 'webapi-1'%]
+																					<option value="[% r.id %]">[%IF r.name == 'counsil'%]Conselheiro[%ELSIF r.name == 'counsil_master'%]Conselheiro Master[%ELSIF r.name == 'user'%]Usuário[%ELSIF r.name == 'admin'%]Administrador</option>
+																					[%END%]
 																					[%END%]
 																				</select>
 																</div>
@@ -56,7 +58,7 @@
                 <button type="submit" class="btn btn-primary" data-loading-text="Processando...">Continuar</button>
                 [%IF !NO_TITLE%]
                     [%href = c.uri_for_action('/admin/user/index')%]
-                    <a href="[%href%]" class="btn btn-right">Voltar para lista de usuários</a>
+                    <a href="[%href%]" class="btn btn-primary pull-right">Voltar para lista de usuários</a>
                 [%END%]
             </div>
         </fieldset>

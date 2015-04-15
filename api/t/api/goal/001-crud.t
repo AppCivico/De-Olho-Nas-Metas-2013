@@ -8,10 +8,10 @@ api_auth_as user_id => 1, roles => ['superadmin'];
 
 db_transaction {
 
-    rest_post '/users',
-      name  => 'criar usuario',
+    rest_post '/goals',
+      name  => 'criar meta',
       list  => 1,
-      stash => 'user',
+      stash => 'goal',
       [
         name             => 'Foo Bar',
         email            => 'foo1@email.com',
@@ -19,6 +19,8 @@ db_transaction {
         password_confirm => 'foobarquux1',
         role             => 'user'
       ];
+
+    exit;
     stash_test 'user.get', sub {
         my ($me) = @_;
         is( $me->{id},    stash 'user.id',  'get has the same id!' );
@@ -39,7 +41,6 @@ db_transaction {
         is( $me->[2]{email}, 'foo1@email.com', 'listing ok' );
     };
 
-    exit;
     rest_put stash 'user.url',
       name => 'atualizar usuario',
       [
@@ -67,19 +68,18 @@ db_transaction {
     # use DDP; p $list;
 
     # utilizar
-
     rest_reload_list 'user';
 
-    stash_test 'user.list', sub {
+    stash_test 'goals.list', sub {
         my ($me) = @_;
-
+        use DDP;
+        p $me;
         ok( $me = delete $me->{users}, 'users list exists' );
 
         is( @$me, 2, '2 users' );
 
         is( $me->[0]{email}, 'superadmin@email.com', 'listing ok' );
     };
-
 };
 
 done_testing;

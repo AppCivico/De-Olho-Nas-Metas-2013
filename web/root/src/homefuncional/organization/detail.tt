@@ -81,7 +81,12 @@ $(document).ready(function () {
 						</p>
 						<br clear="all"/>
 					</div>
-					
+				      [%organization_obj.description%]
+                                        [%organization_obj.email%]
+                                        [%organization_obj.website%]
+                                        [%organization_obj.phone%]
+                                        [%organization_obj.address%]
+	
 					<div class="row social">
 							
 						<div class="col-xs-6 text-right">

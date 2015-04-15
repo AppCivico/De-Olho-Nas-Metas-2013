@@ -92,7 +92,18 @@ sub list_GET {
             }
         );
     }
-    $rs = $rs->search( undef, { order_by => [qw/me.name/] } );
+
+    $rs = $rs->search(
+        {
+            '-or' => [
+                'me.name' => { 'like' => 'user' },
+                'me.name' => { 'like' => 'admin%' },
+                'me.name' => { 'like' => 'counsil%' },
+                'me.name' => { 'like' => 'counsil_master%' },
+            ]
+        },
+        { order_by => [qw/me.name/] }
+    );
     $self->status_ok(
         $c,
         entity => {
