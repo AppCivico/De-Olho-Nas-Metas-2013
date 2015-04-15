@@ -25,8 +25,8 @@
                     <tr>
                         <td>[%ur.name%]</td>
                         <td>[%ur.email%]</td>
+                        <td>[%FOR p IN ur.roles%][%IF p == 'counsil'%]Conselheiro[%ELSIF p == 'counsil_master'%]Conselheiro Master[%ELSIF p == 'user'%]Usuário[%ELSIF p == 'admin'%]Administrador[%END%][%END%]</td>
                         <td>[%format_date_to_human(ur.created_at)%]</td>
-                        <td>[%FOR p IN ur.roles%][%p%][%END%]</td>
                         <td>
                             <a class="btn btn-mini" href="/admin/user/[%ur.id%]">
                                 Editar
@@ -42,7 +42,7 @@
             </ul>
         [%END%]
     </fieldset>
-    <a class="btn" href="/admin/user/new">Adicionar um novo usuário</a>
+    <a class="btn btn-primary pull-right" href="/admin/user/new">Adicionar um novo usuário</a>
 </div>
 
 

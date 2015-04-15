@@ -52,10 +52,6 @@ sub edit : Chained('object') : PathPart('') : Args(0) {
     $c->stash->{roles} =
       [ map { { id => $_->{id}, name => $_->{name} } }
           @{ $c->stash->{roles} } ];
-    warn "teste";
-    use DDP;
-    p $c->stash->{roles};
-    warn "after";
 }
 
 sub add : Chained('base') : PathPart('new') : Args(0) {

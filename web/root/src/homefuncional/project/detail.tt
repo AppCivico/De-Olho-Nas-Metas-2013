@@ -312,7 +312,7 @@ $(document).ready(function () {
       [% SET user_id = user_obj.id%]
 					 [% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]	
 						[% IF users_question.$user_id == 1%]
-										<h3>Estatística de opiniões sobre o progresso</h3>
+										<h3>Opiniões dos conselheiros sobre o progresso</h3>
 										Conselheiros concordaram:	[%statistic.yes || 0%]
 										Conselheiros não concordaram:	[%statistic.no || 0%]
 					 [%ELSE%]
@@ -329,7 +329,7 @@ $(document).ready(function () {
 							[%END%]
 				 	[%END%]
 						[%ELSE%]
-										<h3>Estatística de opiniões sobre o progresso</h3>
+										<h3>Opiniões dos conselheiros sobre o progresso</h3>
  									Conselheiros concordaram:	[%statistic.yes || 0%]
 										Conselheiros não concordaram:	[%statistic.no || 0%] 
       [%END%]

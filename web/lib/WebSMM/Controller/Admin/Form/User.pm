@@ -15,14 +15,11 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
 
     my $api    = $c->model('API');
     my $params = { %{ $c->req->params } };
-    use DDP;
-    p $params;
     $api->stash_result(
         $c, ['users'],
         method => 'POST',
         body   => $params
     );
-
     if ( $c->stash->{error} ) {
         $c->detach( '/form/redirect_error', [] );
     }
@@ -65,7 +62,8 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
             $c->detach( '/form/redirect_error', [] );
         }
         else {
-            $c->detach( '/form/redirect_ok', [ '/admin/user/index', {}, 'Cadastrado com sucesso!' ] );
+            $c->detach( '/form/redirect_ok',
+                [ '/admin/user/index', {}, 'Cadastrado com sucesso!' ] );
         }
     }
 }
@@ -76,32 +74,8 @@ sub process_edit : Chained('base') : PathPart('user') : Args(1) {
     my $api    = $c->model('API');
     my $params = { %{ $c->req->params } };
     my @r;
-    if ( ref $params->{roles} eq 'ARRAY' ) {
 
-        foreach my $r ( @{ $params->{roles} } ) {
-            push(
-                @r,
-                {
-                    user_id => $id,
-                    role_id => $r
-                }
-            );
-        }
-
-    }
-    else {
-        push(
-            @r,
-            {
-                user_id => $id,
-                role_id => $params->{roles}
-            }
-        );
-    }
-
-    my $roles = encode_json( \@r );
-
-    $params->{roles}        = $roles;
+    $params->{role} = "" if $params->{role} eq 'Selecione';
     $params->{change_roles} = 1;
 
     $api->stash_result(
@@ -114,7 +88,8 @@ sub process_edit : Chained('base') : PathPart('user') : Args(1) {
         $c->detach( '/form/redirect_error', [] );
     }
     else {
-        $c->detach( '/form/redirect_ok', [ '/admin/user/index', {}, 'Alterado com sucesso!' ] );
+        $c->detach( '/form/redirect_ok',
+            [ '/admin/user/index', {}, 'Alterado com sucesso!' ] );
     }
 }
 
@@ -129,7 +104,8 @@ sub process_delete : Chained('base') : PathPart('remove_user') : Args(1) {
         $c->detach( '/form/redirect_error', [] );
     }
     else {
-        $c->detach( '/form/redirect_ok', [ '/admin/customer/index', {}, 'Removido com sucesso!' ] );
+        $c->detach( '/form/redirect_ok',
+            [ '/admin/customer/index', {}, 'Removido com sucesso!' ] );
     }
 }
 
