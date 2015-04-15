@@ -144,6 +144,10 @@ sub list_GET {
         $rs =
           $rs->search( { organization_id => $c->req->params->{organization} } );
     }
+    if ( $c->req->params->{name} ) {
+        $rs->search(
+            { name => { like => '%' . $c->req->params->{name} . '%' } } );
+    }
     if ( $c->req->params->{role} ) {
         $conditions = {
             'role.id' => $c->req->params->{role} == 99

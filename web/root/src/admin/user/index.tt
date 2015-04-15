@@ -7,6 +7,29 @@
 <div id="x-container">
 <h2>Lista de usuários administrativos</h2>
     <fieldset>
+        <nav class="navbar navbar-default">
+								   <div class="container-fluid">
+
+										    <form class="navbar-form navbar-left" role="search" action="" method="GET" >
+
+										       <div class="form-group">
+												         Cliente
+													           <input name="name" id="name" value="" />
+														       </select>
+									         </div>
+																	 <div class="form-group">
+												         Permissão
+										           <select name="role" class="form-control">
+													           <option>--</option>
+													           [% FOREACH r  IN roles%]
+													           <option value="[% r.id %]" >[%IF r.name == 'counsil'%]Conselheiro[%ELSIF r.name == 'counsil_master'%]Conselheiro Master[%ELSIF r.name == 'user'%]Usuário[%ELSIF r.name == 'admin'%]Administrador[%END%]</option>
+														          [% END %]
+														       </select>
+								          </div> 
+																	<button type="submit" class="btn btn-default">Buscar</button>
+								      </form>
+																																																																																																								   </div>
+							</nav>
 
         [%IF users.size > 0%]
             <table class="table table-striped table-condensed">
