@@ -140,6 +140,12 @@ __PACKAGE__->table("project");
   is_foreign_key: 1
   is_nullable: 1
 
+=head2 goal_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -189,6 +195,8 @@ __PACKAGE__->add_columns(
     { data_type => "numeric", is_nullable => 1 },
     "type",
     { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+    "goal_id",
+    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -233,6 +241,26 @@ __PACKAGE__->has_many(
     "SMM::Schema::Result::CommentProject",
     { "foreign.project_id" => "self.id" },
     { cascade_copy         => 0, cascade_delete => 0 },
+);
+
+=head2 goal
+
+Type: belongs_to
+
+Related object: L<SMM::Schema::Result::Goal>
+
+=cut
+
+__PACKAGE__->belongs_to(
+    "goal_tb",
+    "SMM::Schema::Result::Goal",
+    { id => "goal_id" },
+    {
+        is_deferrable => 0,
+        join_type     => "LEFT",
+        on_delete     => "NO ACTION",
+        on_update     => "NO ACTION",
+    },
 );
 
 =head2 goal_projects
@@ -425,8 +453,8 @@ __PACKAGE__->has_many(
     { cascade_copy         => 0, cascade_delete => 0 },
 );
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-13 10:00:12
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:FSGLdW8Vm7dsx6uIHtOXNw
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-16 13:52:47
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ne+aZmlUrl4HUjPBhBDkOQ
 
 __PACKAGE__->has_many(
     approved_comments => 'SMM::Schema::Result::CommentProject',

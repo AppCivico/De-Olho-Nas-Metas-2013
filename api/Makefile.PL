@@ -38,6 +38,7 @@ requires 'Data::Printer';
 requires 'Data::Manager';
 requires 'FindBin';
 requires 'JSON';
+requires 'Math::Round';
 requires 'JSON::XS';
 requires 'List::MoreUtils';
 requires 'String::Random';

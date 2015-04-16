@@ -58,6 +58,7 @@ var $maps = function () {
 		
 		$.getJSON('/home/project_map',function(data,status){
 			var json = data;
+			console.log(data);
 			$.each(json, function(i, pj){
 				marker = "";
 				var myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
@@ -71,7 +72,7 @@ var $maps = function () {
 				var url = marker.url;
 				var content = '<div class="project-bubble"><div class="name">';
 				content += '<a href="' + url + '" target="_blank" >';
-				content += pj.name + '</a></div>';
+				content += pj.name + '( Meta - '+pj.goal.id+')</a></div>';
 				content += '<div class="description"></div>';
 				content += '</div>';
 				google.maps.event.addListener(marker, 'mouseover', function() {
