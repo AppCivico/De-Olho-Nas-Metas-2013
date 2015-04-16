@@ -32,6 +32,10 @@ h2{
 	padding: 0;
 }
 
+.word-break{
+	word-break: break-all;
+}
+
 .btn{
 	color: #fff;
 	text-transform: uppercase;

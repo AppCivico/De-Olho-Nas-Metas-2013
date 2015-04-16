@@ -81,8 +81,8 @@ $(document).ready(function () {
 							<div class="col-sm-5">
 								<img src="/static/images/organization/[%organization_obj.id%]/[%organization_obj.id%].jpg" class="company-avatar col-sm-4">
 							</div>
-							<div class="col-sm-7">
-								[%organization_obj.description%]
+							<div class="col-sm-7 word-break">
+								[% organization_obj.description | none %]
 							</div>
 						</div>
 						<br clear="all"/>
@@ -178,10 +178,12 @@ $(document).ready(function () {
 				<div class="col-sm-4">					
 					<div class="list-box list-violet">
 						<span class="header">Conselho participativo - [% organization_obj.name%]</span>
-                        [% IF organization_obj.email %]<a href="mailto: [%organization_obj.email%]">[%organization_obj.email%]</a><br />[% END %]
-                        [% IF organization_obj.website %]<a href="[%organization_obj.website%]" target="_blank">[%organization_obj.website%]</a>a<br />[% END %]
-                        [% IF organization_obj.phone %][%organization_obj.phone%]<br />[% END %]
-                        [% IF organization_obj.address %][%organization_obj.address%]<br />[% END %]
+						<ul>
+                        [% IF organization_obj.email %]<li><a href="mailto: [%organization_obj.email%]">[%organization_obj.email%]</a></li>[% END %]
+                        [% IF organization_obj.website %]<li><a href="[%organization_obj.website%]" target="_blank">[%organization_obj.website%]</a></li>[% END %]
+                        [% IF organization_obj.phone %]<li>[%organization_obj.phone%]</li>[% END %]
+                        [% IF organization_obj.address %]<li>[%organization_obj.address%]</li>[% END %]
+                        </ul>
 					</div>
 					<div class="list-box list-green">
 						<span class="header">Subprefeitura</span>
