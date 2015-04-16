@@ -70,6 +70,10 @@ var $maps = function () {
         	    });
 				marker_array.push(marker);
 				var url = marker.url;
+				var bubble_color = "rgb(140,198,63)";
+				if (pj.percentage < 50){
+					bubble_color = "rgb(198,93,93)";
+				}
 				var content = '<div class="project-bubble"><div class="name">';
 				content += '<a href="' + url + '" target="_blank" >';
 				content += pj.name + '( Meta - '+pj.goal.id+')</a></div>';
@@ -82,7 +86,7 @@ var $maps = function () {
 				          content: content,
 				          shadowStyle: 0,
 				          padding: 0,
-				          backgroundColor: 'rgb(140,198,63)',
+				          backgroundColor: bubble_color,
 				          borderRadius: 0,
 				          arrowSize: 15,
 				          borderWidth: 0,
@@ -96,6 +100,7 @@ var $maps = function () {
 				        });
 				        ib.open(map, this);
 					}else{
+						ib.setBackgroundColor(bubble_color);
 						ib.setContent(content);
 						//ib.setPosition(myLatlng);
 						ib.open(map, this);
