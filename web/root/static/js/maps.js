@@ -58,7 +58,6 @@ var $maps = function () {
 		
 		$.getJSON('/home/project_map',function(data,status){
 			var json = data;
-			console.log(data);
 			$.each(json, function(i, pj){
 				marker = "";
 				var myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
@@ -574,6 +573,11 @@ var $maps = function () {
 			$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
 			$('#result').html(html);
 			$maps.deleteMarkers();
+			if (data.projects.length > 0){
+				$("#map").fadeIn();
+			}else{
+				$("#map").fadeOut();
+			}
 			$.each(data.projects, function(i, pj){
 		
 				if (pj.latitude == 0 && pj.longitude == 0) return;
