@@ -75,18 +75,18 @@ $(document).ready(function () {
 				<div class="col-sm-8">
 				
 					<div class="body">
-						<h1>Conselho participativo de [% organization_obj.name%]</h1>
-						<p><img src="/static/images/organization/[%organization_obj.id%]/[%organization_obj.id%].jpg" class="company-avatar col-sm-4">
-							
-						</p>
+						<h1>Conselho participativo - [% organization_obj.name%]</h1>
+
+						<div class="row">
+							<div class="col-sm-5">
+								<img src="/static/images/organization/[%organization_obj.id%]/[%organization_obj.id%].jpg" class="company-avatar col-sm-4">
+							</div>
+							<div class="col-sm-7">
+								[%organization_obj.description%]
+							</div>
+						</div>
 						<br clear="all"/>
 					</div>
-				      [%organization_obj.description%]
-                                        [%organization_obj.email%]
-                                        [%organization_obj.website%]
-                                        [%organization_obj.phone%]
-                                        [%organization_obj.address%]
-	
 					<div class="row social">
 							
 						<div class="col-xs-6 text-right">
@@ -96,18 +96,17 @@ $(document).ready(function () {
 						</div>
 
 						[% IF c.user%]
-						<div id="follow" class="col-xs-6 text-right">							
+						<div id="follow" class="col-xs-6 text-right">
 							<button  type="button" id="follow_or_not" class="btn btn-brown [% do_i_follow > 0 ? "" : "follow"%]" data-id="[% c.user.obj.id%]" autocomplete="off"><span>[% do_i_follow > 0 ? "Parar de Seguir" : "Siga o Conselho" %]</span></button>
 						</div>
 						[%ELSE%]
-						<div id="follow" class="col-xs-7 text-right">							
+						<div id="follow" class="col-xs-7 text-right">		
 							<a class="btn btn-brown" href="/login">Siga o Conselho</a>
 						</div>
-
 						[%END%]
 
 					</div>
-     [% IF organization_obj.campaigns.size > 0%]
+     				[% IF organization_obj.campaigns.size > 0%]
 					<div class="events">
 						<h3>Participe das Campanhas</h3>
 						[% FOR e IN organization_obj.campaigns%]
@@ -138,7 +137,7 @@ $(document).ready(function () {
 								</div>
 							</div>
 						</div>
-      [% END%]
+     					[% END%]
 					</div>
 					[%END%] 
 
@@ -172,11 +171,18 @@ $(document).ready(function () {
 								</div>
 							</div>
 						</div>
-      [% END%]
+      					[% END%]
 					</div>
 					[%END%]
 				</div>
-				<div class="col-sm-4">
+				<div class="col-sm-4">					
+					<div class="list-box list-violet">
+						<span class="header">Conselho participativo - [% organization_obj.name%]</span>
+                        [% IF organization_obj.email %]<a href="mailto: [%organization_obj.email%]">[%organization_obj.email%]</a><br />[% END %]
+                        [% IF organization_obj.website %]<a href="[%organization_obj.website%]" target="_blank">[%organization_obj.website%]</a>a<br />[% END %]
+                        [% IF organization_obj.phone %][%organization_obj.phone%]<br />[% END %]
+                        [% IF organization_obj.address %][%organization_obj.address%]<br />[% END %]
+					</div>
 					<div class="list-box list-green">
 						<span class="header">Subprefeitura</span>
 						<ul>
@@ -184,10 +190,7 @@ $(document).ready(function () {
 						</ul>
 					</div>
 					
-					<div id="map" style="height: 300px;>
-					</div>
-					
-					<div class="list-box list-orange">
+					<div id="map" style="height: 300px;">
 					</div>
 					
 				</div>
