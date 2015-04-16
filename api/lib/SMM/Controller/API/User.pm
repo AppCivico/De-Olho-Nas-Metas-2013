@@ -1,6 +1,7 @@
 package SMM::Controller::API::User;
 
 use Moose;
+use DateTimeX::Easy qw(parse);
 
 BEGIN { extends 'Catalyst::Controller::REST' }
 
@@ -140,14 +141,50 @@ sub list_GET {
     my ( $self, $c ) = @_;
     my $conditions = undef;
     my $rs         = $c->stash->{collection};
-
+    use DDP;
+    my $params = { %{ $c->req->params } };
+    p $params;
     if ( $c->req->params->{organization} ) {
         $rs =
           $rs->search( { organization_id => $c->req->params->{organization} } );
     }
     if ( $c->req->params->{name} ) {
-        $rs->search(
-            { name => { like => '%' . $c->req->params->{name} . '%' } } );
+        $rs = $rs->search(
+            {
+                'me.name' => {
+                    ilike => \[
+                        q{'%' || ? || '%' },
+                        [ _name => $c->req->params->{name} ]
+                    ]
+                }
+            }
+        );
+    }
+    if ( $c->req->params->{start_in} || $c->req->params->{end_on} ) {
+
+        $c->req->params->{start_in} =~ s/(\d{2})\/(\d{2})\/(\d{4})/$2-$1-$3/
+          if $c->req->params->{start_in};
+        $c->req->params->{start_in} = parse( $c->req->params->{start_in} )
+          if $c->req->params->{start_in};
+
+        $c->req->params->{end_on} =~ s/(\d{2})\/(\d{2})\/(\d{4})/$2-$1-$3/
+          if $c->req->params->{end_on};
+        $c->req->params->{end_on} = parse( $c->req->params->{end_on} )
+          if $c->req->params->{end_on};
+
+        my $dtf      = $rs->result_source->schema->storage->datetime_parser;
+        my $begin_ts = $dtf->format_datetime( $c->req->params->{start_in} )
+          if $c->req->params->{start_in};
+        my $end_ts = $dtf->format_datetime( $c->req->params->{end_on} )
+          if $c->req->params->{end_on};
+        $rs = $rs->search(
+            {
+                'me.created_at' => {
+                    -between =>
+                      [ $begin_ts || '-infinity', $end_ts || 'infinity' ]
+                }
+            }
+        );
     }
     if ( $c->req->params->{role} ) {
         $conditions = {

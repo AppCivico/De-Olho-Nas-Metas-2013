@@ -45,10 +45,6 @@ jQuery(function($){
 					<div class="icon transport">
 					</div>
 				</div>
-				<div class="item">
-					<div class="icon home">
-					</div>
-				</div>
 				<div class="item selected">
 					<div class="icon lamp">
 					</div>
