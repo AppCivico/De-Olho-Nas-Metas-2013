@@ -72,7 +72,7 @@ sub detail : Chained('object') : PathPart('') : Args(0) {
       { map { $_->{user} => 1 }
           @{ $c->stash->{project_obj}->{users_question} } };
     $c->stash->{statistic} =
-      { map { ( $_->{accepted} == 0 ? 'no' : 'yes' ) => $_->{qtde} }
+      { map { $_->{progress} => $_->{percentage} }
           @{ $c->stash->{project_obj}->{statistic} } };
     use DDP;
     p $c->stash->{statistic};

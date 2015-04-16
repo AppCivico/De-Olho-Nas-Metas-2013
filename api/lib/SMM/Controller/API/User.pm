@@ -44,7 +44,8 @@ sub result_GET {
     my $user  = $c->stash->{user};
     my $x     = $user->organization;
     my %attrs = $user->get_inflated_columns;
-    my @pap   = $user->project_accept_porcentages->all;
+
+    #my @pap   = $user->project_accept_porcentages->all;
     $self->status_ok(
         $c,
         entity => {

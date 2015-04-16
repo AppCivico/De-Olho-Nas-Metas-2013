@@ -22,9 +22,9 @@ sub verifiers_specs {
                     required => 1,
                     type     => 'Int',
                 },
-                accepted => {
+                progress => {
                     required => 1,
-                    type     => 'Bool',
+                    type     => 'Str',
                 },
                 project_id => {
                     required => 1,

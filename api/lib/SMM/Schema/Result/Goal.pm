@@ -1,4 +1,5 @@
 use utf8;
+
 package SMM::Schema::Result::Goal;
 
 # Created by DBIx::Class::Schema::Loader
@@ -32,7 +33,8 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
+__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
+    "PassphraseColumn" );
 
 =head1 TABLE: C<goal>
 
@@ -227,84 +229,84 @@ __PACKAGE__->table("goal");
 =cut
 
 __PACKAGE__->add_columns(
-  "id",
-  {
-    data_type         => "integer",
-    is_auto_increment => 1,
-    is_nullable       => 0,
-    sequence          => "goal_id_seq",
-  },
-  "name",
-  { data_type => "text", is_nullable => 0 },
-  "will_be_delivered",
-  { data_type => "text", is_nullable => 1 },
-  "description",
-  { data_type => "text", is_nullable => 0 },
-  "technically",
-  { data_type => "text", is_nullable => 0 },
-  "expected_start_date",
-  { data_type => "timestamp", is_nullable => 1 },
-  "expected_end_date",
-  { data_type => "timestamp", is_nullable => 1 },
-  "start_date",
-  { data_type => "date", is_nullable => 1 },
-  "end_date",
-  { data_type => "date", is_nullable => 1 },
-  "porcentage",
-  { data_type => "text", is_nullable => 1 },
-  "management_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-  "user_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-  "created_at",
-  {
-    data_type     => "timestamp",
-    default_value => \"current_timestamp",
-    is_nullable   => 0,
-    original      => { default_value => \"now()" },
-  },
-  "update_at",
-  { data_type => "timestamp", is_nullable => 1 },
-  "country_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-  "state_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-  "city_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-  "district_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-  "lat_lng",
-  { data_type => "text", is_nullable => 1 },
-  "status_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-  "original_link",
-  { data_type => "text", is_nullable => 1 },
-  "keywords",
-  { data_type => "text[]", is_nullable => 1 },
-  "expected_budget",
-  { data_type => "double precision", is_nullable => 1 },
-  "real_value_expended",
-  { data_type => "double precision", is_nullable => 1 },
-  "origin",
-  { data_type => "text", is_nullable => 1 },
-  "transversality",
-  { data_type => "text", is_nullable => 1 },
-  "objective_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-  "goal_number",
-  { data_type => "integer", is_nullable => 1 },
-  "qualitative_progress_1",
-  { data_type => "text", is_nullable => 1 },
-  "qualitative_progress_2",
-  { data_type => "text", is_nullable => 1 },
-  "qualitative_progress_3",
-  { data_type => "text", is_nullable => 1 },
-  "qualitative_progress_4",
-  { data_type => "text", is_nullable => 1 },
-  "qualitative_progress_5",
-  { data_type => "text", is_nullable => 1 },
-  "qualitative_progress_6",
-  { data_type => "text", is_nullable => 1 },
+    "id",
+    {
+        data_type         => "integer",
+        is_auto_increment => 1,
+        is_nullable       => 0,
+        sequence          => "goal_id_seq",
+    },
+    "name",
+    { data_type => "text", is_nullable => 0 },
+    "will_be_delivered",
+    { data_type => "text", is_nullable => 1 },
+    "description",
+    { data_type => "text", is_nullable => 0 },
+    "technically",
+    { data_type => "text", is_nullable => 0 },
+    "expected_start_date",
+    { data_type => "timestamp", is_nullable => 1 },
+    "expected_end_date",
+    { data_type => "timestamp", is_nullable => 1 },
+    "start_date",
+    { data_type => "date", is_nullable => 1 },
+    "end_date",
+    { data_type => "date", is_nullable => 1 },
+    "porcentage",
+    { data_type => "text", is_nullable => 1 },
+    "management_id",
+    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+    "user_id",
+    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+    "created_at",
+    {
+        data_type     => "timestamp",
+        default_value => \"current_timestamp",
+        is_nullable   => 0,
+        original      => { default_value => \"now()" },
+    },
+    "update_at",
+    { data_type => "timestamp", is_nullable => 1 },
+    "country_id",
+    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+    "state_id",
+    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+    "city_id",
+    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+    "district_id",
+    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+    "lat_lng",
+    { data_type => "text", is_nullable => 1 },
+    "status_id",
+    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+    "original_link",
+    { data_type => "text", is_nullable => 1 },
+    "keywords",
+    { data_type => "text[]", is_nullable => 1 },
+    "expected_budget",
+    { data_type => "double precision", is_nullable => 1 },
+    "real_value_expended",
+    { data_type => "double precision", is_nullable => 1 },
+    "origin",
+    { data_type => "text", is_nullable => 1 },
+    "transversality",
+    { data_type => "text", is_nullable => 1 },
+    "objective_id",
+    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+    "goal_number",
+    { data_type => "integer", is_nullable => 1 },
+    "qualitative_progress_1",
+    { data_type => "text", is_nullable => 1 },
+    "qualitative_progress_2",
+    { data_type => "text", is_nullable => 1 },
+    "qualitative_progress_3",
+    { data_type => "text", is_nullable => 1 },
+    "qualitative_progress_4",
+    { data_type => "text", is_nullable => 1 },
+    "qualitative_progress_5",
+    { data_type => "text", is_nullable => 1 },
+    "qualitative_progress_6",
+    { data_type => "text", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -330,10 +332,9 @@ Related object: L<SMM::Schema::Result::Budget>
 =cut
 
 __PACKAGE__->has_many(
-  "budgets",
-  "SMM::Schema::Result::Budget",
-  { "foreign.goal_number" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "budgets", "SMM::Schema::Result::Budget",
+    { "foreign.goal_number" => "self.id" },
+    { cascade_copy          => 0, cascade_delete => 0 },
 );
 
 =head2 city
@@ -345,15 +346,15 @@ Related object: L<SMM::Schema::Result::City>
 =cut
 
 __PACKAGE__->belongs_to(
-  "city",
-  "SMM::Schema::Result::City",
-  { id => "city_id" },
-  {
-    is_deferrable => 0,
-    join_type     => "LEFT",
-    on_delete     => "NO ACTION",
-    on_update     => "NO ACTION",
-  },
+    "city",
+    "SMM::Schema::Result::City",
+    { id => "city_id" },
+    {
+        is_deferrable => 0,
+        join_type     => "LEFT",
+        on_delete     => "NO ACTION",
+        on_update     => "NO ACTION",
+    },
 );
 
 =head2 comment_goals
@@ -365,10 +366,10 @@ Related object: L<SMM::Schema::Result::CommentGoal>
 =cut
 
 __PACKAGE__->has_many(
-  "comment_goals",
-  "SMM::Schema::Result::CommentGoal",
-  { "foreign.goal_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "comment_goals",
+    "SMM::Schema::Result::CommentGoal",
+    { "foreign.goal_id" => "self.id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 =head2 companies
@@ -380,10 +381,10 @@ Related object: L<SMM::Schema::Result::Company>
 =cut
 
 __PACKAGE__->has_many(
-  "companies",
-  "SMM::Schema::Result::Company",
-  { "foreign.goal_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "companies",
+    "SMM::Schema::Result::Company",
+    { "foreign.goal_id" => "self.id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 =head2 country
@@ -395,15 +396,15 @@ Related object: L<SMM::Schema::Result::Country>
 =cut
 
 __PACKAGE__->belongs_to(
-  "country",
-  "SMM::Schema::Result::Country",
-  { id => "country_id" },
-  {
-    is_deferrable => 0,
-    join_type     => "LEFT",
-    on_delete     => "NO ACTION",
-    on_update     => "NO ACTION",
-  },
+    "country",
+    "SMM::Schema::Result::Country",
+    { id => "country_id" },
+    {
+        is_deferrable => 0,
+        join_type     => "LEFT",
+        on_delete     => "NO ACTION",
+        on_update     => "NO ACTION",
+    },
 );
 
 =head2 district
@@ -415,15 +416,15 @@ Related object: L<SMM::Schema::Result::District>
 =cut
 
 __PACKAGE__->belongs_to(
-  "district",
-  "SMM::Schema::Result::District",
-  { id => "district_id" },
-  {
-    is_deferrable => 0,
-    join_type     => "LEFT",
-    on_delete     => "NO ACTION",
-    on_update     => "NO ACTION",
-  },
+    "district",
+    "SMM::Schema::Result::District",
+    { id => "district_id" },
+    {
+        is_deferrable => 0,
+        join_type     => "LEFT",
+        on_delete     => "NO ACTION",
+        on_update     => "NO ACTION",
+    },
 );
 
 =head2 goal_organizations
@@ -435,10 +436,10 @@ Related object: L<SMM::Schema::Result::GoalOrganization>
 =cut
 
 __PACKAGE__->has_many(
-  "goal_organizations",
-  "SMM::Schema::Result::GoalOrganization",
-  { "foreign.goal_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "goal_organizations",
+    "SMM::Schema::Result::GoalOrganization",
+    { "foreign.goal_id" => "self.id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 =head2 goal_porcentages
@@ -450,10 +451,10 @@ Related object: L<SMM::Schema::Result::GoalPorcentage>
 =cut
 
 __PACKAGE__->has_many(
-  "goal_porcentages",
-  "SMM::Schema::Result::GoalPorcentage",
-  { "foreign.goal_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "goal_porcentages",
+    "SMM::Schema::Result::GoalPorcentage",
+    { "foreign.goal_id" => "self.id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 =head2 goal_projects
@@ -465,10 +466,10 @@ Related object: L<SMM::Schema::Result::GoalProject>
 =cut
 
 __PACKAGE__->has_many(
-  "goal_projects",
-  "SMM::Schema::Result::GoalProject",
-  { "foreign.goal_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "goal_projects",
+    "SMM::Schema::Result::GoalProject",
+    { "foreign.goal_id" => "self.id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 =head2 goal_secretaries
@@ -480,10 +481,10 @@ Related object: L<SMM::Schema::Result::GoalSecretary>
 =cut
 
 __PACKAGE__->has_many(
-  "goal_secretaries",
-  "SMM::Schema::Result::GoalSecretary",
-  { "foreign.goal_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "goal_secretaries",
+    "SMM::Schema::Result::GoalSecretary",
+    { "foreign.goal_id" => "self.id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 =head2 management
@@ -495,15 +496,15 @@ Related object: L<SMM::Schema::Result::Management>
 =cut
 
 __PACKAGE__->belongs_to(
-  "management",
-  "SMM::Schema::Result::Management",
-  { id => "management_id" },
-  {
-    is_deferrable => 0,
-    join_type     => "LEFT",
-    on_delete     => "NO ACTION",
-    on_update     => "NO ACTION",
-  },
+    "management",
+    "SMM::Schema::Result::Management",
+    { id => "management_id" },
+    {
+        is_deferrable => 0,
+        join_type     => "LEFT",
+        on_delete     => "NO ACTION",
+        on_update     => "NO ACTION",
+    },
 );
 
 =head2 objective
@@ -515,15 +516,15 @@ Related object: L<SMM::Schema::Result::Objective>
 =cut
 
 __PACKAGE__->belongs_to(
-  "objective",
-  "SMM::Schema::Result::Objective",
-  { id => "objective_id" },
-  {
-    is_deferrable => 0,
-    join_type     => "LEFT",
-    on_delete     => "NO ACTION",
-    on_update     => "NO ACTION",
-  },
+    "objective",
+    "SMM::Schema::Result::Objective",
+    { id => "objective_id" },
+    {
+        is_deferrable => 0,
+        join_type     => "LEFT",
+        on_delete     => "NO ACTION",
+        on_update     => "NO ACTION",
+    },
 );
 
 =head2 progress_goal_counsils
@@ -535,10 +536,25 @@ Related object: L<SMM::Schema::Result::ProgressGoalCounsil>
 =cut
 
 __PACKAGE__->has_many(
-  "progress_goal_counsils",
-  "SMM::Schema::Result::ProgressGoalCounsil",
-  { "foreign.goal_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "progress_goal_counsils",
+    "SMM::Schema::Result::ProgressGoalCounsil",
+    { "foreign.goal_id" => "self.id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
+);
+
+=head2 projects
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::Project>
+
+=cut
+
+__PACKAGE__->has_many(
+    "project_tb",
+    "SMM::Schema::Result::Project",
+    { "foreign.goal_id" => "self.id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 =head2 state
@@ -550,15 +566,15 @@ Related object: L<SMM::Schema::Result::State>
 =cut
 
 __PACKAGE__->belongs_to(
-  "state",
-  "SMM::Schema::Result::State",
-  { id => "state_id" },
-  {
-    is_deferrable => 0,
-    join_type     => "LEFT",
-    on_delete     => "NO ACTION",
-    on_update     => "NO ACTION",
-  },
+    "state",
+    "SMM::Schema::Result::State",
+    { id => "state_id" },
+    {
+        is_deferrable => 0,
+        join_type     => "LEFT",
+        on_delete     => "NO ACTION",
+        on_update     => "NO ACTION",
+    },
 );
 
 =head2 status
@@ -570,15 +586,15 @@ Related object: L<SMM::Schema::Result::Status>
 =cut
 
 __PACKAGE__->belongs_to(
-  "status",
-  "SMM::Schema::Result::Status",
-  { id => "status_id" },
-  {
-    is_deferrable => 0,
-    join_type     => "LEFT",
-    on_delete     => "NO ACTION",
-    on_update     => "NO ACTION",
-  },
+    "status",
+    "SMM::Schema::Result::Status",
+    { id => "status_id" },
+    {
+        is_deferrable => 0,
+        join_type     => "LEFT",
+        on_delete     => "NO ACTION",
+        on_update     => "NO ACTION",
+    },
 );
 
 =head2 user
@@ -590,40 +606,37 @@ Related object: L<SMM::Schema::Result::User>
 =cut
 
 __PACKAGE__->belongs_to(
-  "user",
-  "SMM::Schema::Result::User",
-  { id => "user_id" },
-  {
-    is_deferrable => 0,
-    join_type     => "LEFT",
-    on_delete     => "NO ACTION",
-    on_update     => "NO ACTION",
-  },
+    "user",
+    "SMM::Schema::Result::User",
+    { id => "user_id" },
+    {
+        is_deferrable => 0,
+        join_type     => "LEFT",
+        on_delete     => "NO ACTION",
+        on_update     => "NO ACTION",
+    },
 );
 
-
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-18 14:34:14
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:5roU+Y4xo6jk9jmYvrKVug
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-16 13:52:47
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:IBSjoYD3djUrGeIkrLPRNQ
 
 __PACKAGE__->has_many(
     approved_comments => 'SMM::Schema::Result::CommentGoal',
     sub {
-      my $args = shift;
+        my $args = shift;
 
-      return {
-        "$args->{foreign_alias}.goal_id" => { -ident => "$args->{self_alias}.id" },
-        "$args->{foreign_alias}.approved"   => 1,
-      };
+        return {
+            "$args->{foreign_alias}.goal_id" =>
+              { -ident => "$args->{self_alias}.id" },
+            "$args->{foreign_alias}.approved" => 1,
+        };
     },
     { cascade_copy => 0, cascade_delete => 0 },
-  );
+);
 
+__PACKAGE__->many_to_many( projects => goal_projects => 'project' );
 
-
-__PACKAGE__->many_to_many( projects => goal_projects => 'project');
-
-
-__PACKAGE__->many_to_many( secretaries => 'goal_secretaries' => 'secretary',);
+__PACKAGE__->many_to_many( secretaries => 'goal_secretaries' => 'secretary', );
 
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
