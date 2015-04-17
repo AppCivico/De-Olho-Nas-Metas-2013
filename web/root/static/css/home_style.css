@@ -410,7 +410,6 @@ footer .logo-eokoe{
 	background-position: center center;
 }
 
-
 .metas-detail,
 section.page-login,
 section.campaign-result{
@@ -529,7 +528,7 @@ section.map .map-overlay{
 	background-position: center right;
 	overflow: hidden;
 }
-.metas-filtro select{
+.metas-filtro .select-stylized select{
 	background: none repeat scroll 0% 0% transparent;
 	border: 0;
 	border-radius: 0;
@@ -1010,7 +1009,10 @@ footer .menu-footer li a:hover{
 		float: right!important;
 	}
 }  
-@media(max-width:979px) {
+@media(min-width:481px){
+	.metas-filtro .select-stylized select{
+		width: 90%;
+	}
 }
 @media(max-width:1199px) {
 	.menu-top .menu li{
@@ -1635,4 +1637,11 @@ input#progress-value{
 }
 .bootstrap-datetimepicker-widget *{
 	color: #000;
+}
+#page-top .metas-filtro h2{
+	padding-bottom: 0;
+}
+#page-top .metas-filtro h3{
+	margin: 0;
+	margin-top: 5px;
 }
