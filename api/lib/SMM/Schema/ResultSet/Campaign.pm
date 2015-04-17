@@ -34,6 +34,10 @@ sub verifiers_specs {
                     required => 1,
                     type     => 'Str',
                 },
+                mobile_campaign_id => {
+                    required => 0,
+                    type     => 'Int',
+                },
                 latitude => {
                     required => 0,
                     type     => 'Str',
@@ -67,6 +71,10 @@ sub verifiers_specs {
                     type     => DataStr,
                 },
                 user_id => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                project_id => {
                     required => 0,
                     type     => 'Str',
                 },

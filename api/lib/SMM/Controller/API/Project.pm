@@ -440,4 +440,25 @@ sub list_geom : Chained('base') PathPart('list_geom') : Args(0) {
     $self->status_ok( $c, entity => { geom => \@geom } );
 
 }
+
+sub autocomplete : Chained('base') PathPart('autocomplete') : Args(0) {
+    my ( $self, $c ) = @_;
+
+    my @projects = $c->model('DB')->resultset('Project')->search(
+        {
+            name => {
+                ilike => \[
+                    q{'%' || ? || '%'},
+                    [ _name => $c->req->params->{project_name} ]
+                ]
+            }
+        },
+        {
+            select => [qw/ id name /],
+            as     => [qw( id value)]
+        }
+    )->as_hashref->all;
+    $self->status_ok( $c, entity => { projects => \@projects } );
+
+}
 1;

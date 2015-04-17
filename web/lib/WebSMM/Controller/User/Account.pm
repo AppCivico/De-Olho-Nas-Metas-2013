@@ -85,9 +85,32 @@ sub campaign : Chained('object') : PathPart('campanhas') : Args(0) {
 
     $api->stash_result( $c, 'campaigns',
         params => { user_id => $c->user->obj->id } );
+    my $return;
+    my $url = URI->new('http://monitor.promisetracker.org');
 
-    $api->stash_result( $c, 'goals' );
+    $url->path_segments( 'api', 'v1', 'campaigns' );
 
+    $url->query_form( user_id => $c->user->obj->organization_id );
+    eval {
+        $return = $api->_do_http_req(
+            method  => 'GET',
+            url     => $url,
+            headers => [
+                Authorization => 'Token token="dd6aba6936baf78d329979564d2fb58c'
+            ],
+
+        );
+    };
+
+    my $data = decode_json $return->content;
+
+    for my $p ( @{ $data->{payload} } ) {
+        push @{ $c->stash->{mobile_campaigns} },
+          { id => $p->{id}, description => $p->{description} }
+          if $p->{description};
+    }
+    use DDP;
+    p $c->stash->{mobile_campaigns};
     $c->stash->{user_obj}->{role} =
       { map { $_ => 1 } @{ $c->stash->{user_roles}->{roles} } };
 }

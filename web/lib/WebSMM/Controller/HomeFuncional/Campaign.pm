@@ -63,11 +63,12 @@ sub set_campaign : Chained('base') : Args(0) {
     use DDP;
     p $params;
     $params->{user_id} = $c->user->obj->id;
-    $params->{latlng} =~ s/\(|\)//g;
-
-    ( $params->{latitude}, $params->{longitude} ) = split ',',
-      $params->{latlng};
-
+    $params->{latlng} =~ s/\(|\)//g if $params->{latlng};
+    if ( $params->{latlng} ) {
+        ( $params->{latitude}, $params->{longitude} ) = split ',',
+          $params->{latlng};
+    }
+    p $params;
     $params->{address} = delete $params->{txtaddress};
     $api->stash_result(
         $c,
