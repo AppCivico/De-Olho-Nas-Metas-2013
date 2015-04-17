@@ -1,5 +1,4 @@
 use utf8;
-
 package SMM::Schema::Result::ProjectAcceptPorcentage;
 
 # Created by DBIx::Class::Schema::Loader
@@ -33,8 +32,7 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
-    "PassphraseColumn" );
+__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
 =head1 TABLE: C<project_accept_porcentage>
 
@@ -63,11 +61,6 @@ __PACKAGE__->table("project_accept_porcentage");
   is_foreign_key: 1
   is_nullable: 1
 
-=head2 accepted
-
-  data_type: 'boolean'
-  is_nullable: 0
-
 =head2 created_at
 
   data_type: 'timestamp'
@@ -75,29 +68,42 @@ __PACKAGE__->table("project_accept_porcentage");
   is_nullable: 1
   original: {default_value => \"now()"}
 
+=head2 progress
+
+  data_type: 'enum'
+  extra: {custom_type_name => "project_progress_type",list => ["late","in_progress","completed"]}
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
-    "id",
-    {
-        data_type         => "integer",
-        is_auto_increment => 1,
-        is_nullable       => 0,
-        sequence          => "project_accept_porcentage_id_seq",
+  "id",
+  {
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+    sequence          => "project_accept_porcentage_id_seq",
+  },
+  "project_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
+  "user_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "created_at",
+  {
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
+    is_nullable   => 1,
+    original      => { default_value => \"now()" },
+  },
+  "progress",
+  {
+    data_type => "enum",
+    extra => {
+      custom_type_name => "project_progress_type",
+      list => ["late", "in_progress", "completed"],
     },
-    "project_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
-    "user_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-    "accepted",
-    { data_type => "boolean", is_nullable => 0 },
-    "created_at",
-    {
-        data_type     => "timestamp",
-        default_value => \"current_timestamp",
-        is_nullable   => 1,
-        original      => { default_value => \"now()" },
-    },
+    is_nullable => 1,
+  },
 );
 
 =head1 RELATIONS
@@ -111,10 +117,10 @@ Related object: L<SMM::Schema::Result::Project>
 =cut
 
 __PACKAGE__->belongs_to(
-    "project",
-    "SMM::Schema::Result::Project",
-    { id            => "project_id" },
-    { is_deferrable => 0, on_delete => "NO ACTION", on_update => "NO ACTION" },
+  "project",
+  "SMM::Schema::Result::Project",
+  { id => "project_id" },
+  { is_deferrable => 0, on_delete => "NO ACTION", on_update => "NO ACTION" },
 );
 
 =head2 user
@@ -126,19 +132,20 @@ Related object: L<SMM::Schema::Result::User>
 =cut
 
 __PACKAGE__->belongs_to(
-    "user",
-    "SMM::Schema::Result::User",
-    { id => "user_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "user",
+  "SMM::Schema::Result::User",
+  { id => "user_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-13 10:00:12
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:CNE9tr72OpkrS3YeG59GRA
+
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-16 15:06:53
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:d+QM18hBauYAJndmkSY8Kw
 
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';

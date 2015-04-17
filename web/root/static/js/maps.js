@@ -69,9 +69,13 @@ var $maps = function () {
         	    });
 				marker_array.push(marker);
 				var url = marker.url;
+				var bubble_color = "rgb(140,198,63)";
+				if (pj.percentage < 50){
+					bubble_color = "rgb(198,93,93)";
+				}
 				var content = '<div class="project-bubble"><div class="name">';
 				content += '<a href="' + url + '" target="_blank" >';
-				content += pj.name + '</a></div>';
+				content += pj.name + '( Meta - '+pj.goal.id+')</a></div>';
 				content += '<div class="description"></div>';
 				content += '</div>';
 				google.maps.event.addListener(marker, 'mouseover', function() {
@@ -81,7 +85,7 @@ var $maps = function () {
 				          content: content,
 				          shadowStyle: 0,
 				          padding: 0,
-				          backgroundColor: 'rgb(140,198,63)',
+				          backgroundColor: bubble_color,
 				          borderRadius: 0,
 				          arrowSize: 15,
 				          borderWidth: 0,
@@ -95,6 +99,7 @@ var $maps = function () {
 				        });
 				        ib.open(map, this);
 					}else{
+						ib.setBackgroundColor(bubble_color);
 						ib.setContent(content);
 						//ib.setPosition(myLatlng);
 						ib.open(map, this);
@@ -568,6 +573,11 @@ var $maps = function () {
 			$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
 			$('#result').html(html);
 			$maps.deleteMarkers();
+			if (data.projects.length > 0){
+				$("#map").fadeIn();
+			}else{
+				$("#map").fadeOut();
+			}
 			$.each(data.projects, function(i, pj){
 		
 				if (pj.latitude == 0 && pj.longitude == 0) return;
