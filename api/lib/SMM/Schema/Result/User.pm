@@ -588,6 +588,7 @@ sub action_specs {
             p %values;
             my $new_role = delete $values{role};
             delete $values{password_confirm};
+            delete $values{current_password};
 
             not defined $values{$_} and delete $values{$_} for keys %values;
             my $user = $self->update( \%values );
