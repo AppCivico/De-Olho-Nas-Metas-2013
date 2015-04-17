@@ -63,7 +63,7 @@ $(document).ready(function() {
 							{
 								value: 0,
 								color: colors["bluelight"].color,
-								highlight: colors["red"].highlight,
+								highlight: colors["bluelight"].highlight,
 								label: "atrasado"
 							},
 							{
@@ -90,7 +90,7 @@ $(document).ready(function() {
 							{
 								value: value_late,
 								color: colors["bluelight"].color,
-								highlight: colors["red"].highlight,
+								highlight: colors["bluelight"].highlight,
 								label: "atrasado"
 							},
 							{
