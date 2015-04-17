@@ -118,7 +118,7 @@ sub survey_list : Chained('survey') : PathPart('') : Args(1) {
 
     my $model = $c->model('API');
 
-    my $url = URI->new('http://monitor.dev.promisetracker.org');
+    my $url = URI->new('http://monitor.promisetracker.org');
 
     $url->path_segments( 'api', 'v1', 'campaigns' );
     $url->query_form( user_id => $id );
@@ -127,18 +127,21 @@ sub survey_list : Chained('survey') : PathPart('') : Args(1) {
             method  => 'GET',
             url     => $url,
             headers => [
-                Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201'
+                Authorization => 'Token token="dd6aba6936baf78d329979564d2fb58c'
             ],
 
         );
     };
 
     use DDP;
-    p $return;
-    $c->stash->{error_msg} =
-"Não foi possível conectar ao sistema de campanhas móveis, por favor tente mais tarde.",
-      $c->detach
-      unless $return->code eq 200;
+    p $c->stash->{user_roles};
+
+    unless ( $return->code eq 200 or $return->code eq 404 ) {
+        $c->stash->{error_msg} =
+"Não foi possível conectar ao sistema de campanhas móveis, por favor tente mais tarde.";
+
+        $c->detach;
+    }
 
     my $data = decode_json $return->content;
 
@@ -154,7 +157,8 @@ sub survey_single : Chained('survey') : PathPart('detalhe') : Args(1) {
 
     my $model = $c->model('API');
 
-    my $url = URI->new('http://monitor.dev.promisetracker.org');
+    #my $url = URI->new('http://monitor.dev.promisetracker.org');
+    my $url = URI->new('http://monitor.promisetracker.org');
 
     $url->path_segments( 'api', 'v1', 'campaigns', $id );
     $url->query_form( user_id => $c->user->obj->organization_id );
@@ -163,7 +167,9 @@ sub survey_single : Chained('survey') : PathPart('detalhe') : Args(1) {
             method  => 'GET',
             url     => $url,
             headers => [
-                Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201'
+
+               #Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201'
+                Authorization => 'Token token="dd6aba6936baf78d329979564d2fb58c'
             ],
         );
     };
@@ -182,7 +188,8 @@ sub survey_clone : Chained('survey') : PathPart('clonar') : Args(1) {
 
     my $model = $c->model('API');
 
-    my $url = URI->new('http://monitor.dev.promisetracker.org');
+    #my $url = URI->new('http://monitor.dev.promisetracker.org');
+    my $url = URI->new('http://monitor.promisetracker.org');
 
     my $organization_name = $c->stash->{user_roles}->{organization}->{name};
     my $organization_id   = $c->stash->{user_roles}->{organization}->{id};
@@ -199,7 +206,9 @@ sub survey_clone : Chained('survey') : PathPart('clonar') : Args(1) {
             method  => 'POST',
             url     => $url,
             headers => [
-                Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201'
+
+               #Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201'
+                Authorization => 'Token token="dd6aba6936baf78d329979564d2fb58c'
             ],
         );
     };
@@ -223,15 +232,18 @@ sub survey_login : Chained('survey') : PathPart('entrar') : Args(1) {
     my $organization_name = $c->stash->{user_roles}->{organization}->{name};
     my $organization_id   = $c->stash->{user_roles}->{organization}->{id};
 
-    my $url = URI->new('http://monitor.dev.promisetracker.org');
+    #my $url = URI->new('http://monitor.dev.promisetracker.org');
+    my $url = URI->new('http://monitor.promisetracker.org');
 
     $url->path_segments( 'api', 'v1', 'users', 'sign_in' );
     $url->query_form(
         username    => $organization_name,
         user_id     => $organization_id,
         campaign_id => $id,
-        token       => 'c687bd99026769a662e9fc84f5c4e201',
-        locale      => 'pt-BR'
+
+        #        token       => 'c687bd99026769a662e9fc84f5c4e201',
+        token  => 'dd6aba6936baf78d329979564d2fb58c',
+        locale => 'pt-BR'
     );
 
     $c->res->redirect($url);
@@ -246,11 +258,12 @@ sub survey_create : Chained('survey') : PathPart('criar') : Args(0) {
 
     my $model = $c->model('API');
 
-    my $url = URI->new('http://monitor.dev.promisetracker.org');
+    #my $url = URI->new('http://monitor.dev.promisetracker.org');
+    my $url = URI->new('http://monitor.promisetracker.org');
 
     $url->path_segments( 'api', 'v1', 'campaigns' );
     $url->query_form(
-        username => $c->user->obj->name,
+        username => $c->stash->{user_roles}->{organization}->{name},
         user_id  => $c->user->obj->organization_id
     );
 
@@ -259,7 +272,9 @@ sub survey_create : Chained('survey') : PathPart('criar') : Args(0) {
             method  => 'POST',
             url     => $url,
             headers => [
-                Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201'
+
+               #Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201'
+                Authorization => 'Token token="dd6aba6936baf78d329979564d2fb58c'
             ],
         );
     };
@@ -269,7 +284,10 @@ sub survey_create : Chained('survey') : PathPart('criar') : Args(0) {
 
     $c->res->redirect( $data->{payload}->{redirect_link} );
     $c->res->headers->header(
-        Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' );
+
+        #Authorization => 'Token token="c687bd99026769a662e9fc84f5c4e201' );
+        Authorization => 'Token token="dd6aba6936baf78d329979564d2fb58c'
+    );
 
 }
 
