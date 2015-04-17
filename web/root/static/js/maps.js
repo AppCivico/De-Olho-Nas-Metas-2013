@@ -830,7 +830,23 @@ $(document).ready(function () {
 			$('#result').html(html);
 		 },"json"); 
    e.preventDefault();
- })  
+ }) 
+ $("#project_name").autocomplete({
+	source: function (request, response) {
+  	$.post( "/home/project/project_autocomplete", { project_name : $('#project_name').val() }, function( data ) {
+							console.log(data);
+       response($.map(data, function (item) {
+          return {
+             id: item.id,
+             value: item.value
+          }
+       })); 
+		 },"json");  
+		},
+		select: function (event, ui) {
+					$('#project_id').val(ui.item.id);
+		}
+	});
 	$("#txtaddress").autocomplete({
 	source: function (request, response) {
 	   geocoder = new google.maps.Geocoder();
