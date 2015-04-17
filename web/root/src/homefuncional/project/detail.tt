@@ -1,5 +1,4 @@
 
-	[%-CALL assets.include("js/Chart.min.js")%]
 	[%-CALL assets.include("js/maps.js")%]
 	[%-CALL assets.include("js/facebook.js")%]
 	[%-CALL assets.include("js/infobubble.min.js")%]
@@ -20,6 +19,8 @@
 	[%-CALL assets.include("js/jquery.upload/js/jquery.fileupload-validate.js")%]
 	[%-CALL assets.include("js/jquery.upload/js/jquery.fileupload-ui.js")%]
 	[%-CALL assets.include("js/jquery.upload/js/gallery.js")%]
+	[%-CALL assets.include("js/Chart.min.js")%]
+	[%-CALL assets.include("js/chart-project.js")%]
 
 <script id="row_template" type="text/template">
 			{{#projects.length}}<h2 class="section-title">{{ projects.length}} Projeto{{#plural}}s{{/plural}} Encontrado{{#plural}}s{{/plural}}</h2>{{/projects.length}}
@@ -319,17 +320,22 @@ $(document).ready(function () {
       [% SET user_id = user_obj.id%]
 					 [% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]	
 						[% IF users_question.$user_id == 1%]
-										<h3>Opiniões dos conselheiros sobre o progresso</h3>
-									 atrasados [%statistic.late || 0%]
-										em progresso [%statistic.in_progress || 0%]
-										concluído [%statistic.completed || 0%]
+						<section class="statistics">
+							<h3>Opiniões dos conselheiros sobre o progresso</h3>
+							<div class="chart-stats text-center">
+								<div class="chart">
+									<canvas id="chart1" value-late="[%statistic.late || 0%]" value-progress="[%statistic.progress || 0%]" value-completed="[%statistic.completed || 0%]"></canvas>
+								</div>
+							</div>
+						</section>
 					 [%ELSE%]
 									<section class="questions">
 										<h3>Você acredita na porcentagem estabelecida pela prefeitura?</h3>
 										<div class="row">
 											<div id="alert_question">
 											</div>
-											<div id="content_question" class="col-xs-offset-1 col-xs-10">
+											<div id="content_question" class="col-xs-offset-1 col-xs-10 text-center">
+												<p class="text-center">Qual sua opinião em relação ao status do projeto? Selecione uma das opções abaixo:</p>
 												<button id="late" name="late" class="btn btn-info">Atrasado</button> <button id="in_progress" name="in_progress" class="btn btn-warning">Em progresso</button> <button id="complete" name="complete" class="btn btn-success">Completo</button>
 											</div>
 										</div>
@@ -337,10 +343,14 @@ $(document).ready(function () {
 							[%END%]
 				 	[%END%]
 						[%ELSE%]
-										<h3>Opiniões dos conselheiros sobre o progresso</h3>
-									 atrasados [%statistic.late || 0%]
-										em progresso [%statistic.in_progress || 0%]
-										concluído [%statistic.completed || 0%]
+						<section class="statistics">
+							<h3>Opiniões dos conselheiros sobre o progresso</h3>
+							<div class="chart-stats text-center">
+								<div class="chart">
+									<canvas id="chart1" value-late="[%statistic.late || 0%]" value-progress="[%statistic.progress || 0%]" value-completed="[%statistic.completed || 0%]"></canvas>
+								</div>
+							</div>
+						</section>
       [%END%]
 					<br />
 					<div>
@@ -380,23 +390,6 @@ $(document).ready(function () {
 						<button  type="button" id="comment_counsil" class="btn btn-violet" data-id="[% c.user.obj.id%]" autocomplete="off">Comentar</button>
 					</div>
 					[% END %]
-
-						<!--<div class="timeline">
-								<h3 class="section-title">Linha do tempo segundo o cronograma</h3>
-								<div class="chart">
-									<canvas id="chartline-goal"></canvas>
-								</div>
-								<script language="text/javascript">
-									var chart_data = {
-														0: [10,20,30,40,50,60,70,80,90,100,110,12],
-														1: [5,10,60,50,45,35,20,40,60,110,85,60]
-													},
-										chart_labels = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
-									loadLineGraph(".timeline .chart",chart_labels,chart_data);
-								</script>
-						</div>-->
-					<div class="timeline">
-					</div>
 
 					<div class="image-gallery">
 
