@@ -125,6 +125,11 @@ __PACKAGE__->table("campaign");
   is_foreign_key: 1
   is_nullable: 1
 
+=head2 mobile_campaign_id
+
+  data_type: 'integer'
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -168,6 +173,8 @@ __PACKAGE__->add_columns(
   { data_type => "text", is_nullable => 0 },
   "project_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "mobile_campaign_id",
+  { data_type => "integer", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -280,8 +287,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-09 19:22:43
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VvvSxHTIFTfXq5J/eKZpNA
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-17 16:01:20
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Drfwz+43yxFahgT4JzAHBQ
 
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
