@@ -1,3 +1,3 @@
-alter table "user" add column request_council boolean default false;
-alter table "user" add column mobile_campaign_id integer;
+alter table campaign add column request_council boolean default false;
+alter table campaign add column mobile_campaign_id integer;
 
