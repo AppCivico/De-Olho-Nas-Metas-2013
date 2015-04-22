@@ -76,7 +76,7 @@ sub stash_result {
                 exists $opts{body} ? ( body => $opts{body} ) : ()
             );
         };
-        print STDERR $res->as_string;
+        #print STDERR $res->as_string;
         use DDP;
     }
     if ($@) {
