@@ -70,17 +70,17 @@ jQuery(function($){
 					</div>
 
 					<div class="form-group">
-						[%input_text('name','Nome:', req=>0,value => c.user.obj.name)|none%]
+						[%input_text('name','Nome:', req=>0,value =>  user_roles.name )|none%]
 					</div>
 					
 					<div class="form-group">
-						[%input_text('email','E-mail:', req=>0, value => c.user.obj.email)|none%]
+						[%input_text('email','E-mail:', req=>0, value => user_roles.email)|none%]
 					</div>
 					
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group">
-								[%input_text('phone_number','Celular:', req=>0,value => c.user.obj.phone_number)|none%]
+								[%input_text('phone_number','Celular:', req=>0,value => user_roles.phone_number)|none%]
 							</div>
 						</div>
 					</div>
