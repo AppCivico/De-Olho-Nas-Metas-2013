@@ -5,6 +5,8 @@ use JSON;
 use Path::Class qw(dir);
 use utf8;
 use DDP;
+use List::Util qw(sum);
+
 BEGIN { extends 'Catalyst::Controller::REST'; }
 
 =head1 NAME
@@ -48,7 +50,7 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
         params => {
             project_id => $id,
             user_id    => $user_id,
-            accepted   => $params->{accepted}
+            progress   => $params->{progress},
         }
     );
     if ( $c->stash->{error} ) {

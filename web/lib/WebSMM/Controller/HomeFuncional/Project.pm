@@ -72,7 +72,7 @@ sub detail : Chained('object') : PathPart('') : Args(0) {
       { map { $_->{user} => 1 }
           @{ $c->stash->{project_obj}->{users_question} } };
     $c->stash->{statistic} =
-      { map { ( $_->{accepted} == 0 ? 'no' : 'yes' ) => $_->{qtde} }
+      { map { $_->{progress} => $_->{percentage} }
           @{ $c->stash->{project_obj}->{statistic} } };
     use DDP;
     p $c->stash->{statistic};
@@ -329,6 +329,28 @@ sub upload_images : Chained('object') : PathPart('upload_images') : Args(0) {
     $c->res->status(200);
     $c->res->content_type('application/json');
     $c->res->body( encode_json($response) );
+}
+
+sub project_autocomplete : Chained('base') : PathPart('project_autocomplete')
+  : Args(0) {
+    my ( $self, $c ) = @_;
+
+    my $api = $c->model('API');
+
+    use DDP;
+    $c->detach unless $c->req->method eq 'POST';
+    $api->stash_result( $c, ['projects/autocomplete'],
+        params => { project_name => $c->req->params->{project_name} } );
+    if ( $c->stash->{error} ) {
+        $c->detach( '/form/redirect_error', [] );
+    }
+
+    warn 'lol';
+    warn 1;
+    p $c->stash->{projects};
+    $c->res->status(200);
+    $c->res->content_type('application/json');
+    $c->res->body( encode_json( $c->stash->{projects} ) );
 }
 
 =encoding utf8

@@ -32,6 +32,7 @@
 						<ul>
 							<li><a href="/user/perfil/enquete/[% user_roles.organization.id%]">Campanha de dados móveis</a></li>
 							<li><a href="/user/perfil/campanhas">Campanhas</a></li>
+							<li><a href="/user/perfil/membros?organization=[%c.user.obj.organization_id%]">Membros do Conselho</a></li>
 							<li><a href="/user/perfil/seguindo">Seguindo</a></li>
 							<li><a href="/user/perfil/seguranca">Segurança</a></li>
 						</ul>

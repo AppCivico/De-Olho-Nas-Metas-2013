@@ -121,6 +121,9 @@ jQuery(function($){
 								[%input_text('phone_number','Celular:', req=>0)|none%]
 						</div>
 					</div>
+ 				<div class="row">
+ 				[%checkbox('request_council','Você é um conselheiro ?', checked => 0)|none%]
+					</div> 
      <div class="row">
  				[%checkbox('accept_email','Aceita receber notificações por e-mail ?', checked => 1)|none%]
 					</div>

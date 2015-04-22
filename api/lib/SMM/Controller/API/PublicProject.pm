@@ -1,4 +1,4 @@
-package SMM::Controller::API::ProjectPublic;
+package SMM::Controller::API::PublicProject;
 
 use Moose;
 use utf8;

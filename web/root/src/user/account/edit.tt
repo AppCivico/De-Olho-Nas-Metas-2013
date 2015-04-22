@@ -1,6 +1,6 @@
 <script>
 jQuery(function($){
-   $("input[name=phone_number]").mask("(99) 9999-9999");
+   $("input[name=phone_number]").mask("(99) 9999-9999?9");
 
    $("input[name=phone_number]").focusout(function(){
         var phone, element;

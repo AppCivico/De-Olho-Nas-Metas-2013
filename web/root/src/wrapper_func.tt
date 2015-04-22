@@ -153,11 +153,7 @@
     <script src="/static/js/bootstrap.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="/static/lightbox/js/lightbox.js"></script>
-    <script src="/static/js/home_site.js"></script>
-    <script src="/static/js/Chart.min.js"></script>
-    <script src="/static/js/chart.js"></script>
-    
-
+    <script src="/static/js/home_site.js"></script>    
 
 	[% assets.export("js")|none %]
 </body>

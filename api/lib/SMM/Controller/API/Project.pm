@@ -3,6 +3,9 @@ package SMM::Controller::API::Project;
 use Moose;
 use utf8;
 use DDP;
+use List::Util qw/sum/;
+use Math::Round qw/round/;
+
 BEGIN { extends 'Catalyst::Controller::REST' }
 
 __PACKAGE__->config(
@@ -57,14 +60,27 @@ sub result_GET {
     my @pap = $project->project_accept_porcentages->search(
         {},
         {
-            select   => [ 'accepted', \'count(1)' ],
-            as       => [qw/accepted qtde/],
-            group_by => ['accepted'],
+            select   => [ 'progress', \'count(1)' ],
+            as       => [qw/progress qtde/],
+            group_by => ['progress'],
             result_class => 'DBIx::Class::ResultClass::HashRefInflator',
         }
     )->all;
-    use DDP;
-    p @pap;
+
+    my @qtde_total;
+
+    push( @qtde_total, $_->{qtde} ) for @pap;
+
+    my $total = sum(@qtde_total);
+    my @pap_total;
+    map {
+        push @pap_total,
+          {
+            percentage => round( ( $_->{qtde} / $total ) * 100 ),
+            qtde       => $_->{qtde},
+            progress   => $_->{progress}
+          }
+    } @pap;
     my @pap_user = $project->project_accept_porcentages->search(
         {},
         {
@@ -167,7 +183,8 @@ sub result_GET {
                     } ( $project->approved_project_events ),
                 )
             ],
-            statistic      => \@pap,
+
+            statistic      => \@pap_total,
             users_question => \@pap_user,
             comments       => [
                 (
@@ -409,14 +426,39 @@ sub list_geom : Chained('base') PathPart('list_geom') : Args(0) {
 
     my @geom = $c->model('DB')->resultset('Project')->search(
         {
-            -and =>
-              [ latitude => { '!=', undef }, longitude => { '!=', undef } ]
+            -and => [
+                latitude   => { '!=', undef },
+                longitude  => { '!=', undef },
+                percentage => { '!=', undef }
+            ]
         },
         {
-            columns => [qw( id name latitude longitude)],
+            join => { 'goal_projects' => 'goal' },
+            columns => [qw( id name latitude longitude percentage goal.id )],
         }
     )->as_hashref->all;
     $self->status_ok( $c, entity => { geom => \@geom } );
+
+}
+
+sub autocomplete : Chained('base') PathPart('autocomplete') : Args(0) {
+    my ( $self, $c ) = @_;
+
+    my @projects = $c->model('DB')->resultset('Project')->search(
+        {
+            name => {
+                ilike => \[
+                    q{'%' || ? || '%'},
+                    [ _name => $c->req->params->{project_name} ]
+                ]
+            }
+        },
+        {
+            select => [qw/ id name /],
+            as     => [qw( id value)]
+        }
+    )->as_hashref->all;
+    $self->status_ok( $c, entity => { projects => \@projects } );
 
 }
 1;

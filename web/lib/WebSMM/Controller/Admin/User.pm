@@ -41,9 +41,12 @@ sub index : Chained('base') : PathPart('') : Args(0) {
         $c, 'users',
         params => {
             role => $params->{role} ? $params->{role} : 99,
-            filters => 1,
-            params  => { name => $params->{name}, role => $params->{role} },
-            order   => 'me.name'
+            filters  => 1,
+            name     => $params->{name},
+            role     => $params->{role},
+            start_in => $params->{start_in},
+            end_on   => $params->{end_on},
+            order    => 'me.name'
         }
     );
 

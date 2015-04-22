@@ -45,10 +45,6 @@ jQuery(function($){
 					<div class="icon transport">
 					</div>
 				</div>
-				<div class="item">
-					<div class="icon home">
-					</div>
-				</div>
 				<div class="item selected">
 					<div class="icon lamp">
 					</div>
@@ -206,11 +202,37 @@ jQuery(function($){
 											        <div class=" ">
 											            <input type="text" id="txtaddress" name="txtaddress" placeholder="CEP" class="form-control">
 																							<input type="hidden" id="latlng" name="latlng" type="text" class="form-control" size="3">
+																							<input type="hidden" id="project_id" name="project_id" type="text" class="form-control" size="3">
 																							<input type="hidden" id="organization_id" name="organization_id" type="text" class="form-control" value="[% c.user.obj.organization_id%]" size="3">
 											        </div>
 											    </div>
 											</div>
-											
+											<div class="form-group row ">
+											    <label class="col-lg-12 " for="elm_end_on">Campanha Móvel:</label>
+											    <div class="col-lg-12">
+											        <div class=" ">
+
+											            <select id="mobile_campaign_id" name="mobile_campaign_id" class="form-control">
+																											[% IF mobile_campaigns.size > 0%]
+																											<option value="">Selecione</option>
+																											[%FOR cm IN mobile_campaigns%]
+																											<option value="[%cm.id%]">[%cm.description%]</option>
+																											[%END%]
+																											[%ELSE%]
+																											<option value="">Nenhuma campanha criada.</option>
+																											[%END%]
+																							</select>
+											        </div>
+											    </div>
+											</div> 
+ 										<div class="form-group row ">
+											    <label class="col-lg-12 " for="elm_end_on">Projeto:</label>
+											    <div class="col-lg-12">
+											        <div class=" ">
+											            <input type="text" id="project_name" name="project_name" placeholder="Projetos" class="form-control">
+											        </div>
+											    </div>
+											</div>  
 										</div>
 									</div>  								
 									<div class="row row-padding">
