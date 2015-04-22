@@ -218,7 +218,7 @@ Related object: L<SMM::Schema::Result::Goal>
 =cut
 
 __PACKAGE__->belongs_to(
-  "goal_number",
+  "goals",
   "SMM::Schema::Result::Goal",
   { id => "goal_number" },
   {

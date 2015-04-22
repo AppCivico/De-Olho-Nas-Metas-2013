@@ -1,6 +1,6 @@
 <script>
 jQuery(function($){
-   $("input[name=phone_number]").mask("(99) 9999-9999");
+   $("input[name=phone_number]").mask("(99) 9999-9999?9");
 
    $("input[name=phone_number]").focusout(function(){
         var phone, element;
@@ -99,7 +99,7 @@ jQuery(function($){
 				
 					<h4 class="green">FAÇA SEU CADASTRO E FIQUE DE OLHO NAS METAS</h4>
 					
-					<a class="btn btn-warning" href="/conselho/contato">Conselheiro? Clique aqui!</a>
+					<a class="btn btn-warning" href="/conselho/contato">Conselheiro? Clique aqui!</a> 
 				
 					[%IF error_msg %]<div class="alert alert-danger"><p>[%error_msg%]</p></div>[%END%]
 					<form action="/form/user" method="post" enctype="multipart/form-data">
@@ -121,9 +121,9 @@ jQuery(function($){
 								[%input_text('phone_number','Celular:', req=>0)|none%]
 						</div>
 					</div>
- 				<div class="row">
+<!-- 				<div class="row">
  				[%checkbox('request_council','Você é um conselheiro ?', checked => 0)|none%]
-					</div> 
+					</div> -->
      <div class="row">
  				[%checkbox('accept_email','Aceita receber notificações por e-mail ?', checked => 1)|none%]
 					</div>
