@@ -324,7 +324,7 @@ $(document).ready(function () {
 							<h3>Opiniões dos conselheiros sobre o progresso</h3>
 							<div class="chart-stats text-center">
 								<div class="chart">
-									<canvas id="chart1" value-late="[%statistic.late || 0%]" value-progress="[%statistic.progress || 0%]" value-completed="[%statistic.completed || 0%]"></canvas>
+									<canvas id="chart1" value-late="[%statistic.late || 0%]" value-progress="[%statistic.in_progress || 0%]" value-completed="[%statistic.completed || 0%]"></canvas>
 								</div>
 							</div>
 						</section>
@@ -347,7 +347,7 @@ $(document).ready(function () {
 							<h3>Opiniões dos conselheiros sobre o progresso</h3>
 							<div class="chart-stats text-center">
 								<div class="chart">
-									<canvas id="chart1" value-late="[%statistic.late || 0%]" value-progress="[%statistic.progress || 0%]" value-completed="[%statistic.completed || 0%]"></canvas>
+									<canvas id="chart1" value-late="[%statistic.late || 0%]" value-progress="[%statistic.in_progress || 0%]" value-completed="[%statistic.completed || 0%]"></canvas>
 								</div>
 							</div>
 						</section>
