@@ -36,7 +36,9 @@ h2{
 	color: #fff;
 	text-transform: uppercase;
 }
-.btn:hover{
+.btn:hover,
+.btn:active,
+.btn:focus{
 	color: #e0e0e0;
 }
 .btn-orange,
@@ -44,7 +46,9 @@ h2{
 	color: #fff;
 	background-color: #f15a24;
 }
-.btn-orange:hover{
+.btn-orange:hover,
+.btn-orange:active,
+.btn-orange:focus{
 	color: #fff;
 	background-color: #f67041;
 }
@@ -53,7 +57,9 @@ h2{
 	color: #fff;
 	background-color: #795891;
 }
-.btn-violet:hover{
+.btn-violet:hover,
+.btn-violet:active,
+.btn-violet:focus{
 	color: #fff;
 	background-color: #8c67a7;
 }
@@ -63,7 +69,9 @@ h2{
 	color: #703e1c;
 	background-color: #face53;
 }
-.btn-yellow:hover{
+.btn-yellow:hover,
+.btn-yellow:active,
+.btn-yellow:focus{
 	color: #000000;
 	background-color: #e6be4e;
 }
@@ -72,7 +80,9 @@ h2{
 	background-color: #42210b;
 	color: #fff;
 }
-.btn-brown:hover{
+.btn-brown:hover,
+.btn-brown:active,
+.btn-brown:focus{
 	background-color: #703e1c;
 	color: #fff;
 }
@@ -81,7 +91,9 @@ h2{
 	border-color: #88817b;
 	color: #88817b;
 }
-.btn-white:hover{
+.btn-white:hover,
+.btn-white:active,
+.btn-white:focus{
 	background-color: #f0f0f0;
 	border-color: #333;
 	color: #333;
@@ -91,7 +103,9 @@ h2{
 	background-color: #00a99d;
 	color: #fff;
 }
-.btn-navy:hover{
+.btn-navy:hover,
+.btn-navy:active,
+.btn-navy:focus{
 	color: #000000;
 	background-color: #14c9bc;
 }
@@ -99,7 +113,9 @@ h2{
 .btn-red:visited{
 	background-color: #f7931e;
 }
-.btn-red:hover{
+.btn-red:hover,
+.btn-red:active,
+.btn-red:focus{
 	color: #000000;
 	background-color: #f4ad5b;
 }
@@ -1694,4 +1710,13 @@ section.statistics .chart-stats{
 .metas-detail section.statistics ul li{
 	color: #666;
 	text-align: left;
+}
+.tooltip-arrow{
+}
+.custom-tooltip + .tooltip > .tooltip-inner{
+	background-color: #fcf0cc;
+	color: #666056;
+}
+.custom-tooltip + .tooltip > .tooltip-arrow{
+	border-top-color: #fcf0cc;
 }
