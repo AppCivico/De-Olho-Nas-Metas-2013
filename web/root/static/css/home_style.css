@@ -158,6 +158,17 @@ h2{
   background-color: #524a40;
 }
 
+.nav .open>a, .nav .open>a:hover, .nav .open>a:focus{
+	background-color: #4d4841 !important;
+	color: #face53 !important;
+}
+.navbar-fixed-top .dropdown-menu{
+	background-color: #4d4841;
+}
+.navbar-fixed-top .dropdown-menu li{
+	padding: 5px 10px;
+}
+
 .navbar-brand{
 	padding: 18px 15px;
 }
