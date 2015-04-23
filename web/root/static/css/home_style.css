@@ -1346,6 +1346,7 @@ div.followers{
 	padding: 5px;
 	margin: 0 10px 10px 0;
 	border: 1px solid #e0e0e0;
+	min-height: 100px;
 }
 h3.dotted{
 	border-bottom: 1px dotted #c6c2c0;
