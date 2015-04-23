@@ -49,7 +49,9 @@
 <script>
 
 $(document).ready(function () {
-	
+
+  $('[data-toggle="tooltip"]').tooltip();
+
   $('#follow_or_not').on('click', function () {
 	var id = $(this).data("id"),
 		url,
@@ -139,7 +141,6 @@ $(document).ready(function () {
 		$(".image-gallery .upload").toggle();
 		$(".image-gallery h3 button").toggle();
 	});
-
 });
 </script>
 
@@ -261,11 +262,11 @@ $(document).ready(function () {
 						
 						[% IF c.user%]
 						<div id="follow" class="col-xs-6 text-right">							
-							<button  type="button" id="follow_or_not" class="btn btn-brown [% do_i_follow > 0 ? "" : "follow"%]" data-id="[% c.user.obj.id%]" autocomplete="off"><span>[% do_i_follow > 0 ? "Parar de Seguir" : "Siga o Projeto" %]</span></button>
+							<button  type="button" id="follow_or_not" data-toggle="tooltip" data-placement="top" title="Acompanhar e receber notificações por email de cada atualização" class="btn btn-brown custom-tooltip [% do_i_follow > 0 ? "" : "follow"%]" data-id="[% c.user.obj.id%]" autocomplete="off"><span>[% do_i_follow > 0 ? "Parar de Seguir" : "Siga o Projeto" %]</span></button>
 						</div>
 						[%ELSE%]
 						<div id="follow" class="col-xs-6 text-right">							
-							<a class="btn btn-brown" href="/login">Siga o Projeto</a>
+							<a class="btn btn-brown" href="/login" data-toggle="tooltip" data-placement="top" title="Acompanhar e receber notificações por email de cada atualização" class="custom-tooltip">Siga o Projeto</a>
 						</div>
 
 						[%END%]

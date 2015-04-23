@@ -1,6 +1,7 @@
 <script>
 	
 $(document).ready(function () {
+  $('[data-toggle="tooltip"]').tooltip();
   $('#follow_or_not').on('click', function () {
 	var id = $(this).data("id"),
 		url,
@@ -96,12 +97,12 @@ $(document).ready(function () {
 						</div>
 
 						[% IF c.user%]
-						<div id="follow" class="col-xs-6 text-right">
-							<button  type="button" id="follow_or_not" class="btn btn-brown [% do_i_follow > 0 ? "" : "follow"%]" data-id="[% c.user.obj.id%]" autocomplete="off"><span>[% do_i_follow > 0 ? "Parar de Seguir" : "Siga o Conselho" %]</span></button>
+						<div id="follow" class="col-xs-6 text-right">							
+							<button  type="button" id="follow_or_not" data-toggle="tooltip" data-placement="top" title="Acompanhar e receber notificações por email de cada atualização" class="btn btn-brown custom-tooltip [% do_i_follow > 0 ? "" : "follow"%]" data-id="[% c.user.obj.id%]" autocomplete="off"><span>[% do_i_follow > 0 ? "Parar de Seguir" : "Siga o Conselho" %]</span></button>
 						</div>
 						[%ELSE%]
-						<div id="follow" class="col-xs-7 text-right">		
-							<a class="btn btn-brown" href="/login">Siga o Conselho</a>
+						<div id="follow" class="col-xs-7 text-right">							
+							<a class="btn btn-brown" data-toggle="tooltip" data-placement="top" title="Acompanhar e receber notificações por email de cada atualização" class="custom-tooltip" href="/login">Siga o Conselho</a>
 						</div>
 						[%END%]
 
