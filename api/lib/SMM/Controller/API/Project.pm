@@ -409,7 +409,7 @@ sub geom : Chained('base') PathPart('geom') : Args(0) {
     my ($geom) = $c->model('DB')->resultset('Project')->search(
         { 'me.id' => $id },
         {
-            '+select' => [ \q{ST_AsGeoJSON(region.geom,3) as geom_json} ],
+            '+select' => [ \q{ST_AsGeoJSON(region.geom,6) as geom_json} ],
             '+as'     => [qw(geom_json)],
             columns =>
               [qw( me.id me.latitude me.longitude region.id region.name)],

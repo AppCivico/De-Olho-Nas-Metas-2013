@@ -31,12 +31,14 @@ The root page (/)
 sub index : Path : Args(0) {
     my ( $self, $c ) = @_;
 
+    $self->root($c);
+
     $c->res->redirect( $c->uri_for_action('/user/account/index') ), $c->detach
       if $c->user_exists;
 
-    $c->res->redirect( $c->uri_for_action('/homefuncional/home') );
-
-    $self->root($c);
+    $c->forward( '/homefuncional/base' );
+    $c->forward( '/homefuncional/home' );
+    $c->stash->{template} = 'homefuncional/home.tt';
 
 }
 
