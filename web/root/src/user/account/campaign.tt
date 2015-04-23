@@ -10,8 +10,8 @@
 <script type="text/javascript" src="/static/js/tinyeditor/tiny.editor.js"></script>
 <script>
 jQuery(function($){
-   $('.datepicker').datepicker();
-   $('.datetimepicker1').datetimepicker();
+   $('.datepicker').datepicker({format : 'dd/mm/yyyy'});
+   $('.datetimepicker1').datetimepicker({ format : 'DD/MM/YYYY HH:MM'});
    $("input[name=phone_number]").mask("(99) 9999-9999");
 
    $("input[name=phone_number]").focusout(function(){
@@ -190,8 +190,8 @@ jQuery(function($){
 						                </script>  
 									<div class="row">
 										<div class="col-sm-6">
-	            								[%input_text('start_in','Data Começo:', classes => ['span3', 'date' ,'datepicker'], req => 0)|none%]
-												[%input_text('end_on','Data Final:', classes => ['span3' , 'date', 'datepicker'],req=>0)|none%]
+	            								[%input_text('start_in','Data Começo:', classes => ['span3', 'date' ,'datepicker'], req => 1)|none%]
+												[%input_text('end_on','Data Final:', classes => ['span3' , 'date', 'datepicker'],req=>1)|none%]
 										</div>
 									</div>
  									<div class="row">
@@ -336,6 +336,7 @@ jQuery(function($){
 										</div>
 									</div>
 									[%input_text('form_ident', '' , req=>1, value => "event", type => 'hidden')|none%]
+									<input type="hidden" id="council_id" name="council_id" type="text" class="form-control" value="[% c.user.obj.organization_id%]" size="3">
 									<button type="reset"  class="btn btn-danger pull-left">Limpar</button>
 									<input type="submit" value="Cadastrar" class="btn btn-success pull-right"/>
 

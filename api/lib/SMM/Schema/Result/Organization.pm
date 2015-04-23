@@ -190,6 +190,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 events
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::Event>
+
+=cut
+
+__PACKAGE__->has_many(
+  "events",
+  "SMM::Schema::Result::Event",
+  { "foreign.council_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 goal_organizations
 
 Type: has_many
@@ -286,8 +301,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-15 15:00:11
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:XhpMAwMFIq0sqUxaGjJoWA
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-23 18:32:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xhrYDUzz/u+8td/E146DJg
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
 with 'SMM::Schema::Role::ResultsetFind';

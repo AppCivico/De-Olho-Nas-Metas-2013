@@ -337,7 +337,6 @@ sub project_autocomplete : Chained('base') : PathPart('project_autocomplete')
 
     my $api = $c->model('API');
 
-    use DDP;
     $c->detach unless $c->req->method eq 'POST';
     $api->stash_result( $c, ['projects/autocomplete'],
         params => { project_name => $c->req->params->{project_name} } );
@@ -345,9 +344,6 @@ sub project_autocomplete : Chained('base') : PathPart('project_autocomplete')
         $c->detach( '/form/redirect_error', [] );
     }
 
-    warn 'lol';
-    warn 1;
-    p $c->stash->{projects};
     $c->res->status(200);
     $c->res->content_type('application/json');
     $c->res->body( encode_json( $c->stash->{projects} ) );

@@ -96,7 +96,7 @@ sub GET_SCHEMA {
 
     # database
     my $db_host = $ENV{SMM_DB_HOST} || 'localhost';
-    my $db_pass = $ENV{SMM_DB_PASS} || 'no-password';
+    my $db_pass = $ENV{SMM_DB_PASS} || '123mudar';
     my $db_port = $ENV{SMM_DB_PORT} || '5432';
     my $db_user = $ENV{SMM_DB_USER} || 'postgres';
     my $db_name = $ENV{SMM_DB_NAME} || 'smm';
