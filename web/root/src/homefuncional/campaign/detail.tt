@@ -112,7 +112,7 @@ $(document).keydown( function(e) {
 						</div>
 						<div class="col-sm-7">
 							<h1>[%campaign_obj.name%]</h1><br />
-							<p>[%campaign_obj.description%]</p>
+							<p>[%campaign_obj.description | none%]</p>
 						</div>
 					</div>
 				</section>

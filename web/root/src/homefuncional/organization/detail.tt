@@ -122,8 +122,8 @@ $(document).ready(function () {
 							</div>
 							<div class="col-xs-11">
 								<div class="item">
-									<div class="title">[%e.name%]</div>
-									<div class="description">[%e.description%].</div>
+									<div class="title"><a class="title" href="[% c.uri_for_action('/homefuncional/campaign/detail',[e.id])%]">[% e.name%]</a></div>
+									<div class="description">[%e.description | none%].</div>
 									<div class="footer">
 										<div class="row">
 											<div class="col-sm-6">
