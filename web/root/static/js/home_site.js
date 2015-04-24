@@ -38,4 +38,12 @@ $(document).ready(function() {
 	$('.image-gallery .arrow.left .glyphicon,.image-gallery .arrow.right .glyphicon').on('mouseup mouseleave', function(){
         clearInterval(iv);
     });
+
+    $("#elm_request_council").click(function(e){
+    	if ($(this).prop("checked")){
+    		$(".council-list").show();
+    	}else{
+    		$(".council-list").hide();
+    	}
+    });
 });

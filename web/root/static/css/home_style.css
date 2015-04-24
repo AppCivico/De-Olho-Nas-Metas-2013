@@ -1724,3 +1724,6 @@ section.statistics .chart-stats{
 .custom-tooltip + .tooltip > .tooltip-arrow{
 	border-top-color: #fcf0cc;
 }
+.page-signup .council-list{
+	display: none;
+}
