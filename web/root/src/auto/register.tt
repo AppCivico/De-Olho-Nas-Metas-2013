@@ -158,11 +158,13 @@ jQuery(function($){
 						</div>
 					</div>
 
-					<input type="hidden" name="organization_id" value="[%c.req.params.organization_id%]" class="btn btn-success pull-right"/>
-					<input type="hidden" name="hash" value="[%c.req.params.key%]" class="btn btn-success pull-right"/>
-					<input type="submit" value="Enviar" class="btn btn-success pull-left"/>
-					<button type="reset"  class="btn btn-danger pull-right">Limpar</button>
-				
+					<div class="text-right">
+						<input type="hidden" name="organization_id" value="[%c.req.params.organization_id%]"/>
+						<input type="hidden" name="hash" value="[%c.req.params.key%]"/>
+						<button type="reset"  class="btn btn-danger">Limpar</button>
+						&nbsp;&nbsp;
+						<input type="submit" value="Enviar" class="btn btn-success"/>
+					</div>				
 					</form>
 				</div>					
 			</div>
