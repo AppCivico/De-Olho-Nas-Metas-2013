@@ -358,6 +358,21 @@ __PACKAGE__->belongs_to(
     },
 );
 
+=head2 password_resets
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::PasswordReset>
+
+=cut
+
+__PACKAGE__->has_many(
+    "password_resets",
+    "SMM::Schema::Result::PasswordReset",
+    { "foreign.user_id" => "self.id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
+);
+
 =head2 project_accept_porcentages
 
 Type: has_many
@@ -477,8 +492,8 @@ __PACKAGE__->has_many(
     { cascade_copy         => 0, cascade_delete => 0 },
 );
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-17 16:52:14
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:CHBuTyyNbv5tdmdCMUciWQ
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-24 13:47:23
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:UcVTtBcapBWUVrbLNGABXA
 
 __PACKAGE__->many_to_many( roles => user_roles => 'role' );
 
@@ -624,6 +639,43 @@ my $tt = Template->new();
 use DateTime;
 use MIME::Base64 qw(decode_base64);
 
+sub _build_email {
+    my ( $self, $email, $title, $content ) = @_;
+
+    my $data = '';
+
+    my $wrapper = get_data_section('body_password.tt');
+
+    my $env = {
+        year => DateTime->now( time_zone => 'local' )->year,
+
+        partner_name => 'veratrum',
+        url          => 'http://www.deolhonasmetas.org.br',
+        web_url      => 'http://localhost:5040',
+        title        => $title
+
+    };
+
+    my $processed_content = '';
+    $tt->process( \$content, $env, \$processed_content );
+    $tt->process( \$wrapper, { content => $processed_content, %$env }, \$data );
+
+    $email->attach(
+        Type => 'text/html; charset=UTF-8',
+        Data => $data,
+    );
+
+    $email->attach(
+        Type     => 'image/png',
+        Id       => 'logo.png',
+        Encoding => 'base64',
+        Data     => decode_base64( get_data_section('logo.png') ),
+    );
+
+    return $email;
+
+}
+
 sub _build_many_emails {
     my ( $self, $email, $title, $content ) = @_;
 
@@ -666,6 +718,74 @@ sub _build_many_emails {
 __PACKAGE__->meta->make_immutable;
 1;
 __DATA__
+
+
+@@ body_password.tt
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>veratrum: Informativo</title>
+</head>
+<body style="padding: 0; margin: 0; background-color: #FAFAFA;">
+<table cellspacing="0" cellpadding="0" border="0" width="100%" height="100%" style="background-color: #FAFAFA;">
+    <tr>
+        <td align="center" vertical-align="top">
+      <table cellspacing="0" cellpadding="6" border="0" width="638">
+        <tr>
+          <td align="center" vertical-align="top" style="background-color: #00a99d;">
+            <!--// header //-->
+            <table cellspacing="0" cellpadding="0" border="0" width="638" style="background-color: #00a99d;">
+              <tr>
+                <td style="padding: 10px 20px;">
+                  <div style="text-align: left;">
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 20px;">
+                  <p style="font-family: arial, verdana; font-size: 16pt; color: #FFFFFF; text-align: left; margin: 0; padding: 0;">[%title%]</p>
+                </td>
+              </tr>
+            </table>
+            <!--// fim header //-->
+
+            <table cellspacing="0" cellpadding="0" border="0">
+              <tr>
+                <td style="background-color: #ffffff; text-align: left;" bgcolor="#ffffff" width="638">
+                  <table border="0" width="100%"><tr><td>
+                    <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                      <tr>
+                        <td style="vertical-align: top; padding: 50px;font-family: arial, verdana;">
+                            [%content%]
+                        </td>
+                      </tr>
+                    </table>
+                  </td></tr></table>
+                </td>
+              </tr>
+            </table>
+            <!--// footer //-->
+
+          </td>
+        </tr>
+      </table>
+      <table cellspacing="0" cellpadding="0" border="0" width="650" height="25">
+        <tr>
+          <td align="center" vertical-align="top">
+          </td>
+        </tr>
+      </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
+
+
+
 
 
 @@ body.tt

@@ -82,6 +82,11 @@ sub verifiers_specs {
                     required => 0,
                     type     => 'Bool'
                 },
+                request_council => {
+                    required => 0,
+                    type     => 'Bool'
+                },
+
             },
         ),
         login => Data::Verifier->new(

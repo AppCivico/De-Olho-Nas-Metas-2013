@@ -25,9 +25,9 @@ sub format_date_hour {
         next unless $ref->{$f};
 
         my $date = $ref->{$f};
-        my ( $d, $m, $y, $h, $m ) =
+        my ( $d, $m, $y, $h, $mn ) =
           $date =~ m/^(\d{1,2})\/(\d{1,2})\/(\d{4})\ (\d{1,2})\:(\d{1,2})$/;
-        $ref->{$f} = "$y-$m-$d $h:$m:00";
+        $ref->{$f} = "$y-$m-$d $h:$mn:00";
     }
 }
 

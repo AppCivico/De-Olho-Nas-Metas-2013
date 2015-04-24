@@ -25,6 +25,16 @@ Catalyst Controller.
 sub base : Chained('/') : PathPart('home') : CaptureArgs(0) {
 
     my ( $self, $c ) = @_;
+    my $api = $c->model('API');
+    if ( $c->user ) {
+        $api->stash_result(
+            $c,
+            [ 'users', $c->user->obj->id ],
+            stash => 'user_roles',
+        );
+        $c->stash->{user_obj}->{role} =
+          { map { $_ => 1 } @{ $c->stash->{user_roles}->{roles} } };
+    }
 
     $c->stash->{template_wrapper} = 'func';
 }
