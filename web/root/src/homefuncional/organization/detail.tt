@@ -80,7 +80,7 @@ $(document).ready(function () {
 
 						<div class="row">
 							<div class="col-sm-5">
-								<img src="/static/images/organization/[%organization_obj.id%]/[%organization_obj.id%].jpg" class="company-avatar col-sm-4">
+								<img src="/static/images/organization/[%organization_obj.id%]/[%organization_obj.id%].jpg" class="company-avatar img-responsive">
 							</div>
 							<div class="col-sm-7 word-break">
 								[% organization_obj.description | none %]
