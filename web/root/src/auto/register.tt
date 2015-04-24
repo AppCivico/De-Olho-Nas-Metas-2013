@@ -123,8 +123,18 @@ jQuery(function($){
 					</div>
  				<div class="row">
  				[%checkbox('request_council','Você é um conselheiro ?', checked => 0)|none%]
-					</div>
-     <div class="row">
+
+				</div>
+ 				<div class="row council-list">
+ 					<div class="form-group">
+ 						<div class="col-sm-12">
+	 						<select id="council_list">
+	 							<option value="">Selecione um Conselho...</option>
+	 						</select>
+	 					</div>
+ 					</div>
+				</div>
+     			<div class="row">
  				[%checkbox('accept_email','Aceita receber notificações por e-mail ?', checked => 1)|none%]
 					</div>
 					<div class="row">
@@ -134,7 +144,7 @@ jQuery(function($){
 					<div class="row row-padding">
 						<div class="col-sm-4">
 							<div class="avatar-upload">
-								<img src="/static/css/images/avatar.jpg">
+								<img src="/static/css/images/avatar.jpg" class="img-responsive">
 							</div>
 						</div>
 						<div class="col-sm-8">
@@ -150,8 +160,8 @@ jQuery(function($){
 
 					<input type="hidden" name="organization_id" value="[%c.req.params.organization_id%]" class="btn btn-success pull-right"/>
 					<input type="hidden" name="hash" value="[%c.req.params.key%]" class="btn btn-success pull-right"/>
-					<button type="reset"  class="btn btn-danger pull-left">Limpar</button>
-					<input type="submit" value="Enviar" class="btn btn-success pull-right"/>
+					<input type="submit" value="Enviar" class="btn btn-success pull-left"/>
+					<button type="reset"  class="btn btn-danger pull-right">Limpar</button>
 				
 					</form>
 				</div>					
