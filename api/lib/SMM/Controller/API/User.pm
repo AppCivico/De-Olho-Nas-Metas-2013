@@ -87,6 +87,15 @@ sub result_GET {
                   } $user->user_follow_projects,
 
             ],
+            councils => [
+
+                map {
+                    my $p = $_;
+                    map { +{ name => $_->name, id => $_->id, } } $p->counsil
+                  } $user->user_follow_counsils,
+
+            ],
+
             project_event => [
                 map {
                     my $ufp = $_;
@@ -295,7 +304,7 @@ sub user_project_event_GET {
     #my $user = $c->stash->{user};
     my $user = $c->model('DB::User');
 
-    #	my @data = $user->user_follow_projects-search({})
+    #   my @data = $user->user_follow_projects-search({})
 
     my ($result) = $user->search(
         {

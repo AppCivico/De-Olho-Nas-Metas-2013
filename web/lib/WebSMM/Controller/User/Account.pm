@@ -432,6 +432,10 @@ sub follow : Chained('object') : PathPart('seguindo') : Args(0) {
     my $api = $c->model('API');
 
     $api->stash_result( $c, [ 'users', $c->user->id ], stash => 'user_obj', );
+
+    use DDP;
+    p $c->stash->{user_obj};
+    warn 1;
 }
 
 sub invite : Chained('object') : PathPart('convidar') : Args(0) {
