@@ -179,8 +179,8 @@ jQuery(function($){
 						                </script>  
 									<div class="row">
 										<div class="col-sm-6">
-	            								[%input_text('start_in','Data Começo:', classes => ['span3', 'date' ,'datepicker'], req => 1, value => campaign_obj.start_in)|none%]
-												[%input_text('end_on','Data Final:', classes => ['span3' , 'date', 'datepicker'],req=>1, value => campaign_obj.end_on)|none%]
+	            								[%input_text('start_in','Data Começo:', classes => ['span3', 'date' ,'datepicker'], req => 1, value => format_date_to_human(campaign_obj.start_in))|none%]
+												[%input_text('end_on','Data Final:', classes => ['span3' , 'date', 'datepicker'],req=>1, value => format_date_to_human(campaign_obj.end_on))|none%]
 										</div>
 									</div>
  									<div class="row">
@@ -215,7 +215,7 @@ jQuery(function($){
 											    <label class="col-lg-12 " for="elm_end_on">Projeto:</label>
 											    <div class="col-lg-12">
 											        <div class=" ">
-											            <input type="text" id="project_name" name="project_name" placeholder="Projetos" value="[%campaign_obj.project_name%]" class="form-control">
+											            <input type="text" id="project_name" name="project_name" placeholder="Projetos" value="[%campaign_obj.project.name%]" class="form-control">
 											        </div>
 											    </div>
 											</div>  

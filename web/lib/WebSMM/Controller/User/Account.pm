@@ -84,6 +84,9 @@ sub campaign_param : Chained('object') : PathPart('campanha') : CaptureArgs(1) {
     my $api = $c->model('API');
 
     $api->stash_result( $c, [ 'campaigns', $id ], stash => 'campaign_obj' );
+    use DDP;
+    p $c->stash->{campaign_obj};
+    warn 1;
 
 }
 

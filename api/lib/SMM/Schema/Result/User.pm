@@ -122,12 +122,6 @@ __PACKAGE__->table("user");
   default_value: false
   is_nullable: 1
 
-=head2 request_council
-
-  data_type: 'boolean'
-  default_value: false
-  is_nullable: 1
-
 =cut
 
 __PACKAGE__->add_columns(
@@ -168,8 +162,6 @@ __PACKAGE__->add_columns(
   "accept_sms",
   { data_type => "boolean", default_value => \"false", is_nullable => 1 },
   "accept_email",
-  { data_type => "boolean", default_value => \"false", is_nullable => 1 },
-  "request_council",
   { data_type => "boolean", default_value => \"false", is_nullable => 1 },
 );
 
@@ -509,8 +501,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-24 18:09:38
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:QV0r4yyx2/J9TJvTd62jLA
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-28 11:38:11
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:6cWqEcGPPc+tWvMmsu2dWg
 
 __PACKAGE__->many_to_many( roles => user_roles => 'role' );
 
