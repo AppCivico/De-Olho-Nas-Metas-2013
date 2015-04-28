@@ -82,7 +82,7 @@ $(document).ready(function () {
 							<div class="col-sm-5">
 								<img src="/static/images/organization/[%organization_obj.id%]/[%organization_obj.id%].jpg" class="company-avatar img-responsive">
 							</div>
-							<div class="col-sm-7 word-break">
+							<div class="col-sm-7">
 								[% organization_obj.description | none %]
 							</div>
 						</div>
