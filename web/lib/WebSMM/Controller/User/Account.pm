@@ -76,6 +76,21 @@ sub edit : Chained('object') : PathPart('editar') : Args(0) {
     );
 }
 
+sub campaign_param : Chained('object') : PathPart('campanha') : CaptureArgs(1) {
+    my ( $self, $c, $id ) = @_;
+
+    $c->detach( '/form/redirect_error', [] ) unless $c->user;
+
+    my $api = $c->model('API');
+
+    $api->stash_result( $c, [ 'campaigns', $id ], stash => 'campaign_obj' );
+
+}
+
+sub campaign_edit : Chained('campaign_param') : PathPart('editar') : Args(0) {
+    my ( $self, $c ) = @_;
+}
+
 sub campaign : Chained('object') : PathPart('campanhas') : Args(0) {
     my ( $self, $c ) = @_;
 

@@ -1,46 +1,43 @@
-[%-CALL assets.include("js/jquery.maskedinput.js")%]
-[%-CALL assets.include("js/forms.js")%]
+	<section class="page-content contato">
+		<div class="container">
+			<h2 class="title">Fale Conosco</h2>
 
-<div class="page-header bg-dark">
-	<h3>Contato</h3>
-	<p>Preencha o formulário abaixo para entrar em contato</p>
-</div>
-<div class="row page-content">
-	<form class="form-horizontal" id="contact" method="post" action="/form/contact">
-	<fieldset>
-	        [%IF error_msg %]
-            <div class="row page-content">
-                <div class="alert alert-error"><p>[%error_msg%]</p></div>
-            </div>
-        [%END%]
-        [%IF status_msg %]
-            <div class="alert"><p>[%status_msg%]</p></div>
-        [%END%]
-        [%input_text('name','Nome completo', req=>1)|none%]
-        <span class="contact_error" id="name_err">Este campo não pode ser vazio</span>
-        [%input_text('email','Email', req=>1)|none%]
-        <span class="contact_error" id="email_err">Este campo não pode ser vazio</span>
-		[%input_text('telephone_number','Telefone', classes => ['span3', 'mobile_phone'], req=>1)|none%]
-		<span class="contact_error" id="tel_err">Este campo não pode ser vazio</span>
-		[%select_field('motive', 'Motivo do contato',  array => [
-			['Dúvida','Dúvida'],
-			['Sugestão','Sugestão'],
-			['Crítica','Crítica'],
-			['Parcerias','Parcerias'],
-			['Outros','Outros'],
-		], req=>1)|none%]
-		<span class="contact_error" id="motive_err">Este campo não pode ser vazio</span>
-		<div class="control-group ">
-			<label class="control-label" for="elm_comment">Comentário</label>
-			<div class="controls">
-				<div class="">
-					<textarea id="elm_comment" name="comment" class="span3" rows="3" cols="40"></textarea>
+			<div class="row">
+				<div class="col-sm-4 col-md-offset-3">
+				[%IF error_msg %]<div class="alert alert-danger"><p>[%error_msg%]</p></div>[%END%]
+                [%IF status_msg %]<div class="alert alert-success"><p>[%status_msg%]</p></div>[%END%]
 				</div>
 			</div>
+
+			<div class="row">
+				<div class="col-sm-6 col-md-offset-3">
+					<p>
+						Preencha o formulário abaixo para entrar em contato:
+					</p>
+				</div>
+			</div>
+			<div class="col-sm-8 col-md-offset-2">
+				<form role="form" method="POST" action="/form/contact" _lpchecked="1">
+					<div class="col-xs-12">
+						<div class="form-group">
+					        [%input_text('name','NOME:', req=>0)|none%]
+						</div>
+					</div>
+					<div class="col-xs-12">
+						<div class="form-group">
+					        [%input_text('email','E-MAIL:', req=>0)|none%]
+						</div>
+					</div>
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label>MENSAGEM:</label>
+							<textarea name="message" class="form-control signup-input" rows="5"></textarea>
+						</div>
+					</div>
+					<div class="button text-center">
+						<button class="btn btn-success">ENVIAR</button>
+					</div>
+				</form>
+			</div>
 		</div>
-		<div class="form-actions">
-			<button type="submit" class="btn btn-success" data-loading-text="Processando...">Enviar</button>
-			<button type="reset" class="btn">Limpar formulário</button>
-		</div>
-    </fieldset>
-</div>
+    </section>

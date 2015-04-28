@@ -39,7 +39,7 @@ sub action_specs {
     my $self = shift;
     return {
         create => sub {
-            my %values       = shift->valid_values;
+            my %values  = shift->valid_values;
             my $contact = $self->create( \%values );
             return $contact;
         }

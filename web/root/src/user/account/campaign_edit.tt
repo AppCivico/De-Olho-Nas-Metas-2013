@@ -79,26 +79,17 @@ jQuery(function($){
 
 					<br /><br />
 				<div class="col-sm-9 .col-md.offset-4">
-					<section class="tabs">
-						<ul class="nav nav-tabs" role="tablist">
-							<li role="presentation" [% IF !body.form_ident && !form_ident%]class="active"[%END%]><a href="#tab-campanhas" aria-controls="projetos" role="tab" data-toggle="tab">Campanhas</a></li>
-							<li role="presentation" [% IF body.form_ident == 'form' OR form_ident == 'form' %]class="active"[%END%]><a href="#tab-cadastrar" aria-controls="metas" role="tab" data-toggle="tab">Cadastrar Campanhas</a></li>
-							<li role="presentation" [% IF body.form_ident == 'event' OR form_ident == 'event' %]class="active"[%END%]><a href="#tab-eventos" aria-controls="metas" role="tab" data-toggle="tab">Cadastrar Eventos</a></li>
-						</ul>
-					</section>
 
 					<section class="projetos-result">
 						<div class="tab-content">
-								<div role="tabpanel" id="tab-cadastrar" class="tab-pane [% IF body.form_ident == 'form' OR form_ident =='form' %]active[%END%] ">
-									<h4 class="green">CADASTRE UMA NOVA CAMPANHA</h4>
-									[% IF body.form_ident == 'form' OR form_ident == 'form'%]
+								<div id="tab-cadastrar" >
+									<h4 class="green">EDITAR CAMPANHA</h4>
 									[%IF status_msg %]<div class="alert alert-success"><p>[%status_msg%]</p></div>[%END%]
 									[%IF error_msg %]<div class="alert alert-danger"><p>[%error_msg%]</p></div>[%END%]
-									[% END%]
 									<form action="/home/campaign/set_campaign" method="post" enctype="multipart/form-data">
-										[%input_text('name','Nome:', req=>1)|none%]
+										[%input_text('name','Nome:', req=>1, value => campaign_obj.name)|none%]
 									
-										[%input_text('description','Descrição:', req=>1, textbox=>1)|none%]
+										[%input_text('description','Descrição:', req=>1, textbox=>1 ,value => campaign_obj.description)|none%]
 						                <script>
 						                    var editor = new TINY.editor.edit('editor', {
 						                        id: 'elm_description',
@@ -128,7 +119,7 @@ jQuery(function($){
 						                        }
 						                    });
 						                </script>
- 										[%input_text('objective','Objetivo:', req=>1, textbox=>1)|none%]
+ 										[%input_text('objective','Objetivo:', req=>1, textbox=>1, value => campaign_obj.objective)|none%]
 						                <script>
 						                    var editor_objetivo = new TINY.editor.edit('editor_objetivo', {
 						                        id: 'elm_objective',
@@ -158,7 +149,7 @@ jQuery(function($){
 						                        }
 						                    });
 						                </script> 
-  										[%input_text('free_text','Texto livre:', req=>0, textbox=>1)|none%]
+  										[%input_text('free_text','Texto livre:', req=>0, textbox=>1, value => campaign_obj.free_text)|none%]
 						                <script>
 						                    var editor_texto = new TINY.editor.edit('editor_texto', {
 						                        id: 'elm_free_text',
@@ -190,8 +181,8 @@ jQuery(function($){
 						                </script>  
 									<div class="row">
 										<div class="col-sm-6">
-	            								[%input_text('start_in','Data Começo:', classes => ['span3', 'date' ,'datepicker'], req => 1)|none%]
-												[%input_text('end_on','Data Final:', classes => ['span3' , 'date', 'datepicker'],req=>1)|none%]
+	            								[%input_text('start_in','Data Começo:', classes => ['span3', 'date' ,'datepicker'], req => 1, value => campaign_obj.start_in)|none%]
+												[%input_text('end_on','Data Final:', classes => ['span3' , 'date', 'datepicker'],req=>1, value => campaign_obj.end_on)|none%]
 										</div>
 									</div>
  									<div class="row">
@@ -200,7 +191,7 @@ jQuery(function($){
 											    <label class="col-lg-12 " for="elm_end_on">CEP ou Endereço:</label>
 											    <div class="col-lg-12">
 											        <div class=" ">
-											            <input type="text" id="txtaddress" name="txtaddress" placeholder="CEP" class="form-control">
+											            <input type="text" id="txtaddress" name="txtaddress" placeholder="CEP" value="[%campaign_obj.address%]" class="form-control">
 																							<input type="hidden" id="latlng" name="latlng" type="text" class="form-control" size="3">
 																							<input type="hidden" id="project_id" name="project_id" type="text" class="form-control" size="3">
 																							<input type="hidden" id="organization_id" name="organization_id" type="text" class="form-control" value="[% c.user.obj.organization_id%]" size="3">
@@ -212,16 +203,16 @@ jQuery(function($){
 											    <div class="col-lg-12">
 											        <div class=" ">
 
-											            <select id="mobile_campaign_id" name="mobile_campaign_id" class="form-control">
-																											[% IF mobile_campaigns.size > 0%]
-																											<option value="">Selecione</option>
-																											[%FOR cm IN mobile_campaigns%]
-																											<option value="[%cm.id%]">[%cm.description%]</option>
-																											[%END%]
-																											[%ELSE%]
-																											<option value="">Nenhuma campanha criada.</option>
-																											[%END%]
-																							</select>
+											   <select id="mobile_campaign_id" name="mobile_campaign_id" class="form-control">
+											[% IF mobile_campaigns.size > 0%]
+					    						<option value="">Selecione</option>
+				    							[%FOR cm IN mobile_campaigns%]
+			    		    						<option value="[%cm.id%]">[%cm.description%]</option>
+		    									[%END%]
+	    									[%ELSE%]
+    											<option value="">Nenhuma campanha criada.</option>
+										    [%END%]
+											</select>
 											        </div>
 											    </div>
 											</div> 
@@ -229,7 +220,7 @@ jQuery(function($){
 											    <label class="col-lg-12 " for="elm_end_on">Projeto:</label>
 											    <div class="col-lg-12">
 											        <div class=" ">
-											            <input type="text" id="project_name" name="project_name" placeholder="Projetos" class="form-control">
+											            <input type="text" id="project_name" name="project_name" placeholder="Projetos" value="[%campaign_obj.project_name%]" class="form-control">
 											        </div>
 											    </div>
 											</div>  
@@ -237,8 +228,8 @@ jQuery(function($){
 									</div>  								
 									<div class="row row-padding">
 										<div class="col-sm-4">
-											<div class="avatar-upload">
-												<img src="/static/css/images/image-example.jpg">
+											<div class="img avatar-upload">
+												<img src="/static/images/campaign/[%campaign_obj.id%]/[%campaign_obj.id%].jpg">
 											</div>
 										</div>
 										<div class="col-sm-8">
@@ -259,108 +250,7 @@ jQuery(function($){
 									</form>
 
 								</div>
-								<div role="tabpanel" id="tab-eventos" class="tab-pane [% IF body.form_ident == 'event' OR form_ident =='event' %]active[%END%] ">
-									<h4 class="green">CADASTRE UM NOVO EVENTO</h4>
-									[% IF body.form_ident == 'event' OR form_ident == 'event'%]
-									[%IF status_msg %]<div class="alert alert-success"><p>[%status_msg%]</p></div>[%END%]
-									[%IF error_msg %]<div class="alert alert-danger"><p>[%error_msg%]</p></div>[%END%]
-									[% END%]
-									<form action="/home/event/set_event" method="post" enctype="multipart/form-data">
-										[%input_text('name','Nome:', req=>1)|none%]
-									
-											[%input_text('description_event','Descrição:', req=>1, textbox=>1)|none%]
-						                <script>
-						                    var editor_description_event = new TINY.editor.edit('editor_description_event', {
-						                        id: 'elm_description_event',
-						                        width: '99%',
-						                        height: '120',
-						                        cssclass: 'tinyeditor',
-						                        controlclass: 'tinyeditor-control',
-						                        rowclass: 'tinyeditor-header',
-						                        dividerclass: 'tinyeditor-divider',
-						                        controls: ['bold', 'italic', 'underline', 'strikethrough', '|', 'subscript', 'superscript', '|',
-						                            'orderedlist', 'unorderedlist', '|', 'outdent', 'indent', '|', 'leftalign',
-						                            'centeralign', 'rightalign', 'blockjustify', '|', 'unformat', '|', 'undo', 'redo', 'n',
-						                            'size', 'style', '|', 'image', 'hr', 'link', 'unlink'
-						                        ],
-						                        footer: true,
-						                        fonts: ['Asap'],
-						                        xhtml: true,
-						                        bodyid: 'editor',
-						                        footerclass: 'tinyeditor-footer',
-						                        toggle: {
-						                            text: 'código-fonte',
-						                            activetext: 'wysiwyg',
-						                            cssclass: 'toggle'
-						                        },
-						                        resize: {
-						                            cssclass: 'resize'
-						                        }
-						                    });
-						                </script> 								
-									<div class="row">
-										<div class="col-sm-6">
-														[%input_text('date','Data:', classes => ['input-group', 'date' ,'datetimepicker1'],  req => 0)|none%]
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-6">
-											<div class="form-group row">
-												<label class="col-lg-12 " for="elm_active">Campanha:</label>
-												<div class="col-lg-12">
-													<select name="campaign_id" class="form-control">
-													<option>Selecione</option>	
-													[%FOREACH cpg IN campaigns%]
-														<option value="[% cpg.id %]">[%cpg.name%]</option>
-													[%END%]
-													</select>
-												</div>
-											</div>
-										</div>
-									</div>
 
-									<div class="row row-padding">
-										<div class="col-sm-4">
-											<div class="avatar-upload">
-												<img src="/static/css/images/image-example.jpg">
-											</div>
-										</div>
-										<div class="col-sm-8">
-											<div class="form-group">
-												<small>
-													<strong>Imagem do evento</strong><br />
-													Faça upload de uma imagem para ilustrar o evento<br /><br />
-												</small>
-												<input type="file" name="avatar">
-											</div>
-										</div>
-									</div>
-									[%input_text('form_ident', '' , req=>1, value => "event", type => 'hidden')|none%]
-									<input type="hidden" id="council_id" name="council_id" type="text" class="form-control" value="[% c.user.obj.organization_id%]" size="3">
-									<button type="reset"  class="btn btn-danger pull-left">Limpar</button>
-									<input type="submit" value="Cadastrar" class="btn btn-success pull-right"/>
-
-								
-									</form>
-
-								</div>
-
-								<div role="tabpanel" id="tab-campanhas" class="tab-pane [% IF !body.form_ident && !form_ident%]active[%END%] ">
-									<h4 class="green">CAMPANHAS CADASTRADAS</h4>
-									[% IF campaigns.size > 0%]
-									<table class="table table-striped table-condensed">
-									<tbody>
-										[%FOR cpg IN campaigns%]
-											<tr>
-												<td><a href="[% c.uri_for_action('/homefuncional/campaign/detail',[cpg.id])%]">[% cpg.name %]</a></td><td align="right"><a href="[% c.uri_for_action('/user/account/campaign_edit',[cpg.id])%]" align="right">Editar</a> | <a href="" align="right">Remover</a></td>
-											</tr>
-										[%END%]
-									</tbody>
-									</table>
-									[% ELSE%]
-										<a>Nenhuma campanha cadastrada</a>
-									[% END %]
-								</div>
 
 						</div>
 					</section>

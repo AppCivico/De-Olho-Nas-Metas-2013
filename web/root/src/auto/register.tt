@@ -128,8 +128,11 @@ jQuery(function($){
  				<div class="row council-list">
  					<div class="form-group">
  						<div class="col-sm-12">
-	 						<select id="council_list">
+	 						<select name="council_id" id="council_id">
 	 							<option value="">Selecione um Conselho...</option>
+                                [%FOR org IN organizations%]
+	 							<option value="[%org.id%]">[%org.name%]</option>
+                                [%END%]
 	 						</select>
 	 					</div>
  					</div>
