@@ -79,7 +79,7 @@ sub result_GET {
 
 sub result_DELETE {
     my ( $self, $c ) = @_;
-    my $campaigns = $c->stash->{organization};
+    my $campaigns = $c->stash->{campaigns};
 
     $campaigns->delete;
 
@@ -90,7 +90,7 @@ sub result_PUT {
     my ( $self, $c ) = @_;
 
     my $params    = { %{ $c->req->params } };
-    my $campaigns = $c->stash->{organization};
+    my $campaigns = $c->stash->{campaigns};
 
     $campaigns->execute( $c, for => 'update', with => $c->req->params );
 

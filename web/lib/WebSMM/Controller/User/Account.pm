@@ -9,6 +9,7 @@ BEGIN { extends 'Catalyst::Controller' }
 
 sub base : Chained('/user/base') : PathPart('') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
+    $c->stash->{template_wrapper} = 'func';
     my $api = $c->model('API');
     $api->stash_result(
         $c,
@@ -81,17 +82,94 @@ sub campaign_param : Chained('object') : PathPart('campanha') : CaptureArgs(1) {
 
     $c->detach( '/form/redirect_error', [] ) unless $c->user;
 
-    my $api = $c->model('API');
-
-    $api->stash_result( $c, [ 'campaigns', $id ], stash => 'campaign_obj' );
-    use DDP;
-    p $c->stash->{campaign_obj};
-    warn 1;
-
+    $c->stash->{id} = $id;
 }
 
 sub campaign_edit : Chained('campaign_param') : PathPart('editar') : Args(0) {
     my ( $self, $c ) = @_;
+
+    my $api = $c->model('API');
+
+    $api->stash_result(
+        $c,
+        [ 'campaigns', $c->stash->{id} ],
+        stash => 'campaign_obj'
+    );
+}
+
+sub campaign_remove : Chained('campaign_param') : PathPart('remover') : Args(0)
+{
+    my ( $self, $c ) = @_;
+
+    my $api = $c->model('API');
+
+    $api->stash_result(
+        $c,
+        [ 'campaigns', $c->stash->{id} ],
+        method => 'DELETE',
+        stash  => 'campaign_obj'
+    );
+    $c->detach(
+        '/form/redirect_ok',
+        [
+
+            '/user/account/campaign',
+            {},
+            'Removido com sucesso!',
+
+        ]
+    );
+
+}
+
+sub campaign_update : Chained('campaign_param') : PathPart('atualizar') :
+  Args(0) {
+    my ( $self, $c ) = @_;
+    use DDP;
+
+    my $api    = $c->model('API');
+    my $form   = $c->model('Form');
+    my $params = { %{ $c->req->params } };
+
+    my $avatar = $c->req->upload('avatar');
+
+    $form->format_date( $params, qw/end_on start_in/ );
+
+    $params->{latlng} =~ s/\(|\)//g if $params->{latlng};
+    if ( $params->{latlng} ) {
+        ( $params->{latitude}, $params->{longitude} ) = split ',',
+          $params->{latlng};
+    }
+    p $params;
+    $params->{address} = delete $params->{txtaddress};
+
+    p $c->req->params;
+    $api->stash_result(
+        $c,
+        [ 'campaigns', $c->stash->{id} ],
+        method => 'PUT',
+        stash  => 'campaign_obj',
+        body   => $params
+    );
+    my $path = dir( $c->config->{campaign_picture_path} )->resolve . '/'
+      . $c->stash->{id};
+
+    unless ( -e $path ) {
+        mkdir $path;
+    }
+
+    $avatar->copy_to( $path . '/' . $c->stash->{id} . '.jpg' ) if $avatar;
+
+    $c->detach(
+        '/form/redirect_ok',
+        [
+
+            '/user/account/campaign',
+            {},
+            'Alterado com sucesso!',
+
+        ]
+    );
 }
 
 sub campaign : Chained('object') : PathPart('campanhas') : Args(0) {

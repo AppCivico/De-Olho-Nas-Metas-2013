@@ -304,21 +304,49 @@ sub verifiers_specs {
         update => Data::Verifier->new(
             filters => [qw(trim)],
             profile => {
-                description => {
+                name => {
                     required => 1,
+                    type     => 'Str',
+                },
+                description => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                objective => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                free_text => {
+                    required => 0,
                     type     => 'Str',
                 },
                 start_in => {
                     required => 1,
-                    type     => 'DateTime',
+                    type     => DataStr,
                 },
                 end_on => {
                     required => 1,
-                    type     => 'DateTime',
+                    type     => DataStr,
                 },
                 user_id => {
                     required => 0,
                     type     => 'Int',
+                },
+                project_id => {
+                    required => 0,
+                    type     => 'Int',
+                },
+                address => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                latitude => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                longitude => {
+                    required => 0,
+                    type     => 'Str',
                 },
             }
         ),

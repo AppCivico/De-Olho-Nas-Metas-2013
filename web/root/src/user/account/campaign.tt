@@ -346,13 +346,19 @@ jQuery(function($){
 								</div>
 
 								<div role="tabpanel" id="tab-campanhas" class="tab-pane [% IF !body.form_ident && !form_ident%]active[%END%] ">
+                                <br>
+									[% IF !body.form_ident OR !form_ident %]
+									[%IF status_msg %]<div class="alert alert-success"><p>[%status_msg%]</p></div>[%END%]
+									[%IF error_msg %]<div class="alert alert-danger"><p>[%error_msg%]</p></div>[%END%]
+									[% END%]
+
 									<h4 class="green">CAMPANHAS CADASTRADAS</h4>
 									[% IF campaigns.size > 0%]
 									<table class="table table-striped table-condensed">
 									<tbody>
 										[%FOR cpg IN campaigns%]
 											<tr>
-												<td><a href="[% c.uri_for_action('/homefuncional/campaign/detail',[cpg.id])%]">[% cpg.name %]</a></td><td align="right"><a href="[% c.uri_for_action('/user/account/campaign_edit',[cpg.id])%]" align="right">Editar</a> | <a href="" align="right">Remover</a></td>
+												<td><a href="[% c.uri_for_action('/homefuncional/campaign/detail',[cpg.id])%]">[% cpg.name %]</a></td><td align="right"><a href="[% c.uri_for_action('/user/account/campaign_edit',[cpg.id])%]" align="right">Editar</a> | <a href="[% c.uri_for_action('/user/account/campaign_remove',[cpg.id])%]" align="right">Remover</a></td>
 											</tr>
 										[%END%]
 									</tbody>
