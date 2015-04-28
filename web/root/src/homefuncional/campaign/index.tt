@@ -51,7 +51,9 @@
 							<div class="col-sm-4">
 								<div class="item">
 									<div class="image">
+										<a href="[% c.uri_for_action('/homefuncional/campaign/detail',[cpg.id])%]">
 										<img src="/static/images/campaign/[% cpg.id%]/[%cpg.id%].jpg" border="0">
+										</a>
 									</div>
 									<div class="description">
 										<a href="[% c.uri_for_action('/homefuncional/campaign/detail',[cpg.id])%]"><h2>[% cpg.name%]</h2></a>
