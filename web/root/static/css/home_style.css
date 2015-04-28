@@ -1045,6 +1045,11 @@ footer .menu-footer li a:hover{
 		width: 90%;
 	}
 }
+@media(max-width:480px){
+	.campaign-image{
+		width: 100%;
+	}
+}
 @media(max-width:1199px) {
 	.menu-top .menu li{
 		padding: 10px 5px;
@@ -1364,9 +1369,10 @@ div.followers{
 .campaign-image{
 	float: left;
 	padding: 5px;
-	margin: 0 10px 10px 0;
+	margin: 10px 20px 10px 0;
 	border: 1px solid #e0e0e0;
 	min-height: 100px;
+	max-width: 60%;
 }
 h3.dotted{
 	border-bottom: 1px dotted #c6c2c0;

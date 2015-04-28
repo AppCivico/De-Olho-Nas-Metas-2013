@@ -110,7 +110,7 @@ $(document).keydown( function(e) {
 						<div class="col-sm-12">
 							<h4 class="subtitle orange">Campanha</h4>
 							<br clear="all"/>
-							<p><img src="/static/images/campaign/[% campaign_obj.id %]/[%campaign_obj.id%].jpg" border="0" class="img-responsive campaign-image">
+							<p><img src="/static/images/campaign/[% campaign_obj.id %]/[%campaign_obj.id%].jpg" border="0" class="campaign-image">
 							<h1>[%campaign_obj.name%]</h1>
 							[%campaign_obj.description%]</p>
 						</div>
