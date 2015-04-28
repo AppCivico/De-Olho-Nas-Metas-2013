@@ -16,7 +16,7 @@ __PACKAGE__->config(
         'me.id' => 'Int'
     },
     result_attr => {
-        prefetch  => [ 'events', 'organization' ],
+        prefetch  => [ 'events', 'organization', 'project' ],
         '+select' => [
             \q{to_char(events.date, 'DD/MM/YYYY HH24:MI:SS')},
             \q{to_char(start_in, 'DD/MM/YYYY HH24:MI:SS')},
@@ -62,20 +62,16 @@ sub result_GET {
                   user_id
                   /
             ),
-            events => [
+            project => {
                 map {
-                    my $e = $_;
-                    (
-                        +{
+                    my $p = $_;
+                    p $p;
 
-                            id          => $e->id,
-                            name        => $e->name,
-                            description => $e->description,
-                            date        => $e->date->datetime,
-                        }
-                      )
-                } ( $campaigns->events ),
-            ],
+                    id     => $p->id,
+                      name => $p->name
+
+                } ( $campaigns->project ),
+            },
         }
     );
 
