@@ -201,9 +201,6 @@ jQuery(function($){
 											    <div class="col-lg-12">
 											        <div class=" ">
 											            <input type="text" id="txtaddress" name="txtaddress" placeholder="CEP" class="form-control">
-																							<input type="hidden" id="latlng" name="latlng" type="text" class="form-control" size="3">
-																							<input type="hidden" id="project_id" name="project_id" type="text" class="form-control" size="3">
-																							<input type="hidden" id="organization_id" name="organization_id" type="text" class="form-control" value="[% c.user.obj.organization_id%]" size="3">
 											        </div>
 											    </div>
 											</div>
@@ -213,15 +210,6 @@ jQuery(function($){
 											        <div class=" ">
 
 											            <select id="mobile_campaign_id" name="mobile_campaign_id" class="form-control">
-																											[% IF mobile_campaigns.size > 0%]
-																											<option value="">Selecione</option>
-																											[%FOR cm IN mobile_campaigns%]
-																											<option value="[%cm.id%]">[%cm.description%]</option>
-																											[%END%]
-																											[%ELSE%]
-																											<option value="">Nenhuma campanha criada.</option>
-																											[%END%]
-																							</select>
 											        </div>
 											    </div>
 											</div> 
@@ -238,7 +226,7 @@ jQuery(function($){
 									<div class="row row-padding">
 										<div class="col-sm-4">
 											<div class="avatar-upload">
-												<img src="/static/css/images/image-example.jpg">
+												<img src="/static/css/images/image-example.jpg" class="img-responsive">
 											</div>
 										</div>
 										<div class="col-sm-8">
