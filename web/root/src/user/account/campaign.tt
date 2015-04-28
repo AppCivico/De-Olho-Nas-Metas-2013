@@ -10,8 +10,8 @@
 <script type="text/javascript" src="/static/js/tinyeditor/tiny.editor.js"></script>
 <script>
 jQuery(function($){
-   $('.datepicker').datepicker();
-   $('.datetimepicker1').datetimepicker();
+   $('.datepicker').datepicker({format : 'dd/mm/yyyy'});
+   $('.datetimepicker1').datetimepicker({ format : 'DD/MM/YYYY HH:MM'});
    $("input[name=phone_number]").mask("(99) 9999-9999");
 
    $("input[name=phone_number]").focusout(function(){
@@ -190,8 +190,8 @@ jQuery(function($){
 						                </script>  
 									<div class="row">
 										<div class="col-sm-6">
-	            								[%input_text('start_in','Data Começo:', classes => ['span3', 'date' ,'datepicker'], req => 0)|none%]
-												[%input_text('end_on','Data Final:', classes => ['span3' , 'date', 'datepicker'],req=>0)|none%]
+	            								[%input_text('start_in','Data Começo:', classes => ['span3', 'date' ,'datepicker'], req => 1)|none%]
+												[%input_text('end_on','Data Final:', classes => ['span3' , 'date', 'datepicker'],req=>1)|none%]
 										</div>
 									</div>
  									<div class="row">
@@ -202,11 +202,37 @@ jQuery(function($){
 											        <div class=" ">
 											            <input type="text" id="txtaddress" name="txtaddress" placeholder="CEP" class="form-control">
 																							<input type="hidden" id="latlng" name="latlng" type="text" class="form-control" size="3">
+																							<input type="hidden" id="project_id" name="project_id" type="text" class="form-control" size="3">
 																							<input type="hidden" id="organization_id" name="organization_id" type="text" class="form-control" value="[% c.user.obj.organization_id%]" size="3">
 											        </div>
 											    </div>
 											</div>
-											
+											<div class="form-group row ">
+											    <label class="col-lg-12 " for="elm_end_on">Campanha Móvel:</label>
+											    <div class="col-lg-12">
+											        <div class=" ">
+
+											            <select id="mobile_campaign_id" name="mobile_campaign_id" class="form-control">
+																											[% IF mobile_campaigns.size > 0%]
+																											<option value="">Selecione</option>
+																											[%FOR cm IN mobile_campaigns%]
+																											<option value="[%cm.id%]">[%cm.description%]</option>
+																											[%END%]
+																											[%ELSE%]
+																											<option value="">Nenhuma campanha criada.</option>
+																											[%END%]
+																							</select>
+											        </div>
+											    </div>
+											</div> 
+ 										<div class="form-group row ">
+											    <label class="col-lg-12 " for="elm_end_on">Projeto:</label>
+											    <div class="col-lg-12">
+											        <div class=" ">
+											            <input type="text" id="project_name" name="project_name" placeholder="Projetos" class="form-control">
+											        </div>
+											    </div>
+											</div>  
 										</div>
 									</div>  								
 									<div class="row row-padding">
@@ -310,6 +336,7 @@ jQuery(function($){
 										</div>
 									</div>
 									[%input_text('form_ident', '' , req=>1, value => "event", type => 'hidden')|none%]
+									<input type="hidden" id="council_id" name="council_id" type="text" class="form-control" value="[% c.user.obj.organization_id%]" size="3">
 									<button type="reset"  class="btn btn-danger pull-left">Limpar</button>
 									<input type="submit" value="Cadastrar" class="btn btn-success pull-right"/>
 
@@ -325,7 +352,7 @@ jQuery(function($){
 									<tbody>
 										[%FOR cpg IN campaigns%]
 											<tr>
-												<td><a href="[% c.uri_for_action('/homefuncional/campaign/detail',[cpg.id])%]">[% cpg.name %]</a></td>
+												<td><a href="[% c.uri_for_action('/homefuncional/campaign/detail',[cpg.id])%]">[% cpg.name %]</a></td><td align="right"><a href="[% c.uri_for_action('/user/account/campaign_edit',[cpg.id])%]" align="right">Editar</a> | <a href="" align="right">Remover</a></td>
 											</tr>
 										[%END%]
 									</tbody>

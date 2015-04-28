@@ -53,6 +53,9 @@ sub result_GET {
                   id
                   name
                   description
+                  objective
+                  free_text
+                  address
                   created_at
                   start_in
                   end_on
@@ -143,7 +146,7 @@ sub list_GET {
     if ( $c->req->param('user_id') ) {
         $rs = $rs->search( { 'me.user_id' => $c->req->param('user_id') } );
     }
-    use DDP;
+    $rs = $rs->search( undef, { order_by => 'me.name' } );
     $self->status_ok(
         $c,
         entity => {

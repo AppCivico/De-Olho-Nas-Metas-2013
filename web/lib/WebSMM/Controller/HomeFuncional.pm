@@ -25,21 +25,18 @@ Catalyst Controller.
 sub base : Chained('/') : PathPart('home') : CaptureArgs(0) {
 
     my ( $self, $c ) = @_;
+    my $api = $c->model('API');
+    if ( $c->user ) {
+        $api->stash_result(
+            $c,
+            [ 'users', $c->user->obj->id ],
+            stash => 'user_roles',
+        );
+        $c->stash->{user_obj}->{role} =
+          { map { $_ => 1 } @{ $c->stash->{user_roles}->{roles} } };
+    }
 
     $c->stash->{template_wrapper} = 'func';
-}
-
-sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
-    my ( $self, $c, $id ) = @_;
-
-    my $api = $c->model('API');
-
-    $api->stash_result( $c, [ 'goals', $id ], stash => 'goal_obj' );
-
-}
-
-sub detail : Chained('object') : PathPart('') : Args(0) {
-    my ( $self, $c ) = @_;
 }
 
 sub home : Chained('base') : PathPart('') : Args(0) {

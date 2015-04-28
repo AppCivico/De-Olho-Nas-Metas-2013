@@ -21,6 +21,8 @@ my %assets = ( 'logo.png' => 'image/png', );
 sub build_email {
     my ( $self, $fixed_to ) = @_;
 
+    use DDP;
+    p $self;
     my ( $user, $to );
     if ( ref $self->to && $self->to->can('_build_email') ) {
         $user = $self->to;
@@ -39,6 +41,33 @@ sub build_email {
     );
 
     return $user->_build_email( $email, $self->title, $self->content );
+
+}
+
+sub build_many_emails {
+    my ( $self, $fixed_to ) = @_;
+
+    use DDP;
+    p $self;
+    my ( $user, $to );
+    if ( ref $self->to && $self->to->can('_build_many_emails') ) {
+        $user = $self->to;
+        $to   = $user->email;
+    }
+    else {
+        die "cant call _build_email on to\n";
+    }
+    $to = $fixed_to if $fixed_to;
+
+    my $email = MIME::Lite->new(
+        To      => Encode::encode( 'MIME-Header', $to ),
+        Subject => Encode::encode( 'MIME-Header', $self->subject ),
+        Type    => q{text},
+        Data    => q{  },
+        From    => $self->from
+    );
+
+    return $user->_build_many_emails( $email, $self->title, $self->content );
 
 }
 

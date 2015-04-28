@@ -331,6 +331,24 @@ sub upload_images : Chained('object') : PathPart('upload_images') : Args(0) {
     $c->res->body( encode_json($response) );
 }
 
+sub project_autocomplete : Chained('base') : PathPart('project_autocomplete')
+  : Args(0) {
+    my ( $self, $c ) = @_;
+
+    my $api = $c->model('API');
+
+    $c->detach unless $c->req->method eq 'POST';
+    $api->stash_result( $c, ['projects/autocomplete'],
+        params => { project_name => $c->req->params->{project_name} } );
+    if ( $c->stash->{error} ) {
+        $c->detach( '/form/redirect_error', [] );
+    }
+
+    $c->res->status(200);
+    $c->res->content_type('application/json');
+    $c->res->body( encode_json( $c->stash->{projects} ) );
+}
+
 =encoding utf8
 
 =head1 AUTHOR

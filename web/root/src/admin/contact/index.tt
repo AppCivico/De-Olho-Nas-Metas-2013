@@ -1,0 +1,34 @@
+<div>
+<div class="rows">
+<h2 class="sub-header">Mensagens recebidas no Fale Conosco</h2>
+<div class="table-responsive">
+	[%IF contacts.size > 0%]
+	<table class="table table-striped">
+		<thead>
+			<tr>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Mensagem</th>
+			</tr>
+		</thead>
+		<tbody>
+			[%FOREACH ct IN contacts%]
+				<tr>
+					<td>[%ct.name%]</td>
+					<td>[%ct.email%]</td>
+					<td>[%ct.message%]</td>
+				</tr>
+            [%END%]
+		</tbody>
+	</table>
+	[%ELSE%]
+		<h4>Nenhum usuário cadastrado</h4>
+	[%END%]
+		
+	<a href="/download">
+		<button type="button" class="btn btn-success pull-right">Download CSV</button>
+	</a>
+
+</div>
+</div>
+</div>

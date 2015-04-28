@@ -409,7 +409,7 @@ sub geom : Chained('base') PathPart('geom') : Args(0) {
     my ($geom) = $c->model('DB')->resultset('Project')->search(
         { 'me.id' => $id },
         {
-            '+select' => [ \q{ST_AsGeoJSON(region.geom,3) as geom_json} ],
+            '+select' => [ \q{ST_AsGeoJSON(region.geom,6) as geom_json} ],
             '+as'     => [qw(geom_json)],
             columns =>
               [qw( me.id me.latitude me.longitude region.id region.name)],
@@ -438,6 +438,27 @@ sub list_geom : Chained('base') PathPart('list_geom') : Args(0) {
         }
     )->as_hashref->all;
     $self->status_ok( $c, entity => { geom => \@geom } );
+
+}
+
+sub autocomplete : Chained('base') PathPart('autocomplete') : Args(0) {
+    my ( $self, $c ) = @_;
+
+    my @projects = $c->model('DB')->resultset('Project')->search(
+        {
+            name => {
+                ilike => \[
+                    q{'%' || ? || '%'},
+                    [ _name => $c->req->params->{project_name} ]
+                ]
+            }
+        },
+        {
+            select => [qw/ id name /],
+            as     => [qw( id value)]
+        }
+    )->as_hashref->all;
+    $self->status_ok( $c, entity => { projects => \@projects } );
 
 }
 1;

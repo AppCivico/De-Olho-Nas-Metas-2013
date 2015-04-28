@@ -18,6 +18,19 @@ sub format_date {
     }
 }
 
+sub format_date_hour {
+    my ( $self, $ref, @fields ) = @_;
+
+    foreach my $f (@fields) {
+        next unless $ref->{$f};
+
+        my $date = $ref->{$f};
+        my ( $d, $m, $y, $h, $mn ) =
+          $date =~ m/^(\d{1,2})\/(\d{1,2})\/(\d{4})\ (\d{1,2})\:(\d{1,2})$/;
+        $ref->{$f} = "$y-$m-$d $h:$mn:00";
+    }
+}
+
 sub format_date_to_human {
     my ( $self, $ref, @fields ) = @_;
 

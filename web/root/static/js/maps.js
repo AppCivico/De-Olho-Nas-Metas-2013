@@ -58,7 +58,6 @@ var $maps = function () {
 		
 		$.getJSON('/home/project_map',function(data,status){
 			var json = data;
-			console.log(data);
 			$.each(json, function(i, pj){
 				marker = "";
 				var myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
@@ -70,6 +69,10 @@ var $maps = function () {
         	    });
 				marker_array.push(marker);
 				var url = marker.url;
+				var bubble_color = "rgb(140,198,63)";
+				if (pj.percentage < 50){
+					bubble_color = "rgb(198,93,93)";
+				}
 				var content = '<div class="project-bubble"><div class="name">';
 				content += '<a href="' + url + '" target="_blank" >';
 				content += pj.name + '( Meta - '+pj.goal.id+')</a></div>';
@@ -82,7 +85,7 @@ var $maps = function () {
 				          content: content,
 				          shadowStyle: 0,
 				          padding: 0,
-				          backgroundColor: 'rgb(140,198,63)',
+				          backgroundColor: bubble_color,
 				          borderRadius: 0,
 				          arrowSize: 15,
 				          borderWidth: 0,
@@ -96,6 +99,7 @@ var $maps = function () {
 				        });
 				        ib.open(map, this);
 					}else{
+						ib.setBackgroundColor(bubble_color);
 						ib.setContent(content);
 						//ib.setPosition(myLatlng);
 						ib.open(map, this);
@@ -569,6 +573,11 @@ var $maps = function () {
 			$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
 			$('#result').html(html);
 			$maps.deleteMarkers();
+			if (data.projects.length > 0){
+				$("#map").fadeIn();
+			}else{
+				$("#map").fadeOut();
+			}
 			$.each(data.projects, function(i, pj){
 		
 				if (pj.latitude == 0 && pj.longitude == 0) return;
@@ -703,7 +712,33 @@ var $maps = function () {
 	};
 }();
 
+var openSelect = function(selector){
+     var element = $(selector)[0], worked = false;
+    if (document.createEvent) { // all browsers
+        var e = document.createEvent("MouseEvents");
+        e.initMouseEvent("mousedown", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        worked = element.dispatchEvent(e);
+    } else if (element.fireEvent) { // ie
+        worked = element.fireEvent("onmousedown");
+    }
+    if (!worked) { // unknown browser / error
+        alert("It didn't worked in your browser.");
+    }   
+}
+
 $(document).ready(function () {
+
+	$(".metas-filtro .select-stylized select").unbind();
+	$(".metas-filtro .select-stylized select").bind("click",function(e){
+		e.stopPropagation();
+	})
+	$(".metas-filtro .select-stylized").unbind();
+	$(".metas-filtro .select-stylized").bind("click",function(e){
+		e.stopPropagation();
+		e.preventDefault();
+		openSelect($(this).find("select"));
+	})
+	
 	if ($("#pagetype").val() != 'homegoal' && $("#pagetype").val() != 'campaign_user' && $("#pagetype").val() != 'campaigndetail' && $("#pagetype").val() != 'campaignhome') {	
 		$maps.initialize();
 	}
@@ -795,7 +830,23 @@ $(document).ready(function () {
 			$('#result').html(html);
 		 },"json"); 
    e.preventDefault();
- })  
+ }) 
+ $("#project_name").autocomplete({
+	source: function (request, response) {
+  	$.post( "/home/project/project_autocomplete", { project_name : $('#project_name').val() }, function( data ) {
+							console.log(data);
+       response($.map(data, function (item) {
+          return {
+             id: item.id,
+             value: item.value
+          }
+       })); 
+		 },"json");  
+		},
+		select: function (event, ui) {
+					$('#project_id').val(ui.item.id);
+		}
+	});
 	$("#txtaddress").autocomplete({
 	source: function (request, response) {
 	   geocoder = new google.maps.Geocoder();
@@ -881,6 +932,4 @@ $(document).ready(function () {
        	$(".metas-filtro .form .cep button").removeClass("disabled");
     }
     });
-
-
 });

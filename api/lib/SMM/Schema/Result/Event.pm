@@ -83,6 +83,12 @@ __PACKAGE__->table("event");
   data_type: 'text'
   is_nullable: 0
 
+=head2 council_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -110,6 +116,8 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "name",
   { data_type => "text", is_nullable => 0 },
+  "council_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -146,6 +154,26 @@ __PACKAGE__->belongs_to(
   },
 );
 
+=head2 council
+
+Type: belongs_to
+
+Related object: L<SMM::Schema::Result::Organization>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "council",
+  "SMM::Schema::Result::Organization",
+  { id => "council_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
 =head2 user
 
 Type: belongs_to
@@ -167,8 +195,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-13 10:27:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:qAtsbdXMG5Bq+28NzUx7TA
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-23 18:32:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:4WVleoy1+hcXUm8gWJ8/FQ
 
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';

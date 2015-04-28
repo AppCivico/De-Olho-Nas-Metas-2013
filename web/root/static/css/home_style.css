@@ -32,11 +32,17 @@ h2{
 	padding: 0;
 }
 
+.word-break{
+	word-break: break-all;
+}
+
 .btn{
 	color: #fff;
 	text-transform: uppercase;
 }
-.btn:hover{
+.btn:hover,
+.btn:active,
+.btn:focus{
 	color: #e0e0e0;
 }
 .btn-orange,
@@ -44,7 +50,9 @@ h2{
 	color: #fff;
 	background-color: #f15a24;
 }
-.btn-orange:hover{
+.btn-orange:hover,
+.btn-orange:active,
+.btn-orange:focus{
 	color: #fff;
 	background-color: #f67041;
 }
@@ -53,7 +61,9 @@ h2{
 	color: #fff;
 	background-color: #795891;
 }
-.btn-violet:hover{
+.btn-violet:hover,
+.btn-violet:active,
+.btn-violet:focus{
 	color: #fff;
 	background-color: #8c67a7;
 }
@@ -63,7 +73,9 @@ h2{
 	color: #703e1c;
 	background-color: #face53;
 }
-.btn-yellow:hover{
+.btn-yellow:hover,
+.btn-yellow:active,
+.btn-yellow:focus{
 	color: #000000;
 	background-color: #e6be4e;
 }
@@ -72,7 +84,9 @@ h2{
 	background-color: #42210b;
 	color: #fff;
 }
-.btn-brown:hover{
+.btn-brown:hover,
+.btn-brown:active,
+.btn-brown:focus{
 	background-color: #703e1c;
 	color: #fff;
 }
@@ -81,7 +95,9 @@ h2{
 	border-color: #88817b;
 	color: #88817b;
 }
-.btn-white:hover{
+.btn-white:hover,
+.btn-white:active,
+.btn-white:focus{
 	background-color: #f0f0f0;
 	border-color: #333;
 	color: #333;
@@ -91,7 +107,9 @@ h2{
 	background-color: #00a99d;
 	color: #fff;
 }
-.btn-navy:hover{
+.btn-navy:hover,
+.btn-navy:active,
+.btn-navy:focus{
 	color: #000000;
 	background-color: #14c9bc;
 }
@@ -99,7 +117,9 @@ h2{
 .btn-red:visited{
 	background-color: #f7931e;
 }
-.btn-red:hover{
+.btn-red:hover,
+.btn-red:active,
+.btn-red:focus{
 	color: #000000;
 	background-color: #f4ad5b;
 }
@@ -156,6 +176,17 @@ h2{
 .nav > li > a:focus {
   text-decoration: none;
   background-color: #524a40;
+}
+
+.nav .open>a, .nav .open>a:hover, .nav .open>a:focus{
+	background-color: #4d4841 !important;
+	color: #face53 !important;
+}
+.navbar-fixed-top .dropdown-menu{
+	background-color: #4d4841;
+}
+.navbar-fixed-top .dropdown-menu li{
+	padding: 5px 10px;
 }
 
 .navbar-brand{
@@ -410,7 +441,6 @@ footer .logo-eokoe{
 	background-position: center center;
 }
 
-
 .metas-detail,
 section.page-login,
 section.campaign-result{
@@ -529,7 +559,7 @@ section.map .map-overlay{
 	background-position: center right;
 	overflow: hidden;
 }
-.metas-filtro select{
+.metas-filtro .select-stylized select{
 	background: none repeat scroll 0% 0% transparent;
 	border: 0;
 	border-radius: 0;
@@ -1010,7 +1040,10 @@ footer .menu-footer li a:hover{
 		float: right!important;
 	}
 }  
-@media(max-width:979px) {
+@media(min-width:481px){
+	.metas-filtro .select-stylized select{
+		width: 90%;
+	}
 }
 @media(max-width:1199px) {
 	.menu-top .menu li{
@@ -1333,6 +1366,7 @@ div.followers{
 	padding: 5px;
 	margin: 0 10px 10px 0;
 	border: 1px solid #e0e0e0;
+	min-height: 100px;
 }
 h3.dotted{
 	border-bottom: 1px dotted #c6c2c0;
@@ -1635,4 +1669,61 @@ input#progress-value{
 }
 .bootstrap-datetimepicker-widget *{
 	color: #000;
+}
+#page-top .metas-filtro h2{
+	padding-bottom: 0;
+}
+#page-top .metas-filtro h3{
+	margin: 0;
+	margin-top: 5px;
+}
+section.statistics .chart-stats{
+	margin-top: 40px;
+	position: relative;
+}
+.doughnut-legend {
+  list-style: none;
+  position: absolute;
+  right: 8px;
+  top: 0;
+}
+.doughnut-legend li {
+  display: block;
+  padding-left: 30px;
+  position: relative;
+  margin-bottom: 4px;
+  border-radius: 5px;
+  padding: 2px 8px 2px 28px;
+  font-size: 14px;
+  cursor: default;
+  -webkit-transition: background-color 200ms ease-in-out;
+  -moz-transition: background-color 200ms ease-in-out;
+  -o-transition: background-color 200ms ease-in-out;
+  transition: background-color 200ms ease-in-out;
+  color: #999;
+}
+.doughnut-legend li span {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 100%;
+  border-radius: 5px;
+}
+.metas-detail section.statistics ul li{
+	color: #666;
+	text-align: left;
+}
+.tooltip-arrow{
+}
+.custom-tooltip + .tooltip > .tooltip-inner{
+	background-color: #fcf0cc;
+	color: #666056;
+}
+.custom-tooltip + .tooltip > .tooltip-arrow{
+	border-top-color: #fcf0cc;
+}
+.page-signup .council-list{
+	display: none;
 }

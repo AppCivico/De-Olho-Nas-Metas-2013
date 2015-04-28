@@ -13,13 +13,14 @@ sub process : Chained('base') : PathPart('contact') : Args(0) {
     my $api = $c->model('API');
 
     $api->stash_result(
-        $c, 'contact/send',
+        $c, 'contacts',
         method => 'POST',
         stash  => 'contact',
         body   => $c->req->params
     );
 
-    $c->detach( '/form/redirect_ok', [ \'/contato', {}, 'Mensagem enviada com sucesso!' ] );
+    $c->detach( '/form/redirect_ok',
+        [ \'/contato', {}, 'Mensagem enviada com sucesso!' ] );
 }
 
 __PACKAGE__->meta->make_immutable;

@@ -62,12 +62,17 @@ sub set_campaign : Chained('base') : Args(0) {
     my $params = { %{ $c->req->params } };
     use DDP;
     p $params;
+    my $form = $c->model('Form');
+
+    $form->format_date( $params, qw/start_in end_on/ );
+
     $params->{user_id} = $c->user->obj->id;
-    $params->{latlng} =~ s/\(|\)//g;
-
-    ( $params->{latitude}, $params->{longitude} ) = split ',',
-      $params->{latlng};
-
+    $params->{latlng} =~ s/\(|\)//g if $params->{latlng};
+    if ( $params->{latlng} ) {
+        ( $params->{latitude}, $params->{longitude} ) = split ',',
+          $params->{latlng};
+    }
+    p $params;
     $params->{address} = delete $params->{txtaddress};
     $api->stash_result(
         $c,

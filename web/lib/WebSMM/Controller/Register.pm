@@ -12,11 +12,13 @@ sub base : Chained('/root') : PathPart('') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
     $c->response->headers->header( 'charset' => 'utf-8' );
     $c->stash->{template_wrapper} = 'func';
+
 }
 
 sub register : Chained('base') : PathPart('cadastro') : Args(0) {
     my ( $self, $c ) = @_;
     my $api = $c->model('API');
+    $api->stash_result( $c, 'organizations', );
     if ( $c->user ) {
         $c->detach( 'Form::Login' => 'after_login' );
     }
