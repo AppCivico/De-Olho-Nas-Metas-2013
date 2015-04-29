@@ -28,6 +28,7 @@ __PACKAGE__->config(
     update_roles => [qw/superadmin user admin webapi organization/],
     create_roles => [qw/superadmin admin webapi/],
     delete_roles => [qw/superadmin admin webapi/],
+
 );
 with 'SMM::TraitFor::Controller::DefaultCRUD';
 
@@ -75,7 +76,8 @@ sub result_GET {
                       )
                 } ( $campaigns->events ),
             ],
-            project => $campaigns->project ? {
+            project => $campaigns->project
+            ? {
                 map {
                     my $p = $_;
                     p $p;
@@ -84,7 +86,8 @@ sub result_GET {
                       name => $p->name
 
                 } ( $campaigns->project ),
-            }: (),
+              }
+            : (),
         }
     );
 
@@ -93,6 +96,8 @@ sub result_GET {
 sub result_DELETE {
     my ( $self, $c ) = @_;
     my $campaigns = $c->stash->{campaigns};
+
+    $campaigns->search_related('events')->delete;
 
     $campaigns->delete;
 
@@ -155,6 +160,11 @@ sub list_GET {
     if ( $c->req->param('user_id') ) {
         $rs = $rs->search( { 'me.user_id' => $c->req->param('user_id') } );
     }
+    if ( $c->req->param('organization_id') ) {
+        $rs = $rs->search(
+            { 'me.organization_id' => $c->req->param('organization_id') } );
+    }
+
     $rs = $rs->search( undef, { order_by => 'me.name' } );
     $self->status_ok(
         $c,

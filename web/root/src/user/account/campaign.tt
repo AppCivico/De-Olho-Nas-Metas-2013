@@ -82,6 +82,7 @@ jQuery(function($){
 					<section class="tabs">
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation" [% IF !body.form_ident && !form_ident%]class="active"[%END%]><a href="#tab-campanhas" aria-controls="projetos" role="tab" data-toggle="tab">Campanhas</a></li>
+							<li role="presentation" ><a href="#tab-list-eventos" aria-controls="metas" role="tab" data-toggle="tab">Eventos</a></li>
 							<li role="presentation" [% IF body.form_ident == 'form' OR form_ident == 'form' %]class="active"[%END%]><a href="#tab-cadastrar" aria-controls="metas" role="tab" data-toggle="tab">Cadastrar Campanhas</a></li>
 							<li role="presentation" [% IF body.form_ident == 'event' OR form_ident == 'event' %]class="active"[%END%]><a href="#tab-eventos" aria-controls="metas" role="tab" data-toggle="tab">Cadastrar Eventos</a></li>
 						</ul>
@@ -358,13 +359,35 @@ jQuery(function($){
 									<tbody>
 										[%FOR cpg IN campaigns%]
 											<tr>
-												<td><a href="[% c.uri_for_action('/homefuncional/campaign/detail',[cpg.id])%]">[% cpg.name %]</a></td><td align="right">[% IF cpg.user_id == user_roles.id%]<a href="[% c.uri_for_action('/user/account/campaign_edit',[cpg.id])%]" align="right">Editar</a> | <a href="[% c.uri_for_action('/user/account/campaign_remove',[cpg.id])%]" align="right">Remover</a></td>[%END%]
+												<td><a href="[% c.uri_for_action('/homefuncional/campaign/detail',[cpg.id])%]">[% cpg.name %]</a></td><td align="right">[% IF cpg.user_id == user_roles.id%]<a href="[% c.uri_for_action('/user/account/campaign/edit',[cpg.id])%]" align="right">Editar</a> | <a href="[% c.uri_for_action('/user/account/campaign/remove',[cpg.id])%]" align="right">Remover</a></td>[%END%]
 											</tr>
 										[%END%]
 									</tbody>
 									</table>
 									[% ELSE%]
 										<a>Nenhuma campanha cadastrada</a>
+									[% END %]
+								</div>
+                                <div role="tabpanel" id="tab-list-eventos" class="tab-pane ">
+                                <br>
+									[% IF !body.form_ident OR !form_ident %]
+									[%IF status_msg %]<div class="alert alert-success"><p>[%status_msg%]</p></div>[%END%]
+									[%IF error_msg %]<div class="alert alert-danger"><p>[%error_msg%]</p></div>[%END%]
+									[% END%]
+
+									<h4 class="green">EVENTOS CADASTRADOS</h4>
+									[% IF events.size > 0%]
+									<table class="table table-striped table-condensed">
+									<tbody>
+										[%FOR evt IN events%]
+											<tr>
+												<td><a href="[% c.uri_for_action('/homefuncional/event/detail',[evt.id])%]">[% evt.name %]</a></td><td align="right">[% IF cpg.user_id == user_roles.id%]<a href="[% c.uri_for_action('/user/account/campaign_edit',[cpg.id])%]" align="right">Editar</a> | <a href="[% c.uri_for_action('/user/account/campaign_remove',[cpg.id])%]" align="right">Remover</a></td>[%END%]
+											</tr>
+										[%END%]
+									</tbody>
+									</table>
+									[% ELSE%]
+										<a>Nenhum evento cadastrado</a>
 									[% END %]
 								</div>
 
