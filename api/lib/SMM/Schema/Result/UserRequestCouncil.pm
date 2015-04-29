@@ -222,10 +222,13 @@ sub action_specs {
 
             not defined $values{$_} and delete $values{$_} for keys %values;
 
-            my $project = $self->update( \%values );
+            my $user_request_council = $self->update( \%values );
 
             my $user = $self->search_related('user')->next;
 
+            $user->update(
+                { organization_id => $user_request_council->organization_id } )
+              if $values{user_status} eq 'accepted';
             $user->set_roles( { name => 'counsil' } )
               if $values{user_status} eq 'accepted';
             my $body = '';
@@ -237,8 +240,10 @@ sub action_specs {
             $tt->process(
                 \$wrapper,
                 {
-                    date =>
-                      DateTime->now( formatter => $strp, time_zone => 'local' ),
+                    date => DateTime->now(
+                        formatter => $strp,
+                        time_zone => 'local'
+                    ),
                     web_url   => '[% web_url %]',
                     email     => $user->email,
                     email_uri => &uri_filter( $user->email )
@@ -259,7 +264,7 @@ sub action_specs {
             $self->result_source->schema->resultset('EmailQueue')
               ->create( { body => $email->as_string, title => $title } );
 
-            return $project;
+            return $user_request_council;
         },
 
     };
