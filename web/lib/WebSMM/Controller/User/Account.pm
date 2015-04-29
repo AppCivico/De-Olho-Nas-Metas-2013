@@ -182,7 +182,7 @@ sub campaign : Chained('object') : PathPart('campanhas') : Args(0) {
     my $api = $c->model('API');
 
     $api->stash_result( $c, 'campaigns',
-        params => { user_id => $c->user->obj->id } );
+        params => { organization_id => $c->user->obj->organization_id } );
     my $return;
     my $url = URI->new('http://monitor.promisetracker.org');
 

@@ -62,6 +62,19 @@ sub result_GET {
                   user_id
                   /
             ),
+            events => [
+                map {
+                    my $e = $_;
+                    (
+                        +{
+                            id          => $e->id,
+                            name        => $e->name,
+                            description => $e->description,
+                            date        => $e->date->datetime,
+                        }
+                      )
+                } ( $campaigns->events ),
+            ],
             project => {
                 map {
                     my $p = $_;

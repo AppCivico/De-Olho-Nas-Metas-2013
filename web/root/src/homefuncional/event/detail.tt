@@ -9,7 +9,7 @@
 						<h4 class="subtitle orange">Evento</h4>
 						<h1>[% event_obj.name%]</h1>
 						<p>
-							[% event_obj.description %]
+							[% event_obj.description | none %]
 						</p>
 					</div>
 
