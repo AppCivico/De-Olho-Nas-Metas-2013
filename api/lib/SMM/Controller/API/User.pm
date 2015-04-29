@@ -46,6 +46,11 @@ sub result_GET {
     my $x     = $user->organization;
     my %attrs = $user->get_inflated_columns;
 
+    my @follows_project =
+      $user->user_follow_projects->search( { active => 1 } )->all;
+    my @follows_council =
+      $user->user_follow_counsils->search( { active => 1 } )->all;
+
     #my @pap   = $user->project_accept_porcentages->all;
     $self->status_ok(
         $c,
@@ -65,15 +70,9 @@ sub result_GET {
                   }
                 : undef
             ),
-            projects_i_follow => [
-                map { $_->project_id }
-                  $user->user_follow_projects->search( { active => 1 } )->all
-            ],
-            counsils_i_follow => [
-                map { $_->counsil_id }
-                  $user->user_follow_counsils->search( { active => 1 } )->all
-            ],
-            projects => [
+            projects_i_follow => [ map { $_->project_id } @follows_project, ],
+            counsils_i_follow => [ map { $_->counsil_id } @follows_council, ],
+            projects          => [
 
                 map {
                     my $p = $_;
@@ -84,7 +83,7 @@ sub result_GET {
                             region => $_->region_id
                           }
                       } $p->project
-                  } $user->user_follow_projects,
+                  } @follows_project,
 
             ],
             councils => [
@@ -92,7 +91,7 @@ sub result_GET {
                 map {
                     my $p = $_;
                     map { +{ name => $_->name, id => $_->id, } } $p->counsil
-                  } $user->user_follow_counsils,
+                  } @follows_council,
 
             ],
 

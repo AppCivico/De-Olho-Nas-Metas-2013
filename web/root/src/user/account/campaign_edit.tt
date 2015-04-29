@@ -189,7 +189,11 @@ jQuery(function($){
 											    <label class="col-lg-12 " for="elm_end_on">CEP ou Endereço:</label>
 											    <div class="col-lg-12">
 											        <div class=" ">
-											            <input type="text" id="txtaddress" name="txtaddress" placeholder="CEP" value="[%campaign_obj.address%]" class="form-control">"3">
+											            <input type="text" id="txtaddress" name="txtaddress" placeholder="CEP" value="[%campaign_obj.address%]" class="form-control">
+														<input type="hidden" id="latlng" name="latlng" type="text" class="form-control" size="3">
+														<input type="hidden" id="project_id" name="project_id" type="text" class="form-control" size="3">
+														<input type="hidden" id="organization_id" name="organization_id" type="text" class="form-control" value="[% c.user.obj.organization_id%]" size="3">
+
 											        </div>
 											    </div>
 											</div>

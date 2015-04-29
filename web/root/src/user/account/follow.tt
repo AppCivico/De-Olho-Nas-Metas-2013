@@ -89,7 +89,7 @@ jQuery(function($){
 					<section class="projetos-result">
 						<div class="tab-content">
 								<div role="tabpanel" id="tab-projetos" class="tab-pane active">
-                                    
+                                    [% IF user_obj.projects.size > 0%] 
                                     [% FOREACH project IN user_obj.projects%]
                                     <div class="item row">
                                         <div class="col-sm-10 nopadding">
@@ -105,11 +105,24 @@ jQuery(function($){
                                         </div>
                                     </div>
                                     [% END %]
-                    
+                                    [%ELSE%]
+                                    <div class="item row">
+                                        <div class="col-sm-10 nopadding">
+                                            <div class="contents pull-left">
+                                                <div class="description">
+                                                    <label>Não está seguindo nenhum projeto.</label>
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+
+                                    [%END%]
 								</div>
 
 								<div role="tabpanel" id="tab-conselhos" class="tab-pane [% IF body.form_ident == 'event' OR form_ident =='event' %]active[%END%] ">
                                    
+                                    [% IF user_obj.councils.size > 0%] 
                                     [% FOREACH council IN user_obj.councils%]
                                     <div class="item row">
                                         <div class="col-sm-10 nopadding">
@@ -125,7 +138,20 @@ jQuery(function($){
                                         </div>
                                     </div>
                                     [% END %]
-                    
+                                    [%ELSE%]
+                                    <div class="item row">
+                                        <div class="col-sm-10 nopadding">
+                                            <div class="contents pull-left">
+                                                <div class="description">
+                                                    <label>Não está seguindo nenhum conselho.</label>
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+
+                                    [%END%]
+
 
 								</div>
 

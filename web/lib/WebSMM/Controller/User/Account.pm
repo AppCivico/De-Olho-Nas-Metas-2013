@@ -4,6 +4,8 @@ use namespace::autoclean;
 use JSON;
 use utf8;
 use URI;
+use Path::Class qw(dir);
+use File::Copy;
 
 BEGIN { extends 'Catalyst::Controller' }
 
