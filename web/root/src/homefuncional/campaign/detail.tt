@@ -112,7 +112,7 @@ $(document).keydown( function(e) {
 							<br clear="all"/>
 							<p><img src="/static/images/campaign/[% campaign_obj.id %]/[%campaign_obj.id%].jpg" border="0" class="campaign-image">
 							<h1>[%campaign_obj.name%]</h1>
-							[%campaign_obj.description%]</p>
+							[%campaign_obj.description | none%]</p>
 						</div>
 					</div>
 				</section>
