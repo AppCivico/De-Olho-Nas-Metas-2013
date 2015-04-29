@@ -46,6 +46,11 @@ sub result_GET {
     my $x     = $user->organization;
     my %attrs = $user->get_inflated_columns;
 
+    my @follows_project =
+      $user->user_follow_projects->search( { active => 1 } )->all;
+    my @follows_council =
+      $user->user_follow_counsils->search( { active => 1 } )->all;
+
     #my @pap   = $user->project_accept_porcentages->all;
     $self->status_ok(
         $c,
@@ -65,15 +70,9 @@ sub result_GET {
                   }
                 : undef
             ),
-            projects_i_follow => [
-                map { $_->project_id }
-                  $user->user_follow_projects->search( { active => 1 } )->all
-            ],
-            counsils_i_follow => [
-                map { $_->counsil_id }
-                  $user->user_follow_counsils->search( { active => 1 } )->all
-            ],
-            projects => [
+            projects_i_follow => [ map { $_->project_id } @follows_project, ],
+            counsils_i_follow => [ map { $_->counsil_id } @follows_council, ],
+            projects          => [
 
                 map {
                     my $p = $_;
@@ -84,9 +83,18 @@ sub result_GET {
                             region => $_->region_id
                           }
                       } $p->project
-                  } $user->user_follow_projects,
+                  } @follows_project,
 
             ],
+            councils => [
+
+                map {
+                    my $p = $_;
+                    map { +{ name => $_->name, id => $_->id, } } $p->counsil
+                  } @follows_council,
+
+            ],
+
             project_event => [
                 map {
                     my $ufp = $_;
@@ -295,7 +303,7 @@ sub user_project_event_GET {
     #my $user = $c->stash->{user};
     my $user = $c->model('DB::User');
 
-    #	my @data = $user->user_follow_projects-search({})
+    #   my @data = $user->user_follow_projects-search({})
 
     my ($result) = $user->search(
         {

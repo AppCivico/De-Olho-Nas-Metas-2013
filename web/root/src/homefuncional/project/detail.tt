@@ -49,7 +49,9 @@
 <script>
 
 $(document).ready(function () {
-	
+
+  $('[data-toggle="tooltip"]').tooltip();
+
   $('#follow_or_not').on('click', function () {
 	var id = $(this).data("id"),
 		url,
@@ -139,7 +141,6 @@ $(document).ready(function () {
 		$(".image-gallery .upload").toggle();
 		$(".image-gallery h3 button").toggle();
 	});
-
 });
 </script>
 
@@ -261,11 +262,11 @@ $(document).ready(function () {
 						
 						[% IF c.user%]
 						<div id="follow" class="col-xs-6 text-right">							
-							<button  type="button" id="follow_or_not" class="btn btn-brown [% do_i_follow > 0 ? "" : "follow"%]" data-id="[% c.user.obj.id%]" autocomplete="off"><span>[% do_i_follow > 0 ? "Parar de Seguir" : "Siga o Projeto" %]</span></button>
+							<button  type="button" id="follow_or_not" data-toggle="tooltip" data-placement="top" title="Acompanhar e receber notificações por email de cada atualização" class="btn btn-brown custom-tooltip [% do_i_follow > 0 ? "" : "follow"%]" data-id="[% c.user.obj.id%]" autocomplete="off"><span>[% do_i_follow > 0 ? "Parar de Seguir" : "Siga o Projeto" %]</span></button>
 						</div>
 						[%ELSE%]
 						<div id="follow" class="col-xs-6 text-right">							
-							<a class="btn btn-brown" href="/login">Siga o Projeto</a>
+							<a class="btn btn-brown" href="/login" data-toggle="tooltip" data-placement="top" title="Acompanhar e receber notificações por email de cada atualização" class="custom-tooltip">Siga o Projeto</a>
 						</div>
 
 						[%END%]
@@ -316,7 +317,7 @@ $(document).ready(function () {
 						</div>
      </section>
       				<br />
-<!--
+
 						[% IF project_obj.region.subprefecture_id == user_obj.organization.subprefecture_id%]
       [% SET user_id = user_obj.id%]
 					 [% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]	
@@ -331,12 +332,12 @@ $(document).ready(function () {
 						</section>
 					 [%ELSE%]
 									<section class="questions">
-										<h3>Você acredita na porcentagem estabelecida pela prefeitura?</h3>
+										<h3>Avaliação dos conselheiros sobre o andamento do projeto:</h3>
 										<div class="row">
 											<div id="alert_question">
 											</div>
 											<div id="content_question" class="col-xs-offset-1 col-xs-10 text-center">
-												<p class="text-center">Qual sua opinião em relação ao status do projeto? Selecione uma das opções abaixo:</p>
+												<p class="text-center">Qual sua avaliação a respeito do projeto? Selecione uma das opções abaixo:</p>
 												<button id="late" name="late" class="btn btn-info">Atrasado</button> <button id="in_progress" name="in_progress" class="btn btn-warning">Em progresso</button> <button id="complete" name="complete" class="btn btn-success">Completo</button>
 											</div>
 										</div>
@@ -345,7 +346,7 @@ $(document).ready(function () {
 				 	[%END%]
 						[%ELSE%]
 						<section class="statistics">
-							<h3>Opiniões dos conselheiros sobre o progresso</h3>
+							<h3>Opinião dos conselheiros sobre o progresso do projeto</h3>
 							<div class="chart-stats text-center">
 								<div class="chart">
 									<canvas id="chart1" value-late="[%statistic.late || 0%]" value-progress="[%statistic.in_progress || 0%]" value-completed="[%statistic.completed || 0%]"></canvas>
@@ -353,7 +354,7 @@ $(document).ready(function () {
 							</div>
 						</section>
       [%END%]
--->
+
 					<br />
 					<div>
 						<h3>Comentários dos conselheiros</h3>

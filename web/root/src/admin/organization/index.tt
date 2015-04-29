@@ -15,7 +15,7 @@
 			[%FOREACH organization IN organizations%]
 				<tr>
 					<td>[%organization.name%]</td>
-					<td>[%organization.description%]</td>
+					<td>[%organization.description | none%]</td>
 					<td>
 						<a href="/admin/organization/[%organization.id%]">Editar</a>
 <!-- 						<a href="/admin/form/remove_organization/[%organization.id%]">Excluir</a> -->

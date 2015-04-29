@@ -190,6 +190,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 events
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::Event>
+
+=cut
+
+__PACKAGE__->has_many(
+  "events",
+  "SMM::Schema::Result::Event",
+  { "foreign.council_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 goal_organizations
 
 Type: has_many
@@ -270,6 +285,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 user_request_councils
+
+Type: has_many
+
+Related object: L<SMM::Schema::Result::UserRequestCouncil>
+
+=cut
+
+__PACKAGE__->has_many(
+  "user_request_councils",
+  "SMM::Schema::Result::UserRequestCouncil",
+  { "foreign.organization_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 users
 
 Type: has_many
@@ -286,8 +316,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-15 15:00:11
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:XhpMAwMFIq0sqUxaGjJoWA
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-24 18:09:38
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VXVxT/5eHoA2NowB+/UjyQ
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
 with 'SMM::Schema::Role::ResultsetFind';

@@ -22,14 +22,17 @@
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 						<a href="[%href%]">Aprovações de Notificações</a>
 					</li>
+                    [%href = c.uri_for_action('/admin/userrequestcouncil/index')%]
+					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
+						<a href="[%href%]">Requisições de Conselheiros</a>
+					</li>
 					[%href = c.uri_for_action('/admin/comment/index')%]
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 						<a href="[%href%]">Aprovações de Comentários</a>
 					</li>
-
-					[%href = c.uri_for_action('/admin/preregister/index')%]
+					[%href = c.uri_for_action('/admin/contact/index')%]
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
-						<a href="[%href%]">Pré Cadastro</a>
+						<a href="[%href%]">Fale Conosco</a>
 					</li>
 
 

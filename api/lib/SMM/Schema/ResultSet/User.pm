@@ -52,6 +52,11 @@ sub verifiers_specs {
                     required => 0,
                     type     => 'Str',
                 },
+                council_id => {
+                    required => 0,
+                    type     => 'Int',
+                },
+
                 hash => {
                     required => 0,
                     type     => 'Str',
@@ -82,6 +87,11 @@ sub verifiers_specs {
                     required => 0,
                     type     => 'Bool'
                 },
+                request_council => {
+                    required => 0,
+                    type     => 'Bool'
+                },
+
             },
         ),
         login => Data::Verifier->new(
@@ -134,6 +144,11 @@ sub action_specs {
         create => sub {
             my %values = shift->valid_values;
 
+            use DDP;
+            p %values;
+            my $request_council = delete $values{request_council};
+            my $council_id      = delete $values{council_id};
+            p $council_id;
             not defined $values{$_} and delete $values{$_} for keys %values;
 
             delete $values{password_confirm};
@@ -150,6 +165,16 @@ sub action_specs {
 
             if ($role) {
                 $user->set_roles( { name => $role } );
+            }
+            if ($request_council) {
+                use DDP;
+                p $council_id;
+                $user->add_to_user_request_councils(
+                    {
+                        organization_id => $council_id,
+                        user_status     => 'pending'
+                    }
+                );
             }
 
 #            my $body = '';

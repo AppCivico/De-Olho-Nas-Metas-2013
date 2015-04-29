@@ -52,11 +52,11 @@ sub set_event : Chained('base') : Args(0) {
     my ( $self, $c ) = @_;
 
     $c->detach unless $c->req->method eq 'POST';
-    my $api = $c->model('API');
+    my $api  = $c->model('API');
+    my $form = $c->model('Form');
 
     my $params = { %{ $c->req->params } };
-    use DDP;
-    p $params;
+    $form->format_date_hour( $params, qw/date/ );
     $params->{description} = delete $params->{description_event};
     delete $params->{campaign_id} if $params->{campaign_id} eq 'Selecione';
     $params->{user_id} = $c->user->obj->id;

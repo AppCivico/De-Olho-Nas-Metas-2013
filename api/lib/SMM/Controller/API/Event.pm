@@ -16,9 +16,12 @@ __PACKAGE__->config(
     result_attr => {
         prefetch => ['campaign'],
     },
-    update_roles => [qw/superadmin user admin webapi organization/],
-    create_roles => [qw/superadmin admin webapi/],
-    delete_roles => [qw/superadmin admin webapi/],
+    update_roles  => [qw/superadmin user admin webapi organization/],
+    create_roles  => [qw/superadmin admin webapi/],
+    delete_roles  => [qw/superadmin admin webapi/],
+    before_delete => sub {
+
+    }
 );
 with 'SMM::TraitFor::Controller::DefaultCRUD';
 
@@ -37,8 +40,11 @@ sub result_GET {
         $c,
         entity => {
             (
-                map { $_ => ref $events->$_ eq 'DateTime' ? $events->$_->datetime : $events->$_}
-                  qw/
+                map {
+                        $_ => ref $events->$_ eq 'DateTime'
+                      ? $events->$_->datetime
+                      : $events->$_
+                  } qw/
                   id
                   name
                   description
@@ -88,6 +94,10 @@ sub list_GET {
 
     my $rs = $c->stash->{collection};
 
+    if ( $c->req->param('organization_id') ) {
+        $rs = $rs->search(
+            { 'me.council_id' => $c->req->param('organization_id') } );
+    }
     $self->status_ok(
         $c,
         entity => {

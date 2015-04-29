@@ -107,34 +107,35 @@ $(document).keydown( function(e) {
 			<div class="col-sm-12">
 				<section class="campaign-detail">
 					<div class="row">
-						<div class="col-sm-5">
-							<img src="/static/images/campaign/[% campaign_obj.id %]/[%campaign_obj.id%].jpg" border="0" class="img-responsive campaign-image">
-						</div>
-						<div class="col-sm-7">
-							<h1>[%campaign_obj.name%]</h1><br />
-							<p>[%campaign_obj.description | none%]</p>
+						<div class="col-sm-12">
+							<h4 class="subtitle orange">Campanha</h4>
+							<br clear="all"/>
+							<p><img src="/static/images/campaign/[% campaign_obj.id %]/[%campaign_obj.id%].jpg" border="0" class="campaign-image">
+							<h1>[%campaign_obj.name%]</h1>
+							[%campaign_obj.description%]</p>
 						</div>
 					</div>
 				</section>
-     <div class="share-buttons">
-					   <div class="twitter">
-					   <!-- Social plugins twitter-->
-					     <a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt"  data-hashtags="deolhonasmetas">Tweetar</a>
-					   </div>
-					   <div class="facebook">
-					   <!-- Social plugin facebook -->
-					     <div class="fb-share-button" data-href="http://deolhonasmetas.org.br/home/goal/[%goal_obj.id%]" data-layout="button_count"></div>
-					   </div>
-					</div>
+ 				<div class="share-buttons">
+				   <div class="twitter">
+				   <!-- Social plugins twitter-->
+				     <a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt"  data-hashtags="deolhonasmetas">Tweetar</a>
+				   </div>
+				   <div class="facebook">
+				   <!-- Social plugin facebook -->
+				     <div class="fb-share-button" data-href="http://deolhonasmetas.org.br/home/goal/[%goal_obj.id%]" data-layout="button_count"></div>
+				   </div>
+				</div>
+				<p>&nbsp;</p>
 
 				<section class="event-list">
 					<h3>Participe dos Eventos</h3>
 					<div class="row">
-						<div class="col-sm-5">
+						<div class="col-sm-4">
 						    <div class="cal1">
 						    </div>
     					</div>
-						<div class="col-sm-7">
+						<div class="col-sm-8">
 							<ul>
 								[% IF campaign_obj.events.size > 0 %]
 								<li>

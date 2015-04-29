@@ -75,7 +75,11 @@ var $maps = function () {
 				}
 				var content = '<div class="project-bubble"><div class="name">';
 				content += '<a href="' + url + '" target="_blank" >';
-				content += pj.name + '( Meta - '+pj.goal.id+')</a></div>';
+				if (pj.goal){
+					content += pj.name + '( Meta - '+pj.goal.id+')</a></div>';
+				}else{
+					content += pj.name + '</a></div>';
+				}
 				content += '<div class="description"></div>';
 				content += '</div>';
 				google.maps.event.addListener(marker, 'mouseover', function() {
@@ -713,17 +717,22 @@ var $maps = function () {
 }();
 
 var openSelect = function(selector){
-     var element = $(selector)[0], worked = false;
-    if (document.createEvent) { // all browsers
-        var e = document.createEvent("MouseEvents");
-        e.initMouseEvent("mousedown", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-        worked = element.dispatchEvent(e);
-    } else if (element.fireEvent) { // ie
-        worked = element.fireEvent("onmousedown");
-    }
-    if (!worked) { // unknown browser / error
-        alert("It didn't worked in your browser.");
-    }   
+	var $target = $(selector);
+	var $clone = $target.clone();
+	$clone.addClass("select-stylized clone");
+	$clone.val($target.val()).css({
+		position: 'absolute',
+		'z-index': 999,
+		left: $target.offset().left,
+		width: $target.width() + "px",
+		top: $target.offset().top + $target.height()
+	}).attr('size', $clone.find('option').length).change(function() {
+		$target.val($clone.val());
+	}).on('click blur',function() {
+		$(this).remove();
+	});
+	$('body').append($clone);
+	$clone.focus();
 }
 
 $(document).ready(function () {

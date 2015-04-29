@@ -18,7 +18,7 @@
 						<div class="form-group">
 							[%input_text('password','Senha:', req=>1, type => 'password')|none%]
 							
-						<!--	<span class="forgot-login"><a href="">Esqueceu a senha?</a></span>-->
+							<span class="forgot-login"><a href="/forgot-password">Esqueceu a senha?</a></span>
 						</div>
 						<button class="btn btn-brown pull-right">Entrar</button>
 						</form>
@@ -34,7 +34,7 @@
 							<br />
 							<p>Bem vindo ao sistema De Olho nas Metas. Faça o login ao lado ou cadastre-se através do link abaixo:</p>
 								<a class="btn btn-success" href="/cadastro">Faça seu Cadastro</a>
-								<a class="btn btn-warning" href="/conselho/contato">Conselheiro? Clique aqui!</a>
+<!--								<a class="btn btn-warning" href="/conselho/contato">Conselheiro? Clique aqui!</a>-->
 						</div>
 				
 					</div>

@@ -16,7 +16,7 @@ __PACKAGE__->config(
         'me.id' => 'Int'
     },
     result_attr => {
-        prefetch  => [ 'events', 'organization' ],
+        prefetch  => [ 'events', 'organization', 'project' ],
         '+select' => [
             \q{to_char(events.date, 'DD/MM/YYYY HH24:MI:SS')},
             \q{to_char(start_in, 'DD/MM/YYYY HH24:MI:SS')},
@@ -28,6 +28,7 @@ __PACKAGE__->config(
     update_roles => [qw/superadmin user admin webapi organization/],
     create_roles => [qw/superadmin admin webapi/],
     delete_roles => [qw/superadmin admin webapi/],
+
 );
 with 'SMM::TraitFor::Controller::DefaultCRUD';
 
@@ -53,6 +54,9 @@ sub result_GET {
                   id
                   name
                   description
+                  objective
+                  free_text
+                  address
                   created_at
                   start_in
                   end_on
@@ -64,7 +68,6 @@ sub result_GET {
                     my $e = $_;
                     (
                         +{
-
                             id          => $e->id,
                             name        => $e->name,
                             description => $e->description,
@@ -73,6 +76,18 @@ sub result_GET {
                       )
                 } ( $campaigns->events ),
             ],
+            project => $campaigns->project
+            ? {
+                map {
+                    my $p = $_;
+                    p $p;
+
+                    id     => $p->id,
+                      name => $p->name
+
+                } ( $campaigns->project ),
+              }
+            : (),
         }
     );
 
@@ -80,7 +95,9 @@ sub result_GET {
 
 sub result_DELETE {
     my ( $self, $c ) = @_;
-    my $campaigns = $c->stash->{organization};
+    my $campaigns = $c->stash->{campaigns};
+
+    $campaigns->search_related('events')->delete;
 
     $campaigns->delete;
 
@@ -91,7 +108,7 @@ sub result_PUT {
     my ( $self, $c ) = @_;
 
     my $params    = { %{ $c->req->params } };
-    my $campaigns = $c->stash->{organization};
+    my $campaigns = $c->stash->{campaigns};
 
     $campaigns->execute( $c, for => 'update', with => $c->req->params );
 
@@ -143,7 +160,12 @@ sub list_GET {
     if ( $c->req->param('user_id') ) {
         $rs = $rs->search( { 'me.user_id' => $c->req->param('user_id') } );
     }
-    use DDP;
+    if ( $c->req->param('organization_id') ) {
+        $rs = $rs->search(
+            { 'me.organization_id' => $c->req->param('organization_id') } );
+    }
+
+    $rs = $rs->search( undef, { order_by => 'me.name' } );
     $self->status_ok(
         $c,
         entity => {

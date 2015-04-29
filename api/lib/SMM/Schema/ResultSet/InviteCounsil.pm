@@ -197,9 +197,9 @@ __DATA__
 <p> Código: [% secret_key %]</p>
 
 <p>Prezad@ Conselheir@, 
-			Você foi convidad@ para participar do programa De Olho nas Metas. Clique aqui para participar!. 
-			Abraços. 
-			Equipe do De Olho nas Metas.
+            Você foi convidad@ para participar do programa De Olho nas Metas. Clique aqui para participar!. 
+            Abraços. 
+            Equipe do De Olho nas Metas.
 </p>
 
 <p><a href="[% web_url %]/cadastro?key=[% secret_key  %]&email=[%email_uri%]&organization_id=[%organization_id%]">

@@ -210,7 +210,7 @@ $(document).ready(function () {
 					<section class="statistics">
 						<h3>Progresso de acordo com a prefeitura</h3>
 						<div class="progress">
-						  <div class="progress-bar progress-bar-success progress-bar-green progress-bar-striped" role="progressbar" aria-valuenow="[%goal_obj.goal_porcentages.owned%]" aria-valuemin="0" aria-valuemax="100" style="width: [%goal_obj.goal_porcentages.owned%]%;">
+						  <div class="progress-bar progress-bar-[% IF goal_obj.goal_porcentages.owned > 50 %]success[% ELSE %]danger[% END %]" role="progressbar" aria-valuenow="[%goal_obj.goal_porcentages.owned%]" aria-valuemin="0" aria-valuemax="100" style="width: [%goal_obj.goal_porcentages.owned%]%;">
 							   [%goal_obj.goal_porcentages.owned%]%
 			              </div>
 						</div>

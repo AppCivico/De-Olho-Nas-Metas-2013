@@ -6,8 +6,8 @@ BEGIN { extends 'Catalyst::Controller::REST' }
 __PACKAGE__->config(
     default => 'application/json',
 
-    result     => 'DB::PreRegister',
-    object_key => 'preregister',
+    result     => 'DB::Contact',
+    object_key => 'contact',
 );
 
 with 'SMM::TraitFor::Controller::DefaultCRUD';
@@ -23,7 +23,7 @@ sub result_PUT {
     my ( $self, $c ) = @_;
 
     my $params      = { %{ $c->req->params } };
-    my $preregister = $c->stash->{preregister};
+    my $preregister = $c->stash->{contact};
 
     $preregister->execute( $c, for => 'update', with => $c->req->params );
 
@@ -44,16 +44,16 @@ sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
 sub list_POST {
     my ( $self, $c ) = @_;
 
-    my $preregister = $c->stash->{collection}
+    my $contact = $c->stash->{collection}
       ->execute( $c, for => 'create', with => $c->req->params );
 
     $self->status_created(
         $c,
         location =>
-          $c->uri_for( $self->action_for('result'), [ $preregister->id ] )
+          $c->uri_for( $self->action_for('result'), [ $contact->id ] )
           ->as_string,
         entity => {
-            id => $preregister->id
+            id => $contact->id
         }
     );
 }
@@ -64,7 +64,7 @@ sub list_GET {
     $self->status_ok(
         $c,
         entity => {
-            preregister => [
+            contacts => [
                 map {
                     my $r = $_;
                     +{
@@ -73,30 +73,12 @@ sub list_GET {
                               qw/
                               id
                               name
+                              email
+                              message
                               /
                         ),
-                        city => {
-                            (
-                                map { $_ => $r->{city}{$_}, }
-                                  qw/
-                                  id
-                                  name
-                                  /
-                            ),
-                            state => {
-                                (
-                                    map { $_ => $r->{city}{state}{$_}, }
-                                      qw/
-                                      id
-                                      name
-                                      /
-                                )
-                            }
-                        },
-                        url => $c->uri_for_action(
-                            $self->action_for('result'),
-                            [ $r->{id} ]
-                        )->as_string
+                        url => $c->uri_for_action( $self->action_for('result'),
+                            [ $r->{id} ] )->as_string
                       }
                 } $c->stash->{collection}->as_hashref->all
             ]
