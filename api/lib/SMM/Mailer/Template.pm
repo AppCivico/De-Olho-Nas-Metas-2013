@@ -21,8 +21,6 @@ my %assets = ( 'logo.png' => 'image/png', );
 sub build_email {
     my ( $self, $fixed_to ) = @_;
 
-    use DDP;
-    p $self;
     my ( $user, $to );
     if ( ref $self->to && $self->to->can('_build_email') ) {
         $user = $self->to;
@@ -47,8 +45,6 @@ sub build_email {
 sub build_many_emails {
     my ( $self, $fixed_to ) = @_;
 
-    use DDP;
-    p $self;
     my ( $user, $to );
     if ( ref $self->to && $self->to->can('_build_many_emails') ) {
         $user = $self->to;

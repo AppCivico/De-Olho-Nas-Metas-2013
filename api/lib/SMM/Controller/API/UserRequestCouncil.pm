@@ -85,7 +85,9 @@ sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
 sub list_GET {
     my ( $self, $c ) = @_;
     my $rs = $c->stash->{collection};
-
+    if ( $c->req->param('user_status') ) {
+        $rs = $rs->search( { user_status => $c->req->param('user_status') } );
+    }
     $rs = $rs->search(
         undef,
         {
