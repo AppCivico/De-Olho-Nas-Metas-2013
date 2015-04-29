@@ -248,7 +248,7 @@ sub regions_map : Chained('base') : PathPart('regions_map') : Args(0) {
         {},
         {
             'join'    => 'subprefecture',
-            'select'  => [ \q{ST_AsGeoJSON(geom,6) as geom_json} ],
+            'select'  => [ \q{ST_AsGeoJSON(geom,4) as geom_json} ],
             'as'      => [qw(geom_json)],
             'columns' => [qw(id name subprefecture_id subprefecture.name)]
 

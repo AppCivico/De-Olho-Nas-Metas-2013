@@ -214,7 +214,7 @@ sub _build_email {
 
         partner_name => 'deolhonasmetas',
         url          => 'www.deolhonasmetas.org.br',
-        web_url      => 'http://localhost:5040',
+        web_url      => 'www.deolhonasmetas.org.br',
         title        => $title
 
     };

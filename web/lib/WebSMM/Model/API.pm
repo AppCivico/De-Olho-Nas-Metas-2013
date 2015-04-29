@@ -77,7 +77,6 @@ sub stash_result {
             );
         };
         #print STDERR $res->as_string;
-        use DDP;
     }
     if ($@) {
         $c->stash( error => "$method $endpoint", error_content => $@ );
