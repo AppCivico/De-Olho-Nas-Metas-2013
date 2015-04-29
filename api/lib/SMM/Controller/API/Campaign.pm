@@ -75,7 +75,7 @@ sub result_GET {
                       )
                 } ( $campaigns->events ),
             ],
-            project => {
+            project => $campaigns->project ? {
                 map {
                     my $p = $_;
                     p $p;
@@ -84,7 +84,7 @@ sub result_GET {
                       name => $p->name
 
                 } ( $campaigns->project ),
-            },
+            }: (),
         }
     );
 
