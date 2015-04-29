@@ -381,7 +381,7 @@ jQuery(function($){
 									<tbody>
 										[%FOR evt IN events%]
 											<tr>
-												<td><a href="[% c.uri_for_action('/homefuncional/event/detail',[evt.id])%]">[% evt.name %]</a></td><td align="right">[% IF cpg.user_id == user_roles.id%]<a href="[% c.uri_for_action('/user/account/campaign_edit',[cpg.id])%]" align="right">Editar</a> | <a href="[% c.uri_for_action('/user/account/campaign_remove',[cpg.id])%]" align="right">Remover</a></td>[%END%]
+												<td><a href="[% c.uri_for_action('/homefuncional/event/detail',[evt.id])%]">[% evt.name %]</a></td><td align="right"><!--[% IF cpg.user_id == user_roles.id%]<a href="[% c.uri_for_action('/user/account/campaign_edit',[cpg.id])%]" align="right">Editar</a> | <a href="[% c.uri_for_action('/user/account/campaign_remove',[cpg.id])%]" align="right">Remover</a></td>[%END%]-->
 											</tr>
 										[%END%]
 									</tbody>
