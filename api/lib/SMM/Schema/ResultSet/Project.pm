@@ -18,7 +18,7 @@ sub verifiers_specs {
         create => Data::Verifier->new(
             filters => [qw(trim)],
             profile => {
-			    name => {
+                name => {
                     required => 1,
                     type     => 'Str',
                 },
@@ -32,8 +32,49 @@ sub verifiers_specs {
                 },
                 longitude => {
                     required => 0,
+                    type     => 'Str',
+                },
+                region_id => {
+                    required => 0,
                     type     => 'Int',
                 },
+                project_number => {
+                    required => 1,
+                    type     => 'Int',
+                },
+                qualitative_progress_1 => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                qualitative_progress_2 => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                qualitative_progress_3 => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                qualitative_progress_4 => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                qualitative_progress_5 => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                qualitative_progress_6 => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                percentage => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                goal_id => {
+                    required => 0,
+                    type     => 'Int',
+                },
+
             }
         )
     };
@@ -43,7 +84,7 @@ sub action_specs {
     my $self = shift;
     return {
         create => sub {
-            my %values     = shift->valid_values;
+            my %values  = shift->valid_values;
             my $project = $self->create( \%values );
             return $project;
         }

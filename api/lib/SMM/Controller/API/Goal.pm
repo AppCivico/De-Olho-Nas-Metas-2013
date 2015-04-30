@@ -108,7 +108,8 @@ sub result_GET {
 
                 ),
             },
-            objective => {
+            objective => $goal->objective
+            ? {
                 (
                     map {
 
@@ -124,7 +125,8 @@ sub result_GET {
                       } $goal->objective,
 
                 ),
-            },
+              }
+            : (),
             project => [
                 (
                     map {
@@ -241,7 +243,7 @@ sub result_GET {
 
 sub result_DELETE {
     my ( $self, $c ) = @_;
-    my $goal = $c->stash->{organization};
+    my $goal = $c->stash->{goal};
 
     $goal->delete;
 
@@ -252,7 +254,7 @@ sub result_PUT {
     my ( $self, $c ) = @_;
 
     my $params = { %{ $c->req->params } };
-    my $goal   = $c->stash->{organization};
+    my $goal   = $c->stash->{goal};
 
     $goal->execute( $c, for => 'update', with => $c->req->params );
 

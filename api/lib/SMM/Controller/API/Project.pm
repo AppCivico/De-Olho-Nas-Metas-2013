@@ -212,7 +212,7 @@ sub result_GET {
 
 sub result_DELETE {
     my ( $self, $c ) = @_;
-    my $project = $c->stash->{organization};
+    my $project = $c->stash->{project};
 
     $project->delete;
 
@@ -223,7 +223,7 @@ sub result_PUT {
     my ( $self, $c ) = @_;
 
     my $params  = { %{ $c->req->params } };
-    my $project = $c->stash->{organization};
+    my $project = $c->stash->{project};
 
     $project->execute( $c, for => 'update', with => $c->req->params );
 
