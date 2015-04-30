@@ -8,7 +8,6 @@
 <script src="//blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
 <script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
 <script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
 	[%-CALL assets.include("js/jquery.upload/js/jquery.iframe-transport.js")%]
 	[%-CALL assets.include("js/jquery.upload/js/jquery.fileupload.js")%]
