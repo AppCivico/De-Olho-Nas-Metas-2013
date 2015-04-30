@@ -13,72 +13,61 @@ db_transaction {
       list  => 1,
       stash => 'goal',
       [
-        name             => 'Foo Bar',
-        email            => 'foo1@email.com',
-        password         => 'foobarquux1',
-        password_confirm => 'foobarquux1',
-        role             => 'user'
+        name        => 'Foo Bar',
+        description => 'Foo',
+        goal_number => '999',
+        technically => 'Foo'
       ];
 
-    exit;
-    stash_test 'user.get', sub {
+    stash_test 'goal.get', sub {
         my ($me) = @_;
-        is( $me->{id},    stash 'user.id',  'get has the same id!' );
-        is( $me->{email}, 'foo1@email.com', 'email ok!' );
+        is( $me->{id},    stash 'goal.id',  'get has the same id!' );
+        is( $me->{name}, 'Foo Bar', 'name ok!' );
     };
-
-    stash_test 'user.list', sub {
+    stash_test 'goal.list', sub {
         my ($me) = @_;
 
-        use DDP;
-        p $me;
-        ok( $me = delete $me->{users}, 'users list exists' );
+        ok( $me = delete $me->{goals}, 'users list exists' );
 
-        is( @$me, 3, '3 users' );
+        is( @$me, 124, '124 goals' );
 
         $me = [ sort { $a->{id} <=> $b->{id} } @$me ];
 
-        is( $me->[2]{email}, 'foo1@email.com', 'listing ok' );
+        is( $me->[123]{name}, 'Foo Bar', 'listing ok' );
     };
 
-    rest_put stash 'user.url',
-      name => 'atualizar usuario',
+    rest_put stash 'goal.url',
+      name => 'atualizar meta',
       [
         name             => 'AAAAAAAAA',
-        email            => 'foo2@email.com',
-        password         => 'foobarquux1',
-        password_confirm => 'foobarquux1',
-        role             => 'user'
       ];
 
-    rest_reload 'user';
+    rest_reload 'goal';
 
-    stash_test 'user.get', sub {
+    stash_test 'goal.get', sub {
         my ($me) = @_;
 
-        is( $me->{email}, 'foo2@email.com', 'email updated!' );
+        is( $me->{name}, 'AAAAAAAAA', 'name updated!' );
     };
 
-    rest_delete stash 'user.url';
+    rest_delete stash 'goal.url';
 
-    rest_reload 'user', 404;
+    rest_reload 'goal', 404;
 
     # ao inves de
     # my $list = rest_get '/users';
     # use DDP; p $list;
 
     # utilizar
-    rest_reload_list 'user';
+    rest_reload_list 'goal';
 
-    stash_test 'goals.list', sub {
+    stash_test 'goal.list', sub {
         my ($me) = @_;
-        use DDP;
-        p $me;
-        ok( $me = delete $me->{users}, 'users list exists' );
+        ok( $me = delete $me->{goals}, 'goals list exists' );
 
-        is( @$me, 2, '2 users' );
+        is( @$me, 123, '123 goals' );
 
-        is( $me->[0]{email}, 'superadmin@email.com', 'listing ok' );
+        is( $me->[1]{name}, 'Beneficiar 228 mil novas famílias com o Programa Bolsa Família', 'listing ok' );
     };
 };
 

@@ -1,4 +1,4 @@
-package SMM::Schema::ResultSet::Company;
+package SMM::Schema::ResultSet::Budget;
 use namespace::autoclean;
 
 use utf8;
@@ -18,17 +18,25 @@ sub verifiers_specs {
         create => Data::Verifier->new(
             filters => [qw(trim)],
             profile => {
-                name => {
+                business_name => {
                     required => 1,
                     type     => 'Str',
                 },
-                name_url => {
+                business_name_url => {
                     required => 1,
                     type     => 'Str',
                 },
-                goal_id => {
+                dedicated_value => {
                     required => 0,
-                    type     => 'Int',
+                    type     => 'Str',
+                },
+                liquidated_value => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                observation => {
+                    required => 0,
+                    type     => 'Str',
                 },
             }
         )

@@ -1,4 +1,4 @@
-package SMM::Controller::API::Company;
+package SMM::Controller::API::Budget;
 
 use Moose;
 use utf8;
@@ -7,10 +7,10 @@ BEGIN { extends 'CatalystX::Eta::Controller::REST' }
 
 __PACKAGE__->config(
 
-    result => 'DB::Company',
+    result => 'DB::Budget',
 
-    object_key => 'company',
-    list_key   => 'companies',
+    object_key => 'budget',
+    list_key   => 'budgets',
     search_ok  => {
         name_url => 'Str'
     },
@@ -29,8 +29,12 @@ __PACKAGE__->config(
                 map { $_ => $r->$_, }
                   qw/
                   id
-                  name
-                  name_url
+                  business_name
+                  business_name_url
+                  dedicated_value
+                  liquidated_value
+                  observation
+
                   /
             ),
 
@@ -46,7 +50,7 @@ after 'base' => sub {
 
     $c->stash->{collection} = $c->stash->{collection}->search(
         {
-            name_url => { '<' => 'a' }
+            business_name_url => { '<' => 'a' }
         }
     ) if $c->req->params->{name_url_zero};
 };
