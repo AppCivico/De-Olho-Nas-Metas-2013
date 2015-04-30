@@ -359,6 +359,22 @@ footer .logo-eokoe{
 	right: 0;
 }
 
+.logos-footer{
+	margin: 20px auto 0 auto;
+	color: #f0eee4;
+	text-align: center;
+}
+.logos-footer div img{
+	margin-top: 2px;
+}
+.logos-footer div{
+	display: inline-block;
+	margin: 0 10px;
+}
+.logos-footer .margin-right{
+	margin-right: 50px;
+}
+
 #map{
 	width: 100%;
 	height: 600px;

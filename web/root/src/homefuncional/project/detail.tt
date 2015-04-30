@@ -338,7 +338,7 @@ $(document).ready(function () {
 											</div>
 											<div id="content_question" class="col-xs-offset-1 col-xs-10 text-center">
 												<p class="text-center">Qual sua avaliação a respeito do projeto? Selecione uma das opções abaixo:</p>
-												<button id="late" name="late" class="btn btn-info">Atrasado</button> <button id="in_progress" name="in_progress" class="btn btn-warning">Em progresso</button> <button id="complete" name="complete" class="btn btn-success">Completo</button>
+												<button id="late" name="late" class="btn btn-danger">Atrasado</button> <button id="in_progress" name="in_progress" class="btn btn-warning">Em progresso</button> <button id="complete" name="complete" class="btn btn-success">Completo</button>
 											</div>
 										</div>
 									</section>

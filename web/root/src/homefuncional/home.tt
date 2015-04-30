@@ -137,33 +137,6 @@ $(document).ready(function () {
     <section class="metas-result">
 		<div class="container">
 			<div id="result" name="name" class="container">
-				<br>
-				<div class="about-logos text-center">
-					<div class="row">
-						<div class="col-sm-6 text-center">
-							Realização<br><br>
-							<a href="http://www.nossasaopaulo.org.br" target="_blank"><img src="/static/css/images/logo-rnsp.png" border="0"></a>
-						</div>
-						<div class="col-sm-6 text-center">
-							Apoio<br><br>
-							<a href="http://www.avinaamericas.org" target="_blank"><img src="/static/css/images/logo-avina.png" border="0"></a>
-						</div>
-					</div>
-					<br /><br />
-					<div class="row text-center">
-						Parceiros<br><br>
-						<div class="col-sm-4 text-center">
-							<a href="http://civic.mit.edu/" target="_blank"><img src="/static/css/images/logo-mit.png" border="0"></a>
-						</div>
-						<div class="col-sm-4 text-center">
-							<a href="http://www.tcm.sp.gov.br/" target="_blank" title="Tribunal de Contas do Município de São Paulo" alt="Tribunal de Contas do Município de São Paulo"><img src="/static/css/images/logo-tcm.png" border="0"></a>
-						</div>
-						<div class="col-sm-4 text-center">
-							<a href="http://www.eokoe.com/" target="_blank"><img src="/static/css/images/logo-eokoe.png" border="0"></a>
-						</div>
-					</div>
-					<br /><br />
-				</div>
 			</div>
 		</div>
     </section>

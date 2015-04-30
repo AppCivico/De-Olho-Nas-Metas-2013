@@ -62,8 +62,8 @@ $(document).ready(function() {
 			var data = [
 							{
 								value: 0,
-								color: colors["bluelight"].color,
-								highlight: colors["bluelight"].highlight,
+								color: colors["red"].color,
+								highlight: colors["red"].highlight,
 								label: "atrasado"
 							},
 							{
@@ -89,8 +89,8 @@ $(document).ready(function() {
 			var data = [
 							{
 								value: value_late,
-								color: colors["bluelight"].color,
-								highlight: colors["bluelight"].highlight,
+								color: colors["red"].color,
+								highlight: colors["red"].highlight,
 								label: "atrasado"
 							},
 							{
