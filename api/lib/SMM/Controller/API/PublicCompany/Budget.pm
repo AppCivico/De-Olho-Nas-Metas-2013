@@ -36,9 +36,13 @@ sub list_GET {
                               id
                               business_name
                               business_name_url
+                              observation
+                              organ_name
                               dedicated_value
                               liquidated_value
                               observation
+                              goal_number
+                              cnpj
                               /
                         ),
 
@@ -46,6 +50,7 @@ sub list_GET {
                   } $rs->search(
                     undef,
                     {
+                        prefetch => ['goals'],
                         result_class =>
                           'DBIx::Class::ResultClass::HashRefInflator'
                     }

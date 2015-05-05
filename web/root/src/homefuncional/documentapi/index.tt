@@ -39,7 +39,7 @@
                 <h3 class="panel-title">API [%l('para desenvolvedores')%]</h3>
             </div>
             <div class="panel-body">
-                <p>Você também pode consultar os dados que estão armazenados no Iota via API.</p>
+                <p>Você também pode consultar os dados que estão armazenados no SMM via API.</p>
 
                 <p>Para saber mais, navegue até a seção <a data-animated-anchor href="#api">API</a></p>
 
@@ -86,60 +86,69 @@
     </thead>
     <tbody>
         <tr>
-            <th><pre><a data-animated-anchor href="#sample_of_indicators">/goals</a></pre></th>
+            <th><pre><a data-animated-anchor href="#sample_of_indicators">/public/goals</a></pre></th>
             <td>Lista de todas as metas</td>
             <td>
             Filtros:
             <ul class="list-unstyled list-param">
-                <li>user_id=123</li>
+                <li></li>
             </ul>
 
-            Se <code>user_id</code> for enviado, os indicadores desabilitado por usuário não retornam.
             </td>
         </tr>
         <tr>
-            <th><pre><a data-animated-anchor href="#sample_of_users">/projects</a></pre></th>
-            <td>Lista de todos os usuários e sua cidade</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <th><pre><a data-animated-anchor href="#sample_of_cities">/</a></pre></th>
-            <td>Lista de todas as cidades</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <th><pre><a data-animated-anchor href="#sample_of_networks">/networks</a></pre></th>
-            <td>Nome da rede e instituição do domínio acessado.</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <th><pre><a data-animated-anchor href="#sample_of_download_indicators">/download-indicators</a></pre></th>
-            <td>Valores calculados por indicador</td>
+            <th><pre><a data-animated-anchor href="#sample_of_indicators">/public/goals/*</a></pre></th>
+            <td>Lista de todos atributos da meta específica</td>
             <td>
-            Filtros:
             <ul class="list-unstyled list-param">
-                <li>user_id=100,222,...</li>
-                <li>city_id=1,5,...</li>
-                <li>region_id=321,...</li>
-                <li>indicator_id=123,..</li>
-                <li>valid_from=2000-01-01,...</li>
-                <li>valid_from_begin=2000-01-01</li>
-                <li>valid_from_end=2010-01-01</li>
+                <li>* => id da meta</li>
+            </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <th><pre><a data-animated-anchor href="#sample_of_users">/public/projects</a></pre></th>
+            <td>Lista de todos os projetos</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <th><pre><a data-animated-anchor href="#sample_of_users">/public/projects/*</a></pre></th>
+            <td>Lista de todos os atributos do projeto específico</td>
+            <td>
+                <ul class="list-unstyled list-param">
+                    <li>* => id do projeto</li>
+                </ul>
+            </td>
+
+        </tr>
+
+        <tr>
+            <th><pre><a data-animated-anchor href="#sample_of_networks">/public/companies</a></pre></th>
+            <td>Lista de todas as empresas.</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <th><pre><a data-animated-anchor href="#sample_of_download_indicators">/public/companies/*/budgets</a></pre></th>
+            <td>Lista de todas as empresas por metas de acordo com os orçamentos utilizados.</td>
+            <td>
+            <ul class="list-unstyled list-param">
+                <li>* => id da empresa</li>
             </ul>
             [%l('Caso o campo <code>region_id</code> não for especificado, a consulta retorna os valores da cidade.')|none%]
 
             </td>
         </tr>
 
-        <tr>
-            <th><pre><a data-animated-anchor href="#sample_of_download_variables">/download-variables</a></pre></th>
-            <td>[%l('Valores das variáveis')%]</td>
+         <tr>
+            <th><pre><a data-animated-anchor href="#sample_of_networks">/public/companies/*/goals</a></pre></th>
+            <td>Lista de todas as empresas por metas.</td>
+
             <td>
-            [%l('Todos os filtros do endpoint <code>/download-indicators</code>, exceto <b>indicator_id</b>, mais:')|none%]
-            <ul class="list-unstyled list-param">
-                <li>variable_id=123,..</li>
-            </ul>
-        </td>
+              <ul class="list-unstyled list-param">
+                <li> * => id da empresa</li>
+              </ul>
+
+            </td>
         </tr>
 
 
@@ -148,250 +157,219 @@
 
 <div class="panel-body">
 
-<h3 id="id_sample_of_indicators" data-animated-anchor-offset="-60">/indicators [%voltar_link|none%]</h3>
+<h3 id="id_sample_of_indicators" data-animated-anchor-offset="-60">/public/goals [%voltar_link|none%]</h3>
 
 <p>[%l('Exemplo de retorno:')%]</p>
-<pre class="precode"><code class="language-javascript">$.get('/indicators', function(ret){console.log(ret)}); // after execute this
-
-ret = {
-    "indicators": [
+<pre class="precode"><code class="language-javascript">
+goals 
+    [
+      [0]
         {
-            "source": null,
-            "sort_direction": null,
-            "variety_name": null,
-            "name_url": "crimes-violentos-nao-fatais",
-            "visibility_user_id": 3,
-            "axis": {
-                "created_at": "2012-10-23 01:43:35.541972",
-                "name": "Equidade, Justiça Social e Cultura de Paz",
-                "id": 3
-            },
-            "indicator_admins": null,
-            "chart_name": null,
-            "created_at": "2013-08-20 16:39:54.30607",
-            "all_variations_variables_are_required": 1,
-            "formula": "$502 / $19 *100000",
-            "indicator_type": "normal",
-            "id": "251",
-            "formula_human": "Número de crimes violentos não fatais / População total *100000",
-            "featured_in_home": 0,
-            "variable_type": "int",
-            "period": "yearly",
-            "observations": null,
-            "name": "Crimes violentos não fatais",
-            "visibility_country_id": null,
-            "axis_id": 3,
-            "tags": null,
-            "goal_explanation": null,
-            "goal_operator": null,
-            "goal": null,
-            "visibility_level": "private",
-            "explanation": "Número de crimes violentos não fatais por cem mil habitantes",
-            "goal_source": null,
-            "user_id": 1,
-            "dynamic_variations": null,
-            "summarization_method": "sum"
-        }
-    ]
-}</code></pre>
-
-<h3 id="id_sample_of_users" data-animated-anchor-offset="-60">/users [%voltar_link|none%]</h3>
-
-<p>[%l('Exemplo de retorno:')%]</p>
-<pre class="precode"><code class="language-javascript">$.get('/users', function(ret){console.log(ret)}); // after execute this
-
-ret = {
-    "users": [
-        {
-            "city_summary": "Somos um movimento da sociedade civil que reúne setores empresariais, acadêmicos, movimentos sociais e cidadãos, mobilizados com o intuito de selecionar, propor e monitorar indicadores da cidade do Recife na busca da melhoria dos níveis de vida de todos os que habitam a capital pernambucana. Aberto a contribuições múltiplas, o ODR não tem destaque para lideranças individuais nem direcionamento político-partidário ou privilégio de grupos específicos. Nossa missão consiste em mobilizar a sociedade para  selecionar, propor e monitorar um conjunto de indicadores e metas que se constituam numa agenda de desenvolvimento sustentável para o Recife e que levem a transformá-la numa cidade melhor para se viver.",
-            "city": {
-                "uf": "PE",
-                "pais": "br",
-                "name_uri": "recife",
-                "name": "Recife",
-                "id": 110
-            },
-            "city_id": 110,
-            "language": "pt-br",
-            "regions_enabled": 1,
-            "name": "Observatório do Recife",
-            "id": "136"
-        }
-    ]
-}</code></pre>
-
-
-<h3 id="id_sample_of_cities" data-animated-anchor-offset="-60">/cities [%voltar_link|none%]</h3>
-
-<p>[%l('Exemplo de retorno:')%]</p>
-<pre class="precode"><code class="language-javascript">$.get('/cities', function(ret){console.log(ret)}); // after execute this
-
-ret = {
-    "cities": [
-        {
-            "state_id": "22",
-            "created_at": "2013-02-04 14:23:24.256487",
-            "country_id": "1",
-            "summary": null,
-            "pais": "br",
-            "latitude": "-12.6938584",
-            "id": 150,
-            "endereco_prefeitura": "Rua Francisco Drumond, S/N",
-            "longitude": "-38.3228842",
-            "telefone_prefeitura": "(71) 3621 6666 ",
-            "bairro_prefeitura": "Centro Administrativo",
-            "name_uri": "camacari",
-            "name": "Camaçari",
-            "email_prefeitura": null,
-            "cep_prefeitura": "42.800-000",
-            "uf": "BA",
-            "automatic_fill": 0,
-            "nome_responsavel_prefeitura": null
-        }
-    ]
-}</code></pre>
-
-<h3 id="id_sample_of_networks" data-animated-anchor-offset="-60">/networks [%voltar_link|none%]</h3>
-
-<p>[%l('Exemplo de retorno:')%]</p>
-<pre class="precode"><code class="language-javascript">$.get('/networks', function(ret){console.log(ret)}); // after execute this
-
-ret = {
-    "network": {
-        "institute": {
-            "name": "Movimentos",
-            "id": 2,
-            "description": "administrado pelos movimentos"
+        description              "Prioridade para implementação das ações nas Subprefeituras com maior concentração de famílias em situação de extrema pobreza e pobreza. Busca Ativa apoiada pelas áreas de interface e sociedade civil. Disponibilização de espaços públicos e equipamentos municipais para ações cadastrais.",
+        expected_budget          103305927,
+        expected_end_date        undef,
+        expected_start_date      undef,
+        goal_number              1,
+        id                       1,
+        name                     "Inserir aproximadamente 280 mil famílias com renda de até meio salário mínimo no Cadastro Único para atingir 773 mil famílias cadastradas",
+        percentage               {
+                 owned   124.94678571429
         },
-        "name": "Rede Social Brasileira por Cidades Justas e Sustentáveis",
-        "id": 2
-    }
-}</code></pre>
+        project_count            1,
+        qualitative_progress_1   "349 mil famílias inseridas no Cadastro Único de janeiro de 2013 a julho de 2014, superando a meta prevista para o final de 2016 em mais de 20%.",
+        qualitative_progress_2   "O número de famílias cadastradas em dezembro de 2012 era de 493 mil. Em julho de 2013 este número passou para 709.595, chegando a 922.259 em julho de 2014, data da última atualização do CadÚnico. ",
+        qualitative_progress_3   "350 entrevistadores contratados em novembro de 2013 para a realização de novos cadastros.",
+        qualitative_progress_4   "200 Agentes de Saúde e  22 Agentes de Gestão de Politicas Públicas de Unidades Básicas de Saúde (UBS) capacitados como entrevistadores para a realização de novos cadastros.",
+        qualitative_progress_5   "",
+        qualitative_progress_6   "",
+        transversality           "juventude-viva  sp-carinhosa   pop rua",
+        updated_at               undef,
+        url                      "http://localhost/public/goals/1",
+        will_be_delivered        "280 mil famílias inscritas no Cadastro Único"
+        }
+        ...
+    ]
 
-
-<h3 id="id_sample_of_download_indicators" data-animated-anchor-offset="-60">/download-indicators [%voltar_link|none%]</h3>
+</code></pre>
+<h3 id="id_sample_of_indicators" data-animated-anchor-offset="-60">/public/goals/* [%voltar_link|none%]</h3>
 
 <p>[%l('Exemplo de retorno:')%]</p>
-<pre class="precode"><code class="language-javascript">$.get('/download-indicators', function(ret){console.log(ret)}); // after execute this
-
-ret = {
-    "data": [
-        {
-            "user_goal": null,
-            "justification_of_missing_field": null,
-            "valid_from": "01/01/2012",
-            "indicator_id": 191,
-            "region_id": null,
-            "indicator_name": "Orçamento do município destinado a transporte público",
-            "formula": "$322/$323*100",
-            "city_name": "São Paulo",
-            "axis_name": "Melhor Mobilidade, Menos Tráfego",
-            "formula_human": "Valor total do orçamento, em reais, destinado a transporte público / Valor total do orçamento da área de transporte do município *100",
-            "institute_id": 2,
-            "city_id": 1,
-            "period": "anual",
-            "region_name": null,
-            "value": "68.8442061662337",
-            "observations": null,
-            "variation_order": null,
-            "goal_explanation": "Destinar 100% dos recursos públicos da área para a melhoria substantiva do transporte público.",
-            "goal_operator": null,
-            "tags": null,
-            "goal": null,
-            "sources": [
-                "SEMPLA (Secretaria Municipal de Planejamento)"
-            ],
-            "explanation": "Percentual do orçamento do município destinado ao transporte público.",
-            "updated_at": "2013-11-06 08:52:08.597114",
-            "goal_source": "Programa Cidades Sustentáveis",
-            "user_id": 11,
-            "variation_name": "",
-            "technical_information": null
-        },
-        {
-            "user_goal": null,
-            "justification_of_missing_field": null,
-            "valid_from": "01/01/2012",
-            "indicator_id": 191,
-            "region_id": null,
-            "indicator_name": "Orçamento do município destinado a transporte público",
-            "formula": "$322/$323*100",
-            "city_name": "Goiânia",
-            "axis_name": "Melhor Mobilidade, Menos Tráfego",
-            "formula_human": "Valor total do orçamento, em reais, destinado a transporte público / Valor total do orçamento da área de transporte do município *100",
-            "institute_id": 2,
-            "city_id": 180,
-            "period": "anual",
-            "region_name": null,
-            "value": "32.1055485270197",
-            "observations": null,
-            "variation_order": null,
-            "goal_explanation": "Destinar 100% dos recursos públicos da área para a melhoria substantiva do transporte público.",
-            "goal_operator": null,
-            "tags": null,
-            "goal": null,
-            "sources": [
-                "Secretaria Municipal de Desenvolvimento Urbano Sustentável - Goiânia",
-                "Secretaria Municipal de Trânsito, Transportes e Mobilidade - Goiânia"
-            ],
-            "explanation": "Percentual do orçamento do município destinado ao transporte público.",
-            "updated_at": "2013-11-06 08:52:08.597114",
-            "goal_source": "Programa Cidades Sustentáveis",
-            "user_id": 763,
-            "variation_name": "",
-            "technical_information": null
-        }
-    ]
-}</code></pre>
+<pre class="precode"><code class="language-javascript">
+{
+    budgets [
+            [0] {
+                    business_name       "FUNDAÇÃO PARA O DESENVOLVIMENTO DAS ARTES E DA COMUNICAÇÃO",
+                    business_name_url   "fundacao-para-o-desenvolvimento-das-artes-e-da-comunicacao",
+                    cnpj                3349489000108,
+                    dedicated_value     2408894,
+                    dedicated_year      2014,
+                    id                  53714,
+                    liquidated_value    2408894,
+                    observation         "CT 51/SMADS/13 - FUNDAC (MARÇO)",
+                    organ_code          93,
+                    organ_name          "Fundo Municipal de Assistência Social"
+                }
+            ...
+        ],
+    description              "Prioridade para implementação das ações nas Subprefeituras com maior concentração de famílias em situação de extrema pobreza e pobreza. Busca Ativa apoiada pelas áreas de interface e sociedade civil. Disponibilização de espaços públicos e equipamentos municipais para ações cadastrais.",
+    expected_budget          103305927,
+    goal_number              1,
+    id                       1,
+    name                     "Inserir aproximadamente 280 mil famílias com renda de até meio salário mínimo no Cadastro Único para atingir 773 mil famílias cadastradas",
+    objective     {
+                    id     1,
+                    name   "Desenvolvimento Social"
+                  },
+    percentages   {
+                    owned       124.94678571429,
+                    remainder   -24.946785714286
+                  },
+    project   [
+                [0] {
+                      id          2805,
+                      latitude    0,
+                      longitude   0,
+                      name        "Famílias inseridas no Cadastro Único",
+                      region_id   undef
+                    }
+              ],
+    qualitative_progress_1   "349 mil famílias inseridas no Cadastro Único de janeiro de 2013 a julho de 2014 superando a meta prevista para o final de 2016 em mais de 20%.",
+    qualitative_progress_2   "O número de famílias cadastradas em dezembro de 2012 era de 493 mil. Em julho de 2013 este número passou para 709.595, chegando a 922.259 em julho de 2014, data da última atualização do CadÚnico. ",
+    qualitative_progress_3   "350 entrevistadores contratados em novembro de 2013 para a realização de novos cadastros.",
+    qualitative_progress_4   "200 Agentes de Saúde e  22 Agentes de Gestão de Politicas Públicas de Unidades Básicas de Saúde (UBS) capacitados como entrevistadores para a realização de novos cadastros.",
+    qualitative_progress_5   "",
+    qualitative_progress_6   "",
+    region                   []
+ }
 
 
-<h3 id="id_sample_of_download_variables" data-animated-anchor-offset="-60">/download-variables [%voltar_link|none%]</h3>
+</code></pre>
+
+<h3 id="id_sample_of_users" data-animated-anchor-offset="-60">/public/projects [%voltar_link|none%]</h3>
 
 <p>[%l('Exemplo de retorno:')%]</p>
-<pre class="precode"><code class="language-javascript">$.get('/download-variables', function(ret){console.log(ret)}); // after execute this
+<pre class="precode"><code class="language-javascript">
+projects [
+         [0]
+            {
+            goal  [
+                  [0] {
+                      id     48,
+                      name   "Requalificar 50 equipamentos esportivos entre Centros Desportivos da Comunidade (CDC) e Clubes-Escola"
+                      }
+                  ],
+            id                       4097,
+            latitude                 -23.587902,
+            longitude                -46.596807,
+            name                     "Equipamento esportivo - CEE Flávio Calabrese Conti",
+            percentage               1,
+            project_number           1342,
+            qualitative_progress_1   undef,
+            qualitative_progress_2   undef,
+            qualitative_progress_3   undef,
+            qualitative_progress_4   undef,
+            qualitative_progress_5   undef,
+            updated_at               undef,
+            url                      "http://localhost/public/projects/4097"
+            }
+        ...    
+        ]
+</code></pre>
 
-ret = {
-    "data": [
-        {
-            "source": null,
-            "measurement_unit_name": null,
-            "valid_from": "01/01/2000",
-            "cognomen": "idh_municipal",
-            "city_name": "São Paulo",
-            "variable_id": 30,
-            "city_id": 1,
-            "is_basic": 1,
-            "institute_id": 2,
-            "period": "anual",
-            "exp_source": null,
-            "value": "0.841",
-            "name": "Índice de Desenvolvimento Humano (IDH) Municipal",
-            "observations": null,
-            "updated_at": "2012-11-28 12:10:16.055272",
-            "type": "num",
-            "user_id": 11
-        },
-        {
-            "source": null,
-            "measurement_unit_name": null,
-            "valid_from": "01/01/2000",
-            "cognomen": "expect_vida",
-            "city_name": "São Paulo",
-            "variable_id": 28,
-            "city_id": 1,
-            "is_basic": 1,
-            "institute_id": 2,
-            "period": "anual",
-            "exp_source": null,
-            "value": "71.7",
-            "name": "Expectativa de Vida: Esperança de vida ao nascer",
-            "observations": null,
-            "updated_at": "2013-08-18 13:24:36.795562",
-            "type": "num",
-            "user_id": 11
-        }
-    ]
-}</code></pre>
+<h3 id="id_sample_of_users" data-animated-anchor-offset="-60">/public/projects/* [%voltar_link|none%]</h3>
+
+
+<p>[%l('Exemplo de retorno:')%]</p>
+<pre class="precode"><code class="language-javascript">
+projects [
+         [0]
+            {
+            goal  [
+                  [0] {
+                      id     48,
+                      name   "Requalificar 50 equipamentos esportivos entre Centros Desportivos da Comunidade (CDC) e Clubes-Escola"
+                      }
+                  ],
+            id                       4097,
+            latitude                 -23.587902,
+            longitude                -46.596807,
+            name                     "Equipamento esportivo - CEE Flávio Calabrese Conti",
+            percentage               1,
+            project_number           1342,
+            qualitative_progress_1   undef,
+            qualitative_progress_2   undef,
+            qualitative_progress_3   undef,
+            qualitative_progress_4   undef,
+            qualitative_progress_5   undef,
+            updated_at               undef,
+            url                      "http://localhost/public/projects/4097"
+            }
+        ...    
+        ]
+</code></pre>
+
+<h3 id="id_sample_of_cities" data-animated-anchor-offset="-60">/public/companies [%voltar_link|none%]</h3>
+
+<p>[%l('Exemplo de retorno:')%]</p>
+<pre class="precode"><code class="language-javascript">
+companies [
+            [0]
+            {
+                id         5405,
+                name       "RENATA ASSIS DOS SANTOS",
+                name_url   "renata-assis-dos-santos"
+            }
+            ...
+          ]
+</code></pre>
+
+<h3 id="id_sample_of_networks" data-animated-anchor-offset="-60">/public/companies/5405/budgets [%voltar_link|none%]</h3>
+
+<p>[%l('Exemplo de retorno:')%]</p>
+<pre class="precode"><code class="language-javascript">
+ budgets   [
+         [0] {
+                business_name       "RENATA ASSIS DOS SANTOS",
+                business_name_url   "renata-assis-dos-santos",
+                cnpj                32142040845,
+                dedicated_value     660,
+                goal_number         15,
+                id                  44200,
+                liquidated_value    484,
+                observation         "SP/SM-(SÃO MATEUS)-SP/VP-SB-(SAPOPEMBA) CONTRATAÇÃO DE AGENTE DE RECREAÇÃO-RECREIO NAS FÉRIAS-JANEIRO/2014.",
+                organ_name          "Secretaria Municipal de Educação"
+             },
+         [1] {
+                business_name       "RENATA ASSIS DOS SANTOS",
+                business_name_url   "renata-assis-dos-santos",
+                cnpj                32142040845,
+                dedicated_value     1100,
+                goal_number         15,
+                id                  29770,
+                liquidated_value    1100,
+                observation         "SP/SM-(SÃO MATEUS)-SP/VP-SB-(SAPOPEMBA) CONTRATAÇÃO DE AGENTE DE RECREAÇÃO-RECREIO NAS FÉRIAS-JUNHO/JULHO/2014",
+                organ_name          "Secretaria Municipal de Educação"
+             }
+                                                                                                                           ]
+
+</code></pre>
+
+
+<h3 id="id_sample_of_download_indicators" data-animated-anchor-offset="-60">/public/companies/5405/goals [%voltar_link|none%]</h3>
+
+<p>[%l('Exemplo de retorno:')%]</p>
+<pre class="precode"><code class="language-javascript">
+goals   [
+        [0] {
+                 id     15,
+                 name   "Ampliar a jornada escolar de 100 mil alunos da Rede Municipal de Ensino"     
+            }
+        ...    
+        ]
+
+</code></pre>
+
+
 
     </div>[%# panel-body%]
 
