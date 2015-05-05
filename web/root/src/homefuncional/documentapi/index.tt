@@ -1,3 +1,5 @@
+[%-CALL assets.include("js/download_links.js")%]
+
 [%SET voltar_link = '<small><a class="pull-right" data-animated-anchor href="#endpoints">voltar para endpoints</a></small>'%]
 <h1>Dados abertos</h1>
 <div class="row">
@@ -50,7 +52,106 @@
 
 </div>
 
+<h1><span class="glyphicon glyphicon-floppy-save"></span> Baixar arquivos</h1>
 
+<form role="form">
+
+<div class="row">
+    <div class="form-group col-sm-9">
+
+        <div class="form-group">
+            <div class="grupo">
+                <label>Tabelas</label>
+                <select name="tabela" class="form-control">
+                    <option value="meta" selected="selected">Metas</option>
+                    <option value="projeto" selected="selected">Projetos</option>
+                    <option value="objetivo" selected="selected">Objetivos</option>
+                    <option value="empresa" selected="selected">Empresas</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group col-sm-3">
+        <div class="form-group">
+            <label>Formato</label>
+
+            <select name="formato" class="form-control">
+                <option value="csv" selected="selected">CSV</option>
+                <option value="xls">XLS</option>
+                <option value="xml">XML</option>
+                <option value="json">JSON</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<legend>Links</legend>
+
+    <h4>Arquivo das tabelas</h4>
+    <p>
+    <div class="row">
+        <div class="col-md-9 col-sm-7">
+            <input type="text" onclick="this.focus();this.select()" name="url" readonly="readonly" style="background-color: #d6e9c6" class="form-control"/>
+        </div>
+        <div class="col-md-3 col-sm-5">
+            <a target="_blank" id="id_link" class="btn form-control btn-success"  href="">Efetuar download das tabelas<span class="glyphicon glyphicon-download"></span></a>
+        </div>
+    </div>
+    </p>
+
+<legend>[%l('Informações contidas nos arquivos')%]</legend>
+
+    <div class="row" >
+        <div class="col-sm-6">
+            <h4>[%l('Arquivo de indicadores')%]</h4>
+            <ul>
+                <li><strong>[%l('Nome da cidade')%]</strong></li>
+                <li><strong>[%l('Nome do indicador')%]</strong></li>
+                <li><strong>[%l('Data')%]</strong></li>
+                <li><strong>[%l('Valor')%]</strong></li>
+                <li>[%l('ID da cidade')%]</li>
+                <li>[%l('Eixo')%]</li>
+                <li>[%l('ID Indicador')%]</li>
+                <li>[%l('Formula do indicador')%]</li>
+                <li>[%l('Meta do indicador')%]</li>
+                <li>[%l('Descrição da meta do indicador')%]</li>
+                <li>[%l('Fonte da meta do indicador')%]</li>
+                <li>[%l('Operação da meta do indicador')%]</li>
+                <li>[%l('Descrição do indicador')%]</li>
+                <li>[%l('Tags do indicador')%]</li>
+                <li>[%l('Observações do indicador')%]</li>
+                <li>[%l('Período do indicador')%]</li>
+                <li>[%l('Faixa')%]</li>
+                <li>[%l('Meta do valor')%]</li>
+                <li>[%l('Justificativa do valor não preenchido')%]</li>
+                <li>[%l('Região')%], [%l('se existir')%]</li>
+                <li>[%l('Fontes')%]</li>
+            </ul>
+
+        </div>
+        <div class="col-sm-6">
+            <h4>[%l('Arquivo de variáveis')%]</h4>
+
+            <ul>
+                <li><strong>[%l('Nome da cidade')%]</strong></li>
+                <li><strong>[%l('Nome')%]</strong></li>
+                <li><strong>[%l('Data')%]</strong></li>
+                <li><strong>[%l('Valor')%]</strong></li>
+                <li>[%l('ID da cidade')%]</li>
+                <li>[%l('ID')%]</li>
+                <li>[%l('Tipo')%]</li>
+                <li>[%l('Apelido')%]</li>
+                <li>[%l('Período de atualização')%]</li>
+                <li>[%l('Fonte')%]</li>
+                <li>[%l('É Básica?')%]</li>
+                <li>[%l('Unidade de medida')%]</li>
+                <li>[%l('Observações')%]</li>
+                <li>[%l('Fonte do valor')%]</li>
+            </ul>
+        </div>
+    </div>
+</form>
 
 <div class="panel panel-info">
     <div class="panel-heading" id="id_api" data-animated-anchor-offset="-60">
@@ -122,8 +223,8 @@
 
         </tr>
         <tr>
-            <th><pre><a data-animated-anchor href="#sample_of_users">/public/objectives/*</a></pre></th>
-            <td>Lista de todos os atributos do projeto específico</td>
+            <th><pre><a data-animated-anchor href="#sample_of_users">/public/objectives</a></pre></th>
+            <td>Lista de todos os objetivos</td>
             <td>-</td>
 
         </tr>

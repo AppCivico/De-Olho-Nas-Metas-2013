@@ -69,8 +69,14 @@ sub result_GET {
                   id
                   name
                   description
-                  expected_budget
+                  project_count
                   goal_number
+                  expected_start_date
+                  expected_end_date
+                  updated_at
+                  expected_budget
+                  transversality
+                  will_be_delivered
                   qualitative_progress_1
                   qualitative_progress_2
                   qualitative_progress_3
