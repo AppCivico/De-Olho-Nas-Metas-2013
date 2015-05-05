@@ -121,6 +121,12 @@
             </td>
 
         </tr>
+        <tr>
+            <th><pre><a data-animated-anchor href="#sample_of_users">/public/objectives/*</a></pre></th>
+            <td>Lista de todos os atributos do projeto específico</td>
+            <td>-</td>
+
+        </tr>
 
         <tr>
             <th><pre><a data-animated-anchor href="#sample_of_networks">/public/companies</a></pre></th>
@@ -184,7 +190,7 @@ goals
         qualitative_progress_6   "",
         transversality           "juventude-viva  sp-carinhosa   pop rua",
         updated_at               undef,
-        url                      "http://localhost/public/goals/1",
+        url                      "http://www.deolhonasmetas.org.br/api/public/goals/1",
         will_be_delivered        "280 mil famílias inscritas no Cadastro Único"
         }
         ...
@@ -233,12 +239,12 @@ goals
                       region_id   undef
                     }
               ],
-    qualitative_progress_1   "349 mil famílias inseridas no Cadastro Único de janeiro de 2013 a julho de 2014 superando a meta prevista para o final de 2016 em mais de 20%.",
-    qualitative_progress_2   "O número de famílias cadastradas em dezembro de 2012 era de 493 mil. Em julho de 2013 este número passou para 709.595, chegando a 922.259 em julho de 2014, data da última atualização do CadÚnico. ",
-    qualitative_progress_3   "350 entrevistadores contratados em novembro de 2013 para a realização de novos cadastros.",
-    qualitative_progress_4   "200 Agentes de Saúde e  22 Agentes de Gestão de Politicas Públicas de Unidades Básicas de Saúde (UBS) capacitados como entrevistadores para a realização de novos cadastros.",
-    qualitative_progress_5   "",
-    qualitative_progress_6   "",
+    qualitative_progress_1:   "349 mil famílias inseridas no Cadastro Único de janeiro de 2013 a julho de 2014 superando a meta prevista para o final de 2016 em mais de 20%.",
+    qualitative_progress_2:   "O número de famílias cadastradas em dezembro de 2012 era de 493 mil. Em julho de 2013 este número passou para 709.595, chegando a 922.259 em julho de 2014, data da última atualização do CadÚnico. ",
+    qualitative_progress_3:   "350 entrevistadores contratados em novembro de 2013 para a realização de novos cadastros.",
+    qualitative_progress_4:   "200 Agentes de Saúde e  22 Agentes de Gestão de Politicas Públicas de Unidades Básicas de Saúde (UBS) capacitados como entrevistadores para a realização de novos cadastros.",
+    qualitative_progress_5:   "",
+    qualitative_progress_6:   "",
     region                   []
  }
 
@@ -270,7 +276,7 @@ projects [
             qualitative_progress_4   undef,
             qualitative_progress_5   undef,
             updated_at               undef,
-            url                      "http://localhost/public/projects/4097"
+            url                      "http://www.deolhonasmetas.org.br/api/public/projects/4097"
             }
         ...    
         ]
@@ -302,10 +308,49 @@ projects [
             qualitative_progress_4   undef,
             qualitative_progress_5   undef,
             updated_at               undef,
-            url                      "http://localhost/public/projects/4097"
+            url                      "http://www.deolhonasmetas.org.br/api/public/projects/4097"
             }
         ...    
         ]
+</code></pre>
+<h3 id="id_sample_of_users" data-animated-anchor-offset="-60">/public/objectives [%voltar_link|none%]</h3>
+
+
+<p>[%l('Exemplo de retorno:')%]</p>
+<pre class="precode"><code class="language-javascript">
+objectives [
+            [0]  {
+                    id     18,
+                    name   "Atendimento ao Cidadão",
+                    url    "http://www.deolhonasmetas.org.br/api/public/objectives/18"
+                 },
+            [1]  {
+                    id     4,
+                    name   "Cultura",
+                    url    "http://www.deolhonasmetas.org.br/api/public/objectives/4"
+                 },
+            [2]  {
+                    id     12,
+                    name   "Desenvolvimento Econômico",
+                    url    "http://www.deolhonasmetas.org.br/api/public/objectives/12"
+                 },
+            [3]  {
+                    id     1,
+                    name   "Desenvolvimento Social",
+                    url    "http://www.deolhonasmetas.org.br/api/public/objectives/1"
+                 },
+            [4]  {
+                    id     20,
+                    name   "Desenvolvimento Urbano",
+                    url    "http://www.deolhonasmetas.org.br/api/public/objectives/20"
+                 },
+            [5]  {
+                    id     9,
+                    name   "Direitos Humanos e Cidadania",
+                    url    "http://www.deolhonasmetas.org.br/api/public/objectives/9"
+                 },
+            ...
+           ]
 </code></pre>
 
 <h3 id="id_sample_of_cities" data-animated-anchor-offset="-60">/public/companies [%voltar_link|none%]</h3>
