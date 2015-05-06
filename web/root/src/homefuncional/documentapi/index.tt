@@ -9,8 +9,8 @@
 
 
     <div class="col-md-10 col-sm-12">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
+        <div class="">
+            <div class="">
                 <h3 class="panel-title">'O que são dados abertos?</h3>
             </div>
             <div class="panel-body">
@@ -36,9 +36,9 @@
 
 
     <div class="col-md-5 col-sm-6">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">API [%l('para desenvolvedores')%]</h3>
+        <div class="">
+            <div class="">
+                <h3 class="panel-title">API para desenvolvedores</h3>
             </div>
             <div class="panel-body">
                 <p>Você também pode consultar os dados que estão armazenados no SMM via API.</p>
@@ -64,6 +64,7 @@
                 <label>Tabelas</label>
                 <select name="tabela" class="form-control">
                     <option value="meta" selected="selected">Metas</option>
+                    <option value="orcamento" selected="selected">Orçamentos</option>
                     <option value="projeto" selected="selected">Projetos</option>
                     <option value="objetivo" selected="selected">Objetivos</option>
                     <option value="empresa" selected="selected">Empresas</option>
@@ -102,54 +103,86 @@
 
 <legend>[%l('Informações contidas nos arquivos')%]</legend>
 
+            <h4>Campos dos arquivos</h4>
     <div class="row" >
-        <div class="col-sm-6">
-            <h4>[%l('Arquivo de indicadores')%]</h4>
+        <div class="col-sm-2">
+            <h2>Meta</h2>
             <ul>
-                <li><strong>[%l('Nome da cidade')%]</strong></li>
-                <li><strong>[%l('Nome do indicador')%]</strong></li>
-                <li><strong>[%l('Data')%]</strong></li>
-                <li><strong>[%l('Valor')%]</strong></li>
-                <li>[%l('ID da cidade')%]</li>
-                <li>[%l('Eixo')%]</li>
-                <li>[%l('ID Indicador')%]</li>
-                <li>[%l('Formula do indicador')%]</li>
-                <li>[%l('Meta do indicador')%]</li>
-                <li>[%l('Descrição da meta do indicador')%]</li>
-                <li>[%l('Fonte da meta do indicador')%]</li>
-                <li>[%l('Operação da meta do indicador')%]</li>
-                <li>[%l('Descrição do indicador')%]</li>
-                <li>[%l('Tags do indicador')%]</li>
-                <li>[%l('Observações do indicador')%]</li>
-                <li>[%l('Período do indicador')%]</li>
-                <li>[%l('Faixa')%]</li>
-                <li>[%l('Meta do valor')%]</li>
-                <li>[%l('Justificativa do valor não preenchido')%]</li>
-                <li>[%l('Região')%], [%l('se existir')%]</li>
-                <li>[%l('Fontes')%]</li>
+                <li><strong>ID da meta</strong></li>
+                <li><strong>Nome</strong></li>
+                <li><strong>Descrição</strong></li>
+                <li><strong>Orçamento esperado</strong></li>
+                <li>Número da meta</li>
+                <li>Data de atualização</li>
+                <li>Data esperada para início</li>
+                <li>Data esperada para termino</li>
+                <li>Será entregue</li>
+                <li>Transversalidade</li>
+                <li>Progresso Qualitativo 1</li>
+                <li>Progresso Qualitativo 2</li>
+                <li>Progresso Qualitativo 3</li>
+                <li>Progresso Qualitativo 4</li>
+                <li>Progresso Qualitativo 5</li>
+                <li>Progresso Qualitativo 6</li>
             </ul>
 
         </div>
-        <div class="col-sm-6">
-            <h4>[%l('Arquivo de variáveis')%]</h4>
+        <div class="col-sm-2">
+            <h2>Projeto</h2>
 
             <ul>
-                <li><strong>[%l('Nome da cidade')%]</strong></li>
-                <li><strong>[%l('Nome')%]</strong></li>
-                <li><strong>[%l('Data')%]</strong></li>
-                <li><strong>[%l('Valor')%]</strong></li>
-                <li>[%l('ID da cidade')%]</li>
-                <li>[%l('ID')%]</li>
-                <li>[%l('Tipo')%]</li>
-                <li>[%l('Apelido')%]</li>
-                <li>[%l('Período de atualização')%]</li>
-                <li>[%l('Fonte')%]</li>
-                <li>[%l('É Básica?')%]</li>
-                <li>[%l('Unidade de medida')%]</li>
-                <li>[%l('Observações')%]</li>
-                <li>[%l('Fonte do valor')%]</li>
+                <li><strong>ID do projeto</strong></li>
+                <li><strong>Nome</strong></li>
+                <li><strong>latitude</strong></li>
+                <li><strong>longitude</strong></li>
+                <li>Número do projeto</li>
+                <li>Progresso Qualitativo 1</li>
+                <li>Progresso Qualitativo 2</li>
+                <li>Progresso Qualitativo 3</li>
+                <li>Progresso Qualitativo 4</li>
+                <li>Progresso Qualitativo 5</li>
+                <li>Progresso Qualitativo 6</li>
+                <li>Porcentagem</li>
+                <li>Data de atualização</li>
             </ul>
         </div>
+        <div class="col-sm-2">
+            <h2>Objetivo</h2>
+
+            <ul>
+                <li><strong>ID do objetivo</strong></li>
+                <li><strong>Nome</strong></li>
+                <li><strong>Data de atualização</strong></li>
+            </ul>
+        </div>
+        <div class="col-sm-2">
+            <h2>Empresa</h2>
+
+            <ul>
+                <li><strong>ID da empresa</strong></li>
+                <li><strong>Nome</strong></li>
+                <li><strong>Url do nome</strong></li>
+            </ul>
+        </div>
+        <div class="col-sm-2">
+            <h2>Orçamento</h2>
+
+            <ul>
+                <li><strong>ID do orçamento</strong></li>
+                <li><strong>Nome da empresa</strong></li>
+                <li><strong>CNPJ</strong></li>
+                <li>Número da meta</li>
+                <li>Valor Dedicado</li>
+                <li>Valor liquidado</li>
+                <li>Observação</li>
+                <li>Código de contrato</li>
+                <li>Código da organização</li>
+                <li>Nome da organização</li>
+                <li>Id da empresa</li>
+                <li>Data de atualização</li>
+            </ul>
+        </div>
+
     </div>
 </form>
 
@@ -272,27 +305,27 @@ goals
     [
       [0]
         {
-        description              "Prioridade para implementação das ações nas Subprefeituras com maior concentração de famílias em situação de extrema pobreza e pobreza. Busca Ativa apoiada pelas áreas de interface e sociedade civil. Disponibilização de espaços públicos e equipamentos municipais para ações cadastrais.",
-        expected_budget          103305927,
-        expected_end_date        undef,
-        expected_start_date      undef,
-        goal_number              1,
-        id                       1,
-        name                     "Inserir aproximadamente 280 mil famílias com renda de até meio salário mínimo no Cadastro Único para atingir 773 mil famílias cadastradas",
-        percentage               {
-                 owned   124.94678571429
-        },
-        project_count            1,
-        qualitative_progress_1   "349 mil famílias inseridas no Cadastro Único de janeiro de 2013 a julho de 2014, superando a meta prevista para o final de 2016 em mais de 20%.",
-        qualitative_progress_2   "O número de famílias cadastradas em dezembro de 2012 era de 493 mil. Em julho de 2013 este número passou para 709.595, chegando a 922.259 em julho de 2014, data da última atualização do CadÚnico. ",
-        qualitative_progress_3   "350 entrevistadores contratados em novembro de 2013 para a realização de novos cadastros.",
-        qualitative_progress_4   "200 Agentes de Saúde e  22 Agentes de Gestão de Politicas Públicas de Unidades Básicas de Saúde (UBS) capacitados como entrevistadores para a realização de novos cadastros.",
-        qualitative_progress_5   "",
-        qualitative_progress_6   "",
-        transversality           "juventude-viva  sp-carinhosa   pop rua",
-        updated_at               undef,
-        url                      "http://www.deolhonasmetas.org.br/api/public/goals/1",
-        will_be_delivered        "280 mil famílias inscritas no Cadastro Único"
+        description:              "Prioridade para implementação das ações nas Subprefeituras com maior concentração de famílias em situação de extrema pobreza e pobreza. Busca Ativa apoiada pelas áreas de interface e sociedade civil. Disponibilização de espaços públicos e equipamentos municipais para ações cadastrais.",
+        expected_budget:          103305927,
+        expected_end_date:        undef,
+        expected_start_date:      undef,
+        goal_number:              1,
+        id:                       1,
+        name:                     "Inserir aproximadamente 280 mil famílias com renda de até meio salário mínimo no Cadastro Único para atingir 773 mil famílias cadastradas",
+        percentage:              {
+                 owned:             124.94678571429
+                                 },
+        project_count:            1,
+        qualitative_progress_1:   "349 mil famílias inseridas no Cadastro Único de janeiro de 2013 a julho de 2014, superando a meta prevista para o final de 2016 em mais de 20%.",
+        qualitative_progress_2:   "O número de famílias cadastradas em dezembro de 2012 era de 493 mil. Em julho de 2013 este número passou para 709.595, chegando a 922.259 em julho de 2014, data da última atualização do CadÚnico. ",
+        qualitative_progress_3:   "350 entrevistadores contratados em novembro de 2013 para a realização de novos cadastros.",
+        qualitative_progress_4:   "200 Agentes de Saúde e  22 Agentes de Gestão de Politicas Públicas de Unidades Básicas de Saúde (UBS) capacitados como entrevistadores para a realização de novos cadastros.",
+        qualitative_progress_5:   "",
+        qualitative_progress_6:   "",
+        transversality:           "juventude-viva  sp-carinhosa   pop rua",
+        updated_at:               undef,
+        url:                      "http://www.deolhonasmetas.org.br/api/public/goals/1",
+        will_be_delivered:        "280 mil famílias inscritas no Cadastro Único"
         }
         ...
     ]
@@ -303,50 +336,50 @@ goals
 <p>[%l('Exemplo de retorno:')%]</p>
 <pre class="precode"><code class="language-javascript">
 {
-    budgets [
-            [0] {
-                    business_name       "FUNDAÇÃO PARA O DESENVOLVIMENTO DAS ARTES E DA COMUNICAÇÃO",
-                    business_name_url   "fundacao-para-o-desenvolvimento-das-artes-e-da-comunicacao",
-                    cnpj                3349489000108,
-                    dedicated_value     2408894,
-                    dedicated_year      2014,
-                    id                  53714,
-                    liquidated_value    2408894,
-                    observation         "CT 51/SMADS/13 - FUNDAC (MARÇO)",
-                    organ_code          93,
-                    organ_name          "Fundo Municipal de Assistência Social"
-                }
-            ...
-        ],
-    description              "Prioridade para implementação das ações nas Subprefeituras com maior concentração de famílias em situação de extrema pobreza e pobreza. Busca Ativa apoiada pelas áreas de interface e sociedade civil. Disponibilização de espaços públicos e equipamentos municipais para ações cadastrais.",
-    expected_budget          103305927,
-    goal_number              1,
-    id                       1,
-    name                     "Inserir aproximadamente 280 mil famílias com renda de até meio salário mínimo no Cadastro Único para atingir 773 mil famílias cadastradas",
-    objective     {
-                    id     1,
-                    name   "Desenvolvimento Social"
-                  },
-    percentages   {
-                    owned       124.94678571429,
-                    remainder   -24.946785714286
-                  },
-    project   [
-                [0] {
-                      id          2805,
-                      latitude    0,
-                      longitude   0,
-                      name        "Famílias inseridas no Cadastro Único",
-                      region_id   undef
-                    }
-              ],
+    budgets:                  [
+                                [0] {
+                                        business_name:       "FUNDAÇÃO PARA O DESENVOLVIMENTO DAS ARTES E DA COMUNICAÇÃO",
+                                        business_name_url:   "fundacao-para-o-desenvolvimento-das-artes-e-da-comunicacao",
+                                        cnpj:                3349489000108,
+                                        dedicated_value:     2408894,
+                                        dedicated_year:      2014,
+                                        id:                  53714,
+                                        liquidated_value:    2408894,
+                                        observation:         "CT 51/SMADS/13 - FUNDAC (MARÇO)",
+                                        organ_code:          93,
+                                        organ_name:          "Fundo Municipal de Assistência Social"
+                                    }
+                                ...
+                              ],
+    description:              "Prioridade para implementação das ações nas Subprefeituras com maior concentração de famílias em situação de extrema pobreza e pobreza. Busca Ativa apoiada pelas áreas de interface e sociedade civil. Disponibilização de espaços públicos e equipamentos municipais para ações cadastrais.",
+    expected_budget:          103305927,
+    goal_number:              1,
+    id:                       1,
+    name:                     "Inserir aproximadamente 280 mil famílias com renda de até meio salário mínimo no Cadastro Único para atingir 773 mil famílias cadastradas",
+    objective:                {
+                                id:     1,
+                                name:   "Desenvolvimento Social"
+                              },
+    percentages:              {
+                                owned:       124.94678571429,
+                                remainder:   -24.946785714286
+                              },
+    project:                  [
+                                [0] {
+                                      id:          2805,
+                                      latitude:    0,
+                                      longitude:   0,
+                                      name:        "Famílias inseridas no Cadastro Único",
+                                      region_idi:   undef
+                                    }
+                              ],
     qualitative_progress_1:   "349 mil famílias inseridas no Cadastro Único de janeiro de 2013 a julho de 2014 superando a meta prevista para o final de 2016 em mais de 20%.",
     qualitative_progress_2:   "O número de famílias cadastradas em dezembro de 2012 era de 493 mil. Em julho de 2013 este número passou para 709.595, chegando a 922.259 em julho de 2014, data da última atualização do CadÚnico. ",
     qualitative_progress_3:   "350 entrevistadores contratados em novembro de 2013 para a realização de novos cadastros.",
     qualitative_progress_4:   "200 Agentes de Saúde e  22 Agentes de Gestão de Politicas Públicas de Unidades Básicas de Saúde (UBS) capacitados como entrevistadores para a realização de novos cadastros.",
     qualitative_progress_5:   "",
     qualitative_progress_6:   "",
-    region                   []
+    region:                   []
  }
 
 
@@ -359,25 +392,25 @@ goals
 projects [
          [0]
             {
-            goal  [
-                  [0] {
-                      id     48,
-                      name   "Requalificar 50 equipamentos esportivos entre Centros Desportivos da Comunidade (CDC) e Clubes-Escola"
-                      }
-                  ],
-            id                       4097,
-            latitude                 -23.587902,
-            longitude                -46.596807,
-            name                     "Equipamento esportivo - CEE Flávio Calabrese Conti",
-            percentage               1,
-            project_number           1342,
-            qualitative_progress_1   undef,
-            qualitative_progress_2   undef,
-            qualitative_progress_3   undef,
-            qualitative_progress_4   undef,
-            qualitative_progress_5   undef,
-            updated_at               undef,
-            url                      "http://www.deolhonasmetas.org.br/api/public/projects/4097"
+            goal:                    [
+                                      [0] {
+                                          id:     48,
+                                          name:   "Requalificar 50 equipamentos esportivos entre Centros Desportivos da Comunidade (CDC) e Clubes-Escola"
+                                          }
+                                     ],
+            id:                       4097,
+            latitude:                 -23.587902,
+            longitude:                -46.596807,
+            name:                     "Equipamento esportivo - CEE Flávio Calabrese Conti",
+            percentage:               1,
+            project_number:           1342,
+            qualitative_progress_1:   undef,
+            qualitative_progress_2:   undef,
+            qualitative_progress_3:   undef,
+            qualitative_progress_4:   undef,
+            qualitative_progress_5:   undef,
+            updated_at:               undef,
+            url:                      "http://www.deolhonasmetas.org.br/api/public/projects/4097"
             }
         ...    
         ]
@@ -391,25 +424,25 @@ projects [
 projects [
          [0]
             {
-            goal  [
-                  [0] {
-                      id     48,
-                      name   "Requalificar 50 equipamentos esportivos entre Centros Desportivos da Comunidade (CDC) e Clubes-Escola"
-                      }
-                  ],
-            id                       4097,
-            latitude                 -23.587902,
-            longitude                -46.596807,
-            name                     "Equipamento esportivo - CEE Flávio Calabrese Conti",
-            percentage               1,
-            project_number           1342,
-            qualitative_progress_1   undef,
-            qualitative_progress_2   undef,
-            qualitative_progress_3   undef,
-            qualitative_progress_4   undef,
-            qualitative_progress_5   undef,
-            updated_at               undef,
-            url                      "http://www.deolhonasmetas.org.br/api/public/projects/4097"
+            goal:                    [
+                                      [0] {
+                                          id     48,
+                                          name   "Requalificar 50 equipamentos esportivos entre Centros Desportivos da Comunidade (CDC) e Clubes-Escola"
+                                          }
+                                     ],
+            id:                       4097,
+            latitude:                 -23.587902,
+            longitude:                -46.596807,
+            name:                     "Equipamento esportivo - CEE Flávio Calabrese Conti",
+            percentage:               1,
+            project_number:           1342,
+            qualitative_progress_1:   undef,
+            qualitative_progress_2:   undef,
+            qualitative_progress_3:   undef,
+            qualitative_progress_4:   undef,
+            qualitative_progress_5:   undef,
+            updated_at:               undef,
+            url:                      "http://www.deolhonasmetas.org.br/api/public/projects/4097"
             }
         ...    
         ]
@@ -421,34 +454,34 @@ projects [
 <pre class="precode"><code class="language-javascript">
 objectives [
             [0]  {
-                    id     18,
-                    name   "Atendimento ao Cidadão",
-                    url    "http://www.deolhonasmetas.org.br/api/public/objectives/18"
+                    id:     18,
+                    name:   "Atendimento ao Cidadão",
+                    url:    "http://www.deolhonasmetas.org.br/api/public/objectives/18"
                  },
             [1]  {
-                    id     4,
-                    name   "Cultura",
-                    url    "http://www.deolhonasmetas.org.br/api/public/objectives/4"
+                    id:     4,
+                    name:   "Cultura",
+                    url:    "http://www.deolhonasmetas.org.br/api/public/objectives/4"
                  },
             [2]  {
-                    id     12,
-                    name   "Desenvolvimento Econômico",
-                    url    "http://www.deolhonasmetas.org.br/api/public/objectives/12"
+                    id:     12,
+                    name:   "Desenvolvimento Econômico",
+                    url:    "http://www.deolhonasmetas.org.br/api/public/objectives/12"
                  },
             [3]  {
-                    id     1,
-                    name   "Desenvolvimento Social",
-                    url    "http://www.deolhonasmetas.org.br/api/public/objectives/1"
+                    id:     1,
+                    name:   "Desenvolvimento Social",
+                    url:    "http://www.deolhonasmetas.org.br/api/public/objectives/1"
                  },
             [4]  {
-                    id     20,
-                    name   "Desenvolvimento Urbano",
-                    url    "http://www.deolhonasmetas.org.br/api/public/objectives/20"
+                    id:     20,
+                    name:   "Desenvolvimento Urbano",
+                    url:    "http://www.deolhonasmetas.org.br/api/public/objectives/20"
                  },
             [5]  {
-                    id     9,
-                    name   "Direitos Humanos e Cidadania",
-                    url    "http://www.deolhonasmetas.org.br/api/public/objectives/9"
+                    id:     9,
+                    name:   "Direitos Humanos e Cidadania",
+                    url:    "http://www.deolhonasmetas.org.br/api/public/objectives/9"
                  },
             ...
            ]
@@ -461,9 +494,9 @@ objectives [
 companies [
             [0]
             {
-                id         5405,
-                name       "RENATA ASSIS DOS SANTOS",
-                name_url   "renata-assis-dos-santos"
+                id:         5405,
+                name:       "RENATA ASSIS DOS SANTOS",
+                name_url:   "renata-assis-dos-santos"
             }
             ...
           ]
@@ -475,26 +508,26 @@ companies [
 <pre class="precode"><code class="language-javascript">
  budgets   [
          [0] {
-                business_name       "RENATA ASSIS DOS SANTOS",
-                business_name_url   "renata-assis-dos-santos",
-                cnpj                32142040845,
-                dedicated_value     660,
-                goal_number         15,
-                id                  44200,
-                liquidated_value    484,
-                observation         "SP/SM-(SÃO MATEUS)-SP/VP-SB-(SAPOPEMBA) CONTRATAÇÃO DE AGENTE DE RECREAÇÃO-RECREIO NAS FÉRIAS-JANEIRO/2014.",
-                organ_name          "Secretaria Municipal de Educação"
+                business_name:       "RENATA ASSIS DOS SANTOS",
+                business_name_url:   "renata-assis-dos-santos",
+                cnpj:                32142040845,
+                dedicated_value:     660,
+                goal_number:         15,
+                id:                  44200,
+                liquidated_value:    484,
+                observation:         "SP/SM-(SÃO MATEUS)-SP/VP-SB-(SAPOPEMBA) CONTRATAÇÃO DE AGENTE DE RECREAÇÃO-RECREIO NAS FÉRIAS-JANEIRO/2014.",
+                organ_name:          "Secretaria Municipal de Educação"
              },
          [1] {
-                business_name       "RENATA ASSIS DOS SANTOS",
-                business_name_url   "renata-assis-dos-santos",
-                cnpj                32142040845,
-                dedicated_value     1100,
-                goal_number         15,
-                id                  29770,
-                liquidated_value    1100,
-                observation         "SP/SM-(SÃO MATEUS)-SP/VP-SB-(SAPOPEMBA) CONTRATAÇÃO DE AGENTE DE RECREAÇÃO-RECREIO NAS FÉRIAS-JUNHO/JULHO/2014",
-                organ_name          "Secretaria Municipal de Educação"
+                business_name:       "RENATA ASSIS DOS SANTOS",
+                business_name_url:   "renata-assis-dos-santos",
+                cnpj:                32142040845,
+                dedicated_value:     1100,
+                goal_number:         15,
+                id:                  29770,
+                liquidated_value:    1100,
+                observation:         "SP/SM-(SÃO MATEUS)-SP/VP-SB-(SAPOPEMBA) CONTRATAÇÃO DE AGENTE DE RECREAÇÃO-RECREIO NAS FÉRIAS-JUNHO/JULHO/2014",
+                organ_name:          "Secretaria Municipal de Educação"
              }
                                                                                                                            ]
 
@@ -507,8 +540,8 @@ companies [
 <pre class="precode"><code class="language-javascript">
 goals   [
         [0] {
-                 id     15,
-                 name   "Ampliar a jornada escolar de 100 mil alunos da Rede Municipal de Ensino"     
+                 id:     15,
+                 name:   "Ampliar a jornada escolar de 100 mil alunos da Rede Municipal de Ensino"     
             }
         ...    
         ]

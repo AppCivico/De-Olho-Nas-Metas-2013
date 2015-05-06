@@ -104,7 +104,6 @@ sub _define_lines {
 
     my $data_rs;
     if ( $company eq 'meta' ) {
-        $db    = 'Goal';
         @lines = (
             [
                 map { $self->_loc_str( $c, $_ ) } 'ID da meta',
@@ -126,7 +125,7 @@ sub _define_lines {
             ]
         );
 
-        $data_rs = $c->model( 'DB::' . $db )->search(
+        $data_rs = $c->model('DB::Goal')->search(
             undef,
             {
 
@@ -161,7 +160,8 @@ sub _define_lines {
         $db    = 'Project';
         @lines = (
             [
-                map { $self->_loc_str( $c, $_ ) } 'Nome',
+                map { $self->_loc_str( $c, $_ ) } 'ID do projeto',
+                'Nome',
                 'latitude',
                 'longitude',
                 'Número do Projeto',
@@ -175,13 +175,32 @@ sub _define_lines {
                 'Data de Atualização',
             ]
         );
-        $data_rs = $c->model( 'DB::' . $db )->search(
+        $data_rs = $c->model('DB::Project')->search(
             undef,
             {
                 select       => \@lines,
                 result_class => 'DBIx::Class::ResultClass::HashRefInflator'
             }
         );
+        while ( my $data = $data_rs->next ) {
+            my @this_row = (
+                $data->{id},
+                $data->{name},
+                $data->{latitude},
+                $data->{longitude},
+                $data->{project_number},
+                $data->{qualitative_progress_1},
+                $data->{qualitative_progress_2},
+                $data->{qualitative_progress_3},
+                $data->{qualitative_progress_4},
+                $data->{qualitative_progress_5},
+                $data->{qualitative_progress_6},
+                $data->{percentage},
+                $data->{updated_at},
+            );
+
+            push @lines, \@this_row;
+        }
 
     }
     elsif ( $company eq 'objetivo' ) {
@@ -192,24 +211,27 @@ sub _define_lines {
                 'Nome', 'Data de Atualização',
             ]
         );
-        $data_rs = $c->model( 'DB::' . $db )->search(
+        $data_rs = $c->model('DB::Objective')->search(
             undef,
             {
-                select       => \@lines,
                 result_class => 'DBIx::Class::ResultClass::HashRefInflator'
             }
         );
+        while ( my $data = $data_rs->next ) {
+            my @this_row = ( $data->{id}, $data->{name}, $data->{updated_at}, );
+
+            push @lines, \@this_row;
+        }
 
     }
     elsif ( $company eq 'empresa' ) {
-        $db    = 'Company';
         @lines = (
             [
                 map { $self->_loc_str( $c, $_ ) } 'ID da empresa',
                 'Nome', 'Url do nome',
             ]
         );
-        $data_rs = $c->model( 'DB::' . $db )->search(
+        $data_rs = $c->model('DB::Company')->search(
             undef,
             {
                 select       => \@lines,
@@ -218,6 +240,32 @@ sub _define_lines {
         );
 
     }
+    elsif ( $company eq 'orcamento' ) {
+        @lines = (
+            [
+                map { $self->_loc_str( $c, $_ ) } 'ID do orçamento',
+                'Nome da empresa',
+                'CNPJ',
+                'Número da meta',
+                'Valor Dedicado',
+                'Valor liquidado',
+                'Observação',
+                'Código de contrato',
+                'Código da organização',
+                'Nome da organização',
+                'Id da empresa',
+                'Data de atualização',
+            ]
+        );
+        $data_rs = $c->model('DB::Budget')->search(
+            undef,
+            {
+                result_class => 'DBIx::Class::ResultClass::HashRefInflator'
+            }
+        );
+
+    }
+
     return @lines;
 }
 
