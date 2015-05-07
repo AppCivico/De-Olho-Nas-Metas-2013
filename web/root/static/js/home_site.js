@@ -13,7 +13,6 @@ $(document).ready(function() {
 	
 	$('.page-scroll a').bind('click', function(event) {
         var $anchor = $(this);
-		console.log($($anchor.attr('href')).offset().top);
         $('html, body').stop().animate({
             scrollTop: $($anchor.attr('href')).offset().top - 108
         }, 1500, 'easeInOutExpo');

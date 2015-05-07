@@ -1787,8 +1787,10 @@ section.documentation .block .doc-icon{
 	border-radius: 20px;
 	text-align: center;
 }
+pre {
+  word-wrap: normal;
+}
 pre.precode {
-    word-wrap: normal;
     max-height: 500px;
-    word-wrap: normal;
+    overflow-x: auto;
 }
