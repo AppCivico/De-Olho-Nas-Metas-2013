@@ -182,6 +182,20 @@
                 <li>Data de atualização</li>
             </ul>
         </div>
+        <div class="col-sm-2">
+            <h2>Conselho</h2>
+
+            <ul>
+                <li><strong>ID do conselho</strong></li>
+                <li><strong>Nome do conselho</strong></li>
+                <li><strong>Descrição</strong></li>
+                <li>Telefone</li>
+                <li>Endereço</li>
+                <li>Complemento</li>
+                <li>Código postal</li>
+                <li>Site</li>
+            </ul>
+        </div>
 
     </div>
 </form>
@@ -286,6 +300,16 @@
             <td>
               <ul class="list-unstyled list-param">
                 <li> * => id da empresa</li>
+              </ul>
+
+            </td>
+        </tr>
+         <tr>
+            <th><pre><a data-animated-anchor href="#sample_of_networks">/public/councils</a></pre></th>
+            <td>Lista de todos os conselhos.</td>
+
+            <td>
+              <ul class="list-unstyled list-param">
               </ul>
 
             </td>
@@ -548,6 +572,34 @@ goals   [
 
 </code></pre>
 
+<h3 id="id_sample_of_download_indicators" data-animated-anchor-offset="-60">/public/councils [%voltar_link|none%]</h3>
+
+<p>[%l('Exemplo de retorno:')%]</p>
+<pre class="precode"><code class="language-javascript">
+
+councils => [
+             [0]
+                address    : undef,
+                city       : {
+                                 id   : 1,
+                                 name : "São Paulo",
+                                 state: {
+                                          id  : 25,
+                                          name: "São Paulo"
+                                        }
+                              },
+                 complement : undef,
+                 description: undef,
+                 email      : undef,
+                 id         : 3,
+                 name       : "ARICANDUVA",
+                 phone      : undef,
+                 postal_code: undef,
+                 url        : "http://localhost/public/organizations/3",
+                 website    : undef
+              ...
+            ]
+</code></pre>
 
 
     </div>[%# panel-body%]
