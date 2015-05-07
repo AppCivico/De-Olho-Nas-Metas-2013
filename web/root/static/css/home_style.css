@@ -1763,3 +1763,27 @@ section.statistics .chart-stats{
 .page-signup .council-list{
 	display: none;
 }
+section.documentation{
+	background-color: #f0eee4;
+}
+section.documentation .block{
+	background-color: #fff;
+	padding: 20px;
+}
+section.documentation h1{
+	color: #8d8577;
+}
+section.documentation .block h1,
+section.documentation .block h2,
+section.documentation .block h3,
+section.documentation .block .doc-icon .glyphicon{
+	color: #666056;
+}
+section.documentation .block .doc-icon{
+	max-width: 120px;
+	background-color: #face53;
+	font-size: 3em;
+	padding: 20px;
+	border-radius: 20px;
+	text-align: center;
+}

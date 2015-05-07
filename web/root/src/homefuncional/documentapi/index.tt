@@ -1,611 +1,584 @@
 [%-CALL assets.include("js/download_links.js")%]
 
-[%SET voltar_link = '<small><a class="pull-right" data-animated-anchor href="#endpoints">voltar para endpoints</a></small>'%]
-<h1>Dados abertos</h1>
-<div class="row">
-    <div class="col-sm-2 hidden-sm hidden-xs text-center">
-        <span style="font-size: 8em; margin-top: 0.4em; color: #428bca;" class="glyphicon glyphicon-folder-open"></span>
-    </div>
+<section class="documentation">
+    <div class="container">
+        [%SET voltar_link = '<small><a class="pull-right" data-animated-anchor href="#endpoints">voltar para endpoints</a></small>'%]
+        <h1>Dados abertos</h1>
 
-
-    <div class="col-md-10 col-sm-12">
-        <div class="">
-            <div class="">
-                <h3 class="panel-title">'O que são dados abertos?</h3>
+        <div class="block">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="doc-icon">
+                        <span class="glyphicon glyphicon-folder-open"></span>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <h3>O que são dados abertos?</h3>
+                    <p>Segundo a definição da Open Knowledge Foundation, em suma:</p>
+                    <blockquote class="pull-right">
+                        <p>dados são abertos quando qualquer pessoa pode livremente usá-los, reutilizá-los e redistribuí-los, estando sujeito a, no máximo, a exigência de creditar a sua autoria e compartilhar pela mesma licença.</p>
+                        <small><cite title="Open Knowledge Foundation"><a href="http://opendatahandbook.org/pt_BR/what-is-open-data/index.html" rel="nofollow" target="_blank">Open Knowledge Foundation</a></cite></small>
+                    </blockquote>
+                    <p>Você pode saber mais sobre o assunto acessando <a href="http://dados.gov.br/dados-abertos/" target="_blank" rel="nofollow">o Portal de dados abertos do Brasil</a>.</p>
+                </div>
             </div>
-            <div class="panel-body">
-                <p>'Segundo a definição da Open Knowledge Foundation, em suma,</p>
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="doc-icon">
+                        <span class="glyphicon glyphicon glyphicon-transfer"></span>    
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <h3>API para desenvolvedores</h3>
+                    <p>Você também pode consultar os dados que estão armazenados no SMM via API.</p>
 
-                <blockquote class="pull-right">
-                    <p>dados são abertos quando qualquer pessoa pode livremente usá-los, reutilizá-los e redistribuí-los, estando sujeito a, no máximo, a exigência de creditar a sua autoria e compartilhar pela mesma licença.</p>
-                    <small><cite title="Open Knowledge Foundation"><a href="http://opendatahandbook.org/pt_BR/what-is-open-data/index.html" rel="nofollow" target="_blank">Open Knowledge Foundation</a></cite></small>
-                </blockquote>
-
-                <p>Você pode saber mais sobre o assunto acessando <a href="http://dados.gov.br/dados-abertos/" target="_blank" rel="nofollow">o Portal de dados abertos do Brasil</a>.</p>
-
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<div class="row">
-    <div class="col-sm-2 hidden-sm hidden-xs text-center">
-        <span style="font-size: 5em; margin-top: 0.4em; color: #3a87ad;" class="glyphicon glyphicon glyphicon-transfer"></span>
-    </div>
-
-
-    <div class="col-md-5 col-sm-6">
-        <div class="">
-            <div class="">
-                <h3 class="panel-title">API para desenvolvedores</h3>
-            </div>
-            <div class="panel-body">
-                <p>Você também pode consultar os dados que estão armazenados no SMM via API.</p>
-
-                <p>Para saber mais, navegue até a seção <a data-animated-anchor href="#api">API</a></p>
-
+                    <p>Para saber mais, navegue até a seção <a data-animated-anchor href="#api">API</a></p>
+                </div>
             </div>
         </div>
-    </div>
+    
+        <h1><span class="glyphicon glyphicon-floppy-save"></span> Baixar arquivos</h1>
 
+        <div class="block">
+            <form role="form">
+            <div class="row">
+                <div class="form-group col-sm-9">
 
-</div>
+                    <div class="form-group">
+                        <div class="grupo">
+                            <label>Tabelas</label>
+                            <select name="tabela" class="form-control">
+                                <option value="meta" selected="selected">Metas</option>
+                                <option value="orcamento" selected="selected">Orçamentos</option>
+                                <option value="projeto" selected="selected">Projetos</option>
+                                <option value="objetivo" selected="selected">Objetivos</option>
+                                <option value="empresa" selected="selected">Empresas</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
-<h1><span class="glyphicon glyphicon-floppy-save"></span> Baixar arquivos</h1>
+                <div class="form-group col-sm-3">
+                    <div class="form-group">
+                        <label>Formato</label>
 
-<form role="form">
-
-<div class="row">
-    <div class="form-group col-sm-9">
-
-        <div class="form-group">
-            <div class="grupo">
-                <label>Tabelas</label>
-                <select name="tabela" class="form-control">
-                    <option value="meta" selected="selected">Metas</option>
-                    <option value="orcamento" selected="selected">Orçamentos</option>
-                    <option value="projeto" selected="selected">Projetos</option>
-                    <option value="objetivo" selected="selected">Objetivos</option>
-                    <option value="empresa" selected="selected">Empresas</option>
-                </select>
+                        <select name="formato" class="form-control">
+                            <option value="csv" selected="selected">CSV</option>
+                            <option value="xls">XLS</option>
+                            <option value="xml">XML</option>
+                            <option value="json">JSON</option>
+                        </select>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 
-    <div class="form-group col-sm-3">
-        <div class="form-group">
-            <label>Formato</label>
+            <legend>Links</legend>
 
-            <select name="formato" class="form-control">
-                <option value="csv" selected="selected">CSV</option>
-                <option value="xls">XLS</option>
-                <option value="xml">XML</option>
-                <option value="json">JSON</option>
-            </select>
-        </div>
-    </div>
-</div>
+                <h4>Arquivo das tabelas</h4>
+                <p>
+                <div class="row">
+                    <div class="col-md-9 col-sm-7">
+                        <input type="text" onclick="this.focus();this.select()" name="url" readonly="readonly" style="background-color: #d6e9c6" class="form-control"/>
+                    </div>
+                    <div class="col-md-3 col-sm-5">
+                        <a target="_blank" id="id_link" class="btn form-control btn-success"  href="">Efetuar download das tabelas<span class="glyphicon glyphicon-download"></span></a>
+                    </div>
+                </div>
+                </p>
 
-<legend>Links</legend>
+            <legend>[%l('Informações contidas nos arquivos')%]</legend>
 
-    <h4>Arquivo das tabelas</h4>
-    <p>
-    <div class="row">
-        <div class="col-md-9 col-sm-7">
-            <input type="text" onclick="this.focus();this.select()" name="url" readonly="readonly" style="background-color: #d6e9c6" class="form-control"/>
-        </div>
-        <div class="col-md-3 col-sm-5">
-            <a target="_blank" id="id_link" class="btn form-control btn-success"  href="">Efetuar download das tabelas<span class="glyphicon glyphicon-download"></span></a>
-        </div>
-    </div>
-    </p>
+                        <h4>Campos dos arquivos</h4>
+                <div class="row" >
+                    <div class="col-sm-2">
+                        <h2>Meta</h2>
+                        <ul>
+                            <li><strong>ID da meta</strong></li>
+                            <li><strong>Nome</strong></li>
+                            <li><strong>Descrição</strong></li>
+                            <li><strong>Orçamento esperado</strong></li>
+                            <li>Número da meta</li>
+                            <li>Data de atualização</li>
+                            <li>Data esperada para início</li>
+                            <li>Data esperada para termino</li>
+                            <li>Será entregue</li>
+                            <li>Transversalidade</li>
+                            <li>Progresso Qualitativo 1</li>
+                            <li>Progresso Qualitativo 2</li>
+                            <li>Progresso Qualitativo 3</li>
+                            <li>Progresso Qualitativo 4</li>
+                            <li>Progresso Qualitativo 5</li>
+                            <li>Progresso Qualitativo 6</li>
+                        </ul>
 
-<legend>[%l('Informações contidas nos arquivos')%]</legend>
+                    </div>
+                    <div class="col-sm-2">
+                        <h2>Projeto</h2>
 
-            <h4>Campos dos arquivos</h4>
-    <div class="row" >
-        <div class="col-sm-2">
-            <h2>Meta</h2>
-            <ul>
-                <li><strong>ID da meta</strong></li>
-                <li><strong>Nome</strong></li>
-                <li><strong>Descrição</strong></li>
-                <li><strong>Orçamento esperado</strong></li>
-                <li>Número da meta</li>
-                <li>Data de atualização</li>
-                <li>Data esperada para início</li>
-                <li>Data esperada para termino</li>
-                <li>Será entregue</li>
-                <li>Transversalidade</li>
-                <li>Progresso Qualitativo 1</li>
-                <li>Progresso Qualitativo 2</li>
-                <li>Progresso Qualitativo 3</li>
-                <li>Progresso Qualitativo 4</li>
-                <li>Progresso Qualitativo 5</li>
-                <li>Progresso Qualitativo 6</li>
-            </ul>
+                        <ul>
+                            <li><strong>ID do projeto</strong></li>
+                            <li><strong>Nome</strong></li>
+                            <li><strong>latitude</strong></li>
+                            <li><strong>longitude</strong></li>
+                            <li>Número do projeto</li>
+                            <li>Progresso Qualitativo 1</li>
+                            <li>Progresso Qualitativo 2</li>
+                            <li>Progresso Qualitativo 3</li>
+                            <li>Progresso Qualitativo 4</li>
+                            <li>Progresso Qualitativo 5</li>
+                            <li>Progresso Qualitativo 6</li>
+                            <li>Porcentagem</li>
+                            <li>Data de atualização</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-2">
+                        <h2>Objetivo</h2>
 
-        </div>
-        <div class="col-sm-2">
-            <h2>Projeto</h2>
+                        <ul>
+                            <li><strong>ID do objetivo</strong></li>
+                            <li><strong>Nome</strong></li>
+                            <li><strong>Data de atualização</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-2">
+                        <h2>Empresa</h2>
 
-            <ul>
-                <li><strong>ID do projeto</strong></li>
-                <li><strong>Nome</strong></li>
-                <li><strong>latitude</strong></li>
-                <li><strong>longitude</strong></li>
-                <li>Número do projeto</li>
-                <li>Progresso Qualitativo 1</li>
-                <li>Progresso Qualitativo 2</li>
-                <li>Progresso Qualitativo 3</li>
-                <li>Progresso Qualitativo 4</li>
-                <li>Progresso Qualitativo 5</li>
-                <li>Progresso Qualitativo 6</li>
-                <li>Porcentagem</li>
-                <li>Data de atualização</li>
-            </ul>
-        </div>
-        <div class="col-sm-2">
-            <h2>Objetivo</h2>
+                        <ul>
+                            <li><strong>ID da empresa</strong></li>
+                            <li><strong>Nome</strong></li>
+                            <li><strong>Url do nome</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-2">
+                        <h2>Orçamento</h2>
 
-            <ul>
-                <li><strong>ID do objetivo</strong></li>
-                <li><strong>Nome</strong></li>
-                <li><strong>Data de atualização</strong></li>
-            </ul>
-        </div>
-        <div class="col-sm-2">
-            <h2>Empresa</h2>
+                        <ul>
+                            <li><strong>ID do orçamento</strong></li>
+                            <li><strong>Nome da empresa</strong></li>
+                            <li><strong>CNPJ</strong></li>
+                            <li>Número da meta</li>
+                            <li>Valor Dedicado</li>
+                            <li>Valor liquidado</li>
+                            <li>Observação</li>
+                            <li>Código de contrato</li>
+                            <li>Código da organização</li>
+                            <li>Nome da organização</li>
+                            <li>Id da empresa</li>
+                            <li>Data de atualização</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-2">
+                        <h2>Conselho</h2>
 
-            <ul>
-                <li><strong>ID da empresa</strong></li>
-                <li><strong>Nome</strong></li>
-                <li><strong>Url do nome</strong></li>
-            </ul>
-        </div>
-        <div class="col-sm-2">
-            <h2>Orçamento</h2>
+                        <ul>
+                            <li><strong>ID do conselho</strong></li>
+                            <li><strong>Nome do conselho</strong></li>
+                            <li><strong>Descrição</strong></li>
+                            <li>Telefone</li>
+                            <li>Endereço</li>
+                            <li>Complemento</li>
+                            <li>Código postal</li>
+                            <li>Site</li>
+                        </ul>
+                    </div>
 
-            <ul>
-                <li><strong>ID do orçamento</strong></li>
-                <li><strong>Nome da empresa</strong></li>
-                <li><strong>CNPJ</strong></li>
-                <li>Número da meta</li>
-                <li>Valor Dedicado</li>
-                <li>Valor liquidado</li>
-                <li>Observação</li>
-                <li>Código de contrato</li>
-                <li>Código da organização</li>
-                <li>Nome da organização</li>
-                <li>Id da empresa</li>
-                <li>Data de atualização</li>
-            </ul>
-        </div>
-        <div class="col-sm-2">
-            <h2>Conselho</h2>
-
-            <ul>
-                <li><strong>ID do conselho</strong></li>
-                <li><strong>Nome do conselho</strong></li>
-                <li><strong>Descrição</strong></li>
-                <li>Telefone</li>
-                <li>Endereço</li>
-                <li>Complemento</li>
-                <li>Código postal</li>
-                <li>Site</li>
-            </ul>
+                </div>
+            </form>
         </div>
 
-    </div>
-</form>
+        <h1>API para desenvolvedores</h1>
 
-<div class="panel panel-info">
-    <div class="panel-heading" id="id_api" data-animated-anchor-offset="-60">
-        <h3 class="panel-title">API para desenvolvedores</h3>
-    </div>
+        <div class="block">
+            <p>O DONM fornece uma REST API para a consulta dos dados.</p>
+            <p>Os <b>endpoints</b> podem entregar o contéudo serializado em <b>JSON</b>.</p>
+            <p>O <code>content-type</code> é definido automaticamente pelo header <code>Accept</code>. Por padrão, a resposta é no formato <b>JSON</b>.</p>
+            <p>Para pedir manualmente, utilize <code>?content-type=application/json</code> para JSON.</p>
 
-    <div class="panel-body">
-        <p>O DONM fornece uma REST API para a consulta dos dados.</p>
-        <p>Os <b>endpoints</b> podem entregar o contéudo serializado em <b>JSON</b>.</p>
-        <p>O <code>content-type</code> é definido automaticamente pelo header <code>Accept</code>. Por padrão, a resposta é no formato <b>JSON</b>.</p>
-        <p>Para pedir manualmente, utilize <code>?content-type=application/json</code> para JSON.</p>
+            <p><strong>Todos</strong> os <i>endpoints</i> utilizam o domínio para descobrir qual a rede ativa para a consulta, isso influência no resultados obtidos.</p>
 
-        <p><strong>Todos</strong> os <i>endpoints</i> utilizam o domínio para descobrir qual a rede ativa para a consulta, isso influência no resultados obtidos.</p>
+            <div class="bs-callout bs-callout-info">
+                <h4>Rede ativa no momento</h4>
+                <p>Você esta no domínio<i>[%network.domain_name%]</i>, [%l('rede ID')%] [%network.id%]</p>
+            </div>
 
-        <div class="bs-callout bs-callout-info">
-            <h4>Rede ativa no momento</h4>
-            <p>Você esta no domínio<i>[%network.domain_name%]</i>, [%l('rede ID')%] [%network.id%]</p>
-        </div>
+            <h1 id="id_endpoints"  data-animated-anchor-offset="-60" >Endpoints</h1>
+            <table class="table table-condensed table-tiny-pre table-responsive">
+                <col class="col-sm-3">
+                <col class="col-sm-3">
+                <col class="col-sm-6">
+                <thead>
+                    <tr>
+                        <th>Endpoint</th>
+                        <th>Descrição</th>
+                        <th>Parâmetros aceitos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th><pre><a data-animated-anchor href="#sample_of_indicators">/public/goals</a></pre></th>
+                        <td>Lista de todas as metas</td>
+                        <td>
+                        Filtros:
+                        <ul class="list-unstyled list-param">
+                            <li></li>
+                        </ul>
 
-    </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><pre><a data-animated-anchor href="#sample_of_indicators">/public/goals/*</a></pre></th>
+                        <td>Lista de todos atributos da meta específica</td>
+                        <td>
+                        <ul class="list-unstyled list-param">
+                            <li>* => id da meta</li>
+                        </ul>
+                        </td>
+                    </tr>
 
-<h1 id="id_endpoints"  data-animated-anchor-offset="-60" >Endpoints</h1>
-<table class="table table-condensed table-tiny-pre table-responsive">
-    <col class="col-sm-3">
-    <col class="col-sm-3">
-    <col class="col-sm-6">
-    <thead>
-        <tr>
-            <th>Endpoint</th>
-            <th>Descrição</th>
-            <th>Parâmetros aceitos</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th><pre><a data-animated-anchor href="#sample_of_indicators">/public/goals</a></pre></th>
-            <td>Lista de todas as metas</td>
-            <td>
-            Filtros:
-            <ul class="list-unstyled list-param">
-                <li></li>
-            </ul>
+                    <tr>
+                        <th><pre><a data-animated-anchor href="#sample_of_users">/public/projects</a></pre></th>
+                        <td>Lista de todos os projetos</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <th><pre><a data-animated-anchor href="#sample_of_users">/public/projects/*</a></pre></th>
+                        <td>Lista de todos os atributos do projeto específico</td>
+                        <td>
+                            <ul class="list-unstyled list-param">
+                                <li>* => id do projeto</li>
+                            </ul>
+                        </td>
 
-            </td>
-        </tr>
-        <tr>
-            <th><pre><a data-animated-anchor href="#sample_of_indicators">/public/goals/*</a></pre></th>
-            <td>Lista de todos atributos da meta específica</td>
-            <td>
-            <ul class="list-unstyled list-param">
-                <li>* => id da meta</li>
-            </ul>
-            </td>
-        </tr>
+                    </tr>
+                    <tr>
+                        <th><pre><a data-animated-anchor href="#sample_of_users">/public/objectives</a></pre></th>
+                        <td>Lista de todos os objetivos</td>
+                        <td>-</td>
 
-        <tr>
-            <th><pre><a data-animated-anchor href="#sample_of_users">/public/projects</a></pre></th>
-            <td>Lista de todos os projetos</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <th><pre><a data-animated-anchor href="#sample_of_users">/public/projects/*</a></pre></th>
-            <td>Lista de todos os atributos do projeto específico</td>
-            <td>
-                <ul class="list-unstyled list-param">
-                    <li>* => id do projeto</li>
-                </ul>
-            </td>
+                    </tr>
 
-        </tr>
-        <tr>
-            <th><pre><a data-animated-anchor href="#sample_of_users">/public/objectives</a></pre></th>
-            <td>Lista de todos os objetivos</td>
-            <td>-</td>
+                    <tr>
+                        <th><pre><a data-animated-anchor href="#sample_of_networks">/public/companies</a></pre></th>
+                        <td>Lista de todas as empresas.</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <th><pre><a data-animated-anchor href="#sample_of_download_indicators">/public/companies/*/budgets</a></pre></th>
+                        <td>Lista de todas as empresas por metas de acordo com os orçamentos utilizados.</td>
+                        <td>
+                        <ul class="list-unstyled list-param">
+                            <li>* => id da empresa</li>
+                        </ul>
+                        [%l('Caso o campo <code>region_id</code> não for especificado, a consulta retorna os valores da cidade.')|none%]
 
-        </tr>
+                        </td>
+                    </tr>
 
-        <tr>
-            <th><pre><a data-animated-anchor href="#sample_of_networks">/public/companies</a></pre></th>
-            <td>Lista de todas as empresas.</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <th><pre><a data-animated-anchor href="#sample_of_download_indicators">/public/companies/*/budgets</a></pre></th>
-            <td>Lista de todas as empresas por metas de acordo com os orçamentos utilizados.</td>
-            <td>
-            <ul class="list-unstyled list-param">
-                <li>* => id da empresa</li>
-            </ul>
-            [%l('Caso o campo <code>region_id</code> não for especificado, a consulta retorna os valores da cidade.')|none%]
+                     <tr>
+                        <th><pre><a data-animated-anchor href="#sample_of_networks">/public/companies/*/goals</a></pre></th>
+                        <td>Lista de todas as empresas por metas.</td>
 
-            </td>
-        </tr>
+                        <td>
+                          <ul class="list-unstyled list-param">
+                            <li> * => id da empresa</li>
+                          </ul>
 
-         <tr>
-            <th><pre><a data-animated-anchor href="#sample_of_networks">/public/companies/*/goals</a></pre></th>
-            <td>Lista de todas as empresas por metas.</td>
+                        </td>
+                    </tr>
+                     <tr>
+                        <th><pre><a data-animated-anchor href="#sample_of_networks">/public/councils</a></pre></th>
+                        <td>Lista de todos os conselhos.</td>
 
-            <td>
-              <ul class="list-unstyled list-param">
-                <li> * => id da empresa</li>
-              </ul>
+                        <td>
+                          <ul class="list-unstyled list-param">
+                          </ul>
 
-            </td>
-        </tr>
-         <tr>
-            <th><pre><a data-animated-anchor href="#sample_of_networks">/public/councils</a></pre></th>
-            <td>Lista de todos os conselhos.</td>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-            <td>
-              <ul class="list-unstyled list-param">
-              </ul>
+            <h3 id="id_sample_of_indicators" data-animated-anchor-offset="-60">/public/goals [%voltar_link|none%]</h3>
 
-            </td>
-        </tr>
+            <p>[%l('Exemplo de retorno:')%]</p>
+            <pre class="precode"><code class="language-javascript">
+            goals 
+                [
+                  [0]
+                    {
+                    description:              "Prioridade para implementação das ações nas Subprefeituras com maior concentração de famílias em situação de extrema pobreza e pobreza. Busca Ativa apoiada pelas áreas de interface e sociedade civil. Disponibilização de espaços públicos e equipamentos municipais para ações cadastrais.",
+                    expected_budget:          103305927,
+                    expected_end_date:        undef,
+                    expected_start_date:      undef,
+                    goal_number:              1,
+                    id:                       1,
+                    name:                     "Inserir aproximadamente 280 mil famílias com renda de até meio salário mínimo no Cadastro Único para atingir 773 mil famílias cadastradas",
+                    percentage:              {
+                             owned:             124.94678571429
+                                             },
+                    project_count:            1,
+                    qualitative_progress_1:   "349 mil famílias inseridas no Cadastro Único de janeiro de 2013 a julho de 2014, superando a meta prevista para o final de 2016 em mais de 20%.",
+                    qualitative_progress_2:   "O número de famílias cadastradas em dezembro de 2012 era de 493 mil. Em julho de 2013 este número passou para 709.595, chegando a 922.259 em julho de 2014, data da última atualização do CadÚnico. ",
+                    qualitative_progress_3:   "350 entrevistadores contratados em novembro de 2013 para a realização de novos cadastros.",
+                    qualitative_progress_4:   "200 Agentes de Saúde e  22 Agentes de Gestão de Politicas Públicas de Unidades Básicas de Saúde (UBS) capacitados como entrevistadores para a realização de novos cadastros.",
+                    qualitative_progress_5:   "",
+                    qualitative_progress_6:   "",
+                    transversality:           "juventude-viva  sp-carinhosa   pop rua",
+                    updated_at:               undef,
+                    url:                      "http://www.deolhonasmetas.org.br/api/public/goals/1",
+                    will_be_delivered:        "280 mil famílias inscritas no Cadastro Único"
+                    }
+                    ...
+                ]
 
+            </code></pre>
+            <h3 id="id_sample_of_indicators" data-animated-anchor-offset="-60">/public/goals/* [%voltar_link|none%]</h3>
 
-    </tbody>
-</table>
-
-<div class="panel-body">
-
-<h3 id="id_sample_of_indicators" data-animated-anchor-offset="-60">/public/goals [%voltar_link|none%]</h3>
-
-<p>[%l('Exemplo de retorno:')%]</p>
-<pre class="precode"><code class="language-javascript">
-goals 
-    [
-      [0]
-        {
-        description:              "Prioridade para implementação das ações nas Subprefeituras com maior concentração de famílias em situação de extrema pobreza e pobreza. Busca Ativa apoiada pelas áreas de interface e sociedade civil. Disponibilização de espaços públicos e equipamentos municipais para ações cadastrais.",
-        expected_budget:          103305927,
-        expected_end_date:        undef,
-        expected_start_date:      undef,
-        goal_number:              1,
-        id:                       1,
-        name:                     "Inserir aproximadamente 280 mil famílias com renda de até meio salário mínimo no Cadastro Único para atingir 773 mil famílias cadastradas",
-        percentage:              {
-                 owned:             124.94678571429
-                                 },
-        project_count:            1,
-        qualitative_progress_1:   "349 mil famílias inseridas no Cadastro Único de janeiro de 2013 a julho de 2014, superando a meta prevista para o final de 2016 em mais de 20%.",
-        qualitative_progress_2:   "O número de famílias cadastradas em dezembro de 2012 era de 493 mil. Em julho de 2013 este número passou para 709.595, chegando a 922.259 em julho de 2014, data da última atualização do CadÚnico. ",
-        qualitative_progress_3:   "350 entrevistadores contratados em novembro de 2013 para a realização de novos cadastros.",
-        qualitative_progress_4:   "200 Agentes de Saúde e  22 Agentes de Gestão de Politicas Públicas de Unidades Básicas de Saúde (UBS) capacitados como entrevistadores para a realização de novos cadastros.",
-        qualitative_progress_5:   "",
-        qualitative_progress_6:   "",
-        transversality:           "juventude-viva  sp-carinhosa   pop rua",
-        updated_at:               undef,
-        url:                      "http://www.deolhonasmetas.org.br/api/public/goals/1",
-        will_be_delivered:        "280 mil famílias inscritas no Cadastro Único"
-        }
-        ...
-    ]
-
-</code></pre>
-<h3 id="id_sample_of_indicators" data-animated-anchor-offset="-60">/public/goals/* [%voltar_link|none%]</h3>
-
-<p>[%l('Exemplo de retorno:')%]</p>
-<pre class="precode"><code class="language-javascript">
-{
-    budgets:                  [
-                                [0] {
-                                        business_name:       "FUNDAÇÃO PARA O DESENVOLVIMENTO DAS ARTES E DA COMUNICAÇÃO",
-                                        business_name_url:   "fundacao-para-o-desenvolvimento-das-artes-e-da-comunicacao",
-                                        cnpj:                3349489000108,
-                                        dedicated_value:     2408894,
-                                        dedicated_year:      2014,
-                                        id:                  53714,
-                                        liquidated_value:    2408894,
-                                        observation:         "CT 51/SMADS/13 - FUNDAC (MARÇO)",
-                                        organ_code:          93,
-                                        organ_name:          "Fundo Municipal de Assistência Social"
-                                    }
-                                ...
-                              ],
-    description:              "Prioridade para implementação das ações nas Subprefeituras com maior concentração de famílias em situação de extrema pobreza e pobreza. Busca Ativa apoiada pelas áreas de interface e sociedade civil. Disponibilização de espaços públicos e equipamentos municipais para ações cadastrais.",
-    expected_budget:          103305927,
-    goal_number:              1,
-    id:                       1,
-    name:                     "Inserir aproximadamente 280 mil famílias com renda de até meio salário mínimo no Cadastro Único para atingir 773 mil famílias cadastradas",
-    objective:                {
-                                id:     1,
-                                name:   "Desenvolvimento Social"
-                              },
-    percentages:              {
-                                owned:       124.94678571429,
-                                remainder:   -24.946785714286
-                              },
-    project:                  [
-                                [0] {
-                                      id:          2805,
-                                      latitude:    0,
-                                      longitude:   0,
-                                      name:        "Famílias inseridas no Cadastro Único",
-                                      region_idi:   undef
-                                    }
-                              ],
-    qualitative_progress_1:   "349 mil famílias inseridas no Cadastro Único de janeiro de 2013 a julho de 2014 superando a meta prevista para o final de 2016 em mais de 20%.",
-    qualitative_progress_2:   "O número de famílias cadastradas em dezembro de 2012 era de 493 mil. Em julho de 2013 este número passou para 709.595, chegando a 922.259 em julho de 2014, data da última atualização do CadÚnico. ",
-    qualitative_progress_3:   "350 entrevistadores contratados em novembro de 2013 para a realização de novos cadastros.",
-    qualitative_progress_4:   "200 Agentes de Saúde e  22 Agentes de Gestão de Politicas Públicas de Unidades Básicas de Saúde (UBS) capacitados como entrevistadores para a realização de novos cadastros.",
-    qualitative_progress_5:   "",
-    qualitative_progress_6:   "",
-    region:                   []
- }
-
-
-</code></pre>
-
-<h3 id="id_sample_of_users" data-animated-anchor-offset="-60">/public/projects [%voltar_link|none%]</h3>
-
-<p>[%l('Exemplo de retorno:')%]</p>
-<pre class="precode"><code class="language-javascript">
-projects [
-         [0]
+            <p>[%l('Exemplo de retorno:')%]</p>
+            <pre class="precode"><code class="language-javascript">
             {
-            goal:                    [
-                                      [0] {
-                                          id:     48,
-                                          name:   "Requalificar 50 equipamentos esportivos entre Centros Desportivos da Comunidade (CDC) e Clubes-Escola"
-                                          }
-                                     ],
-            id:                       4097,
-            latitude:                 -23.587902,
-            longitude:                -46.596807,
-            name:                     "Equipamento esportivo - CEE Flávio Calabrese Conti",
-            percentage:               1,
-            project_number:           1342,
-            qualitative_progress_1:   undef,
-            qualitative_progress_2:   undef,
-            qualitative_progress_3:   undef,
-            qualitative_progress_4:   undef,
-            qualitative_progress_5:   undef,
-            updated_at:               undef,
-            url:                      "http://www.deolhonasmetas.org.br/api/public/projects/4097"
-            }
-        ...    
-        ]
-</code></pre>
-
-<h3 id="id_sample_of_users" data-animated-anchor-offset="-60">/public/projects/* [%voltar_link|none%]</h3>
-
-
-<p>[%l('Exemplo de retorno:')%]</p>
-<pre class="precode"><code class="language-javascript">
-projects [
-         [0]
-            {
-            goal:                    [
-                                      [0] {
-                                          id     48,
-                                          name   "Requalificar 50 equipamentos esportivos entre Centros Desportivos da Comunidade (CDC) e Clubes-Escola"
-                                          }
-                                     ],
-            id:                       4097,
-            latitude:                 -23.587902,
-            longitude:                -46.596807,
-            name:                     "Equipamento esportivo - CEE Flávio Calabrese Conti",
-            percentage:               1,
-            project_number:           1342,
-            qualitative_progress_1:   undef,
-            qualitative_progress_2:   undef,
-            qualitative_progress_3:   undef,
-            qualitative_progress_4:   undef,
-            qualitative_progress_5:   undef,
-            updated_at:               undef,
-            url:                      "http://www.deolhonasmetas.org.br/api/public/projects/4097"
-            }
-        ...    
-        ]
-</code></pre>
-<h3 id="id_sample_of_users" data-animated-anchor-offset="-60">/public/objectives [%voltar_link|none%]</h3>
-
-
-<p>[%l('Exemplo de retorno:')%]</p>
-<pre class="precode"><code class="language-javascript">
-objectives [
-            [0]  {
-                    id:     18,
-                    name:   "Atendimento ao Cidadão",
-                    url:    "http://www.deolhonasmetas.org.br/api/public/objectives/18"
-                 },
-            [1]  {
-                    id:     4,
-                    name:   "Cultura",
-                    url:    "http://www.deolhonasmetas.org.br/api/public/objectives/4"
-                 },
-            [2]  {
-                    id:     12,
-                    name:   "Desenvolvimento Econômico",
-                    url:    "http://www.deolhonasmetas.org.br/api/public/objectives/12"
-                 },
-            [3]  {
-                    id:     1,
-                    name:   "Desenvolvimento Social",
-                    url:    "http://www.deolhonasmetas.org.br/api/public/objectives/1"
-                 },
-            [4]  {
-                    id:     20,
-                    name:   "Desenvolvimento Urbano",
-                    url:    "http://www.deolhonasmetas.org.br/api/public/objectives/20"
-                 },
-            [5]  {
-                    id:     9,
-                    name:   "Direitos Humanos e Cidadania",
-                    url:    "http://www.deolhonasmetas.org.br/api/public/objectives/9"
-                 },
-            ...
-           ]
-</code></pre>
-
-<h3 id="id_sample_of_cities" data-animated-anchor-offset="-60">/public/companies [%voltar_link|none%]</h3>
-
-<p>[%l('Exemplo de retorno:')%]</p>
-<pre class="precode"><code class="language-javascript">
-companies [
-            [0]
-            {
-                id:         5405,
-                name:       "RENATA ASSIS DOS SANTOS",
-                name_url:   "renata-assis-dos-santos"
-            }
-            ...
-          ]
-</code></pre>
-
-<h3 id="id_sample_of_networks" data-animated-anchor-offset="-60">/public/companies/5405/budgets [%voltar_link|none%]</h3>
-
-<p>[%l('Exemplo de retorno:')%]</p>
-<pre class="precode"><code class="language-javascript">
- budgets   [
-         [0] {
-                business_name:       "RENATA ASSIS DOS SANTOS",
-                business_name_url:   "renata-assis-dos-santos",
-                cnpj:                32142040845,
-                dedicated_value:     660,
-                goal_number:         15,
-                id:                  44200,
-                liquidated_value:    484,
-                observation:         "SP/SM-(SÃO MATEUS)-SP/VP-SB-(SAPOPEMBA) CONTRATAÇÃO DE AGENTE DE RECREAÇÃO-RECREIO NAS FÉRIAS-JANEIRO/2014.",
-                organ_name:          "Secretaria Municipal de Educação"
-             },
-         [1] {
-                business_name:       "RENATA ASSIS DOS SANTOS",
-                business_name_url:   "renata-assis-dos-santos",
-                cnpj:                32142040845,
-                dedicated_value:     1100,
-                goal_number:         15,
-                id:                  29770,
-                liquidated_value:    1100,
-                observation:         "SP/SM-(SÃO MATEUS)-SP/VP-SB-(SAPOPEMBA) CONTRATAÇÃO DE AGENTE DE RECREAÇÃO-RECREIO NAS FÉRIAS-JUNHO/JULHO/2014",
-                organ_name:          "Secretaria Municipal de Educação"
+                budgets:                  [
+                                            [0] {
+                                                    business_name:       "FUNDAÇÃO PARA O DESENVOLVIMENTO DAS ARTES E DA COMUNICAÇÃO",
+                                                    business_name_url:   "fundacao-para-o-desenvolvimento-das-artes-e-da-comunicacao",
+                                                    cnpj:                3349489000108,
+                                                    dedicated_value:     2408894,
+                                                    dedicated_year:      2014,
+                                                    id:                  53714,
+                                                    liquidated_value:    2408894,
+                                                    observation:         "CT 51/SMADS/13 - FUNDAC (MARÇO)",
+                                                    organ_code:          93,
+                                                    organ_name:          "Fundo Municipal de Assistência Social"
+                                                }
+                                            ...
+                                          ],
+                description:              "Prioridade para implementação das ações nas Subprefeituras com maior concentração de famílias em situação de extrema pobreza e pobreza. Busca Ativa apoiada pelas áreas de interface e sociedade civil. Disponibilização de espaços públicos e equipamentos municipais para ações cadastrais.",
+                expected_budget:          103305927,
+                goal_number:              1,
+                id:                       1,
+                name:                     "Inserir aproximadamente 280 mil famílias com renda de até meio salário mínimo no Cadastro Único para atingir 773 mil famílias cadastradas",
+                objective:                {
+                                            id:     1,
+                                            name:   "Desenvolvimento Social"
+                                          },
+                percentages:              {
+                                            owned:       124.94678571429,
+                                            remainder:   -24.946785714286
+                                          },
+                project:                  [
+                                            [0] {
+                                                  id:          2805,
+                                                  latitude:    0,
+                                                  longitude:   0,
+                                                  name:        "Famílias inseridas no Cadastro Único",
+                                                  region_idi:   undef
+                                                }
+                                          ],
+                qualitative_progress_1:   "349 mil famílias inseridas no Cadastro Único de janeiro de 2013 a julho de 2014 superando a meta prevista para o final de 2016 em mais de 20%.",
+                qualitative_progress_2:   "O número de famílias cadastradas em dezembro de 2012 era de 493 mil. Em julho de 2013 este número passou para 709.595, chegando a 922.259 em julho de 2014, data da última atualização do CadÚnico. ",
+                qualitative_progress_3:   "350 entrevistadores contratados em novembro de 2013 para a realização de novos cadastros.",
+                qualitative_progress_4:   "200 Agentes de Saúde e  22 Agentes de Gestão de Politicas Públicas de Unidades Básicas de Saúde (UBS) capacitados como entrevistadores para a realização de novos cadastros.",
+                qualitative_progress_5:   "",
+                qualitative_progress_6:   "",
+                region:                   []
              }
-                                                                                                                           ]
-
-</code></pre>
 
 
-<h3 id="id_sample_of_download_indicators" data-animated-anchor-offset="-60">/public/companies/5405/goals [%voltar_link|none%]</h3>
+            </code></pre>
 
-<p>[%l('Exemplo de retorno:')%]</p>
-<pre class="precode"><code class="language-javascript">
-goals   [
-        [0] {
-                 id:     15,
-                 name:   "Ampliar a jornada escolar de 100 mil alunos da Rede Municipal de Ensino"     
-            }
-        ...    
-        ]
+            <h3 id="id_sample_of_users" data-animated-anchor-offset="-60">/public/projects [%voltar_link|none%]</h3>
 
-</code></pre>
+            <p>[%l('Exemplo de retorno:')%]</p>
+            <pre class="precode"><code class="language-javascript">
+            projects [
+                     [0]
+                        {
+                        goal:                    [
+                                                  [0] {
+                                                      id:     48,
+                                                      name:   "Requalificar 50 equipamentos esportivos entre Centros Desportivos da Comunidade (CDC) e Clubes-Escola"
+                                                      }
+                                                 ],
+                        id:                       4097,
+                        latitude:                 -23.587902,
+                        longitude:                -46.596807,
+                        name:                     "Equipamento esportivo - CEE Flávio Calabrese Conti",
+                        percentage:               1,
+                        project_number:           1342,
+                        qualitative_progress_1:   undef,
+                        qualitative_progress_2:   undef,
+                        qualitative_progress_3:   undef,
+                        qualitative_progress_4:   undef,
+                        qualitative_progress_5:   undef,
+                        updated_at:               undef,
+                        url:                      "http://www.deolhonasmetas.org.br/api/public/projects/4097"
+                        }
+                    ...    
+                    ]
+            </code></pre>
 
-<h3 id="id_sample_of_download_indicators" data-animated-anchor-offset="-60">/public/councils [%voltar_link|none%]</h3>
-
-<p>[%l('Exemplo de retorno:')%]</p>
-<pre class="precode"><code class="language-javascript">
-
-councils => [
-             [0]
-                address    : undef,
-                city       : {
-                                 id   : 1,
-                                 name : "São Paulo",
-                                 state: {
-                                          id  : 25,
-                                          name: "São Paulo"
-                                        }
-                              },
-                 complement : undef,
-                 description: undef,
-                 email      : undef,
-                 id         : 3,
-                 name       : "ARICANDUVA",
-                 phone      : undef,
-                 postal_code: undef,
-                 url        : "http://localhost/public/organizations/3",
-                 website    : undef
-              ...
-            ]
-</code></pre>
+            <h3 id="id_sample_of_users" data-animated-anchor-offset="-60">/public/projects/* [%voltar_link|none%]</h3>
 
 
-    </div>[%# panel-body%]
+            <p>[%l('Exemplo de retorno:')%]</p>
+            <pre class="precode"><code class="language-javascript">
+            projects [
+                     [0]
+                        {
+                        goal:                    [
+                                                  [0] {
+                                                      id     48,
+                                                      name   "Requalificar 50 equipamentos esportivos entre Centros Desportivos da Comunidade (CDC) e Clubes-Escola"
+                                                      }
+                                                 ],
+                        id:                       4097,
+                        latitude:                 -23.587902,
+                        longitude:                -46.596807,
+                        name:                     "Equipamento esportivo - CEE Flávio Calabrese Conti",
+                        percentage:               1,
+                        project_number:           1342,
+                        qualitative_progress_1:   undef,
+                        qualitative_progress_2:   undef,
+                        qualitative_progress_3:   undef,
+                        qualitative_progress_4:   undef,
+                        qualitative_progress_5:   undef,
+                        updated_at:               undef,
+                        url:                      "http://www.deolhonasmetas.org.br/api/public/projects/4097"
+                        }
+                    ...    
+                    ]
+            </code></pre>
+            <h3 id="id_sample_of_users" data-animated-anchor-offset="-60">/public/objectives [%voltar_link|none%]</h3>
 
-</div>[%# panel%]
 
+            <p>[%l('Exemplo de retorno:')%]</p>
+            <pre class="precode"><code class="language-javascript">
+            objectives [
+                        [0]  {
+                                id:     18,
+                                name:   "Atendimento ao Cidadão",
+                                url:    "http://www.deolhonasmetas.org.br/api/public/objectives/18"
+                             },
+                        [1]  {
+                                id:     4,
+                                name:   "Cultura",
+                                url:    "http://www.deolhonasmetas.org.br/api/public/objectives/4"
+                             },
+                        [2]  {
+                                id:     12,
+                                name:   "Desenvolvimento Econômico",
+                                url:    "http://www.deolhonasmetas.org.br/api/public/objectives/12"
+                             },
+                        [3]  {
+                                id:     1,
+                                name:   "Desenvolvimento Social",
+                                url:    "http://www.deolhonasmetas.org.br/api/public/objectives/1"
+                             },
+                        [4]  {
+                                id:     20,
+                                name:   "Desenvolvimento Urbano",
+                                url:    "http://www.deolhonasmetas.org.br/api/public/objectives/20"
+                             },
+                        [5]  {
+                                id:     9,
+                                name:   "Direitos Humanos e Cidadania",
+                                url:    "http://www.deolhonasmetas.org.br/api/public/objectives/9"
+                             },
+                        ...
+                       ]
+            </code></pre>
+
+            <h3 id="id_sample_of_cities" data-animated-anchor-offset="-60">/public/companies [%voltar_link|none%]</h3>
+
+            <p>[%l('Exemplo de retorno:')%]</p>
+            <pre class="precode"><code class="language-javascript">
+            companies [
+                        [0]
+                        {
+                            id:         5405,
+                            name:       "RENATA ASSIS DOS SANTOS",
+                            name_url:   "renata-assis-dos-santos"
+                        }
+                        ...
+                      ]
+            </code></pre>
+
+            <h3 id="id_sample_of_networks" data-animated-anchor-offset="-60">/public/companies/5405/budgets [%voltar_link|none%]</h3>
+
+            <p>[%l('Exemplo de retorno:')%]</p>
+            <pre class="precode"><code class="language-javascript">
+             budgets   [
+                     [0] {
+                            business_name:       "RENATA ASSIS DOS SANTOS",
+                            business_name_url:   "renata-assis-dos-santos",
+                            cnpj:                32142040845,
+                            dedicated_value:     660,
+                            goal_number:         15,
+                            id:                  44200,
+                            liquidated_value:    484,
+                            observation:         "SP/SM-(SÃO MATEUS)-SP/VP-SB-(SAPOPEMBA) CONTRATAÇÃO DE AGENTE DE RECREAÇÃO-RECREIO NAS FÉRIAS-JANEIRO/2014.",
+                            organ_name:          "Secretaria Municipal de Educação"
+                         },
+                     [1] {
+                            business_name:       "RENATA ASSIS DOS SANTOS",
+                            business_name_url:   "renata-assis-dos-santos",
+                            cnpj:                32142040845,
+                            dedicated_value:     1100,
+                            goal_number:         15,
+                            id:                  29770,
+                            liquidated_value:    1100,
+                            observation:         "SP/SM-(SÃO MATEUS)-SP/VP-SB-(SAPOPEMBA) CONTRATAÇÃO DE AGENTE DE RECREAÇÃO-RECREIO NAS FÉRIAS-JUNHO/JULHO/2014",
+                            organ_name:          "Secretaria Municipal de Educação"
+                         }
+                                                                                                                                       ]
+
+            </code></pre>
+
+
+            <h3 id="id_sample_of_download_indicators" data-animated-anchor-offset="-60">/public/companies/5405/goals [%voltar_link|none%]</h3>
+
+            <p>[%l('Exemplo de retorno:')%]</p>
+            <pre class="precode"><code class="language-javascript">
+            goals   [
+                    [0] {
+                             id:     15,
+                             name:   "Ampliar a jornada escolar de 100 mil alunos da Rede Municipal de Ensino"     
+                        }
+                    ...    
+                    ]
+
+            </code></pre>
+
+            <h3 id="id_sample_of_download_indicators" data-animated-anchor-offset="-60">/public/councils [%voltar_link|none%]</h3>
+
+            <p>[%l('Exemplo de retorno:')%]</p>
+            <pre class="precode"><code class="language-javascript">
+
+            councils => [
+                         [0]
+                            address    : undef,
+                            city       : {
+                                             id   : 1,
+                                             name : "São Paulo",
+                                             state: {
+                                                      id  : 25,
+                                                      name: "São Paulo"
+                                                    }
+                                          },
+                             complement : undef,
+                             description: undef,
+                             email      : undef,
+                             id         : 3,
+                             name       : "ARICANDUVA",
+                             phone      : undef,
+                             postal_code: undef,
+                             url        : "http://localhost/public/organizations/3",
+                             website    : undef
+                          ...
+                        ]
+            </code></pre>
+        </div>
+    </div>
+</section>
 
 [%-CALL assets.include("/static/js/download_links.js", 999)%]
-
