@@ -81,9 +81,9 @@
                     <li>
                         <a href="/home/company">Empresas</a>
                     </li>
-                    <li>
+                    <!--<li>
                         <a href="/home/open-data">Dados Abertos</a>
-                    </li>
+                    </li>-->
 					[% IF c.user %]
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle navbar-link" data-toggle="dropdown"> Perfil e ferramentas <b class="caret"></b></a>
