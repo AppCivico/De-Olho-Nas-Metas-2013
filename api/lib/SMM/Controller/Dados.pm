@@ -44,7 +44,9 @@ sub _download : Chained('base') PathPart('download') : Args(1) {
     my ( $self, $c, $ff ) = @_;
 
     use DDP;
-    $c->detach unless $ff =~ m/meta|empresa|projeto|objetivo/;
+    $c->detach
+      unless $ff =~
+      m/meta|empresa|projeto|objetivo|conselho|subprefeitura|orcamento/;
     my $path = ( $c->config->{downloads}{tmp_dir} || '/tmp' ) . '/' . lc $ff;
 
     if ( -e $path ) {
@@ -135,21 +137,21 @@ sub _define_lines {
         while ( my $data = $data_rs->next ) {
             my @this_row = (
                 $data->{id},
-                $data->{name},
-                $data->{description},
+                $self->_loc_str( $c, $data->{name} ),
+                $self->_loc_str( $c, $data->{description} ),
                 $data->{expected_budget},
                 $data->{goal_number},
                 $data->{updated_at},
                 $data->{expected_start_date},
                 $data->{expected_end_date},
-                $data->{will_be_delivered},
-                $data->{transversality},
-                $data->{qualitative_progress_1},
-                $data->{qualitative_progress_2},
-                $data->{qualitative_progress_3},
-                $data->{qualitative_progress_4},
-                $data->{qualitative_progress_5},
-                $data->{qualitative_progress_6},
+                $self->_loc_str( $c, $data->{will_be_delivered} ),
+                $self->_loc_str( $c, $data->{transversality} ),
+                $self->_loc_str( $c, $data->{qualitative_progress_1} ),
+                $self->_loc_str( $c, $data->{qualitative_progress_2} ),
+                $self->_loc_str( $c, $data->{qualitative_progress_3} ),
+                $self->_loc_str( $c, $data->{qualitative_progress_4} ),
+                $self->_loc_str( $c, $data->{qualitative_progress_5} ),
+                $self->_loc_str( $c, $data->{qualitative_progress_6} ),
             );
 
             push @lines, \@this_row;
@@ -234,10 +236,14 @@ sub _define_lines {
         $data_rs = $c->model('DB::Company')->search(
             undef,
             {
-                select       => \@lines,
                 result_class => 'DBIx::Class::ResultClass::HashRefInflator'
             }
         );
+        while ( my $data = $data_rs->next ) {
+            my @this_row = ( $data->{id}, $data->{name}, $data->{name_url}, );
+
+            push @lines, \@this_row;
+        }
 
     }
     elsif ( $company eq 'orcamento' ) {
@@ -263,37 +269,110 @@ sub _define_lines {
                 result_class => 'DBIx::Class::ResultClass::HashRefInflator'
             }
         );
+        while ( my $data = $data_rs->next ) {
+            my @this_row = (
+                $data->{id},              $data->{business_name},
+                $data->{cnpj},            $data->{goal_number},
+                $data->{dedicated_value}, $data->{liquidated_value},
+                $data->{observation},     $data->{contract_code},
+                $data->{organ_code},      $data->{organ_name},
+                $data->{company_id},      $data->{updated_at},
+            );
+
+            push @lines, \@this_row;
+        }
+
+    }
+    elsif ( $company eq 'conselho' ) {
+        @lines = (
+            [
+                map { $self->_loc_str( $c, $_ ) } 'ID do conselho',
+                'Nome do conselho',
+                'Descrição',
+                'Telefone',
+                'Endereço',
+                'Código postal',
+                'Site',
+            ]
+        );
+        $data_rs = $c->model('DB::Organization')->search(
+            undef,
+            {
+                result_class => 'DBIx::Class::ResultClass::HashRefInflator'
+            }
+        );
+        while ( my $data = $data_rs->next ) {
+            my @this_row = (
+                $data->{id}, $data->{name},
+                $data->{description}, $data->{phone},
+                $data->{address}, $data->{postal_code}, $data->{website},
+            );
+
+            push @lines, \@this_row;
+        }
+
+    }
+    elsif ( $company eq 'distrito' ) {
+        @lines = (
+            [
+                map { $self->_loc_str( $c, $_ ) } 'ID do distrito',
+                'Nome do distrito',
+                'Latitude',
+                'Longitude',
+                'Coordenadas Geométricas',
+            ]
+        );
+        $data_rs = $c->model('DB::Region')->search(
+            undef,
+            {
+                result_class => 'DBIx::Class::ResultClass::HashRefInflator'
+            }
+        );
+        while ( my $data = $data_rs->next ) {
+            my @this_row = (
+                $data->{id},   $data->{name}, $data->{lat},
+                $data->{long}, $data->{geom},
+            );
+
+            push @lines, \@this_row;
+        }
+
+    }
+    elsif ( $company eq 'subprefeitura' ) {
+        @lines = (
+            [
+                map { $self->_loc_str( $c, $_ ) } 'ID da subprefeitura',
+                'Nome da subprefeitura',
+                'Endereço',
+                'E-mail',
+                'Site',
+                'Telefone',
+                'Subprefeito',
+                'Latitude',
+                'Longitude',
+            ]
+        );
+        $data_rs = $c->model('DB::Subprefecture')->search(
+            undef,
+            {
+                result_class => 'DBIx::Class::ResultClass::HashRefInflator'
+            }
+        );
+        while ( my $data = $data_rs->next ) {
+            my @this_row = (
+                $data->{id},           $data->{name},
+                $data->{address},      $data->{email},
+                $data->{site},         $data->{telephone},
+                $data->{deputy_mayor}, $data->{latitude},
+                $data->{longitude},
+            );
+
+            push @lines, \@this_row;
+        }
 
     }
 
     return @lines;
-}
-
-sub _add_variables {
-    my ( $self, $c, $hash, $arr ) = @_;
-    my @rows = $c->model('DB')->resultset('Variable')
-      ->as_hashref->search( undef, { order_by => 'name' } )->all;
-    my $i = scalar @$arr;
-    foreach my $var (@rows) {
-        $hash->{ $var->{id} } = $i++;
-        push @$arr, $var->{name};
-    }
-}
-
-sub _concate_variables {
-    my ( $self, $c, $header, $values, $row ) = @_;
-
-    my %id_val = map { $_->{varid} => $_->{value} } @$values;
-
-    foreach my $id ( sort { $header->{$a} <=> $header->{$b} } keys %$header ) {
-        if ( exists $id_val{$id} ) {
-            push @$row, $id_val{$id};
-        }
-        else {
-            push @$row, '';
-        }
-    }
-
 }
 
 sub ymd2dmy {
@@ -403,152 +482,6 @@ sub _download_and_detach {
     $c->detach;
 }
 
-sub download_indicators_GET {
-    my ( $self, $c ) = @_;
-    my $params = $c->req->params;
-    my @objs;
-
-    my $data_rs =
-      $c->model('DB::DownloadData')
-      ->search( { institute_id => $c->stash->{institute}->id },
-        { result_class => 'DBIx::Class::ResultClass::HashRefInflator' } );
-
-    if ( exists $params->{region_id} ) {
-        my @ids = split /,/, $params->{region_id};
-
-        $self->status_bad_request( $c, message => 'invalid region_id' ),
-          $c->detach
-          unless $self->int_validation(@ids);
-
-        $data_rs = $data_rs->search(
-            {
-                region_id => { 'in' => \@ids }
-            }
-        );
-    }
-    else {
-        $data_rs = $data_rs->search(
-            {
-                region_id => undef
-            }
-        );
-    }
-
-    if ( exists $params->{user_id} ) {
-        my @ids = split /,/, $params->{user_id};
-
-        $self->status_bad_request( $c, message => 'invalid user_id' ),
-          $c->detach
-          unless $self->int_validation(@ids);
-
-        $data_rs = $data_rs->search(
-            {
-                user_id => { 'in' => \@ids }
-            }
-        );
-    }
-
-    if ( exists $params->{city_id} ) {
-        my @ids = split /,/, $params->{city_id};
-
-        $self->status_bad_request( $c, message => 'invalid city_id' ),
-          $c->detach
-          unless $self->int_validation(@ids);
-
-        $data_rs = $data_rs->search(
-            {
-                city_id => { 'in' => \@ids }
-            }
-        );
-    }
-
-    if ( exists $params->{indicator_id} ) {
-        my @ids = split /,/, $params->{indicator_id};
-
-        $self->status_bad_request( $c, message => 'invalid indicator_id' ),
-          $c->detach
-          unless $self->int_validation(@ids);
-
-        $data_rs = $data_rs->search(
-            {
-                indicator_id => { 'in' => \@ids }
-            }
-        );
-    }
-
-    if ( exists $params->{valid_from} ) {
-        my @dates = split /,/, $params->{valid_from};
-
-        $self->status_bad_request( $c, message => 'invalid date format' ),
-          $c->detach
-          unless $self->date_validation(@dates);
-
-        $data_rs = $data_rs->search(
-            {
-                valid_from => { 'in' => \@dates }
-            }
-        );
-    }
-
-    if ( exists $params->{valid_from_begin} ) {
-
-        $self->status_bad_request( $c, message => 'invalid date format' ),
-          $c->detach
-          unless $self->date_validation( $params->{valid_from_begin} );
-
-        $data_rs = $data_rs->search(
-            {
-                valid_from => { '>=' => $params->{valid_from_begin} }
-            }
-        );
-    }
-
-    if ( exists $params->{valid_from_end} ) {
-
-        $self->status_bad_request( $c, message => 'invalid date format' ),
-          $c->detach
-          unless $self->date_validation( $params->{valid_from_end} );
-
-        $data_rs = $data_rs->search(
-            {
-                '-and' => {
-                    valid_from => { '<=' => $params->{valid_from_end} }
-                }
-            }
-        );
-    }
-
-    while ( my $row = $data_rs->next ) {
-        $row->{period}      = $self->_period_pt( $row->{period} );
-        $row->{valid_from}  = $self->ymd2dmy( $row->{valid_from} );
-        $row->{values_used} = eval { decode_json( $row->{values_used} ) };
-
-        push @objs, $row;
-    }
-
-    $self->status_ok( $c, entity => { data => \@objs } );
-}
-
-sub int_validation {
-    my ( $self, @ids ) = @_;
-
-    do { return 0 unless /^[0-9]+$/ }
-      for @ids;
-
-    return 1;
-}
-
-sub date_validation {
-    my ( $self, @dates ) = @_;
-
-    do {
-        eval { DateTime::Format::Pg->parse_datetime($_) };
-        return 0 if $@;
-      }
-      for @dates;
-
-    return 1;
-}
 ##################################################
 ### be happy to read bellow this line!
 
