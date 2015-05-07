@@ -11,9 +11,9 @@ db_transaction {
     my $teste;
 
     # ao inves de
-    my $list = rest_get '/public/regions';
+    my $list = rest_get '/public/districts';
     use DDP;
-    p $list->{regions}[0];
+    p $list->{districts}[0];
 
     #my $unique_project = rest_get '/public/goals/' . $list->{goals}[0]->{id};
 
