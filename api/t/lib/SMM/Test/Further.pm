@@ -92,14 +92,18 @@ sub rest_post {
     my $data = pop;
     my %conf = @_;
     $url = join '/', @$url if ref $url eq 'ARRAY';
+    use DDP;
+    p $url;
 
     $conf{code} ||= exists $conf{is_fail} ? 400 : 201;
 
     my $name = $conf{name} || "POST $url";
+    p $name;
     my $stashkey = exists $conf{stash} ? $conf{stash} : undef;
+    p $stashkey;
 
     my $req;
-
+    p $url;
     if ( !exists $conf{files} ) {
         $req = POST $url, $data;
     }
@@ -111,11 +115,11 @@ sub rest_post {
           'Content-Type' => 'form-data',
           Content        => [ @$data, %{ $conf{files} } ];
     }
-
+    warn $req->as_string;
     $req->method( $conf{method} ) if exists $conf{method};
 
     my ( $res, $c ) = ctx_request($req);
-
+    warn $res->as_string;
     if ( exists $conf{is_fail} ) {
         if ( !ok( !$res->is_success, $name . ' is_fail' ) ) {
             eval('use Data::Printer; p $res');
@@ -233,7 +237,6 @@ sub rest_get {
     $exp_code ||= 200;
 
     my ( $res, $c ) = ctx_request( GET $url );
-
     if ( $exp_code == 200 ) {
         ok( $res->is_success, 'GET ' . $url . ' is_success' );
         is( $res->code, 200, 'GET ' . $url . ' status code is 200' );
@@ -242,7 +245,6 @@ sub rest_get {
         is( $res->code, $exp_code,
             'GET ' . $url . ' status code is ' . $exp_code );
     }
-
     my $obj = eval { decode_json( $res->content ) };
     fail($@) if $@;
 

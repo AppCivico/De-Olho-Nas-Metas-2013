@@ -517,6 +517,42 @@ sub verifiers_specs {
                     required => 0,
                     type     => 'Str',
                 },
+                region_id => {
+                    required => 0,
+                    type     => 'Int',
+                },
+                project_number => {
+                    required => 0,
+                    type     => 'Int',
+                },
+                qualitative_progress_1 => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                qualitative_progress_2 => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                qualitative_progress_3 => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                qualitative_progress_4 => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                qualitative_progress_5 => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                qualitative_progress_6 => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                percentage => {
+                    required => 0,
+                    type     => 'Str',
+                },
             }
         ),
     };

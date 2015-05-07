@@ -212,7 +212,7 @@ sub result_GET {
 
 sub result_DELETE {
     my ( $self, $c ) = @_;
-    my $project = $c->stash->{organization};
+    my $project = $c->stash->{project};
 
     $project->delete;
 
@@ -223,7 +223,7 @@ sub result_PUT {
     my ( $self, $c ) = @_;
 
     my $params  = { %{ $c->req->params } };
-    my $project = $c->stash->{organization};
+    my $project = $c->stash->{project};
 
     $project->execute( $c, for => 'update', with => $c->req->params );
 
@@ -427,9 +427,9 @@ sub list_geom : Chained('base') PathPart('list_geom') : Args(0) {
     my @geom = $c->model('DB')->resultset('Project')->search(
         {
             -and => [
-                latitude   => { '!=', undef },
-                longitude  => { '!=', undef },
-                percentage => { '!=', undef }
+                latitude        => { '!=', undef },
+                longitude       => { '!=', undef },
+                'me.percentage' => { '!=', undef }
             ]
         },
         {

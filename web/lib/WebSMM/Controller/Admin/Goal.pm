@@ -47,6 +47,15 @@ sub index : Chained('base') : PathPart('') : Args(0) {
     $api->stash_result( $c, 'goals' );
 }
 
+sub add : Chained('base') : PathPart('new') : Args(0) {
+    my ( $self, $c ) = @_;
+    my $api = $c->model('API');
+    $api->stash_result( $c, 'objectives' );
+    $c->stash->{select_objectives} =
+      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{objectives} } ];
+
+}
+
 =encoding utf8
 
 =head1 AUTHOR

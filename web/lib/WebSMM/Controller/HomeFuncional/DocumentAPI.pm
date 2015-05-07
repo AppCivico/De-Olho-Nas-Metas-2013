@@ -28,7 +28,7 @@ sub base : Chained('/homefuncional/base') : PathPart('') : CaptureArgs(0) {
 
 }
 
-sub index : Chained('base') : PathPart('dados-abertos') : Args(0) {
+sub index : Chained('base') : PathPart('open-data') : Args(0) {
     my ( $self, $c ) = @_;
 
 }

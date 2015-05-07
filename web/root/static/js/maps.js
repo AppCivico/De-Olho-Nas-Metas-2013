@@ -82,7 +82,7 @@ var $maps = function () {
 				}
 				content += '<div class="description"></div>';
 				content += '</div>';
-				google.maps.event.addListener(marker, 'mouseover', function() {
+				google.maps.event.addListener(marker, 'click', function() {
 					if (!ib){
 						ib = new InfoBubble({
 				          map: map,
@@ -110,7 +110,7 @@ var $maps = function () {
 					}
         			//window.location.href = url;
     			});
-				google.maps.event.addListener(marker, 'click', function(event) {
+				google.maps.event.addListener(marker, 'dblclick', function(event) {
 					map.setCenter(event.latLng);
 				});
 			});

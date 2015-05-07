@@ -23,7 +23,7 @@ __PACKAGE__->config(
 );
 with 'SMM::TraitFor::Controller::DefaultCRUD';
 
-sub base : Chained('/api/base') : PathPart('public/projects') :
+sub base : Chained('/api/root') : PathPart('public/projects') :
   CaptureArgs(0) { }
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
@@ -170,6 +170,16 @@ sub list_GET {
                               name
                               latitude
                               longitude
+                              updated_at
+                              project_number
+                              percentage
+                              qualitative_progress_1
+                              qualitative_progress_2
+                              qualitative_progress_3
+                              qualitative_progress_4
+                              qualitative_progress_5
+                              qualitative_progress_6
+
                               /
                         ),
                         goal => [
@@ -177,11 +187,13 @@ sub list_GET {
                                 map {
                                     my $p = $_;
                                     (
-                                        map {
-                                            { $_ => $p->{goal}->{$_} }
-                                          } qw/
-                                          name
-                                          /
+                                        +{
+                                            map { $_ => $p->{goal}->{$_} }
+                                              qw/
+                                              id
+                                              name
+                                              /
+                                        },
                                       ),
                                 } @{ $r->{goal_projects} },
                             ),

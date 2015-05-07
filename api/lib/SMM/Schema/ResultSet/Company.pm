@@ -22,6 +22,14 @@ sub verifiers_specs {
                     required => 1,
                     type     => 'Str',
                 },
+                name_url => {
+                    required => 1,
+                    type     => 'Str',
+                },
+                goal_id => {
+                    required => 0,
+                    type     => 'Int',
+                },
             }
         )
     };

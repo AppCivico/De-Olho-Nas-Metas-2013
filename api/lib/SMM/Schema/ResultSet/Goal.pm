@@ -22,42 +22,67 @@ sub verifiers_specs {
                     required => 1,
                     type     => 'Str',
                 },
-                address => {
-                    required => 0,
-                    type     => 'Str',
-                },
-                postal_code => {
-                    required => 0,
-                    type     => 'Str',
-                },
-                city_id => {
-                    required => 0,
-                    type     => 'Int',
-                },
                 description => {
                     required => 0,
                     type     => 'Str',
                 },
-                phone => {
+                technically => {
+                    required => 1,
+                    type     => 'Str',
+                },
+                will_be_delivered => {
                     required => 0,
                     type     => 'Str',
                 },
-                email => {
+                expected_start_date => {
                     required => 0,
                     type     => 'Str',
                 },
-                website => {
+                expected_end_date => {
                     required => 0,
                     type     => 'Str',
                 },
-                complement => {
+                start_date => {
                     required => 0,
                     type     => 'Str',
                 },
-                number => {
+                end_date => {
                     required => 0,
                     type     => 'Str',
                 },
+                percentage => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                goal_number => {
+                    required => 1,
+                    type     => 'Int',
+                },
+                qualitative_progress_1 => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                qualitative_progress_2 => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                qualitative_progress_3 => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                qualitative_progress_4 => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                qualitative_progress_5 => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                qualitative_progress_6 => {
+                    required => 0,
+                    type     => 'Str',
+                },
+
             }
         )
     };
@@ -67,8 +92,8 @@ sub action_specs {
     my $self = shift;
     return {
         create => sub {
-            my %values  = shift->valid_values;
-            my $goal = $self->create( \%values );
+            my %values = shift->valid_values;
+            my $goal   = $self->create( \%values );
             return $goal;
         }
     };

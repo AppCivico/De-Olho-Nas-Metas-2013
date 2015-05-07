@@ -133,21 +133,6 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 goals
-
-Type: has_many
-
-Related object: L<SMM::Schema::Result::Goal>
-
-=cut
-
-__PACKAGE__->has_many(
-  "goals",
-  "SMM::Schema::Result::Goal",
-  { "foreign.city_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
-);
-
 =head2 managements
 
 Type: has_many
@@ -199,8 +184,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-11-11 07:38:17
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:PV5PBlk6r9sGeMlkVp6uQw
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-05-06 14:53:51
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:hCu25dTH/LXiidW5iA30mA
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;

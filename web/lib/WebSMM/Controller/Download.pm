@@ -30,7 +30,8 @@ sub download : Path : Args(0) {
     my $json = $api->stash_result( $c, 'preregisters', get_as_content => 1 );
     use DDP;
     my $content = decode_json $json;
-    $csv .= "$_->{username},$_->{useremail}\n" for ( @{ $content->{preregisters} } );
+    $csv .= "$_->{username},$_->{useremail}\n"
+      for ( @{ $content->{preregisters} } );
     $c->res->content_type('text/comma-separated-values');
 
     my $name = q/pre_cadastro.txt/;

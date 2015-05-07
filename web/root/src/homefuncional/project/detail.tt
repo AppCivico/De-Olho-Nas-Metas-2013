@@ -8,7 +8,6 @@
 <script src="//blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
 <script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
 <script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
 	[%-CALL assets.include("js/jquery.upload/js/jquery.iframe-transport.js")%]
 	[%-CALL assets.include("js/jquery.upload/js/jquery.fileupload.js")%]
@@ -338,7 +337,7 @@ $(document).ready(function () {
 											</div>
 											<div id="content_question" class="col-xs-offset-1 col-xs-10 text-center">
 												<p class="text-center">Qual sua avaliação a respeito do projeto? Selecione uma das opções abaixo:</p>
-												<button id="late" name="late" class="btn btn-info">Atrasado</button> <button id="in_progress" name="in_progress" class="btn btn-warning">Em progresso</button> <button id="complete" name="complete" class="btn btn-success">Completo</button>
+												<button id="late" name="late" class="btn btn-danger">Atrasado</button> <button id="in_progress" name="in_progress" class="btn btn-warning">Em progresso</button> <button id="complete" name="complete" class="btn btn-success">Completo</button>
 											</div>
 										</div>
 									</section>

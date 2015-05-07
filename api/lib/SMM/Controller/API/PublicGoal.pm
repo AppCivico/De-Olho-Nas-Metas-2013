@@ -25,7 +25,7 @@ __PACKAGE__->config(
 );
 with 'SMM::TraitFor::Controller::DefaultCRUD';
 
-sub base : Chained('/api/base') : PathPart('public/goals') : CaptureArgs(0) { }
+sub base : Chained('/api/root') : PathPart('public/goals') : CaptureArgs(0) { }
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
 
@@ -69,8 +69,14 @@ sub result_GET {
                   id
                   name
                   description
-                  expected_budget
+                  project_count
                   goal_number
+                  expected_start_date
+                  expected_end_date
+                  updated_at
+                  expected_budget
+                  transversality
+                  will_be_delivered
                   qualitative_progress_1
                   qualitative_progress_2
                   qualitative_progress_3
@@ -173,8 +179,8 @@ sub result_GET {
                 ),
             ],
 
-            region           => \@region,
-            goal_porcentages => (
+            region      => \@region,
+            percentages => (
                 map {
                     +{
                         owned     => $_->owned,
@@ -242,6 +248,8 @@ sub list_GET {
           unless $region;
         $rs = $rs->search( { 'project.region_id' => $region->{id} } );
     }
+    use DDP;
+
     $self->status_ok(
         $c,
         entity => {
@@ -254,37 +262,42 @@ sub list_GET {
                               qw/
                               id
                               name
-                              address
-                              postal_code
                               description
-                              phone
-                              email
-                              website
-                              complement
-                              region_count
                               project_count
+                              goal_number
+                              expected_start_date
+                              expected_end_date
+                              updated_at
+                              expected_budget
+                              transversality
+                              will_be_delivered
+                              qualitative_progress_1
+                              qualitative_progress_2
+                              qualitative_progress_3
+                              qualitative_progress_4
+                              qualitative_progress_5
+                              qualitative_progress_6
                               /
                         ),
-                        goal_projects => {
+                        percentage => {
                             (
                                 map {
 
                                     my $d = $_;
                                     (
-                                        map { $_ => $d->{$_} }
+                                        map { $_ => $d->[0]{$_} }
                                           qw/
-                                          id
+                                          owned
                                           /
                                       ),
 
-                                  } @{ $r->{goal_projects} },
+                                  } $r->{goal_porcentages},
 
                             ),
                         },
-                        url => $c->uri_for_action(
-                            $self->action_for('result'),
-                            [ $r->{id} ]
-                        )->as_string
+
+                        url => $c->uri_for_action( $self->action_for('result'),
+                            [ $r->{id} ] )->as_string
                       }
                   } $rs->search(
                     undef,

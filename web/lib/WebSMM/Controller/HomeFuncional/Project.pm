@@ -74,11 +74,6 @@ sub detail : Chained('object') : PathPart('') : Args(0) {
     $c->stash->{statistic} =
       { map { $_->{progress} => $_->{percentage} }
           @{ $c->stash->{project_obj}->{statistic} } };
-    use DDP;
-    p $c->stash->{statistic};
-    p $c->stash->{user_obj}->{organization}->{subprefecture_id};
-    p $c->stash->{project_obj}->{region};
-    warn '1';
 
 }
 
