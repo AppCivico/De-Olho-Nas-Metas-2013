@@ -50,7 +50,7 @@ sub verifiers_specs {
                     required => 0,
                     type     => 'Str',
                 },
-                porcentage => {
+                percentage => {
                     required => 0,
                     type     => 'Str',
                 },

@@ -119,24 +119,9 @@ __PACKAGE__->belongs_to(
   { is_deferrable => 0, on_delete => "NO ACTION", on_update => "NO ACTION" },
 );
 
-=head2 goals
 
-Type: has_many
-
-Related object: L<SMM::Schema::Result::Goal>
-
-=cut
-
-__PACKAGE__->has_many(
-  "goals",
-  "SMM::Schema::Result::Goal",
-  { "foreign.district_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
-);
-
-
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-10-06 22:55:04
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:9aFy1Y1Edf5gnUsUbG/B+A
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-05-06 14:53:51
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:AQLwCZCcFleEkKS+ytg/Ow
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

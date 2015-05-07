@@ -91,7 +91,7 @@ __PACKAGE__->table("goal");
   data_type: 'date'
   is_nullable: 1
 
-=head2 porcentage
+=head2 percentage
 
   data_type: 'text'
   is_nullable: 1
@@ -121,35 +121,6 @@ __PACKAGE__->table("goal");
   is_nullable: 1
 
 =head2 country_id
-
-  data_type: 'integer'
-  is_foreign_key: 1
-  is_nullable: 1
-
-=head2 state_id
-
-  data_type: 'integer'
-  is_foreign_key: 1
-  is_nullable: 1
-
-=head2 city_id
-
-  data_type: 'integer'
-  is_foreign_key: 1
-  is_nullable: 1
-
-=head2 district_id
-
-  data_type: 'integer'
-  is_foreign_key: 1
-  is_nullable: 1
-
-=head2 lat_lng
-
-  data_type: 'text'
-  is_nullable: 1
-
-=head2 status_id
 
   data_type: 'integer'
   is_foreign_key: 1
@@ -252,7 +223,7 @@ __PACKAGE__->add_columns(
     { data_type => "date", is_nullable => 1 },
     "end_date",
     { data_type => "date", is_nullable => 1 },
-    "porcentage",
+    "percentage",
     { data_type => "text", is_nullable => 1 },
     "management_id",
     { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
@@ -268,16 +239,6 @@ __PACKAGE__->add_columns(
     "update_at",
     { data_type => "timestamp", is_nullable => 1 },
     "country_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-    "state_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-    "city_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-    "district_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-    "lat_lng",
-    { data_type => "text", is_nullable => 1 },
-    "status_id",
     { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
     "original_link",
     { data_type => "text", is_nullable => 1 },
@@ -337,26 +298,6 @@ __PACKAGE__->has_many(
     { cascade_copy          => 0, cascade_delete => 0 },
 );
 
-=head2 city
-
-Type: belongs_to
-
-Related object: L<SMM::Schema::Result::City>
-
-=cut
-
-__PACKAGE__->belongs_to(
-    "city",
-    "SMM::Schema::Result::City",
-    { id => "city_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
-);
-
 =head2 comment_goals
 
 Type: has_many
@@ -399,26 +340,6 @@ __PACKAGE__->belongs_to(
     "country",
     "SMM::Schema::Result::Country",
     { id => "country_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
-);
-
-=head2 district
-
-Type: belongs_to
-
-Related object: L<SMM::Schema::Result::District>
-
-=cut
-
-__PACKAGE__->belongs_to(
-    "district",
-    "SMM::Schema::Result::District",
-    { id => "district_id" },
     {
         is_deferrable => 0,
         join_type     => "LEFT",
@@ -551,50 +472,10 @@ Related object: L<SMM::Schema::Result::Project>
 =cut
 
 __PACKAGE__->has_many(
-    "project_tb",
+    "project",
     "SMM::Schema::Result::Project",
     { "foreign.goal_id" => "self.id" },
     { cascade_copy      => 0, cascade_delete => 0 },
-);
-
-=head2 state
-
-Type: belongs_to
-
-Related object: L<SMM::Schema::Result::State>
-
-=cut
-
-__PACKAGE__->belongs_to(
-    "state",
-    "SMM::Schema::Result::State",
-    { id => "state_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
-);
-
-=head2 status
-
-Type: belongs_to
-
-Related object: L<SMM::Schema::Result::Status>
-
-=cut
-
-__PACKAGE__->belongs_to(
-    "status",
-    "SMM::Schema::Result::Status",
-    { id => "status_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
 );
 
 =head2 user
@@ -617,8 +498,8 @@ __PACKAGE__->belongs_to(
     },
 );
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-16 13:52:47
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:IBSjoYD3djUrGeIkrLPRNQ
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-05-06 14:53:51
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:JNbsecTcytEuFXcOrDqJug
 
 __PACKAGE__->has_many(
     approved_comments => 'SMM::Schema::Result::CommentGoal',
@@ -684,7 +565,7 @@ sub verifiers_specs {
                     required => 0,
                     type     => 'Str',
                 },
-                porcentage => {
+                percentage => {
                     required => 0,
                     type     => 'Str',
                 },

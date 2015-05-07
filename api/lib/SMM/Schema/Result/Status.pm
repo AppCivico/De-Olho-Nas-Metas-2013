@@ -80,26 +80,9 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key("id");
 
-=head1 RELATIONS
 
-=head2 goals
-
-Type: has_many
-
-Related object: L<SMM::Schema::Result::Goal>
-
-=cut
-
-__PACKAGE__->has_many(
-  "goals",
-  "SMM::Schema::Result::Goal",
-  { "foreign.status_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
-);
-
-
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-10-06 19:49:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:yLUM8LSEBExftQ+d54VyDg
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-05-06 14:53:51
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:wm6HFped39DdZlnRt/nS0g
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

@@ -1,6 +1,10 @@
 <div>
 <div class="rows">
 <h2 class="sub-header">Metas</h2>
+<div class="container-fluid">
+  <a href="[% c.uri_for_action('/admin/goal/add') %]" class="btn btn-default">Cadastrar Meta</a>
+</div>
+
 <div class="table-responsive">
 	[%IF goals.size > 0%]
 	<table class="table table-striped">
@@ -17,6 +21,7 @@
 						<a href="[% c.uri_for_action('/admin/goal/detail',[goal.id] ) %]">[%goal.name%]</a>
 					</td>
 					<td>[%goal.description%]</td>
+					<td><a href="">Editar</a></td>
 				</tr>
             [%END%]
 		</tbody>
