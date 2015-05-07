@@ -69,6 +69,7 @@
                     <option value="orcamento" selected="selected">Orçamentos</option>
                     <option value="objetivo" selected="selected">Objetivos</option>
                     <option value="projeto" selected="selected">Projetos</option>
+                    <option value="subprefeitura" selected="selected">Subprefeituras</option>
                 </select>
             </div>
         </div>
@@ -347,6 +348,16 @@
          <tr>
             <th><pre><a data-animated-anchor href="#sample_of_networks">/public/regions</a></pre></th>
             <td>Lista de todos os distritos.</td>
+
+            <td>
+              <ul class="list-unstyled list-param">
+              </ul>
+
+            </td>
+        </tr>
+         <tr>
+            <th><pre><a data-animated-anchor href="#sample_of_networks">/public/subprefectures</a></pre></th>
+            <td>Lista de todas as subprefeituras.</td>
 
             <td>
               <ul class="list-unstyled list-param">

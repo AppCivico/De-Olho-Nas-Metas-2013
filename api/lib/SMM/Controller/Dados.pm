@@ -44,7 +44,9 @@ sub _download : Chained('base') PathPart('download') : Args(1) {
     my ( $self, $c, $ff ) = @_;
 
     use DDP;
-    $c->detach unless $ff =~ m/meta|empresa|projeto|objetivo/;
+    $c->detach
+      unless $ff =~
+      m/meta|empresa|projeto|objetivo|conselho|subprefeitura|orcamento/;
     my $path = ( $c->config->{downloads}{tmp_dir} || '/tmp' ) . '/' . lc $ff;
 
     if ( -e $path ) {
@@ -135,21 +137,21 @@ sub _define_lines {
         while ( my $data = $data_rs->next ) {
             my @this_row = (
                 $data->{id},
-                $data->{name},
-                $data->{description},
+                $self->_loc_str( $c, $data->{name} ),
+                $self->_loc_str( $c, $data->{description} ),
                 $data->{expected_budget},
                 $data->{goal_number},
                 $data->{updated_at},
                 $data->{expected_start_date},
                 $data->{expected_end_date},
-                $data->{will_be_delivered},
-                $data->{transversality},
-                $data->{qualitative_progress_1},
-                $data->{qualitative_progress_2},
-                $data->{qualitative_progress_3},
-                $data->{qualitative_progress_4},
-                $data->{qualitative_progress_5},
-                $data->{qualitative_progress_6},
+                $self->_loc_str( $c, $data->{will_be_delivered} ),
+                $self->_loc_str( $c, $data->{transversality} ),
+                $self->_loc_str( $c, $data->{qualitative_progress_1} ),
+                $self->_loc_str( $c, $data->{qualitative_progress_2} ),
+                $self->_loc_str( $c, $data->{qualitative_progress_3} ),
+                $self->_loc_str( $c, $data->{qualitative_progress_4} ),
+                $self->_loc_str( $c, $data->{qualitative_progress_5} ),
+                $self->_loc_str( $c, $data->{qualitative_progress_6} ),
             );
 
             push @lines, \@this_row;
@@ -304,6 +306,65 @@ sub _define_lines {
                 $data->{id}, $data->{name},
                 $data->{description}, $data->{phone},
                 $data->{address}, $data->{postal_code}, $data->{website},
+            );
+
+            push @lines, \@this_row;
+        }
+
+    }
+    elsif ( $company eq 'distrito' ) {
+        @lines = (
+            [
+                map { $self->_loc_str( $c, $_ ) } 'ID do distrito',
+                'Nome do distrito',
+                'Latitude',
+                'Longitude',
+                'Coordenadas Geométricas',
+            ]
+        );
+        $data_rs = $c->model('DB::Region')->search(
+            undef,
+            {
+                result_class => 'DBIx::Class::ResultClass::HashRefInflator'
+            }
+        );
+        while ( my $data = $data_rs->next ) {
+            my @this_row = (
+                $data->{id},   $data->{name}, $data->{lat},
+                $data->{long}, $data->{geom},
+            );
+
+            push @lines, \@this_row;
+        }
+
+    }
+    elsif ( $company eq 'subprefeitura' ) {
+        @lines = (
+            [
+                map { $self->_loc_str( $c, $_ ) } 'ID da subprefeitura',
+                'Nome da subprefeitura',
+                'Endereço',
+                'E-mail',
+                'Site',
+                'Telefone',
+                'Subprefeito',
+                'Latitude',
+                'Longitude',
+            ]
+        );
+        $data_rs = $c->model('DB::Subprefecture')->search(
+            undef,
+            {
+                result_class => 'DBIx::Class::ResultClass::HashRefInflator'
+            }
+        );
+        while ( my $data = $data_rs->next ) {
+            my @this_row = (
+                $data->{id},           $data->{name},
+                $data->{address},      $data->{email},
+                $data->{site},         $data->{telephone},
+                $data->{deputy_mayor}, $data->{latitude},
+                $data->{longitude},
             );
 
             push @lines, \@this_row;
