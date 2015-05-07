@@ -427,9 +427,9 @@ sub list_geom : Chained('base') PathPart('list_geom') : Args(0) {
     my @geom = $c->model('DB')->resultset('Project')->search(
         {
             -and => [
-                latitude   => { '!=', undef },
-                longitude  => { '!=', undef },
-                percentage => { '!=', undef }
+                latitude        => { '!=', undef },
+                longitude       => { '!=', undef },
+                'me.percentage' => { '!=', undef }
             ]
         },
         {

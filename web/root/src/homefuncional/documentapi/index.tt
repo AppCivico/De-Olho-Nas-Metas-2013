@@ -63,11 +63,12 @@
             <div class="grupo">
                 <label>Tabelas</label>
                 <select name="tabela" class="form-control">
+                    <option value="conselho" selected="selected">Conselhos</option>
+                    <option value="empresa" selected="selected">Empresas</option>
                     <option value="meta" selected="selected">Metas</option>
                     <option value="orcamento" selected="selected">Orçamentos</option>
-                    <option value="projeto" selected="selected">Projetos</option>
                     <option value="objetivo" selected="selected">Objetivos</option>
-                    <option value="empresa" selected="selected">Empresas</option>
+                    <option value="projeto" selected="selected">Projetos</option>
                 </select>
             </div>
         </div>
@@ -198,6 +199,35 @@
         </div>
 
     </div>
+    <div class="row" >
+        <div class="col-sm-2">
+            <h2>Distrito</h2>
+            <ul>
+                <li><strong>ID do distrito</strong></li>
+                <li><strong>Nome</strong></li>
+                <li><strong>Latitude</strong></li>
+                <li><strong>Longitude</strong></li>
+                <li>Coordenadas Geométricas</li>
+            </ul>
+
+        </div>
+        <div class="col-sm-2">
+            <h2>Subprefeitura</h2>
+            <ul>
+                <li><strong>ID da subprefeitura</strong></li>
+                <li><strong>Nome</strong></li>
+                <li><strong>Endereço</strong></li>
+                <li><strong>E-mail</strong></li>
+                <li>Site</li>
+                <li>Telefone</li>
+                <li>Subprefeito</li>
+                <li>Latitude</li>
+                <li>Longitude</li>
+            </ul>
+
+        </div>
+
+    </div>
 </form>
 
 <div class="panel panel-info">
@@ -307,6 +337,16 @@
          <tr>
             <th><pre><a data-animated-anchor href="#sample_of_networks">/public/councils</a></pre></th>
             <td>Lista de todos os conselhos.</td>
+
+            <td>
+              <ul class="list-unstyled list-param">
+              </ul>
+
+            </td>
+        </tr>
+         <tr>
+            <th><pre><a data-animated-anchor href="#sample_of_networks">/public/regions</a></pre></th>
+            <td>Lista de todos os distritos.</td>
 
             <td>
               <ul class="list-unstyled list-param">
@@ -598,6 +638,46 @@ councils => [
                  url        : "http://localhost/public/organizations/3",
                  website    : undef
               ...
+            ]
+</code></pre>
+<h3 id="id_sample_of_download_indicators" data-animated-anchor-offset="-60">/public/regions [%voltar_link|none%]</h3>
+
+<p>[%l('Exemplo de retorno:')%]</p>
+<pre class="precode"><code class="language-javascript">
+
+regions => [
+             [0]
+                 {
+                    geom            : "0103000020E61000000100000060030000C1163A43.. ...",
+                    id              : 599,
+                    lat             : 1,
+                    long            : 1,
+                    name            : "Alto De Pinheiros",
+                    subprefecture_id: 22
+                 }
+
+            ]
+</code></pre>
+</code></pre>
+<h3 id="id_sample_of_download_indicators" data-animated-anchor-offset="-60">/public/subprefectures [%voltar_link|none%]</h3>
+
+<p>[%l('Exemplo de retorno:')%]</p>
+<pre class="precode"><code class="language-javascript">
+
+subprefectures => [
+             [0]
+               {
+                  acronym     : "AF",
+                  address     : "R. Atucuri, 699 - CEP 03411-000",
+                  deputy_mayor: "Quintino Simões Pinto",
+                  email       : "aricanduva@prefeitura.sp.gov.br",
+                  id          : 1,
+                  latitude    : -23.549884,
+                  longitude   : -46.536692,
+                  name        : "Aricanduva",
+                  site        : "http://aricanduva.prefeitura.sp.gov.br",
+                  telephone   : "PABX: 3396-0800"
+               }
             ]
 </code></pre>
 
