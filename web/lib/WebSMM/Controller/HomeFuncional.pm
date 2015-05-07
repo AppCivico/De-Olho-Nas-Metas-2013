@@ -22,7 +22,7 @@ Catalyst Controller.
 
 =cut
 
-sub base : Chained('/') : PathPart('home') : CaptureArgs(0) {
+sub base : Chained('/') : PathPart('') : CaptureArgs(0) {
 
     my ( $self, $c ) = @_;
     my $api = $c->model('API');

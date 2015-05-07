@@ -64,11 +64,13 @@
                 <label>Tabelas</label>
                 <select name="tabela" class="form-control">
                     <option value="conselho" selected="selected">Conselhos</option>
+                    <option value="distrito" selected="selected">Distritos</option>
                     <option value="empresa" selected="selected">Empresas</option>
                     <option value="meta" selected="selected">Metas</option>
-                    <option value="orcamento" selected="selected">Orçamentos</option>
                     <option value="objetivo" selected="selected">Objetivos</option>
+                    <option value="orcamento" selected="selected">Orçamentos</option>
                     <option value="projeto" selected="selected">Projetos</option>
+                    <option value="subprefeitura" selected="selected">Subprefeituras</option>
                 </select>
             </div>
         </div>
@@ -353,7 +355,17 @@
               </ul>
 
             </td>
-        </tr>
+         </tr>
+         <tr>
+            <th><pre><a data-animated-anchor href="#sample_of_networks">/public/subprefectures</a></pre></th>
+            <td>Lista de todos as subprefeituras.</td>
+
+            <td>
+              <ul class="list-unstyled list-param">
+              </ul>
+
+            </td>
+         </tr>
 
 
     </tbody>

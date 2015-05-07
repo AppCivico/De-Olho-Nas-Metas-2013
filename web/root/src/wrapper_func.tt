@@ -56,7 +56,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-				<a href="/home" class="navbar-brand"><img src="/static/images/logo-header.png"></a>
+				<a href="[% c.uri_for_action('/homefuncional/home')%]" class="navbar-brand"><img src="/static/images/logo-header.png"></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-main-collapse">
@@ -66,23 +66,23 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a href="/home/goal">Metas</a>
+                        <a href="[% c.uri_for_action('/homefuncional/goal/index')%]">Metas</a>
                     </li>
                     <li>
-                        <a href="/home/region">Distritos</a>
+                        <a href="[% c.uri_for_action('/homefuncional/region/index')%]">Distritos</a>
                     </li>
                     <li>
-                        <a href="/home/organization">Conselhos</a>
+                        <a href="[% c.uri_for_action('/homefuncional/organization/index')%]">Conselhos</a>
                     </li>
                     <li>
-                        <a href="/home/campaign">Campanhas</a>
+                        <a href="[% c.uri_for_action('/homefuncional/campaign/index')%]">Campanhas</a>
                     </li>
 
                     <li>
-                        <a href="/home/company">Empresas</a>
+                        <a href="[% c.uri_for_action('/homefuncional/company/index')%]">Empresas</a>
                     </li>
                     <li>
-                        <a href="/home/open-data">Dados Abertos</a>
+                        <a href="[% c.uri_for_action('/homefuncional/documentapi/index')%]">Dados Abertos</a>
                     </li>
 					[% IF c.user %]
                     <li class="dropdown">
@@ -115,10 +115,10 @@
 			<div class="container">
 				<ul class="menu-footer">
 					<li>
-						<a href="/homefuncional/sobre">Sobre</a>
+						<a href="/sobre">Sobre</a>
 					</li>
 					<li>
-						<a href="/homefuncional/faq">Perguntas Frequentes</a>
+						<a href="/faq">Perguntas Frequentes</a>
 					</li>
 					<li>
 						<a href="/contato">Contato</a>

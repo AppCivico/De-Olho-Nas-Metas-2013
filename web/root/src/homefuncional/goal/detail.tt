@@ -406,7 +406,7 @@ $(document).ready(function () {
 						<span class="header">Planeja Sampa</span>
 						<ul class="list-organizations">
 							<li>
-								<a href="http://planejasampa.prefeitura.sp.gov.br/metas/meta/[%goal_obj.id%]">Meta [%goal_obj.id%] - [% goal_obj.name%]
+								<a _blank href="http://planejasampa.prefeitura.sp.gov.br/metas/meta/[%goal_obj.id%]">Meta [%goal_obj.id%] - [% goal_obj.name%]
 							</li>
 						</ul>
 					</div>

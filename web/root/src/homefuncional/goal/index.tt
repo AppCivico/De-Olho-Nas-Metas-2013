@@ -8,7 +8,7 @@
 					<div class="contents pull-left">
 						<div class="description">
 							<h2>
-								<a href="/home/goal/{{id}}">Meta {{id}} - {{name}}</a>
+								<a href="/goal/{{id}}">Meta {{id}} - {{name}}</a>
 							</h2>
 							<div class="stats">
 								{{#region_count}}
