@@ -1763,3 +1763,10 @@ section.statistics .chart-stats{
 .page-signup .council-list{
 	display: none;
 }
+
+pre.precode {
+    word-wrap: normal;
+    max-height: 500px;
+    word-wrap: normal;
+}
+

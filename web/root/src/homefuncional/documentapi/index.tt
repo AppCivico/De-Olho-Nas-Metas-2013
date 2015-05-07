@@ -1,6 +1,7 @@
 [%-CALL assets.include("js/download_links.js")%]
 
 [%SET voltar_link = '<small><a class="pull-right" data-animated-anchor href="#endpoints">voltar para endpoints</a></small>'%]
+<div class="container">
 <h1>Dados abertos</h1>
 <div class="row">
     <div class="col-sm-2 hidden-sm hidden-xs text-center">
@@ -404,7 +405,6 @@ goals
         }
         ...
     ]
-
 </code></pre>
 <h3 id="id_sample_of_indicators" data-animated-anchor-offset="-60">/public/goals/* [%voltar_link|none%]</h3>
 
@@ -673,7 +673,7 @@ regions => [
 <h3 id="id_sample_of_download_indicators" data-animated-anchor-offset="-60">/public/subprefectures [%voltar_link|none%]</h3>
 
 <p>[%l('Exemplo de retorno:')%]</p>
-<pre class="precode"><code class="language-javascript">
+<pre style="overflow:auto" class="precode"><code class="language-javascript">
 
 subprefectures => [
              [0]
@@ -696,7 +696,7 @@ subprefectures => [
     </div>[%# panel-body%]
 
 </div>[%# panel%]
-
+</div>
 
 [%-CALL assets.include("/static/js/download_links.js", 999)%]
 
