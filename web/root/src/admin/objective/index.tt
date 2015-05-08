@@ -1,0 +1,36 @@
+<div>
+<div class="rows">
+<h2 class="sub-header">Objetivos</h2>
+<div class="container-fluid">
+  <a href="[% c.uri_for_action('/admin/objective/add') %]" class="btn btn-default">Cadastrar Objetivo</a>
+</div>
+
+<div class="table-responsive">
+	[%IF objectives.size > 0%]
+	<table class="table table-striped">
+		<thead>
+			<tr>
+                <th>Nome</th>
+                <th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			[%FOREACH objective IN objectives%]
+				<tr>
+					<td>
+						<a href="[% c.uri_for_action('/admin/objective/detail',[objective.id] ) %]">[%objective.name%]</a>
+					</td>
+					<td>[%objective.description%]</td>
+					<td><a href="">Editar</a></td>
+				</tr>
+            [%END%]
+		</tbody>
+	[%ELSE%]
+		<h4>Objetivos</h4>
+	[%END%]
+	  </table>
+	
+</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,36 @@
+<div>
+<div class="rows">
+<h2 class="sub-header">Distrito</h2>
+<div class="container-fluid">
+  <a href="[% c.uri_for_action('/admin/district/add') %]" class="btn btn-default">Cadastrar Distrito</a>
+</div>
+
+<div class="table-responsive">
+	[%IF regions.size > 0%]
+	<table class="table table-striped">
+		<thead>
+			<tr>
+                <th>Nome</th>
+                <th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			[%FOREACH region IN regions%]
+				<tr>
+					<td>
+						<a href="[% c.uri_for_action('/admin/district/detail',[region.id] ) %]">[%region.name%]</a>
+					</td>
+					<td>[%region.description%]</td>
+					<td><a href="">Editar</a></td>
+				</tr>
+            [%END%]
+		</tbody>
+	[%ELSE%]
+		<h4>Distritos</h4>
+	[%END%]
+	  </table>
+	
+</div>
+</div>
+</div>
+</div>

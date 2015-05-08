@@ -18,11 +18,25 @@
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 						<a href="[%href%]">Metas</a>
 					</li>
+					[%href = c.uri_for_action('/admin/project/index')%]
+					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
+						<a href="[%href%]">Projetos</a>
+					</li>
+					[%href = c.uri_for_action('/admin/objective/index')%]
+					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
+						<a href="[%href%]">Objetivo</a>
+					</li>
+					</li>
+					[%href = c.uri_for_action('/admin/district/index')%]
+					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
+						<a href="[%href%]">Distrito</a>
+					</li>
+
 					[%href = c.uri_for_action('/admin/projectevent/index')%]
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 						<a href="[%href%]">Aprovações de Notificações</a>
 					</li>
-                    [%href = c.uri_for_action('/admin/userrequestcouncil/index')%]
+			        [%href = c.uri_for_action('/admin/userrequestcouncil/index')%]
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 						<a href="[%href%]">Requisições de Conselheiros</a>
 					</li>
