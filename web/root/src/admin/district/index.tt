@@ -21,7 +21,7 @@
 						<a href="[% c.uri_for_action('/admin/district/detail',[region.id] ) %]">[%region.name%]</a>
 					</td>
 					<td>[%region.description%]</td>
-					<td><a href="">Editar</a></td>
+					<td><a href="[% c.uri_for_action('/admin/form/district/process_edit',[region.id] ) %]">Editar</a></td>
 				</tr>
             [%END%]
 		</tbody>
