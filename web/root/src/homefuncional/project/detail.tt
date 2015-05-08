@@ -29,7 +29,7 @@
 					<div class="contents pull-left">
 						<div class="description">
 							<h2>
-								<a href="/home/project/{{id}}">{{ name }}</a>
+								<a href="/project/{{id}}">{{ name }}</a>
 							</h2>
 							<div class="stats">
 								<div class="icon projects"></div> <span class="projects">Meta Associada: {{#goal}}{{name}}{{/goal}}</span>
@@ -57,11 +57,11 @@ $(document).ready(function () {
 		textview;
 	var button = $(this);
 	if ($(this).hasClass('follow')){
-		url = "/home/project/user_follow_project";
+		url = "/project/user_follow_project";
 		$(this).removeClass('follow');
 		textview = "Parar de Seguir";	
 	}else{
-		url = "/home/project/user_stop_follow";
+		url = "/project/user_stop_follow";
 		$(this).addClass('follow');
 		textview = "Siga o Projeto";	
 	}
@@ -76,21 +76,21 @@ $(document).ready(function () {
 	
   })
    $('#late').on('click', function () {
-						$.post( '/home/project_accept_porcentage/' + $('#projectid').val() + '/accepted', { project_id: $('#projectid').val(), progress : 'late' },function( data ) {
+						$.post( '/project_accept_porcentage/' + $('#projectid').val() + '/accepted', { project_id: $('#projectid').val(), progress : 'late' },function( data ) {
 				  console.log(data);
 					 $('#alert_question').html('<div class="alert alert-success"><p>'+data.message+'</p></div>');
 					 $('#content_question').html('');
 						},"json")
    })   
  		$('#in_progress').on('click', function () {
-						$.post( '/home/project_accept_porcentage/' + $('#projectid').val() + '/accepted', { project_id: $('#projectid').val(), progress: 'in_progress' },function( data ) {
+						$.post( '/project_accept_porcentage/' + $('#projectid').val() + '/accepted', { project_id: $('#projectid').val(), progress: 'in_progress' },function( data ) {
 				  console.log(data);
 					 $('#alert_question').html('<div class="alert alert-success"><p>'+data.message+'</p></div>');
 					 $('#content_question').html('');
 						},"json")
    })    
    $('#complete').on('click', function () {
-						$.post( '/home/project_accept_porcentage/'+ $('#projectid').val() + '/accepted', { project_id: $('#projectid').val(), progress : 'completed' },function( data ) {
+						$.post( '/project_accept_porcentage/'+ $('#projectid').val() + '/accepted', { project_id: $('#projectid').val(), progress : 'completed' },function( data ) {
 						console.log(data);
 						$('#alert_question').html('<div class="alert alert-success"><p>'+data.message+'</p></div>');
 					 $('#content_question').html('');
@@ -104,7 +104,7 @@ $(document).ready(function () {
 	}
 
 	var id = $(this).data("id");
-	$.post( "/home/project/comment_counsil", { user_id: $(this).data("id"), text: $('#text_comment_counsil').val(), project_id : $('#projectid').val() } ,function( data ) {
+	$.post( "/project/comment_counsil", { user_id: $(this).data("id"), text: $('#text_comment_counsil').val(), project_id : $('#projectid').val() } ,function( data ) {
 		$('#alert').html('<div class="alert alert-success"><p>'+data.message+'</p></div>');
   	},"json");
 
@@ -117,7 +117,7 @@ $(document).ready(function () {
 	}
 
 	var id = $(this).data("id");
-	$.post( "/home/project/comment", { user_id: $(this).data("id"), text: $('#text_comment').val(), project_id : $('#projectid').val() } ,function( data ) {
+	$.post( "/project/comment", { user_id: $(this).data("id"), text: $('#text_comment').val(), project_id : $('#projectid').val() } ,function( data ) {
 		$('#alert_comment').html('<div class="alert alert-success"><p>'+data.message+'</p></div>');
   	},"json");
 
@@ -241,7 +241,7 @@ $(document).ready(function () {
 							</div>
 							<div class="facebook">
 							<!-- Social plugin facebook -->
-							<div class="fb-share-button" data-href="http://deolhonasmetas.org.br/home/project/[%project_obj.id%]" data-layout="button_count"></div>
+							<div class="fb-share-button" data-href="http://deolhonasmetas.org.br/project/[%project_obj.id%]" data-layout="button_count"></div>
 							</div>
 						</div>
 						<br clear="all"/>
@@ -415,7 +415,7 @@ $(document).ready(function () {
 						</div>
 						[%END%]
 						<div class="upload" style="display: none;">
-						    <form id="fileupload" action="/home/project/[%project_obj.id%]/upload_images" method="POST" enctype="multipart/form-data">
+						    <form id="fileupload" action="/project/[%project_obj.id%]/upload_images" method="POST" enctype="multipart/form-data">
 						        <div class="row fileupload-buttonbar">
 						            <div class="col-lg-7">
 						                <span class="btn btn-success fileinput-button">

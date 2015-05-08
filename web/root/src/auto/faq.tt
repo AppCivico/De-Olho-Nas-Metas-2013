@@ -1,159 +1,72 @@
-[%-CALL assets.include("js/faq.js")%]
-<div class="page-header bg-dark">
-	<h3>Perguntas frequentes</h3>
-	<p>Dúvidas? Saiba quais são as perguntas mais frequentes aqui</p>
-</div>
-<div class="row page-content">
+	<section class="page-content faq">
+		<div class="container">
+			<h2 class="title">Perguntas Frequentes</h2>
+			<div class="row">
+				<div class="col-sm-8 col-md-offset-2">
+					<p>
+						<strong>O que é o De Olho nas Metas?</strong>
+						<br /><br />
+						A cada novo mandato, conforme estabelece a Emenda Nº 30 da Lei Orgânica do Município (LOM), o(a) prefeito(a) de São Paulo tem a obrigatoriedade de apresentar um plano descrevendo as metas que serão implementadas durante seu governo. Essas metas abrangem temas diversos que vão do meio ambiente à educação, passando por toda as outras pastas e temas, e incluem projetos dirigidos a todas as regiões da cidade.<br /><br />
+						
+						A lei 15.764 de Maio de 2013 criou os Conselhos Participativos. Estes conselhos tem por atribuição, dentre outros temas, monitorar no âmbito de seu território a execução orçamentária, a evolução dos Indicadores de Desempenho dos Serviços Públicos, a execução do Plano de Metas e ainda acompanhar outras ferramentas de controle social com base em seus territórios. E, foi para facilitar o monitoramento das metas e a comunicação entre a população, Conselhos Participativos e Prefeitura que o <b>De Olho nas Metas foi criado</b>.<br /><br />
+						
+						É fundamental que cada vez mais pessoas conheçam o Plano de Metas e o impacto que ele poderá trazer para suas vidas. O De Olho nas Metas tem por objetivo ajudar a população a conhecer os projetos relacionados com a sua comunidade ou com temas de seu interesse. O De Olho nas Metas também ajuda os Conselheiros a divulgar informações, a organizar campanhas de monitoramento das metas, e a desenvolver seu trabalho de forma mais eficiente.
+						<br /><br />
+					</p>
+					
+					<p>
+					<strong>Quem pode usar o De Olho nas Metas?</strong>
+					<br><br>
+					O <b>De Olho nas Metas</b> pode ser usado por qualquer cidadão e cidadã: residentes da cidade de São Paulo, membros dos Conselhos Participativos e do próprio governo.
+					<br><br>
+					
+					<strong>O que o De Olho nas Metas oferece para os cidadãos de São Paulo?</strong>
+					<br><br>
+					O site do <b>De Olho nas Metas</b> ajuda a população a conhecer e a monitorar a implementação das metas que foram prometidas para a cidade de São Paulo. Dentre outras coisas, o site permite encontrar as metas e os projetos relacionados com regiões ou temas específicos. O site também permite que o usuário participe de discussões específicas e receba notificações via e-mail ou SMS toda vez que algo de seu interesse seja adicionado. Para receber essas notificações, é preciso se cadastrar no site e depois clicar em "siga" nos tópicos de interesse.
+					<br><br>
+					
+					<strong>Como o De Olho nas Metas ajuda os Conselheiros Participativos?</strong>
+					<br><br>
+					O <b>De Olho nas Metas</b> oferece uma série de ferramentas especialmente criadas para ajudar os Conselheiros Participativos na execução de suas tarefas. Dentre outras coisas, o site possui uma seção para cada um dos Conselhos Participativos da cidade. A partir desta seção, os conselheiros podem divulgar seus eventos e atividades, difundir novidades por meio de SMS e email, e até mesmo organizar campanhas móveis para a coleta de dados relacionados com as metas.
+					<br><br>
+					
+					<strong>Como o De Olho nas Metas ajuda o governo da cidade de São Paulo?</strong>
+					<br><br>
+					O município de São Paulo é extremamente grande e complexo. A Prefeitura procura cuidar de toda a cidade por meio de uma rede enorme de funcionários e parceiros. Ainda assim, às vezes fica difícil para a Prefeitura acompanhar de perto o resultado de suas ações. O <b>De Olho nas Metas</b> disponibilizará para a Prefeitura um conjunto de informações, fotos e mensagens enviadas diretamente pela população e pelos Conselheiros Participativos, contribuindo para que os gestores possam agilizar a tomada de decisões e a resolução de problemas na implementação dos projetos da administração municipal.
+					<br><br>
+					
+					<strong>Qual a vantagem de se cadastrar no sistema?</strong>
+					<br><br>
+					Todo usuário cadastrado poderá "seguir" os Conselhos Participativos, as metas, os projetos e receber notificações toda vez que algo de seu interesse for inserido no <b>De Olho nas Metas</b>.
+					<br><br>
+					
+					<strong>De onde vêm os dados do De Olho nas Metas?</strong>
+					<br><br>
+					Periodicamente, o <b>De Olho nas Metas</b> consulta automaticamente as informações sobre as metas e projetos do Planeja Sampa - site da Prefeitura de São Paulo que foi especialmente criado para incentivar a transparência e a participação social (http://planejasampa.prefeitura.sp.gov.br). Além dos dados do Planeja Sampa, o De Olho nas Metas também disponibiliza informações sobre as empresas executoras das metas. Essas informações fazem parte do Acordo de Cooperação Técnica entre o Tribunal de Contas do Município de São Paulo e a Rede Nossa São Paulo.
+					<br><br>
+					
+					<strong>O De Olho nas Metas aceita qualquer tipo de comentário?</strong>
+					<br><br>
+					Qualquer pessoa pode comentar as metas e projetos, inserir fotos, e inserir arquivos de áudio sem precisar se cadastrar no site com login. No entanto, todos os comentários passam por uma moderação. Não são permitidos comentários com linguagem ofensiva, preconceituosa, racista, agressiva etc.
+					<br><br>
+					
+					<strong>Quais os tipos de usuário do De Olho nas Metas?</strong>
+					<br><br>
+					O <b>De Olho nas Metas</b> oferece permissões e funcionalidades específicas para cada um dos seguintes tipos de usuário:<br>
+					* Usuário anônimo: pode postar comentários nas metas e projetos, inserir fotos e arquivos de áudio;<br>
+					* Usuário autenticado: pode postar comentários nas metas e projetos, inserir fotos, arquivos de áudio, e "seguir" o Conselho Participativo e as metas;<br>
+					* Conselheiro: pode postar comentários nas metas e projetos, inserir fotos e arquivos de áudio. Também pode criar enquetes móveis;<br>
+					* Conselheiro Master: pode postar comentários nas metas e projetos, inserir fotos e arquivos de áudio. Pode criar enquetes móveis e convidar outros conselheiros para participar. Pode criar campanhas, eventos e administrar a página do Conselho. Os Conselheiros Master deverão ser eleitos pelo próprio Conselho.
+					<br><br>
+					
+					<strong>Quem são as organizações responsáveis pelo De Olho nas Metas?</strong>
+					<br><br>
+					O <b>De Olho nas Metas</b> é uma iniciativa da Rede Nossa São Paulo, em parceria com a Eokoe e o Centro de Mídias Cívicas do Instituto de Tecnologia de Massachusetts (MIT Center for Civic Media), e conta com o apoio da Fundación Avina, por meio do <b>Fundo Acelerador de Inovações Cívicas</b>.  O sistema conta também com a cooperação técnica do Tribunal de Contas do Município de São Paulo.
+					<br><br>
 
-	<div class="faq">
-		<div class="buttons"><a href="#" class="expand-all">expandir todos</a> | <a href="#" class="collapse-all">fechar todos</a></div>
-			<div class='item even'>
-				<div class='question'>
-					Sou pago só por quilômetro rodado ou ganho um valor mínimo mesmo se o carro ficar na garagem?
-					<div class='arrow'></div>
-				</div>
-				<div class='answer'>
-					Sua remuneração será estabelecida de acordo com a rota e utilização informada no seu cadastro. Por isso, a transparência na hora de preencher o cadastro é muito importante.
-					A remuneração terá início quando você atingir 80% do que foi informado no seu cadastro. A partir daí, ela será crescente.
+					</p>
 				</div>
 			</div>
-			<div class='item odd'>
-				<div class='question'>
-					O adesivo vai deixar alguma cola ou alterar a cor da pintura do meu carro?
-					<div class='arrow'></div>
-				</div>
-				<div class='answer'>
-					Utilizamos os adesivos mais modernos existentes no mercado e a cola é específica para este tipo de utilização. Por isso, não provoca qualquer dano ou mudança de característica do seu automóvel. Após o término da campanha e, caso não tenha interesse em continuar, basta retirar o adesivo e fazer a vistoria para liberar seu pagamento.
-				</div>
-			</div>
-			<div class='item even'>
-				<div class='question'>
-					O período da campanha acabou. Como eu faço para tirar o adesivo do carro?
-					<div class='arrow'></div>
-				</div>
-				<div class='answer'>
-                    No término da campanha, basta retirar o adesivo, e realizar um agendamento para comprovação da retirada, que é obrigatório. O pagamento da última mensalidade só será liberado após a retirada do adesivo.
-				</div>
-			</div>
-			<div class='item odd'>
-				<div class='question'>
-					O adesivo sofreu um pequeno dano. Preciso fazer a troca?
-					<div class='arrow'></div>
-				</div>
-				<div class='answer'>
-					Nesse tipo de situação, fazemos uma avaliação caso a caso. Caso ocorra algo fora do previsto, entre em contato com nossa central e agende uma avaliação.
-				</div>
-			</div>
-			<div class='item even'>
-				<div class='question'>
-					Recebi uma proposta incrível para vender o meu veículo, mas ainda tenho um mês de campanha adesivada. O que acontece?
-					<div class='arrow'></div>
-				</div>
-				<div class='answer'>
-					Basta comunicar a retirada do adesivo e do rastreador. Sua remuneração também será interrompida e você receberá proporcionalmente até o último dia de veiculação da campanha.
-				</div>
-			</div>
-			<div class='item odd'>
-				<div class='question'>
-					Estourei os pontos na carteira, posso participar?
-					<div class='arrow'></div>
-				</div>
-				<div class='answer'>
-					Sua habilitação precisa estar válida. Caso haja algum problema junto aos órgão reguladores, primeiro regularize a situação, depois realize o cadastramento. A validade do seu documento é fundamental para a aprovação do cadastro.
-				</div>
-			</div>
-			<div class='item even'>
-				<div class='question'>
-					Minha carteira vence daqui a seis meses, preciso renová-la agora?
-					<div class='arrow'></div>
-				</div>
-				<div class='answer'>
-					Não há necessidade, porém você só poderá aderir à campanha durante o período de validade. No vencimento da habilitação, será solicitado o documento renovado. Caso isso não ocorra, seu cadastro será suspenso até a regularização e, consequentemente, a suspensão dos benefícios da campanha.
-				</div>
-			</div>
-			<div class='item odd'>
-				<div class='question'>
-					Meu carro está com o IPVA atrasado, tudo bem?
-					<div class='arrow'></div>
-				</div>
-				<div class='answer'>
-					Infelizmente, não. Na validação do cadastro será necessário apresentar os comprovantes das obrigações legais em dia, caso esteja com alguma pendência, é necessário regularizar sua situação para ter acesso aos benefícios da campanha.
-				</div>
-			</div>
-			<div class='item even'>
-				<div class='question'>
-					Sou o motorista principal, mas a minha filha de 18 anos também usa bastante o carro. O meu cadastro é válido?
-					<div class='arrow'></div>
-				</div>
-				<div class='answer'>
-					É válido, com certeza. Mas é importante informar o perfil de utilização do veículo com transparência, uma vez que no termo de compromisso assinado por você, vinculamos a campanha e a remuneração de acordo com o perfil de uso. Caso a informação não esteja de acordo, a Publicidade Inteligente se reserva ao direito de descadastrar seu veículo da campanha.
-				</div>
-			</div>
-			<div class='item odd'>
-				<div class='question'>
-					Meu carro está amassado, vocês aceitam a minha inscrição?
-					<div class='arrow'></div>
-				</div>
-				<div class='answer'>
-					Não, infelizmente. Para participar, é preciso consertá-lo. Lembre-se que seu veículo será a vitrine de uma grande marca e, por isso, é preciso que ele esteja bem cuidado.
-				</div>
-			</div>
-			<div class='item even'>
-				<div class='question'>
-					Viajo para o sítio todos os fins de semana e o meu carro fica cheio de lama. Posso veicular campanhas mesmo com ele sujo?
-					<div class='arrow'></div>
-				</div>
-				<div class='answer'>
-					Não recomendamos. Um dos compromissos é manter o veículo em boas condições visuais. Mais uma vez, reforçamos que seu veículo será vitrine de grandes marcas, então é fundamental que ele esteja sempre em boas condições visuais. Este inclusive é um requisito de continuidade do seu cadastro. Em nossas auditorias periódicas, avaliamos as condições visuais do veículo e, caso não esteja adequado, enviaremos comunicados para regularização e/ou manutenção, tendo como consequência máxima o descadastramento e perda dos benefícios da campanha. Haja sempre com bom senso.
-				</div>
-			</div>
-			<div class='item odd'>
-				<div class='question'>
-					Sou funcionário da empresa concorrente que deseja anunciar no meu carro, algum problema?
-					<div class='arrow'></div>
-				</div>
-				<div class='answer'>
-					Para a Publicidade Inteligente não há problemas, porém é necessário avaliar se haverá alguma retaliação por parte do seu empregador. Nós não interferimos no processo e não podemos nos responsabilizar ou negociar com seu empregador.
-				</div>
-			</div>
-			<div class='item even'>
-				<div class='question'>
-					Se eu for pego num blitz do bafômetro ou for culpado de um acidente de trânsito, posso sofrer algum processo da marca que anunciou no meu carro?
-					<div class='arrow'></div>
-				</div>
-				<div class='answer'>
-					Não. O processo, se houver, será dos órgãos públicos competentes e os envolvidos no acidente e/ou incidente. Porém, se houver consequências como processo ou cassação do direito de dirigir, infelizmente seu perfil será descadastrado.
-				</div>
-			</div>
-			<div class='item odd'>
-				<div class='question'>
-					Eu posso ser multado por exibir propaganda nas laterais do meu carro?
-					<div class='arrow'></div>
-				</div>
-				<div class='answer'>
-					Depende da cidade. Em locais onde a lei cidade limpa é vigente, não é permitido veicular campanhas publicitárias, porém a Publicidade Inteligente sempre monitora as permissões e somente irá te oferecer o que for compatível com a legislação para que não haja qualquer problema.
-				</div>
-			</div>
-			<div class='item even'>
-				<div class='question'>
-					Eu não me sinto à vontade em veicular campanhas de determinadas marcas e produtos. Quem pode anunciar no meu automóvel?
-					<div class='arrow'></div>
-				</div>
-				<div class='answer'>
-					A campanha publicitária será oferecida ao associado, que irá avaliar se quer ou não aderir à veiculação. Lembre-se você é um parceiro associado e não um funcionário. Por isso, tem todo direito de aceitar ou recusar o tipo de anuncio que será colocado no seu veículo.
-				</div>
-			</div>
-            <div class='item even'>
-                <div class='question'>
-                    Como será realizado o pagamento da campanha que eu aderi?
-                    <div class='arrow'></div>
-                </div>
-                <div class='answer'>
-                    Uma vez por mês, você deverá realizar uma vistoria, que é rápida e muito simples, nela será verificado as condições do seu adesivo e as funcionalidades do rastreador, após a vistoria realizada, o sistema irá liberar o seu pagamento, que será pago através de depósito bancário na conta corrente cadastrada.
-                </div>
-            </div>
-
+			<br>
 		</div>
-	</div>
-
-</div>
+    </section>

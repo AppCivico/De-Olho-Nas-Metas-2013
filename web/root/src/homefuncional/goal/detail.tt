@@ -13,7 +13,7 @@
 					<div class="contents pull-left">
 						<div class="description">
 							<h2>
-								<a href="/home/goal/{{id}}">Meta {{id}} - {{name}}</a>
+								<a href="/goal/{{id}}">Meta {{id}} - {{name}}</a>
 							</h2>
 							<div class="stats">
 								{{#region_count}}
@@ -52,14 +52,14 @@ $(document).ready(function () {
 		}
 
 		var id = $(this).data("id");
-		$.post( "/home/goal/comment", { user_id: $(this).data("id"), text: $('#text_comment').val(), goal_id : $('#goalid').val() } ,function( data ) {
+		$.post( "/goal/comment", { user_id: $(this).data("id"), text: $('#text_comment').val(), goal_id : $('#goalid').val() } ,function( data ) {
 			$('#alert_comment').html('<div class="alert alert-success"><p>'+data.message+'</p></div>');
   		},"json");
 
 		$('#text_comment').val('');
 	});
 	$('#progress-save').on('click', function () {
-		$.post( "/home/goal/set_progress", { owned : $('#progress-value').val(), goal_id : $('#goalid').val() } ,function( data ) {
+		$.post( "/goal/set_progress", { owned : $('#progress-value').val(), goal_id : $('#goalid').val() } ,function( data ) {
 			$('#alert_progress').html('<div class="alert alert-success"><p>'+data.message+'</p></div>');
   		},"json");
 
@@ -187,7 +187,7 @@ $(document).ready(function () {
 							</div>
 							<div class="facebook">
 							<!-- Social plugin facebook -->
-							<div class="fb-share-button" data-href="http://deolhonasmetas.org.br/home/goal/[%goal_obj.id%]" data-layout="button_count"></div>
+							<div class="fb-share-button" data-href="http://deolhonasmetas.org.br/goal/[%goal_obj.id%]" data-layout="button_count"></div>
 							</div>
 						</div>
 						<br clear="all"/>
@@ -406,7 +406,7 @@ $(document).ready(function () {
 						<span class="header">Planeja Sampa</span>
 						<ul class="list-organizations">
 							<li>
-								<a href="http://planejasampa.prefeitura.sp.gov.br/metas/meta/[%goal_obj.id%]">Meta [%goal_obj.id%] - [% goal_obj.name%]
+								<a _blank href="http://planejasampa.prefeitura.sp.gov.br/metas/meta/[%goal_obj.id%]">Meta [%goal_obj.id%] - [% goal_obj.name%]
 							</li>
 						</ul>
 					</div>
