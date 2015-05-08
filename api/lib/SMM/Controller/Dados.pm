@@ -46,7 +46,7 @@ sub _download : Chained('base') PathPart('download') : Args(1) {
     use DDP;
     $c->detach
       unless $ff =~
-      m/meta|empresa|projeto|objetivo|conselho|subprefeitura|orcamento/;
+      m/meta|empresa|projeto|objetivo|conselho|subprefeitura|orcamento|distrito/;
     my $path = ( $c->config->{downloads}{tmp_dir} || '/tmp' ) . '/' . lc $ff;
 
     if ( -e $path ) {
@@ -328,6 +328,7 @@ sub _define_lines {
                 result_class => 'DBIx::Class::ResultClass::HashRefInflator'
             }
         );
+
         while ( my $data = $data_rs->next ) {
             my @this_row = (
                 $data->{id},   $data->{name}, $data->{lat},
@@ -336,7 +337,7 @@ sub _define_lines {
 
             push @lines, \@this_row;
         }
-
+	use DDP; p @lines;
     }
     elsif ( $company eq 'subprefeitura' ) {
         @lines = (
