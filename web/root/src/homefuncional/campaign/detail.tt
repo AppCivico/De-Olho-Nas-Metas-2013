@@ -12,7 +12,7 @@ moment.locale('pt-br');
 $(document).ready(function() {
 	 $("#homedistricts").change(function(){
 											   
-	    $.post( "/home/campaign/search_by_district", { district_id: $('#homedistricts option:selected').val() }, function( data ) {
+	    $.post( "/campaign/search_by_district", { district_id: $('#homedistricts option:selected').val() }, function( data ) {
 	    $('#result').html(data);
 	  })
 													   
@@ -123,7 +123,7 @@ $(document).keydown( function(e) {
 				   </div>
 				   <div class="facebook">
 				   <!-- Social plugin facebook -->
-				     <div class="fb-share-button" data-href="http://deolhonasmetas.org.br/home/goal/[%goal_obj.id%]" data-layout="button_count"></div>
+				     <div class="fb-share-button" data-href="http://deolhonasmetas.org.br/goal/[%goal_obj.id%]" data-layout="button_count"></div>
 				   </div>
 				</div>
 				<p>&nbsp;</p>

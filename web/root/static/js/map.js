@@ -9,7 +9,7 @@
                     $('#txtLatitude').val(latitude);
                     $('#txtLongitude').val(longitude);
 
- 					$.get("/home/project/region_by_cep",{latitude: latitude, longitude: longitude}).done( function(data){
+ 					$.get("/project/region_by_cep",{latitude: latitude, longitude: longitude}).done( function(data){
 						document.getElementById("result").innerHTML=data
         		 	});
 
@@ -35,7 +35,7 @@ function initialize() {
 		geocoder = new google.maps.Geocoder();
 
    	    map = new google.maps.Map(document.getElementById("map"),mapOptions);
-		$.getJSON('/home/project_map',function(data,status){
+		$.getJSON('/project_map',function(data,status){
 			var json = data;
 			$.each(json, function(i, pj){
 				marker = "";
@@ -44,7 +44,7 @@ function initialize() {
     	            position: myLatlng,
 	                map: map,
 					title: pj.name,
-					url : "/home/project/"+pj.id
+					url : "/project/"+pj.id
         	    });
 
 				google.maps.event.addListener(marker, 'click', function() {
@@ -69,7 +69,7 @@ $(document).ready(function(){
 			zoom: 8,
 		};
    	    map = new google.maps.Map(document.getElementById("listprojects"),mapOptions);
-		$.getJSON('/home/project_map_list', { id : [%goal_obj.id ? goal_obj.id : 0 %] },function(data,status){
+		$.getJSON('/project_map_list', { id : [%goal_obj.id ? goal_obj.id : 0 %] },function(data,status){
 			var json = data;
 			$.each(json, function(i, pj){
 				marker = "";
@@ -78,7 +78,7 @@ $(document).ready(function(){
     	            position: myLatlng,
 	                map: map,
 					title: pj.name,
-					url : "/home/project/"+pj.id
+					url : "/project/"+pj.id
         	    });
 
 				google.maps.event.addListener(marker, 'click', function() {
@@ -90,13 +90,13 @@ $(document).ready(function(){
 		}
 		$("#type").change(function(){
 			var id = $( "#type option:selected" ).val();
-  	     	$.get("/home/project/type",{type_id: id}).done( function(data){
+  	     	$.get("/project/type",{type_id: id}).done( function(data){
 				document.getElementById("result").innerHTML=data
          	});
 		});
 		$("#region").change(function(){
 			var id = $( "#region option:selected" ).val();
-  	     	$.get("/home/project/region",{region_id: id}).done( function(data){
+  	     	$.get("/project/region",{region_id: id}).done( function(data){
 				document.getElementById("result").innerHTML=data
          	});
 		});
@@ -116,7 +116,7 @@ $(document).ready(function(){
         select: function (event, ui) {
             var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
 						
- 			$.get("/home/project/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+ 			$.get("/project/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
 				document.getElementById("result").innerHTML=data
         	});
             map.setCenter(location);

@@ -3,7 +3,7 @@
 	$(document).ready(function () {
 	 $("#homedistricts").change(function(){
 
-	   $.post( "/home/campaign/search_by_district", { district_id: $('#homedistricts option:selected').val() }, function( data ) {
+	   $.post( "/campaign/search_by_district", { district_id: $('#homedistricts option:selected').val() }, function( data ) {
 						$('#result').html(data);		
 				})
 

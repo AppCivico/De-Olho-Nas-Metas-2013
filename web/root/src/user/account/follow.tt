@@ -95,9 +95,9 @@ jQuery(function($){
                                         <div class="col-sm-10 nopadding">
                                             <div class="contents pull-left">
                                                 <div class="description">
-                                                    <h2><a href="/home/project/[%project.id%]">[% project.name%]</a></h2>
+                                                    <h2><a href="/project/[%project.id%]">[% project.name%]</a></h2>
                                                     <div class="stats">
-                                                        <button class="btn btn-white"><a href="/home/project/[%project.id%]">Parar de seguir</a></button>
+                                                        <button class="btn btn-white"><a href="/project/[%project.id%]">Parar de seguir</a></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -128,9 +128,9 @@ jQuery(function($){
                                         <div class="col-sm-10 nopadding">
                                             <div class="contents pull-left">
                                                 <div class="description">
-                                                    <h2><a href="/home/organization/[%council.id%]">[% council.name%]</a></h2>
+                                                    <h2><a href="/organization/[%council.id%]">[% council.name%]</a></h2>
                                                     <div class="stats">
-                                                        <button class="btn btn-white"><a href="/home/organization/[%council.id%]">Parar de seguir</a></button>
+                                                        <button class="btn btn-white"><a href="/organization/[%council.id%]">Parar de seguir</a></button>
                                                     </div>
                                                 </div>
                                             </div>

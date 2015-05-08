@@ -56,7 +56,7 @@ var $maps = function () {
 	function loadproject(){
 		var ib;
 		
-		$.getJSON('/home/project_map',function(data,status){
+		$.getJSON('/project_map',function(data,status){
 			var json = data;
 			$.each(json, function(i, pj){
 				marker = "";
@@ -64,7 +64,7 @@ var $maps = function () {
 				marker = new google.maps.Marker({
     	            position: myLatlng,
 	                map: map,
-	                url: "/home/project/"+pj.id,
+	                url: "/project/"+pj.id,
 	                icon: "/static/images/marker_donm.png"
         	    });
 				marker_array.push(marker);
@@ -123,7 +123,7 @@ var $maps = function () {
 	function markprojectdetail( project_id ){
 		var ib;
 		var myLatlng;
-		$.getJSON('/home/project_map_single', { id : project_id } ,function(data,status){
+		$.getJSON('/project_map_single', { id : project_id } ,function(data,status){
 			var json = data;
 			marker = "";
 			var geojson = eval('(' + json.geom_json + ')');
@@ -195,7 +195,7 @@ var $maps = function () {
 		var ib;
 		var myLatlng;
 		myLatlng = new google.maps.LatLng(-23.554070, -46.634438);	
-		$.getJSON('/home/getregions', function(data,status){
+		$.getJSON('/getregions', function(data,status){
 			var json = data;
 			//var infowindow = new google.maps.InfoWindow();
 			$.each(json.geoms, function(i, pj){
@@ -211,7 +211,7 @@ var $maps = function () {
 
 				marker = new google.maps.Marker({
 		            map: map,
-					url : "/home/region/"+pj.id,
+					url : "/region/"+pj.id,
 	            });
 				var url = marker.url;
 				google.maps.event.addListener(polygon, "mouseover", function(event) {
@@ -220,7 +220,7 @@ var $maps = function () {
 					content += 'Distrito: <a href="' + url + '">';
 					content += pj.name + '</a></div>';
 					content += '<div class="name">';
-					content += 'Subprefeitura: <a href="' + '/home/subprefecture/' +pj.subprefecture_id+ '">'+pj.subprefecture.name+'</a></div>';
+					content += 'Subprefeitura: <a href="' + '/subprefecture/' +pj.subprefecture_id+ '">'+pj.subprefecture.name+'</a></div>';
 					content += '</div>';
 
 					if (!ib){
@@ -268,7 +268,7 @@ var $maps = function () {
 
 	function markregiondetail( region_id ){
 		var ib;
-		$.getJSON('/home/region_project', { id : region_id } ,function(data,status){
+		$.getJSON('/region_project', { id : region_id } ,function(data,status){
 			var json = data;
 			var myLatlng;
 			var geojson = eval('(' + json.geom_json + ')');
@@ -289,7 +289,7 @@ var $maps = function () {
 				marker = new google.maps.Marker({
 	                position: myLatlng,
 		            map: map,
-					url : "/home/project/"+pj.id,
+					url : "/project/"+pj.id,
 		            icon: "/static/images/marker_donm.png"
 	            });
 				var url = marker.url;
@@ -338,7 +338,7 @@ var $maps = function () {
 	}
 
 	function markorgdetail( org_id ){
-		$.getJSON('/home/subpref_org',{ id : org_id },function(data,status){
+		$.getJSON('/subpref_org',{ id : org_id },function(data,status){
 			var json = data;
 			var myLatlng;
 			var ib;
@@ -346,12 +346,12 @@ var $maps = function () {
 				marker = new google.maps.Marker({
     	            position: myLatlng,
 	                map: map,
-	                url: "/home/subprefecture/"+data.subprefecture.id,
+	                url: "/subprefecture/"+data.subprefecture.id,
 	                icon: "/static/images/marker_donm.png"
         	    });
 				var url = marker.url;
 				var content = '<div class="project-bubble" ><div class="name">';
-				content += '<a href="/home/subprefecture/'+data.subprefecture.id+'">' + data.subprefecture.name + '</a></div>';
+				content += '<a href="/subprefecture/'+data.subprefecture.id+'">' + data.subprefecture.name + '</a></div>';
 				content += '</div>';
 
 				google.maps.event.addListener(marker, 'mouseover', function() {
@@ -388,7 +388,7 @@ var $maps = function () {
 
 	function marksubprefdetail( subpref_id ){
 		var ib;
-		$.getJSON('/home/subpref_region', { id : subpref_id } ,function(data,status){
+		$.getJSON('/subpref_region', { id : subpref_id } ,function(data,status){
 			var json = data;
 			var myLatlng;
 			$.each(json.regions, function(i, pj){
@@ -404,7 +404,7 @@ var $maps = function () {
 
 				marker = new google.maps.Marker({
 		            map: map,
-					url : "/home/region/"+pj.id,
+					url : "/region/"+pj.id,
 	            });
 				var url = marker.url;
 
@@ -452,7 +452,7 @@ var $maps = function () {
 			marker = new google.maps.Marker({
 	            position: myLatlng,
                 map: map,
-                url: "/home/subprefecture/"+json.id,
+                url: "/subprefecture/"+json.id,
                 icon: "/static/images/marker_donm.png"
     	    });
 
@@ -466,14 +466,14 @@ var $maps = function () {
 	function markgoaldetail( goal_id ){
 		var ib;
 		var markers = [];
-		$.getJSON('/home/project_map_list', { id : goal_id } ,function(data,status){
+		$.getJSON('/project_map_list', { id : goal_id } ,function(data,status){
 			$.each(data.project, function(i, pj){
 				marker = "";
 				var myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);
 				marker = new google.maps.Marker({
     	            position: myLatlng,
 	                map: map,
-					url : "/home/project/"+pj.id,
+					url : "/project/"+pj.id,
 	                icon: "/static/images/marker_donm.png"
         	    });
 				if ( pj.latitude != 0 && pj.longitude != 0){
@@ -534,7 +534,7 @@ var $maps = function () {
 	function render_goal(){
 		var ib;
 		var myLatlng;
-		$.post( "/home/goal/search_by_types", { type_id: $('#type_goal option:selected').val(), region_id: $('#goalregion option:selected').val() }, function( data ) {
+		$.post( "/goal/search_by_types", { type_id: $('#type_goal option:selected').val(), region_id: $('#goalregion option:selected').val() }, function( data ) {
 			data.plural = (data.goals.length > 1);
 			var template = $('#row_template').html();
 			var html = Mustache.to_html(template, data);
@@ -554,7 +554,7 @@ var $maps = function () {
 					var latitude = results[0].geometry.location.lat();
 					var longitude = results[0].geometry.location.lng();
 					$('#txtEndereco').val(results[0].formatted_address);
-					$.post("/home/goal/search_by_types",{ latitude: latitude, longitude: longitude, type_id: $('#type option:selected').val() },function(data){
+					$.post("/goal/search_by_types",{ latitude: latitude, longitude: longitude, type_id: $('#type option:selected').val() },function(data){
 						var template = $('#row_template').html();
 	   					var html = Mustache.to_html(template, data);
 		   				$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
@@ -568,7 +568,7 @@ var $maps = function () {
 	function render_projects(){
 		var ib;
 		var myLatlng;
-		$.post( "/home/project/search_by_types", { type_id: $('#type option:selected').val(), region_id: $('#homeregion option:selected').val() }, function( data ) {
+		$.post( "/project/search_by_types", { type_id: $('#type option:selected').val(), region_id: $('#homeregion option:selected').val() }, function( data ) {
 			$("#map").addClass("search");
 
 			data.plural = (data.projects.length > 1);
@@ -590,7 +590,7 @@ var $maps = function () {
 				marker = new google.maps.Marker({
 					position: myLatlng,
 					map: map,
-					url: "/home/project/"+pj.id,
+					url: "/project/"+pj.id,
 					icon: "/static/images/marker_donm.png"
 				});
 				marker_array.push(marker);
@@ -641,7 +641,7 @@ var $maps = function () {
 					var latitude = results[0].geometry.location.lat();
 					var longitude = results[0].geometry.location.lng();
 					$('#txtEndereco').val(results[0].formatted_address);
-					$.post("/home/project/search_by_types",{ latitude: latitude, longitude: longitude, type_id: $('#type option:selected').val() },function(data){
+					$.post("/project/search_by_types",{ latitude: latitude, longitude: longitude, type_id: $('#type option:selected').val() },function(data){
 						var template = $('#row_template').html();
 	   					var html = Mustache.to_html(template, data);
 		   				$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
@@ -652,7 +652,7 @@ var $maps = function () {
 							marker = new google.maps.Marker({
 	    	    	        	position: myLatlng,
 			        	        map: map,
-		    	        	    url: "/home/project/"+pj.id,
+		    	        	    url: "/project/"+pj.id,
 			       		        icon: "/static/images/marker_donm.png"
     	    	   		 	});
 							var url = marker.url;
@@ -786,7 +786,7 @@ $(document).ready(function () {
 //	$("#type_goal").change(function(){
 //		var id = $( "#type_goal option:selected" ).val();
 //		$("section.map .map-overlay").fadeIn();
-//    	$.get("/home/goal/type",{type_id: id}).done( function(data){
+//    	$.get("/goal/type",{type_id: id}).done( function(data){
 //			$("section.map .map-overlay").fadeOut();
 //			document.getElementById("result").innerHTML=data
 //      	});
@@ -794,7 +794,7 @@ $(document).ready(function () {
 
 //	$("#goalregion").change(function(){
 //		var id = $( "#goalregion option:selected" ).val();
-//    	$.get("/home/goal/region",{region_id: id}).done( function(data){
+//    	$.get("/goal/region",{region_id: id}).done( function(data){
 //			document.getElementById("result").innerHTML=data
 //      	});
 //	});
@@ -819,7 +819,7 @@ $(document).ready(function () {
 
 	})
  $('.objective_type_goal').on('click', function ( e) {
- 		$.post( "/home/goal/search_by_types", { type_id: $('#objective_type_goal_id').val() }, function( data ) {
+ 		$.post( "/goal/search_by_types", { type_id: $('#objective_type_goal_id').val() }, function( data ) {
 							data.plural = (data.goals.length > 1);
 							var template = $('#row_template').html();
 							var html = Mustache.to_html(template, data);
@@ -829,7 +829,7 @@ $(document).ready(function () {
    e.preventDefault();
  }) 
  $('.objective_type_project').on('click', function ( e) {
- 		$.post( "/home/project/search_by_types", { type_id: $('#objective_type_project_id').val() }, function( data ) {
+ 		$.post( "/project/search_by_types", { type_id: $('#objective_type_project_id').val() }, function( data ) {
 			$("#map").addClass("search");
 
 			data.plural = (data.projects.length > 1);
@@ -842,7 +842,7 @@ $(document).ready(function () {
  }) 
  $("#project_name").autocomplete({
 	source: function (request, response) {
-  	$.post( "/home/project/project_autocomplete", { project_name : $('#project_name').val() }, function( data ) {
+  	$.post( "/project/project_autocomplete", { project_name : $('#project_name').val() }, function( data ) {
 							console.log(data);
        response($.map(data, function (item) {
           return {
@@ -882,7 +882,7 @@ $(document).ready(function () {
         var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
 		if ($("#pagetype").val() == 'home'){		
 			$("section.map .map-overlay").fadeIn();
- 			$.get("/home/project/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+ 			$.get("/project/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
 				$("section.map .map-overlay").fadeOut();
    				$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
 				document.getElementById("result").innerHTML=data
@@ -894,46 +894,46 @@ $(document).ready(function () {
 				$('#latlng').val(location);
 		} 
 		if ($("#pagetype").val() == 'projectdetail'){		
- 			$.get("/home/project/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+ 			$.get("/project/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
    				$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
 				document.getElementById("result").innerHTML=data
         	});
 		}
 		
 		if ($("#pagetype").val() == 'homegoal'){		
- 			$.get("/home/goal/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+ 			$.get("/goal/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
    				$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
 				document.getElementById("result").innerHTML=data
         	});
 		}
  		if ($("#pagetype").val() == 'campaignhome'){		
- 			$.get("/home/campaign/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+ 			$.get("/campaign/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
    				$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
 				document.getElementById("result").innerHTML=data
         	});
 		} 
 		if ($("#pagetype").val() == 'campaigndetail'){		
- 			$.get("/home/campaign/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+ 			$.get("/campaign/region_by_cep",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
    				$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
 				document.getElementById("result").innerHTML=data
         	});
 		}
 
 		if ($("#pagetype").val() == 'homeregion'){		
-			$.getJSON('/home/region/id',{latitude: ui.item.latitude, longitude: ui.item.longitude},function(data,status){
+			$.getJSON('/region/id',{latitude: ui.item.latitude, longitude: ui.item.longitude},function(data,status){
 				if (data.message){
    				$(".project-detail").removeClass(".metas-detail").addClass("metas-result");
 					document.getElementById("result").innerHTML="<h2 class=\"section-tittle\">"+data.message+"</h2>"
 				}else{
-					window.location.href="/home/region/"+data.id;
+					window.location.href="/region/"+data.id;
 				}
         	});
 
 			  $("select#homeregion")[0].selectedIndex = 0;
 		}
 		if ($("#pagetype").val() == 'regiondetail'){			
- 			$.get("/home/region/id",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
-				window.location.href="/home/region/"+data.id;
+ 			$.get("/region/id",{latitude: ui.item.latitude, longitude: ui.item.longitude}).done( function(data){
+				window.location.href="/region/"+data.id;
         	});
 		}
 			
