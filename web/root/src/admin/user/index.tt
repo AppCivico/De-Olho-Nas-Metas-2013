@@ -42,7 +42,7 @@ jQuery(function($){
 													           <input name="end_on" class="datepicker" id="end_on" value="" />
 														       </select>
 									         </div> 
-																	<button type="submit" class="btn btn-default">Buscar</button>
+																	<button type="submit" class="btn btn-success">Buscar</button>
 								      </form>
 																																																																																																								   </div>
 							</nav>
@@ -81,7 +81,7 @@ jQuery(function($){
             </ul>
         [%END%]
     </fieldset>
-    <a class="btn btn-primary pull-right" href="/admin/user/new">Adicionar um novo usuário</a>
+    <a class="btn btn-success pull-right" href="/admin/user/new">Adicionar um novo usuário</a>
 </div>
 
 

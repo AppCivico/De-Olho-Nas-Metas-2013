@@ -36,7 +36,7 @@
 	[%END%]
 	
 	<a href="/admin/candidate/new">
-	<button type="button" class="btn btn-primary pull-right">Adicionar novo candidato</button>
+	<button type="button" class="btn btn-success pull-right">Adicionar novo candidato</button>
 	</a>
 </div>
 [%PROCESS pagination.tt  %]

@@ -55,10 +55,10 @@
             </div>
 
             <div class="form-actions">
-                <button type="submit" class="btn btn-primary" data-loading-text="Processando...">Continuar</button>
+                <button type="submit" class="btn btn-success" data-loading-text="Processando...">Continuar</button>
                 [%IF !NO_TITLE%]
                     [%href = c.uri_for_action('/admin/user/index')%]
-                    <a href="[%href%]" class="btn btn-primary pull-right">Voltar para lista de usuários</a>
+                    <a href="[%href%]" class="btn btn-success pull-right">Voltar para lista de usuários</a>
                 [%END%]
             </div>
         </fieldset>
