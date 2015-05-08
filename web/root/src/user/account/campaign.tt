@@ -96,7 +96,7 @@ jQuery(function($){
 									[%IF status_msg %]<div class="alert alert-success"><p>[%status_msg%]</p></div>[%END%]
 									[%IF error_msg %]<div class="alert alert-danger"><p>[%error_msg%]</p></div>[%END%]
 									[% END%]
-									<form action="/home/campaign/set_campaign" method="post" enctype="multipart/form-data">
+									<form action="/campaign/set_campaign" method="post" enctype="multipart/form-data">
 										[%input_text('name','Nome:', req=>1)|none%]
 									
 										[%input_text('description','Descrição:', req=>1, textbox=>1)|none%]
@@ -266,7 +266,7 @@ jQuery(function($){
 									[%IF status_msg %]<div class="alert alert-success"><p>[%status_msg%]</p></div>[%END%]
 									[%IF error_msg %]<div class="alert alert-danger"><p>[%error_msg%]</p></div>[%END%]
 									[% END%]
-									<form action="/home/event/set_event" method="post" enctype="multipart/form-data">
+									<form action="/event/set_event" method="post" enctype="multipart/form-data">
 										[%input_text('name','Nome:', req=>1)|none%]
 									
 											[%input_text('description_event','Descrição:', req=>1, textbox=>1)|none%]
