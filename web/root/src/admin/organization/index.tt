@@ -29,7 +29,7 @@
 	[%END%]
 	
 	<a href="/admin/organization/new">
-		<button type="button" class="btn btn-primary pull-right">Adicionar nova organização</button>
+		<button type="button" class="btn btn-success pull-right">Adicionar nova organização</button>
 	</a>
 </div>
 [%PROCESS pagination.tt  %]

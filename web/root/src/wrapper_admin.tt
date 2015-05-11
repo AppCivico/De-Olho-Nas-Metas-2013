@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>[% template.title or site.title or title or 'De Olho nas Metas' %]</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
 
 <script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script>
 <!--[if lt IE 9]>

@@ -2,7 +2,7 @@
 <div class="rows">
 <h2 class="sub-header">Projetos</h2>
 <div class="container-fluid">
-  <a href="[% c.uri_for_action('/admin/project/add') %]" class="btn btn-default">Cadastrar Projeto</a>
+  <a href="[% c.uri_for_action('/admin/project/add') %]" class="btn btn-success">Cadastrar Projeto</a>
 </div>
 
 <div class="table-responsive">
@@ -11,7 +11,8 @@
 		<thead>
 			<tr>
                 <th>Nome</th>
-                <th>Description</th>
+                <th>Descrição</th>
+                <th>Ação</th>
 			</tr>
 		</thead>
 		<tbody>

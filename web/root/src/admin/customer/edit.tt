@@ -38,7 +38,7 @@
         [%input_text('neighborhood','Bairro', classes => ['span3', 'clear_addr', 'clear_addr_rt'], value=customer_obj.address.neighborhood)|none%]
 
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary" data-loading-text="Processando...">Continuar</button>
+            <button type="submit" class="btn btn-success" data-loading-text="Processando...">Continuar</button>
             [%IF !NO_TITLE%]
             [%href = c.uri_for_action('/admin/customer/index')%]
             <a href="[%href%]" class="btn btn-right">Voltar para lista de clientes</a>

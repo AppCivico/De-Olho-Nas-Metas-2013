@@ -1,6 +1,6 @@
 <!--<form class="form-horizontal" method="post" id="search_customer">
 
-    [%input_text('search','Pesquisar')|none%] <button type="submit" class="btn btn-primary"  id="btn_save" data-loading-text="Processando...">Buscar</button>
+    [%input_text('search','Pesquisar')|none%] <button type="submit" class="btn btn-success"  id="btn_save" data-loading-text="Processando...">Buscar</button>
     </form>
 <-->
 

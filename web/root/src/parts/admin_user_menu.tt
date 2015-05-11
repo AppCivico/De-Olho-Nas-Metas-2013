@@ -7,11 +7,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+          <a href="/admin/dashboard" class="navbar-brand"><img src="/static/images/logo-header.png"></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
 			<li>
-				<a href="/logout" class="pull-right btn btn-primary btn-logout">Sair</a>
+				<a href="/logout" class="pull-right btn btn-warning btn-logout">Sair</a>
 			</li>
             <!--<li><a href="#">Dashboard</a></li>
             <li><a href="#">Settings</a></li>

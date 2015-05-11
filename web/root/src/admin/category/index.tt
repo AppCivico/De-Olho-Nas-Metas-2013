@@ -27,7 +27,7 @@
 	[%END%]
 	
 	<a href="/admin/category/new">
-	<button type="button" class="btn btn-primary pull-right">Adicionar nova categoria</button>
+	<button type="button" class="btn btn-success pull-right">Adicionar nova categoria</button>
 	</a>
 </div>
 [%PROCESS pagination.tt  %]

@@ -29,7 +29,7 @@
 	[%END%]
 	
 	<a href="/admin/management/new">
-		<button type="button" class="btn btn-primary pull-right">Adicionar nova gestão</button>
+		<button type="button" class="btn btn-success pull-right">Adicionar nova gestão</button>
 	</a>
 </div>
 [%PROCESS pagination.tt  %]
