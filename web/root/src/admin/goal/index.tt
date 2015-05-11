@@ -21,7 +21,7 @@
 						<a href="[% c.uri_for_action('/admin/goal/detail',[goal.id] ) %]">[%goal.name%]</a>
 					</td>
 					<td>[%goal.description%]</td>
-					<td><a href="">Editar</a></td>
+					<td><a href="[% c.uri_for_action('/admin/goal/edit',[goal.id] ) %]">Editar</a></td>
 				</tr>
             [%END%]
 		</tbody>

@@ -1,32 +1,32 @@
 [%-CALL assets.include("js/forms.js")%]
-[%#-CALL assets.include("js/address.js")#%]
+[%-CALL assets.include("js/address.js")%]
 <div>
 	<div class="rows">
-	<h2 class="sub-header">Adicionar organização</h2>
-		<form role="form" method="post" class="form-horizontal" action="/admin/form/organization/[%organization_obj.id%]">
+	<h2 class="sub-header">Editar Projeto</h2>
+		<form role="form" method="post" class="form-horizontal" action="/admin/form/goal">
+
+			[%input_text('name','Nome', req=>1)|none%]
+
+			[%input_text('address','Endereço', req=>0, type =>'textarea', textbox => 1)|none%]
+		
+			[%input_text('latitude','Latitude', req=>0 )|none%]
+		
+			[%input_text('longitude','Longitude', req=>0)|none%]
+
+			[%input_text('budget_executed','Orçamento Executado', req=>1 )|none%]
 			
-			[%input_text('name','Nome', req=>1, value=organization_obj.name)|none%]
+            [%input_text('project_number','Número do projeto', req=>1 )|none%]
+
+            [%input_text('percentage','Porcentagem', req=>1)|none%]
 		
-			[%input_text('description','Descrição', req=>0, value=organization_obj.description, type=>'textarea')|none%]
+			[%input_text('qualitative_progress_1','Progresso Qualitativo 1', req=>0, textbox => 1)|none%]
+			[%input_text('qualitative_progress_2','Progresso Qualitativo 2', req=>0, textbox => 1)|none%]
+			[%input_text('qualitative_progress_3','Progresso Qualitativo 3', req=>0, textbox => 1)|none%]
+			[%input_text('qualitative_progress_4','Progresso Qualitativo 4', req=>0, textbox => 1)|none%]
+			[%input_text('qualitative_progress_5','Progresso Qualitativo 5', req=>0, textbox => 1)|none%]
+			[%input_text('qualitative_progress_6','Progresso Qualitativo 6', req=>0, textbox => 1)|none%]
 		
-			[%input_text('phone','Telefone', req=>0, classes => ['form-control', 'mobile_phone'], value=organization_obj.phone)|none%]
-		
-			[%input_text('email','Email', req=>0, value=organization_obj.email)|none%]
-		
-			[%input_text('website','Website', req=>0, value=organization_obj.website)|none%]
-		
-			[%input_text('postal_code','CEP', req=>0, value=organization_obj.postal_code)|none%]
-		
-			[%input_text('address','Endereço', req=>0, value=organization_obj.address)|none%]
-		
-			[%input_text('number','Número', req=>0, value=organization_obj.number)|none%]
-		
-			[%input_text('complement','Complemento', req=>0, value=organization_obj.complement)|none%]
-		
-			[%select_field('state_id','Estado', array => select_states, req=>0, value=organization_obj.city.state.id)|none%]
-		
-			[%select_field('city_id','Cidade', array => select_cities, req=>0, value=organization_obj.city.id)|none%]
-			
+			[%select_field('goal_id','Meta', array => select_goals, req=>0)|none%]
 			<button type="submit" class="btn btn-success pull-right">Salvar</button>
 		</form>
 	</div>

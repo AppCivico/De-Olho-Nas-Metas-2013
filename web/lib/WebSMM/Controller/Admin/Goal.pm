@@ -56,6 +56,11 @@ sub add : Chained('base') : PathPart('new') : Args(0) {
 
 }
 
+sub edit : Chained('object') : PathPart('edit') : Args(0) {
+    my ( $self, $c, $id ) = @_;
+
+}
+
 =encoding utf8
 
 =head1 AUTHOR

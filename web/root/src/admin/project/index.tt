@@ -21,7 +21,7 @@
 						<a href="[% c.uri_for_action('/admin/project/detail',[project.id] ) %]">[%project.name%]</a>
 					</td>
 					<td>[%project.description%]</td>
-					<td><a href="">Editar</a></td>
+					<td><a href="[% c.uri_for_action('/admin/project/edit',[project.id] ) %]">Editar</a></td>
 				</tr>
             [%END%]
 		</tbody>
