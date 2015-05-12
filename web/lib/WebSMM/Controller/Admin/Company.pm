@@ -45,6 +45,25 @@ sub index : Chained('base') : PathPart('') : Args(0) {
     my $api = $c->model('API');
 
     $api->stash_result( $c, 'companies' );
+    my $api = $c->model('API');
+
+    $c->req->params->{option} ||= 'a';
+
+    $api->stash_result(
+        $c,
+        'companies',
+        params => {
+            'name:order' => 'asc',
+            ( $c->req->params->{option} ne '0..9' )
+            ? ( 'name_url:like' => lc $c->req->params->{option} . '%' )
+            : ( 'name_url_zero' => 1 )
+        }
+    );
+    for my $carac ( 'A' .. 'Z' ) {
+        push( @{ $c->stash->{options} }, $carac );
+    }
+    push( @{ $c->stash->{options} }, '0..9' );
+
 }
 
 sub add : Chained('base') : PathPart('new') : Args(0) {

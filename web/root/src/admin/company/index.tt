@@ -7,6 +7,12 @@
 
 <div class="table-responsive">
 	[%IF companies.size > 0%]
+			<div class="abc-list text-center">
+				[% FOR ca IN options %]
+				<a href="[% c.uri_for_action('/admin/company/index',[],{ option => ca })%]">[%ca%]</a>
+				[% END %]
+			</div>				
+
 	<table class="table table-striped">
 		<thead>
 			<tr>
