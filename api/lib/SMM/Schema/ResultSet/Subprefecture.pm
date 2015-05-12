@@ -18,7 +18,7 @@ sub verifiers_specs {
         create => Data::Verifier->new(
             filters => [qw(trim)],
             profile => {
-			    name => {
+                name => {
                     required => 1,
                     type     => 'Str',
                 },
@@ -34,6 +34,26 @@ sub verifiers_specs {
                     required => 0,
                     type     => 'Str',
                 },
+                site => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                email => {
+                    required => 0,
+                    type     => 'EmailAddress',
+                },
+                telephone => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                address => {
+                    required => 0,
+                    type     => 'Str',
+                },
+                deputy_mayor => {
+                    required => 0,
+                    type     => 'Str',
+                },
             }
         )
     };
@@ -43,7 +63,7 @@ sub action_specs {
     my $self = shift;
     return {
         create => sub {
-            my %values     = shift->valid_values;
+            my %values        = shift->valid_values;
             my $subprefecture = $self->create( \%values );
             return $subprefecture;
         }

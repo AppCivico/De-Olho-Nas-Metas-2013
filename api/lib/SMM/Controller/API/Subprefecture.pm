@@ -1,7 +1,6 @@
 package SMM::Controller::API::Subprefecture;
 
 use Moose;
-use utf8;
 
 BEGIN { extends 'Catalyst::Controller::REST' }
 
@@ -167,10 +166,10 @@ sub list_GET {
 
 sub list_POST {
     my ( $self, $c ) = @_;
-
+    warn 1;
     my $subprefecture = $c->stash->{collection}
       ->execute( $c, for => 'create', with => $c->req->params );
-
+    warn 2;
     $self->status_created(
         $c,
         location =>
@@ -180,6 +179,7 @@ sub list_POST {
             id => $subprefecture->id
         }
     );
+    warn 3;
 }
 
 sub complete : Chained('base') : PathPart('complete') : Args(0) {

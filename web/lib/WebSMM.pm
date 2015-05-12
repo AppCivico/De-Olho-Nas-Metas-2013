@@ -48,7 +48,7 @@ our $VERSION = '0.01';
 
 __PACKAGE__->config(
     name     => 'WebSMM',
-    encoding => 'UTF8',
+    encoding => 'UTF-8',
 
     # Disable deprecated behavior needed by old applications
     disable_component_resolution_regex_fallback => 1,

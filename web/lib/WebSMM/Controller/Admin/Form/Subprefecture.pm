@@ -15,11 +15,14 @@ sub process : Chained('base') : PathPart('subprefecture') : Args(0) {
 
     my $api    = $c->model('API');
     my $params = { %{ $c->req->params } };
+    warn 1;
     $api->stash_result(
         $c, ['subprefectures'],
         method => 'POST',
         body   => $params
     );
+    use DDP;
+    p $c->stash->{error};
     if ( $c->stash->{error} ) {
         $c->detach( '/form/redirect_error', [] );
     }
