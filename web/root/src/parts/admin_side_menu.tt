@@ -39,6 +39,10 @@
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 						<a href="[%href%]">Empresa</a>
 					</li>
+					[%href = c.uri_for_action('/admin/council/index')%]
+					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
+						<a href="[%href%]">Conselho</a>
+					</li>
 					[%href = c.uri_for_action('/admin/projectevent/index')%]
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 						<a href="[%href%]">Aprovações de Notificações</a>

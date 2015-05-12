@@ -2,34 +2,30 @@
 <div class="rows">
 <h2 class="sub-header">Distrito</h2>
 <div class="container-fluid">
-  <a href="[% c.uri_for_action('/admin/subprefecture/add') %]" class="btn btn-success">Cadastrar subprefeitura</a>
+  <a href="[% c.uri_for_action('/admin/company/add') %]" class="btn btn-success">Cadastrar Empresa</a>
 </div>
 
 <div class="table-responsive">
-	[%IF subprefectures.size > 0%]
+	[%IF companies.size > 0%]
 	<table class="table table-striped">
 		<thead>
 			<tr>
                 <th>Nome</th>
-                <th>Sigla</th>
-                <th>Email</th>
                 <th>Ação</th>
 			</tr>
 		</thead>
 		<tbody>
-			[%FOREACH subprefecture IN subprefectures%]
+			[%FOREACH company IN companies%]
 				<tr>
 					<td>
-						<a href="[% c.uri_for_action('/admin/subprefecture/detail',[subprefecture.id] ) %]">[%subprefecture.name%]</a>
+						<a href="[% c.uri_for_action('/admin/company/detail',[company.id] ) %]">[%company.name%]</a>
 					</td>
-					<td>[%subprefecture.acronym%]</td>
-					<td>[%subprefecture.email%]</td>
-					<td style="white-space: nowrap;"><a href="[% c.uri_for_action('/admin/subprefecture/edit',[subprefecture.id] ) %]">Editar</a> | <a href="[% c.uri_for_action('/admin/form/subprefecture/process_delete',[subprefecture.id] ) %]">Remover</a></td>
+					<td style="white-space: nowrap;"><a href="[% c.uri_for_action('/admin/company/edit',[company.id] ) %]">Editar</a> | <a href="[% c.uri_for_action('/admin/form/company/process_delete',[company.id] ) %]">Remover</a></td>
 				</tr>
             [%END%]
 		</tbody>
 	[%ELSE%]
-		<h4>Distritos</h4>
+		<h4>Empresas</h4>
 	[%END%]
 	  </table>
 	

@@ -14,9 +14,7 @@ __PACKAGE__->config(
     search_ok  => {
         name_url => 'Str'
     },
-    order_ok => {
-        name => 1
-    },
+    result_attr  => { order_by => ['me.name'] },
     update_roles => [qw/superadmin admin webapi organization/],
     create_roles => [qw/superadmin admin webapi/],
     delete_roles => [qw/superadmin admin webapi/],
@@ -31,16 +29,25 @@ __PACKAGE__->config(
                   id
                   name
                   name_url
+                  cnpj
                   /
             ),
 
         };
 
-    }
+    },
+    before_delete => sub {
+        my ( $self, $c, $item ) = @_;
+
+        use DDP;
+        $item->search_related('budgets')->update( { company_id => undef } )
+          or return 0;
+        return 1;
+    },
+
 );
 with 'CatalystX::Eta::Controller::SimpleCRUD';
 with 'CatalystX::Eta::Controller::Order';
-
 after 'base' => sub {
     my ( $self, $c ) = @_;
 

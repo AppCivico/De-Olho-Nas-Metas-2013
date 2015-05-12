@@ -1,4 +1,5 @@
 use utf8;
+
 package SMM::Schema::Result::Company;
 
 # Created by DBIx::Class::Schema::Loader
@@ -32,7 +33,8 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
+__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
+    "PassphraseColumn" );
 
 =head1 TABLE: C<company>
 
@@ -67,19 +69,19 @@ __PACKAGE__->table("company");
 =cut
 
 __PACKAGE__->add_columns(
-  "id",
-  {
-    data_type         => "integer",
-    is_auto_increment => 1,
-    is_nullable       => 0,
-    sequence          => "company_id_seq",
-  },
-  "name",
-  { data_type => "text", is_nullable => 0 },
-  "name_url",
-  { data_type => "text", is_nullable => 0 },
-  "cnpj",
-  { data_type => "text", is_nullable => 1 },
+    "id",
+    {
+        data_type         => "integer",
+        is_auto_increment => 1,
+        is_nullable       => 0,
+        sequence          => "company_id_seq",
+    },
+    "name",
+    { data_type => "text", is_nullable => 0 },
+    "name_url",
+    { data_type => "text", is_nullable => 0 },
+    "cnpj",
+    { data_type => "text", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -106,7 +108,7 @@ __PACKAGE__->set_primary_key("id");
 
 =cut
 
-__PACKAGE__->add_unique_constraint("name_idx", ["name"]);
+__PACKAGE__->add_unique_constraint( "name_idx", ["name"] );
 
 =head1 RELATIONS
 
@@ -119,12 +121,10 @@ Related object: L<SMM::Schema::Result::Budget>
 =cut
 
 __PACKAGE__->has_many(
-  "budgets",
-  "SMM::Schema::Result::Budget",
-  { "foreign.company_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "budgets", "SMM::Schema::Result::Budget",
+    { "foreign.company_id" => "self.id" },
+    { cascade_copy         => 0, cascade_delete => 0 },
 );
-
 
 # Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-05-12 14:59:09
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:MJ+Inhu68d6stTa2bQ1aHQ
@@ -154,6 +154,10 @@ sub verifiers_specs {
                 goal_id => {
                     required => 0,
                     type     => 'Int',
+                },
+                cnpj => {
+                    required => 0,
+                    type     => 'Str',
                 },
             }
         ),

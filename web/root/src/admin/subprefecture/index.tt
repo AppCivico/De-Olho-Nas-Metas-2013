@@ -29,7 +29,7 @@
             [%END%]
 		</tbody>
 	[%ELSE%]
-		<h4>Distritos</h4>
+		<h4>Subprefeituras</h4>
 	[%END%]
 	  </table>
 	
