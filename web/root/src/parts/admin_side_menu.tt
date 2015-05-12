@@ -24,24 +24,28 @@
 					</li>
 					[%href = c.uri_for_action('/admin/objective/index')%]
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
-						<a href="[%href%]">Objetivo</a>
+						<a href="[%href%]">Objetivos</a>
 					</li>
 					</li>
 					[%href = c.uri_for_action('/admin/district/index')%]
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
-						<a href="[%href%]">Distrito</a>
+						<a href="[%href%]">Distritos</a>
 					</li>
 					[%href = c.uri_for_action('/admin/subprefecture/index')%]
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
-						<a href="[%href%]">Subprefeitura</a>
+						<a href="[%href%]">Subprefeituras</a>
 					</li>
 					[%href = c.uri_for_action('/admin/company/index')%]
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
-						<a href="[%href%]">Empresa</a>
+						<a href="[%href%]">Empresas</a>
 					</li>
 					[%href = c.uri_for_action('/admin/council/index')%]
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
-						<a href="[%href%]">Conselho</a>
+						<a href="[%href%]">Conselhos</a>
+					</li>
+					[%href = c.uri_for_action('/admin/budget/index')%]
+					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
+						<a href="[%href%]">Orçamentos</a>
 					</li>
 					[%href = c.uri_for_action('/admin/projectevent/index')%]
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>

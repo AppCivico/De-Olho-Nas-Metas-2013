@@ -6,7 +6,7 @@
 </div>
 
 <div class="table-responsive">
-	[%IF companies.size > 0%]
+	[%IF organizations.size > 0%]
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -15,7 +15,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			[%FOREACH council IN councils%]
+			[%FOREACH council IN organizations%]
 				<tr>
 					<td>
 						<a href="[% c.uri_for_action('/admin/council/detail',[council.id] ) %]">[%council.name%]</a>

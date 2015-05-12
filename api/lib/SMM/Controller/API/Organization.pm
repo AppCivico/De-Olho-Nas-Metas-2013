@@ -57,6 +57,7 @@ sub result_GET {
                   phone
                   email
                   website
+                  subprefecture_id
                   /
             ),
             follow_counsil => $follow_counsil,

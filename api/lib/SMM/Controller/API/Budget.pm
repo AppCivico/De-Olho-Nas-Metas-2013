@@ -12,11 +12,9 @@ __PACKAGE__->config(
     object_key => 'budget',
     list_key   => 'budgets',
     search_ok  => {
-        name_url => 'Str'
+        business_name_url => 'Str'
     },
-    order_ok => {
-        name => 1
-    },
+    result_attr => { order_by => ['me.business_name'] },
     update_roles => [qw/superadmin admin webapi organization/],
     create_roles => [qw/superadmin admin webapi/],
     delete_roles => [qw/superadmin admin webapi/],
@@ -52,9 +50,9 @@ after 'base' => sub {
         {
             business_name_url => { '<' => 'a' }
         }
-    ) if $c->req->params->{name_url_zero};
+    ) if $c->req->params->{business_name_url_zero};
 };
-sub base : Chained('/api/base') : PathPart('companies') : CaptureArgs(0) { }
+sub base : Chained('/api/base') : PathPart('budgets') : CaptureArgs(0) { }
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
 
