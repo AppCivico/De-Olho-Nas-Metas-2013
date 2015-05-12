@@ -12,6 +12,7 @@
 			<tr>
                 <th>Nome</th>
                 <th>Description</th>
+                <th>Ação</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -21,7 +22,7 @@
 						<a href="[% c.uri_for_action('/admin/objective/detail',[objective.id] ) %]">[%objective.name%]</a>
 					</td>
 					<td>[%objective.description%]</td>
-					<td><a href="">Editar</a></td>
+					<td><a href="[% c.uri_for_action('/admin/objective/edit',[objective.id] ) %]">Editar</a> | <a href="[% c.uri_for_action('/admin/form/objective/process_delete',[objective.id] ) %]">Remover</a></td>
 				</tr>
             [%END%]
 		</tbody>

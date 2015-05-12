@@ -2,30 +2,15 @@
 [%-CALL assets.include("js/address.js")%]
 <div>
 	<div class="rows">
-	<h2 class="sub-header">Adicionar Meta</h2>
-		<form role="form" method="post" class="form-horizontal" action="/admin/form/goal">
+	<h2 class="sub-header">Adicionar Distrito</h2>
+		<form role="form" method="post" class="form-horizontal" action="/admin/form/district">
 			[%input_text('name','Nome', req=>1)|none%]
-			[%input_text('description','Descrição', req=>0, type =>'textarea', textbox => 1)|none%]
 		
-			[%input_text('expected_budget','Orçamento esperado', req=>0 )|none%]
+			[%input_text('lat','Latitude', req=>0 )|none%]
 		
-			[%input_text('goal_number','Número da meta', req=>1)|none%]
+			[%input_text('long','Longitude', req=>1)|none%]
 
-			[%input_text('technically','Descrição Técnica', req=>1, textbox => 1)|none%]
-			
-            [%input_text('will_be_delivered','Objetivo de entrega', req=>1 , textbox => 1)|none%]
-
-            [%input_text('percentage','Porcentagem', req=>1)|none%]
-			
-		
-			[%input_text('qualitative_progress_1','Progresso Qualitativo 1', req=>0, textbox => 1)|none%]
-			[%input_text('qualitative_progress_2','Progresso Qualitativo 2', req=>0, textbox => 1)|none%]
-			[%input_text('qualitative_progress_3','Progresso Qualitativo 3', req=>0, textbox => 1)|none%]
-			[%input_text('qualitative_progress_4','Progresso Qualitativo 4', req=>0, textbox => 1)|none%]
-			[%input_text('qualitative_progress_5','Progresso Qualitativo 5', req=>0, textbox => 1)|none%]
-			[%input_text('qualitative_progress_6','Progresso Qualitativo 6', req=>0, textbox => 1)|none%]
-		
-			[%select_field('objective_id','Objetivo', array => select_objectives, req=>0)|none%]
+			[%select_field('subprefecture_id','Subprefeitura', array => select_subprefectures, req=>0)|none%]
 			<button type="submit" class="btn btn-success pull-right">Salvar</button>
 		</form>
 	</div>

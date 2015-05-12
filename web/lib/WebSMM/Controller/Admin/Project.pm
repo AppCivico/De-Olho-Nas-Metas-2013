@@ -59,6 +59,12 @@ sub add : Chained('base') : PathPart('new') : Args(0) {
 
 sub edit : Chained('object') : PathPart('edit') : Args(0) {
     my ( $self, $c, $id ) = @_;
+    my $api = $c->model('API');
+    $api->stash_result( $c, 'goals' );
+
+    $c->stash->{select_goals} =
+      [ map { [ $_->{id}, "Meta " . $_->{id} . " - " . $_->{name} ] }
+          @{ $c->stash->{goals} } ];
 
 }
 

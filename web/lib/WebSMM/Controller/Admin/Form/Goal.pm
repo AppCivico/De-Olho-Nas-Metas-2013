@@ -33,13 +33,9 @@ sub process_edit : Chained('base') : PathPart('goal') : Args(1) {
 
     my $api    = $c->model('API');
     my $params = { %{ $c->req->params } };
-    my @r;
-
-    $params->{role} = "" if $params->{role} eq 'Selecione';
-    $params->{change_roles} = 1;
 
     $api->stash_result(
-        $c, [ 'users', $id ],
+        $c, [ 'goals', $id ],
         method => 'PUT',
         body   => $params
     );
@@ -49,7 +45,7 @@ sub process_edit : Chained('base') : PathPart('goal') : Args(1) {
     }
     else {
         $c->detach( '/form/redirect_ok',
-            [ '/admin/user/index', {}, 'Alterado com sucesso!' ] );
+            [ '/admin/goal/index', {}, 'Alterado com sucesso!' ] );
     }
 }
 
@@ -58,14 +54,14 @@ sub process_delete : Chained('base') : PathPart('remove_goal') : Args(1) {
 
     my $api = $c->model('API');
 
-    $api->stash_result( $c, [ 'customers', $id ], method => 'DELETE' );
+    $api->stash_result( $c, [ 'goals', $id ], method => 'DELETE' );
 
     if ( $c->stash->{error} ) {
         $c->detach( '/form/redirect_error', [] );
     }
     else {
         $c->detach( '/form/redirect_ok',
-            [ '/admin/customer/index', {}, 'Removido com sucesso!' ] );
+            [ '/admin/goal/index', {}, 'Removido com sucesso!' ] );
     }
 }
 

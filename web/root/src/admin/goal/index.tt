@@ -22,6 +22,7 @@
 					</td>
 					<td>[%goal.description%]</td>
 					<td><a href="[% c.uri_for_action('/admin/goal/edit',[goal.id] ) %]">Editar</a></td>
+					<td><a href="[% c.uri_for_action('/admin/form/goal/process_delete',[goal.id] ) %]">Remover</a></td>
 				</tr>
             [%END%]
 		</tbody>

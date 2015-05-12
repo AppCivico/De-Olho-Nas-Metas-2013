@@ -22,7 +22,7 @@
 						<a href="[% c.uri_for_action('/admin/district/detail',[region.id] ) %]">[%region.name%]</a>
 					</td>
 					<td>[%region.description%]</td>
-					<td><a href="[% c.uri_for_action('/admin/form/district/process_edit',[region.id] ) %]">Editar</a></td>
+					<td style="white-space: nowrap;"><a href="[% c.uri_for_action('/admin/district/edit',[region.id] ) %]">Editar</a> | <a href="[% c.uri_for_action('/admin/form/district/process_delete',[region.id] ) %]">Remover</a></td>
 				</tr>
             [%END%]
 		</tbody>

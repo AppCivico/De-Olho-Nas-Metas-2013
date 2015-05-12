@@ -54,9 +54,18 @@ sub add : Chained('base') : PathPart('new') : Args(0) {
     my ( $self, $c ) = @_;
     my $api = $c->model('API');
 
-    #    $api->stash_result( $c, 'objectives' );
-    #    $c->stash->{select_objectives} =
-    #      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{objectives} } ];
+    $api->stash_result( $c, 'subprefectures' );
+    $c->stash->{select_subprefectures} =
+      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{subprefectures} } ];
+
+}
+
+sub edit : Chained('object') : PathPart('edit') : Args(0) {
+    my ( $self, $c, $id ) = @_;
+    my $api = $c->model('API');
+    $api->stash_result( $c, 'subprefectures' );
+    $c->stash->{select_subprefectures} =
+      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{subprefectures} } ];
 
 }
 

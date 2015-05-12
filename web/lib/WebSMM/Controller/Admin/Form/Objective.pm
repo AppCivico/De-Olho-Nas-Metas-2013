@@ -1,4 +1,4 @@
-package WebSMM::Controller::Admin::Form::District;
+package WebSMM::Controller::Admin::Form::Objective;
 use Moose;
 use namespace::autoclean;
 use DateTime;
@@ -10,13 +10,13 @@ sub base : Chained('/admin/form/base') : PathPart('') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 }
 
-sub process : Chained('base') : PathPart('district') : Args(0) {
+sub process : Chained('base') : PathPart('objective') : Args(0) {
     my ( $self, $c ) = @_;
 
     my $api    = $c->model('API');
     my $params = { %{ $c->req->params } };
     $api->stash_result(
-        $c, ['regions'],
+        $c, ['objectives'],
         method => 'POST',
         body   => $params
     );
@@ -25,17 +25,17 @@ sub process : Chained('base') : PathPart('district') : Args(0) {
     }
 
     $c->detach( '/form/redirect_ok',
-        [ '/admin/district/index', {}, 'Cadastrado com sucesso!' ] );
+        [ '/admin/objective/index', {}, 'Cadastrado com sucesso!' ] );
 }
 
-sub process_edit : Chained('base') : PathPart('district') : Args(1) {
+sub process_edit : Chained('base') : PathPart('objective') : Args(1) {
     my ( $self, $c, $id ) = @_;
 
     my $api    = $c->model('API');
     my $params = { %{ $c->req->params } };
 
     $api->stash_result(
-        $c, [ 'regions', $id ],
+        $c, [ 'objectives', $id ],
         method => 'PUT',
         body   => $params
     );
@@ -45,7 +45,7 @@ sub process_edit : Chained('base') : PathPart('district') : Args(1) {
     }
     else {
         $c->detach( '/form/redirect_ok',
-            [ '/admin/district/index', {}, 'Alterado com sucesso!' ] );
+            [ '/admin/objective/index', {}, 'Alterado com sucesso!' ] );
     }
 }
 
@@ -54,14 +54,14 @@ sub process_delete : Chained('base') : PathPart('remove_objective') : Args(1) {
 
     my $api = $c->model('API');
 
-    $api->stash_result( $c, [ 'regions', $id ], method => 'DELETE' );
+    $api->stash_result( $c, [ 'objectives', $id ], method => 'DELETE' );
 
     if ( $c->stash->{error} ) {
         $c->detach( '/form/redirect_error', [] );
     }
     else {
         $c->detach( '/form/redirect_ok',
-            [ '/admin/district/index', {}, 'Removido com sucesso!' ] );
+            [ '/admin/objective/index', {}, 'Removido com sucesso!' ] );
     }
 }
 

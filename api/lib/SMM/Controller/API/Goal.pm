@@ -90,6 +90,10 @@ sub result_GET {
                   qualitative_progress_4
                   qualitative_progress_5
                   qualitative_progress_6
+                  objective_id
+                  technically
+                  will_be_delivered
+                  percentage
                   /
             ),
             goal_projects => {

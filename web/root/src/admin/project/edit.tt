@@ -3,30 +3,30 @@
 <div>
 	<div class="rows">
 	<h2 class="sub-header">Editar Projeto</h2>
-		<form role="form" method="post" class="form-horizontal" action="/admin/form/goal">
+		<form role="form" method="post" class="form-horizontal" action="[% c.uri_for_action('/admin/form/project/process_edit', [ project_obj.id]) %]">
 
-			[%input_text('name','Nome', req=>1)|none%]
+			[%input_text('name','Nome', req=>1, value => project_obj.name)|none%]
 
-			[%input_text('address','Endereço', req=>0, type =>'textarea', textbox => 1)|none%]
+			[%input_text('address','Endereço', req=>0, type =>'textarea', textbox => 1, value => project_obj.address)|none%]
 		
-			[%input_text('latitude','Latitude', req=>0 )|none%]
+			[%input_text('latitude','Latitude', req=>0, value => project_obj.latitude )|none%]
 		
-			[%input_text('longitude','Longitude', req=>0)|none%]
+			[%input_text('longitude','Longitude', req=>0, value => project_obj.longitude)|none%]
 
-			[%input_text('budget_executed','Orçamento Executado', req=>1 )|none%]
+			[%input_text('budget_executed','Orçamento Executado', req=>1 , value => project_obj.budget_executed)|none%]
 			
-            [%input_text('project_number','Número do projeto', req=>1 )|none%]
+            [%input_text('project_number','Número do projeto', req=>1 , value => project_obj.project_number)|none%]
 
-            [%input_text('percentage','Porcentagem', req=>1)|none%]
+            [%input_text('percentage','Porcentagem', req=>1, value => project_obj.percentage)|none%]
 		
-			[%input_text('qualitative_progress_1','Progresso Qualitativo 1', req=>0, textbox => 1)|none%]
-			[%input_text('qualitative_progress_2','Progresso Qualitativo 2', req=>0, textbox => 1)|none%]
-			[%input_text('qualitative_progress_3','Progresso Qualitativo 3', req=>0, textbox => 1)|none%]
-			[%input_text('qualitative_progress_4','Progresso Qualitativo 4', req=>0, textbox => 1)|none%]
-			[%input_text('qualitative_progress_5','Progresso Qualitativo 5', req=>0, textbox => 1)|none%]
-			[%input_text('qualitative_progress_6','Progresso Qualitativo 6', req=>0, textbox => 1)|none%]
-		
-			[%select_field('goal_id','Meta', array => select_goals, req=>0)|none%]
+			[%input_text('qualitative_progress_1','Progresso Qualitativo 1', req=>0, textbox => 1, value => project_obj.qualitative_progress_1)|none%]
+			[%input_text('qualitative_progress_2','Progresso Qualitativo 2', req=>0, textbox => 1, value => project_obj.qualitative_progress_2)|none%]
+			[%input_text('qualitative_progress_3','Progresso Qualitativo 3', req=>0, textbox => 1, value => project_obj.qualitative_progress_3)|none%]
+			[%input_text('qualitative_progress_4','Progresso Qualitativo 4', req=>0, textbox => 1, value => project_obj.qualitative_progress_4)|none%]
+			[%input_text('qualitative_progress_5','Progresso Qualitativo 5', req=>0, textbox => 1, value => project_obj.qualitative_progress_5)|none%]
+			[%input_text('qualitative_progress_6','Progresso Qualitativo 6', req=>0, textbox => 1, value => project_obj.qualitative_progress_6)|none%]
+	        [%project_obj.goal_id%]	
+			[%select_field('goal_id','Meta', array => select_goals, req=>0 , value => project_obj.goal.id)|none%]
 			<button type="submit" class="btn btn-success pull-right">Salvar</button>
 		</form>
 	</div>

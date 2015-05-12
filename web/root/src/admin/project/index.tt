@@ -22,7 +22,7 @@
 						<a href="[% c.uri_for_action('/admin/project/detail',[project.id] ) %]">[%project.name%]</a>
 					</td>
 					<td>[%project.description%]</td>
-					<td><a href="[% c.uri_for_action('/admin/project/edit',[project.id] ) %]">Editar</a></td>
+					<td style="white-space: nowrap;"><a href="[% c.uri_for_action('/admin/project/edit',[project.id] ) %]">Editar</a> | <a href="[% c.uri_for_action('/admin/form/project/process_delete',[project.id] ) %]">Remover</a></td>
 				</tr>
             [%END%]
 		</tbody>
