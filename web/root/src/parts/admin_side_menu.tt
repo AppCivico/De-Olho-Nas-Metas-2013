@@ -35,9 +35,9 @@
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 						<a href="[%href%]">Subprefeitura</a>
 					</li>
-					[%href = c.uri_for_action('/admin/subprefecture/index')%]
+					[%href = c.uri_for_action('/admin/company/index')%]
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
-						<a href="[%href%]">Subprefeitura</a>
+						<a href="[%href%]">Empresa</a>
 					</li>
 					[%href = c.uri_for_action('/admin/projectevent/index')%]
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
