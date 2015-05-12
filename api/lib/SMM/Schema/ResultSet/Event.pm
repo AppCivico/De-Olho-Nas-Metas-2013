@@ -66,8 +66,6 @@ sub action_specs {
 
             my %values = shift->valid_values;
             my $event  = $self->create( \%values );
-            use DDP;
-            p %values;
 
             my @followers_users =
               $self->result_source->schema->resultset('UserFollowCounsil')

@@ -1,0 +1,17 @@
+[%-CALL assets.include("js/forms.js")%]
+[%#-CALL assets.include("js/address.js")#%]
+<div>
+	<div class="rows">
+	<h2 class="sub-header">Editar Subprefeitura</h2>
+		<form role="form" method="post" class="form-horizontal" action="/admin/form/subprefecture/[%subprefecture_obj.id%]">
+			[%input_text('name','Nome', req=>1 , value => subprefecture_obj.name)|none%]
+		
+			[%input_text('lat','Latitude', req=>0, value => subprefecture_obj.lat )|none%]
+		
+			[%input_text('long','Longitude', req=>1, value => subprefecture_obj.long)|none%]
+			[%select_field('subprefecture_id','Subprefeitura', array => select_subprefectures, req=>0, value => subprefecture_obj.subprefecture_id)|none%]
+	
+			<button type="submit" class="btn btn-success pull-right">Salvar</button>
+		</form>
+	</div>
+</div>

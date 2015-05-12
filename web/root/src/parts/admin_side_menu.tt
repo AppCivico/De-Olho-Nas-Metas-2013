@@ -31,7 +31,10 @@
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 						<a href="[%href%]">Distrito</a>
 					</li>
-
+					[%href = c.uri_for_action('/admin/subprefecture/index')%]
+					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
+						<a href="[%href%]">Subprefeitura</a>
+					</li>
 					[%href = c.uri_for_action('/admin/projectevent/index')%]
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 						<a href="[%href%]">Aprovações de Notificações</a>

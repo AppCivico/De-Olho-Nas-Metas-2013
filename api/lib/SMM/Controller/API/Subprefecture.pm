@@ -48,6 +48,7 @@ sub result_GET {
                   id
                   name
                   acronym
+                  email
                   site
                   deputy_mayor
                   address
@@ -151,6 +152,8 @@ sub list_GET {
                               qw/
                               id
                               name
+                              acronym
+                              email
                               latitude
                               longitude
                               /
