@@ -21,6 +21,7 @@ function re_mask() {
     if ($('#elm_cnpj').length) {
         $('#elm_cnpj').mask('99.999.999/9999-99');
     }
+    $('.money').maskMoney({prefix: "R$ ", thousands: ".", decimal: ","});
 }
 
 $(document).ready(function () {

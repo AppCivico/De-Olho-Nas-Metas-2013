@@ -123,6 +123,7 @@ float:none;}
 
 .main {
 	padding: 20px;
+	min-height: 650px;
 	
 }
 @media (min-width: 768px) {
@@ -131,10 +132,6 @@ float:none;}
 		padding-left: 40px;
 	}
 }
-.main .page-header {
-	margin-top: 0;
-}
-
 
 /*
  * Placeholder dashboard ideas
@@ -156,8 +153,6 @@ float:none;}
 }
 
 .bs-footer{
-	position: fixed;
-	bottom: 0;
 	width: 100%;
 	padding: 5px 0;
 }
@@ -180,4 +175,13 @@ float:none;}
 .table > thead > tr > th {
     border-bottom: none;
     background-color: #fef5dd;
+}
+.logo-footer-admin{
+	padding: 2px 4px;
+}
+
+.form-subtitle{
+	border-bottom: 1px solid #e0e0e0;
+	color: #ada59b;
+	padding: 10px;
 }

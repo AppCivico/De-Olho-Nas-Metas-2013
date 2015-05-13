@@ -1,6 +1,11 @@
 <div>
 <div class="rows">
 <h2 class="sub-header">Organizações cadastradas</h2>
+<div class="container-fluid">	
+	<a href="/admin/organization/new">
+		<button type="button" class="btn btn-success pull-right">Adicionar nova organização</button>
+	</a>
+</div>
 <div class="table-responsive">
 	[%IF organizations.size > 0%]
 	<table class="table table-striped">
@@ -27,10 +32,6 @@
 	[%ELSE%]
 		<h4>Nenhuma organização cadastrada</h4>
 	[%END%]
-	
-	<a href="/admin/organization/new">
-		<button type="button" class="btn btn-success pull-right">Adicionar nova organização</button>
-	</a>
 </div>
 [%PROCESS pagination.tt  %]
 </div>
