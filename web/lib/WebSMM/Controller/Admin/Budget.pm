@@ -85,7 +85,6 @@ sub edit : Chained('object') : PathPart('edit') : Args(0) {
     $c->stash->{select_companies} =
       [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{companies} } ];
     $api->stash_result( $c, 'goals' );
-
     $c->stash->{select_goals} =
       [ map { [ $_->{id}, "Meta " . $_->{id} . " - " . $_->{name} ] }
           @{ $c->stash->{goals} } ];

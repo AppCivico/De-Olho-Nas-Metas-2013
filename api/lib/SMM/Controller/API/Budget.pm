@@ -32,7 +32,13 @@ __PACKAGE__->config(
                   dedicated_value
                   liquidated_value
                   observation
-
+                  contract_code
+                  dedicated_year
+                  organ_code
+                  organ_name
+                  company_id
+                  goal_number
+                  cod_emp
                   /
             ),
 

@@ -144,11 +144,8 @@ sub action_specs {
         create => sub {
             my %values = shift->valid_values;
 
-            use DDP;
-            p %values;
             my $request_council = delete $values{request_council};
             my $council_id      = delete $values{council_id};
-            p $council_id;
             not defined $values{$_} and delete $values{$_} for keys %values;
 
             delete $values{password_confirm};
@@ -167,8 +164,6 @@ sub action_specs {
                 $user->set_roles( { name => $role } );
             }
             if ($request_council) {
-                use DDP;
-                p $council_id;
                 $user->add_to_user_request_councils(
                     {
                         organization_id => $council_id,

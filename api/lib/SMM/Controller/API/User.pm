@@ -59,8 +59,10 @@ sub result_GET {
 
             (
                 map { $_ => $attrs{$_}, }
-                  qw(id name phone_number username email type)
+                  qw(id name phone_number username email type organization_id)
             ),
+            role_id => [ map { $_->id } $user->roles ],
+
             (
                 organization => $user->organization
                 ? {
