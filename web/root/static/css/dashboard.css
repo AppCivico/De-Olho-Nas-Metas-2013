@@ -131,10 +131,6 @@ float:none;}
 		padding-left: 40px;
 	}
 }
-.main .page-header {
-	margin-top: 0;
-}
-
 
 /*
  * Placeholder dashboard ideas
@@ -180,4 +176,7 @@ float:none;}
 .table > thead > tr > th {
     border-bottom: none;
     background-color: #fef5dd;
+}
+.logo-footer-admin{
+	padding: 2px 4px;
 }

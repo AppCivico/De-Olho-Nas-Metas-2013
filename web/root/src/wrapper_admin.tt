@@ -49,10 +49,8 @@
 </div> <!-- /container -->
 <div class="clear"></div>
 <footer class="bs-footer" role="contentinfo">
-	<div class="container text-center">
-		<div class="row text-center">
-			<div class="aware">Desenvolvido por <a href="http://www.aware.com.br" target="_blank">Aware</a><img src="/static/images/logo-aware.gif" alt="Aware - Desenvolvendo conceitos, criando parceiros"></div>
-		</div>
+	<div class="text-right">
+		<a href="http://www.appcivico.com/?ref=donm" target="_blank"><img src="/static/css/images/appcivico-hosting2.png" border="0" class="logo-footer-admin"></a>
 	</div>
 </footer>
 

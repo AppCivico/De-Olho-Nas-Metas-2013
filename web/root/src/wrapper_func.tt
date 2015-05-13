@@ -138,14 +138,21 @@
         <div class="container text-center">
             <div class="row">
                 <div class="col-sm-5 logos-footer">
-                    <div class="text-center">
-                        Realização<br>
-                        <a href="http://www.nossasaopaulo.org.br" target="_blank"><img src="/static/css/images/logo-rnsp-footer.png" border="0"></a>
+                    <div class="row">
+                        <div class="col-xs-6 text-center">
+                            Realização
+                        </div>
+                        <div class="col-xs-6 text-center">
+                            Apoio
+                        </div>
                     </div>
-
-                    <div class="text-center margin-right">
-                        Apoio<br>
-                        <a href="http://www.avinaamericas.org" target="_blank"><img src="/static/css/images/logo-avina-footer.png" border="0"></a>
+                    <div class="row">
+                        <div class="col-xs-6 text-center">
+                            <a href="http://www.nossasaopaulo.org.br" target="_blank"><img src="/static/css/images/logo-rnsp-footer.png" border="0"></a>
+                        </div>
+                        <div class="col-xs-6 text-center">
+                            <a href="http://www.avinaamericas.org" target="_blank"><img src="/static/css/images/logo-avina-footer.png" border="0"></a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-2 hidden-xs">
@@ -154,19 +161,31 @@
                     </div>                    
                 </div>
                 <div class="col-sm-5 logos-footer">
-                    <div class="text-center">
-                        <br>
-                        <a href="http://civic.mit.edu/" target="_blank"><img src="/static/css/images/logo-mit-footer.png" border="0"></a>
+                    <div class="row">
+                        <div class="col-xs-8 text-center">
+                            Parceiros
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            Desenvolvimento
+                        </div>
                     </div>
+                    <div class="row">
+                        <div class="col-xs-4 text-center">
+                            <a href="http://civic.mit.edu/" target="_blank"><img src="/static/css/images/logo-mit-footer.png" border="0"></a>
+                        </div>
 
-                    <div class="text-center">
-                        Parceiros<br>
-                        <a href="http://www.tcm.sp.gov.br/" target="_blank" title="Tribunal de Contas do Município de São Paulo" alt="Tribunal de Contas do Município de São Paulo"><img src="/static/css/images/logo-tcm-footer.png" border="0"></a>
+                        <div class="col-xs-4 text-center">
+                            <a href="http://www.tcm.sp.gov.br/" target="_blank" title="Tribunal de Contas do Município de São Paulo" alt="Tribunal de Contas do Município de São Paulo"><img src="/static/css/images/logo-tcm-footer.png" class="img-responsive" border="0"></a>
+                        </div>
+
+                        <div class="col-xs-4 text-center">
+                            <a href="http://www.eokoe.com/" target="_blank"><img src="/static/css/images/logo-eokoe-footer.png" border="0"></a>
+                        </div>
                     </div>
-
-                    <div class="text-center">
-                        Desenvolvido por<br>
-                        <a href="http://www.eokoe.com/" target="_blank"><img src="/static/css/images/logo-eokoe-footer.png" border="0"></a>
+                    <div class="row">
+                        <div class="logo-appcivico">
+                            <a href="http://www.appcivico.com/?ref=donm" target="_blank"><img src="/static/css/images/appcivico-hosting.png" border="0"></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -176,9 +195,6 @@
 				<img src="/static/css/images/logo-footer.png" border="0" class="logo-footer">
 			</div>
 		</div>
-        <div class="logo-eokoe hidden-sm hidden-md hidden-lg">
-            <a href="http://www.eokoe.com/?ref=donm" target="_blank"><img src="/static/css/images/developed_eokoe.png" border="0"></a>
-        </div>
 	</footer>
 	
 <!-- 	GA tag -->

@@ -350,13 +350,12 @@ footer{
 }
 
 footer .logo-footer{
-	padding: 40px 0 0 0;
+	padding: 70px 0 0 0;
 }
 
-footer .logo-eokoe{
-	position: absolute;
-	bottom: 0;
-	right: 0;
+footer .logo-appcivico{
+	margin-top: 38px;
+	text-align: right;
 }
 
 .logos-footer{
@@ -366,13 +365,6 @@ footer .logo-eokoe{
 }
 .logos-footer div img{
 	margin-top: 2px;
-}
-.logos-footer div{
-	display: inline-block;
-	margin: 0 10px;
-}
-.logos-footer .margin-right{
-	margin-right: 50px;
 }
 
 #map{
@@ -1094,6 +1086,14 @@ footer .menu-footer li a:hover{
 	}
 	.navbar-brand{
 		padding: 10px;
+	}
+	footer .logo-footer{
+		padding: 20px 0 0 0;
+	}
+
+	footer .logo-appcivico{
+		margin-top: 25px;
+		text-align: center;
 	}
 }
 
