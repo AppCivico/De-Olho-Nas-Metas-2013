@@ -25,7 +25,7 @@
 		</tbody>
 	</table>
 	[%ELSE%]
-		<h4>Nenhuma organização cadastrada</h4>
+		<h4>Nenhuma gestão cadastrada</h4>
 	[%END%]
 	
 	<a href="/admin/management/new">
