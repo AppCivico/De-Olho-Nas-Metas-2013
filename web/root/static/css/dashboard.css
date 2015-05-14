@@ -38,6 +38,11 @@ a:hover{
 	color: #fff;
 }
 
+a.btn:visited,
+a.btn:focus{
+	color: #fff;
+}
+
 /*
  * Global add-ons
  */
