@@ -22,6 +22,7 @@
 [%-CALL assets.include("js/jquery.maskedinput.js")%]
 [%-CALL assets.include("js/jquery.maskMoney.js")%]
 [%-CALL assets.include("js/admin.js")%]
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
 [%- assets.export("css") |none-%]
 

@@ -185,3 +185,13 @@ float:none;}
 	color: #ada59b;
 	padding: 10px;
 }
+
+#slider-value{
+	margin-left: 10px;
+}
+
+iframe.upload {
+  width: 0;
+  height: 0;
+  border: none;
+}
