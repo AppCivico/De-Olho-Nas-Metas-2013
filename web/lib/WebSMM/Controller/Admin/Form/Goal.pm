@@ -38,10 +38,11 @@ sub csv : Chained('download') : PathPart('csv') : Args(0) {
     my $file = $c->model('File');
 
     $api->stash_result( $c, 'goals' );
+    my %lines;
 
-    my @lines;
-    push @lines, $c->stash->{header};
-    push @lines, [ $_->{id}, $_->{name}, ], for @{ $c->stash->{goals} };
+    push @{ $lines->{main} }, $c->stash->{header};
+    push @{ $lines->{main} }, [ $_->{id}, $_->{name}, ],
+      for @{ $c->stash->{goals} };
     $file->_download( $c, 'meta', \@lines );
 
 }

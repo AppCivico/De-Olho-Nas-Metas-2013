@@ -23,7 +23,10 @@ sub _download {
     my ( $self, $c, $name, $data ) = @_;
 
     my $ignore_cache = 0;
+    use DDP;
 
+    use Data::Dumper;
+    p Dumper $c;
     my $file = $c->get_lang() . '_' . $name . '.';
 
     # evita conflito com outros usuarios

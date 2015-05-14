@@ -28,6 +28,7 @@ use Catalyst qw/
   Session::DynamicExpiry
   Session
 
+  +CatalystX::Plugin::Lexicon
   Session::Store::File
   Session::State::Cookie
   Session::PerUser
