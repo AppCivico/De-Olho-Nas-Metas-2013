@@ -200,3 +200,14 @@ iframe.upload {
   height: 0;
   border: none;
 }
+
+.mark-kml{
+	border: 1px solid #e0e0e0;
+	padding: 20px;
+	border-radius: 4px;
+	margin-top: 5px;
+}
+
+.mark-kml #panel button{
+	margin: 2px;
+}
