@@ -1,5 +1,6 @@
 package WebSMM;
 use Moose;
+use CatalystX::RoleApplicator;
 use namespace::autoclean;
 
 use Catalyst::Runtime 5.80;

@@ -45,7 +45,6 @@ sub index : Chained('base') : PathPart('') : Args(0) {
     my $api = $c->model('API');
 
     $api->stash_result( $c, 'companies' );
-    my $api = $c->model('API');
 
     $c->req->params->{option} ||= 'a';
 

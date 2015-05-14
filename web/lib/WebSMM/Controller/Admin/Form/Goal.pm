@@ -3,6 +3,7 @@ use Moose;
 use namespace::autoclean;
 use DateTime;
 use JSON::XS;
+use utf8;
 
 BEGIN { extends 'Catalyst::Controller' }
 
@@ -10,11 +11,39 @@ sub base : Chained('/admin/form/base') : PathPart('') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 }
 
-sub download : Chained('base') : PathPart('download') : CaptureArgs(0) {
+sub download : Chained('base') : PathPart('goal') : CaptureArgs(0) {
+    my ( $self, $c ) = @_;
+
+    @{ $c->stash->{header} } = (
+        "Nome",
+        "Descrição",
+        "Descrição Técnica",
+        "Objetivo de entrega",
+        "Expectativa de começo",
+        "Expectativa de fim",
+        "Porcentagem",
+        "Número da meta",
+        "Progresso Qualitativo 1",
+        "Progresso Qualitativo 2",
+        "Progresso Qualitativo 3",
+        "Progresso Qualitativo 4",
+        "Progresso Qualitativo 5",
+        "Progresso Qualitativo 6"
+    );
 }
 
 sub csv : Chained('download') : PathPart('csv') : Args(0) {
     my ( $self, $c ) = @_;
+    my $api  = $c->model('API');
+    my $file = $c->model('File');
+
+    $api->stash_result( $c, 'goals' );
+
+    my @lines;
+    push @lines, $c->stash->{header};
+    push @lines, [ $_->{id}, $_->{name}, ], for @{ $c->stash->{goals} };
+    $file->_download( $c, 'meta', \@lines );
+
 }
 
 sub xls : Chained('download') : PathPart('xls') : Args(0) {

@@ -20,13 +20,11 @@ sub _loc_str {
 
 # download de todos os endpoints caem aqui
 sub _download {
-    my ( $self, $c , $db  ) = @_;
-
-    my $rs = $db;
+    my ( $self, $c, $name, $data ) = @_;
 
     my $ignore_cache = 0;
 
-    my $file = $c->get_lang() . '_variaveis_exemplo.';
+    my $file = $c->get_lang() . '_' . $name . '.';
 
     # evita conflito com outros usuarios
     $file .= join '-', rand, rand, rand, rand, '.' if $ignore_cache;
@@ -41,15 +39,10 @@ sub _download {
 
     $self->_download_and_detach( $c, $path ) if !$ignore_cache && -e $path;
 
-    $rs = $rs->as_hashref;
+    my @lines =
+      ( [ 'ID da variável', 'Nome', 'Data', 'Valor', 'fonte', 'observacao' ] );
 
-    my @lines = ( [ 'ID da variável', 'Nome', 'Data', 'Valor', 'fonte', 'observacao' ] );
-
-    while ( my $var = $rs->next ) {
-        push @lines, [ $var->{id}, $self->_loc_str( $c, $var->{name} ), undef, undef, undef, undef ];
-    }
-
-    if ( $0 && $0 =~ /\.t$/ ) {
+    if ( !@{ $data->{main} } ) {
         $c->stash->{lines} = \@lines;
     }
     else {
@@ -127,7 +120,8 @@ sub _download_and_detach {
     elsif ( $c->stash->{type} =~ /(xls)/ ) {
         $c->response->content_type('application/vnd.ms-excel');
     }
-    $c->response->headers->header( 'content-disposition' => "attachment;filename="
+    $c->response->headers->header(
+            'content-disposition' => "attachment;filename="
           . "variaveis-exemplo-"
           . ( $custom ? 'dos-indicadores-' : 'completa-' )
           . $c->get_lang()
@@ -139,19 +133,20 @@ sub _download_and_detach {
     $c->detach;
 }
 
-sub doido_download_csv : Chained('/institute_load') : PathPart('variaveis_exemplo.csv') : Args(0) {
+sub doido_download_csv : Chained('/institute_load') :
+  PathPart('variaveis_exemplo.csv') : Args(0) {
     my ( $self, $c ) = @_;
     $c->stash->{type} = 'csv';
     $self->_download($c);
 }
 
-sub download_xls : Chained('/institute_load') : PathPart('variaveis_exemplo.xls') : Args(0) {
+sub download_xls : Chained('/institute_load') :
+  PathPart('variaveis_exemplo.xls') : Args(0) {
     my ( $self, $c ) = @_;
     $c->stash->{type} = 'xls';
     $self->_download($c);
 }
 
 1;
-
 
 1;
