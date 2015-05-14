@@ -10,6 +10,21 @@ sub base : Chained('/admin/form/base') : PathPart('') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 }
 
+sub download : Chained('base') : PathPart('download') : CaptureArgs(0) {
+}
+
+sub csv : Chained('download') : PathPart('csv') : Args(0) {
+    my ( $self, $c ) = @_;
+}
+
+sub xls : Chained('download') : PathPart('xls') : Args(0) {
+    my ( $self, $c ) = @_;
+}
+
+sub xlsx : Chained('download') : PathPart('xlsx') : Args(0) {
+    my ( $self, $c ) = @_;
+}
+
 sub process : Chained('base') : PathPart('goal') : Args(0) {
     my ( $self, $c ) = @_;
 

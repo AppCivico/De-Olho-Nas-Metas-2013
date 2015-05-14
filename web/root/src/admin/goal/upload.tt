@@ -1,0 +1,25 @@
+<div>
+<div class="rows">
+<h2 class="sub-header">Modelo de arquivo para preenchimento</h2>
+<div class="container-fluid">
+  <a href="[% c.uri_for_action('/admin/goal/upload') %]" class="btn btn-success">CSV</a> <a href="[% c.uri_for_action('/admin/goal/upload') %]" class="btn btn-success">XLS</a> <a href="[% c.uri_for_action('/admin/goal/upload') %]" class="btn btn-success">XLSX</a>
+</div>
+	<div class="rows">
+    
+        <div class="container-fluid">
+            <form role="form" method="post" class="form-horizontal" enctype="multipart/form-data" action="/admin/form/goal/upload">
+
+                <div class="col-lg-6">
+					<input type="file" name="file">
+                    <input type="submit" class="btn btn-success" value="Importar Arquivo"/> 
+                </div>
+            </form>
+        </div>
+    </div>
+
+<div class="table-responsive">
+
+</div>
+</div>
+</div>
+</div>

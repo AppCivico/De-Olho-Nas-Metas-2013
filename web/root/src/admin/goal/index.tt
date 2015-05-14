@@ -2,7 +2,7 @@
 <div class="rows">
 <h2 class="sub-header">Metas</h2>
 <div class="container-fluid">
-  <a href="[% c.uri_for_action('/admin/goal/add') %]" class="btn btn-success">Cadastrar Meta</a>
+  <a href="[% c.uri_for_action('/admin/goal/add') %]" class="btn btn-success">Cadastrar Meta</a> <a href="[% c.uri_for_action('/admin/goal/upload') %]" class="btn btn-success">Cadastrar Arquivo de Meta</a>
 </div>
 
 <div class="table-responsive">

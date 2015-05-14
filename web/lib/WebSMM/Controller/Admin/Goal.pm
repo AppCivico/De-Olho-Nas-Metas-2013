@@ -56,6 +56,11 @@ sub add : Chained('base') : PathPart('new') : Args(0) {
 
 }
 
+sub upload : Chained('base') : ParthPart('upload') : Args(0) {
+    my ( $self, $c ) = @_;
+
+}
+
 sub edit : Chained('object') : PathPart('edit') : Args(0) {
     my ( $self, $c, $id ) = @_;
     my $api = $c->model('API');
