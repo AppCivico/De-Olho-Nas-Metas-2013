@@ -40,10 +40,10 @@ sub csv : Chained('download') : PathPart('csv') : Args(0) {
     $api->stash_result( $c, 'goals' );
     my %lines;
 
-    push @{ $lines->{main} }, $c->stash->{header};
-    push @{ $lines->{main} }, [ $_->{id}, $_->{name}, ],
+    push @{ $lines{main} }, $c->stash->{header};
+    push @{ $lines{main} }, [ $_->{id}, $_->{name}, ],
       for @{ $c->stash->{goals} };
-    $file->_download( $c, 'meta', \@lines );
+    $file->_download( $c, 'meta', \%lines );
 
 }
 

@@ -6,21 +6,21 @@
 	[%-CALL assets.include("js/slider/js/bootstrap-slider.js")%]
 	[%-CALL assets.include("js/slider/css/slider.css")%]
 	<script id="row_template" type="text/template">
-			{{#goals.length}}<h2 class="section-title">{{ goals.length}} Meta{{#plural}}s{{/plural}} Encontrada{{#plural}}s{{/plural}}</h2>{{/goals.length}}
+			{{#goals.length}}<h2 class="section-title">{{ goals.length}} [%('Meta{{#plural}}s{{/plural}} Encontrada{{#plural}}s{{/plural}}')%]</h2>{{/goals.length}}
 			{{ #goals }}	
 			<div class="item row">
 				<div class="col-sm-10 nopadding">
 					<div class="contents pull-left">
 						<div class="description">
 							<h2>
-								<a href="/home/goal/{{id}}">Meta {{id}} - {{name}}</a>
+								<a href="/home/goal/{{id}}">[%l('Meta')%] {{id}} - {{name}}</a>
 							</h2>
 							<div class="stats">
 								{{#region_count}}
-									<div class="icon regions"></div> <span class="regions"> {{region_count}} Regiões</span>
+									<div class="icon regions"></div> <span class="regions"> {{region_count}} [%l('Regiões')%]</span>
 								{{/region_count}}
 								{{#project_count}}
-									<div class="icon projects"></div> <span class="projects">{{project_count}} Projetos</span>
+									<div class="icon projects"></div> <span class="projects">{{project_count}} [%(l'Projetos')%]</span>
 								{{/project_count}}
 							</div>
 
@@ -32,7 +32,7 @@
 
 			{{/goals}}
 			{{^goals}}
-			<h2 class="section-title">Nenhum projeto encontrado.</h2>
+			<h2 class="section-title">[%l('Nenhum projeto encontrado')%].</h2>
 			{{/goals}}
 
 	</script>
@@ -133,23 +133,23 @@ $(document).ready(function () {
 					Metas próximas a mim<br />
 					<input type="hidden" id="pagetype" value="goaldetail">
 					<input type="hidden" id="goalid" value="[% goal_obj.id%]">
-					<input type="text" id="txtaddress" name="txtaddress" placeholder="CEP">
+					<input type="text" id="txtaddress" name="txtaddress" placeholder="[%l('CEP')%]">
 				</div>
 				<div class="col-sm-8">
 					<div class="row">
 						<div class="col-sm-4 region">
-							por Distrito<br />
+							[%l('por Distrito')%]<br />
 							<div class="select-stylized"><select id="goalregion">
-								<option value="">Distrito</option>
+								<option value="">[%l('Distrito')%]</option>
 								[% FOREACH region IN regions %]
 									<option value="[% region.id %]">[% region.name %]</option>
 								[% END %]
 							</select></div>
 						</div>
 						<div class="col-sm-4 type">
-							por Tema<br />
+							[%l('por Tema')%]<br />
 							<div class="select-stylized"><select id="type_goal">
-								<option value="">Temas</option>
+								<option value="">[%l('Temas')%]</option>
 								[% FOREACH type IN objectives %]
 								<option value="[% type.id %]">[% type.name %]</option>
 								[% END %]
@@ -157,7 +157,7 @@ $(document).ready(function () {
 						</div>
 						<div class="col-sm-4 type">
 							<br />
-							<button type="button" class="btn btn-default" id="searchgoal">Pesquisar</button>
+							<button type="button" class="btn btn-default" id="searchgoal">[%l('Pesquisar')%]</button>
 						</div>
 
 					</div>
@@ -175,7 +175,7 @@ $(document).ready(function () {
 				<div class="col-sm-8">
 				
 					<div class="body">
-						<h1>Meta [% goal_obj.id%] - [% goal_obj.name %]</h1>
+						<h1>[%l('Meta')%] [% goal_obj.id%] - [% goal_obj.name %]</h1>
 						<p>
 							[% goal_obj.description %].
 						</p>
@@ -183,7 +183,7 @@ $(document).ready(function () {
 						<div class="share-buttons">
 							<div class="twitter">
 						    <!-- Social plugins twitter-->
-							<a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt"  data-hashtags="deolhonasmetas">Tweetar</a>
+							<a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt"  data-hashtags="deolhonasmetas">[%l('Tweetar')</a>
 							</div>
 							<div class="facebook">
 							<!-- Social plugin facebook -->
@@ -192,9 +192,9 @@ $(document).ready(function () {
 						</div>
 						<br clear="all"/>
 					</div>
-					<h3>INVESTIMENTO TOTAL PREVISTO: <strong>R$<span class="priceformat">[% goal_obj.expected_budget %]</span></strong></h3>
+					<h3>[%l('INVESTIMENTO TOTAL PREVISTO')%]: <strong>R$<span class="priceformat">[% goal_obj.expected_budget %]</span></strong></h3>
 <!--				<div class="timeline">
-						<h3 class="section-title">Linha do tempo segundo o cronograma</h3>
+						<h3 class="section-title">[%l('Linha do tempo segundo o cronograma')%]</h3>
 						<div class="chart">
 							<canvas id="chartline-goal"></canvas>
 						</div>
@@ -208,7 +208,7 @@ $(document).ready(function () {
 						</script>
 					</div>-->
 					<section class="statistics">
-						<h3>Progresso de acordo com a prefeitura</h3>
+						<h3>[%l('Progresso de acordo com a prefeitura')%]</h3>
 						<div class="progress">
 						  <div class="progress-bar progress-bar-[% IF goal_obj.goal_porcentages.owned > 50 %]success[% ELSE %]danger[% END %]" role="progressbar" aria-valuenow="[%goal_obj.goal_porcentages.owned%]" aria-valuemin="0" aria-valuemax="100" style="width: [%goal_obj.goal_porcentages.owned%]%;">
 							   [%goal_obj.goal_porcentages.owned%]%
@@ -219,12 +219,12 @@ $(document).ready(function () {
 	       <h3>Progresso no <img src="/static/css/images/logo-planejasampa.png"></h3>
 	       <div class="row">
 	        <div class="col-xs-offset-1 col-xs-10">
-	              <p><a  href="http://planejasampa.prefeitura.sp.gov.br/metas/meta/[%goal_obj.id%]" target="_blank"><strong>Clique aqui</strong></a> para acompanhar o andamento     do projeto no site Planeja Sampa</p>
+	              <p><a  href="http://planejasampa.prefeitura.sp.gov.br/metas/meta/[%goal_obj.id%]" target="_blank"><strong>[%l('Clique aqui')%]</strong></a> [%l('para acompanhar o andamento do projeto no site Planeja Sampa')%]</p>
 	        </div>
 	       </div>
 	     </section>
       <br>
-						<div class="progress-steps green">[% goal_obj.progress_count%] de 6 etapas completas</div>
+						<div class="progress-steps green">[% goal_obj.progress_count%] [%l('de 6 etapas completas')%]</div>
 						<table class="table-progress-steps">
 						[% IF goal_obj.qualitative_progress_1%]
 							<tr><td class="number green">1</td><td class="description">[% goal_obj.qualitative_progress_1%]</td></tr>
@@ -246,12 +246,12 @@ $(document).ready(function () {
 						[%END%]
 						</table>
 						[% IF goal_obj.progress_count == 0%]
-							<p>Nenhum progresso até o momento.</p>
+							<p>[%l('Nenhum progresso até o momento')%].</p>
 						
 						[%END%]
 
 						<br />
-						<!--<h3>Progresso segundo o Conselho Participativo</h3>
+						<!--<h3>[%l('Progresso segundo o Conselho Participativo')%]</h3>
 						<div class="progress">
 						[% IF goal_obj.progress_goal_counsil.size > 0 %]
 							[% FOR gpc IN goal_obj.progress_goal_counsil%]
@@ -306,14 +306,14 @@ $(document).ready(function () {
 					<div class="list_budget">
 
 						<h3>Execução Financeira da Meta - Contratados</h3>
-						<h5><i><b>Fonte das informações:</b> Tribunal de Contas do Município de São Paulo</i></h5>
+						<h5><i><b>[%l('Fonte das informações')]:</b> [%l('Tribunal de Contas do Município de São Paulo')%]</i></h5>
 						<table id="list_budgets" class="table table-striped">
 							<thead>
 								<tr>
-					                <th>Nome da Empresa</th>
-				    	            <th>Descrição da despesa</th>
-				    	            <th style="white-space: nowrap">Valor Empenhado (R$)</th>
-				    	            <th style="white-space: nowrap">Valor Liquidado (R$)</th>
+					                <th>[%l(%Nome da Empresa%)]</th>
+				    	            <th>[%l('Descrição da despesa')%]</th>
+				    	            <th style="white-space: nowrap">[%l('Valor Empenhado')%] (R$)</th>
+				    	            <th style="white-space: nowrap">[%l('Valor Liquidado')%] (R$)</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -332,7 +332,7 @@ $(document).ready(function () {
 		            [%END%]
 					[% ELSE %]
 							<tr>
-								<td colspan="3">Nenhum orçamento encontrado.</td>
+								<td colspan="3">[%l('Nenhum orçamento encontrado')%].</td>
 							</tr>
 					[% END %]
 	
@@ -341,13 +341,13 @@ $(document).ready(function () {
 					</div>
 
 					<div class="comments">
-						<h3>Comentários</h3>
+						<h3>[%l('Comentários')%]</h3>
 						<table id="list_comment" class="table table-striped">
 							<thead>
 								<tr>
-					                <th>Nome</th>
-				    	            <th>Comentário</th>
-				    	            <th>Data</th>
+					                <th>[%l('Nome')%]</th>
+				    	            <th>[%l('Comentário')%]</th>
+				    	            <th>[%l('Data')%]</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -361,7 +361,7 @@ $(document).ready(function () {
 		            [%END%]
 					[% ELSE %]
 							<tr>
-								<td colspan="3">Nenhum comentário encontrado</td>
+								<td colspan="3">[%l('Nenhum comentário encontrado')%]</td>
 							</tr>
 					[% END %]
 	
@@ -372,14 +372,14 @@ $(document).ready(function () {
 					<div id="alert_comment"></div>
 					<div>						
 						<textarea id="text_comment" class="form-control" rows="2"></textarea>
-						<button  id="comment" type="button" class="btn btn-brown" data-id="[% c.user.obj.id%]">Comentar</button>
+						<button  id="comment" type="button" class="btn btn-brown" data-id="[% c.user.obj.id%]">[%l('Comentar')%]</button>
 					</div>
 
     	
 				</div>
 				<div class="col-sm-4">
 					<div class="list-box list-types">
-						<span class="header">Tema</span>
+						<span class="header">[%l('Tema')%]</span>
 						<ul>
 							<input type="hidden" id="objective_type_goal_id" value="[%goal_obj.objective.id%]"/>
 							<li><a href="" class="objective_type_goal" value="[%goal_obj.objective.id%]">
@@ -389,7 +389,7 @@ $(document).ready(function () {
 					</div>
 				    [% IF goal_obj.region.size > 0 %]	
 					<div class="list-regions">
-						<span class="header">Distritos</span>
+						<span class="header">[%l('Distritos')%]</span>
 						<ul class="list-regions">
 							<li>[% FOREACH region IN goal_obj.region%]
 							<a href="[% c.uri_for_action('/homefuncional/region/detail',[region.id] ) %]">[%region.name%]</a>[% UNLESS region.id == goal_obj.region.last.id %],[% END%]
@@ -403,17 +403,17 @@ $(document).ready(function () {
 					</div>
 
 					<div class="list-projects">
-						<span class="header">Planeja Sampa</span>
+						<span class="header">[%l('Planeja Sampa')%]</span>
 						<ul class="list-organizations">
 							<li>
-								<a href="http://planejasampa.prefeitura.sp.gov.br/metas/meta/[%goal_obj.id%]">Meta [%goal_obj.id%] - [% goal_obj.name%]
+								<a href="http://planejasampa.prefeitura.sp.gov.br/metas/meta/[%goal_obj.id%]">[%l('Meta')%] [%goal_obj.id%] - [% goal_obj.name%]
 							</li>
 						</ul>
 					</div>
 
 					[% IF goal_obj.organization.size > 0 %]
 					<div class="list-organizations">
-						<span class="header">3 Organizações</span>
+						<span class="header">[% goal_obj.organization.size%] [%l('Organizações')%]</span>
 						<ul class="list-organizations">
 							[% FOREACH organization IN goal_obj.organizations%]					
 							<li>[% organization.name%]</li>
@@ -423,7 +423,7 @@ $(document).ready(function () {
 					[% END%]
 					[% IF business_names.size > 0%]
 					<div class="list-organizations">
-						<span class="header">[%business_names.size%] Empresa[% IF business_names.size > 1%]s[%END%] Relacionada[% IF business_names.size > 1%]s[% END %]</span>
+						<span class="header">[%business_names.size%] [%l('Empresa')%][% IF business_names.size > 1%]s[%END%] [%l('Relacionada')%][% IF business_names.size > 1%]s[% END %]</span>
 						<ul class="list-organizations">
 							[% FOREACH bn IN business_names%]					
 							<li><a href="[% c.uri_for_action('/homefuncional/company/detail', [ bn.url] )%]">[% bn.name %]</a></li>

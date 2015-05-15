@@ -39,7 +39,8 @@ sub setup_lexicon_plugin {
 
     my $db = $c->model('DB');
     $resultset = $db->resultset('Lexicon');
-
+    use DDP;
+    p $resultset;
     $c->config->{default_lang} ||= 'pt-br';
     $c->config->{forced_langs} ||= 'pt-br';
 

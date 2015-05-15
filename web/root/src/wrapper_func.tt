@@ -61,6 +61,13 @@
                 </button>
 				<a href="/home" class="navbar-brand"><img src="/static/images/logo-header.png"></a>
             </div>
+			<div class="navbar-header page-scroll">
+			<ul class="select-langs list-unstyled">
+				 <li><a href="/lang/en" lang="en" hreflang="en"><img alt="English" title="English" src="//upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/23px-Flag_of_the_United_States.svg.png" width="23" height="12"> </a></li>
+				 <li><a href="/lang/pt-br" lang="pt-br" hreflang="pt-br"><img alt="Português" title="Português" src="//upload.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/22px-Flag_of_Brazil.svg.png" width="17" height="12"></a></li>
+				 <li><a href="/lang/es" lang="es" hreflang="es"><img alt="Español" title="Español" src="//upload.wikimedia.org/wikipedia/en/thumb/9/9a/Flag_of_Spain.svg/23px-Flag_of_Spain.svg.png" width="22" height="12">  </a></li>
+			</ul>
+			</div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-main-collapse">
                 <ul class="nav navbar-nav">
@@ -69,38 +76,38 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a href="/home/goal">Metas</a>
+                        <a href="/home/goal">[%l('Metas')%]</a>
                     </li>
                     <li>
-                        <a href="/home/region">Distritos</a>
+                        <a href="/home/region">[%l('Distritos')%]</a>
                     </li>
                     <li>
-                        <a href="/home/organization">Conselhos</a>
+                        <a href="/home/organization">[%l('Conselhos')%]</a>
                     </li>
                     <li>
-                        <a href="/home/campaign">Campanhas</a>
+                        <a href="/home/campaign">[%l('Campanhas')%]</a>
                     </li>
 
                     <li>
-                        <a href="/home/company">Empresas</a>
+                        <a href="/home/company">[%l('Empresas')%]</a>
                     </li>
                     <li>
-                        <a href="/home/open-data">Dados Abertos</a>
+                        <a href="/home/open-data">[%l('Dados Abertos')%]</a>
                     </li>
 					[% IF c.user %]
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle navbar-link" data-toggle="dropdown"> Perfil e ferramentas <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle navbar-link" data-toggle="dropdown">[%l('Perfil e ferramentas')%] <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="[%c.uri_for_action('/user/account/index')%]">Meu Perfil</a></li>
+                            <li><a href="[%c.uri_for_action('/user/account/index')%]">[%l('Meu Perfil')%]</a></li>
                             [% INCLUDE 'user/account/menu_profile.tt' %]
                         </ul>
                     </li>
                     <li >
-						<a href="[%c.uri_for('/logout')%]">Sair</a>
+						<a href="[%c.uri_for('/logout')%]">[%l('Sair')%]</a>
                     </li>
 					[% ELSE %]
                     <li >
-						<a href="/login">Entrar</a>
+						<a href="/login">[%l('Entrar')%]</a>
                     </li>
 					[%END%]
                 </ul>
@@ -118,19 +125,19 @@
 			<div class="container">
 				<ul class="menu-footer">
 					<li>
-						<a href="/homefuncional/sobre">Sobre</a>
+						<a href="/homefuncional/sobre">[%l('Sobre')%]</a>
 					</li>
 					<li>
-						<a href="/homefuncional/faq">Perguntas Frequentes</a>
+						<a href="/homefuncional/faq">[%l('Perguntas Frequentes')%]</a>
 					</li>
 					<li>
-						<a href="/contato">Contato</a>
+						<a href="/contato">[%l('Contato')%]</a>
 					</li>
 					<li>
-						<a href="/cadastro">Cadastro</a>
+						<a href="/cadastro">[%l('Cadastro')%]</a>
 					</li>
 					<li>
-						<a href="/login">Entrar</a>
+						<a href="/login">[%l('Entrar')%]</a>
 					</li>
 				</ul>
 			</div>
@@ -140,10 +147,10 @@
                 <div class="col-sm-5 logos-footer">
                     <div class="row">
                         <div class="col-xs-6 text-center">
-                            Realização
+                            [%l('Realização')%]
                         </div>
                         <div class="col-xs-6 text-center">
-                            Apoio
+                            [%l('Apoio')%]
                         </div>
                     </div>
                     <div class="row">
@@ -163,10 +170,10 @@
                 <div class="col-sm-5 logos-footer">
                     <div class="row">
                         <div class="col-xs-8 text-center">
-                            Parceiros
+                            [%l('Parceiros')%]
                         </div>
                         <div class="col-xs-4 text-center">
-                            Desenvolvimento
+                            [%l('Desenvolvido por')%]
                         </div>
                     </div>
                     <div class="row">

@@ -68,7 +68,8 @@ __PACKAGE__->config(
             'days_of_week_human',   'hour_human',
             'format_date_to_human', 'format_cnpj_to_human',
             'birthdate_to_age',     'meter_to_kilometer',
-            'ymd_to_human',         'month_name'
+            'ymd_to_human',         'month_name',
+            'l'
         ]
     },
 );
@@ -78,6 +79,15 @@ after 'setup_components' => sub {
     for ( keys %{ $app->components } ) {
         if ( $app->components->{$_}->can('initialize_after_setup') ) {
             $app->components->{$_}->initialize_after_setup($app);
+        }
+    }
+};
+after setup_finalize => sub {
+    my $app = shift;
+
+    for ( $app->registered_plugins ) {
+        if ( $_->can('initialize_after_setup') ) {
+            $_->initialize_after_setup($app);
         }
     }
 };
