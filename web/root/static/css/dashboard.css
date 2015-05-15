@@ -38,6 +38,11 @@ a:hover{
 	color: #fff;
 }
 
+a.btn:visited,
+a.btn:focus{
+	color: #fff;
+}
+
 /*
  * Global add-ons
  */
@@ -194,4 +199,15 @@ iframe.upload {
   width: 0;
   height: 0;
   border: none;
+}
+
+.mark-kml{
+	border: 1px solid #e0e0e0;
+	padding: 20px;
+	border-radius: 4px;
+	margin-top: 5px;
+}
+
+.mark-kml #panel button{
+	margin: 2px;
 }
