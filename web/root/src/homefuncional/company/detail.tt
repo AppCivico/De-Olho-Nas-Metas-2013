@@ -18,12 +18,12 @@ $(document).ready(function () {
 				<div class="col-sm-8">
 				
 					<div class="body">
-						<h4 class="subtitle blue">Empresa</h4>
+						<h4 class="subtitle blue">[%l('Empresa')%]</h4>
 						<h1>[% company.name %]</h1>
       <div class="share-buttons">
 						  <div class="twitter">
 						  <!-- Social plugins twitter-->
-						    <a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt"  data-hashtags="deolhonasmetas">Tweetar</a>
+						    <a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt"  data-hashtags="deolhonasmetas">[%l('Tweetar')%]</a>
 								</div>
 						  <div class="facebook">
 																																																		       <!-- Social plugin facebook -->
@@ -34,13 +34,13 @@ $(document).ready(function () {
       <br>
 						<div class="list_budget">
 
-							<h3>Total Recebido: <strong>R$<span class="priceformat">[% sum_budgets %]</span></strong></h3>
+							<h3>[%l('Total Recebido')%]: <strong>R$<span class="priceformat">[% sum_budgets %]</span></strong></h3>
 							<table id="list_budgets" class="table table-striped">
 								<thead>
 									<tr>
-					    	            <th>Descrição da despesa</th>
-					    	            <th>Valor empenhado (R$)</th>
-					    	            <th>Valor liquidado (R$)</th>
+					    	            <th>[%l('Descrição da despesa')%]</th>
+					    	            <th>[%l('Valor empenhado')%] (R$)</th>
+					    	            <th>[%l('Valor liquidado')%] (R$)</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -58,7 +58,7 @@ $(document).ready(function () {
 			            [%END%]
 						[% ELSE %]
 								<tr>
-									<td colspan="3">Nenhum valor encontrado.</td>
+									<td colspan="3">[%l('Nenhum valor encontrado')%].</td>
 								</tr>
 						[% END %]
 		
@@ -70,7 +70,7 @@ $(document).ready(function () {
 				</div>
 				<div class="col-sm-4">
 					<div class="list-box list-green">
-						<span class="header">[%goals.size%] Meta[% IF goals.size > 1%]s[% END%] associada[% IF goals.size > 1 %]s[% END %]</span>
+						<span class="header">[%goals.size%] [%l('Meta(s) Associada(s)')%]</span>
 						[% FOREACH g IN goals%]
 						<ul class="list-goals">
 							<li><a href="[% c.uri_for_action('/homefuncional/goal/detail',[ g.id ] ) %]">[% g.name %]</a></li>

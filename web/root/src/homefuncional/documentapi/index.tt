@@ -2,8 +2,8 @@
 
 <section class="documentation">
     <div class="container">
-        [%SET voltar_link = '<small><span class="page-scroll"><a class="pull-right" data-animated-anchor href="#endpoints">voltar para endpoints</a></span></small>'%]
-        <h1>Dados abertos</h1>
+        [%SET voltar_link = '<small><span class="page-scroll"><a class="pull-right" data-animated-anchor href="#endpoints">[%l('voltar para endpoints')%]</a></span></small>'%]
+        <h1>[%l('Dados abertos')%]</h1>
 
         <div class="block">
             <div class="row">
@@ -13,13 +13,13 @@
                     </div>
                 </div>
                 <div class="col-sm-10">
-                    <h3>O que são dados abertos?</h3>
-                    <p>Segundo a definição da Open Knowledge Foundation, em suma:</p>
+                    <h3>[%l('O que são dados abertos')%]?</h3>
+                    <p>[%l('Segundo a definição da Open Knowledge Foundation, em suma')%]:</p>
                     <blockquote class="pull-right">
-                        <p>dados são abertos quando qualquer pessoa pode livremente usá-los, reutilizá-los e redistribuí-los, estando sujeito a, no máximo, a exigência de creditar a sua autoria e compartilhar pela mesma licença.</p>
+                        <p>[%l('dados são abertos quando qualquer pessoa pode livremente usá-los, reutilizá-los e redistribuí-los, estando sujeito a, no máximo, a exigência de creditar a sua autoria e compartilhar pela mesma licença')%].</p>
                         <small><cite title="Open Knowledge Foundation"><b><a href="http://opendatahandbook.org/pt_BR/what-is-open-data/index.html" rel="nofollow" target="_blank">Open Knowledge Foundation</a></b></cite></small>
                     </blockquote>
-                    <p>Você pode saber mais sobre o assunto acessando <b><a href="http://dados.gov.br/dados-abertos/" target="_blank" rel="nofollow">o Portal de dados abertos do Brasil</a></b>.</p>
+                    <p>[%l('Você pode saber mais sobre o assunto acessando')%] <b><a href="http://dados.gov.br/dados-abertos/" target="_blank" rel="nofollow">[%l('o Portal de dados abertos do Brasil')%]</a></b>.</p>
                 </div>
             </div>
             <div class="row">
@@ -29,15 +29,15 @@
                     </div>
                 </div>
                 <div class="col-sm-10">
-                    <h3>API para desenvolvedores</h3>
-                    <p>Você também pode consultar os dados que estão armazenados no DONM via API.</p>
+                    <h3>[%l('API para desenvolvedores')%]</h3>
+                    <p>[%l('Você também pode consultar os dados que estão armazenados no DONM via API')%].</p>
 
-                    <p>Para saber mais, navegue até a seção  <span class="page-scroll"><b><a href="#api">API</a></span></b></p>
+                    <p>[%l('Para saber mais, navegue até a seção')%]  <span class="page-scroll"><b><a href="#api">API</a></span></b></p>
                 </div>
             </div>
         </div>
     
-        <h1><span class="glyphicon glyphicon-floppy-save"></span> Baixar arquivos</h1>
+        <h1><span class="glyphicon glyphicon-floppy-save"></span> [%l('Baixar arquivos')%]</h1>
 
         <div class="block">
             <form role="form">
@@ -46,16 +46,16 @@
 
                     <div class="form-group">
                         <div class="grupo">
-                            <label>Tabelas</label>
+                            <label>[%l('Tabelas')%]</label>
                             <select name="tabela" class="form-control">
-                                <option value="conselho" selected="selected">Conselhos</option>
-                                <option value="distrito" selected="selected">Distritos</option>
-                                <option value="empresa" selected="selected">Empresas</option>
-                                <option value="meta" selected="selected">Metas</option>
-                                <option value="objetivo" selected="selected">Objetivos</option>
-                                <option value="orcamento" selected="selected">Orçamentos</option>
-                                <option value="projeto" selected="selected">Projetos</option>
-                                <option value="subprefeitura" selected="selected">Subprefeituras</option>
+                                <option value="conselho" selected="selected">[%l('Conselhos')%]</option>
+                                <option value="distrito" selected="selected">[%l('Distritos')%]</option>
+                                <option value="empresa" selected="selected">[%l('Empresas')%]</option>
+                                <option value="meta" selected="selected">[%l('Metas')%]</option>
+                                <option value="objetivo" selected="selected">[%l('Objetivos')%]</option>
+                                <option value="orcamento" selected="selected">[%l('Orçamentos')%]</option>
+                                <option value="projeto" selected="selected">[%l('Projetos')%]</option>
+                                <option value="subprefeitura" selected="selected">[%l('Subprefeituras')%]</option>
                             </select>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
 
                 <div class="form-group col-sm-3">
                     <div class="form-group">
-                        <label>Formato</label>
+                        <label>[%l('Formato')%]</label>
 
                         <select name="formato" class="form-control">
                             <option value="csv" selected="selected">CSV</option>
@@ -75,9 +75,9 @@
                 </div>
             </div>
 
-            <legend>Links</legend>
+            <legend>[%l('Links')%]</legend>
 
-                <h4>Arquivo das tabelas</h4>
+                <h4>[%l('Arquivo das tabelas')%]</h4>
                 <p>
                 <div class="row">
                     <div class="col-md-9 col-sm-7">
@@ -91,140 +91,140 @@
 
             <legend>[%l('Informações contidas nos arquivos')%]</legend>
 
-                        <h4>Campos dos arquivos</h4>
+                        <h4>[%l('Campos dos arquivos')%]</h4>
                 <div class="row" >
                     <div class="col-sm-3">
-                        <h2>Meta</h2>
+                        <h2>[%l('Meta')%]</h2>
                         <ul>
-                            <li><strong>ID da meta</strong></li>
-                            <li><strong>Nome</strong></li>
-                            <li><strong>Descrição</strong></li>
-                            <li><strong>Orçamento esperado</strong></li>
-                            <li>Número da meta</li>
-                            <li>Data de atualização</li>
-                            <li>Data esperada para início</li>
-                            <li>Data esperada para termino</li>
-                            <li>Será entregue</li>
-                            <li>Transversalidade</li>
-                            <li>Progresso Qualitativo 1</li>
-                            <li>Progresso Qualitativo 2</li>
-                            <li>Progresso Qualitativo 3</li>
-                            <li>Progresso Qualitativo 4</li>
-                            <li>Progresso Qualitativo 5</li>
-                            <li>Progresso Qualitativo 6</li>
+                            <li><strong>[%l('ID da meta')%]</strong></li>
+                            <li><strong>[%l('Nome')%]</strong></li>
+                            <li><strong>[%l('Descrição')%]</strong></li>
+                            <li><strong>[%l('Orçamento esperado')%]</strong></li>
+                            <li>[%l('Número da meta')%]</li>
+                            <li>[%l('Data de atualização')%]</li>
+                            <li>[%l('Data esperada para início')%]</li>
+                            <li>[%l('Data esperada para termino')%]</li>
+                            <li>[%l('Será entregue')%]</li>
+                            <li>[%l('Transversalidade')%]</li>
+                            <li>[%l('Progresso Qualitativo 1')%]</li>
+                            <li>[%l('Progresso Qualitativo 2')%]</li>
+                            <li>[%l('Progresso Qualitativo 3')%]</li>
+                            <li>[%l('Progresso Qualitativo 4')%]</li>
+                            <li>[%l('Progresso Qualitativo 5')%]</li>
+                            <li>[%l('Progresso Qualitativo 6')%]</li>
                         </ul>
 
                     </div>
                     <div class="col-sm-3">
-                        <h2>Objetivo</h2>
+                        <h2>[%l('Objetivo')%]</h2>
 
                         <ul>
-                            <li><strong>ID do objetivo</strong></li>
-                            <li><strong>Nome</strong></li>
-                            <li><strong>Data de atualização</strong></li>
+                            <li><strong>[%l('ID do objetivo')%]</strong></li>
+                            <li><strong>[%l('Nome')%]</strong></li>
+                            <li><strong>[%l('Data de atualização')%]</strong></li>
                         </ul>
                     </div>
                     <div class="col-sm-3">
                         <h2>Projeto</h2>
 
                         <ul>
-                            <li><strong>ID do projeto</strong></li>
-                            <li><strong>Nome</strong></li>
-                            <li><strong>latitude</strong></li>
-                            <li><strong>longitude</strong></li>
-                            <li>Número do projeto</li>
-                            <li>Progresso Qualitativo 1</li>
-                            <li>Progresso Qualitativo 2</li>
-                            <li>Progresso Qualitativo 3</li>
-                            <li>Progresso Qualitativo 4</li>
-                            <li>Progresso Qualitativo 5</li>
-                            <li>Progresso Qualitativo 6</li>
-                            <li>Porcentagem</li>
-                            <li>Data de atualização</li>
+                            <li><strong>[%l('ID do projeto')%]</strong></li>
+                            <li><strong>[%l('Nome')%]</strong></li>
+                            <li><strong>[%l('latitude')%]</strong></li>
+                            <li><strong>[%l('longitude')%]</strong></li>
+                            <li>[%l('Número do projeto')%]</li>
+                            <li>[%l('Progresso Qualitativo 1')%]</li>
+                            <li>[%l('Progresso Qualitativo 2')%]</li>
+                            <li>[%l('Progresso Qualitativo 3')%]</li>
+                            <li>[%l('Progresso Qualitativo 4')%]</li>
+                            <li>[%l('Progresso Qualitativo 5')%]</li>
+                            <li>[%l('Progresso Qualitativo 6')%]</li>
+                            <li>[%l('Porcentagem')%]</li>
+                            <li>[%l('Data de atualização')%]</li>
                         </ul>
                     </div>
 
                     <div class="col-sm-3">
-                        <h2>Empresa</h2>
+                        <h2>[%l('Empresa')%]</h2>
 
                         <ul>
-                            <li><strong>ID da empresa</strong></li>
-                            <li><strong>Nome</strong></li>
-                            <li><strong>Url do nome</strong></li>
+                            <li><strong>[%l('ID da empresa')%]</strong></li>
+                            <li><strong>[%l('Nome')%]</strong></li>
+                            <li><strong>[%l('Url do nome')%]</strong></li>
                         </ul>
                     </div>
               
                 </div>
                  <div class="row" >
                     <div class="col-sm-3">
-                        <h2>Orçamento</h2>
+                        <h2>[%l('Orçamento')%]</h2>
 
                         <ul>
-                            <li><strong>ID do orçamento</strong></li>
-                            <li><strong>Nome da empresa</strong></li>
-                            <li><strong>CNPJ</strong></li>
-                            <li>Número da meta</li>
-                            <li>Valor Dedicado</li>
-                            <li>Valor liquidado</li>
-                            <li>Observação</li>
-                            <li>Código de contrato</li>
-                            <li>Código da organização</li>
-                            <li>Nome da organização</li>
-                            <li>Id da empresa</li>
-                            <li>Data de atualização</li>
+                            <li><strong>[%l('ID do orçamento')%]</strong></li>
+                            <li><strong>[%l('Nome da empresa')%]</strong></li>
+                            <li><strong>[%l('CNPJ')%]</strong></li>
+                            <li>[%l('Número da meta')%]</li>
+                            <li>[%l('Valor Dedicado')%]</li>
+                            <li>[%l('Valor liquidado')%]</li>
+                            <li>[%l('Observação')%]</li>
+                            <li>[%l('Código de contrato')%]</li>
+                            <li>[%l('Código da organização')%]</li>
+                            <li>[%l('Nome da organização')%]</li>
+                            <li>[%l('Id da empresa')%]</li>
+                            <li>[%l('Data de atualização')%]</li>
                         </ul>
                     </div>
                     <div class="col-sm-3">
-                        <h2>Conselho</h2>
+                        <h2>[%l('Conselho')%]</h2>
 
                         <ul>
-                            <li><strong>ID do conselho</strong></li>
-                            <li><strong>Nome do conselho</strong></li>
-                            <li><strong>Descrição</strong></li>
-                            <li>Telefone</li>
-                            <li>Endereço</li>
-                            <li>Complemento</li>
-                            <li>Código postal</li>
-                            <li>Site</li>
+                            <li><strong>[%l('ID do conselho')%]</strong></li>
+                            <li><strong>[%l('Nome do conselho')%]</strong></li>
+                            <li><strong>[%l('Descrição')%]</strong></li>
+                            <li>[%l('Telefone')%]</li>
+                            <li>[%l('Endereço')%]</li>
+                            <li>[%l('Complemento')%]</li>
+                            <li>[%l('Código postal')%]</li>
+                            <li>[%l('Site')%]</li>
                         </ul>
                     </div>
                     <div class="col-sm-3">
-                        <h2>Distrito</h2>
+                        <h2>[%l('Distrito')%]</h2>
 
                         <ul>
-                            <li><strong>ID do distrito</strong></li>
-                            <li><strong>Nome do distrito</strong></li>
-                            <li><strong>Latitude</strong></li>
-                            <li>Longitude</li>
-                            <li>Coordenadas Geométricas</li>
+                            <li><strong>[%l('ID do distrito')%]</strong></li>
+                            <li><strong>[%l('Nome do distrito')%]</strong></li>
+                            <li><strong>[%l('Latitude')%]</strong></li>
+                            <li>[%l('Longitude')%]</li>
+                            <li>[%l('Coordenadas Geométricas')%]</li>
                         </ul>
                     </div>
                     <div class="col-sm-3">
-                        <h2>Subprefeitura</h2>
+                        <h2>[%l('Subprefeitura')%]</h2>
 
                         <ul>
-                            <li><strong>ID da subprefeitura</strong></li>
-                            <li><strong>Nome da subprefeitura</strong></li>
-                            <li><strong>Endereço</strong></li>
-                            <li>E-mail</li>
-                            <li>Site</li>
-                            <li>Telefone</li>
-                            <li>Subprefeito</li>
-                            <li>Latitude</li>
-                            <li>Longitude</li>
+                            <li><strong>[%l('ID da subprefeitura')%]</strong></li>
+                            <li><strong>[%l('Nome da subprefeitura')%]</strong></li>
+                            <li><strong>[%l('Endereço')%]</strong></li>
+                            <li>[%l('E-mail')%]</li>
+                            <li>[%l('Site')%]</li>
+                            <li>[%l('Telefone')%]</li>
+                            <li>[%l('Subprefeito')%]</li>
+                            <li>[%l('Latitude')%]</li>
+                            <li>[%l('Longitude')%]</li>
                         </ul>
                     </div>
 
                 </div>
             </form>
         </div>
-        <h1>API para desenvolvedores</h1>
+        <h1>[%l('API para desenvolvedores')%]</h1>
 
         <div id="api" class="block">
-            <p>O DONM fornece uma REST API para a consulta dos dados.</p>
-            <p>Os <b>endpoints</b> podem entregar o contéudo serializado em <b>JSON</b>.</p>
-            <p>O <code>content-type</code> é definido automaticamente pelo header <code>Accept</code>. Por padrão, a resposta é no formato <b>JSON</b>.</p>
-            <p>Para pedir manualmente, utilize <code>?content-type=application/json</code> para JSON.</p>
+            <p>[%l('O DONM fornece uma REST API para a consulta dos dados')%].</p>
+            <p>[%l('Os <b>endpoints</b> podem entregar o contéudo serializado em')%] <b>JSON</b>.</p>
+            <p>[%l('O')%] <code>content-type</code> [%l('é definido automaticamente pelo header')%] <code>Accept</code>. [%l('Por padrão, a resposta é no formato')%] <b>JSON</b>.</p>
+            <p>[%l('Para pedir manualmente, utilize')%] <code>?content-type=application/json</code> [%l('para JSON')%].</p>
 
 
             <h1 id="endpoints"  data-animated-anchor-offset="-60" >Endpoints</h1>
@@ -235,16 +235,15 @@
                 <thead>
                     <tr>
                         <th>Endpoint</th>
-                        <th>Descrição</th>
-                        <th>Parâmetros aceitos</th>
+                        <th>[%l('Descrição')%]</th>
+                        <th>[%l('Parâmetros aceitos')%]</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <th><pre><span class="page-scroll"><a data-animated-anchor href="#code_goal">/public/goals</a></span></pre></th>
-                        <td>Lista de todas as metas</td>
+                        <td>[%l('Lista de todas as metas')%]</td>
                         <td>
-                        Filtros:
                         <ul class="list-unstyled list-param">
                             <li></li>
                         </ul>
@@ -253,39 +252,39 @@
                     </tr>
                     <tr>
                         <th><pre><span class="page-scroll"><a data-animated-anchor href="#code_goal_detail">/public/goals/*</a></span></pre></th>
-                        <td>Lista de todos atributos da meta específica</td>
+                        <td>[%l('Lista de todos atributos da meta específica')%]</td>
                         <td>
                         <ul class="list-unstyled list-param">
-                            <li>* => id da meta</li>
+                            <li>* => [%l('id da meta')%]</li>
                         </ul>
                         </td>
                     </tr>
 
                     <tr>
                         <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-project">/public/projects</a></span></pre></th>
-                        <td>Lista de todos os projetos</td>
+                        <td>[%l('Lista de todos os projetos')%]</td>
                         <td>-</td>
                     </tr>
                     <tr>
                         <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-project-detail">/public/projects/*</a></span></pre></th>
-                        <td>Lista de todos os atributos do projeto específico</td>
+                        <td>[%l('Lista de todos os atributos do projeto específico')%]</td>
                         <td>
                             <ul class="list-unstyled list-param">
-                                <li>* => id do projeto</li>
+                                <li>* => [%l('id do projeto')%]</li>
                             </ul>
                         </td>
 
                     </tr>
                     <tr>
                         <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-objective">/public/objectives</a></span></pre></th>
-                        <td>Lista de todos os objetivos</td>
+                        <td>[%l('Lista de todos os objetivos')%]</td>
                         <td>-</td>
 
                     </tr>
 
                     <tr>
                         <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-company">/public/companies</a></span></pre></th>
-                        <td>Lista de todas as empresas.</td>
+                        <td>[%l('Lista de todas as empresas')%].</td>
                         <td>-</td>
                     </tr>
                     <tr>
