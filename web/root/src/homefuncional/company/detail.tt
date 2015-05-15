@@ -27,7 +27,7 @@ $(document).ready(function () {
 								</div>
 						  <div class="facebook">
 																																																		       <!-- Social plugin facebook -->
-									<div class="fb-share-button" data-href="http://www.deolhonasmetas.org.br/home/company/[%company.name_url%]/detail" data-layout="button_count"></div>
+									<div class="fb-share-button" data-href="http://www.deolhonasmetas.org.br/company/[%company.name_url%]/detail" data-layout="button_count"></div>
 									
 								</div>
 						</div>

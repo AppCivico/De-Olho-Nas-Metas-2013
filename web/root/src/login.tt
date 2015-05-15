@@ -43,16 +43,16 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a href="/home/goal">Metas</a>
+                        <a href="/goal">Metas</a>
                     </li>
                     <li>
-                        <a href="/home/region">Regiões</a>
+                        <a href="/region">Regiões</a>
                     </li>
                     <li>
-                        <a href="/home/organization">Conselhos</a>
+                        <a href="/organization">Conselhos</a>
                     </li>
                     <li>
-                        <a href="/home/campaign">Campanhas</a>
+                        <a href="/campaign">Campanhas</a>
                     </li>
                     <li class="highlight">
                         <a href="/login">Entrar</a>

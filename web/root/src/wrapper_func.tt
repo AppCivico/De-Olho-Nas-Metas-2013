@@ -76,23 +76,23 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a href="/home/goal">[%l('Metas')%]</a>
+                        <a href="/goal">[%l('Metas')%]</a>
                     </li>
                     <li>
-                        <a href="/home/region">[%l('Distritos')%]</a>
+                        <a href="/region">[%l('Distritos')%]</a>
                     </li>
                     <li>
-                        <a href="/home/organization">[%l('Conselhos')%]</a>
+                        <a href="/organization">[%l('Conselhos')%]</a>
                     </li>
                     <li>
-                        <a href="/home/campaign">[%l('Campanhas')%]</a>
+                        <a href="/campaign">[%l('Campanhas')%]</a>
                     </li>
 
                     <li>
-                        <a href="/home/company">[%l('Empresas')%]</a>
+                        <a href="/company">[%l('Empresas')%]</a>
                     </li>
                     <li>
-                        <a href="/home/open-data">[%l('Dados Abertos')%]</a>
+                        <a href="/open-data">[%l('Dados Abertos')%]</a>
                     </li>
 					[% IF c.user %]
                     <li class="dropdown">

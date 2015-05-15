@@ -8,11 +8,11 @@ $(document).ready(function () {
 		textview;
 	var button = $(this);
 	if ($(this).hasClass('follow')){
-		url = "/home/organization/user_follow_counsil";
+		url = "/organization/user_follow_counsil";
 		$(this).removeClass('follow');
 		textview = "Parar de Seguir";	
 	}else{
-		url = "/home/organization/user_stop_counsil";
+		url = "/organization/user_stop_counsil";
 		$(this).addClass('follow');
 		textview = "Siga o Conselho";	
 	}
