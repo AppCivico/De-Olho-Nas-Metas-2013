@@ -1,64 +1,18 @@
-	<section class="menu-top hidden-xs">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-4 text-right">
-					<ul class="menu">
-						<li class="page-scroll">
-							<a href="../#home">Início</a>
-						</li>
-						<!--//<li class="page-scroll">
-							<a href="#faq">Perguntas Frequentes</a>
-						</li>//-->
-						<li class="page-scroll">
-							<a href="../#about">Sobre</a>
-						</li>
-					</ul>
-				</div>
-				<div class="col-sm-4 text-center logo-top">
-					<img src="/static/css/images/logo-top.png" class="img-responsive">
-				</div>
-				<div class="col-sm-4 text-left">
-					<ul class="menu">
-						<li class="page-scroll">
-							<a href="../#signup">Participe</a>
-						</li>
-						<li>
-							<a href="/login">Entrar</a>
-						</li>
-					</ul>
-					<ul class="menu menu-social">
-						<li class="twitter">
-							<a href="" title="Twitter" alt="Facebook">&nbsp;</a>
-						</li>
-						<li class="facebook">
-							<a href="" title="Facebook" alt="Facebook">&nbsp;</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</section>
-
-    <section class="about text-center">
+	<section class="page-content sobre">
 		<div class="container">
 			<h2 class="title">Sobre o De Olho nas Metas</h2>
 			<div class="row">
-				<div class="col-sm-8 col-sm-offset-2">
-					
+				<div class="col-sm-8 col-md-offset-2">
 					<p>
 						Criado por iniciativa da sociedade civil, o sistema De Olho nas Metas ajudará cidadãos e organizações da sociedade civil a acompanhar e monitorar o cumprimento de metas da prefeitura de São Paulo.
 						<br /><br />
-						A base para o desenvolvimento do sistema foi o Programa de Metas da Cidade de São Paulo 2013-2016, que contempla 123 metas a serem executadas até o final da atual gestão. Periodicamente, o De Olho nas Metas "puxa" automaticamente as informações sobre as metas e projetos do Planeja Sampa, um site da Prefeitura de São Paulo que foi especialmente criado para incentivar a transparência e a participação social (http://planejasampa.prefeitura.sp.gov.br). Além dos dados do Planeja Sampa, o De Olho nas Metas também disponibiliza informações sobre as empresas executoras das metas. Essas informações fazem parte do Acordo de Cooperação Técnica entre o Tribunal de Contas do Município de São Paulo e a Rede Nossa São Paulo.
-
-
-						<br /><br />
-						O De Olho nas Metas oferece uma série de ferramentas para telefonia móvel e mídias sociais criadas especialmente para facilitar o acesso à informação, divulgar o que foi prometido para cada região, e ajudar os conselheiros participativos, as organizações e os cidadãos interessados a garantir que as metas sejam implementadas.
-
+						A base para o desenvolvimento do sistema foi o Programa de Metas da Cidade de São Paulo 2013-2016, que contempla 123 metas a serem executadas até o final da atual gestão. Periodicamente, o De Olho nas Metas consulta automaticamente as informações sobre as metas e projetos do Planeja Sampa, um site da Prefeitura de São Paulo que foi especialmente criado para incentivar a transparência e a participação social (http://planejasampa.prefeitura.sp.gov.br). Além dos dados do Planeja Sampa, o De Olho nas Metas também disponibiliza informações sobre as empresas executoras das metas. Essas informações fazem parte do Acordo de Cooperação Técnica entre o Tribunal de Contas do Município de São Paulo e a Rede Nossa São Paulo.
 						<br /><br />
 						O sistema De Olho nas Metas é uma iniciativa da Rede Nossa São Paulo, em parceria com a Eokoe e o Centro de Mídias Cívicas do Instituto de Tecnologia de Massachusetts (MIT Center for Civic Media) e conta com o apoio da Fundación Avina, por meio do Fundo Acelerador de Inovações Cívicas.  O sistema conta também com a cooperação técnica do Tribunal de Contas do Município de São Paulo.
-
-						<br /><br />
-						
+						<br /><br/>
+					</p>
+					<br>
+					<p>
 						<strong>Sobre a Rede Nossa São Paulo</strong>
 						<br /><br />
 						Lançada em maio de 2007, a Rede Nossa São Paulo (RNSP) é uma organização que defende o desenvolvimento sustentável, a ética e a democracia participativa.
@@ -81,12 +35,55 @@
 						<br /><br />
 						O Centro de Mídias Cívicas do Instituto de Tecnologia de Massachusetts (MIT Center for Civic Media) trabalha lado-a-lado com governos e organizações comunitárias na criação, desenho, implementação e avaliação de novas práticas e mídias cívicas.
 						<br /><br />
-						Inventando novas tecnologias que facilitam e incentivam a geração de conteúdos e ações políticas, estudamos o impacto destas tecnologias, e coordenamos processos colaborativos de design em Boston, nos Estados Unidos como um todo, e em outras partes do mundo.
+						Inventando novas tecnologias que facilitam e incentivam a geração de conteúdos e ações políticas, estudam o impacto destas tecnologias, e coordenam processos colaborativos de design em Boston, nos Estados Unidos como um todo, e em outras partes do mundo.
 						<br /><br />
 						Unindo dois programas altamente reconhecidos do MIT -- um famoso por inventar futuros tecnológicos alternativos, e outro por analizar o potencial de transformação social e cultural da mídia -- o Centro de Mídias Cívicas é um esforço conjunto do MIT Media Lab e do MIT Comparative Media Studies.
+						<br /><br />
+						
+						<strong>Sobre o Tribunal de Contas do Município de São Paulo</strong>
+						<br /><br />
+						O Tribunal de Contas do Município de São Paulo é um órgão de controle externo cuja missão é a de fiscalizar a gestão dos recursos públicos do Município de São Paulo, de modo a assegurar que sejam arrecadados e aplicados em conformidade com os princípios da legalidade, legitimidade e economicidade, tendo em vista a plena satisfação do interesse público.
+						<br /><br />
+						Para isso, o TCM realiza auditorias sobre as contas municipais e fiscaliza os gastos públicos de maneira concomitante por meio de análises de editais de licitação e de acompanhamentos da execução de obras, contratos e convênios.
+						<br /><br />
+						O TCM possui importante papel na avaliação das políticas públicas, dos programas de governo e de seus resultados.
+						<br /><br />
+
+						<strong>Sobre a Eokoe</strong>
+						<p align="justify">
+						A Eokoe é uma empresa especializada em tecnologias livres e possui um time de desenvolvedores que, além da construção do aplicativo, oferece apoio a infraestrutura, gestão de projetos, obtenção de parceiros estratégicos e tudo o que for necessário para alcançar os objetivos,
+						pois acreditamos que o desenvolvimento de software deve ser construído em conjunto com as propostas de valores de nossos parceiros.<br /><br />
+						O time é responsável pelo desenvolvimento de outros aplicativos cívicos, como o IOTA, De Olho nas Promessas e diversos softwares livres.
+						</p>
+
 					</p>
-					
-					
+					<br>
+					<div class="about-logos text-center">
+						<div class="row">
+							<div class="col-sm-6 text-center">
+								Realização<br><br>
+								<a href="http://www.nossasaopaulo.org.br" target="_blank"><img src="/static/css/images/logo-rnsp.png" border="0"></a>
+							</div>
+							<div class="col-sm-6 text-center">
+								Apoio<br><br>
+								<a href="http://www.avinaamericas.org" target="_blank"><img src="/static/css/images/logo-avina.png" border="0"></a>
+							</div>
+						</div>
+						<br /><br />
+						<div class="row text-center">
+							Parceiros<br><br>
+							<div class="col-sm-4 text-center">
+								<a href="http://civic.mit.edu/" target="_blank"><img src="/static/css/images/logo-mit.png" border="0"></a>
+							</div>
+							<div class="col-sm-4 text-center">
+								<a href="http://www.tcm.sp.gov.br/" target="_blank" title="Tribunal de Contas do Município de São Paulo" alt="Tribunal de Contas do Município de São Paulo"><img src="/static/css/images/logo-tcm.png" border="0"></a>
+							</div>
+							<div class="col-sm-4 text-center">
+								<a href="http://www.eokoe.com/" target="_blank"><img src="/static/css/images/logo-eokoe.png" border="0"></a>
+							</div>
+						</div>
+						<br /><br />
+					</div>
 				</div>
 			</div>
 		</div>

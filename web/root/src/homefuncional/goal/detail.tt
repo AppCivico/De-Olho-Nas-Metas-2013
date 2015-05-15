@@ -20,7 +20,7 @@
 									<div class="icon regions"></div> <span class="regions"> {{region_count}} [%l('Regiões')%]</span>
 								{{/region_count}}
 								{{#project_count}}
-									<div class="icon projects"></div> <span class="projects">{{project_count}} [%(l'Projetos')%]</span>
+									<div class="icon projects"></div> <span class="projects">{{project_count}} [%l('Projetos')%]</span>
 								{{/project_count}}
 							</div>
 
@@ -183,7 +183,7 @@ $(document).ready(function () {
 						<div class="share-buttons">
 							<div class="twitter">
 						    <!-- Social plugins twitter-->
-							<a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt"  data-hashtags="deolhonasmetas">[%l('Tweetar')</a>
+							<a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt"  data-hashtags="deolhonasmetas">[%l('Tweetar')%]</a>
 							</div>
 							<div class="facebook">
 							<!-- Social plugin facebook -->
@@ -306,11 +306,11 @@ $(document).ready(function () {
 					<div class="list_budget">
 
 						<h3>Execução Financeira da Meta - Contratados</h3>
-						<h5><i><b>[%l('Fonte das informações')]:</b> [%l('Tribunal de Contas do Município de São Paulo')%]</i></h5>
+						<h5><i><b>[%l('Fonte das informações')%]:</b> [%l('Tribunal de Contas do Município de São Paulo')%]</i></h5>
 						<table id="list_budgets" class="table table-striped">
 							<thead>
 								<tr>
-					                <th>[%l(%Nome da Empresa%)]</th>
+					                <th>[%l('Nome da Empresa')%]</th>
 				    	            <th>[%l('Descrição da despesa')%]</th>
 				    	            <th style="white-space: nowrap">[%l('Valor Empenhado')%] (R$)</th>
 				    	            <th style="white-space: nowrap">[%l('Valor Liquidado')%] (R$)</th>

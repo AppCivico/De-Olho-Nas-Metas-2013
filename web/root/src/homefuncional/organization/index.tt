@@ -42,14 +42,14 @@
 					Encontre seu console<br />
 					<input type="hidden" id="pagetype" value="regiondetail">
 					<input type="hidden" id="regionid" value="[% region_obj.id %]">
-					<input type="text" id="txtaddress" placeholder="CEP">
+					<input type="text" id="txtaddress" placeholder="[%l('CEP')%]">
 					<button id="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
 				</div>
 				<div class="col-xs-6 cep">
 					PROCURAR POR SUBPREFEITURAS<br />
 					<div class="select-stylized">
 						<select id="subprefecture" onchange="location = this.options[this.selectedIndex].value;">
-							<option value="">Subprefeituras</option>
+							<option value="">[%l('Subprefeituras')%]</option>
 							[% FOREACH subprefecture_obj IN subprefectures %]
 							<option value="[%%]">[%subprefecture_obj.name%]</option>
 							[% END %]
@@ -63,7 +63,7 @@
     </section>-->
 	<section class="metas-detail search-list">
 		<div class="container">
-			<h2 class="section-title">[%organizations.count.0%] Conselhos Participativos</h2>
+			<h2 class="section-title">[%organizations.count.0%] [%l('Conselhos Participativos')%]</h2>
 				
 			<div class="row index-results organization-list violet multi-column">
 				<div>

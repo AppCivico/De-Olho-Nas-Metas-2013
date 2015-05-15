@@ -39,16 +39,16 @@
 		<div class="container">
 			<form>
 				<div class="col-sm-6 cep">
-					PROCURAR EMPRESAS<br />
-					<input type="text" placeholder="Informe o Nome">
+					[%l('PROCURAR EMPRESAS')%]<br />
+					<input type="text" placeholder="[%l('Informe o Nome')%]">
 					<button><span class="glyphicon glyphicon-search"></span></button>
 				</div>
 				<div class="col-sm-6">
 					<div class="row">
 						<div class="col-sm-6 region">
-							FILTRAR EMPRESAS POR<br />
+							[%l('FILTRAR EMPRESAS POR')%]<br />
 							<select>
-								<option>Metas
+								<option value="">[%l('Metas')%]
 							</select>
 						</div>
 					</div>
@@ -61,7 +61,7 @@
     <section class="metas-result">
 		<div class="container">
 
-			<h2 class="section-title">[% projects.size %] Organizações Encontradas</h2>
+			<h2 class="section-title">[% projects.size %] [%l('Organizações Encontradas')%]</h2>
 			[% FOREACH project IN projects %]	
 			<div class="item row">
 				<div class="col-sm-10 nopadding">

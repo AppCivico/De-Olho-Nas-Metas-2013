@@ -59,7 +59,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-				<a href="/home" class="navbar-brand"><img src="/static/images/logo-header.png"></a>
+				<a href="/" class="navbar-brand"><img src="/static/images/logo-header.png"></a>
             </div>
 			<div class="navbar-header page-scroll">
 			<ul class="select-langs list-unstyled">
@@ -125,10 +125,10 @@
 			<div class="container">
 				<ul class="menu-footer">
 					<li>
-						<a href="/homefuncional/sobre">[%l('Sobre')%]</a>
+						<a href="/sobre">[%l('Sobre')%]</a>
 					</li>
 					<li>
-						<a href="/homefuncional/faq">[%l('Perguntas Frequentes')%]</a>
+						<a href="//faq">[%l('Perguntas Frequentes')%]</a>
 					</li>
 					<li>
 						<a href="/contato">[%l('Contato')%]</a>

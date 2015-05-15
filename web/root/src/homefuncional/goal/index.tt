@@ -1,21 +1,21 @@
 	
 	[%-CALL assets.include("js/maps.js")%]
 	<script id="row_template" type="text/template">
-			{{#goals.length}}<h2 class="section-title">{{ goals.length}} Meta{{#plural}}s{{/plural}} Encontrada{{#plural}}s{{/plural}}</h2>{{/goals.length}}
+			{{#goals.length}}<h2 class="section-title">{{ goals.length}} [%l('Meta(s) Encontrada(s)')%]</h2>{{/goals.length}}
 			{{ #goals }}	
 			<div class="item row">
 				<div class="col-sm-10 nopadding">
 					<div class="contents pull-left">
 						<div class="description">
 							<h2>
-								<a href="/goal/{{id}}">Meta {{id}} - {{name}}</a>
+								<a href="/goal/{{id}}">[%l('Meta')%] {{id}} - {{name}}</a>
 							</h2>
 							<div class="stats">
 								{{#region_count}}
-									<div class="icon regions"></div> <span class="regions"> {{region_count}} Regiões</span>
+									<div class="icon regions"></div> <span class="regions"> {{region_count}} [%l('Regiões')%]</span>
 								{{/region_count}}
 								{{#project_count}}
-									<div class="icon projects"></div> <span class="projects">{{project_count}} Projetos</span>
+									<div class="icon projects"></div> <span class="projects">{{project_count}} [%l('Projetos')%]</span>
 								{{/project_count}}
 							</div>
 
@@ -27,7 +27,7 @@
 
 			{{/goals}}
 			{{^goals}}
-			<h2 class="section-title">Nenhum projeto encontrado.</h2>
+			<h2 class="section-title">[%l('Nenhum projeto encontrado')%].</h2>
 			{{/goals}}
 
 	</script>
@@ -72,25 +72,25 @@
 		<div class="container">
 			<div class="form">
 				<div class="col-sm-4 cep">
-					Metas próximas a mim<br />
+					[%l('Metas próximas a mim')%]<br />
 					<input type="hidden" id="pagetype" value="homegoal">
-					<input type="text" id="txtaddress" name="txtaddress" placeholder="CEP">
+					<input type="text" id="txtaddress" name="txtaddress" placeholder="[%l('CEP')%]">
 				</div>
 				<div class="col-sm-8">
 					<div class="row">
 						<div class="col-sm-4 region">
-							por Distrito<br />
+							[%l('por Distrito')%]<br />
 							<div class="select-stylized"><select id="goalregion">
-								<option value="">Distrito</option>
+								<option value="">[%l('Distrito')%]</option>
 								[% FOREACH region IN regions %]
 									<option value="[% region.id %]">[% region.name %]</option>
 								[% END %]
 							</select></div>
 						</div>
 						<div class="col-sm-4 type">
-							por Tema<br />
+							[%l('por Tema')%]<br />
 							<div class="select-stylized"><select id="type_goal">
-								<option value="">Temas</option>
+								<option value="">[%l('Temas')%]</option>
 								[% FOREACH type IN objectives %]
 								<option value="[% type.id %]">[% type.name %]</option>
 								[% END %]
@@ -98,7 +98,7 @@
 						</div>
 						<div class="col-sm-4 type">
 							<br />
-							<button type="button" class="btn btn-default" id="searchgoal">Pesquisar</button>
+							<button type="button" class="btn btn-default" id="searchgoal">[%l('Pesquisar')%]</button>
 						</div>
 
 					</div>
@@ -112,7 +112,8 @@
     <section class="metas-result">
 		<div id="result" class="container">
 
-			<h2 class="section-title">[% goals.size %] Metas Encontradas</h2>
+			<h2 class="section-title">[% goals.size %] [%l('Metas Encontradas')%]</h2>
+
 			[% FOREACH goal IN goals %]	
 			<div class="item row">
 				<div class="col-sm-10 nopadding">
@@ -123,10 +124,10 @@
 							</h2>
 							<div class="stats">
 								[% IF goal.region_count > 0 %]
-								<div class="icon regions"></div> <span class="regions"> [% goal.region_count %] [% goal.region_count > 1 ? "Regiões" : "Região" %]</span>
+								<div class="icon regions"></div> <span class="regions"> [% goal.region_count %] [% goal.region_count > 1 ? l('Regiões') : l('Região') %]</span>
 								[% END %]
 								[% IF goal.project_count > 0 %]
-								<div class="icon projects"></div> <span class="projects">[% goal.project_count %] Projeto[% goal.project_count > 1 ? "s" : "" %]</span>
+								<div class="icon projects"></div> <span class="projects">[% goal.project_count %] [%l('Projeto(s)')%]</span>
 								[% END %]
 								[% IF goal.organization.size > 0 %]
 								<div class="icon organizations"></div> <span class="organizations">3 Organizações</span>
