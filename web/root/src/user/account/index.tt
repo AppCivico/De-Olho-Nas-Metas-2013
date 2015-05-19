@@ -58,7 +58,7 @@ $(document).ready(function () {
 			<div class="row">
 				<div class="col-sm-9">
 				
-					<h3 class="dotted">Notificações Recentes</h3>
+					<h3 class="dotted">[%l('Notificações Recentes')%]</h3>
 					<input type="hidden" id="user_id" value="[%c.user.obj.id%]"/>	
 					<div class="notification-list">
 						[% IF user_obj.notifications.size > 0 %]
@@ -75,7 +75,7 @@ $(document).ready(function () {
 								<button type="button" id="close" class="close" data-id="[% pe.id%]" data-dismiss="item" aria-label="Close">
 								  <span aria-hidden="true">&times;</span>
 								</button>
-								<div class="title">O projeto "[% ufp.project.name%]" foi atualizado.</div>
+								<div class="title">[%l('O projeto')%] "[% ufp.project.name%]" [%l('foi atualizado')%].</div>
 								<div class="title">[%pe.text%]</div>
 							</div>
 
@@ -85,7 +85,7 @@ $(document).ready(function () {
 						[% ELSE%]
 						<div class="item row">
 							<div class="col-xs-11">
-								<div class="title">Nenhuma notificação.</div>
+								<div class="title">[%l('Nenhuma notificação')%].</div>
 							</div>
 						</div>
 
@@ -93,11 +93,11 @@ $(document).ready(function () {
 					</div>
 					[% IF user_follow_project.size > 0%]
 					<div class="text-right">
-						<button id="see_all" class="btn "><a href="/user/perfil/notificacoes">Ver todas</a></button>
+						<button id="see_all" class="btn "><a href="/user/perfil/notificacoes">[%l('Ver todas')%]</a></button>
 					</div>
 					[% END %]
 					
-<!--				<h3 class="dotted">Atividades recentes</h3>
+<!--				<h3 class="dotted">[%l('Atividades recentes')%]</h3>
 					<div class="activity-list">
 						<div class="item">
 							<div class="date">

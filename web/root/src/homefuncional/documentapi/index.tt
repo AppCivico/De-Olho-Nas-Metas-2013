@@ -2,7 +2,7 @@
 
 <section class="documentation">
     <div class="container">
-        [%SET voltar_link = '<small><span class="page-scroll"><a class="pull-right" data-animated-anchor href="#endpoints">[%l('voltar para endpoints')%]</a></span></small>'%]
+        [%SET voltar_link = '<small><span class="page-scroll"><a class="pull-right" data-animated-anchor href="#endpoints">' _ l('voltar para endpoints') _ '</a></span></small>'%]
         <h1>[%l('Dados abertos')%]</h1>
 
         <div class="block">
@@ -84,7 +84,7 @@
                         <input type="text" onclick="this.focus();this.select()" name="url" readonly="readonly" style="background-color: #d6e9c6" class="form-control"/>
                     </div>
                     <div class="col-md-3 col-sm-5">
-                        <a target="_blank" id="id_link" class="btn form-control btn-success"  href="">Efetuar download das tabelas  <span class="glyphicon glyphicon-download"></span></a>
+                        <a target="_blank" id="id_link" class="btn form-control btn-success"  href="">[%l('Efetuar download das tabelas')%]<span class="glyphicon glyphicon-download"></span></a>
                     </div>
                 </div>
                 </p>
@@ -125,7 +125,7 @@
                         </ul>
                     </div>
                     <div class="col-sm-3">
-                        <h2>Projeto</h2>
+                        <h2>[%l('Projeto')%]</h2>
 
                         <ul>
                             <li><strong>[%l('ID do projeto')%]</strong></li>
@@ -289,7 +289,7 @@
                     </tr>
                     <tr>
                         <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-company-budget">/public/companies/*/budgets</a></span></pre></th>
-                        <td>Lista de todas as empresas por metas de acordo com os orçamentos utilizados.</td>
+                        <td>[%l('Lista de todas as empresas por metas de acordo com os orçamentos utilizados')%].</td>
                         <td>
                         <ul class="list-unstyled list-param">
                             <li>* => id da empresa</li>
@@ -300,7 +300,7 @@
 
                      <tr>
                         <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-budget-goal">/public/companies/*/goals</a></span></pre></th>
-                        <td>Lista de todas as empresas por metas.</td>
+                        <td>[%l('Lista de todas as empresas por metas')%].</td>
 
                         <td>
                           <ul class="list-unstyled list-param">
@@ -311,7 +311,7 @@
                     </tr>
                      <tr>
                         <th><pre><span class="page-scroll"<a data-animated-anchor href="#code-council">/public/councils</a></span></pre></th>
-                        <td>Lista de todos os conselhos.</td>
+                        <td>[%l('Lista de todos os conselhos')%].</td>
 
                         <td>
                           <ul class="list-unstyled list-param">
@@ -321,7 +321,7 @@
                      </tr>
                      <tr>
                         <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-district">/public/districts</a></span></pre></th>
-                        <td>Lista de todos os distritos.</td>
+                        <td>[%l('Lista de todos os distritos')%].</td>
 
                         <td>
                           <ul class="list-unstyled list-param">
@@ -331,7 +331,7 @@
                      </tr>
                      <tr>
                         <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-subprefecture">/public/subprefectures</a></span></pre></th>
-                        <td>Lista de todas as subprefeituras.</td>
+                        <td>[%l('Lista de todas as subprefeituras')%].</td>
 
                         <td>
                           <ul class="list-unstyled list-param">
@@ -345,7 +345,7 @@
 
             <h3 id="code_goal" data-animated-anchor-offset="-60">/public/goals [%voltar_link|none%]</h3>
 
-            <p>Exemplo de retorno</p>
+            <p>[%l('Exemplo de retorno')%]</p>
             <pre class="precode"><code class="language-javascript" >
             goals 
                 [
@@ -379,7 +379,7 @@
             </code></pre>
             <h3 id="code_goal_detail" data-animated-anchor-offset="-60">/public/goals/* [%voltar_link|none%]</h3>
 
-            <p>Exemplo de retorno:</p>
+            <p>[%l('Exemplo de retorno')%]:</p>
             <pre class="precode"><code class="language-javascript">
             
                 budgets:                  [
@@ -433,7 +433,7 @@
 
             <h3 id="code-project" data-animated-anchor-offset="-60">/public/projects [%voltar_link|none%]</h3>
 
-            <p>Exemplo de retorno:</p>
+            <p>[%l('Exemplo de retorno')%]:</p>
             <pre class="precode"><code class="language-javascript">
             projects [
                      [0]
@@ -465,7 +465,7 @@
             <h3 id="code-project-detail" data-animated-anchor-offset="-60">/public/projects/* [%voltar_link|none%]</h3>
 
 
-            <p>Exemplo de retorno:</p>
+            <p>[%l('Exemplo de retorno')%]:</p>
             <pre class="precode"><code class="language-javascript">
             projects [
                      [0]
@@ -496,7 +496,7 @@
             <h3 id="code-objective" data-animated-anchor-offset="-60">/public/objectives [%voltar_link|none%]</h3>
 
 
-            <p>Exemplo de retorno:</p>
+            <p>[%l('Exemplo de retorno')%]:</p>
             <pre class="precode"><code class="language-javascript">
             objectives [
                         [0]  {
@@ -535,7 +535,7 @@
 
             <h3 id="code-company" data-animated-anchor-offset="-60">/public/companies [%voltar_link|none%]</h3>
 
-            <p>Exemplo de retorno:</p>
+            <p>[%l('Exemplo de retorno')%]:</p>
             <pre class="precode"><code class="language-javascript">
             companies [
                         [0]
@@ -550,7 +550,7 @@
 
             <h3 id="code-company-budget" data-animated-anchor-offset="-60">/public/companies/5405/budgets [%voltar_link|none%]</h3>
 
-            <p>Exemplo de retorno:</p>
+            <p>[%l('Exemplo de retorno')%]:</p>
             <pre class="precode"><code class="language-javascript">
              budgets   [
                      [0] {
@@ -582,7 +582,7 @@
 
             <h3 id="code-budget-goal" data-animated-anchor-offset="-60">/public/companies/5405/goals [%voltar_link|none%]</h3>
 
-            <p>Exemplo de retorno:</p>
+            <p>[%l('Exemplo de retorno')%]:</p>
             <pre class="precode"><code class="language-javascript">
             goals   [
                     [0] {
@@ -596,7 +596,7 @@
 
             <h3 id="code-budget" data-animated-anchor-offset="-60">/public/councils [%voltar_link|none%]</h3>
 
-            <p>Exemplo de retorno:</p>
+            <p>[%l('Exemplo de retorno')%]:</p>
             <pre class="precode"><code class="language-javascript">
 
             councils => [
@@ -624,7 +624,7 @@
             </code></pre>
 	    <h3 id="code-district" data-animated-anchor-offset="-60">/public/districts [%voltar_link|none%]</h3>
 
-            <p>Exemplo de retorno:</p>
+            <p>[%l('Exemplo de retorno')%]:</p>
             <pre class="precode"><code class="language-javascript">
 
             districts => [
@@ -642,7 +642,7 @@
             </code></pre>
             <h3 id="code-subprefecture" data-animated-anchor-offset="-60">/public/subprefectures [%voltar_link|none%]</h3>
 
-            <p>Exemplo de retorno:</p>
+            <p>[%l('Exemplo de retorno')%]:</p>
             <pre class="precode"><code class="language-javascript">
 
             subprefectures => [

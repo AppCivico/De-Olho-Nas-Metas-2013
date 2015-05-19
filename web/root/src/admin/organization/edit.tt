@@ -2,7 +2,7 @@
 [%#-CALL assets.include("js/address.js")#%]
 <div>
 	<div class="rows">
-	<h2 class="sub-header">Adicionar organização</h2>
+	<h2 class="sub-header">[%l('Adicionar organização')%]</h2>
 		<form role="form" method="post" class="form-horizontal" action="/admin/form/organization/[%organization_obj.id%]">
 			
 			<div class="col-lg-12">
@@ -50,7 +50,7 @@
 			[%input_text('phone','Telefone', req=>0, input_col=>"col-lg-6", classes => ['form-control', 'mobile_phone'], value=organization_obj.phone)|none%]
 			</div>
 			
-			<button type="submit" class="btn btn-success pull-right">Salvar</button>
+			<button type="submit" class="btn btn-success pull-right">[%l('Salvar')%]</button>
 		</form>
 	</div>
 </div>

@@ -64,9 +64,9 @@ $(document).ready(function () {
 					<col style="width: 25%">
 					<thead>
 					<tr>
-						<th>Nome</th>
-						<th>Email</th>
-						<th>Data de cadastro</th>
+						<th>[%l('Nome')%]</th>
+						<th>[%l('Email')%]</th>
+						<th>[%l('Data de cadastro')%]</th>
 					</tr>
 					</thead>
 					<tbody>

@@ -81,8 +81,8 @@ jQuery(function($){
 				<div class="col-sm-9 .col-md.offset-4">
 					<section class="tabs">
 						<ul class="nav nav-tabs" role="tablist">
-							<li role="presentation" class="active"><a href="#tab-projetos" aria-controls="metas" role="tab" data-toggle="tab">Projetos</a></li>
-							<li role="presentation"><a href="#tab-conselhos" aria-controls="metas" role="tab" data-toggle="tab">Conselhos</a></li>
+							<li role="presentation" class="active"><a href="#tab-projetos" aria-controls="metas" role="tab" data-toggle="tab">[%l('Projetos')%]</a></li>
+							<li role="presentation"><a href="#tab-conselhos" aria-controls="metas" role="tab" data-toggle="tab">[%l('Conselhos')%]</a></li>
 						</ul>
 					</section>
 
@@ -97,7 +97,7 @@ jQuery(function($){
                                                 <div class="description">
                                                     <h2><a href="/project/[%project.id%]">[% project.name%]</a></h2>
                                                     <div class="stats">
-                                                        <button class="btn btn-white"><a href="/project/[%project.id%]">Parar de seguir</a></button>
+                                                        <button class="btn btn-white"><a href="/project/[%project.id%]">[%l('Parar de seguir')%]</a></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -110,7 +110,7 @@ jQuery(function($){
                                         <div class="col-sm-10 nopadding">
                                             <div class="contents pull-left">
                                                 <div class="description">
-                                                    <label>Não está seguindo nenhum projeto.</label>
+                                                    <label>[%l('Não está seguindo nenhum projeto')%].</label>
                                                 </div>
                                             </div>
                                             <div class="clear"></div>
@@ -130,7 +130,7 @@ jQuery(function($){
                                                 <div class="description">
                                                     <h2><a href="/organization/[%council.id%]">[% council.name%]</a></h2>
                                                     <div class="stats">
-                                                        <button class="btn btn-white"><a href="/organization/[%council.id%]">Parar de seguir</a></button>
+                                                        <button class="btn btn-white"><a href="/organization/[%council.id%]">[%l('Parar de seguir')%]</a></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -143,7 +143,7 @@ jQuery(function($){
                                         <div class="col-sm-10 nopadding">
                                             <div class="contents pull-left">
                                                 <div class="description">
-                                                    <label>Não está seguindo nenhum conselho.</label>
+                                                    <label>[%l('Não está seguindo nenhum conselho')%].</label>
                                                 </div>
                                             </div>
                                             <div class="clear"></div>
