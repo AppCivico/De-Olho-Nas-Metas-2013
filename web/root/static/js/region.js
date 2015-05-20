@@ -549,7 +549,7 @@ $(document).ready(function () {
 
         var file = "arquivo";
         var form = $("#formFileUpload_" + file);
-
+		console.log(form);
         original_id = $('#arquivo_' + file).attr("original-id");
 
         $('#arquivo_' + file).attr({
@@ -557,7 +557,8 @@ $(document).ready(function () {
             id: "arquivo"
         });
 
-        form.attr("action", api_path + '/api/user/$$user/kml?api_key=$$key&content-type=application/json'.render2({
+		alert('teste');
+        form.attr("action", '/kml?content-type=application/json'.render2({
             user: $.cookie("user.id"),
             key: $.cookie("key")
         }));
