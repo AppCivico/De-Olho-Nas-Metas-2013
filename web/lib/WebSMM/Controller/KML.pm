@@ -2,8 +2,11 @@ package WebSMM::Controller::KML;
 use Moose;
 use namespace::autoclean;
 use URI;
+use JSON;
 
-BEGIN { extends 'Catalyst::Controller' }
+BEGIN { extends 'Catalyst::Controller::REST' }
+
+__PACKAGE__->config( default => 'application/json' );
 
 sub base : Chained('/root') : PathPart('') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
@@ -47,15 +50,13 @@ sub kml_file : Chained('base') : PathPart('kml') : Args(0) ActionClass('REST') {
 sub kml_file_POST {
     my ( $self, $c ) = @_;
 
-    $self->status_forbidden( $c, message => "access denied", ), $c->detach
-      unless $c->check_any_user_role(qw(admin superadmin user));
+    #    $self->status_forbidden( $c, message => "access denied", ), $c->detach
+    #     unless $c->check_any_user_role(qw(admin superadmin user));
     my $upload = $c->req->upload('arquivo');
 
     eval {
         if ($upload) {
             my $user_id = $c->user->id;
-
-            $c->logx( 'Enviou KML ' . $upload->basename );
 
             my $file = $c->model('KML')->process(
                 user_id => $user_id,
@@ -63,7 +64,8 @@ sub kml_file_POST {
                 schema  => $c->model('DB'),
                 app     => $c
             );
-
+            use DDP;
+            p to_json($file);
             $c->res->body( to_json($file) );
 
         }

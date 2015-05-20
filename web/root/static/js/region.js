@@ -578,6 +578,7 @@ $(document).ready(function () {
                         var retorno = $(this).contents()[0].body.outerHTML;
                         retorno = $(retorno).text();
                         retorno = $.parseJSON(retorno);
+						console.log(retorno);
                     } else {
                         erro = 1;
                     }

@@ -69,6 +69,15 @@ sub edit : Chained('object') : PathPart('edit') : Args(0) {
 
 }
 
+sub link_region : Chained('object') : PathPart('link_region') : Args(0) {
+    my ( $self, $c, $id ) = @_;
+    my $api = $c->model('API');
+    $api->stash_result( $c, 'subprefectures' );
+    $c->stash->{select_subprefectures} =
+      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{subprefectures} } ];
+
+}
+
 =encoding utf8
 
 =head1 AUTHOR
