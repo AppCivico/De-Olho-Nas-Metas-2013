@@ -558,10 +558,7 @@ $(document).ready(function () {
         });
 
 		alert('teste');
-        form.attr("action", '/kml?content-type=application/json'.render2({
-            user: $.cookie("user.id"),
-            key: $.cookie("key")
-        }));
+        form.attr("action", "/kml?content-type=application/json");
         form.attr("method", "post");
         form.attr("enctype", "multipart/form-data");
         form.attr("encoding", "multipart/form-data");
@@ -574,7 +571,6 @@ $(document).ready(function () {
         });
 
         $("#iframe_" + file).load(function () {
-            $.loading.hide();
             var erro = 0;
             if ($(this).contents()) {
                 if ($(this).contents()[0].body) {
