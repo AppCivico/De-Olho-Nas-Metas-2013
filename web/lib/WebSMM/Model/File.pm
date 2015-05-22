@@ -3,7 +3,7 @@ use Moose;
 BEGIN { extends 'Catalyst::Controller' }
 use utf8;
 use JSON::XS;
-
+use Spreadsheet::WriteExcel;
 use Text::CSV_XS;
 
 sub _loc_str {
@@ -25,38 +25,31 @@ sub _download {
     my $ignore_cache = 0;
     use DDP;
 
-    use Data::Dumper;
-    p Dumper $c;
     my $file = $c->get_lang() . '_' . $name . '.';
+    p $file;
 
     # evita conflito com outros usuarios
     $file .= join '-', rand, rand, rand, rand, '.' if $ignore_cache;
     $file .= $c->stash->{type};
 
     my $path = ( $c->config->{downloads}{tmp_dir} || '/tmp' ) . '/' . lc $file;
-
     if ( -e $path ) {
         my $epoch_timestamp = ( stat($path) )[9];
         unlink($path) if time() - $epoch_timestamp > 60;
     }
 
-    $self->_download_and_detach( $c, $path ) if !$ignore_cache && -e $path;
+    $self->_download_and_detach( $c, $path, $file )
+      if !$ignore_cache && -e $path;
+    my @lines = @{ $data->{main} };
 
-    my @lines =
-      ( [ 'ID da variável', 'Nome', 'Data', 'Valor', 'fonte', 'observacao' ] );
-
-    if ( !@{ $data->{main} } ) {
-        $c->stash->{lines} = \@lines;
-    }
-    else {
-        eval { $self->lines2file( $c, $path, \@lines ) };
-    }
+    p $file;
+    eval { $self->lines2file( $c, $path, \@lines ) };
 
     if ($@) {
         unlink($path);
         die $@;
     }
-    $self->_download_and_detach( $c, $path, $ignore_cache );
+    $self->_download_and_detach( $c, $path, $file, $ignore_cache );
 
     unlink($path) if $ignore_cache;
 }
@@ -115,8 +108,9 @@ sub lines2file {
 }
 
 sub _download_and_detach {
-    my ( $self, $c, $path, $custom ) = @_;
-
+    my ( $self, $c, $path, $file, $custom ) = @_;
+    use DDP;
+    p $file;
     if ( $c->stash->{type} =~ /(csv)/ ) {
         $c->response->content_type('text/csv');
     }
@@ -124,11 +118,7 @@ sub _download_and_detach {
         $c->response->content_type('application/vnd.ms-excel');
     }
     $c->response->headers->header(
-            'content-disposition' => "attachment;filename="
-          . "variaveis-exemplo-"
-          . ( $custom ? 'dos-indicadores-' : 'completa-' )
-          . $c->get_lang()
-          . ".$1" );
+        'content-disposition' => "attachment;filename=" . "exemplo-$file" );
 
     open( my $fh, '<:raw', $path );
     $c->res->body($fh);
@@ -149,7 +139,5 @@ sub download_xls : Chained('/institute_load') :
     $c->stash->{type} = 'xls';
     $self->_download($c);
 }
-
-1;
 
 1;

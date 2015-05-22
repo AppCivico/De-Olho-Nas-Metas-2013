@@ -37,22 +37,35 @@ sub csv : Chained('download') : PathPart('csv') : Args(0) {
     my $api  = $c->model('API');
     my $file = $c->model('File');
 
-    $api->stash_result( $c, 'goals' );
     my %lines;
-
+    $c->stash->{type} = 'csv';
     push @{ $lines{main} }, $c->stash->{header};
-    push @{ $lines{main} }, [ $_->{id}, $_->{name}, ],
-      for @{ $c->stash->{goals} };
     $file->_download( $c, 'meta', \%lines );
 
 }
 
 sub xls : Chained('download') : PathPart('xls') : Args(0) {
     my ( $self, $c ) = @_;
+    my $api  = $c->model('API');
+    my $file = $c->model('File');
+
+    my %lines;
+    $c->stash->{type} = 'xls';
+    push @{ $lines{main} }, $c->stash->{header};
+    $file->_download( $c, 'meta', \%lines );
+
 }
 
 sub xlsx : Chained('download') : PathPart('xlsx') : Args(0) {
     my ( $self, $c ) = @_;
+    my $api  = $c->model('API');
+    my $file = $c->model('File');
+
+    my %lines;
+    $c->stash->{type} = 'csv';
+    push @{ $lines{main} }, $c->stash->{header};
+    $file->_download( $c, 'meta', \%lines );
+
 }
 
 sub process : Chained('base') : PathPart('goal') : Args(0) {
