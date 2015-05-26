@@ -54,8 +54,7 @@ sub process {
     );
     $file_id = $file->id;
 
-    my $vv_rs  = $schema->resultset('VariableValue');
-    my $rvv_rs = $schema->resultset('RegionVariableValue');
+    my $rvv_rs = $schema;
 
     $schema->txn_do(
         sub {
@@ -83,30 +82,35 @@ sub process {
                     do_not_calc => 1,
                     cache_ref   => $cache_ref
                 };
-                $ref->{variable_id}   = $r->{id};
-                $ref->{user_id}       = $user_id;
-                $ref->{value}         = $r->{value};
-                $ref->{value_of_date} = $r->{date};
-                $ref->{file_id}       = $file_id;
+                $ref->{variable_id} = $r->{id};
 
-                $ref->{observations} = $r->{obs};
-                $ref->{source}       = $r->{source};
-
-                if ( exists $r->{region_id} && $r->{region_id} ) {
-                    $ref->{region_id} = $r->{region_id};
-
-                    $with_region->{variables}{ $r->{id} }      = 1;
-                    $with_region->{dates}{ $r->{date} }        = 1;
-                    $with_region->{regions}{ $r->{region_id} } = 1;
-
-                }
-                else {
-                    $without_region->{variables}{ $r->{id} } = 1;
-                    $without_region->{dates}{ $r->{date} }   = 1;
-
-                }
                 $status .= "$@" if $@;
                 die $@ if $@;
+            }
+            my $data = Iota::IndicatorData->new( schema => $schema->schema );
+            if ( exists $with_region->{dates} ) {
+                $data->upsert(
+                    indicators => [
+                        $data->indicators_from_variables(
+                            variables => [ keys %{ $with_region->{variables} } ]
+                        )
+                    ],
+                    dates      => [ keys %{ $with_region->{dates} } ],
+                    regions_id => [ keys %{ $with_region->{regions} } ],
+                    user_id    => $user_id
+                );
+            }
+            if ( exists $without_region->{dates} ) {
+                $data->upsert(
+                    indicators => [
+                        $data->indicators_from_variables(
+                            variables =>
+                              [ keys %{ $without_region->{variables} } ]
+                        )
+                    ],
+                    dates   => [ keys %{ $without_region->{dates} } ],
+                    user_id => $user_id
+                );
             }
 
         }
