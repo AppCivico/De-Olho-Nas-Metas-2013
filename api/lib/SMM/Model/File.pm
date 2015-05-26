@@ -12,22 +12,27 @@ sub process {
 
     my $upload = $param{upload};
     my $schema = $param{schema};
-
+    my %header = %{ $param{header} };
     my $parse;
     eval {
         if ( $upload->filename =~ /xlsx$/ ) {
-            $parse = SMM::Model::File::XLSX->new->parse( $upload->tempname );
+            $parse =
+              SMM::Model::File::XLSX->new->parse( $upload->tempname, %header );
         }
         elsif ( $upload->filename =~ /xls$/ ) {
-            $parse = SMM::Model::File::XLS->new->parse( $upload->tempname );
+            $parse =
+              SMM::Model::File::XLS->new->parse( $upload->tempname, %header );
         }
         elsif ( $upload->filename =~ /csv$/ ) {
-            $parse = SMM::Model::File::CSV->new->parse( $upload->tempname );
+            $parse =
+              SMM::Model::File::CSV->new->parse( $upload->tempname, %header );
         }
     };
     die $@ if $@;
     die "file not supported!\n" unless $parse;
-
+    use DDP;
+    p $parse;
+    exit;
     my $status = $@ ? $@ : '';
 
     $status .= 'Linhas aceitas: ' . $parse->{ok} . "\n";

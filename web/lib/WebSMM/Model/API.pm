@@ -58,7 +58,12 @@ sub stash_result {
     my $method = lc( $opts{method} || 'GET' );
 
     my $res;
+    use DDP;
+    p \%opts;
+    p $method;
     if ( $method eq 'upload' ) {
+        use DDP;
+        p $url;
         $res = eval {
             my $req = POST $url, @headers,
               Content_Type => 'form-data',
@@ -68,6 +73,8 @@ sub stash_result {
         };
     }
     else {
+        warn
+'aaaaaaaaaaaaaaaaaaaaaaaaaaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
         $res = eval {
             $self->_do_http_req(
                 method  => $method,
@@ -76,6 +83,7 @@ sub stash_result {
                 exists $opts{body} ? ( body => $opts{body} ) : ()
             );
         };
+
         #print STDERR $res->as_string;
         use DDP;
     }

@@ -11,20 +11,11 @@ use DateTime::Format::Excel;
 use Encode;
 
 sub parse {
-    my ( $self, $file ) = @_;
+    my ( $self, $file, %header ) = @_;
 
     my $xls = Spreadsheet::ParseExcel::Stream->new($file);
-
-    my %expected_header = (
-        subprefeitura => qr /\bSubprefeitura\b/io,
-        subprefeito   => qr /\bSubprefeito\b/io,
-        site          => qr /\bSite\b/io,
-
-        email    => qr /\bEmail\b/io,
-        telefone => qr /\bTelefone\b/io,
-
-        endereco => qr /\bEndereço\b/io,
-    );
+    use DDP;
+    my %expected_header = %header;
 
     my @rows;
     my $ok      = 0;
@@ -75,25 +66,8 @@ sub parse {
                     $registro->{$header_name} = $value;
                 }
 
-                if (   exists $registro->{id}
-                    && exists $registro->{date}
-                    && exists $registro->{value} )
-                {
-
-                    $registro->{date} =
-                        $registro->{date} =~ /^20[0123][0-9]$/
-                      ? $registro->{date} . '-01-01'
-                      : $registro->{date} =~ /^\d{4}\-\d{2}\-\d{2}$/
-                      ? $registro->{date}
-                      : DateTime::Format::Excel->parse_datetime(
-                        $registro->{date} )->ymd;
+                if ( exists $registro->{name} ) {
                     $ok++;
-
-                    die 'invalid variable id' unless $registro->{id} =~ /^\d+$/;
-                    die 'invalid region id'
-                      if $registro->{region_id}
-                      && $registro->{region_id} !~ /^\d+$/;
-
                     push @rows, $registro;
 
                 }
