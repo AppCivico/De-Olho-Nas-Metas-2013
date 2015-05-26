@@ -87,31 +87,6 @@ sub process {
                 $status .= "$@" if $@;
                 die $@ if $@;
             }
-            my $data = Iota::IndicatorData->new( schema => $schema->schema );
-            if ( exists $with_region->{dates} ) {
-                $data->upsert(
-                    indicators => [
-                        $data->indicators_from_variables(
-                            variables => [ keys %{ $with_region->{variables} } ]
-                        )
-                    ],
-                    dates      => [ keys %{ $with_region->{dates} } ],
-                    regions_id => [ keys %{ $with_region->{regions} } ],
-                    user_id    => $user_id
-                );
-            }
-            if ( exists $without_region->{dates} ) {
-                $data->upsert(
-                    indicators => [
-                        $data->indicators_from_variables(
-                            variables =>
-                              [ keys %{ $without_region->{variables} } ]
-                        )
-                    ],
-                    dates   => [ keys %{ $without_region->{dates} } ],
-                    user_id => $user_id
-                );
-            }
 
         }
     );
