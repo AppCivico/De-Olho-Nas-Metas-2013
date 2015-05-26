@@ -58,12 +58,7 @@ sub stash_result {
     my $method = lc( $opts{method} || 'GET' );
 
     my $res;
-    use DDP;
-    p \%opts;
-    p $method;
     if ( $method eq 'upload' ) {
-        use DDP;
-        p $url;
         $res = eval {
             my $req = POST $url, @headers,
               Content_Type => 'form-data',
