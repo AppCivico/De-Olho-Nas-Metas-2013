@@ -211,3 +211,32 @@ iframe.upload {
 .mark-kml #panel button{
 	margin: 2px;
 }
+
+.admin #region-list{
+	border: 1px solid #e0e0e0;
+	padding: 10px;
+	overflow-y: auto;
+	max-height: 60em;
+}
+.admin #region-list ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+.admin #region-list ul li{
+	padding: 5px 10px;
+	border-bottom: 1px solid #e0e0e0;
+}
+.admin #region-list ul li:last-child{
+	border-bottom: none;
+}
+.admin #region-list ul li:hover{
+	background-color: #f5f5f5;
+	cursor: hand;
+	cursor: pointer;
+}
+.admin #region-list ul li.item.selected:hover,
+.admin #region-list ul li.item.selected{
+	background-color: #fffec9;
+	color: #37360c;
+}

@@ -14,8 +14,13 @@
 		<div class="col-sm-3">
 			<div id="region-list">
 				<ul>
-					<li region-id="1" class="item">Região 1</li>
-					<li region-id="2" class="item">Região 2</li>
+				[%IF regions.size > 0%]
+					[%FOREACH region IN regions%]
+						<li region-id="[%region.id%]" class="item">[%region.name%]</li>
+		            [%END%]
+				[%ELSE%]
+					<li>Nenhuma região cadastrada</li>
+				[%END%]
 				</ul>
 			</div>
 		</div>

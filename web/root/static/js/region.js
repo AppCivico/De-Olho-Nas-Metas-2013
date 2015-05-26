@@ -499,26 +499,30 @@ $(document).ready(function () {
             $map.focusAll();
 
             $("#region-list .item").bind('click', function (e) {
-                $("#region-list .item").removeClass("selected");
-                $(this).addClass("selected");
-                if ($(this).attr("region-id")) {
-                    var region_selected = getRegion($(this).attr("region-id"));
-                    var region_index = $(this).attr("region-index");
-                    if ((region_selected) && region_selected.polygon_path) {
-                        if (!$map.getObjTriangle(region_index)) {
-                            $map.addPolygon({
-                                "map_string": region_selected.polygon_path,
-                                "focus": true,
-                                "region_id": region_selected.id,
-                                "select": true
-                            });
-                        } else {
-                            $map.selectPolygon(region_index);
-                        }
+                if (!$(this).hasClass("selected")){
+                    $("#region-list .item").removeClass("selected");
+                    $(this).addClass("selected");
+                    if ($(this).attr("region-id")) {
+                        /*var region_selected = getRegion($(this).attr("region-id"));
+                        var region_index = $(this).attr("region-index");
+                        if ((region_selected) && region_selected.polygon_path) {
+                            if (!$map.getObjTriangle(region_index)) {
+                                $map.addPolygon({
+                                    "map_string": region_selected.polygon_path,
+                                    "focus": true,
+                                    "region_id": region_selected.id,
+                                    "select": true
+                                });
+                            } else {
+                                $map.selectPolygon(region_index);
+                            }
+                        }*/
                     }
+                    //$.setSelectedRegion();
+                }else{
+                    $(this).removeClass("selected");
                 }
-                $.setSelectedRegion();
-
+    
             });
 
 
