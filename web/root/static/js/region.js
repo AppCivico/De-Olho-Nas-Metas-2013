@@ -58,6 +58,9 @@ $(document).ready(function () {
                 hide_controls();
                 document.getElementById('delete-button').setAttribute('disabled','disabled');
                 document.getElementById('edit-button').setAttribute('disabled','disabled');
+                if ($("#region-list .item.selected").length <= 0) {
+                    document.getElementById('save-button').setAttribute('disabled','disabled');
+                }
             }
         }
 
@@ -67,6 +70,9 @@ $(document).ready(function () {
             setColor("select");
             document.getElementById('delete-button').removeAttribute('disabled');
             document.getElementById('edit-button').removeAttribute('disabled');
+                if ($("#region-list .item.selected").length <= 0) {
+                    document.getElementById('save-button').removeAttribute('disabled');
+                }
         }
 
         function setShapeEditable() {
@@ -81,7 +87,7 @@ $(document).ready(function () {
 
         function saveSelectedShape() {
             if ($("#save-button").length > 0) {
-                if ($("#save-button").hasClass("disabled")) {
+                if ($("#save-button").attr("disabled") == "disabled") {
                     return;
                 }
             }
@@ -433,7 +439,9 @@ $(document).ready(function () {
             google.maps.event.addListener(map, 'click', clearSelection);
             google.maps.event.addDomListener(document.getElementById('edit-button'), 'click', editSelectedShape);
             google.maps.event.addDomListener(document.getElementById('delete-button'), 'click', deleteSelectedShape);
-
+            if ($("#save-button").length > 0) {
+                google.maps.event.addDomListener(document.getElementById('save-button'), 'click', saveSelectedShape);
+            }
             selectColor();
 
         }
@@ -491,26 +499,30 @@ $(document).ready(function () {
             $map.focusAll();
 
             $("#region-list .item").bind('click', function (e) {
-                $("#region-list .item").removeClass("selected");
-                $(this).addClass("selected");
-                if ($(this).attr("region-id")) {
-                    var region_selected = getRegion($(this).attr("region-id"));
-                    var region_index = $(this).attr("region-index");
-                    if ((region_selected) && region_selected.polygon_path) {
-                        if (!$map.getObjTriangle(region_index)) {
-                            $map.addPolygon({
-                                "map_string": region_selected.polygon_path,
-                                "focus": true,
-                                "region_id": region_selected.id,
-                                "select": true
-                            });
-                        } else {
-                            $map.selectPolygon(region_index);
-                        }
+                if (!$(this).hasClass("selected")){
+                    $("#region-list .item").removeClass("selected");
+                    $(this).addClass("selected");
+                    if ($(this).attr("region-id")) {
+                        /*var region_selected = getRegion($(this).attr("region-id"));
+                        var region_index = $(this).attr("region-index");
+                        if ((region_selected) && region_selected.polygon_path) {
+                            if (!$map.getObjTriangle(region_index)) {
+                                $map.addPolygon({
+                                    "map_string": region_selected.polygon_path,
+                                    "focus": true,
+                                    "region_id": region_selected.id,
+                                    "select": true
+                                });
+                            } else {
+                                $map.selectPolygon(region_index);
+                            }
+                        }*/
                     }
+                    //$.setSelectedRegion();
+                }else{
+                    $(this).removeClass("selected");
                 }
-                $.setSelectedRegion();
-
+    
             });
 
 
@@ -616,3 +628,115 @@ $(document).ready(function () {
     })
 
 });
+$.confirm = function(params){
+    if (!params.hide_close_button) params.hide_close_button = 0;
+    if($("#modal-alert").length > 0){
+        $("#modal-alert").remove();
+    }
+
+    var buttonHTML = '';
+    var caption;
+    $.each(params.buttons,function(name,obj){
+        if (obj.caption){
+            caption = obj.caption;
+        }else{
+            caption = name;
+        }
+        buttonHTML += '<button type="button" class="btn '+obj['class']+'">'+caption+'</button>';
+        if(!obj.action){
+            obj.action = function(){};
+        }
+    });
+    
+    var size_class = "";
+    if (params.size){
+        size_class = params.size;
+    }
+    
+    var confirmWindow = "<div id='modal-alert' class='modal fade $$size_class' data-backdrop='static'>".render({
+        size_class: params.size
+    });
+    confirmWindow += "<div class='modal-dialog'>";
+    confirmWindow += "<div class='modal-content'>";
+    confirmWindow += "<div class='modal-header'>";
+    if (params.hide_close_button == 0){
+        confirmWindow += "<button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button>";
+    }
+    confirmWindow += "<h4 class='modal-title'>$$title</h4>".render({title: params.title});
+    confirmWindow += "</div>";
+    confirmWindow += "<div class='modal-body'>$$message</div>".render({message: params.message});
+    confirmWindow += "<div class='modal-footer'>$$buttons</div>".render({buttons: buttonHTML});
+    confirmWindow += "</div></div></div>";
+    
+    $(confirmWindow).appendTo("body");
+    
+    $("#modal-alert").on("shown.bs.modal", function(e){
+        if (typeof params.onCreate == "function"){
+            params.onCreate();
+        }
+        $("#modal-alert .modal-footer button:first").focus();
+    });
+    
+    var buttons = $('#modal-alert .modal-footer button'), i = 0;
+
+    $.each(params.buttons,function(name,obj){
+        buttons.eq(i++).click(function(){
+            obj.action();
+            if (!obj.stay_open) $.confirm.hide();
+            return false;
+        });
+    });     
+    $("#modal-alert").modal('show');
+};
+$.confirm.hide = function(args){
+    $("#modal-alert").on("hide.bs.modal", function(e){
+        $("#modal-alert").remove();
+        if (args){
+            args.rollback();
+        }
+    });
+    $("#modal-alert").modal('hide');
+}
+$.confirm.update = function(msg){
+    $('#modal-alert .modal-body').html(msg);
+}
+$.confirm.center = function(){
+    var w = $('#modal-alert').width();
+    var h = $('#modal-alert').height();
+    $('#modal-alert').animate({
+            "margin-left":(w/2*(-1))+"px",
+            "margin-top": (h/2*(-1))+"px"
+    });
+}
+
+$.scrollTo = function(id,has_target,target){
+    if (id.charAt(0) != "." && id.charAt(0) != "#" && !(has_target)){
+        id = "#"+id;
+    }
+    var top = $(id).offset().top;
+    if (has_target){
+        if (!target){
+            target = "html,body";
+        }
+    }else{
+        target = "html,body";
+    }
+    $(target).animate({scrollTop: top},'slow');
+}
+
+$.fn.setWarning = function(){
+    var args = arguments[0];
+    if (!args.type) args.type = "warning";
+    if (args.type == "error") args.type = "danger";
+    $(this).hide();
+    $(this).empty();
+    $(this).html("<div class='alert alert-" + args.type + "'>"+args.msg+"</div>");
+    $(this).show();
+    $.scrollTo("#" + $(this).attr("id"));
+};
+$.fn.clearWarning = function(){
+    $(this).fadeOut("slow",function(){
+        $(this).empty();
+    });
+    
+};
