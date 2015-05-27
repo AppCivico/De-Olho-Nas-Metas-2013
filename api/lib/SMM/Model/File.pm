@@ -10,9 +10,9 @@ use SMM::Model::File::CSV;
 sub process {
     my ( $self, %param ) = @_;
 
-    my $upload = $param{upload};
-    my $schema = $param{schema};
-    my %header = %{ $param{header} };
+    my $upload    = $param{upload};
+    my $resultset = $param{schema};
+    my %header    = %{ $param{header} };
     my $parse;
     eval {
         if ( $upload->filename =~ /xlsx$/ ) {
@@ -37,15 +37,12 @@ sub process {
       if $parse->{ignored};
     $status .= "Cabeçalho não encontrado!\n" unless $parse->{header_found};
 
-    use DDP;
-    p $parse;
-    exit;
     my $file_id;
 
     # se tem menos variaveis no banco do que as enviadas
 
     my $user_id = $param{user_id};
-    my $file    = $schema->resultset('File')->create(
+    my $file    = $resultset->result_source->schema->resultset('File')->create(
         {
             name        => $upload->filename,
             status_text => $status,
@@ -54,13 +51,11 @@ sub process {
     );
     $file_id = $file->id;
 
-    my $rvv_rs = $schema;
-
-    $schema->txn_do(
+    my $rvv_rs = $resultset;
+    use DDP;
+    $resultset->result_source->schema->txn_do(
         sub {
-            my $with_region    = {};
-            my $without_region = {};
-            my $cache_ref      = {};
+            my $cache_ref = {};
 
             # percorre as linhas e insere no banco
             # usando o modelo certo.
@@ -73,11 +68,11 @@ sub process {
 
                 if ( !defined $r->{value} ) {
                     $status =
-"Valor '$old_value' não é um número válido [registro número $c]. Por favor, envie formatado corretamente.";
+"Valor  não é um número válido [registro número $c]. Por favor, envie formatado corretamente.";
 
                     #  die "invalid number";
                 }
-
+                $resultset->create($r);
                 my $ref = {
                     do_not_calc => 1,
                     cache_ref   => $cache_ref

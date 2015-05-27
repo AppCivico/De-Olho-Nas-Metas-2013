@@ -32,6 +32,7 @@ sub file_POST {
                 upload  => $upload,
                 header  => $c->stash->{header},
                 schema  => $c->stash->{db},
+                config  => $c->stash->{config},
                 app     => $c,
             );
 

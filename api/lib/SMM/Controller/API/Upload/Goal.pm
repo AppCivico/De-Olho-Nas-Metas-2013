@@ -27,7 +27,7 @@ sub configuration_goal_POST {
         technically       => qr /\bdescri..o t.cnica\b/io,
         will_be_delivered => qr /\bobjetivo de entrega\b/io,
 
-        expected_start_date    => qr /\bexpectativa de começo\b/io,
+        expected_start_date    => qr /\bexpectativa de come.o\b/io,
         expected_end_date      => qr /\bexpectativa de fim\b/io,
         percentage             => qr /\bporcentagem\b/io,
         goal_number            => qr /\bn.mero da meta\b/io,
