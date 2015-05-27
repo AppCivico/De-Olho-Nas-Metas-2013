@@ -14,7 +14,7 @@ sub parse {
       or die "Cannot use CSV: " . Text::CSV_XS->error_diag();
     open my $fh, "<:encoding(utf8)", $file or die "$file: $!";
 
-    my %expected_header = \%header;
+    my %expected_header = %header;
 
     my @rows;
     my $ok      = 0;
@@ -61,9 +61,7 @@ sub parse {
                 $registro->{$header_name} = $value;
             }
 
-            if (   exists $registro->{id}
-                && exists $registro->{name} )
-            {
+            if ( exists $registro->{name} ) {
 
                 $ok++;
 

@@ -2,7 +2,7 @@
 <div class="rows">
 <h2 class="sub-header">Projetos</h2>
 <div class="container-fluid">
-  <a href="[% c.uri_for_action('/admin/project/add') %]" class="btn btn-success">Cadastrar Projeto</a>
+  <a href="[% c.uri_for_action('/admin/project/add') %]" class="btn btn-success">Cadastrar Projeto</a>   <a href="[% c.uri_for_action('/admin/project/upload') %]" class="btn btn-success">Cadastrar Arquivo de Projeto</a>
 </div>
 
 <div class="table-responsive">
