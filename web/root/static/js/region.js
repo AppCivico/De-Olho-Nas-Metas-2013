@@ -1,3 +1,32 @@
+if (!String.prototype.render) {
+    String.prototype.render = function(args) {
+        var copy = this + '';
+        for (var i in args) {
+            copy = copy.replace(RegExp('\\$\\$' + i, 'g'), args[i]);
+        }
+        return copy;
+    };
+}
+        
+if (!Array.prototype.indexOf){
+  Array.prototype.indexOf = function(elt /*, from*/){
+    var len = this.length >>> 0;
+
+    var from = Number(arguments[1]) || 0;
+    from = (from < 0)
+         ? Math.ceil(from)
+         : Math.floor(from);
+    if (from < 0)
+      from += len;
+
+    for (; from < len; from++){
+      if (from in this &&
+          this[from] === elt)
+        return from;
+    }
+    return -1;
+  };
+}
 $(document).ready(function () {
     var current_map_string = '',
         map,
@@ -70,9 +99,12 @@ $(document).ready(function () {
             setColor("select");
             document.getElementById('delete-button').removeAttribute('disabled');
             document.getElementById('edit-button').removeAttribute('disabled');
-                if ($("#region-list .item.selected").length <= 0) {
-                    document.getElementById('save-button').removeAttribute('disabled');
-                }
+            console.log($("#region-list .item.selected").length);
+            if ($("#region-list .item.selected").length > 0) {
+                document.getElementById('save-button').removeAttribute('disabled');
+            }else{
+                document.getElementById('save-button').setAttribute('disabled','disabled');
+            }
         }
 
         function setShapeEditable() {
@@ -143,16 +175,9 @@ $(document).ready(function () {
 
                 var action = "update";
                 var method = "POST";
-                var url_action = api_path + "/api/city/$$city/region/$$region?api_key=$$key&with_polygon_path=1&limit=1000".render2({
-                    key: $.cookie("key"),
-                    city: getIdFromUrl(user_info.city),
-                    region: $("#region-list .selected").attr("region-id")
-                });
+                var url_action = "url/" + $("#region-list ul li.selected").attr("region-id");
 
                 args = [{
-                    name: "api_key",
-                    value: $.cookie("key")
-                }, {
                     name: "city.region." + action + ".polygon_path",
                     value: current_map_string
                 }];
@@ -521,6 +546,7 @@ $(document).ready(function () {
                     //$.setSelectedRegion();
                 }else{
                     $(this).removeClass("selected");
+                    document.getElementById('save-button').setAttribute('disabled','disabled');
                 }
     
             });
