@@ -239,12 +239,6 @@ $(document).ready(function () { // type_of_string = "string" ou "coord"
             }
 
             function Save() {
-                var index = objTriangle.length;
-                selectedShape.region_index = index;
-                objTriangle.push(selectedShape);
-                $("#region-list .selected").attr("region-index", selectedShape.region_index);
-                updateDataRegions($("#region-list .selected").attr("region-id"), current_map_string);
-                return false;
 
                 var action = "update";
                 var method = "POST";
