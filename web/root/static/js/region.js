@@ -36,6 +36,11 @@ $(document).ready(function () { // type_of_string = "string" ou "coord"
 
         $("#region-list ul").append("<li class='item'>Carregando...</li>");
         $.getJSON('/getregions', function(data,status){
+            data.geoms.sort(function (a, b) {
+                a = String(a.name),
+                b = String(b.name);
+                return a.localeCompare(b);
+            });
             $("#region-list ul").empty();
             regions_list = data.geoms;
             if ($("#region-list").length > 0){
@@ -566,7 +571,7 @@ $(document).ready(function () { // type_of_string = "string" ou "coord"
             }
             selectColor();
 
-            if ($("#map_string").val() != ""){
+            if ($("#map_string").length > 0 && $("#map_string").val() != ""){
                 addPolygon({
                     "map_string": $("#map_string").val(),
                     "focus": true,
