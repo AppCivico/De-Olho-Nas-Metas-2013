@@ -14,13 +14,6 @@
 		<div class="col-sm-3">
 			<div id="region-list">
 				<ul>
-				[%IF regions.size > 0%]
-					[%FOREACH region IN regions%]
-						<li region-id="[%region.id%]" class="item" polygon-path="[%region.geom%]">[%region.name%]</li>
-		            [%END%]
-				[%ELSE%]
-					<li>Nenhuma região cadastrada</li>
-				[%END%]
 				</ul>
 			</div>
 		</div>

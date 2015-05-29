@@ -27,10 +27,69 @@ if (!Array.prototype.indexOf){
     return -1;
   };
 }
-$(document).ready(function () {
+$(document).ready(function () { // type_of_string = "string" ou "coord"
     var current_map_string = '',
+        type_of_string = 'coord',
         map,
-        retorno_kml;
+        retorno_kml,
+        regions_list;
+
+        $("#region-list ul").append("<li class='item'>Carregando...</li>");
+        $.getJSON('/getregions', function(data,status){
+            $("#region-list ul").empty();
+            regions_list = data.geoms;
+            if ($("#region-list").length > 0){
+                $.each(regions_list, function(index,item){
+                    $("#region-list ul").append("<li class='item' region-id='" + item.id + "'>" + item.name + "</li>");
+                });
+            }
+
+            $("#region-list .item").bind('click', function (e) {
+                if (!$(this).hasClass("selected")){
+                    $("#region-list .item").removeClass("selected");
+                    $(this).addClass("selected");
+                    if ($(this).attr("region-id")) {
+                        var region_selected = getRegion($(this).attr("region-id"));
+                        var region_index = $(this).attr("region-index");
+                        if ((region_selected) && region_selected.geom_json) {
+                            var coords = JSON.parse(region_selected.geom_json).coordinates;
+                            if (!$map.getObjTriangle(region_index)) {
+                                $map.addPolygon({
+                                    "map_string": JSON.stringify(coords),
+                                    "focus": true,
+                                    "region_id": region_selected.id,
+                                    "select": true,
+                                    "set_index": true
+                                });
+                            } else {
+                                $map.selectPolygon(region_index);
+                            }
+                        }
+                    }
+                    //$.setSelectedRegion();
+                }else{
+                    $(this).removeClass("selected");
+                    if ($("#save-button").length > 0){
+                        document.getElementById('save-button').setAttribute('disabled','disabled');
+                    }
+                }
+    
+            });
+        });   
+
+    function getRegion(id) {
+        var i = "";
+        $.each(regions_list, function (index, item) {
+            if (item.id == id) {
+                i = index;
+            }
+        });
+        if (i) {
+            return regions_list[i];
+        } else {
+            return null;
+        }
+    }
 
     $map = function () {
 
@@ -87,8 +146,10 @@ $(document).ready(function () {
                 hide_controls();
                 document.getElementById('delete-button').setAttribute('disabled','disabled');
                 document.getElementById('edit-button').setAttribute('disabled','disabled');
-                if ($("#region-list .item.selected").length <= 0) {
-                    document.getElementById('save-button').setAttribute('disabled','disabled');
+                if ($("#save-button").length > 0){
+                    if ($("#region-list .item.selected").length <= 0) {
+                        document.getElementById('save-button').setAttribute('disabled','disabled');
+                    }
                 }
             }
         }
@@ -99,11 +160,12 @@ $(document).ready(function () {
             setColor("select");
             document.getElementById('delete-button').removeAttribute('disabled');
             document.getElementById('edit-button').removeAttribute('disabled');
-            console.log($("#region-list .item.selected").length);
-            if ($("#region-list .item.selected").length > 0) {
-                document.getElementById('save-button').removeAttribute('disabled');
-            }else{
-                document.getElementById('save-button').setAttribute('disabled','disabled');
+            if ($("#save-button").length > 0){
+                if ($("#region-list .item.selected").length > 0) {
+                    document.getElementById('save-button').removeAttribute('disabled');
+                }else{
+                    document.getElementById('save-button').setAttribute('disabled','disabled');
+                }
             }
         }
 
@@ -172,10 +234,13 @@ $(document).ready(function () {
             }
 
             function Save() {
-
-                $("#region-list ul li.selected").attr("polygon-path",current_map_string);
+                var index = objTriangle.length;
+                selectedShape.region_index = index;
+                objTriangle.push(selectedShape);
+                $("#region-list .selected").attr("region-index", selectedShape.region_index);
+                updateDataRegions($("#region-list .selected").attr("region-id"), current_map_string);
                 return false;
-                
+
                 var action = "update";
                 var method = "POST";
                 var url_action = "url/" + $("#region-list ul li.selected").attr("region-id");
@@ -237,7 +302,7 @@ $(document).ready(function () {
                 selectedShape.setMap(null);
                 objTriangle[selectedShape.region_index] = null;
                 current_map_string = '';
-                $("#map-string").val("");
+                $("#map_string").val("");
                 hide_controls();
             }
         }
@@ -245,7 +310,6 @@ $(document).ready(function () {
         function deleteShape(shape) {
             if (shape) {
                 if ($("#region-list").length > 0) {
-                    //                  $("#region-list .item[region-index=" + shape.region_index + "]").removeClass("selected");
                     $("#region-list .item[region-index=" + shape.region_index + "]").attr("region-index", "");
                 }
                 shape.setMap(null);
@@ -283,9 +347,21 @@ $(document).ready(function () {
 
         function _store_string(theShape) {
             if (typeof theShape.getPath == "function") {
-                current_map_string = google.maps.geometry.encoding.encodePath(theShape.getPath());
-                $("#map-string").val(current_map_string);
+                if (type_of_string == "string"){
+                    current_map_string = google.maps.geometry.encoding.encodePath(theShape.getPath());
+                }else if(type_of_string == "coord"){
+                    var vertices = theShape.getPath(),
+                        coords = [];
+
+                    for (var i =0; i < vertices.getLength(); i++) {
+                        var xy = vertices.getAt(i);
+                        coords.push( new Array(xy.lng(), xy.lat()) );
+                    }
+                    coords = new Array(coords);
+                    current_map_string = JSON.stringify(coords);
+                }
             }
+            $("#map_string").val(current_map_string);
             show_controls();
         }
 
@@ -293,8 +369,20 @@ $(document).ready(function () {
             if (!(current_map_string) && !(args.map_string) && !(args.kml_string)) return;
 
             if (!args.kml_string) {
-                if (current_map_string && !(args.map_string)) args.map_string = current_map_string
-                var triangleCoords = google.maps.geometry.encoding.decodePath(args.map_string);
+                if (current_map_string && !(args.map_string)){
+                    args.map_string = current_map_string;
+                }
+                if (type_of_string == "string"){
+                    var triangleCoords = google.maps.geometry.encoding.decodePath(args.map_string);
+                }else{
+                    var coordinates = JSON.parse(args.map_string);
+                    var polyCoords = new Array();
+                    for (j in coordinates[0]) {
+                        var coords = coordinates[0][j];
+                        polyCoords.push(new google.maps.LatLng(coords[1], coords[0])); 
+                    }
+                    var triangleCoords = polyCoords;
+                }
             } else {
                 var triangleCoords = [];
 
@@ -312,6 +400,10 @@ $(document).ready(function () {
             }
 
             var index = objTriangle.length;
+
+            if (args.set_index){
+                $("#region-list ul li.selected").attr("region-index",index);
+            }
 
             objTriangle.push(new google.maps.Polygon({
                 paths: triangleCoords,
@@ -393,13 +485,15 @@ $(document).ready(function () {
 
         function updateDataRegions(id, string) {
             var i = "";
-            $.each(data_regions.regions, function (index, item) {
+            $.each(regions_list, function (index, item) {
                 if (item.id == id) {
                     i = index;
                 }
             });
             if (i) {
-                data_regions.regions[i].polygon_path = string;
+                var geom_json = JSON.parse(regions_list[i].geom_json);
+                geom_json.coordinates = JSON.parse(string);
+                regions_list[i].geom_json = JSON.stringify(geom_json);
             }
         }
 
@@ -472,6 +566,15 @@ $(document).ready(function () {
             }
             selectColor();
 
+            if ($("#map_string").val() != ""){
+                addPolygon({
+                    "map_string": $("#map_string").val(),
+                    "focus": true,
+                    "region_id": $("#region_edit_id").val(),
+                    "select": true,
+                    "set_index": true
+                });
+            }
         }
         return {
             init: initialize,
@@ -525,35 +628,6 @@ $(document).ready(function () {
                 google: google
             });
             $map.focusAll();
-
-            $("#region-list .item").bind('click', function (e) {
-                if (!$(this).hasClass("selected")){
-                    $("#region-list .item").removeClass("selected");
-                    $(this).addClass("selected");
-                    if ($(this).attr("region-id")) {
-                        /*var region_selected = getRegion($(this).attr("region-id"));
-                        var region_index = $(this).attr("region-index");
-                        if ((region_selected) && region_selected.polygon_path) {
-                            if (!$map.getObjTriangle(region_index)) {
-                                $map.addPolygon({
-                                    "map_string": region_selected.polygon_path,
-                                    "focus": true,
-                                    "region_id": region_selected.id,
-                                    "select": true
-                                });
-                            } else {
-                                $map.selectPolygon(region_index);
-                            }
-                        }*/
-                    }
-                    //$.setSelectedRegion();
-                }else{
-                    $(this).removeClass("selected");
-                    document.getElementById('save-button').setAttribute('disabled','disabled');
-                }
-    
-            });
-
 
         }
     });
