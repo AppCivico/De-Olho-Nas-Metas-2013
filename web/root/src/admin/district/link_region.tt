@@ -16,7 +16,7 @@
 				<ul>
 				[%IF regions.size > 0%]
 					[%FOREACH region IN regions%]
-						<li region-id="[%region.id%]" class="item">[%region.name%]</li>
+						<li region-id="[%region.id%]" class="item" polygon-path="[%region.geom%]">[%region.name%]</li>
 		            [%END%]
 				[%ELSE%]
 					<li>Nenhuma região cadastrada</li>

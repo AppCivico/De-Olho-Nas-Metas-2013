@@ -151,7 +151,7 @@ $(document).ready(function () {
             } else {
                 $.confirm({
                     'title': 'Confirmação',
-                    'message': 'Tem certeza que deseja associar essa forma à região "$$regiao"?'.render2({
+                    'message': 'Tem certeza que deseja associar essa forma à região "$$regiao"?'.render({
                         regiao: $("#region-list .item.selected").text()
                     }),
                     'buttons': {
@@ -173,6 +173,9 @@ $(document).ready(function () {
 
             function Save() {
 
+                $("#region-list ul li.selected").attr("polygon-path",current_map_string);
+                return false;
+                
                 var action = "update";
                 var method = "POST";
                 var url_action = "url/" + $("#region-list ul li.selected").attr("region-id");
@@ -206,7 +209,7 @@ $(document).ready(function () {
                     },
                     error: function (data) {
                         $("#aviso").setWarning({
-                            msg: "Erro na operação. ($$codigo)".render2({
+                            msg: "Erro na operação. ($$codigo)".render({
                                 codigo: $.trataErro(data)
                             })
                         });
