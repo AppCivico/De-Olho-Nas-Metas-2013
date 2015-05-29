@@ -15,7 +15,7 @@
 			[%input_text('long','Longitude', req=>1, value => region_obj.long)|none%]
 			[%select_field('subprefecture_id','Subprefeitura', array => select_subprefectures, req=>0, value => region_obj.subprefecture_id)|none%]
 
-			<input type="hidden" id="map_string" name="map_string" value="[% geom.geom_json.coordinates %]">
+			<input type="hidden" id="map_string" name="map_string" value="[[% coord %]]">
 			<input type="hidden" id="region_edit_id" value="[% region_obj.id %]">
 
 			<strong>Demarcar Região no mapa</strong>

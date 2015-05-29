@@ -572,7 +572,8 @@ $(document).ready(function () { // type_of_string = "string" ou "coord"
             selectColor();
 
             if ($("#map_string").length > 0 && $("#map_string").val() != ""){
-                addPolygon({
+                console.log($("#map_string").val());
+                $map.addPolygon({
                     "map_string": $("#map_string").val(),
                     "focus": true,
                     "region_id": $("#region_edit_id").val(),
