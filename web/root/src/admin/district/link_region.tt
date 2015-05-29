@@ -15,7 +15,7 @@
 			<div id="region-list">
 				<ul>
 				[%IF regions.size > 0%]
-					[%FOREACH region IN regions%]
+					[%FOREACH region IN regions.geoms%]
 						<li region-id="[%region.id%]" class="item">[%region.name%]</li>
 		            [%END%]
 				[%ELSE%]

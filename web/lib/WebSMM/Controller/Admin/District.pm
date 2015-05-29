@@ -45,9 +45,6 @@ sub index : Chained('base') : PathPart('') : Args(0) {
     my $api = $c->model('API');
 
     $api->stash_result( $c, 'regions' );
-    use DDP;
-    p $c->stash->{regions};
-    warn 1;
 }
 
 sub add : Chained('base') : PathPart('new') : Args(0) {
