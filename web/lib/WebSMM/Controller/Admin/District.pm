@@ -73,7 +73,7 @@ sub link_region : Chained('base') : PathPart('link_region') : Args(0) {
     my ( $self, $c, $id ) = @_;
     my $api = $c->model('API');
     $api->stash_result( $c, 'subprefectures' );
-    $api->stash_result( $c, 'regions' );
+    $api->stash_result( $c, 'regions/regions_map', stash => 'regions' );
     $c->stash->{select_subprefectures} =
       [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{subprefectures} } ];
 

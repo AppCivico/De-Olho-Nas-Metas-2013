@@ -3,6 +3,7 @@ package SMM::Controller::API::Upload::Goal;
 
 use Moose;
 use JSON;
+use SMM::Types qw/DataStr TimeStr/;
 
 BEGIN { extends 'Catalyst::Controller::REST' }
 
@@ -38,12 +39,45 @@ sub configuration_goal_POST {
         qualitative_progress_5 => qr /\bprogresso qualitativo 5\b/io,
         qualitative_progress_6 => qr /\bprogresso qualitativo 6\b/io,
     );
-    $c->stash->{db}     = $c->model('DB::Goal');
-    $c->stash->{header} = \%header;
-    $c->stash->{config} = sub { my $column = shift; };
+    $c->stash->{db}       = $c->model('DB::Goal');
+    $c->stash->{header}   = \%header;
+    $c->stash->{validate} = sub {
+        my $line = shift;
+        use DDP;
+        my $dv = Data::Verifier->new(
+            filters => [qw(trim)],
+            profile => {
+                name                   => { required => 0, type => 'Str' },
+                description            => { required => 0, type => 'Str' },
+                technically            => { required => 0, type => 'Str' },
+                will_be_delivered      => { required => 0, type => 'Str' },
+                expected_start_date    => { required => 0, type => DataStr },
+                expected_end_date      => { required => 0, type => DataStr },
+                percentage             => { required => 0, type => 'Int' },
+                goal_number            => { required => 0, type => 'Int' },
+                qualitative_progress_1 => { required => 0, type => 'Str' },
+                qualitative_progress_2 => { required => 0, type => 'Str' },
+                qualitative_progress_3 => { required => 0, type => 'Str' },
+                qualitative_progress_4 => { required => 0, type => 'Str' },
+                qualitative_progress_5 => { required => 0, type => 'Str' },
+                qualitative_progress_6 => { required => 0, type => 'Str' },
+            }
+        );
+        my $results = $dv->verify($line);
 
-    $c->detach('/api/uploadfile/file');
+        return 1 if $results->success;
 
+        my @res = $results->invalids;
+        my @message;
+        push @message, $results->get_field($_) for @res;
+        p \@message;
+        p \@res;
+
+    };
+    my $lol = $c->forward('/api/uploadfile/file');
+    use DDP;
+    p $lol;
+    warn 1234567;
 }
 
 1;

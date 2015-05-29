@@ -8,14 +8,15 @@ use DateTime::Format::Pg;
 use Text::CSV_XS;
 
 sub parse {
-    my ( $self, $file, %header ) = @_;
+    my ( $self, %args ) = @_;
+	my $file = $args{tempname};
+	my $validate = $args{validate};
 
     my $csv = Text::CSV_XS->new( { binary => 1 } )
       or die "Cannot use CSV: " . Text::CSV_XS->error_diag();
     open my $fh, "<:encoding(utf8)", $file or die "$file: $!";
 
-    my %expected_header = %header;
-
+    my %expected_header = %{$args{header}};
     my @rows;
     my $ok      = 0;
     my $ignored = 0;
@@ -60,8 +61,9 @@ sub parse {
                 $value =~ s/\s+$//;
                 $registro->{$header_name} = $value;
             }
-
-            if ( exists $registro->{name} ) {
+			my $teste = $validate->($registro);
+			warn $teste;
+            if ($teste) {
 
                 $ok++;
 

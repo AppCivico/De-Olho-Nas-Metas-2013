@@ -12,40 +12,52 @@ sub process {
 
     my $upload    = $param{upload};
     my $resultset = $param{schema};
-    my %header    = %{ $param{header} };
+    my $validate  = $param{validate};
+    my $header    = $param{header};
     my $parse;
     eval {
         if ( $upload->filename =~ /xlsx$/ ) {
-            $parse =
-              SMM::Model::File::XLSX->new->parse( $upload->tempname, %header );
+            $parse = SMM::Model::File::XLSX->new->parse(
+                tempname => $upload->tempname,
+                validate => $validate,
+                header   => $header
+            );
         }
         elsif ( $upload->filename =~ /xls$/ ) {
-            $parse =
-              SMM::Model::File::XLS->new->parse( $upload->tempname, %header );
+            $parse = SMM::Model::File::XLS->new->parse(
+                tempname => $upload->tempname,
+                validate => $validate,
+                header   => $header
+            );
         }
         elsif ( $upload->filename =~ /csv$/ ) {
-            $parse =
-              SMM::Model::File::CSV->new->parse( $upload->tempname, %header );
+            $parse = SMM::Model::File::CSV->new->parse(
+                tempname => $upload->tempname,
+                validate => $validate,
+                header   => $header
+            );
         }
     };
     die $@ if $@;
     die "file not supported!\n" unless $parse;
-    my $status = $@ ? $@ : '';
+    my $status = $@ ? { error => $@ } : undef;
 
-    $status .= 'Linhas aceitas: ' . $parse->{ok} . "\n";
-    $status .= 'Linhas ignoradas: ' . $parse->{ignored} . "\n"
+    $status->{accepted} = 'Linhas aceitas: ' . $parse->{ok} . "\n";
+    $status->{ignored}  = 'Linhas ignoradas: ' . $parse->{ignored} . "\n"
       if $parse->{ignored};
-    $status .= "Cabeçalho não encontrado!\n" unless $parse->{header_found};
+    $status->{error} = "Cabeçalho não encontrado!\n"
+      unless $parse->{header_found};
 
     my $file_id;
 
     # se tem menos variaveis no banco do que as enviadas
 
     my $user_id = $param{user_id};
-    my $file    = $resultset->result_source->schema->resultset('File')->create(
+
+    my $file = $resultset->result_source->schema->resultset('File')->create(
         {
             name        => $upload->filename,
-            status_text => $status,
+            status_text => encode_json($status),
             created_by  => $user_id
         }
     );
@@ -66,14 +78,8 @@ sub process {
 
                 my $old_value = $r->{value};
 
-                if ( !defined $r->{value} ) {
-                    $status =
-"Valor  não é um número válido [registro número $c]. Por favor, envie formatado corretamente.";
-
-                    #  die "invalid number";
-                }
-                $resultset->create($r);
-                my $ref = {
+                my $create = $resultset->create($r);
+                my $ref    = {
                     do_not_calc => 1,
                     cache_ref   => $cache_ref
                 };
@@ -85,11 +91,10 @@ sub process {
 
         }
     );
-    $file->update( { status_text => $status } );
-
+    $file->update( { status_text => encode_json $status } );
     return {
         status  => $status,
-        file_id => $file_id
+        file_id => $file_id,
     };
 
 }
