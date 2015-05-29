@@ -60,8 +60,7 @@ sub upload : Chained('base') : PathPart('upload_goal') : Args(0) {
         ],
         method => 'upload',
     );
-    $c->detach;
-    if ( $status->{status}{error} eq 'header_found' ) {
+    if ( $c->stash->{status}{error} eq 'header_found' ) {
         $c->stash->{error}      = 'form_error';
         $c->stash->{form_error} = {
             'archive',      'invalid',
@@ -70,7 +69,7 @@ sub upload : Chained('base') : PathPart('upload_goal') : Args(0) {
 
         $c->detach( '/form/redirect_error', );
     }
-    elsif ( $status->{error} ) {
+    elsif ( $c->stash->{error} ) {
 
         $c->stash->{error}      = $status->{error};
         $c->stash->{form_error} = $status->{form_error}
@@ -99,10 +98,10 @@ sub upload : Chained('base') : PathPart('upload_goal') : Args(0) {
         $c->detach(
             '/form/redirect_ok',
             [
-                anchor     => 'usuario/blacklist',
+                \'/admin/goal/upload',
                 status_msg => 'Importado com sucesso',
-                status     => $status->{status}
-            ]
+                status     => $c->stash->{status}
+            ],
         );
 
     }
