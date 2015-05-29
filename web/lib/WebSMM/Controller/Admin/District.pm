@@ -2,6 +2,7 @@ package WebSMM::Controller::Admin::District;
 use Moose;
 use namespace::autoclean;
 use utf8;
+use JSON;
 
 BEGIN { extends 'Catalyst::Controller'; }
 
@@ -63,6 +64,9 @@ sub edit : Chained('object') : PathPart('edit') : Args(0) {
     $api->stash_result( $c, 'subprefectures' );
     $api->stash_result( $c, 'regions/geom',
         params => { region_id => $c->stash->{id} } );
+    use DDP;
+    $c->stash->{geom}->{geom_json} = decode_json $c->stash->{geom}->{geom_json};
+    p $c->stash->{geom}->{geom_json}->{coordinates};
     $c->stash->{select_subprefectures} =
       [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{subprefectures} } ];
 
@@ -73,6 +77,7 @@ sub link_region : Chained('base') : PathPart('link_region') : Args(0) {
     my $api = $c->model('API');
     $api->stash_result( $c, 'subprefectures' );
     $api->stash_result( $c, 'regions/regions_map', stash => 'regions' );
+
     $c->stash->{select_subprefectures} =
       [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{subprefectures} } ];
 
