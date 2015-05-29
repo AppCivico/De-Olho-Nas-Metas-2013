@@ -30,7 +30,7 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
     my ( $self, $c, $id ) = @_;
 
     my $api = $c->model('API');
-
+    $c->stash->{id} = $id;
     $api->stash_result( $c, [ 'regions', $id ], stash => 'region_obj' );
 
 }
@@ -61,6 +61,8 @@ sub edit : Chained('object') : PathPart('edit') : Args(0) {
     my ( $self, $c, $id ) = @_;
     my $api = $c->model('API');
     $api->stash_result( $c, 'subprefectures' );
+    $api->stash_result( $c, 'regions/geom',
+        params => { region_id => $c->stash->{id} } );
     $c->stash->{select_subprefectures} =
       [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{subprefectures} } ];
 
