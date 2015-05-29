@@ -65,8 +65,12 @@ sub edit : Chained('object') : PathPart('edit') : Args(0) {
     $api->stash_result( $c, 'regions/geom',
         params => { region_id => $c->stash->{id} } );
     use DDP;
-    $c->stash->{geom}->{geom_json} = decode_json $c->stash->{geom}->{geom_json};
-    p $c->stash->{geom}->{geom_json}->{coordinates};
+    p $c->stash->{geom}->{geom_json};
+    $c->stash->{geom}->{geom_json} =
+      decode_json $c->stash->{geom}->{geom_json};
+
+    $c->stash->{coord} =
+      encode_json $c->stash->{geom}->{geom_json}->{coordinates}[0];
     $c->stash->{select_subprefectures} =
       [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{subprefectures} } ];
 
