@@ -87,6 +87,10 @@ sub link_region : Chained('base') : PathPart('link_region') : Args(0) {
 
 }
 
+sub upload : Chained('base') : ParthPart('upload') : Args(0) {
+    my ( $self, $c ) = @_;
+}
+
 =encoding utf8
 
 =head1 AUTHOR

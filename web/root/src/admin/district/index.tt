@@ -4,6 +4,8 @@
 <div class="container-fluid">
   <a href="[% c.uri_for_action('/admin/district/add') %]" class="btn btn-success">Cadastrar Distrito</a>
   <a href="[% c.uri_for_action('/admin/district/link_region') %]" class="btn btn-success">Linkar distritos</a>
+  <a href="[% c.uri_for_action('/admin/district/upload') %]" class="btn btn-success">Cadastrar Arquivo de Distrito</a>
+
 </div>
 
 <div class="table-responsive">
