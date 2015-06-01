@@ -2,7 +2,7 @@
 <div class="rows">
 <h2 class="sub-header">Modelo de arquivo para preenchimento</h2>
 <div class="container-fluid">
-  <a href="[% c.uri_for_action('/admin/form/project/csv') %]" class="btn btn-success">CSV</a> <a href="[% c.uri_for_action('/admin/form/project/xls') %]" class="btn btn-success">XLS</a>
+  <a href="[% c.uri_for_action('/admin/form/objective/csv') %]" class="btn btn-success">CSV</a> <a href="[% c.uri_for_action('/admin/form/objective/xls') %]" class="btn btn-success">XLS</a>
 </div>
 	<h2 class="sub-header">Importar Arquivo</h2>
 	<div class="rows">
