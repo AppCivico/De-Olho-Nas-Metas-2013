@@ -87,6 +87,18 @@ sub link_region : Chained('base') : PathPart('link_region') : Args(0) {
 
 }
 
+sub region_shape : Chained('base') : ParthPart('region_shape') : Args(1) {
+    my ( $self, $c, $id ) = @_;
+    my $api = $c->model('API');
+    $api->stash_result(
+        $c, [ 'regions', $id ],
+        method => 'PUT',
+        params =>
+          { geom => $c->req->params->{'city.region.update.polygon_path'} }
+    );
+
+}
+
 sub upload : Chained('base') : ParthPart('upload') : Args(0) {
     my ( $self, $c ) = @_;
 }

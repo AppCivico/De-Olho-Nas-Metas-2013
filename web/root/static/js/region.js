@@ -242,7 +242,7 @@ $(document).ready(function () { // type_of_string = "string" ou "coord"
 
                 var action = "update";
                 var method = "POST";
-                var url_action = "url/" + $("#region-list ul li.selected").attr("region-id");
+                var url_action = "/admin/district/region_shape/" + $("#region-list ul li.selected").attr("region-id");
 
                 args = [{
                     name: "city.region." + action + ".polygon_path",
