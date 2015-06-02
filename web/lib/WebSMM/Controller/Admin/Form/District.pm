@@ -15,7 +15,7 @@ sub download : Chained('base') : PathPart('district') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
     @{ $c->stash->{header} } =
-      ( "nome", "lat", "long", "id da subprefeitura", "geom" );
+      ( "nome", "latitude", "longitude", "id da subprefeitura", "geom" );
 }
 
 sub process : Chained('base') : PathPart('district') : Args(0) {

@@ -68,8 +68,6 @@ sub stash_result {
         };
     }
     else {
-        warn
-'aaaaaaaaaaaaaaaaaaaaaaaaaaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
         $res = eval {
             $self->_do_http_req(
                 method  => $method,

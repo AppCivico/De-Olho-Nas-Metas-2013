@@ -14,7 +14,7 @@ sub base : Chained('/admin/form/base') : PathPart('') : CaptureArgs(0) {
 sub download : Chained('base') : PathPart('objective') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
-    @{ $c->stash->{header} } = ( "nome", );
+    @{ $c->stash->{header} } = ("nome");
 }
 
 sub process : Chained('base') : PathPart('objective') : Args(0) {
@@ -94,8 +94,8 @@ sub upload : Chained('base') : PathPart('upload_objective') : Args(0) {
         [ 'upload', 'objectives' ],
 
         body => [
-            'orignal_filename ' => $upload->filename,
-            'file'              => [ $upload->tempname ]
+            'original_filename ' => $upload->filename,
+            'file'               => [ $upload->tempname ]
         ],
         method => 'upload',
     );

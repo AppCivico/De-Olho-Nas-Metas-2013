@@ -14,27 +14,35 @@ sub process {
     my $resultset = $param{schema};
     my $validate  = $param{validate};
     my $header    = $param{header};
+    my $fk        = $param{fk};
+    use DDP;
+    p $upload;
+    p $header;
     my $parse;
+
     eval {
         if ( $upload->filename =~ /xlsx$/ ) {
             $parse = SMM::Model::File::XLSX->new->parse(
                 tempname => $upload->tempname,
                 validate => $validate,
-                header   => $header
+                header   => $header,
+                fk       => $fk
             );
         }
         elsif ( $upload->filename =~ /xls$/ ) {
             $parse = SMM::Model::File::XLS->new->parse(
                 tempname => $upload->tempname,
                 validate => $validate,
-                header   => $header
+                header   => $header,
+                fk       => $fk
             );
         }
         elsif ( $upload->filename =~ /csv$/ ) {
             $parse = SMM::Model::File::CSV->new->parse(
                 tempname => $upload->tempname,
                 validate => $validate,
-                header   => $header
+                header   => $header,
+                fk       => $fk
             );
         }
     };
@@ -64,7 +72,6 @@ sub process {
     $file_id = $file->id;
 
     my $rvv_rs = $resultset;
-    use DDP;
     $resultset->result_source->schema->txn_do(
         sub {
             my $cache_ref = {};
@@ -77,9 +84,11 @@ sub process {
                 $c++;
 
                 my $old_value = $r->{value};
+                my $create    = $resultset->create($r);
 
-                my $create = $resultset->create($r);
-                my $ref    = {
+                $r->{id} = $create->id;
+                $fk->($r) if $fk;
+                my $ref = {
                     do_not_calc => 1,
                     cache_ref   => $cache_ref
                 };

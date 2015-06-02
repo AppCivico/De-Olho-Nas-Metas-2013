@@ -15,7 +15,7 @@ sub download : Chained('base') : PathPart('company') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
     @{ $c->stash->{header} } =
-      ( "nome", "nome_url", "cnpj" );
+      ( "nome", "cnpj" );
 }
 
 sub process : Chained('base') : PathPart('company') : Args(0) {
@@ -129,11 +129,11 @@ sub upload : Chained('base') : PathPart('upload_company') : Args(0) {
     }
     my $status = $api->stash_result(
         $c,
-        [ 'upload', 'districts' ],
+        [ 'upload', 'companies' ],
 
         body => [
-            'orignal_filename ' => $upload->filename,
-            'file'              => [ $upload->tempname ]
+            'original_filename ' => $upload->filename,
+            'file'               => [ $upload->tempname ]
         ],
         method => 'upload',
     );

@@ -7,7 +7,7 @@
 	<h2 class="sub-header">Importar Arquivo</h2>
 	<div class="rows">
          <div class="container-fluid">
-            <form role="form" method="post" class="form-horizontal" enctype="multipart/form-data" action="/admin/form/upload_goal">
+            <form role="form" method="post" class="form-horizontal" enctype="multipart/form-data" action="/admin/form/upload_objective">
 
                 <div class="col-lg-4">
 	<small>

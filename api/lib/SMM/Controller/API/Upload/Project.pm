@@ -39,7 +39,7 @@ sub configuration_goal_POST {
         qualitative_progress_5 => qr /\bprogresso qualitativo 5\b/io,
         qualitative_progress_6 => qr /\bprogresso qualitativo 6\b/io,
     );
-    $c->stash->{db}       = $c->model('DB::Goal');
+    $c->stash->{db}       = $c->model('DB::Project');
     $c->stash->{header}   = \%header;
     $c->stash->{validate} = sub {
         my $line = shift;
@@ -69,6 +69,15 @@ sub configuration_goal_POST {
         my @res = $results->invalids;
         my @message;
         push @message, $results->get_field($_) for @res;
+
+    };
+    my $db = $c->model('DB::GoalProject');
+    $c->stash->{fk} = sub {
+        my $line = shift;
+
+        $db->create(
+            { project_id => $line->{id}, goal_id => $line->{goal_id} } )
+          if $line->{goal_id};
 
     };
     my $lol = $c->forward('/api/uploadfile/file');

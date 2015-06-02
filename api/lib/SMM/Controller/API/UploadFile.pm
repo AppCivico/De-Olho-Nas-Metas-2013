@@ -32,15 +32,15 @@ sub file_POST {
         schema   => $c->stash->{db},
         config   => $c->stash->{config},
         validate => $c->stash->{validate},
+        fk       => $c->stash->{fk},
         app      => $c,
     );
-    use DDP;
-    p $res;
 
     if ( $res->{status}{error} ) {
         $c->res->code(400);
         $c->detach;
     }
+
     unlink $upload->tempname;
 
     $self->status_accepted( $c, entity => $res );
