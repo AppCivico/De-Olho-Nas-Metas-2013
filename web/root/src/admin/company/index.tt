@@ -3,6 +3,7 @@
 <h2 class="sub-header">Distrito</h2>
 <div class="container-fluid">
   <a href="[% c.uri_for_action('/admin/company/add') %]" class="btn btn-success">Cadastrar Empresa</a>
+  <a href="[% c.uri_for_action('/admin/company/upload') %]" class="btn btn-success">Cadastrar Arquivo de Empresas</a>
 </div>
 
 <div class="table-responsive">

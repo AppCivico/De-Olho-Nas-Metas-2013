@@ -3,6 +3,7 @@ use Moose;
 use namespace::autoclean;
 use DateTime;
 use JSON::XS;
+use utf8;
 
 BEGIN { extends 'Catalyst::Controller' }
 
@@ -90,7 +91,7 @@ sub upload : Chained('base') : PathPart('upload_objective') : Args(0) {
     }
     my $status = $api->stash_result(
         $c,
-        [ 'upload', 'projects' ],
+        [ 'upload', 'objectives' ],
 
         body => [
             'orignal_filename ' => $upload->filename,

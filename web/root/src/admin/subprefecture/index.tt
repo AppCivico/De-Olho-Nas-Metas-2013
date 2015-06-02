@@ -3,6 +3,7 @@
 <h2 class="sub-header">Distrito</h2>
 <div class="container-fluid">
   <a href="[% c.uri_for_action('/admin/subprefecture/add') %]" class="btn btn-success">Cadastrar subprefeitura</a>
+  <a href="[% c.uri_for_action('/admin/subprefecture/upload') %]" class="btn btn-success">Cadastrar Arquivo de Subprefeitura</a>
 </div>
 
 <div class="table-responsive">

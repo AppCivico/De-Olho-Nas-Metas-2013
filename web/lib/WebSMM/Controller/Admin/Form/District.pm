@@ -3,6 +3,7 @@ use Moose;
 use namespace::autoclean;
 use DateTime;
 use JSON::XS;
+use utf8;
 
 BEGIN { extends 'Catalyst::Controller' }
 
@@ -10,7 +11,7 @@ sub base : Chained('/admin/form/base') : PathPart('') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 }
 
-sub download : Chained('base') : PathPart('objective') : CaptureArgs(0) {
+sub download : Chained('base') : PathPart('district') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
     @{ $c->stash->{header} } =
@@ -72,7 +73,7 @@ sub process_delete : Chained('base') : PathPart('remove_district') : Args(1) {
     }
 }
 
-sub upload : Chained('base') : PathPart('upload_objective') : Args(0) {
+sub upload : Chained('base') : PathPart('upload_district') : Args(0) {
     my ( $self, $c ) = @_;
     my $api = $c->model('API');
 
@@ -91,7 +92,7 @@ sub upload : Chained('base') : PathPart('upload_objective') : Args(0) {
     }
     my $status = $api->stash_result(
         $c,
-        [ 'upload', 'projects' ],
+        [ 'upload', 'districts' ],
 
         body => [
             'orignal_filename ' => $upload->filename,
