@@ -70,14 +70,9 @@ sub configuration_goal_POST {
         my @res = $results->invalids;
         my @message;
         push @message, $results->get_field($_) for @res;
-        p \@message;
-        p \@res;
 
     };
     my $lol = $c->forward('/api/uploadfile/file');
-    use DDP;
-    p $lol;
-    warn 1234567;
 }
 
 1;
