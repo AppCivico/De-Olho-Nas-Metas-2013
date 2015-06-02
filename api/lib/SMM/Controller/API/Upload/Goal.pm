@@ -74,7 +74,7 @@ sub configuration_goal_POST {
         p \@res;
 
     };
-    my $lol = $c->forward('/api/uploadfile/file');
+    my $lol = $c->forward('/api/uploadfile/do');
     use DDP;
     p $lol;
     warn 1234567;

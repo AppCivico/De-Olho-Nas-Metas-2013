@@ -16,8 +16,6 @@ sub process {
     my $header    = $param{header};
     my $fk        = $param{fk};
     use DDP;
-    p $upload;
-    p $header;
     my $parse;
 
     eval {
@@ -46,10 +44,12 @@ sub process {
             );
         }
     };
-    die $@ if $@;
+    p $@;
+    die $@ if $@ && ref $@;
+    die \[ 'archive', "FATAL ERROR: $@ " ] if $@;
     die "file not supported!\n" unless $parse;
-    my $status = $@ ? { error => $@ } : undef;
 
+    my $status = $@ ? { error => $@ } : undef;
     $status->{accepted} = 'Linhas aceitas: ' . $parse->{ok} . "\n";
     $status->{ignored}  = 'Linhas ignoradas: ' . $parse->{ignored} . "\n"
       if $parse->{ignored};
@@ -72,34 +72,40 @@ sub process {
     $file_id = $file->id;
 
     my $rvv_rs = $resultset;
-    $resultset->result_source->schema->txn_do(
-        sub {
-            my $cache_ref = {};
+    eval {
+        $resultset->result_source->schema->txn_do(
+            sub {
+                my $cache_ref = {};
 
-            # percorre as linhas e insere no banco
-            # usando o modelo certo.
-            my $c = 0;
+                # percorre as linhas e insere no banco
+                # usando o modelo certo.
+                my $c = 0;
 
-            foreach my $r ( @{ $parse->{rows} } ) {
-                $c++;
+                foreach my $r ( @{ $parse->{rows} } ) {
+                    $c++;
 
-                my $old_value = $r->{value};
-                my $create    = $resultset->create($r);
+                    my $old_value = $r->{value};
+                    my $create;
+                    eval { $create = $resultset->create($r); };
 
-                $r->{id} = $create->id;
-                $fk->($r) if $fk;
-                my $ref = {
-                    do_not_calc => 1,
-                    cache_ref   => $cache_ref
-                };
-                $ref->{variable_id} = $r->{id};
+                    die \[ 'archive', "Não foi possivel inserir o registro" ]
+                      if $@;
+                    $r->{id} = $create->id;
+                    $fk->($r) if $fk;
+                    my $ref = {
+                        do_not_calc => 1,
+                        cache_ref   => $cache_ref
+                    };
+                    $ref->{variable_id} = $r->{id};
 
-                $status .= "$@" if $@;
-                die $@ if $@;
+                    $status .= "$@" if $@;
+                    die $@ if $@;
+                }
+
             }
-
-        }
-    );
+        );
+    };
+    $status->{error} = $@ if $@;
     $file->update( { status_text => encode_json $status } );
     return {
         status  => $status,

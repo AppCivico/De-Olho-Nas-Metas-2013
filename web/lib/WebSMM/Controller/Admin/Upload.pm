@@ -34,12 +34,11 @@ sub upload : Chained('base') : PathPart('') : Args(0) {
     my $api = $c->model('API');
 
     my $upload = $c->req->upload('archive');
-	use DDP; 
+    use DDP;
     if ( !$upload ) {
         $c->stash->{error} = 'form_error';
         $c->stash->{form_error} = { 'archive', 'missing' };
-        $c->detach( '/form/redirect_error'
-            );
+        $c->detach( '/form/redirect_error' );
     }
     elsif ( $upload->filename !~ /(.xlsx?|.csv)$/i ) {
         $c->stash->{error}      = 'form_error';
@@ -48,7 +47,7 @@ sub upload : Chained('base') : PathPart('') : Args(0) {
         $c->detach( '/form/redirect_error4adm',
             [ anchor => 'usuario/blacklist/upload' ] );
     }
-	p $upload;
+    p $upload;
     my $status = $api->get_result(
         $c,
         '/admin/upload',
@@ -66,8 +65,7 @@ sub upload : Chained('base') : PathPart('') : Args(0) {
             'archive:help', 'cabeçalho não encontrado.'
         };
 
-        $c->detach( '/form/redirect_error',
-            );
+        $c->detach( '/form/redirect_error', );
     }
     elsif ( $status->{error} ) {
 
@@ -90,8 +88,7 @@ sub upload : Chained('base') : PathPart('') : Args(0) {
             $c->stash->{form_error} = \%new;
         }
 
-        $c->detach( '/form/redirect_error',
-             );
+        $c->detach( '/form/redirect_error', );
 
     }
     else {

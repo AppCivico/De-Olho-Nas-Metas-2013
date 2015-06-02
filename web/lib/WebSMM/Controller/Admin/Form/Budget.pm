@@ -121,7 +121,7 @@ sub xlsx : Chained('download') : PathPart('xlsx') : Args(0) {
 
 }
 
-sub upload : Chained('base') : PathPart('upload_goal') : Args(0) {
+sub upload : Chained('base') : PathPart('upload_budget') : Args(0) {
     my ( $self, $c ) = @_;
     my $api = $c->model('API');
 
@@ -149,6 +149,8 @@ sub upload : Chained('base') : PathPart('upload_goal') : Args(0) {
         ],
         method => 'upload',
     );
+    use DDP;
+    p $c->stash;
     if ( $c->stash->{status}{error} eq 'header_found' ) {
         $c->stash->{error}      = 'form_error';
         $c->stash->{form_error} = {
@@ -159,11 +161,6 @@ sub upload : Chained('base') : PathPart('upload_goal') : Args(0) {
         $c->detach( '/form/redirect_error', );
     }
     elsif ( $c->stash->{error} ) {
-
-        $c->stash->{error}      = $status->{error};
-        $c->stash->{form_error} = $status->{form_error}
-          if exists $status->{form_error};
-        $c->stash->{error} = 'form_error' if $status->{error_is_form_error};
 
         if ( ref $c->stash->{form_error} eq 'HASH' ) {
             my %new;
@@ -176,7 +173,9 @@ sub upload : Chained('base') : PathPart('upload_goal') : Args(0) {
                     $new{$k} = 'invalid';
                 }
             }
-            $c->stash->{form_error} = \%new;
+
+            #$c->stash->{form_error} = \%new;
+            $c->stash->{error} = $c->stash->{form_error}->{archive};
         }
 
         $c->detach( '/form/redirect_error', );

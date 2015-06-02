@@ -68,13 +68,20 @@ sub parse {
                     $registro->{$header_name} = $value;
                 }
                 my $vdt = $validate->($registro);
-                if ($vdt) {
+                if ( $vdt and ref $vdt ne 'ARRAY' ) {
                     $ok++;
                     push @rows, $registro;
 
                 }
                 else {
-                    $ignored++;
+                    use DDP;
+                    p $vdt;
+
+                    my $error = join( q/,/, @{$vdt} );
+                    p $error;
+                    die \[ 'archive', 'campos inválidos ' . $error ];
+
+                    #$ignored++;
                 }
 
             }
