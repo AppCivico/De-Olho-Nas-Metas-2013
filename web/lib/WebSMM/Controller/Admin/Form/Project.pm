@@ -115,7 +115,7 @@ sub upload : Chained('base') : PathPart('upload_project') : Args(0) {
         $c->detach(
             '/form/redirect_ok',
             [
-                \'/admin/goal/upload',
+                \'/admin/project/upload',
                 status_msg => 'Importado com sucesso',
                 status     => $c->stash->{status}
             ],

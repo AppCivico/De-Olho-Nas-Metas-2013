@@ -3,6 +3,7 @@
 <h2 class="sub-header">Distrito</h2>
 <div class="container-fluid">
   <a href="[% c.uri_for_action('/admin/council/add') %]" class="btn btn-success">Cadastrar Conselho</a>
+  <a href="[% c.uri_for_action('/admin/council/upload') %]" class="btn btn-success">Cadastrar Arquivo de Conselhos</a>
 </div>
 
 <div class="table-responsive">
@@ -18,7 +19,7 @@
 			[%FOREACH council IN organizations%]
 				<tr>
 					<td>
-						<a href="[% c.uri_for_action('/admin/council/detail',[council.id] ) %]">[%council.name%]</a>
+						[%council.name%]
 					</td>
 					<td style="white-space: nowrap;"><a href="[% c.uri_for_action('/admin/council/edit',[council.id] ) %]">Editar</a> | <a href="[% c.uri_for_action('/admin/form/council/process_delete',[council.id] ) %]">Remover</a></td>
 				</tr>

@@ -3,11 +3,19 @@ use Moose;
 use namespace::autoclean;
 use DateTime;
 use JSON::XS;
+use utf8;
 
 BEGIN { extends 'Catalyst::Controller' }
 
 sub base : Chained('/admin/form/base') : PathPart('') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
+}
+
+sub download : Chained('base') : PathPart('company') : CaptureArgs(0) {
+    my ( $self, $c ) = @_;
+
+    @{ $c->stash->{header} } =
+      ( "nome", "nome_url", "cnpj" );
 }
 
 sub process : Chained('base') : PathPart('company') : Args(0) {
@@ -74,7 +82,7 @@ sub csv : Chained('download') : PathPart('csv') : Args(0) {
     my %lines;
     $c->stash->{type} = 'csv';
     push @{ $lines{main} }, $c->stash->{header};
-    $file->_download( $c, 'district', \%lines );
+    $file->_download( $c, 'company', \%lines );
 
 }
 
@@ -86,7 +94,7 @@ sub xls : Chained('download') : PathPart('xls') : Args(0) {
     my %lines;
     $c->stash->{type} = 'xls';
     push @{ $lines{main} }, $c->stash->{header};
-    $file->_download( $c, 'district', \%lines );
+    $file->_download( $c, 'company', \%lines );
 
 }
 
@@ -98,11 +106,11 @@ sub xlsx : Chained('download') : PathPart('xlsx') : Args(0) {
     my %lines;
     $c->stash->{type} = 'csv';
     push @{ $lines{main} }, $c->stash->{header};
-    $file->_download( $c, 'district', \%lines );
+    $file->_download( $c, 'company', \%lines );
 
 }
 
-sub upload : Chained('base') : PathPart('upload_district') : Args(0) {
+sub upload : Chained('base') : PathPart('upload_company') : Args(0) {
     my ( $self, $c ) = @_;
     my $api = $c->model('API');
 

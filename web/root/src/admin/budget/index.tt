@@ -3,6 +3,7 @@
 <h2 class="sub-header">Orçamentos</h2>
 <div class="container-fluid">
   <a href="[% c.uri_for_action('/admin/budget/add') %]" class="btn btn-success">Cadastrar Orçamento</a>
+  <a href="[% c.uri_for_action('/admin/budget/upload') %]" class="btn btn-success">Cadastrar Arquivo de Orçamentos</a>
 </div>
 
 	<section class="metas-detail search-list">
@@ -31,7 +32,7 @@
                             [%FOREACH budget IN budgets%]
                                 <tr>
                                     <td>
-                                        <a href="[% c.uri_for_action('/admin/budget/detail',[budget.id] ) %]">[%budget.business_name%]</a>
+                                        [%budget.business_name%]
                                     </td>
                                     <td>[%budget.observation%]</td>
                                     <td>[%budget.goal_number%]</td>

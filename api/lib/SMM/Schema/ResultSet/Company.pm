@@ -5,6 +5,7 @@ use utf8;
 use Moose;
 use MooseX::Types::Email qw/EmailAddress/;
 use SMM::Types qw /DataStr TimeStr/;
+use Text2URI;
 extends 'DBIx::Class::ResultSet';
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
@@ -23,12 +24,12 @@ sub verifiers_specs {
                     type     => 'Str',
                 },
                 name_url => {
-                    required => 1,
+                    required => 0,
                     type     => 'Str',
                 },
-                goal_id => {
+                cnpj => {
                     required => 0,
-                    type     => 'Int',
+                    type     => 'Str',
                 },
             }
         )
@@ -39,7 +40,9 @@ sub action_specs {
     my $self = shift;
     return {
         create => sub {
-            my %values  = shift->valid_values;
+            my %values = shift->valid_values;
+            my $t2u    = new Text2URI();
+            $values{name_url} = $t2u->translate( $values{name} );
             my $company = $self->create( \%values );
             return $company;
         }
