@@ -65,7 +65,8 @@ sub result_GET {
                     } $region->projects,
                 ),
             ],
-            subprefecture => (
+            subprefecture => $region->subprefecture
+            ? (
                 map {
                     {
                         id   => $_->id,
@@ -73,7 +74,8 @@ sub result_GET {
                     }
 
                 } $region->subprefecture,
-            ),
+              )
+            : (),
         }
     );
 

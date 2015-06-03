@@ -56,6 +56,11 @@ sub edit : Chained('object') : PathPart('edit') : Args(0) {
     my ( $self, $c, $id ) = @_;
 }
 
+sub upload : Chained('base') : PathPart('upload') : Args(0) {
+    my ( $self, $c ) = @_;
+
+}
+
 =encoding utf8
 
 =head1 AUTHOR

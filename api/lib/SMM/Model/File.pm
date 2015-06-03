@@ -14,34 +14,42 @@ sub process {
     my $resultset = $param{schema};
     my $validate  = $param{validate};
     my $header    = $param{header};
+    my $fk        = $param{fk};
+    use DDP;
     my $parse;
+
     eval {
         if ( $upload->filename =~ /xlsx$/ ) {
             $parse = SMM::Model::File::XLSX->new->parse(
                 tempname => $upload->tempname,
                 validate => $validate,
-                header   => $header
+                header   => $header,
+                fk       => $fk
             );
         }
         elsif ( $upload->filename =~ /xls$/ ) {
             $parse = SMM::Model::File::XLS->new->parse(
                 tempname => $upload->tempname,
                 validate => $validate,
-                header   => $header
+                header   => $header,
+                fk       => $fk
             );
         }
         elsif ( $upload->filename =~ /csv$/ ) {
             $parse = SMM::Model::File::CSV->new->parse(
                 tempname => $upload->tempname,
                 validate => $validate,
-                header   => $header
+                header   => $header,
+                fk       => $fk
             );
         }
     };
-    die $@ if $@;
+    p $@;
+    die $@ if $@ && ref $@;
+    die \[ 'archive', "FATAL ERROR: $@ " ] if $@;
     die "file not supported!\n" unless $parse;
-    my $status = $@ ? { error => $@ } : undef;
 
+    my $status = $@ ? { error => $@ } : undef;
     $status->{accepted} = 'Linhas aceitas: ' . $parse->{ok} . "\n";
     $status->{ignored}  = 'Linhas ignoradas: ' . $parse->{ignored} . "\n"
       if $parse->{ignored};
@@ -64,33 +72,40 @@ sub process {
     $file_id = $file->id;
 
     my $rvv_rs = $resultset;
-    use DDP;
-    $resultset->result_source->schema->txn_do(
-        sub {
-            my $cache_ref = {};
+    eval {
+        $resultset->result_source->schema->txn_do(
+            sub {
+                my $cache_ref = {};
 
-            # percorre as linhas e insere no banco
-            # usando o modelo certo.
-            my $c = 0;
+                # percorre as linhas e insere no banco
+                # usando o modelo certo.
+                my $c = 0;
 
-            foreach my $r ( @{ $parse->{rows} } ) {
-                $c++;
+                foreach my $r ( @{ $parse->{rows} } ) {
+                    $c++;
 
-                my $old_value = $r->{value};
+                    my $old_value = $r->{value};
+                    my $create;
+                    eval { $create = $resultset->create($r); };
 
-                my $create = $resultset->create($r);
-                my $ref    = {
-                    do_not_calc => 1,
-                    cache_ref   => $cache_ref
-                };
-                $ref->{variable_id} = $r->{id};
+                    die \[ 'archive', "Não foi possivel inserir o registro" ]
+                      if $@;
+                    $r->{id} = $create->id;
+                    $fk->($r) if $fk;
+                    my $ref = {
+                        do_not_calc => 1,
+                        cache_ref   => $cache_ref
+                    };
+                    $ref->{variable_id} = $r->{id};
 
-                $status .= "$@" if $@;
-                die $@ if $@;
+                    $status .= "$@" if $@;
+                    die $@ if $@;
+                }
+
             }
-
-        }
-    );
+        );
+    };
+    $status->{error} = $@ if $@;
     $file->update( { status_text => encode_json $status } );
     return {
         status  => $status,

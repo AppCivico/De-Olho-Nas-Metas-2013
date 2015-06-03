@@ -3,11 +3,23 @@ use Moose;
 use namespace::autoclean;
 use DateTime;
 use JSON::XS;
+use utf8;
 
 BEGIN { extends 'Catalyst::Controller' }
 
 sub base : Chained('/admin/form/base') : PathPart('') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
+}
+
+sub download : Chained('base') : PathPart('council') : CaptureArgs(0) {
+    my ( $self, $c ) = @_;
+
+    @{ $c->stash->{header} } = (
+        "nome",        "endereço",
+        "postal_code", "description",
+        "email",       "website",
+        "phone",       "id da subprefeitura"
+    );
 }
 
 sub process : Chained('base') : PathPart('council') : Args(0) {
@@ -65,6 +77,41 @@ sub process_delete : Chained('base') : PathPart('remove_council') : Args(1) {
     }
 }
 
+sub csv : Chained('download') : PathPart('csv') : Args(0) {
+    my ( $self, $c ) = @_;
+    my $api  = $c->model('API');
+    my $file = $c->model('File');
+
+    my %lines;
+    $c->stash->{type} = 'csv';
+    push @{ $lines{main} }, $c->stash->{header};
+    $file->_download( $c, 'council', \%lines );
+
+}
+
+sub xls : Chained('download') : PathPart('xls') : Args(0) {
+    my ( $self, $c ) = @_;
+    my $api  = $c->model('API');
+    my $file = $c->model('File');
+
+    my %lines;
+    $c->stash->{type} = 'xls';
+    push @{ $lines{main} }, $c->stash->{header};
+    $file->_download( $c, 'council', \%lines );
+
+}
+
+sub xlsx : Chained('download') : PathPart('xlsx') : Args(0) {
+    my ( $self, $c ) = @_;
+    my $api  = $c->model('API');
+    my $file = $c->model('File');
+
+    my %lines;
+    $c->stash->{type} = 'csv';
+    push @{ $lines{main} }, $c->stash->{header};
+    $file->_download( $c, 'council', \%lines );
+
+}
 __PACKAGE__->meta->make_immutable;
 
 1;

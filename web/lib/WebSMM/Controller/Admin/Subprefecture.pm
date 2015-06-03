@@ -39,6 +39,10 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
 
 }
 
+sub upload : Chained('base') : ParthPart('upload') : Args(0) {
+    my ( $self, $c ) = @_;
+}
+
 sub detail : Chained('object') : PathPart('') Args(0) {
     my ( $self, $c ) = @_;
 }

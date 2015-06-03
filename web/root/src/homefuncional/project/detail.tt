@@ -261,7 +261,7 @@ $(document).ready(function () {
 						
 						[% IF c.user%]
 						<div id="follow" class="col-xs-6 text-right">							
-							<button  type="button" id="follow_or_not" data-toggle="tooltip" data-placement="top" title="[%l('Acompanhar e receber notificações por email de cada atualização')%]" class="btn btn-brown custom-tooltip [% do_i_follow > 0 ? "" : "follow"%]" data-id="[% c.user.obj.id%]" autocomplete="off"><span>[% do_i_follow > 0 ? "[%l('Parar de Seguir')%]" : "[%l('Siga o Projeto')%]" %]</span></button>
+							<button  type="button" id="follow_or_not" data-toggle="tooltip" data-placement="top" title="[%l('Acompanhar e receber notificações por email de cada atualização')%]" class="btn btn-brown custom-tooltip [% do_i_follow > 0 ? "" : "follow"%]" data-id="[% c.user.obj.id%]" autocomplete="off"><span>[% do_i_follow > 0 ? l('Parar de Seguir') : l('Siga o Projeto') %]</span></button>
 						</div>
 						[%ELSE%]
 						<div id="follow" class="col-xs-6 text-right">							
@@ -448,8 +448,21 @@ $(document).ready(function () {
 						    </form>
 						</div>
 					</div>
+					<div id="disqus_thread"></div>
+					<script type="text/javascript">
+						/* * * CONFIGURATION VARIABLES * * */
+						var disqus_shortname = 'donm';
+						
+						/* * * DON'T EDIT BELOW THIS LINE * * */
+						(function() {
+							var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+							dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+							(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+						})();
+					</script>
+					<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 
-					<div class="comments">
+<!--					<div class="comments">
 						<h3>[%l('Comentários')%]</h3>
 						<table id="list_comment" class="table table-striped">
 							<thead>
@@ -485,7 +498,7 @@ $(document).ready(function () {
 						<textarea id="text_comment" class="form-control" rows="2"></textarea>
 						<button  id="comment" type="button" class="btn btn-brown" data-id="[% c.user.obj.id%]">[%l('Comentar')%]</button>
 					</div>
-
+				-->
 
 				</div>
 				<div class="col-sm-4">

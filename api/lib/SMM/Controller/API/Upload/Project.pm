@@ -1,5 +1,5 @@
 
-package SMM::Controller::API::Upload::Goal;
+package SMM::Controller::API::Upload::Project;
 
 use Moose;
 use JSON;
@@ -13,7 +13,7 @@ sub base : Chained('/api/upload/base') : PathPart('') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 }
 
-sub configuration_goal : Chained('base') : PathPart('goals') : Args(0)
+sub configuration_goal : Chained('base') : PathPart('projects') : Args(0)
   : ActionClass('REST') {
 
 }
@@ -22,16 +22,16 @@ sub configuration_goal_POST {
     my ( $self, $c ) = @_;
 
     my %header = (
-        name        => qr /\bnome\b/io,
-        description => qr /\bdescri..o\b/io,
+        name    => qr /\bnome\b/io,
+        address => qr /\bendere.o\b/io,
 
-        technically       => qr /\bdescri..o t.cnica\b/io,
-        will_be_delivered => qr /\bobjetivo de entrega\b/io,
+        latitude  => qr /\blatitude\b/io,
+        longitude => qr /\blongitude\b/io,
 
-        expected_start_date    => qr /\bexpectativa de come.o\b/io,
-        expected_end_date      => qr /\bexpectativa de fim\b/io,
+        budget_executed        => qr /\bor.amento executado\b/io,
+        goal_id                => qr /\bid da meta\b/io,
+        region_id              => qr /\bid da região\b/io,
         percentage             => qr /\bporcentagem\b/io,
-        goal_number            => qr /\bn.mero da meta\b/io,
         qualitative_progress_1 => qr /\bprogresso qualitativo 1\b/io,
         qualitative_progress_2 => qr /\bprogresso qualitativo 2\b/io,
         qualitative_progress_3 => qr /\bprogresso qualitativo 3\b/io,
@@ -39,22 +39,21 @@ sub configuration_goal_POST {
         qualitative_progress_5 => qr /\bprogresso qualitativo 5\b/io,
         qualitative_progress_6 => qr /\bprogresso qualitativo 6\b/io,
     );
-    $c->stash->{db}       = $c->model('DB::Goal');
+    $c->stash->{db}       = $c->model('DB::Project');
     $c->stash->{header}   = \%header;
     $c->stash->{validate} = sub {
         my $line = shift;
-        use DDP;
-        my $dv = Data::Verifier->new(
+        my $dv   = Data::Verifier->new(
             filters => [qw(trim)],
             profile => {
                 name                   => { required => 0, type => 'Str' },
-                description            => { required => 0, type => 'Str' },
-                technically            => { required => 0, type => 'Str' },
-                will_be_delivered      => { required => 0, type => 'Str' },
-                expected_start_date    => { required => 0, type => DataStr },
-                expected_end_date      => { required => 0, type => DataStr },
+                address                => { required => 0, type => 'Str' },
+                latitude               => { required => 0, type => 'Str' },
+                longitude              => { required => 0, type => 'Str' },
+                budget_executed        => { required => 0, type => 'Int' },
+                goal_id                => { required => 0, type => 'Int' },
+                region_id              => { required => 0, type => 'Int' },
                 percentage             => { required => 0, type => 'Int' },
-                goal_number            => { required => 0, type => 'Int' },
                 qualitative_progress_1 => { required => 0, type => 'Str' },
                 qualitative_progress_2 => { required => 0, type => 'Str' },
                 qualitative_progress_3 => { required => 0, type => 'Str' },
@@ -72,10 +71,16 @@ sub configuration_goal_POST {
         push @message, $results->get_field($_) for @res;
 
     };
-    my $lol = $c->forward('/api/uploadfile/do');
-    use DDP;
-    p $lol;
-    warn 1234567;
+    my $db = $c->model('DB::GoalProject');
+    $c->stash->{fk} = sub {
+        my $line = shift;
+
+        $db->create(
+            { project_id => $line->{id}, goal_id => $line->{goal_id} } )
+          if $line->{goal_id};
+
+    };
+    my $lol = $c->forward('/api/uploadfile/file');
 }
 
 1;

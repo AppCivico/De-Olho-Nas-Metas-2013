@@ -20,6 +20,7 @@
 [%-CALL assets.include("css/admin.css")%]
 [%-CALL assets.include("js/bootstrap.min.js")%]
 [%-CALL assets.include("js/jquery.maskedinput.js")%]
+<script type="text/javascript" src="/static/js/GeoJSON.js"></script>
 [%-CALL assets.include("js/jquery.maskMoney.js")%]
 [%-CALL assets.include("js/admin.js")%]
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>

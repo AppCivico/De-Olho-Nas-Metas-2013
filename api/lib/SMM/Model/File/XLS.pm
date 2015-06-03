@@ -11,11 +11,13 @@ use DateTime::Format::Excel;
 use Encode;
 
 sub parse {
-    my ( $self, $file, %header ) = @_;
+    my ( $self, %args ) = @_;
+    my $file     = $args{tempname};
+    my $validate = $args{validate};
 
     my $xls = Spreadsheet::ParseExcel::Stream->new($file);
     use DDP;
-    my %expected_header = %header;
+    my %expected_header = %{ $args{header} };
 
     my @rows;
     my $ok      = 0;
@@ -65,14 +67,21 @@ sub parse {
                     $value = decode( 'iso-8859-15', $value );
                     $registro->{$header_name} = $value;
                 }
-
-                if ( exists $registro->{name} ) {
+                my $vdt = $validate->($registro);
+                if ( $vdt and ref $vdt ne 'ARRAY' ) {
                     $ok++;
                     push @rows, $registro;
 
                 }
                 else {
-                    $ignored++;
+                    use DDP;
+                    p $vdt;
+
+                    my $error = join( q/,/, @{$vdt} );
+                    p $error;
+                    die \[ 'archive', 'campos inválidos ' . $error ];
+
+                    #$ignored++;
                 }
 
             }

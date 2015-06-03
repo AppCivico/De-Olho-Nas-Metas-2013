@@ -150,7 +150,7 @@ IF (opt.req || opt.required); opt.classes.push('required'); END;
 			[%IF opt.default_first%]
 				<option value="">[%opt.default_first%]</option>
 			[%ELSIF !opt.without_select_opt%]
-				<option value="">l('Selecione')</option>
+				<option value="">[%l('Selecione')%]</option>
             [%END%]
             [% FOREACH item = opt.array;
 
