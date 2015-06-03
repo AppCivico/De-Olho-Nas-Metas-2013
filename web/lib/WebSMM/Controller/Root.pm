@@ -3,7 +3,14 @@ use Moose;
 use namespace::autoclean;
 
 BEGIN { extends 'Catalyst::Controller' }
+use I18N::AcceptLanguage;
 
+has 'lang_acceptor' => (
+    is      => 'rw',
+    isa     => 'I18N::AcceptLanguage',
+    lazy    => 1,
+    default => sub { I18N::AcceptLanguage->new( defaultLanguage => 'pt-br' ) }
+);
 #
 # Sets the actions in this controller to be registered with no prefix
 # so they function identically to actions created in MyApp.pm
@@ -36,9 +43,72 @@ sub index : Path : Args(0) {
     $c->res->redirect( $c->uri_for_action('/user/account/index') ), $c->detach
       if $c->user_exists;
 
-    $c->forward( '/homefuncional/base' );
-    $c->forward( '/homefuncional/home' );
+    $c->forward('/homefuncional/base');
+    $c->forward('/homefuncional/home');
     $c->stash->{template} = 'homefuncional/home.tt';
+
+}
+
+sub change_lang : Chained('root') PathPart('lang') CaptureArgs(1) {
+    my ( $self, $c, $lang ) = @_;
+    $c->stash->{lang} = $lang;
+}
+
+sub change_lang_redir : Chained('change_lang') PathPart('') Args(0) {
+    my ( $self, $c ) = @_;
+
+    my $cur_lang = $c->stash->{lang};
+    my %langs = map { $_ => 1 } split /,/, $c->config->{available_langs};
+    $cur_lang = 'pt-br' unless exists $langs{$cur_lang};
+    my $host = $c->req->uri->host;
+
+    $c->response->cookies->{'cur_lang'} = {
+        value   => $cur_lang,
+        path    => '/',
+        expires => '+3600h',
+    };
+
+    my $refer = $c->req->headers->referer;
+    if ( $refer && $refer =~ /^https?:\/\/$host/ ) {
+        $c->res->redirect($refer);
+    }
+    else {
+        $c->res->redirect( $c->uri_for('/') );
+    }
+    $c->detach;
+}
+
+sub load_lang {
+    my ( $self, $c ) = @_;
+
+    my $cur_lang =
+      exists $c->req->cookies->{cur_lang}
+      ? $c->req->cookies->{cur_lang}->value
+      : undef;
+
+    if ( !defined $cur_lang ) {
+        my $al = $c->req->headers->header('Accept-language');
+        my $language =
+          $self->lang_acceptor->accepts( $al, split /,/,
+            $c->config->{available_langs} );
+
+        $cur_lang = $language;
+
+    }
+    else {
+        my %langs = map { $_ => 1 } split /,/, $c->config->{available_langs};
+        $cur_lang = 'en' unless exists $langs{$cur_lang};
+    }
+
+    $c->set_lang($cur_lang);
+
+    $c->response->cookies->{'cur_lang'} = {
+        value   => $cur_lang,
+        path    => '/',
+        expires => '+3600h',
+      }
+      if !exists $c->req->cookies->{cur_lang}
+      || $c->req->cookies->{cur_lang} ne $cur_lang;
 
 }
 
@@ -98,6 +168,8 @@ sub root : Chained('/') : PathPart('') : CaptureArgs(0) {
     $c->stash->{c_req_path} = $c->req->path;
 
     $c->session->{foobar}++;
+
+    $self->load_lang($c);
 
     $c->load_status_msgs;
     my $status_msg = $c->stash->{status_msg};

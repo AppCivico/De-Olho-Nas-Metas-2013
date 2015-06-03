@@ -81,7 +81,7 @@ jQuery(function($){
 					<section class="projetos-result">
 						<div class="tab-content">
 								<div id="tab-cadastrar" >
-									<h4 class="green">EDITAR CAMPANHA</h4>
+									<h4 class="green">[%l('EDITAR CAMPANHA')%]</h4>
 									[%IF status_msg %]<div class="alert alert-success"><p>[%status_msg%]</p></div>[%END%]
 									[%IF error_msg %]<div class="alert alert-danger"><p>[%error_msg%]</p></div>[%END%]
 									<form action="/user/campaign/[%campaign_obj.id%]/update" method="post" enctype="multipart/form-data">
@@ -186,7 +186,7 @@ jQuery(function($){
  									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group row ">
-											    <label class="col-lg-12 " for="elm_end_on">CEP ou Endereço:</label>
+											    <label class="col-lg-12 " for="elm_end_on">[%l('CEP ou Endereço')%]:</label>
 											    <div class="col-lg-12">
 											        <div class=" ">
 											            <input type="text" id="txtaddress" name="txtaddress" placeholder="CEP" value="[%campaign_obj.address%]" class="form-control">
@@ -198,7 +198,7 @@ jQuery(function($){
 											    </div>
 											</div>
 											<div class="form-group row ">
-											    <label class="col-lg-12 " for="elm_end_on">Campanha Móvel:</label>
+											    <label class="col-lg-12 " for="elm_end_on">[%l('Campanha Móvel')%]:</label>
 											    <div class="col-lg-12">
 											        <div class=" ">
 
@@ -209,7 +209,7 @@ jQuery(function($){
 			    		    						<option value="[%cm.id%]">[%cm.description%]</option>
 		    									[%END%]
 	    									[%ELSE%]
-    											<option value="">Nenhuma campanha criada.</option>
+    											<option value="">[%l('Nenhuma campanha criada')%].</option>
 										    [%END%]
 											</select>
 											        </div>
@@ -235,7 +235,7 @@ jQuery(function($){
 											<div class="form-group">
 												<small>
 													<strong>Imagem da campanha</strong><br />
-													Faça upload de uma imagem para ilustrar a campanha<br />
+												[%l('Faça upload de uma imagem para ilustrar a campanha')%]<br />
 												</small>
 												<input type="file" name="avatar">
 											</div>

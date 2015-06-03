@@ -1,14 +1,19 @@
 <div>
 <div class="rows">
 <h2 class="sub-header">Organizações cadastradas</h2>
+<div class="container-fluid">	
+	<a href="/admin/organization/new">
+		<button type="button" class="btn btn-success pull-right">[%l('Adicionar nova organização')%]</button>
+	</a>
+</div>
 <div class="table-responsive">
 	[%IF organizations.size > 0%]
 	<table class="table table-striped">
 		<thead>
 			<tr>
-                <th>Nome</th>
-                <th>Descrição</th>
-                <th>Ações</th>
+                <th>[%l('Nome')%]</th>
+                <th>[%l('Descrição')%]</th>
+                <th>[%l('Ações')%]</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -17,20 +22,16 @@
 					<td>[%organization.name%]</td>
 					<td>[%organization.description | none%]</td>
 					<td>
-						<a href="/admin/organization/[%organization.id%]">Editar</a>
-<!-- 						<a href="/admin/form/remove_organization/[%organization.id%]">Excluir</a> -->
+						<a href="/admin/organization/[%organization.id%]">[%l('Editar')%]</a>
+<!-- 						<a href="/admin/form/remove_organization/[%organization.id%]">[%l('Excluir')%]</a> -->
 					</td>
 				</tr>
             [%END%]
 		</tbody>
 	</table>
 	[%ELSE%]
-		<h4>Nenhuma organização cadastrada</h4>
+		<h4>[%l('Nenhuma organização cadastrada')%]</h4>
 	[%END%]
-	
-	<a href="/admin/organization/new">
-		<button type="button" class="btn btn-primary pull-right">Adicionar nova organização</button>
-	</a>
 </div>
 [%PROCESS pagination.tt  %]
 </div>

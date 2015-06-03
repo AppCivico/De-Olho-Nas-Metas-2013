@@ -11,23 +11,11 @@ use DateTime::Format::Excel;
 use Encode;
 
 sub parse {
-    my ( $self, $file ) = @_;
+    my ( $self, $file, %header ) = @_;
 
     my $excel = Spreadsheet::XLSX->new($file);
 
-    my %expected_header = (
-        Ano_empenho    => qr /\b(AnoEmpenho)\b/io,
-        cod_orgao  => qr /\bcodorgao\b/io,
-        orgao => qr /\borgao\b/io,
-
-        txt_emp    => qr /\bTxt_Obs_Eph\b/io,
-        Nome_razao => qr /\bNom_Rzao_Soci_Sof\b/io,
-
-        total_emp => qr /\b(Val_tot_eph)\b/io,
-        Cod_Cpf_Cnpj_Sof => qr /\b(Val_tot_eph)\b/io,
-        liquidado => qr /\b(liquidado)\b/io,
-        meta_number => qr /\b(meta_n_c)\b/io,
-    );
+    my %expected_header = \%header;
 
     my @rows;
     my $ok      = 0;
@@ -61,8 +49,8 @@ sub parse {
             }
             else {
 
-                # aqui você pode verificar se foram encontrados todos os campos que você precisa
-                # neste caso, achar apenas 1 cabeçalho já é o suficiente
+# aqui você pode verificar se foram encontrados todos os campos que você precisa
+# neste caso, achar apenas 1 cabeçalho já é o suficiente
 
                 my $registro = {};
 
@@ -75,7 +63,7 @@ sub parse {
                     my $value = $cell->value();
                     utf8::decode($value);
 
-                    # aqui é uma regra que você escolhe, pois as vezes o valor da célula pode ser nulo
+# aqui é uma regra que você escolhe, pois as vezes o valor da célula pode ser nulo
                     next if !defined $value || $value =~ /^\s*$/;
                     $value =~ s/^\s+//;
                     $value =~ s/\s+$//;

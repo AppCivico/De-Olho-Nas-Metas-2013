@@ -50,6 +50,13 @@ sub days_of_week_human {
     return "$x";
 }
 
+sub l {
+    my ( $self, $c, $text, @args ) = @_;
+    return unless $text;
+
+    return $c->loc( $text, @args ) || $text;
+}
+
 sub hour_human {
     my ( $self, $c, $time ) = @_;
 

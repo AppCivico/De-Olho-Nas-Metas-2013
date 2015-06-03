@@ -80,7 +80,7 @@ jQuery(function($){
 				<div class="col-sm-9 .col-md.offset-4">
 					<section class="projetos-result">
 						<div class="tab-content">
-									<h4 class="green">EDITAR CONSELHO</h4>
+									<h4 class="green">[%l('EDITAR CONSELHO')%]</h4>
 									[%IF status_msg %]<div class="alert alert-success"><p>[%status_msg%]</p></div>[%END%]
 									[%IF error_msg %]<div class="alert alert-danger"><p>[%error_msg%]</p></div>[%END%]
 									<form action="/organization/edit" method="post" enctype="multipart/form-data">

@@ -116,12 +116,14 @@ sub result_GET {
                   longitude
                   project_number
                   percentage
+                  budget_executed
                   qualitative_progress_1
                   qualitative_progress_2
                   qualitative_progress_3
                   qualitative_progress_4
                   qualitative_progress_5
                   qualitative_progress_6
+                  goal_id
                   /
             ),
             goal => {
@@ -214,6 +216,10 @@ sub result_DELETE {
     my ( $self, $c ) = @_;
     my $project = $c->stash->{project};
 
+    $project->search_related('project_prefectures')->delete;
+    $project->search_related('project_milestones')->delete;
+
+    $project->search_related('goal_projects')->delete;
     $project->delete;
 
     $self->status_no_content($c);

@@ -49,6 +49,7 @@ sub result_GET {
                   name
                   lat
                   long
+                  subprefecture_id
                   /
             ),
             projects => [
@@ -64,7 +65,8 @@ sub result_GET {
                     } $region->projects,
                 ),
             ],
-            subprefecture => (
+            subprefecture => $region->subprefecture
+            ? (
                 map {
                     {
                         id   => $_->id,
@@ -72,7 +74,8 @@ sub result_GET {
                     }
 
                 } $region->subprefecture,
-            ),
+              )
+            : (),
         }
     );
 
@@ -80,7 +83,7 @@ sub result_GET {
 
 sub result_DELETE {
     my ( $self, $c ) = @_;
-    my $region = $c->stash->{organization};
+    my $region = $c->stash->{region};
 
     $region->delete;
 
@@ -91,7 +94,7 @@ sub result_PUT {
     my ( $self, $c ) = @_;
 
     my $params = { %{ $c->req->params } };
-    my $region = $c->stash->{organization};
+    my $region = $c->stash->{region};
 
     $region->execute( $c, for => 'update', with => $c->req->params );
 

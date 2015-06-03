@@ -52,7 +52,7 @@ sub result_GET {
 sub result_DELETE {
     my ( $self, $c ) = @_;
     my $objective = $c->stash->{objective};
-
+    $objective->search_related('goals')->update( { objective_id => undef } );
     $objective->delete;
 
     $self->status_no_content($c);
@@ -85,7 +85,7 @@ sub list_GET {
     my $rs  = $c->stash->{collection};
     my $lol = $c->stash->{collection};
 
-    #my $teste = $lol->search( {}, { join => 'goals', select => [qw/me.id me.name/], 'as' => [ 'id', 'name' ], group_by =>  [ 'me.id','me.name' ]});
+#my $teste = $lol->search( {}, { join => 'goals', select => [qw/me.id me.name/], 'as' => [ 'id', 'name' ], group_by =>  [ 'me.id','me.name' ]});
     $rs = $rs->search(
         undef,
         {

@@ -42,19 +42,19 @@
 		<div class="container">
 			<div class="form">
 				<div class="col-sm-4 cep">
-					Encontre seu distrito<br />
+					[%l('Encontre seu distrito')%]<br />
 					<input type="hidden" id="pagetype" value="subprefdetail">
 					<input type="hidden" id="subprefid" value="[% subprefecture_obj.id %]">
-					<input type="text" id="txtaddress" placeholder="CEP">
+					<input type="text" id="txtaddress" placeholder="[%l('CEP')%]">
 					<button id="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
 				</div>
 				<div class="col-sm-8">
 					<div class="row">
 						<div class="col-sm-6 region">
-							Selecione o Distrito<br />
+							[%l('Selecione o Distrito')%]<br />
 							<div class="select-stylized">
 							<select id="region" onchange="location = this.options[this.selectedIndex].value;">
-								<option value="">Distrito</option>
+								<option value="">[%l('Distrito')%]</option>
 								[% FOREACH region IN regions %]
 								<option value="[% c.uri_for_action('/homefuncional/region/detail',[ region.id ] ) %]">[%region.name%]</option>
 								[% END %]
@@ -94,7 +94,7 @@
 					</div>-->
 					
 <!--				<div class="events">
-						<h3>Participe dos Eventos</h3>
+						<h3>[%l('Participe dos Eventos')%]</h3>
 						<div class="date-row row">
 							<div class="col-xs-1">
 								<div class="day">
@@ -106,7 +106,7 @@
 							</div>
 							<div class="col-xs-11">
 								<div class="item">
-									<div class="title">Nome da campanha</div>
+									<div class="title">[%l('Nome da campanha')%]</div>
 									<div class="description">Pastry wafer brownie liquorice. Unerdwear.com gummi cupcake bears bonbon. Cheesecake dessert cupcake.</div>
 								</div>
 							</div>
@@ -119,7 +119,7 @@
 					<div class="col-sm-4">
 					
 					<div class="list-box list-gold">
-						<span class="header">Subprefeitura [%subprefecture_obj.name%]</span>
+						<span class="header">[%l('Subprefeitura')%] [%subprefecture_obj.name%]</span>
 						<table>
 							<tr>
 								<td><div class="icon gps3"></div></td>
@@ -140,14 +140,14 @@
 							[% END %]
 						</table>
 						[% IF subprefecture_obj.deputy_mayor != "" %]
-						<span class="header">Subprefeito</span>
+						<span class="header">[%l('Subprefeito')%]</span>
 						<ul>
 							<li>
 								[% subprefecture_obj.deputy_mayor%]
 							</li>
 						</ul>
 						[% END %]
-						<span class="header">[% subprefecture_obj.regions.size%] Distritos</span>
+						<span class="header">[% subprefecture_obj.regions.size%] [%l('Distritos')%]</span>
 						<ul>
 							[% IF subprefecture_obj.regions.size > 0 %]
 							<li>
@@ -156,12 +156,12 @@
 							[% END %]
 							</li>
 							[%ELSE%]
-							<li><a href="">NENHUMA REGIÃO ENCONTRADA</a></li>
+							<li><a href="">[%l('NENHUMA REGIÃO ENCONTRADA')%]</a></li>
 							[% END %]
 						</ul>
 					</div>
 					<div class="list-box list-blue">
-						<span class="header">Conselho</span>
+						<span class="header">[%l('Conselho')%]</span>
 						<ul>
 							[% IF subprefecture_obj.organization.size > 0 %]
 
@@ -169,7 +169,7 @@
 							<li><a href="[% c.uri_for_action('/homefuncional/organization/detail',[subprefecture_obj.organization.id] ) %]">[% subprefecture_obj.organization.name%]</a></li>
 
 							[%ELSE%]
-							<li><a href="">NENHUMA REGIÃO ENCONTRADA</a></li>
+							<li><a href="">[%l('NENHUMA REGIÃO ENCONTRADA')%]</a></li>
 							[% END %]
 						</ul>
 					</div>

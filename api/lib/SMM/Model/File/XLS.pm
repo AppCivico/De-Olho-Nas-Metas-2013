@@ -11,20 +11,13 @@ use DateTime::Format::Excel;
 use Encode;
 
 sub parse {
-    my ( $self, $file ) = @_;
+    my ( $self, %args ) = @_;
+    my $file     = $args{tempname};
+    my $validate = $args{validate};
 
     my $xls = Spreadsheet::ParseExcel::Stream->new($file);
-
-    my %expected_header = (
-        subprefeitura   => qr /\bSubprefeitura\b/io,
-        subprefeito  => qr /\bSubprefeito\b/io,
-        site => qr /\bSite\b/io,
-
-        email   => qr /\bEmail\b/io,
-        telefone => qr /\bTelefone\b/io,
-
-        endereco => qr /\bEndereço\b/io,
-    );
+    use DDP;
+    my %expected_header = %{ $args{header} };
 
     my @rows;
     my $ok      = 0;
@@ -56,8 +49,8 @@ sub parse {
             }
             else {
 
-                # aqui você pode verificar se foram encontrados todos os campos que você precisa
-                # neste caso, achar apenas 1 cabeçalho já é o suficiente
+# aqui você pode verificar se foram encontrados todos os campos que você precisa
+# neste caso, achar apenas 1 cabeçalho já é o suficiente
 
                 my $registro = {};
 
@@ -66,7 +59,7 @@ sub parse {
 
                     my $value = $data[$col];
 
-                    # aqui é uma regra que você escolhe, pois as vezes o valor da célula pode ser nulo
+# aqui é uma regra que você escolhe, pois as vezes o valor da célula pode ser nulo
                     next if !defined $value || $value =~ /^\s*$/;
                     $value =~ s/^\s+//;
                     $value =~ s/\s+$//;
@@ -74,23 +67,21 @@ sub parse {
                     $value = decode( 'iso-8859-15', $value );
                     $registro->{$header_name} = $value;
                 }
-
-                if ( exists $registro->{id} && exists $registro->{date} && exists $registro->{value} ) {
-
-                    $registro->{date} =
-                        $registro->{date} =~ /^20[0123][0-9]$/       ? $registro->{date} . '-01-01'
-                      : $registro->{date} =~ /^\d{4}\-\d{2}\-\d{2}$/ ? $registro->{date}
-                      :   DateTime::Format::Excel->parse_datetime( $registro->{date} )->ymd;
+                my $vdt = $validate->($registro);
+                if ( $vdt and ref $vdt ne 'ARRAY' ) {
                     $ok++;
-
-                    die 'invalid variable id' unless $registro->{id} =~ /^\d+$/;
-                    die 'invalid region id' if $registro->{region_id} && $registro->{region_id} !~ /^\d+$/;
-
                     push @rows, $registro;
 
                 }
                 else {
-                    $ignored++;
+                    use DDP;
+                    p $vdt;
+
+                    my $error = join( q/,/, @{$vdt} );
+                    p $error;
+                    die \[ 'archive', 'campos inválidos ' . $error ];
+
+                    #$ignored++;
                 }
 
             }

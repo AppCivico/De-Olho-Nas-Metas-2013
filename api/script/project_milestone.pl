@@ -79,9 +79,10 @@ while ( my $row = $csv->getline($fh) ) {
         }
     );
 }
-for my $d ( keys $data ) {
-    my $sum = sum @{ $data->{$d} };
-    $schema->resultset('Project')->find($d)->update( { percentage => $sum } );
-    warn "soma: $d : $sum";
-}
+
+#for my $d ( keys $data ) {
+#    my $sum = sum @{ $data->{$d} };
+#    $schema->resultset('Project')->find($d)->update( { percentage => $sum } );
+#    warn "soma: $d : $sum";
+#}
 $csv->eol("\r\n");

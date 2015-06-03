@@ -8,22 +8,15 @@ use DateTime::Format::Pg;
 use Text::CSV_XS;
 
 sub parse {
-    my ( $self, $file ) = @_;
+    my ( $self, %args ) = @_;
+    my $file     = $args{tempname};
+    my $validate = $args{validate};
 
     my $csv = Text::CSV_XS->new( { binary => 1 } )
       or die "Cannot use CSV: " . Text::CSV_XS->error_diag();
     open my $fh, "<:encoding(utf8)", $file or die "$file: $!";
 
-    my %expected_header = (
-        id     => qr /\b(id da v.ri.vel|v.ri.vel id)\b/io,
-        date   => qr /\bdata\b/io,
-        value  => qr /\bvalor\b/io,
-        obs    => qr /\bobserva..o\b/io,
-        source => qr /\bfonte\b/io,
-
-        region_id => qr /\b(id da regi.o|regi.o id)\b/io,
-    );
-
+    my %expected_header = %{ $args{header} };
     my @rows;
     my $ok      = 0;
     my $ignored = 0;
@@ -52,8 +45,8 @@ sub parse {
         }
         else {
 
-            # aqui você pode verificar se foram encontrados todos os campos que você precisa
-            # neste caso, achar apenas 1 cabeçalho já é o suficiente
+# aqui você pode verificar se foram encontrados todos os campos que você precisa
+# neste caso, achar apenas 1 cabeçalho já é o suficiente
 
             my $registro = {};
 
@@ -62,23 +55,16 @@ sub parse {
 
                 my $value = $data[$col];
 
-                # aqui é uma regra que você escolhe, pois as vezes o valor da célula pode ser nulo
+# aqui é uma regra que você escolhe, pois as vezes o valor da célula pode ser nulo
                 next if !defined $value || $value =~ /^\s*$/;
                 $value =~ s/^\s+//;
                 $value =~ s/\s+$//;
                 $registro->{$header_name} = $value;
             }
+            my $vdt = $validate->($registro);
+            if ($vdt) {
 
-            if ( exists $registro->{id} && exists $registro->{date} && exists $registro->{value} ) {
-
-                $registro->{date} =
-                    $registro->{date} =~ /^20[0123][0-9]$/       ? $registro->{date} . '-01-01'
-                  : $registro->{date} =~ /^\d{4}\-\d{2}\-\d{2}$/ ? $registro->{date}
-                  :   DateTime::Format::Excel->parse_datetime( $registro->{date} )->ymd;
                 $ok++;
-
-                die 'invalid variable id' unless $registro->{id} =~ /^\d+$/;
-                die 'invalid region id' if $registro->{region_id} && $registro->{region_id} !~ /^\d+$/;
 
                 push @rows, $registro;
 

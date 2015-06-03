@@ -75,18 +75,18 @@ $(document).keydown( function(e) {
 		<div class="container">
 			<form>
 				<div class="col-sm-6 cep">
-					Encontre a campanha<br />
+					[%l('Encontre a campanha')%]<br />
 					<input type="hidden" id="pagetype" value="campaigndetail">
-					<input type="text" id="txtaddress" placeholder="CEP">
+					<input type="text" id="txtaddress" placeholder="[%l('CEP')%]">
 					<button><span class="glyphicon glyphicon-search"></span></button>
 				</div>
 				<div class="col-sm-6">
 					<div class="row">
 						<div class="col-sm-12 region">
-							Filtrar Campanha<br />
+							[%('Filtrar Campanha')%]<br />
 							<div class="select-stylized">
 							 <select id="homedistricts">
-							      <option value="">Distrito</option>
+							      <option value="">[%l('Distrito')%]</option>
 							   [% FOREACH region IN regions %]
 							      <option value="[% region.id %]">[% region.name %]</option>
 							   [% END %]
@@ -108,7 +108,7 @@ $(document).keydown( function(e) {
 				<section class="campaign-detail">
 					<div class="row">
 						<div class="col-sm-12">
-							<h4 class="subtitle orange">Campanha</h4>
+							<h4 class="subtitle orange">[%l('Campanha')%]</h4>
 							<br clear="all"/>
 							<p><img src="/static/images/campaign/[% campaign_obj.id %]/[%campaign_obj.id%].jpg" border="0" class="campaign-image">
 							<h1>[%campaign_obj.name%]</h1>
@@ -129,7 +129,7 @@ $(document).keydown( function(e) {
 				<p>&nbsp;</p>
 
 				<section class="event-list">
-					<h3>Participe dos Eventos</h3>
+					<h3>[%l('Participe dos Eventos')%]</h3>
 					<div class="row">
 						<div class="col-sm-4">
 						    <div class="cal1">
@@ -149,7 +149,7 @@ $(document).keydown( function(e) {
 								[% END %]
 								</li>
 								[%ELSE%]
-								<li>NENHUM EVENTO ENCONTRADO</li>
+								<li>[%l('NENHUM EVENTO ENCONTRADO')%]</li>
 								[% END %]
 							</ul>
 						</div>

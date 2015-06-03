@@ -32,7 +32,7 @@
 								<a href="/project/{{id}}">{{ name }}</a>
 							</h2>
 							<div class="stats">
-								<div class="icon projects"></div> <span class="projects">Meta Associada: {{#goal}}{{name}}{{/goal}}</span>
+								<div class="icon projects"></div> <span class="projects">[%l('Meta Associada')%]: {{#goal}}{{name}}{{/goal}}</span>
 							</div>
 						</div>
 					</div>
@@ -41,7 +41,7 @@
 			</div>
 			{{/projects}}
 			{{^projects}}
-			<h2 class="section-title">Nenhum projeto encontrado.</h2>
+			<h2 class="section-title">[%l('Nenhum projeto encontrado')%].</h2>
 			{{/projects}}
 </script>
 
@@ -59,11 +59,11 @@ $(document).ready(function () {
 	if ($(this).hasClass('follow')){
 		url = "/project/user_follow_project";
 		$(this).removeClass('follow');
-		textview = "Parar de Seguir";	
+		textview = "[%l('Parar de Seguir')%]";	
 	}else{
 		url = "/project/user_stop_follow";
 		$(this).addClass('follow');
-		textview = "Siga o Projeto";	
+		textview = "[%l('Siga o Projeto')%]";	
 	}
 	$(this).attr('disabled',true);
 	$.post( url, { user_id: $(this).data("id"), project_id: $('#projectid').val() },function( data ) {
@@ -188,7 +188,7 @@ $(document).ready(function () {
 			<div class="form row">
 				<div class="col-sm-4 cep">
 					Projetos próximos a mim<br />
-					<input type="text" id="txtaddress" name="txtaddress" placeholder="CEP">
+					<input type="text" id="txtaddress" name="txtaddress" placeholder="[%l('CEP')%]">
 					<input type="hidden" id="pagetype" value="projectdetail">
 					<input type="hidden" id="projectid" value="[%project_obj.id%]">
 					<button id="btnaddress" name="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
@@ -196,19 +196,19 @@ $(document).ready(function () {
 				<div class="col-sm-8">
 					<div class="row">
 						<div class="col-sm-5 region">
-							por Distrito<br />
+							[%l('por Distrito')%]<br />
 							<div class="select-stylized"><select id="homeregion">
-								<option value="">Distrito</option>
+								<option value="">[%l('Distrito')%]</option>
 								[% FOREACH region IN regions %]
 									<option value="[% region.id %]">[% region.name %]</option>
 								[% END %]
 							</select></div>
 						</div>
 						<div class="col-sm-5 type">
-							por Tema<br />
+							[%l('por Tema')%]<br />
 							<div class="select-stylized">
 								<select id="type">
-								<option value="">Temas</option>
+								<option value="">[%l('Temas')%]</option>
 								[% FOREACH type IN objectives %]
 								<option value="[% type.id %]">[% type.name %]</option>
 								[% END %]
@@ -216,7 +216,7 @@ $(document).ready(function () {
 						</div>
 						<div class="col-sm-2 type">
 							<br />
-							<button type="button" class="btn btn-default" id="search">Pesquisar</button>
+							<button type="button" class="btn btn-default" id="search">[%l('Pesquisar')%]</button>
 						</div>
 
 					</div>
@@ -232,12 +232,12 @@ $(document).ready(function () {
 				<div class="col-sm-8">
 				
 					<div class="body">
-						<h4 class="subtitle green">Projeto</h4>
+						<h4 class="subtitle green">[%l('Projeto')%]</h4>
 						<h1>[% project_obj.name %]</h1>
 						<div class="share-buttons">
 							<div class="twitter">
 							<!-- Social plugins twitter-->
-							<a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt" data-hashtags="deolhonasmetas">Tweetar</a>
+							<a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt" data-hashtags="deolhonasmetas">[%l('Tweetar')%]</a>
 							</div>
 							<div class="facebook">
 							<!-- Social plugin facebook -->
@@ -261,18 +261,18 @@ $(document).ready(function () {
 						
 						[% IF c.user%]
 						<div id="follow" class="col-xs-6 text-right">							
-							<button  type="button" id="follow_or_not" data-toggle="tooltip" data-placement="top" title="Acompanhar e receber notificações por email de cada atualização" class="btn btn-brown custom-tooltip [% do_i_follow > 0 ? "" : "follow"%]" data-id="[% c.user.obj.id%]" autocomplete="off"><span>[% do_i_follow > 0 ? "Parar de Seguir" : "Siga o Projeto" %]</span></button>
+							<button  type="button" id="follow_or_not" data-toggle="tooltip" data-placement="top" title="[%l('Acompanhar e receber notificações por email de cada atualização')%]" class="btn btn-brown custom-tooltip [% do_i_follow > 0 ? "" : "follow"%]" data-id="[% c.user.obj.id%]" autocomplete="off"><span>[% do_i_follow > 0 ? l('Parar de Seguir') : l('Siga o Projeto') %]</span></button>
 						</div>
 						[%ELSE%]
 						<div id="follow" class="col-xs-6 text-right">							
-							<a class="btn btn-brown" href="/login" data-toggle="tooltip" data-placement="top" title="Acompanhar e receber notificações por email de cada atualização" class="custom-tooltip">Siga o Projeto</a>
+							<a class="btn btn-brown" href="/login" data-toggle="tooltip" data-placement="top" title="[%l('Acompanhar e receber notificações por email de cada atualização')%]" class="custom-tooltip">[%l('Siga o Projeto')%]</a>
 						</div>
 
 						[%END%]
 					</div>
 					<section class="statistics">
 						[% IF project_obj.percentage != ""%]
-						<h3>Progresso de acordo com a prefeitura</h3>
+						<h3>[%l('Progresso de acordo com a prefeitura')%]</h3>
 						<div class="progress">
 						   <div class="progress-bar progress-bar-[% IF project_obj.percentage > 50 %]success[% ELSE %]danger[% END %]" role="progressbar" aria-valuenow="[%project_obj.percentage%]" aria-valuemin="0"     aria-valuemax="100" style="width: [%project_obj.percentage%]%;">
 						    [%project_obj.percentage%]%
@@ -280,7 +280,7 @@ $(document).ready(function () {
 						</div>
 						[% END %]
 						<br />
-						<div class="progress-steps green">[% project_obj.progress_count%] de 6 etapas completas</div>
+						<div class="progress-steps green">[% project_obj.progress_count%] [%l('de 6 etapas completas')%]</div>
 						<table class="table-progress-steps">
 						[% IF project_obj.qualitative_progress_1%]
 							<tr><td class="number green">1</td><td class="description">[% project_obj.qualitative_progress_1%]</td></tr>
@@ -302,7 +302,7 @@ $(document).ready(function () {
 						[%END%]
 						</table>
 						[% IF project_obj.progress_count == 0%]
-							<p>Sem destaques sobre esse projeto.</p>
+							<p>[%('Sem destaques sobre esse projeto')%].</p>
 						
 						[%END%]
 					</section>
@@ -311,7 +311,7 @@ $(document).ready(function () {
 						<h3>Progresso no <img src="/static/css/images/logo-planejasampa.png"></h3>
 						<div class="row">
 							<div class="col-xs-offset-1 col-xs-10">
-		      					<p><a  href="http://planejasampa.prefeitura.sp.gov.br/metas/projeto/[%project_obj.project_number%]" target="_blank"><strong>Clique aqui</strong></a> para acompanhar o andamento do projeto no site Planeja Sampa</p>
+		      					<p><a  href="http://planejasampa.prefeitura.sp.gov.br/metas/projeto/[%project_obj.project_number%]" target="_blank"><strong>[%('Clique aqui')%]</strong></a> [%('para acompanhar o andamento do projeto no site Planeja Sampa')%]</p>
 							</div>
 						</div>
      </section>
@@ -322,7 +322,7 @@ $(document).ready(function () {
 					 [% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]	
 						[% IF users_question.$user_id == 1%]
 						<section class="statistics">
-							<h3>Opiniões dos conselheiros sobre o progresso</h3>
+							<h3>[%l('Opiniões dos conselheiros sobre o progresso')%]</h3>
 							<div class="chart-stats text-center">
 								<div class="chart">
 									<canvas id="chart1" value-late="[%statistic.late || 0%]" value-progress="[%statistic.in_progress || 0%]" value-completed="[%statistic.completed || 0%]"></canvas>
@@ -331,13 +331,13 @@ $(document).ready(function () {
 						</section>
 					 [%ELSE%]
 									<section class="questions">
-										<h3>Avaliação dos conselheiros sobre o andamento do projeto:</h3>
+										<h3>[%l('Avaliação dos conselheiros sobre o andamento do projeto')%]:</h3>
 										<div class="row">
 											<div id="alert_question">
 											</div>
 											<div id="content_question" class="col-xs-offset-1 col-xs-10 text-center">
-												<p class="text-center">Qual sua avaliação a respeito do projeto? Selecione uma das opções abaixo:</p>
-												<button id="late" name="late" class="btn btn-danger">Atrasado</button> <button id="in_progress" name="in_progress" class="btn btn-warning">Em progresso</button> <button id="complete" name="complete" class="btn btn-success">Completo</button>
+												<p class="text-center">[%l('Qual sua avaliação a respeito do projeto? Selecione uma das opções abaixo')%]:</p>
+												<button id="late" name="late" class="btn btn-danger">[%l('Atrasado')%]</button> <button id="in_progress" name="in_progress" class="btn btn-warning">[%l('Em progresso')%]</button> <button id="complete" name="complete" class="btn btn-success">[%l('Completo')%]</button>
 											</div>
 										</div>
 									</section>
@@ -345,7 +345,7 @@ $(document).ready(function () {
 				 	[%END%]
 						[%ELSE%]
 						<section class="statistics">
-							<h3>Opinião dos conselheiros sobre o progresso do projeto</h3>
+							<h3>[%l('Opinião dos conselheiros sobre o progresso do projeto')%]</h3>
 							<div class="chart-stats text-center">
 								<div class="chart">
 									<canvas id="chart1" value-late="[%statistic.late || 0%]" value-progress="[%statistic.in_progress || 0%]" value-completed="[%statistic.completed || 0%]"></canvas>
@@ -356,13 +356,13 @@ $(document).ready(function () {
 
 					<br />
 					<div>
-						<h3>Comentários dos conselheiros</h3>
+						<h3>[%l('Comentários dos conselheiros')%]</h3>
 						<table id="list_note" class="table table-striped">
 							<thead>
 								<tr>
-					                <th>Conselheiro</th>
-				    	            <th>Comentário</th>
-				    	            <th>Data</th>
+					                <th>[%l('Conselheiro')%]</th>
+				    	            <th>[%l('Comentário')%]</th>
+				    	            <th>[%l('Data')%]</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -376,7 +376,7 @@ $(document).ready(function () {
 		            [%END%]
 					[% ELSE %]
 							<tr>
-								<td colspan="3">Nenhum comentário encontrado</td>
+								<td colspan="3">[%l('Nenhum comentário encontrado')%]</td>
 							</tr>
 					[% END %]
 	
@@ -389,14 +389,14 @@ $(document).ready(function () {
 					</div>
 					<div id="disqus_thread">						
 						<textarea id="text_comment_counsil" class="form-control" rows="2"></textarea>
-						<button  type="button" id="comment_counsil" class="btn btn-violet" data-id="[% c.user.obj.id%]" autocomplete="off">Comentar</button>
+						<button  type="button" id="comment_counsil" class="btn btn-violet" data-id="[% c.user.obj.id%]" autocomplete="off">[%l('Comentar')%]</button>
 					</div>
 					[% END %]
 
 					<div class="image-gallery">
 
 					 [% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]	
-						<h3>[% IF project_obj.images.size > 0%][% project_obj.images.size%] imagens relacionadas[% ELSE %]Nenhuma imagem cadastrada[% END %] <button class="btn btn-brown pull-right" id="add-gallery">Enviar imagens</button></h3>
+						<h3>[% IF project_obj.images.size > 0%][% project_obj.images.size%] [%l('imagens relacionadas')%][% ELSE %][%l('Nenhuma imagem cadastrada')%][% END %] <button class="btn btn-brown pull-right" id="add-gallery">Enviar imagens</button></h3>
 						[%END%]
 						[% IF project_obj.images.size > 0%]
 						<div class="gallery">
@@ -406,7 +406,7 @@ $(document).ready(function () {
 							<div class="contents">
 								
 								[% FOR img IN project_obj.images%]
-								<a href="[% img.name_image %]" data-lightbox="gallery" data-title="Descrição: [% img.description %]<br>Enviado por: [% img.user%]"><img src="[% img.name_image%]"></a>
+								<a href="[% img.name_image %]" data-lightbox="gallery" data-title="[%l('Descrição')%]: [% img.description %]<br>[%l('Enviado por')%]: [% img.user%]"><img src="[% img.name_image%]"></a>
 								[% END %]
 							</div>
 							<div class="arrow right">
@@ -420,20 +420,20 @@ $(document).ready(function () {
 						            <div class="col-lg-7">
 						                <span class="btn btn-success fileinput-button">
 						                    <i class="glyphicon glyphicon-plus"></i>
-						                    <span>Adicionar...</span>
+						                    <span>[%l('Adicionar...')%]</span>
 						                    <input type="file" name="files[]" multiple>
 						                </span>
 						                <button type="submit" class="btn btn-primary start">
 						                    <i class="glyphicon glyphicon-upload"></i>
-						                    <span>Iniciar</span>
+						                    <span>[%l('Iniciar')%]</span>
 						                </button>
 						                <button type="reset" class="btn btn-warning cancel">
 						                    <i class="glyphicon glyphicon-ban-circle"></i>
-						                    <span>Cancelar</span>
+						                    <span>[%l('Cancelar')%]</span>
 						                </button>
 						                <a class="btn btn-brown close-upload">
 						                    <i class="glyphicon glyphicon-remove"></i>
-						                    <span>Fechar</span>
+						                    <span>[%l('Fechar')%]</span>
 						                </a>
 						                <span class="fileupload-process"></span>
 						            </div>
@@ -448,15 +448,28 @@ $(document).ready(function () {
 						    </form>
 						</div>
 					</div>
+					<div id="disqus_thread"></div>
+					<script type="text/javascript">
+						/* * * CONFIGURATION VARIABLES * * */
+						var disqus_shortname = 'donm';
+						
+						/* * * DON'T EDIT BELOW THIS LINE * * */
+						(function() {
+							var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+							dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+							(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+						})();
+					</script>
+					<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 
-					<div class="comments">
-						<h3>Comentários</h3>
+<!--					<div class="comments">
+						<h3>[%l('Comentários')%]</h3>
 						<table id="list_comment" class="table table-striped">
 							<thead>
 								<tr>
-					                <th>Nome</th>
-				    	            <th>Comentário</th>
-				    	            <th>Data</th>
+					                <th>[%l('Nome')%]</th>
+				    	            <th>[%l('Comentário')%]</th>
+				    	            <th>[%l('Data')%]</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -470,7 +483,7 @@ $(document).ready(function () {
 		            [%END%]
 					[% ELSE %]
 							<tr>
-								<td colspan="3">Nenhum comentário encontrado</td>
+								<td colspan="3">[%l('Nenhum comentário encontrado')%]</td>
 							</tr>
 					[% END %]
 	
@@ -483,14 +496,14 @@ $(document).ready(function () {
 					</div>
 					<div>						
 						<textarea id="text_comment" class="form-control" rows="2"></textarea>
-						<button  id="comment" type="button" class="btn btn-brown" data-id="[% c.user.obj.id%]">Comentar</button>
+						<button  id="comment" type="button" class="btn btn-brown" data-id="[% c.user.obj.id%]">[%l('Comentar')%]</button>
 					</div>
-
+				-->
 
 				</div>
 				<div class="col-sm-4">
 					<div class="list-box list-types">
-						<span class="header">Tema</span>
+						<span class="header">[%l('Tema')%]</span>
 						<ul>
 							[% FOREACH type IN project_obj.type%]
 							<input type="hidden" id="objective_type_project_id" value="[%type.id%]"/>
@@ -502,17 +515,17 @@ $(document).ready(function () {
 					</div>
 				    [% IF project_obj.region.size > 0 %]	
 					<div class="list-regions">
-						<span class="header">Distrito</span>
+						<span class="header">[%l('Distrito')%]</span>
 						<ul class="list-regions">
 							<li> <a href="[% c.uri_for_action('/homefuncional/region/detail',[project_obj.region.id] ) %]">[%project_obj.region.name%]</a></li>
 						</ul>
 					</div>
 					[% END %]
 					<div class="list-box list-projects">
-						<span class="header">Planeja Sampa</span>
+						<span class="header">[%l('Planeja Sampa')%]</span>
 						<ul class="list-projects">
 							<li>
-								<a href="http://planejasampa.prefeitura.sp.gov.br/metas/projeto/[%project_obj.project_number%]" target="_blank">Projeto [%project_obj.id%] - [% project_obj.name%]
+								<a href="http://planejasampa.prefeitura.sp.gov.br/metas/projeto/[%project_obj.project_number%]" target="_blank">[%l('Projeto')%] [%project_obj.id%] - [% project_obj.name%]
 								</a>
 							</li>
 						</ul>
@@ -527,7 +540,7 @@ $(document).ready(function () {
 					[% END %]
 					[% IF organizations.size > 0 %]	
 					<div class="list-box list-organizations">
-						<span class="header">3 Organizações</span>
+						<span class="header">3 [%l('Organizações')%]</span>
 						<ul class="list-organizations">
 							<li>Organização 01</li>
 							<li>Organização 02</li>
@@ -565,20 +578,20 @@ $(document).ready(function () {
             <strong class="error text-danger"></strong>
         </td>
         <td>
-            <p class="size">Processando...</p>
+            <p class="size">[%l('Processando...')%]</p>
             <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
         </td>
         <td>
             {% if (!i && !o.options.autoUpload) { %}
                 <button class="btn btn-primary start" disabled>
                     <i class="glyphicon glyphicon-upload"></i>
-                    <span>Iniciar</span>
+                    <span>[%l('Iniciar')%]</span>
                 </button>
             {% } %}
             {% if (!i) { %}
                 <button class="btn btn-warning cancel">
                     <i class="glyphicon glyphicon-ban-circle"></i>
-                    <span>Cancelar</span>
+                    <span>[%l('Cancelar')%]</span>
                 </button>
             {% } %}
         </td>
@@ -605,7 +618,7 @@ $(document).ready(function () {
                 {% } %}
             </p>
             {% if (file.error) { %}
-                <div><span class="label label-danger">Erro</span> {%=file.error%}</div>
+                <div><span class="label label-danger">[%l('Erro')%]</span> {%=file.error%}</div>
             {% } %}
         </td>
         <td>
@@ -615,13 +628,13 @@ $(document).ready(function () {
             {% if (file.deleteUrl) { %}
                 <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
                     <i class="glyphicon glyphicon-trash"></i>
-                    <span>Apagar</span>
+                    <span>[%l('Apagar')%]</span>
                 </button>
                 <input type="checkbox" name="delete" value="1" class="toggle">
             {% } else { %}
                 <button class="btn btn-warning cancel">
                     <i class="glyphicon glyphicon-ban-circle"></i>
-                    <span>Cancelar</span>
+                    <span>[%l('Cancelar')%]</span>
                 </button>
             {% } %}
         </td>

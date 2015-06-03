@@ -1,6 +1,6 @@
 	<section class="metas-detail search-list">
 		<div class="container">
-			<h2 class="section-title">[%companies.count.0%] Empresas</h2>
+			<h2 class="section-title">[%companies.count.0%] [%l('Empresas')%]</h2>
 
 			<div class="abc-list text-center">
 				[% FOR ca IN options %]

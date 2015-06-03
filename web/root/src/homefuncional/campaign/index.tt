@@ -15,17 +15,17 @@
 		<div class="container">
 			<form>
 				<div class="col-sm-6 cep">
-					Encontre a campanha<br />
-					<input type="text" id="txtaddress" placeholder="CEP">
+					[%l('Encontre a campanha')%]<br />
+					<input type="text" id="txtaddress" placeholder="[%l('CEP')%]">
 				</div>
 				<div class="col-sm-6">
 					<div class="row">
 						<div class="col-sm-12 region">
-							Filtrar Campanha<br />
+							[%l('Filtrar Campanha')%]<br />
 							<div class="select-stylized">
 							<input type="hidden" id="pagetype" value="campaignhome">
 							<select id="homedistricts">
- 							<option value="">Distrito</option>
+ 							<option value="">[%l('Distrito')%]</option>
 							 [% FOREACH region IN regions %]
 								   <option value="[% region.id %]">[% region.name %]</option>
 								[% END %]
@@ -43,7 +43,7 @@
 		<div id="result" class="container">
 
 			[% IF campaigns.size > 0 %]
-				<h2 class="section-title">Participe das campanhas</h2>
+				<h2 class="section-title">[%l('Participe das campanhas')%]</h2>
 			
 				<div class="campaign-list">
 					<div class="row">
@@ -68,7 +68,7 @@
 				</div>
 			[% ELSE %]
 				<br /><br /><br />
-				<h2 class="section-title">Nenhuma campanha encontrada</h2>
+				<h2 class="section-title">[%l('Nenhuma campanha encontrada')%]</h2>
 			[% END %]
 		</div>
     </section>

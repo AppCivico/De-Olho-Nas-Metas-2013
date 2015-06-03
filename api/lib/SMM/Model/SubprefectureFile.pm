@@ -16,7 +16,8 @@ sub process {
     my $parse;
     eval {
         if ( $upload->filename =~ /xlsx$/ ) {
-            $parse = SMM::Model::File::FileXLSX->new->parse( $upload->tempname );
+            $parse =
+              SMM::Model::File::FileXLSX->new->parse( $upload->tempname );
         }
         elsif ( $upload->filename =~ /xls$/ ) {
             $parse = SMM::Model::File::XLS->new->parse( $upload->tempname );
@@ -28,11 +29,11 @@ sub process {
     die "FATAL ERROR: $@" if $@;
     die 'not supported filetype' unless $parse;
 
-    my $status = $@ ? { error => "$@" }: undef;
+    my $status = $@ ? { error => "$@" } : undef;
 
     $status->{accepted} = $parse->{ok};
-    $status->{ignored} = $parse->{ignored} if $parse->{ignored};
-    $status->{error} = 'header_found' unless $parse->{header_found};
+    $status->{ignored}  = $parse->{ignored} if $parse->{ignored};
+    $status->{error}    = 'header_found' unless $parse->{header_found};
 
     $status->{original_filename} = $upload->filename;
 
@@ -41,29 +42,29 @@ sub process {
     my $user_id = $param{user_id};
     my $file    = $schema->resultset('ImeiFile')->create(
         {
-            status      => (encode_json $status),
-            user_id     => $user_id
+            status  => ( encode_json $status),
+            user_id => $user_id
         }
     );
     $file_id = $file->id;
 
     # is ok
-    if ($parse && $parse->{rows}){
-        for my $r (@{$parse->{rows}}){
+    if ( $parse && $parse->{rows} ) {
+        for my $r ( @{ $parse->{rows} } ) {
             my $imei = $r->{imei};
-            die \['archive', "too long imei: $imei"] if length $imei > 15;
-            die \['archive', "too short imei: $imei"] if length $imei < 14;
+            die \[ 'archive', "too long imei: $imei" ]  if length $imei > 15;
+            die \[ 'archive', "too short imei: $imei" ] if length $imei < 14;
         }
 
-        eval{
+        eval {
             $schema->txn_do(
                 sub {
                     my $dbh = $schema->storage->dbh;
 
                     my $quotechar = "\x{11}";    # Vertical tab (ASCII 11)
 
-                    for my $r (@{$parse->{rows}}){
-						p $r;
+                    for my $r ( @{ $parse->{rows} } ) {
+                        p $r;
                         my $imei = $r->{imei};
                     }
 

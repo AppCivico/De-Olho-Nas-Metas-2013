@@ -24,7 +24,7 @@ var md = function () {
             if ((indi == '') == false) {
                 url = url + '/' + indi;
             }
-            base_uri = 'http://' + window.location.host + '/api/download' + url;
+            base_uri = 'http://www.deolhonasmetas.org.br/api/download' + url;
 
             url = base_uri  + arquivo;
             $('#id_link').attr('href', url);

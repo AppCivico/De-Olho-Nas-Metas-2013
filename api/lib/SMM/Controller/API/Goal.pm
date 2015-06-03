@@ -90,6 +90,10 @@ sub result_GET {
                   qualitative_progress_4
                   qualitative_progress_5
                   qualitative_progress_6
+                  objective_id
+                  technically
+                  will_be_delivered
+                  percentage
                   /
             ),
             goal_projects => {
@@ -333,13 +337,19 @@ sub list_GET {
                               qw/
                               id
                               name
-                              address
-                              postal_code
                               description
-                              phone
-                              email
-                              website
-                              complement
+                              technically
+                              will_be_deliveredi
+                              expected_start_date
+                              expected_end_date
+                              percentage
+                              goal_number
+                              qualitative_progress_1
+                              qualitative_progress_2
+                              qualitative_progress_3
+                              qualitative_progress_4
+                              qualitative_progress_5
+                              qualitative_progress_6
                               region_count
                               project_count
                               /

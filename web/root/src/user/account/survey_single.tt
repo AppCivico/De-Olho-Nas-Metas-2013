@@ -78,15 +78,15 @@
 					<button class="btn btn-danger">Desativar</button>
 				</div>-->
 				<div class="col-sm-4 text-center">
-					<a class="btn btn-yellow" href="/user/perfil/enquete/clonar/[%campaign.id%]" target="_blank">Clonar</a>
+					<a class="btn btn-yellow" href="/user/perfil/enquete/clonar/[%campaign.id%]" target="_blank">[%l('Clonar')%]</a>
 				</div>
 				<div class="col-sm-4 text-center">
-					<a class="btn btn-navy" href="/user/perfil/enquete/entrar/[%campaign.id%]" target="_blank">Editar</a>
+					<a class="btn btn-navy" href="/user/perfil/enquete/entrar/[%campaign.id%]" target="_blank">[%l('Editar')%]</a>
 				</div>
 			</div>
 
 			<h3>
-				Formulário
+				[%l('Formulário')%]
 <!--				<button class="btn btn-brown pull-right">Editar</button>-->
 			</h3>
 			

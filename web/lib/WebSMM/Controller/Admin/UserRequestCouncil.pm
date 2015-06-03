@@ -20,9 +20,6 @@ sub index : Chained('base') : PathPart('') : Args(0) {
     $api->stash_result( $c, 'user_request_council',
         params => { user_status => 'pending' } );
 
-    use DDP;
-    p $c->stash->{user_request_councils};
-    warn 1;
 }
 
 sub set_accepted : Chained('base') : PathPart('aceito') : Args(0) {
@@ -30,8 +27,6 @@ sub set_accepted : Chained('base') : PathPart('aceito') : Args(0) {
 
     my $api = $c->model('API');
     my $pe  = $c->req->param('pe_id');
-    use DDP;
-    p $c->req->params;
     $api->stash_result(
         $c,
         [ 'user_request_council', $pe ],
@@ -50,8 +45,6 @@ sub set_removed : Chained('base') : PathPart('remover') : Args(0) {
     my $api = $c->model('API');
     my $pe  = $c->req->param('pe_id');
 
-    use DDP;
-    p $pe;
     $api->stash_result(
         $c,
         [ 'user_request_council', $pe ],

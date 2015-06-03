@@ -61,10 +61,9 @@ __PACKAGE__->table("company");
   data_type: 'text'
   is_nullable: 0
 
-=head2 goal_id
+=head2 cnpj
 
-  data_type: 'integer'
-  is_foreign_key: 1
+  data_type: 'text'
   is_nullable: 1
 
 =cut
@@ -81,8 +80,8 @@ __PACKAGE__->add_columns(
     { data_type => "text", is_nullable => 0 },
     "name_url",
     { data_type => "text", is_nullable => 0 },
-    "goal_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+    "cnpj",
+    { data_type => "text", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -127,28 +126,8 @@ __PACKAGE__->has_many(
     { cascade_copy         => 0, cascade_delete => 0 },
 );
 
-=head2 goal
-
-Type: belongs_to
-
-Related object: L<SMM::Schema::Result::Goal>
-
-=cut
-
-__PACKAGE__->belongs_to(
-    "goal",
-    "SMM::Schema::Result::Goal",
-    { id => "goal_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
-);
-
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-18 15:25:22
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:jLX/+z+HrbzHd3Skc1qwKw
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-05-12 14:59:09
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:MJ+Inhu68d6stTa2bQ1aHQ
 
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
@@ -175,6 +154,10 @@ sub verifiers_specs {
                 goal_id => {
                     required => 0,
                     type     => 'Int',
+                },
+                cnpj => {
+                    required => 0,
+                    type     => 'Str',
                 },
             }
         ),

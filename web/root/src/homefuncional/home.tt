@@ -2,7 +2,7 @@
 	[%-CALL assets.include("js/maps.js")%]
 	[%-CALL assets.include("js/infobubble.min.js")%]
 <script id="row_template" type="text/template">
-			{{#projects.length}}<h2 class="section-title">{{ projects.length}} Projeto{{#plural}}s{{/plural}} Encontrado{{#plural}}s{{/plural}}</h2>{{/projects.length}}
+			{{#projects.length}}<h2 class="section-title">{{ projects.length}} [%l('Projeto{{#plural}}s{{/plural}} Encontrado{{#plural}}s{{/plural}}')%]</h2>{{/projects.length}}
 			{{ #projects }}	
 			<div class="item row">
 				<div class="col-sm-10 nopadding">
@@ -12,7 +12,7 @@
 								<a href="/project/{{id}}" target="_blank">{{ name }}</a>
 							</h2>
 							<div class="stats">
-								<div class="icon projects"></div> <span class="projects">Meta Associada: {{#goal}}{{name}}{{/goal}}</span>
+								<div class="icon projects"></div> <span class="projects">[%l('Meta Associada')%]: {{#goal}}{{name}}{{/goal}}</span>
 							</div>
 						</div>
 					</div>
@@ -30,7 +30,7 @@
 			</div>
 			{{/projects}}
 			{{^projects}}
-			<h2 class="section-title">Nenhum projeto encontrado.</h2>
+			<h2 class="section-title">[%l('Nenhum projeto encontrado')%].</h2>
 			{{/projects}}
 </script>
 <script>
@@ -52,31 +52,31 @@ $(document).ready(function () {
 
 	<section class="metas-filtro">
 		<div class="container">
-			<h2 class="title text-center">Ajude a monitorar as Metas da cidade de São Paulo</h2>
-			<h3 class="section-title">Use os filtros abaixo para ver os projetos no mapa</h3>
+			<h2 class="title text-center">[%l('Ajude a monitorar as Metas da cidade de São Paulo')%]</h2>
+			<h3 class="section-title">[%l('Use os filtros abaixo para ver os projetos no mapa')%]</h3>
 			<div class="form row">
 				<div class="col-sm-4 cep">
-					Filtrar por CEP ou endereço<br />
-					<input type="text" id="txtaddress" name="txtaddress" placeholder="CEP">
+					[%l(Filtrar por CEP ou endereço)%]<br />
+					<input type="text" id="txtaddress" name="txtaddress" placeholder="[%l('CEP')%]">
 					<input type="hidden" id="pagetype" value="home">
 					<button id="btnaddress" name="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
 				</div>
 				<div class="col-sm-8">
 					<div class="row">
 						<div class="col-sm-5 region">
-							por Distrito<br />
+							[%l('por Distrito')%]<br />
 							<div class="select-stylized"><select id="homeregion">
-								<option value="">Distrito</option>
+								<option value="">[%('Distrito')%]</option>
 								[% FOREACH region IN regions %]
 									<option value="[% region.id %]">[% region.name %]</option>
 								[% END %]
 							</select></div>
 						</div>
 						<div class="col-sm-5 type">
-							por Tema<br />
+							[%l('por Tema')%]<br />
 							<div class="select-stylized">
 								<select id="type">
-								<option value="">Temas</option>
+								<option value="">[%l('Temas')%]</option>
 								[% FOREACH type IN objectives %]
 								<option value="[% type.id %]">[% type.name %]</option>
 								[% END %]
@@ -84,7 +84,7 @@ $(document).ready(function () {
 						</div>
 						<div class="col-sm-2 type">
 							<br />
-							<button type="button" class="btn btn-default" id="search">Pesquisar</button>
+							<button type="button" class="btn btn-default" id="search">[%l('Pesquisar')%]</button>
 						</div>
 
 					</div>

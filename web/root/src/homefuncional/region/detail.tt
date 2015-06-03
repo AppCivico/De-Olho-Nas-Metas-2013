@@ -50,10 +50,10 @@
 				<div class="col-sm-8">
 					<div class="row">
 						<div class="col-sm-6 region">
-							Selecione o Distrito<br />
+							[%l('Selecione o Distrito')%]<br />
 							<div class="select-stylized">
 							<select id="region" onchange="location = this.options[this.selectedIndex].value;">
-								<option value="">Distrito</option>
+								<option value="">[%l('Distrito')%]</option>
 								[% FOREACH region IN regions %]
 								<option value="[% c.uri_for_action('/homefuncional/region/detail',[ region.id ] ) %]">[%region.name%]</option>
 								[% END %]
@@ -73,14 +73,14 @@
 				<div class="col-sm-8">
 				
 					<div class="body">
-						<h1>Distrito [%region_obj.name%]</h1>
+						<h1>[%l('Distrito')%] [%region_obj.name%]</h1>
 					</div>
 					
 					<div style="height: 300px;" id="map">
 					</div>
 					
 					<div class="projects">
-						<h3>[% region_obj.projects.size%] Projetos neste Distrito</h3>
+						<h3>[% region_obj.projects.size%] [%l('Projetos neste Distrito')%]</h3>
 						<ul class="list-arrow multi-column-2">
 							[% IF region_obj.projects.size > 0 %]
 
@@ -90,7 +90,7 @@
 
 							[% END %]
 							[%ELSE%]
-							<li>NENHUM PROJETO NA REGIÃO</li>
+							<li>[%l('NENHUM PROJETO NA REGIÃO')%]</li>
 							[% END %]
 						</ul>
 					</div>
@@ -109,7 +109,7 @@
 					</div>-->
 					
 <!--				<div class="events">
-						<h3>Participe dos Eventos</h3>
+						<h3>[%l('Participe dos Eventos')%]</h3>
 						<div class="date-row row">
 							<div class="col-xs-1">
 								<div class="day">
@@ -121,7 +121,7 @@
 							</div>
 							<div class="col-xs-11">
 								<div class="item">
-									<div class="title">Nome da campanha</div>
+									<div class="title">[%l('Nome da campanha')%]</div>
 									<div class="description">Pastry wafer brownie liquorice. Unerdwear.com gummi cupcake bears bonbon. Cheesecake dessert cupcake.</div>
 								</div>
 							</div>
@@ -133,7 +133,7 @@
 				</div>
 					<div class="col-sm-4">
 					<div class="list-box list-gold">
-						<span class="header">Subprefeitura</span>
+						<span class="header">[%l('Subprefeitura')%]</span>
 						<ul>
 							<li><a href="[% c.uri_for_action('/homefuncional/subprefecture/detail',[region_obj.subprefecture.id] ) %]">[%region_obj.subprefecture.name%]</a></li>
 						</ul>

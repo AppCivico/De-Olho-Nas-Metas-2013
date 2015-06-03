@@ -18,7 +18,7 @@ sub verifiers_specs {
         create => Data::Verifier->new(
             filters => [qw(trim)],
             profile => {
-			    name => {
+                name => {
                     required => 1,
                     type     => 'Str',
                 },
@@ -43,7 +43,8 @@ sub action_specs {
     my $self = shift;
     return {
         create => sub {
-            my %values     = shift->valid_values;
+            my %values = shift->valid_values;
+
             my $region = $self->create( \%values );
             return $region;
         }

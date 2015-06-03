@@ -30,44 +30,39 @@ jQuery(function($){
                 <input type="hidden" name="redirect_to_dashboard" value="1"/>
             [%END%]
 
-            [%input_text('name','Nome', req=>1)|none%]
-            [%input_text('email','E-mail', req=>1)|none%]
-            [%input_text('password','Senha', req=>1, type => 'password')|none%]
-            [%input_text('password_confirm','Confirmação de senha', req=>1, type => 'password')|none%]
-			[%input_text('phone_number','Celular:', req=>0)|none%]
-            [%select_field('active','Status',array => [
-                [1, 'Ativo'],
-                [0,'Inativo'],
-            ])|none%]
-            
-            <div class="form-group">
-				<label class="col-lg-12 " for="elm_active">Permissões</label>
-				<div class="col-lg-12">
-				<select name="roles" class="form-control">
-				<option>Selecione</option>	
-				[%FOREACH r IN roles%]
-				<option value="[% r.id %]">[%r.name%]</option>
-				[%END%]
-				</select>
-				</div>
+            <div class="col-lg-12">
+                [%input_text('name','Nome', req=>1)|none%]
             </div>
-            <div class="form-group">
-				<label class="col-lg-12 " for="elm_active">Organizações</label>
-				<div class="col-lg-12">
-				<select name="organization_id" class="form-control">
-				<option>Selecione</option>	
-				[%FOREACH org IN organizations%]
-				<option value="[% org.id %]">[%org.name%]</option>
-				[%END%]
-				</select>
-				</div>
+            <div class="col-lg-6">
+                [%input_text('email','E-mail', req=>1)|none%]
+            </div>
+            <div class="col-lg-6">
+                [%input_text('phone_number','Celular:', req=>0)|none%]
+            </div>
+            <div class="col-lg-6">
+                [%input_text('password','Senha', req=>1, type => 'password')|none%]
+            </div>
+            <div class="col-lg-6">
+                [%input_text('password_confirm','Confirmação de senha', req=>1, type => 'password')|none%]
+            </div>
+            <div class="col-lg-6">
+                [%select_field('roles','Permissões',array => select_roles, default_option => 'Selecione')|none%]
+            </div>
+            <div class="col-lg-6">
+                [%select_field('active','Status',array => [
+                    [1, 'Ativo'],
+                    [0,'Inativo'],
+                ])|none%]
+            </div>
+            <div class="col-lg-12">
+                [%select_field('organization_id','Organização',array => select_organizations, default_option => 'Selecione', input_col=>"col-lg-6")|none%]
             </div>
 
             <div class="form-actions">
-                <button type="submit" class="btn btn-primary" data-loading-text="Processando...">Continuar</button>
+                <button type="submit" class="btn btn-success" data-loading-text="Processando...">Continuar</button>
                 [%IF !NO_TITLE%]
                     [%href = c.uri_for_action('/admin/user/index')%]
-                    <a href="[%href%]" class="btn btn-primary btn-right">Voltar para lista de usuários</a>
+                    <a href="[%href%]" class="btn btn-success btn-right">Voltar para lista de usuários</a>
                 [%END%]
             </div>
         </fieldset>

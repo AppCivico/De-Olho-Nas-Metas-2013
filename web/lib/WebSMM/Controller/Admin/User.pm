@@ -10,11 +10,11 @@ sub base : Chained('/admin/base') : PathPart('user') : CaptureArgs(0) {
     my $api = $c->model('API');
     $api->stash_result( $c, 'roles' );
     $api->stash_result( $c, 'organizations' );
-    $c->stash->{users} =
+    $c->stash->{select_roles} =
       [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{roles} } ];
-    use DDP;
-    p $c->stash->{roles};
-    warn '1';
+    $c->stash->{select_organizations} =
+      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{organizations} } ];
+
 }
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
@@ -25,6 +25,8 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
     $api->stash_result( $c, [ 'users', $id ], stash => 'user_obj' );
     my %ar = map { $_ => 1 } @{ $c->stash->{user_obj}{role_ids} };
     $c->stash->{active_roles} = \%ar;
+    use DDP;
+    p $c->stash->{user_obj};
 
     $c->detach( '/form/not_found', [] ) if $c->stash->{user_obj}{error};
 }
@@ -36,7 +38,6 @@ sub index : Chained('base') : PathPart('') : Args(0) {
     my $params = { %{ $c->req->params } };
     use DDP;
     $params->{role} = "" if $params->{role} eq '--';
-    p $params;
     $api->stash_result(
         $c, 'users',
         params => {
@@ -67,11 +68,6 @@ sub edit : Chained('object') : PathPart('') : Args(0) {
 sub add : Chained('base') : PathPart('new') : Args(0) {
     my ( $self, $c ) = @_;
 
-    my $api = $c->model('API');
-
-    $api->stash_result( $c, 'roles' );
-    use DDP;
-    p $c->stash->{organizations};
 }
 
 __PACKAGE__->meta->make_immutable;

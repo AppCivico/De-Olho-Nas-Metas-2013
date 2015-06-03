@@ -93,8 +93,8 @@ jQuery(function($){
 						<div class="col-sm-8">
 							<div class="form-group">
 								<small>
-									FOTO DO PERFIL<br />
-									Faça upload de uma foto para usar no seu perfil<br /><br />
+									[%l('FOTO DO PERFIL')%]<br />
+									[%l('Faça upload de uma foto para usar no seu perfil')%]<br /><br />
 								</small>
 								<input type="file" name="avatar">
 							</div>

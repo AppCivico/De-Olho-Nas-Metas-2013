@@ -22,7 +22,7 @@ SET id = "elm_${name}";
 
 %]
 <div class="form-group row [%IF !DISABLE_MESSAGES && form_error.$name == 'invalid'%]has-error[%ELSIF !DISABLE_MESSAGES && form_error.$name%]has-warning[%END%]">
-    <label class="[%IF opt.label_col%][%opt.label_col%][%ELSE%]col-lg-12[%END%] [%IF opt.control_label == 'YES'%]control-label[%END%]" for="[%id%]">[%label|none%]</label>
+    <label class="[%IF opt.label_col%][%opt.label_col%][%ELSE%]col-lg-12[%END%] [%IF opt.control_label == 'YES'%]control-label[%END%]" for="[%id%]">[%l(label)|none%]</label>
     <div class="[%IF opt.input_col%][%opt.input_col%][%ELSE%]col-lg-12[%END%]">
         <div class="[%IF opt.pre || opt.app%]input-group[%END%] [%IF opt.divclass%] [%opt.divclass%][%END%]">
             [%IF opt.pre%]<span class="input-group-addon">[%opt.pre|none%]</span>[%END%]
@@ -30,7 +30,7 @@ SET id = "elm_${name}";
             [% IF opt.pattern %] pattern="[% opt.pattern %]" [% END %]
             [%~ IF opt.classes %] class="[% opt.classes.join(" ") %]"[% END ~%]
             [%~ IF opt.disabled %] disabled="disabled"[% END ~%]
-            [%~ IF opt.placeholder %] placeholder="[%opt.placeholder%]"[% END ~%]
+            [%~ IF opt.placeholder %] placeholder="[%l(opt.placeholder)%]"[% END ~%]
             [%~ IF opt.checked %] checked="checked"[% END ~%]
             [%~ IF opt.readonly %] readonly="readonly"[% END ~%]
             [%~ IF opt.autooff %] autocomplete="off"[% END ~%]
@@ -39,7 +39,7 @@ SET id = "elm_${name}";
             [%~ IF opt.size %] size="[%opt.size|none%]"[% END ~%]
             [%~ IF opt.maxlength %] maxlength="[% opt.maxlength %]"[% END ~%]>[%IF opt.textbox%][%IF opt.value.defined%][%opt.value%][%END%]</textarea>[%END%]
             [%IF opt.app%]<span class="input-group-addon">[%opt.app|none%]</span>[%END%]
-            [%IF opt.help%]<span class="label label-warning">[%opt.help %]</span>[%END%]
+            [%IF opt.help%]<span class="label label-warning">[%l(opt.help) %]</span>[%END%]
 
             [%IF opt.input_append%][%opt.input_append|none%][%END%]
         </div>
@@ -47,28 +47,28 @@ SET id = "elm_${name}";
             <span class="label label-danger">
                 [%-IF form_error.$name == 'invalid'-%]
                     [%-IF opt.only_digits && !opt.value.match('^[0-9]+$') -%]
-                        Digite apenas números
+                        [%l('Digite apenas números')%]
                     [%ELSIF opt.db_unique %]
-                        [% opt.db_unique%] já utilizado. Escolha um novo.
+                        [% opt.db_unique%]  [%l('já utilizado. Escolha um novo')%].
                     [%ELSIF opt.check_length && opt.value.length != opt.check_length%]
-                        Código inválido
+                        [%l('Código inválido')%]
                     [%ELSIF opt.email%]
-                        E-mail inválido ou já está em uso por outra pessoa.
+                        [%l('E-mail inválido ou já está em uso por outra pessoa')%].
                     [%ELSIF opt.date || opt.birth_date%]
                         [%IF opt.birth_date && too_young%]
-                            O condutor deve ser maior
+                            [%l('O condutor deve ser maior')%]
                         [%ELSE%]
-                            Data inválida
+                            [%l('Data inválida')%]
                         [%END%]
                     [%ELSE%]
-                        Valor inválido
+                        [%l('Valor inválido')%]
                     [%END%]
                 [%-ELSE-%]
-                    Este campo não pode ser vazio
+                    [%l('Este campo não pode ser vazio')%]
                 [%END%]
             </span>
         [%END%]
-        [% IF opt.support %]<p>[% (opt.support) %]</p>[% END %]
+        [% IF opt.support %]<p>[% l(opt.support) %]</p>[% END %]
     </div>
 </div>[%
 END;
@@ -100,8 +100,8 @@ IF (opt.req || opt.required); opt.classes.push('required'); END;
         [%~ IF opt.disabled %] disabled="disabled"[% END ~%]
         [%~ IF opt.checked %] checked="checked"[% END ~%]/>
 
-        [%IF form_error.$name%]<span class="help-inline">[%IF form_error.$name == 'invalid'%]Valor inválido[%ELSE%]Este campo não pode ser vazio[%END%]</span>[%END%]
-        [% IF opt.support %]<p>[% (opt.support) %]</p>[% END %]
+        [%IF form_error.$name%]<span class="help-inline">[%IF form_error.$name == 'invalid'%][%l('Valor inválido')%][%ELSE%][%l('Este campo não pode ser vazio')%][%END%]</span>[%END%]
+        [% IF opt.support %]<p>[% l(opt.support) %]</p>[% END %]
       </div>
     </div>
 	[%ELSE%]
@@ -116,8 +116,8 @@ IF (opt.req || opt.required); opt.classes.push('required'); END;
         [%~ IF opt.checked %] checked="checked"[% END ~%]/> [%label%]
         </label>
 
-        [%IF form_error.$name%]<span class="help-inline">[%IF form_error.$name == 'invalid'%]Valor inválido[%ELSE%]Este campo não pode ser vazio[%END%]</span>[%END%]
-        [% IF opt.support %]<p>[% (opt.support) %]</p>[% END %]
+        [%IF form_error.$name%]<span class="help-inline">[%IF form_error.$name == 'invalid'%][%l('Valor inválido')%][%ELSE%][%l('Este campo não pode ser vazio')%][%END%]</span>[%END%]
+        [% IF opt.support %]<p>[% l(opt.support) %]</p>[% END %]
       </div>
     </div>
 	[%END%]
@@ -150,7 +150,7 @@ IF (opt.req || opt.required); opt.classes.push('required'); END;
 			[%IF opt.default_first%]
 				<option value="">[%opt.default_first%]</option>
 			[%ELSIF !opt.without_select_opt%]
-				<option value="">Selecione</option>
+				<option value="">[%l('Selecione')%]</option>
             [%END%]
             [% FOREACH item = opt.array;
 
@@ -169,7 +169,7 @@ IF (opt.req || opt.required); opt.classes.push('required'); END;
             [% END %]
         </select>
         [%IF form_error.$name%]<span class="help-inline">[%IF form_error.$name == 'invalid'%]Valor inválido[%ELSE%]Este campo não pode ser vazio[%END%]</span>[%END%]
-        [% IF opt.support %]<p>[% (opt.support) %]</p>[% END %]
+        [% IF opt.support %]<p>[% l(opt.support) %]</p>[% END %]
 
     </div>
 </div>

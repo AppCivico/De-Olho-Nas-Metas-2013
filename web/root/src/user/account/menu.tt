@@ -2,39 +2,39 @@
 						<div class="img text-center"><img src="/static/images/user/[%c.user.id%]/[%c.user.id%].jpg" border="0" class="img-responsive"></div>
 						<div class="name text-center">[% c.user.name %]</div>
 						[% UNLESS user_roles.organization.name == ""%]
-						<div class="text-center">Conselho: [% user_roles.organization.name %]</div>
+						<div class="text-center">[%l('Conselho')%]: [% user_roles.organization.name %]</div>
 						[% END %]
-						<a href="/user/perfil/editar" class="btn btn-yellow">Editar perfil</a>
+						<a href="/user/perfil/editar" class="btn btn-yellow">[%l('Editar perfil')%]</a>
 					</div>
 
 					[% IF user_obj.role.user == 1%]
 					<div class="list-box list-brown">
 						<ul>
-							<li><a href="">Seguindo</a></li>
-							<li><a href="/user/perfil/seguranca">Segurança</a></li>
-							<li><a href="">Atividades</a></li>
+							<li><a href="">[%l('Seguindo')%]</a></li>
+							<li><a href="/user/perfil/seguranca">[%l('Segurança')%]</a></li>
+							<li><a href="">[%l('Atividades')%]</a></li>
 						</ul>
 					</div>
 					[% ELSIF user_obj.role.counsil_master == 1%]
 					<div class="list-box list-brown">
 						<ul>
-							<li><a href="/user/perfil/enquete/[% user_roles.organization.id%]">Campanha de dados móveis</a></li>
-							<li><a href="/user/perfil/convidar">Convidar</a></li>
-							<li><a href="/user/perfil/conselho">Conselho</a></li>
-							<li><a href="/user/perfil/membros?organization=[%c.user.obj.organization_id%]">Membros do Conselho</a></li>
-							<li><a href="/user/perfil/campanhas">Campanhas</a></li>
-							<li><a href="/user/perfil/seguindo">Seguindo</a></li>
-							<li><a href="/user/perfil/seguranca">Segurança</a></li>
+							<li><a href="/user/perfil/enquete/[% user_roles.organization.id%]">[%l('Campanha de dados móveis')%]</a></li>
+							<li><a href="/user/perfil/convidar">[%l('Convidar')%]</a></li>
+							<li><a href="/user/perfil/conselho">[%l('Conselho')%]</a></li>
+							<li><a href="/user/perfil/membros?organization=[%c.user.obj.organization_id%]">[%l('Membros do Conselho')%]</a></li>
+							<li><a href="/user/perfil/campanhas">[%l('Campanhas')%]</a></li>
+							<li><a href="/user/perfil/seguindo">[%l('Seguindo')%]</a></li>
+							<li><a href="/user/perfil/seguranca">[%l('Segurança')%]</a></li>
 						</ul>
 					</div>
 					[% ELSE %]
 					<div class="list-box list-brown">
 						<ul>
-							<li><a href="/user/perfil/enquete/[% user_roles.organization.id%]">Campanha de dados móveis</a></li>
-							<li><a href="/user/perfil/campanhas">Campanhas</a></li>
-							<li><a href="/user/perfil/membros?organization=[%c.user.obj.organization_id%]">Membros do Conselho</a></li>
-							<li><a href="/user/perfil/seguindo">Seguindo</a></li>
-							<li><a href="/user/perfil/seguranca">Segurança</a></li>
+							<li><a href="/user/perfil/enquete/[% user_roles.organization.id%]">[%l('Campanha de dados móveis')%]</a></li>
+							<li><a href="/user/perfil/campanhas">[%l('Campanhas')%]</a></li>
+							<li><a href="/user/perfil/membros?organization=[%c.user.obj.organization_id%]">[%l('Membros do Conselho')%]</a></li>
+							<li><a href="/user/perfil/seguindo">[%l('Seguindo')%]</a></li>
+							<li><a href="/user/perfil/seguranca">[%l('Segurança')%]</a></li>
 						</ul>
 					</div>
 					[%END%]

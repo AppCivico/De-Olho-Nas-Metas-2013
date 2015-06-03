@@ -15,7 +15,7 @@
 				['me.created_at','Data de cadastro'],
 				['me.name','Nome'],
 			])|none%]
-            <button class="btn btn-primary" data-loading-text="Processando...">Pesquisar</button>
+            <button class="btn btn-success" data-loading-text="Processando...">Pesquisar</button>
         </form>
 
         [%IF pre_registrations.size > 0%]
