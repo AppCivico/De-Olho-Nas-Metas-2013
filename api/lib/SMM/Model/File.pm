@@ -86,10 +86,10 @@ sub process {
 
                     my $old_value = $r->{value};
                     my $create;
-                    eval { $create = $resultset->create($r); };
+                    $create = $resultset->create($r);
 
-                    die \[ 'archive', "Não foi possivel inserir o registro" ]
-                      if $@;
+                    die "Não foi possivel inserir o registro"  unless $create;
+                      
                     $r->{id} = $create->id;
                     $fk->($r) if $fk;
                     my $ref = {
@@ -106,7 +106,9 @@ sub process {
         );
     };
     $status->{error} = $@ if $@;
+
     $file->update( { status_text => encode_json $status } );
+
     return {
         status  => $status,
         file_id => $file_id,
