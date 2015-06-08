@@ -2,7 +2,7 @@
 [%#-CALL assets.include("js/address.js")#%]
 <div>
 	<div class="rows">
-	<h2 class="sub-header">Editar Objetivo</h2>
+	<h2 class="sub-header">Editar Orçamento</h2>
 		<form role="form" method="post" class="form-horizontal" action="[% c.uri_for_action('/admin/form/budget/process_edit',[ budget_obj.id ]) %]">
 			[%input_text('business_name','Nome', req=>1, value => budget_obj.business_name)|none%]
 		

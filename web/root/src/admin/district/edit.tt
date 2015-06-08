@@ -1,5 +1,5 @@
 [%-CALL assets.include("js/slider/js/bootstrap-slider.js")%]
-[%-CALL assets.include("js/slider/css/slider.css")%]
+:[%-CALL assets.include("js/slider/css/slider.css")%]
 [%-CALL assets.include("js/forms.js")%]
 [%-CALL assets.include("js/kml.converter.js")%]
 [%-CALL assets.include("js/region.js")%]
