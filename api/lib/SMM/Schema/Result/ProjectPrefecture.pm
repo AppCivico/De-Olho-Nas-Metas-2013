@@ -68,7 +68,7 @@ __PACKAGE__->table("project_prefecture");
   is_nullable: 0
   original: {default_value => \"now()"}
 
-=head2 update_at
+=head2 updated_at
 
   data_type: 'timestamp'
   is_nullable: 1
@@ -94,7 +94,7 @@ __PACKAGE__->add_columns(
     is_nullable   => 0,
     original      => { default_value => \"now()" },
   },
-  "update_at",
+  "updated_at",
   { data_type => "timestamp", is_nullable => 1 },
 );
 
@@ -143,8 +143,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-10-06 19:49:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:q/oM9AU83RmQeouCB3tNug
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-06-10 19:02:01
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:9ZXwV2CONWXm9xF1mUodug
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
