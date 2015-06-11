@@ -7,6 +7,7 @@ use JSON;
 use DDP;
 use Catalyst::Test q(SMM);
 use utf8;
+use DateTime::Format::DateParse;
 my $config = SMM->config;
 
 my $schema = SMM::Schema->connect(
@@ -124,8 +125,11 @@ $schema->txn_do(
                 }
                 p $return_proj->updated_at;
                 p $key->{updated_at};
+                my $dt_proj = DateTime::Format::DateParse->parse_datetime(
+                    $key->{updated_at} );
+                p $dt_proj;
                 if (   ( not defined $return_proj->updated_at )
-                    || ( $key->{updated_at} > $return_proj->updated_at ) )
+                    || ( $dt_proj > $return_proj->updated_at ) )
                 {
                     p $return_proj->updated_at;
                     $return_proj->update(
@@ -142,7 +146,9 @@ $schema->txn_do(
                               $key->{qualitative_progress_5},
                             qualitative_progress_6 =>
                               $key->{qualitative_progress_6},
-                            updated_at => \"NOW()"
+                            updated_at => \"NOW()",
+                            latitude   => $key->{gps_lat},
+                            longitude  => $key->{gps_long}
                         }
                     );
                 }
@@ -186,8 +192,11 @@ $schema->txn_do(
 
             }
             p $return_goal->updated_at;
+            my $dt_goal = DateTime::Format::DateParse->parse_datetime(
+                $goal->{updated_at} );
+            p $dt_goal;
             if (   ( not defined $return_goal->updated_at )
-                || ( $goal->{updated_at} > $return_goal->updated_at ) )
+                || ( $dt_goal > $return_goal->updated_at ) )
             {
                 p $return_goal->updated_at;
                 $return_goal->update(
@@ -259,26 +268,29 @@ $schema->txn_do(
               unless $return_goal;
 
             my $goal_vs_proj = {};
-            map { $goal_vs_proj->{ $_->{goal_id} }{ $_->{project_id} } }
-              $schema->resultset('GoalProject')->search(
+            map {
+                push( @{ $goal_vs_proj->{ $_->{goal_id} } }, $_->{project_id} );
+              } $schema->resultset('GoalProject')->search(
                 {},
                 {
                     result_class => 'DBIx::Class::ResultClass::HashRefInflator',
                 }
               )->all;
 
-            # for (@projects) {
-            #     next if $goal_vs_proj->{ $return_goal->id }{$_};
-            #     my $lol = $c->model('DB::GoalProject')->create(
-            #         {
-            #             goal_id    => $return_goal->id,
-            #             project_id => $_
-            #         }
-            #     );
-            # }
+            for (@projects) {
+                next if grep { $_ } @{ $goal_vs_proj->{ $return_goal->id } };
+                my $lol = $c->model('DB::GoalProject')->create(
+                    {
+                        goal_id    => $return_goal->id,
+                        project_id => $_
+                    }
+                );
+            }
             my $goal_vs_sec = {};
-            map { $goal_vs_sec->{ $_->{goal_id} }{ $_->{secretary_id} } }
-              $schema->resultset('GoalSecretary')->search(
+            map {
+                push( @{ $goal_vs_sec->{ $_->{goal_id} } },
+                    $_->{secretary_id} );
+              } $schema->resultset('GoalSecretary')->search(
                 {},
                 {
                     result_class => 'DBIx::Class::ResultClass::HashRefInflator',
@@ -286,6 +298,7 @@ $schema->txn_do(
               )->all;
             for (@secretary) {
                 next if $goal_vs_sec->{ $return_goal->id }{$_};
+                next if grep { $_ } @{ $goal_vs_sec->{ $return_goal->id } };
 
                 my $sec = $schema->resultset('GoalSecretary')->create(
                     {
