@@ -183,6 +183,24 @@ sub xlsx : Chained('download') : PathPart('xlsx') : Args(0) {
     $file->_download( $c, 'district', \%lines );
 
 }
+
+sub subprefecture : Chained('download') : PathPart('subprefecture') : Args(0) {
+    my ( $self, $c ) = @_;
+    my $api  = $c->model('API');
+    my $file = $c->model('File');
+
+    my %lines;
+    $c->stash->{type} = 'xls';
+
+    $api->stash_result( $c, 'subprefectures' );
+
+    push @{ $lines{main} }, [ 'id', 'name' ];
+    push @{ $lines{main} }, [ $_->{id}, $_->{name} ]
+      for @{ $c->stash->{subprefectures} };
+    $file->_download( $c, 'subprefectures', \%lines );
+
+}
+
 __PACKAGE__->meta->make_immutable;
 
 1;

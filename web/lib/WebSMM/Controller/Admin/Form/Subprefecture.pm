@@ -88,7 +88,7 @@ sub csv : Chained('download') : PathPart('csv') : Args(0) {
     my %lines;
     $c->stash->{type} = 'csv';
     push @{ $lines{main} }, $c->stash->{header};
-    $file->_download( $c, 'meta', \%lines );
+    $file->_download( $c, 'subprefecture', \%lines );
 
 }
 
@@ -100,7 +100,7 @@ sub xls : Chained('download') : PathPart('xls') : Args(0) {
     my %lines;
     $c->stash->{type} = 'xls';
     push @{ $lines{main} }, $c->stash->{header};
-    $file->_download( $c, 'meta', \%lines );
+    $file->_download( $c, 'subprefecture', \%lines );
 
 }
 
@@ -112,7 +112,7 @@ sub xlsx : Chained('download') : PathPart('xlsx') : Args(0) {
     my %lines;
     $c->stash->{type} = 'csv';
     push @{ $lines{main} }, $c->stash->{header};
-    $file->_download( $c, 'meta', \%lines );
+    $file->_download( $c, 'subprefecture', \%lines );
 
 }
 
