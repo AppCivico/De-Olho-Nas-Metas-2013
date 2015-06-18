@@ -198,6 +198,39 @@ sub xlsx : Chained('download') : PathPart('xlsx') : Args(0) {
 
 }
 
+sub goal : Chained('download') : PathPart('goal') : Args(0) {
+    my ( $self, $c ) = @_;
+    my $api  = $c->model('API');
+    my $file = $c->model('File');
+
+    my %lines;
+    $c->stash->{type} = 'xls';
+
+    $api->stash_result( $c, 'goals' );
+
+    push @{ $lines{main} }, [ 'id', 'name' ];
+    push @{ $lines{main} }, [ $_->{id}, $_->{name} ]
+      for @{ $c->stash->{goals} };
+    $file->_download( $c, 'metas', \%lines );
+
+}
+
+sub region : Chained('download') : PathPart('region') : Args(0) {
+    my ( $self, $c ) = @_;
+    my $api  = $c->model('API');
+    my $file = $c->model('File');
+
+    my %lines;
+    $c->stash->{type} = 'xls';
+
+    $api->stash_result( $c, 'regions' );
+
+    push @{ $lines{main} }, [ 'id', 'name' ];
+    push @{ $lines{main} }, [ $_->{id}, $_->{name} ]
+      for @{ $c->stash->{regions} };
+    $file->_download( $c, 'regioes', \%lines );
+
+}
 __PACKAGE__->meta->make_immutable;
 
 1;
