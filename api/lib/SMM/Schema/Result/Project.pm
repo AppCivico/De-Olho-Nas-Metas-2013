@@ -553,6 +553,10 @@ sub verifiers_specs {
                     required => 0,
                     type     => 'Str',
                 },
+                updated_at => {
+                    required => 0,
+                    type     => DataStr,
+                },
             }
         ),
     };

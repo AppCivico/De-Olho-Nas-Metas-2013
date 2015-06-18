@@ -196,6 +196,40 @@ sub upload : Chained('base') : PathPart('upload_budget') : Args(0) {
 
 }
 
+sub company : Chained('download') : PathPart('company') : Args(0) {
+    my ( $self, $c ) = @_;
+    my $api  = $c->model('API');
+    my $file = $c->model('File');
+
+    my %lines;
+    $c->stash->{type} = 'xls';
+
+    $api->stash_result( $c, 'companies' );
+
+    push @{ $lines{main} }, [ 'id', 'name' ];
+    push @{ $lines{main} }, [ $_->{id}, $_->{name} ]
+      for @{ $c->stash->{companies} };
+    $file->_download( $c, 'companies', \%lines );
+
+}
+
+sub goal : Chained('download') : PathPart('goal') : Args(0) {
+    my ( $self, $c ) = @_;
+    my $api  = $c->model('API');
+    my $file = $c->model('File');
+
+    my %lines;
+    $c->stash->{type} = 'xls';
+
+    $api->stash_result( $c, 'goals' );
+
+    push @{ $lines{main} }, [ 'id', 'name' ];
+    push @{ $lines{main} }, [ $_->{id}, $_->{name} ]
+      for @{ $c->stash->{goals} };
+    $file->_download( $c, 'goals', \%lines );
+
+}
+
 __PACKAGE__->meta->make_immutable;
 
 1;

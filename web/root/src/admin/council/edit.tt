@@ -2,7 +2,7 @@
 [%#-CALL assets.include("js/address.js")#%]
 <div>
 	<div class="rows">
-	<h2 class="sub-header">Editar Subprefeitura</h2>
+	<h2 class="sub-header">Editar Conselho</h2>
 		<form role="form" method="post" class="form-horizontal" action="/admin/form/company/[%council_obj.id%]">
 			[%input_text('name','Nome', req=>1, value => council_obj.name)|none%]
 

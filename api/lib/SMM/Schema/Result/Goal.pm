@@ -115,7 +115,7 @@ __PACKAGE__->table("goal");
   is_nullable: 0
   original: {default_value => \"now()"}
 
-=head2 update_at
+=head2 updated_at
 
   data_type: 'timestamp'
   is_nullable: 1
@@ -236,7 +236,7 @@ __PACKAGE__->add_columns(
         is_nullable   => 0,
         original      => { default_value => \"now()" },
     },
-    "update_at",
+    "updated_at",
     { data_type => "timestamp", is_nullable => 1 },
     "country_id",
     { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
@@ -483,8 +483,8 @@ __PACKAGE__->belongs_to(
     },
 );
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-05-12 14:59:09
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:wr0B9v3VVZg32YCn43KiEw
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-06-10 18:16:05
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7gme5RFzZ7Dcp5rMzebUww
 
 __PACKAGE__->has_many(
     approved_comments => 'SMM::Schema::Result::CommentGoal',
