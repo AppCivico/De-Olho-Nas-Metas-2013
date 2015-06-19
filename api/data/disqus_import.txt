@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"  xmlns:dsq="http://www.disqus.com/"	     xmlns:dc="http://purl.org/dc/elements/1.1/"	       xmlns:wp="http://wordpress.org/export/1.0/">
+<channel><item><title> Foo Bar </title><link>http://deolhonasmetas.org.br/project/3445</link><content:encoded><![CDATA[Hello World]]></content:encoded><wp:post_date_gmt>2015-04-16 19:54:40</wp:post_date_gmt><wp:comment_status>open</wp:comment_status><wp:comment>
