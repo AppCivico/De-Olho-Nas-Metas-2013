@@ -1,3 +1,246 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"  xmlns:dsq="http://www.disqus.com/"	     xmlns:dc="http://purl.org/dc/elements/1.1/"	       xmlns:wp="http://wordpress.org/export/1.0/">
-<channel><item><title> Foo Bar </title><link>http://deolhonasmetas.org.br/project/3445</link><content:encoded><![CDATA[Hello World]]></content:encoded><wp:post_date_gmt>2015-04-16 19:54:40</wp:post_date_gmt><wp:comment_status>open</wp:comment_status><wp:comment>
+<channel>
+<item>
+<title> Foo Bar </title>
+<link>http://deolhonasmetas.org.br/project/3445</link>
+<content:encoded><![CDATA[Hello World]]></content:encoded>
+<wp:post_date_gmt>2015-04-16 19:54:40</wp:post_date_gmt>
+<wp:comment_status>open</wp:comment_status>
+<wp:comment>
+<wp:comment_id>11</wp:comment_id>
+<wp:comment_author>Yvan Pessoa de Lima</wp:comment_author>
+<wp:comment_author_email>titiuyvan@gmail.com</wp:comment_author_email>
+<wp:comment_date_gmt>2015-03-24 17:43:41</wp:comment_date_gmt>
+<wp:comment_content><![CDATA[UPA PS Municipal Dr. Caetano Virgilio Netto, constantemente, é alvo de vandalismo. Além da sua já degradada situação, o mesmo, devido ao seu velho problema de longas esperas no atendimento ao público, acaba este, por ser ainda vitima de vandalismo pois, as pessoas ficam muito irritadas e descarregam sua ira no bem publico. Dê fato, nós já sabemos que isso não resolve nada, muito ao contrário, só piora a gravidade do problema que, tem como origem, a péssima administração pública. Constantes denuncias já foram realizadas e até mesmo, equipes de reportagem já estiveram por diversas vezes no mesmo, com, o intuito de revelar publicamente o que toda a população já esta cansada de saber. Sob o comando da Prefeitura Municipal de São Paulo e, a Secretaria Municipal de Saúde Pública, o mesmo se encontra literalmente refém de decisões partidárias pois, entra governo e sai governo e as decisões sobre, reforma, manutenção e administração do mesmo, depende unica e exclusivamente de, vontade política. Enquanto este processo político da saúde pública não for eliminado, o mesmo certamente se encontrará neste estado degradante por muito mais tempo e continuará vivendo esta verdadeira novela. Longe de defender aqui, uma privatização da saúde publica e sim, estar aqui para, defender uma maior autonomia do, Conselho Administrativo de Cada unidade de Pronto Socorro do Município. Cabendo a estes, serem fiscalizados pela própria população e outros Órgãos Municipais e Estaduais. Devo sim lembrar aqui que, os atos de vandalismo foram sim notificados através de Boletim de Ocorrência e que, parte dos danos foram ressarcidos mas, no parâmetro geral, a Unidade se encontra em estado pura e simplesmente degradante em, sua conservação.]]></wp:comment_content>
+<wp:comment_approved>1</wp:comment_approved>
+<wp:comment_parent>0</wp:comment_parent>
+</wp:comment>
+</item>
+<item>
+<title> Foo Bar </title>
+<link>http://deolhonasmetas.org.br/project/4692</link>
+<content:encoded><![CDATA[Hello World]]></content:encoded>
+<wp:post_date_gmt>2015-04-16 19:54:40</wp:post_date_gmt>
+<wp:comment_status>open</wp:comment_status>
+<wp:comment>
+<wp:comment_id>15</wp:comment_id>
+<wp:comment_author>anônimo</wp:comment_author>
+<wp:comment_author_email>anonimo@email.com</wp:comment_author_email>
+<wp:comment_date_gmt>2015-04-06 12:37:35</wp:comment_date_gmt>
+<wp:comment_content><![CDATA[Quando esse projeto sairá do papel? Em que ano será ou começará o projeto?]]></wp:comment_content>
+<wp:comment_approved>1</wp:comment_approved>
+<wp:comment_parent>0</wp:comment_parent>
+</wp:comment>
+</item>
+<item>
+<title> Foo Bar </title>
+<link>http://deolhonasmetas.org.br/project/2953</link>
+<content:encoded><![CDATA[Hello World]]></content:encoded>
+<wp:post_date_gmt>2015-04-16 19:54:40</wp:post_date_gmt>
+<wp:comment_status>open</wp:comment_status>
+<wp:comment>
+<wp:comment_id>16</wp:comment_id>
+<wp:comment_author>anônimo</wp:comment_author>
+<wp:comment_author_email>anonimo@email.com</wp:comment_author_email>
+<wp:comment_date_gmt>2015-04-07 22:34:11</wp:comment_date_gmt>
+<wp:comment_content><![CDATA[Como a prefeitura cobre um santo para descobrir outro, esse CEU é para enganar, pois tirar um clube bem frequentado, um lindo trabalho da 3º idade, aulas de tennis, ginastica, vólei etc... o povo é esquecido mesmo.]]></wp:comment_content>
+<wp:comment_approved>1</wp:comment_approved>
+<wp:comment_parent>0</wp:comment_parent>
+</wp:comment>
+</item>
+<item>
+<title> Foo Bar </title>
+<link>http://deolhonasmetas.org.br/project/3075</link>
+<content:encoded><![CDATA[Hello World]]></content:encoded>
+<wp:post_date_gmt>2015-04-16 19:54:40</wp:post_date_gmt>
+<wp:comment_status>open</wp:comment_status>
+<wp:comment>
+<wp:comment_id>17</wp:comment_id>
+<wp:comment_author>anônimo</wp:comment_author>
+<wp:comment_author_email>anonimo@email.com</wp:comment_author_email>
+<wp:comment_date_gmt>2015-04-14 10:21:54</wp:comment_date_gmt>
+<wp:comment_content><![CDATA[Bom dia! Esta CEI é aguardada desde 2011, processo antigo\ no local ainda existe depósito de material de construção pll, comércio varejão e várias residências.]]></wp:comment_content>
+<wp:comment_approved>1</wp:comment_approved>
+<wp:comment_parent>0</wp:comment_parent>
+</wp:comment>
+</item>
+<item>
+<title> Foo Bar </title>
+<link>http://deolhonasmetas.org.br/project/3663</link>
+<content:encoded><![CDATA[Hello World]]></content:encoded>
+<wp:post_date_gmt>2015-04-16 19:54:40</wp:post_date_gmt>
+<wp:comment_status>open</wp:comment_status>
+<wp:comment>
+<wp:comment_id>18</wp:comment_id>
+<wp:comment_author>Irani Aparecida Pereira</wp:comment_author>
+<wp:comment_author_email>iranid@bol.com.br</wp:comment_author_email>
+<wp:comment_date_gmt>2015-04-16 20:18:00</wp:comment_date_gmt>
+<wp:comment_content><![CDATA[Este terreno da Direitos Humanos com Francisco Raniere que compreende 300 unidades saiu no edital da Cohab no chamamento de janeiro de 2015 e na abertura dos envelopes no dia 1/04/2015 ,ele havia sido retirado gostaria de saber por que saiu do edital e para onde irá . QWuem são as famílias que serão beneficiadas nela e qual critério será utilizado]]></wp:comment_content>
+<wp:comment_approved>1</wp:comment_approved>
+<wp:comment_parent>0</wp:comment_parent>
+</wp:comment>
+</item>
+<item>
+<title> Foo Bar </title>
+<link>http://deolhonasmetas.org.br/project/3482</link>
+<content:encoded><![CDATA[Hello World]]></content:encoded>
+<wp:post_date_gmt>2015-04-16 19:54:40</wp:post_date_gmt>
+<wp:comment_status>open</wp:comment_status>
+<wp:comment>
+<wp:comment_id>20</wp:comment_id>
+<wp:comment_author>anônimo</wp:comment_author>
+<wp:comment_author_email>anonimo@email.com</wp:comment_author_email>
+<wp:comment_date_gmt>2015-04-20 16:22:42</wp:comment_date_gmt>
+<wp:comment_content><![CDATA[Fiquei sabendo que já foi finalizado o processo de tombamento. Gostaria de saber porque ainda não foi aberto processo de licitação para o começo das obras?]]></wp:comment_content>
+<wp:comment_approved>1</wp:comment_approved>
+<wp:comment_parent>0</wp:comment_parent>
+</wp:comment>
+</item>
+<item>
+<title> Foo Bar </title>
+<link>http://deolhonasmetas.org.br/project/3338</link>
+<content:encoded><![CDATA[Hello World]]></content:encoded>
+<wp:post_date_gmt>2015-04-16 19:54:40</wp:post_date_gmt>
+<wp:comment_status>open</wp:comment_status>
+<wp:comment>
+<wp:comment_id>19</wp:comment_id>
+<wp:comment_author>anônimo</wp:comment_author>
+<wp:comment_author_email>anonimo@email.com</wp:comment_author_email>
+<wp:comment_date_gmt>2015-04-19 14:33:27</wp:comment_date_gmt>
+<wp:comment_content><![CDATA[seja mas detalhista]]></wp:comment_content>
+<wp:comment_approved>1</wp:comment_approved>
+<wp:comment_parent>0</wp:comment_parent>
+</wp:comment>
+</item>
+<item>
+<title> Foo Bar </title>
+<link>http://deolhonasmetas.org.br/project/3482</link>
+<content:encoded><![CDATA[Hello World]]></content:encoded>
+<wp:post_date_gmt>2015-04-16 19:54:40</wp:post_date_gmt>
+<wp:comment_status>open</wp:comment_status>
+<wp:comment>
+<wp:comment_id>21</wp:comment_id>
+<wp:comment_author>anônimo</wp:comment_author>
+<wp:comment_author_email>anonimo@email.com</wp:comment_author_email>
+<wp:comment_date_gmt>2015-04-20 16:38:49</wp:comment_date_gmt>
+<wp:comment_content><![CDATA[Esta muito atrasado este projeto, realmente foram feitos a contencao e a limpeza, um assessor veio aqui e disse que o tombamento também foi feito, mas agora precisa ser feita licitação para que a obra realmente comece, entretanto nao pode continuar nesse ritmo, senão não ficará pronto em 2016 como consta no plano de metas. Precisamos de ajuda para agilizar o andamento desse projeto. Peço que a comunidade do Brás,Belém, Bresser,Mooca fiquem de olho e postem comentários pois essa casa de cultura será de muita utilidade para toda comunidade. Att. Fátima 20/04/2015]]></wp:comment_content>
+<wp:comment_approved>1</wp:comment_approved>
+<wp:comment_parent>0</wp:comment_parent>
+</wp:comment>
+</item>
+<item>
+<title> Foo Bar </title>
+<link>http://deolhonasmetas.org.br/project/3837</link>
+<content:encoded><![CDATA[Hello World]]></content:encoded>
+<wp:post_date_gmt>2015-04-16 19:54:40</wp:post_date_gmt>
+<wp:comment_status>open</wp:comment_status>
+<wp:comment>
+<wp:comment_id>22</wp:comment_id>
+<wp:comment_author>Geovani Silva Souza</wp:comment_author>
+<wp:comment_author_email>geovani_sou@hotmail.com</wp:comment_author_email>
+<wp:comment_date_gmt>2015-05-02 15:41:37</wp:comment_date_gmt>
+<wp:comment_content><![CDATA[Projeto esta caminhando conforme esperado! Destinado para famílias modalidade I, Minha casa minha vida! Interessados devem procurar Movimento de Moradia 2000]]></wp:comment_content>
+<wp:comment_approved>1</wp:comment_approved>
+<wp:comment_parent>0</wp:comment_parent>
+</wp:comment>
+</item>
+<item>
+<title> Foo Bar </title>
+<link>http://deolhonasmetas.org.br/project/3456</link>
+<content:encoded><![CDATA[Hello World]]></content:encoded>
+<wp:post_date_gmt>2015-04-16 19:54:40</wp:post_date_gmt>
+<wp:comment_status>open</wp:comment_status>
+<wp:comment>
+<wp:comment_id>23</wp:comment_id>
+<wp:comment_author>anônimo</wp:comment_author>
+<wp:comment_author_email>anonimo@email.com</wp:comment_author_email>
+<wp:comment_date_gmt>2015-05-08 09:31:13</wp:comment_date_gmt>
+<wp:comment_content><![CDATA[Qual é o prazo para o cumprimento da meta?]]></wp:comment_content>
+<wp:comment_approved>1</wp:comment_approved>
+<wp:comment_parent>0</wp:comment_parent>
+</wp:comment>
+</item>
+<item>
+<title> Foo Bar </title>
+<link>http://deolhonasmetas.org.br/project/3837</link>
+<content:encoded><![CDATA[Hello World]]></content:encoded>
+<wp:post_date_gmt>2015-04-16 19:54:40</wp:post_date_gmt>
+<wp:comment_status>open</wp:comment_status>
+<wp:comment>
+<wp:comment_id>24</wp:comment_id>
+<wp:comment_author>anônimo</wp:comment_author>
+<wp:comment_author_email>anonimo@email.com</wp:comment_author_email>
+<wp:comment_date_gmt>2015-05-17 18:16:55</wp:comment_date_gmt>
+<wp:comment_content><![CDATA[O projeto esta em água morna...nao a informaçoes exatas aos associados quanto ao inicio de fato das obras...Segundo informaçoes de terceiros as obras inicia em junho]]></wp:comment_content>
+<wp:comment_approved>1</wp:comment_approved>
+<wp:comment_parent>0</wp:comment_parent>
+</wp:comment>
+</item>
+<item>
+<title> Foo Bar </title>
+<link>http://deolhonasmetas.org.br/project/3376</link>
+<content:encoded><![CDATA[Hello World]]></content:encoded>
+<wp:post_date_gmt>2015-04-16 19:54:40</wp:post_date_gmt>
+<wp:comment_status>open</wp:comment_status>
+<wp:comment>
+<wp:comment_id>25</wp:comment_id>
+<wp:comment_author>anônimo</wp:comment_author>
+<wp:comment_author_email>anonimo@email.com</wp:comment_author_email>
+<wp:comment_date_gmt>2015-05-17 18:25:31</wp:comment_date_gmt>
+<wp:comment_content><![CDATA[Ao\nDr. Jose de Filippi â€“ SecretÃ¡rio da SaÃºde\nDr. Fernando Haddad â€“ Prefeito de SÃ£o Paulo\n \n\nBoa tarde.\n \n \nComo Ã© de vosso conhecimento, venho acompanhando notÃ­cias sobre a construÃ§Ã£o da UBS Jardim SÃ£o Nicolau desde  a inserÃ§Ã£o de nossa solicitaÃ§Ã£o feita nas plenÃ¡rias e incorporada no Programa de Metas do Governo Fernando Haddad e posteriormente reforÃ§ado atravÃ©s de e-mails enviados Ã¡s diversas secretarias, subprefeitura Penha e gabinete do Governo, como tambem atravÃ©s do site da prefeitura, Ã¡rea da SaÃºde/SIURB, e informaÃ§Ãµes recebidas de membros do Conselho Municipal de SaÃºde.\n \nEm 16 de setembro de 2014 no encontro com munÃ­cipes no Jabaquara ( CEU Caminho do Mar ), o secretÃ¡rio da SaÃºde Dr. Jose de Filippi anunciou a abertura de licitaÃ§Ã£o para construÃ§Ã£o de novas UBSs, na qual se incluia a do Jd SÃ£o Nicolau, fazendo parte do LOTE 2.\n \nEm 15 de janeiro de 2015 conforme notÃ­cia divulgada pelo portal da Prefeitura/SMS, as obras seriam iniciadas no primeiro trimestre ( 11 Unidades ) * As unidades licitadas e aptas para o inÃ­cio das obras sÃ£o: UBS BrasilÃ¢ndia III, UBS Cidade Nova SÃ£o Miguel, UBS Jd. SÃ£o Carlos, UBS Jova Rural, UBS Parque das NaÃ§Ãµes Unidas, UBS Cambuci, UBS Enconsta, UBS Jd. Romano, UBS SÃ£o Nicolau, UBS Pro Morar e UBS Vila SÃ´nia. As novas UBSâ€™s prestarÃ£o atendimento no modelo integral, com horÃ¡rio de funcionamento de segunda a sexta-feira das 7h Ã s 19h e aos sÃ¡bados das 8h Ã s 14h. - * copiado da publicaÃ§Ã£o do site da Prefeitura\n \nDesde entÃ£o, verifiquei o numero do edital da licitaÃ§Ã£o - RDC PRESENCIAL  NÂ° 8/14/SIURB e o numero do processo -  2014-0.260.426-9, atÃ© sua publicaÃ§Ã£o em 12 de novembro de 2014 no DOU, habilitando para construÃ§Ã£o das unidades a empresa PILÃƒO ENGENHARIA E CONTRUÃ‡Ã•ES LTDA.\n \nComo atÃ© o momento nÃ£o verificamos no terreno indicado nenhuma movimentaÃ§Ã£o em relaÃ§Ã£o ao inÃ­cio das obras, entrei em contato com a SIURB tel.3397.2435 Sr. Ricardo Tadeu, que ao ficar interado do assunto me transferiu para o Setor de Apoio Tecnico do Gabinete da SaÃºde, tel 3397.2142 Sr. Ivanildo Costa que me adiantou alem do valor de cada UBS R$ 4.500.000,00, que o problema estava com a liberaÃ§Ã£o de verbas para as construÃ§Ãµes e que deveriamos entrar em contato com o setor de FinanÃ§as Sr. Marcos de Barros Cruz - SecretÃ¡rio Municipal.\n \nSem mais e contando com vosso empenho para verificar junto a SMS e Secretaria Municipal de FinanÃ§as e Desenvolvimento EconÃ´mico o assunto exposto, ficamos no aguardo de uma resposta para posicionarmos a comunidade,\n \nAtenciosamente  \n \nFlÃ¡vio  - Eunice - Mirian -  Angela\nConselho Gestor da UBS J. S. Nicolau - Segmento UsuÃ¡rio\nMovimento Popular pelo Desenvolvimento da Zona Leste\nMovimento Popular de SaÃºde Leste - Penha\n \nNoticias relacionadas no site da Prefeitura Ã  contruÃ§Ã£o da UBS J S Nicolau.\n \nhttp://www.prefeitura.sp.gov.br/cidade/secretarias/subprefeituras/jabaquara/noticias/?p=50818\n \nhttp://www.prefeitura.sp.gov.br/cidade/secretarias/saude/noticias/?p=188527\n \nhttp://www.prefeitura.sp.gov.br/cidade/secretarias/infraestrutura/empreendimentos/unidades_da_saude/index.php?p=187659]]></wp:comment_content>
+<wp:comment_approved>1</wp:comment_approved>
+<wp:comment_parent>0</wp:comment_parent>
+</wp:comment>
+</item>
+<item>
+<title> Foo Bar </title>
+<link>http://deolhonasmetas.org.br/project/3584</link>
+<content:encoded><![CDATA[Hello World]]></content:encoded>
+<wp:post_date_gmt>2015-04-16 19:54:40</wp:post_date_gmt>
+<wp:comment_status>open</wp:comment_status>
+<wp:comment>
+<wp:comment_id>26</wp:comment_id>
+<wp:comment_author>anônimo</wp:comment_author>
+<wp:comment_author_email>anonimo@email.com</wp:comment_author_email>
+<wp:comment_date_gmt>2015-05-25 16:24:47</wp:comment_date_gmt>
+<wp:comment_content><![CDATA[Gostaria de saber se esta demanda é referente ás reuniões realizadas no parque São rafael na rua antiga 51.\n\nAtenciosamente.]]></wp:comment_content>
+<wp:comment_approved>1</wp:comment_approved>
+<wp:comment_parent>0</wp:comment_parent>
+</wp:comment>
+</item>
+<item>
+<title> Foo Bar </title>
+<link>http://deolhonasmetas.org.br/project/4454</link>
+<content:encoded><![CDATA[Hello World]]></content:encoded>
+<wp:post_date_gmt>2015-04-16 19:54:40</wp:post_date_gmt>
+<wp:comment_status>open</wp:comment_status>
+<wp:comment>
+<wp:comment_id>13</wp:comment_id>
+<wp:comment_author>Wellington Santos</wp:comment_author>
+<wp:comment_author_email>wtn_14@yahoo.com.br</wp:comment_author_email>
+<wp:comment_date_gmt>2015-03-30 15:59:08</wp:comment_date_gmt>
+<wp:comment_content><![CDATA[Por favor, nos informem de fato o que está ocorrendo. O projeto parece estar estacionado, há uma placa no Jd. Silveira que já fez dois aniversários e no local não há nada, em Vargem Grande o povo quase que se afoga na lama das ruas. É preciso tomar providencias com urgência!]]></wp:comment_content>
+<wp:comment_approved>1</wp:comment_approved>
+<wp:comment_parent>0</wp:comment_parent>
+</wp:comment>
+</item>
+<item>
+<title> Foo Bar </title>
+<link>http://deolhonasmetas.org.br/project/4454</link>
+<content:encoded><![CDATA[Hello World]]></content:encoded>
+<wp:post_date_gmt>2015-04-01 12:53:54</wp:post_date_gmt>
+<wp:comment_status>open</wp:comment_status>
+<wp:comment>
+<wp:comment_id>14</wp:comment_id>
+<wp:comment_author>Walter Tesch</wp:comment_author>
+<wp:comment_author_email>walter.tesch65@gmail.com</wp:comment_author_email>
+<wp:comment_date_gmt>2015-03-30 15:59:08</wp:comment_date_gmt>
+<wp:comment_content><![CDATA[Gostaria de conhecer mais detalhes deste projeto, pois me parece parcial Fala em "condominio' quando de fato não exuste um condominio ali.2-Queria saber se é um projeto é transversal se contempla o fato de que a região a Cratera é Tombada pelo Municipio, Estado e APA e esta enquadrado nas tratativas que vem desde 2007-08 ou é apenas clientelista de "atendimento de demanda" sem o ganha-ganha?]]></wp:comment_content>
+<wp:comment_approved>1</wp:comment_approved>
+<wp:comment_parent>0</wp:comment_parent>
+</wp:comment>
+</item>
+
+</channel>
+</rss>

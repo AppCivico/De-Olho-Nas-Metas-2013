@@ -16,9 +16,12 @@ my $config = SMM->config;
 my $schema = SMM::Schema->connect(
     $config->{'Model::DB'}{connect_info}{dsn},
     $config->{'Model::DB'}{connect_info}{user},
-    $config->{'Model::DB'}{connect_info}{password}
+    $config->{'Model::DB'}{connect_info}{password},{
+    quote_char => q{"},
+    name_sep => q{.}
+}
 );
-
+use DDP; p $schema;
 open( my $fh, '>', 'data/disqus_import.txt' ) or die "erro open file";
 
 print $fh "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
@@ -31,40 +34,43 @@ my $csv = Text::CSV->new( { binary => 1, sep_char => ';', eol => "\r\n" }
 
 open my $fh_csv, '<', 'data/disqus.csv'
   or die "not open";
-print $fh "<channel>";
+print $fh "<channel>\n";
 
 while ( my $row = $csv->getline($fh_csv) ) {
     use DDP;
     p $row;
-    print $fh "<item>";
+    print $fh "<item>\n";
 
-    print $fh "<title> Foo Bar </title>";
+    print $fh "<title> Foo Bar </title>\n";
 
     print $fh "<link>http://deolhonasmetas.org.br/project/"
       . $row->[4]
-      . "</link>";
-    print $fh "<content:encoded><![CDATA[Hello World]]></content:encoded>";
-    print $fh "<wp:post_date_gmt>2015-04-16 19:54:40</wp:post_date_gmt>";
-    print $fh "<wp:comment_status>open</wp:comment_status>";
-    print $fh "<wp:comment>";
+      . "</link>\n";
+    print $fh "<content:encoded><![CDATA[Hello World]]></content:encoded>\n";
+    print $fh "<wp:post_date_gmt>2015-04-16 19:54:40</wp:post_date_gmt>\n";
+    print $fh "<wp:comment_status>open</wp:comment_status>\n";
+    print $fh "<wp:comment>\n";
 
-    print "<wp:comment_id>$row->[0]</wp:comment_id>";
+    print $fh "<wp:comment_id>$row->[0]</wp:comment_id>\n";
+    use DDP; p $row;
+    p $row->[5];
     my $user =
-      $schema->resultset('User')->find( $row->[5] );
-
-    print $fh "<wp:comment_author>$user->name</wp:comment_author>";
-    print $fh "<wp:comment_author_email>$user->email</wp:comment_author_email>";
+      $schema->resultset('User')->search({ id => $row->[5]} )->next;
+    p $user;	
+    print $fh "<wp:comment_author>".$user->name."</wp:comment_author>\n";
+    print $fh "<wp:comment_author_email>".$user->email."</wp:comment_author_email>\n";
     my @date = split /\./, $row->[2];
-    print $fh "<wp:comment_date_gmt>$date[0]</wp:comment_date_gmt>";
-    print $fh "<wp:comment_content><![CDATA[$row->[1]]]></wp:comment_content>";
-    print $fh "<wp:comment_approved>1</wp:comment_approved>";
-    print $fh "<wp:comment_parent>0</wp:comment_parent>";
-    print $fh "</wp:comment>";
-    print $fh "</item>";
+    print $fh "<wp:comment_date_gmt>$date[0]</wp:comment_date_gmt>\n";
+    print $fh "<wp:comment_content><![CDATA[$row->[1]]]></wp:comment_content>\n";
+    print $fh "<wp:comment_approved>1</wp:comment_approved>\n";
+
+    print $fh "<wp:comment_parent>0</wp:comment_parent>\n";
+    print $fh "</wp:comment>\n";
+    print $fh "</item>\n";
 
     #    $csv->parse($_);
     #    my @fields = $csv->fields();
     #    p \@fields;
 }
-print $fh "</channel>";
-print $fh "</rss>";
+print $fh "</channel>\n";
+print $fh "</rss>\n";
