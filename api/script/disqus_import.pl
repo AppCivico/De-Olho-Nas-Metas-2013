@@ -16,12 +16,14 @@ my $config = SMM->config;
 my $schema = SMM::Schema->connect(
     $config->{'Model::DB'}{connect_info}{dsn},
     $config->{'Model::DB'}{connect_info}{user},
-    $config->{'Model::DB'}{connect_info}{password},{
-    quote_char => q{"},
-    name_sep => q{.}
-}
+    $config->{'Model::DB'}{connect_info}{password},
+    {
+        quote_char => q{"},
+        name_sep   => q{.}
+    }
 );
-use DDP; p $schema;
+use DDP;
+p $schema;
 open( my $fh, '>', 'data/disqus_import.txt' ) or die "erro open file";
 
 print $fh "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
@@ -52,16 +54,20 @@ while ( my $row = $csv->getline($fh_csv) ) {
     print $fh "<wp:comment>\n";
 
     print $fh "<wp:comment_id>$row->[0]</wp:comment_id>\n";
-    use DDP; p $row;
+    use DDP;
+    p $row;
     p $row->[5];
     my $user =
-      $schema->resultset('User')->search({ id => $row->[5]} )->next;
-    p $user;	
-    print $fh "<wp:comment_author>".$user->name."</wp:comment_author>\n";
-    print $fh "<wp:comment_author_email>".$user->email."</wp:comment_author_email>\n";
+      $schema->resultset('User')->search( { id => $row->[5] } )->next;
+    p $user;
+    print $fh "<wp:comment_author>" . $user->name . "</wp:comment_author>\n";
+    print $fh "<wp:comment_author_email>"
+      . $user->email
+      . "</wp:comment_author_email>\n";
     my @date = split /\./, $row->[2];
     print $fh "<wp:comment_date_gmt>$date[0]</wp:comment_date_gmt>\n";
-    print $fh "<wp:comment_content><![CDATA[$row->[1]]]></wp:comment_content>\n";
+    print $fh
+      "<wp:comment_content><![CDATA[$row->[1]]]></wp:comment_content>\n";
     print $fh "<wp:comment_approved>1</wp:comment_approved>\n";
 
     print $fh "<wp:comment_parent>0</wp:comment_parent>\n";

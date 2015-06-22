@@ -76,7 +76,6 @@ map { $objectives->{ $_->{id} } = $_->{name} } @$data_obj;
 $schema->txn_do(
     sub {
         for my $goal (@$data) {
-            p $goal;
             my $return_goal = $schema->resultset('Goal')
               ->search( { goal_number => $goal->{id} } )->next;
             next unless $return_goal;
@@ -89,7 +88,6 @@ $schema->txn_do(
                 $return_sec =
                   $schema->resultset('Secretary')
                   ->search( { name => $sec->{name} } )->next;
-                use DDP;
                 delete $sec->{created_at};
                 delete $sec->{updated_at};
                 delete $sec->{pivot};
@@ -99,8 +97,6 @@ $schema->txn_do(
                 push( @secretary, $return_sec->id );
             }
             for my $key ( @{ $goal->{projects} } ) {
-                use DDP;
-                p $key->{name};
                 my $return_proj =
                   $schema->resultset('Project')
                   ->search( { project_number => $key->{id} } )->next;
@@ -110,7 +106,6 @@ $schema->txn_do(
 
                 for my $pref ( @{ $key->{prefectures} } ) {
                     my $return_pref;
-                    p $pref->{name};
                     $return_pref =
                       $schema->resultset('Prefecture')
                       ->search( { name => $pref->{name} } )->next;
@@ -123,15 +118,11 @@ $schema->txn_do(
                       unless $return_pref;
                     push( @prefectures, $return_pref->id );
                 }
-                p $return_proj->updated_at;
-                p $key->{updated_at};
                 my $dt_proj = DateTime::Format::DateParse->parse_datetime(
                     $key->{updated_at} );
-                p $dt_proj;
                 if (   ( not defined $return_proj->updated_at )
                     || ( $dt_proj > $return_proj->updated_at ) )
                 {
-                    p $return_proj->updated_at;
                     $return_proj->update(
                         {
                             qualitative_progress_1 =>
@@ -191,14 +182,11 @@ $schema->txn_do(
                 push( @projects, $return_proj->id )
 
             }
-            p $return_goal->updated_at;
             my $dt_goal = DateTime::Format::DateParse->parse_datetime(
                 $goal->{updated_at} );
-            p $dt_goal;
             if (   ( not defined $return_goal->updated_at )
                 || ( $dt_goal > $return_goal->updated_at ) )
             {
-                p $return_goal->updated_at;
                 $return_goal->update(
                     {
                         qualitative_progress_1 =>
