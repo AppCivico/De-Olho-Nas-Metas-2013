@@ -40,6 +40,7 @@ while ( my $row = $csv->getline($fh) ) {
       $schema->resultset('Project')->search( { project_number => $row->[1] } )
       ->next;
     use DDP;
+    p $row;
     my $update_project;
     unless ( defined $project ) {
         my $url =
@@ -47,10 +48,10 @@ while ( my $row = $csv->getline($fh) ) {
 
         $url->path_segments( 'metas', 'api', 'project', $row->[1] );
 
-        my $resp  = $furl->get( $url->as_string );
+        my $resp = $furl->get( $url->as_string );
+        p $resp;
         my $value = decode_json $resp->content;
         warn "value";
-        p $value;
         $update_project =
           $schema->resultset('Project')
           ->search( { name => { ilike => $value->{name} } } )
