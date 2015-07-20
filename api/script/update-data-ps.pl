@@ -62,6 +62,9 @@ my @secretary;
 my @secretaries;
 my $db = $schema->resultset('Goal');
 
+
+print "start update:";
+
 $url->path_segments( 'metas', 'api', 'goals' );
 
 my $res_goal = $furl->get($url);
@@ -341,3 +344,5 @@ $schema->txn_do(
         }
     }
 );
+
+print "finish update";

@@ -448,6 +448,8 @@ $(document).ready(function () {
 						    </form>
 						</div>
 					</div>
+
+					<h3>[%l('Comentários')%]</h3>
 					<div id="disqus_thread"></div>
 					<script type="text/javascript">
 						/* * * CONFIGURATION VARIABLES * * */
