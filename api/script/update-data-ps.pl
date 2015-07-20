@@ -105,7 +105,6 @@ $schema->txn_do(
                 push( @secretary, $return_sec->id );
             }
             for my $key ( @{ $goal->{projects} } ) {
-
                 my $return_proj =
                   $schema->resultset('Project')
                   ->search( { project_number => $key->{id} } )->next;
