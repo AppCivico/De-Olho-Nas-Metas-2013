@@ -387,6 +387,7 @@ $(document).ready(function () {
 					[% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]	
 					<div id="alert">
 					</div>
+
 					<div id="disqus_thread">						
 						<textarea id="text_comment_counsil" class="form-control" rows="2"></textarea>
 						<button  type="button" id="comment_counsil" class="btn btn-violet" data-id="[% c.user.obj.id%]" autocomplete="off">[%l('Comentar')%]</button>
@@ -448,6 +449,8 @@ $(document).ready(function () {
 						    </form>
 						</div>
 					</div>
+
+					<h3>[%l('Comentários')%]</h3>
 					<div id="disqus_thread"></div>
 					<script type="text/javascript">
 						/* * * CONFIGURATION VARIABLES * * */
