@@ -22,11 +22,19 @@
 				<div class="notifications">
 					{{#interation}}
 					<div class="notification-icon violet" title="Nova interação do conselheiro" alt="Nova interação do conselheiro">
-						<div class="icon eye2">
+						<div class="icon eye">
 						</div>
 					</div>
 					{{/interation}}
+					{{#set_updated}}
+				<div class="notification-icon violet" title="Nova atualização" alt="Nova atualização">
+						<div class="icon check">
+						</div>
 				</div>
+					{{/set_updated}}
+
+				</div>
+
 			</div>
 			{{/projects}}
 			{{^projects}}
@@ -45,10 +53,6 @@ $(document).ready(function () {
 
 });
 </script>
-			<!--	<div class="notification-icon brown" title="Nova atualização" alt="Nova atualização">
-						<div class="icon check">
-						</div>
-					</div>-->
 
 	<section class="metas-filtro">
 		<div class="container">
