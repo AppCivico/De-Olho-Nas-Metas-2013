@@ -323,6 +323,7 @@ sub list_GET {
                               name
                               latitude
                               longitude
+                              updated_at
                               /
                         ),
                         goal => [

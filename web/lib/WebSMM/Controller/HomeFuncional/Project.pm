@@ -5,6 +5,9 @@ use JSON;
 use Path::Class qw(dir);
 use utf8;
 use DDP;
+use DateTime::Format::DateParse;
+
+#use DateTime;
 BEGIN { extends 'Catalyst::Controller'; }
 
 =head1 NAME
@@ -278,6 +281,18 @@ sub search_by_types : Chained('base') : Args(0) {
             lnglat    => $lnglat    ? $lnglat    : ""
         }
     );
+    use DDP;
+
+    for my $p ( @{ $c->stash->{projects} } ) {
+        next unless $p->{updated_at};
+        my $dt =
+          DateTime::Format::DateParse->parse_datetime( $p->{updated_at} );
+        $dt = $dt->add( days => 7 );
+
+        $p->{set_updated} = 1 if DateTime->now() < $dt;
+
+    }
+    p $c->stash->{projects};
     $c->res->status(200);
     $c->detach( '/form/as_json', [ { projects => $c->stash->{projects} } ] );
 }
