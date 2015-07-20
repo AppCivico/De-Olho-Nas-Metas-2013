@@ -5,6 +5,9 @@ use JSON;
 use Path::Class qw(dir);
 use utf8;
 use DDP;
+use DateTime::Format::DateParse;
+
+#use DateTime;
 BEGIN { extends 'Catalyst::Controller'; }
 
 =head1 NAME
@@ -260,11 +263,13 @@ sub search_by_types : Chained('base') : Args(0) {
     my ( $self, $c ) = @_;
     my $lat  = $c->req->param('latitude');
     my $long = $c->req->param('longitude');
-    $lat  = "" unless $lat =~ qr/^(\-?\d+(\.\d+)?)$/;
-    $long = "" unless $long =~ qr/^(\-?\d+(\.\d+)?)$/;
+    my $lnglat;
+    if ( $lat && $long ) {
+        $lat  = "" unless $lat =~ qr/^(\-?\d+(\.\d+)?)$/;
+        $long = "" unless $long =~ qr/^(\-?\d+(\.\d+)?)$/;
 
-    my $lnglat = join( q/ /, $long, $lat ) if $lat && $long;
-
+        $lnglat = join( q/ /, $long, $lat );
+    }
     my $type_id   = $c->req->param('type_id');
     my $region_id = $c->req->param('region_id');
     my $api       = $c->model('API');
@@ -278,6 +283,18 @@ sub search_by_types : Chained('base') : Args(0) {
             lnglat    => $lnglat    ? $lnglat    : ""
         }
     );
+    use DDP;
+    my $now = DateTime->now( time_zone => 'local' );
+
+    for my $p ( @{ $c->stash->{projects} } ) {
+        next unless $p->{updated_at};
+        my $dt =
+          DateTime::Format::DateParse->parse_datetime( $p->{updated_at} );
+        $dt = $dt->add( days => 7 );
+
+        $p->{set_updated} = 1 if $now < $dt;
+
+    }
     $c->res->status(200);
     $c->detach( '/form/as_json', [ { projects => $c->stash->{projects} } ] );
 }
