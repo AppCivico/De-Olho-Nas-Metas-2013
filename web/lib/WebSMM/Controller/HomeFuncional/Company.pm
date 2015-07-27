@@ -70,7 +70,7 @@ sub detail : Chained('object') : Args(0) {
         [ 'companies', $c->stash->{company}->{id}, 'goals' ] );
 
     $c->stash->{sum_budgets} =
-      sum map { $_->{dedicated_value} } @{ $c->stash->{budgets} };
+      sum map { $_->{liquidated_value} } @{ $c->stash->{budgets} };
 }
 
 =encoding utf8
