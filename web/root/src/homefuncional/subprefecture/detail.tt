@@ -79,6 +79,14 @@
 					
 					<div style="height: 300px;" id="map">
 					</div>
+                    <div class="projects">
+                        <h3>[% subprefecture_obj.projects.size %] Projeto[% subprefecture_obj.projects.size > 1 ? "s" : "" %] da Subprefeitura</h3>
+                        <ul class="list-arrow multi-column">
+                            [% FOREACH project IN subprefecture_obj.projects %]
+                            <li><a href="[% c.uri_for_action('/homefuncional/project/detail',[project.id] ) %]">[%project.name%]</a></li>
+                            [% END %]
+                        </ul>
+                    </div>
 
 <!--				<div class="row social">
 						<div class="col-xs-4">
@@ -147,7 +155,7 @@
 							</li>
 						</ul>
 						[% END %]
-						<span class="header">[% subprefecture_obj.regions.size%] [%l('Distritos')%]</span>
+						<span class="header">[% subprefecture_obj.regions.size%] [%l('Distrito(s)')%]</span>
 						<ul>
 							[% IF subprefecture_obj.regions.size > 0 %]
 							<li>
