@@ -1,5 +1,4 @@
 use utf8;
-
 package SMM::Schema::Result::Campaign;
 
 # Created by DBIx::Class::Schema::Loader
@@ -33,8 +32,7 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
-    "PassphraseColumn" );
+__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
 =head1 TABLE: C<campaign>
 
@@ -84,6 +82,12 @@ __PACKAGE__->table("campaign");
   data_type: 'date'
   is_nullable: 0
 
+=head2 region_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
 =head2 address
 
   data_type: 'text'
@@ -97,12 +101,6 @@ __PACKAGE__->table("campaign");
 =head2 longitude
 
   data_type: 'text'
-  is_nullable: 1
-
-=head2 region_id
-
-  data_type: 'integer'
-  is_foreign_key: 1
   is_nullable: 1
 
 =head2 organization_id
@@ -132,51 +130,59 @@ __PACKAGE__->table("campaign");
   data_type: 'integer'
   is_nullable: 1
 
+=head2 request_council
+
+  data_type: 'boolean'
+  default_value: false
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
-    "id",
-    {
-        data_type         => "integer",
-        is_auto_increment => 1,
-        is_nullable       => 0,
-        sequence          => "campaign_id_seq",
-    },
-    "description",
-    { data_type => "text", is_nullable => 1 },
-    "created_at",
-    {
-        data_type     => "timestamp",
-        default_value => \"current_timestamp",
-        is_nullable   => 1,
-        original      => { default_value => \"now()" },
-    },
-    "user_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-    "name",
-    { data_type => "text", is_nullable => 0 },
-    "start_in",
-    { data_type => "date", is_nullable => 0 },
-    "end_on",
-    { data_type => "date", is_nullable => 0 },
-    "address",
-    { data_type => "text", is_nullable => 1 },
-    "latitude",
-    { data_type => "text", is_nullable => 1 },
-    "longitude",
-    { data_type => "text", is_nullable => 1 },
-    "region_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-    "organization_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-    "free_text",
-    { data_type => "text", is_nullable => 1 },
-    "objective",
-    { data_type => "text", is_nullable => 0 },
-    "project_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-    "mobile_campaign_id",
-    { data_type => "integer", is_nullable => 1 },
+  "id",
+  {
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+    sequence          => "campaign_id_seq",
+  },
+  "description",
+  { data_type => "text", is_nullable => 1 },
+  "created_at",
+  {
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
+    is_nullable   => 1,
+    original      => { default_value => \"now()" },
+  },
+  "user_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "name",
+  { data_type => "text", is_nullable => 0 },
+  "start_in",
+  { data_type => "date", is_nullable => 0 },
+  "end_on",
+  { data_type => "date", is_nullable => 0 },
+  "region_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "address",
+  { data_type => "text", is_nullable => 1 },
+  "latitude",
+  { data_type => "text", is_nullable => 1 },
+  "longitude",
+  { data_type => "text", is_nullable => 1 },
+  "organization_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "free_text",
+  { data_type => "text", is_nullable => 1 },
+  "objective",
+  { data_type => "text", is_nullable => 0 },
+  "project_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "mobile_campaign_id",
+  { data_type => "integer", is_nullable => 1 },
+  "request_council",
+  { data_type => "boolean", default_value => \"false", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -202,9 +208,10 @@ Related object: L<SMM::Schema::Result::Event>
 =cut
 
 __PACKAGE__->has_many(
-    "events", "SMM::Schema::Result::Event",
-    { "foreign.campaign_id" => "self.id" },
-    { cascade_copy          => 0, cascade_delete => 0 },
+  "events",
+  "SMM::Schema::Result::Event",
+  { "foreign.campaign_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 organization
@@ -216,15 +223,15 @@ Related object: L<SMM::Schema::Result::Organization>
 =cut
 
 __PACKAGE__->belongs_to(
-    "organization",
-    "SMM::Schema::Result::Organization",
-    { id => "organization_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "organization",
+  "SMM::Schema::Result::Organization",
+  { id => "organization_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
 =head2 project
@@ -236,15 +243,15 @@ Related object: L<SMM::Schema::Result::Project>
 =cut
 
 __PACKAGE__->belongs_to(
-    "project",
-    "SMM::Schema::Result::Project",
-    { id => "project_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "project",
+  "SMM::Schema::Result::Project",
+  { id => "project_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
 =head2 region
@@ -256,15 +263,15 @@ Related object: L<SMM::Schema::Result::Region>
 =cut
 
 __PACKAGE__->belongs_to(
-    "region",
-    "SMM::Schema::Result::Region",
-    { id => "region_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "region",
+  "SMM::Schema::Result::Region",
+  { id => "region_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
 =head2 user
@@ -276,19 +283,20 @@ Related object: L<SMM::Schema::Result::User>
 =cut
 
 __PACKAGE__->belongs_to(
-    "user",
-    "SMM::Schema::Result::User",
-    { id => "user_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "user",
+  "SMM::Schema::Result::User",
+  { id => "user_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-17 16:01:20
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Drfwz+43yxFahgT4JzAHBQ
+
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-07-29 14:29:19
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:S8oob5VD+JlQLWvaozhaiQ
 
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';

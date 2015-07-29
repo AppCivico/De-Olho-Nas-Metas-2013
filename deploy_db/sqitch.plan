@@ -1,0 +1,6 @@
+%syntax-version=1.0.0
+%project=flipr
+%uri=https://github.com/theory/sqitch-intro/
+
+0001-donmschema 2015-07-29T14:58:48Z Renan Carvalho <renan.carvalho@eokoe.com> # deploy db
+0002-add_column_counsil_type [0001-donmschema] 2015-07-29T14:59:11Z Renan Carvalho <renan.carvalho@eokoe.com> # adicionando coluna para distinguir nome do conselho

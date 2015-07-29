@@ -1,5 +1,0 @@
-%syntax-version=1.0.0
-%project=flipr
-%uri=https://github.com/theory/sqitch-intro/
-
-donmschema 2015-07-07T17:56:04Z Renan Carvalho <renan.carvalho@eokoe.com> # Add schema for all flipr objects.

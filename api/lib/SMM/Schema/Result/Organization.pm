@@ -96,6 +96,12 @@ __PACKAGE__->table("organization");
   is_foreign_key: 1
   is_nullable: 1
 
+=head2 organization_type_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -123,6 +129,8 @@ __PACKAGE__->add_columns(
   "phone",
   { data_type => "text", is_nullable => 1 },
   "subprefecture_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "organization_type_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
@@ -250,6 +258,26 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 organization_type
+
+Type: belongs_to
+
+Related object: L<SMM::Schema::Result::OrganizationType>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "organization_type",
+  "SMM::Schema::Result::OrganizationType",
+  { id => "organization_type_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
 =head2 subprefecture
 
 Type: belongs_to
@@ -316,8 +344,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-24 18:09:38
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VXVxT/5eHoA2NowB+/UjyQ
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-07-29 14:29:19
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:iZ5gHAhKj4c/Xm86QolsMw
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
 with 'SMM::Schema::Role::ResultsetFind';

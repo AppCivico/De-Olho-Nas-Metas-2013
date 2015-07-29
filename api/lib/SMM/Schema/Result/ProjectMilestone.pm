@@ -78,12 +78,6 @@ __PACKAGE__->table("project_milestones");
   data_type: 'timestamp'
   is_nullable: 1
 
-=head2 project_type_id
-
-  data_type: 'integer'
-  is_foreign_key: 1
-  is_nullable: 1
-
 =cut
 
 __PACKAGE__->add_columns(
@@ -109,8 +103,6 @@ __PACKAGE__->add_columns(
   },
   "updated_at",
   { data_type => "timestamp", is_nullable => 1 },
-  "project_type_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -167,29 +159,9 @@ __PACKAGE__->belongs_to(
   },
 );
 
-=head2 project_type
 
-Type: belongs_to
-
-Related object: L<SMM::Schema::Result::ProjectType>
-
-=cut
-
-__PACKAGE__->belongs_to(
-  "project_type",
-  "SMM::Schema::Result::ProjectType",
-  { id => "project_type_id" },
-  {
-    is_deferrable => 0,
-    join_type     => "LEFT",
-    on_delete     => "NO ACTION",
-    on_update     => "NO ACTION",
-  },
-);
-
-
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-03-24 02:47:30
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1cC/HC4u/0N5g3dAj2bacg
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-07-29 14:29:19
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:nzZptlvQD9oYce1H4SpuWw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

@@ -1,5 +1,4 @@
 use utf8;
-
 package SMM::Schema::Result::ImagesProject;
 
 # Created by DBIx::Class::Schema::Loader
@@ -33,8 +32,7 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
-    "PassphraseColumn" );
+__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
 =head1 TABLE: C<images_project>
 
@@ -62,35 +60,35 @@ __PACKAGE__->table("images_project");
   data_type: 'text'
   is_nullable: 0
 
-=head2 description
-
-  data_type: 'text'
-  is_nullable: 1
-
 =head2 user_id
 
   data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 1
 
+=head2 description
+
+  data_type: 'text'
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
-    "id",
-    {
-        data_type         => "integer",
-        is_auto_increment => 1,
-        is_nullable       => 0,
-        sequence          => "project_images_id_seq",
-    },
-    "project_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-    "name_image",
-    { data_type => "text", is_nullable => 0 },
-    "description",
-    { data_type => "text", is_nullable => 1 },
-    "user_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "id",
+  {
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+    sequence          => "project_images_id_seq",
+  },
+  "project_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "name_image",
+  { data_type => "text", is_nullable => 0 },
+  "user_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "description",
+  { data_type => "text", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -116,15 +114,15 @@ Related object: L<SMM::Schema::Result::Project>
 =cut
 
 __PACKAGE__->belongs_to(
-    "project",
-    "SMM::Schema::Result::Project",
-    { id => "project_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "project",
+  "SMM::Schema::Result::Project",
+  { id => "project_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
 =head2 user
@@ -136,19 +134,20 @@ Related object: L<SMM::Schema::Result::User>
 =cut
 
 __PACKAGE__->belongs_to(
-    "user",
-    "SMM::Schema::Result::User",
-    { id => "user_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "user",
+  "SMM::Schema::Result::User",
+  { id => "user_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-06 17:04:43
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:UlPUx3/oMH9Klc6U8E9Ixw
+
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-07-29 14:29:19
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:aNC+qDvpRdNcwH4xEyY3JA
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
 with 'SMM::Schema::Role::ResultsetFind';

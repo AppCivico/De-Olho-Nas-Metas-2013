@@ -54,6 +54,11 @@ __PACKAGE__->table("file");
   data_type: 'text'
   is_nullable: 1
 
+=head2 status_text
+
+  data_type: 'json'
+  is_nullable: 1
+
 =head2 created_at
 
   data_type: 'timestamp'
@@ -64,11 +69,7 @@ __PACKAGE__->table("file");
 =head2 created_by
 
   data_type: 'integer'
-  is_nullable: 0
-
-=head2 status_text
-
-  data_type: 'json'
+  is_foreign_key: 1
   is_nullable: 1
 
 =cut
@@ -83,6 +84,8 @@ __PACKAGE__->add_columns(
   },
   "name",
   { data_type => "text", is_nullable => 1 },
+  "status_text",
+  { data_type => "json", is_nullable => 1 },
   "created_at",
   {
     data_type     => "timestamp",
@@ -91,9 +94,7 @@ __PACKAGE__->add_columns(
     original      => { default_value => \"now()" },
   },
   "created_by",
-  { data_type => "integer", is_nullable => 0 },
-  "status_text",
-  { data_type => "json", is_nullable => 1 },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -108,9 +109,31 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key("id");
 
+=head1 RELATIONS
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-05-28 19:17:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:0MU5Bp8iSxXVE3Fnn6yXXg
+=head2 created_by
+
+Type: belongs_to
+
+Related object: L<SMM::Schema::Result::User>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "created_by",
+  "SMM::Schema::Result::User",
+  { id => "created_by" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-07-29 14:29:19
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:SuP7R0hk1F1LiEtVXlbBtQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

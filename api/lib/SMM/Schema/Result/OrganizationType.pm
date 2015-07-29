@@ -1,12 +1,12 @@
 use utf8;
-package SMM::Schema::Result::ProjectType;
+package SMM::Schema::Result::OrganizationType;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
 
 =head1 NAME
 
-SMM::Schema::Result::ProjectType
+SMM::Schema::Result::OrganizationType
 
 =cut
 
@@ -34,11 +34,11 @@ extends 'DBIx::Class::Core';
 
 __PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
-=head1 TABLE: C<project_types>
+=head1 TABLE: C<organization_type>
 
 =cut
 
-__PACKAGE__->table("project_types");
+__PACKAGE__->table("organization_type");
 
 =head1 ACCESSORS
 
@@ -47,12 +47,12 @@ __PACKAGE__->table("project_types");
   data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
-  sequence: 'project_types_id_seq'
+  sequence: 'organization_type_id_seq'
 
 =head2 name
 
   data_type: 'text'
-  is_nullable: 0
+  is_nullable: 1
 
 =cut
 
@@ -62,10 +62,10 @@ __PACKAGE__->add_columns(
     data_type         => "integer",
     is_auto_increment => 1,
     is_nullable       => 0,
-    sequence          => "project_types_id_seq",
+    sequence          => "organization_type_id_seq",
   },
   "name",
-  { data_type => "text", is_nullable => 0 },
+  { data_type => "text", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -82,54 +82,25 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
 
-=head2 milestones
+=head2 organizations
 
 Type: has_many
 
-Related object: L<SMM::Schema::Result::Milestone>
+Related object: L<SMM::Schema::Result::Organization>
 
 =cut
 
 __PACKAGE__->has_many(
-  "milestones",
-  "SMM::Schema::Result::Milestone",
-  { "foreign.project_type_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
-);
-
-=head2 project_progresses
-
-Type: has_many
-
-Related object: L<SMM::Schema::Result::ProjectProgress>
-
-=cut
-
-__PACKAGE__->has_many(
-  "project_progresses",
-  "SMM::Schema::Result::ProjectProgress",
-  { "foreign.milestone_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
-);
-
-=head2 projects
-
-Type: has_many
-
-Related object: L<SMM::Schema::Result::Project>
-
-=cut
-
-__PACKAGE__->has_many(
-  "projects",
-  "SMM::Schema::Result::Project",
-  { "foreign.type" => "self.id" },
+  "organizations",
+  "SMM::Schema::Result::Organization",
+  { "foreign.organization_type_id" => "self.id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
 # Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-07-29 14:29:19
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:cNiNqpyytKkr+XX0ZIxsIQ
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:hpcqtAp/Ch9DQO7Ar7Eh0A
+
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;
