@@ -21,10 +21,9 @@ my $url =
 
 my $jar_file = path("jar.txt");
 $jar_file->touch;
-i
 
-  my $jar = HTTP::CookieJar->new->load_cookies( $jar_file->lines );
-my $ua = HTTP::Tiny->new(
+my $jar = HTTP::CookieJar->new->load_cookies( $jar_file->lines );
+my $ua  = HTTP::Tiny->new(
     cookie_jar => $jar,
     agent =>
 "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.0"

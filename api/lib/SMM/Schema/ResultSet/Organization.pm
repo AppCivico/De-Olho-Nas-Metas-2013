@@ -50,13 +50,13 @@ sub verifiers_specs {
                     required => 0,
                     type     => 'Str',
                 },
-                complement => {
+                subprefecture_id => {
                     required => 0,
-                    type     => 'Str',
+                    type     => 'Int',
                 },
-                number => {
-                    required => 0,
-                    type     => 'Str',
+                organization_type_id => {
+                    required => 1,
+                    type     => 'Int',
                 },
             }
         )

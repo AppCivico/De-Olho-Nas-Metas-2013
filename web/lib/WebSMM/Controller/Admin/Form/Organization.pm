@@ -19,7 +19,7 @@ sub process : Chained('base') : PathPart('organization') : Args(0) {
     my $params = { %{ $c->req->params } };
 
     $api->stash_result(
-        $c, ['organizations/complete'],
+        $c, ['organizations'],
         method => 'POST',
         body   => $params
     );
@@ -28,7 +28,8 @@ sub process : Chained('base') : PathPart('organization') : Args(0) {
         $c->detach( '/form/redirect_error', [] );
     }
     else {
-        $c->detach( '/form/redirect_ok', [ '/admin/organization/index', {}, 'Cadastrado com sucesso!' ] );
+        $c->detach( '/form/redirect_ok',
+            [ '/admin/organization/index', {}, 'Cadastrado com sucesso!' ] );
     }
 
 }
@@ -51,11 +52,13 @@ sub process_edit : Chained('base') : PathPart('organization') : Args(1) {
         $c->detach( '/form/redirect_error', [] );
     }
     else {
-        $c->detach( '/form/redirect_ok', [ '/admin/organization/index', {}, 'Alterado com sucesso!' ] );
+        $c->detach( '/form/redirect_ok',
+            [ '/admin/organization/index', {}, 'Alterado com sucesso!' ] );
     }
 }
 
-sub process_delete : Chained('base') : PathPart('remove_organization') : Args(1) {
+sub process_delete : Chained('base') : PathPart('remove_organization') :
+  Args(1) {
     my ( $self, $c, $id ) = @_;
 
     my $api = $c->model('API');
@@ -66,11 +69,13 @@ sub process_delete : Chained('base') : PathPart('remove_organization') : Args(1)
         $c->detach( '/form/redirect_error', [] );
     }
     else {
-        $c->detach( '/form/redirect_ok', [ '/admin/federalelectoralprocess/index', {}, 'Removido com sucesso!' ] );
+        $c->detach( '/form/redirect_ok',
+            [ '/admin/organization/index', {}, 'Removido com sucesso!' ] );
     }
 }
 
-sub process_password : Chained('base') : PathPart('change_organization_password') : Args(0) {
+sub process_password : Chained('base') :
+  PathPart('change_organization_password') : Args(0) {
     my ( $self, $c, $id ) = @_;
 
     my $api = $c->model('API');
@@ -91,7 +96,8 @@ sub process_password : Chained('base') : PathPart('change_organization_password'
 
         $c->authenticate( $c->req->params );
 
-        $c->detach( '/form/redirect_ok', [ '/admin/dashboard/index', {}, 'Senha alterada com sucesso!' ] );
+        $c->detach( '/form/redirect_ok',
+            [ '/admin/dashboard/index', {}, 'Senha alterada com sucesso!' ] );
     }
 }
 

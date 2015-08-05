@@ -1,6 +1,6 @@
 <div>
 <div class="rows">
-<h2 class="sub-header">Distrito</h2>
+<h2 class="sub-header">Conselhos</h2>
 <div class="container-fluid">
   <a href="[% c.uri_for_action('/admin/council/add') %]" class="btn btn-success">Cadastrar Conselho</a>
   <a href="[% c.uri_for_action('/admin/council/upload') %]" class="btn btn-success">Cadastrar Arquivo de Conselhos</a>

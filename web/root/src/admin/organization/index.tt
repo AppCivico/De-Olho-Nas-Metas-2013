@@ -2,9 +2,7 @@
 <div class="rows">
 <h2 class="sub-header">Organizações cadastradas</h2>
 <div class="container-fluid">	
-	<a href="/admin/organization/new">
-		<button type="button" class="btn btn-success pull-right">[%l('Adicionar nova organização')%]</button>
-	</a>
+  <a href="[% c.uri_for_action('/admin/organization/add') %]" class="btn btn-success">Cadastrar Organização</a>
 </div>
 <div class="table-responsive">
 	[%IF organizations.size > 0%]
@@ -14,6 +12,7 @@
                 <th>[%l('Nome')%]</th>
                 <th>[%l('Descrição')%]</th>
                 <th>[%l('Ações')%]</th>
+                <th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -23,7 +22,9 @@
 					<td>[%organization.description | none%]</td>
 					<td>
 						<a href="/admin/organization/[%organization.id%]">[%l('Editar')%]</a>
-<!-- 						<a href="/admin/form/remove_organization/[%organization.id%]">[%l('Excluir')%]</a> -->
+					</td>
+					<td>
+ 						<a href="/admin/form/remove_organization/[%organization.id%]">[%l('Excluir')%]</a> 
 					</td>
 				</tr>
             [%END%]

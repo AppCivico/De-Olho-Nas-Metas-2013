@@ -39,10 +39,12 @@
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 						<a href="[%href%]">[%l('Empresas')%]</a>
 					</li>
+<!--
 					[%href = c.uri_for_action('/admin/council/index')%]
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 						<a href="[%href%]">[%l('Conselhos')%]</a>
 					</li>
+-->
 					[%href = c.uri_for_action('/admin/budget/index')%]
 					<li [% IF href.match("/${c_req_path}$") %]class="active"[%END%]>
 						<a href="[%href%]">[%l('Orçamentos')%]</a>
