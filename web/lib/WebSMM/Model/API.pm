@@ -77,7 +77,6 @@ sub stash_result {
                 exists $opts{body} ? ( body => $opts{body} ) : ()
             );
         };
-        p $res;
 
         #print STDERR $res->as_string;
     }
