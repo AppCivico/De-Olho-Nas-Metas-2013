@@ -321,25 +321,27 @@ sub list_GET {
                               qw/
                               id
                               name
+                              percentage
                               latitude
                               longitude
                               updated_at
                               /
                         ),
-                        goal => [
+                        goal => {
                             (
                                 map {
                                     my $p = $_;
                                     (
-                                        map {
-                                            { $_ => $p->{goal}->{$_} }
-                                          } qw/
+
+                                        map { $_ => $p->{goal}->{$_} } qw/
+                                          id
                                           name
                                           /
+
                                       ),
                                 } @{ $r->{goal_projects} },
                             ),
-                        ],
+                        },
                         (
                             interation => $r->{approved_project_events}
                             ? do {

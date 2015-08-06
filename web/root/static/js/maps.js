@@ -61,18 +61,22 @@ var $maps = function () {
 			$.each(json, function(i, pj){
 				marker = "";
 				var myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
+				var bubble_color = "rgb(140,198,63)";
+				var icone = "/static/images/icone_verde.png";
+
+				if (pj.percentage < 50){
+					bubble_color = "rgb(198,93,93)";
+					icone = "/static/images/icone_vermelho.png";
+				}
+
 				marker = new google.maps.Marker({
     	            position: myLatlng,
 	                map: map,
 	                url: "/project/"+pj.id,
-	                icon: "/static/images/marker_donm.png"
+	                icon: icone
         	    });
 				marker_array.push(marker);
 				var url = marker.url;
-				var bubble_color = "rgb(140,198,63)";
-				if (pj.percentage < 50){
-					bubble_color = "rgb(198,93,93)";
-				}
 				var content = '<div class="project-bubble"><div class="name">';
 				content += '<a href="' + url + '" target="_blank" >';
 				if (pj.goal){
@@ -583,22 +587,35 @@ var $maps = function () {
 				$("#map").fadeOut();
 			}
 			$.each(data.projects, function(i, pj){
-		
+				console.log(pj);	
 				if (pj.latitude == 0 && pj.longitude == 0) return;
 				marker = "";	
-				myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);	
+				myLatlng = new google.maps.LatLng(pj.latitude,pj.longitude);
+				var icone = "/static/images/icone_verde.png";
+
+				if (pj.percentage < 50){
+					bubble_color = "rgb(198,93,93)";
+					icone = "/static/images/icone_vermelho.png";
+				}
+
 				marker = new google.maps.Marker({
 					position: myLatlng,
 					map: map,
 					url: "/project/"+pj.id,
-					icon: "/static/images/marker_donm.png"
+					icon: icone
 				});
+
 				marker_array.push(marker);
 				var url = marker.url;
+
 				var content = '<div class="project-bubble"><div class="name">';
-				content += '<a href="' + url + '" target="_blank">';
-				content += pj.name + '</a></div>';
-				content += '</div>';
+				content += '<a href="' + url + '" target="_blank" >';
+				if (pj.goal){
+					content += pj.name + '( Meta - '+pj.goal.id+')</a></div>';
+				}else{
+					content += pj.name + '</a></div>';
+				}
+
 				google.maps.event.addListener(marker, 'mouseover', function() {
 					if (!ib){
 						ib = new InfoBubble({
@@ -606,7 +623,7 @@ var $maps = function () {
 							content: content,
 							shadowStyle: 0,
 							padding: 0,
-							backgroundColor: 'rgb(140,198,63)',
+							backgroundColor: bubble_color,
 							borderRadius: 0,
 							arrowSize: 15,
 							borderWidth: 0,
@@ -620,6 +637,7 @@ var $maps = function () {
 						});
 						ib.open(map, this);
 					}else{
+						ib.setBackgroundColor(bubble_color);
 						ib.setContent(content);
 						//ib.setPosition(myLatlng);
 						ib.open(map, this);
