@@ -57,8 +57,6 @@ sub stash_result {
     my $method = lc( $opts{method} || 'GET' );
 
     my $res;
-    use DDP;
-    p \@headers;
 
     if ( $method eq 'upload' ) {
         $res = eval {

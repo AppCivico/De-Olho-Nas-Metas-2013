@@ -80,8 +80,6 @@ sub index : Chained('base') : PathPart('') : Args(0) {
       [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{organization_types} } ];
     $c->stash->{organizations} = $group_by;
     my @order = sort keys %$group_by;
-    use DDP;
-    p \@order;
     $c->stash->{order} = \@order;
 
 }
