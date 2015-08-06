@@ -13,7 +13,9 @@ use Time::HiRes qw(time);
 
 sub api_key_check : Private {
     my ( $self, $c ) = @_;
-
+    use DDP;
+    p $c->req->params;
+    p $c->req->headers;
     my $api_key = $c->req->param('api_key')
       || ( $c->req->header('X-API-Key') );
 

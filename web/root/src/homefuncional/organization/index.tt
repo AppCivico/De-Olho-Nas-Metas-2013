@@ -1,4 +1,6 @@
-    <section class="map text-center">
+    
+	[%-CALL assets.include("js/maps.js")%]
+	<section class="map text-center">
 		<div id="filter-map">
 			<div class="contents text-center">
 				<div class="item">
@@ -35,36 +37,35 @@
 		<div class="clear"></div>
     </section>
 
-<!--	<section class="metas-filtro">
+	<section class="metas-filtro violet">
 		<div class="container">
 			<div class="form">
-				<div class="col-xs-4 cep">
-					Encontre seu console<br />
-					<input type="hidden" id="pagetype" value="regiondetail">
-					<input type="hidden" id="regionid" value="[% region_obj.id %]">
-					<input type="text" id="txtaddress" placeholder="[%l('CEP')%]">
-					<button id="btnaddress"><span class="glyphicon glyphicon-search"></span></button>
-				</div>
+				<form method="GET" action="">
 				<div class="col-xs-6 cep">
-					PROCURAR POR SUBPREFEITURAS<br />
-					<div class="select-stylized">
-						<select id="subprefecture" onchange="location = this.options[this.selectedIndex].value;">
-							<option value="">[%l('Subprefeituras')%]</option>
-							[% FOREACH subprefecture_obj IN subprefectures %]
-							<option value="[%%]">[%subprefecture_obj.name%]</option>
+					<div class="col-xs-8 region">
+							[%l('por Tipo de Conselho')%]<br />
+							<div class="select-stylized"><select name="organization_type" id="organization_type">
+								<option value="">[%l('Tipo de Conselho')%]</option>
+							[% FOREACH ot IN select_organization_types %]
+							<option value="[%ot.0%]">[%ot.1%]</option>
 							[% END %]
-						</select>
-					</div>
+							</select></div>
+						</div>
+						<div class="col-sm-4 type">
+							<br />
+							<button type="submit" class="btn btn-default" id="searchgoal">[%l('Pesquisar')%]</button>
+						</div>
 
 				</div>
-
+				</form>
 				<div class="clear"></div>
 		</div>
-    </section>-->
+    </section>
 	<section class="metas-detail search-list">
 		<div class="container">
-			<h2 class="section-title">[%organizations.count.0%] [%l('Conselhos Participativos')%]</h2>
-				
+			<h2 class="section-title">[%organizations.count.0%] [%l('Conselho(s)')%]</h2>
+
+			[% IF order.size > 2%]
 			<div class="row index-results organization-list violet multi-column">
 				<div>
 					<ul>
@@ -77,10 +78,31 @@
 					[% END%]
 					[% END %]
 					</ul>
+
 				</div>
 
 			</div>
-			
+			[%ELSIF order.size > 1%]
+			<div class="row index-results organization-list violet">
+				<div>
+					<ul>
+					[% FOREACH key IN order %]
+					[% UNLESS key == 'count' %]
+						<li class="index">[%key%]</li>
+							[%FOREACH org IN organizations.$key %]
+							<li class="item"><a href="[% c.uri_for_action('/homefuncional/organization/detail', [ org.id ])%]">[%org.name%]</a></li>
+							[% END %]
+					[% END%]
+					[% END %]
+					</ul>
+
+				</div>
+
+			</div>
+
+			[%ELSE%]
+				<h2 class="section-title">[%l('Nenhum conselho encontrado')%].</h2>
+			[%END%]
 			
 		</div>
     </section>	

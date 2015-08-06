@@ -36,8 +36,6 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
         [ 'organizations', $id ],
         stash => 'organization_obj'
     );
-    use DDP;
-    p $c->stash->{organization_obj};
     if ( $c->user ) {
         $api->stash_result(
             $c,
@@ -61,17 +59,31 @@ sub detail : Chained('object') : PathPart('') : Args(0) {
 sub index : Chained('base') : PathPart('') : Args(0) {
     my ( $self, $c ) = @_;
 
-    my $api = $c->model('API');
-
+    my $api               = $c->model('API');
+    my $organization_type = $c->req->params->{organization_type}
+      if $c->req->params->{organization_type};
     $api->stash_result( $c, 'subprefectures' );
-    $api->stash_result( $c, 'organizations' );
+    $api->stash_result(
+        $c, 'organizations',
+
+        params =>
+          { organization_type => $organization_type ? $organization_type : '' }
+    );
+    $api->stash_result( $c, 'organization_types' );
+
     my $group_by = {};
     push @{ $group_by->{ uc( substr( $_->{name}, 0, 1 ) ) } }, $_
       for @{ $c->stash->{organizations} };
     push @{ $group_by->{count} }, scalar( @{ $c->stash->{organizations} } );
+
+    $c->stash->{select_organization_types} =
+      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{organization_types} } ];
     $c->stash->{organizations} = $group_by;
     my @order = sort keys %$group_by;
+    use DDP;
+    p \@order;
     $c->stash->{order} = \@order;
+
 }
 
 sub user_follow_counsil : Chained('base') : PathPart('user_follow_counsil') :
@@ -93,8 +105,6 @@ sub user_follow_counsil : Chained('base') : PathPart('user_follow_counsil') :
     $c->res->status(400), $c->detach unless $c->stash->{counsil};
     $c->res->status(200);
     $c->res->content_type('application/json');
-    use DDP;
-    p $c->stash->{counsil};
     $c->res->body( JSON::encode_json( $c->stash->{counsil} ) );
 
 }
@@ -113,8 +123,6 @@ sub user_stop_counsil : Chained('base') : PathPart('user_stop_counsil') :
         method => 'POST',
         stash  => 'counsil'
     );
-    use DDP;
-    p $c->stash->{counsil};
     $c->res->status(200);
     $c->res->content_type('application/json');
     $c->res->body( JSON::encode_json( $c->stash->{counsil} ) );
@@ -130,8 +138,6 @@ sub edit : Chained('base') : PathPart('edit') : Args(0) {
 
     my $organization_id = $c->user->obj->organization_id;
 
-    use DDP;
-    p $params;
     $api->stash_result(
         $c, [ 'organizations', $organization_id ],
         params => $params,

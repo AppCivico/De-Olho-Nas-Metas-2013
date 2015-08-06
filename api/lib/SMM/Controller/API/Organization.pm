@@ -167,6 +167,12 @@ sub list_GET {
     my ( $self, $c ) = @_;
     my $rs = $c->stash->{collection};
 
+    if ( $c->req->params->{organization_type} ) {
+        $rs = $rs->search(
+            { 'organization_type.id' => $c->req->params->{organization_type} },
+            { join                   => ['organization_type'] }
+        );
+    }
     $rs = $rs->search( undef, { order_by => { -asc => [qw/me.name/] } } );
     $self->status_ok(
         $c,

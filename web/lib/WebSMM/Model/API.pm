@@ -45,7 +45,6 @@ sub stash_result {
     $url .= $self->_generate_query_params( $c, %opts );
 
     my @headers = $self->_generate_headers($c);
-
     if ( exists $opts{body} && ref $opts{body} eq 'HASH' ) {
         $opts{body} = { %{ $opts{body} } };
 
@@ -58,6 +57,9 @@ sub stash_result {
     my $method = lc( $opts{method} || 'GET' );
 
     my $res;
+    use DDP;
+    p \@headers;
+
     if ( $method eq 'upload' ) {
         $res = eval {
             my $req = POST $url, @headers,
@@ -68,6 +70,7 @@ sub stash_result {
         };
     }
     else {
+
         $res = eval {
             $self->_do_http_req(
                 method  => $method,
@@ -76,6 +79,7 @@ sub stash_result {
                 exists $opts{body} ? ( body => $opts{body} ) : ()
             );
         };
+        p $res;
 
         #print STDERR $res->as_string;
     }
