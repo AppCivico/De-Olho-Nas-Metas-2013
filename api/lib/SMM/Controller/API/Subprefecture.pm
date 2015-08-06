@@ -37,10 +37,7 @@ sub result_GET {
 
     my $subprefecture = $c->stash->{subprefecture};
     my $name          = $subprefecture->organizations->get_column('name');
-    use DDP;
-    p $subprefecture;
-    my @projects = $subprefecture->regions->projects;
-    p \@projects;
+    my @projects      = $subprefecture->regions->projects;
 
     $self->status_ok(
         $c,
