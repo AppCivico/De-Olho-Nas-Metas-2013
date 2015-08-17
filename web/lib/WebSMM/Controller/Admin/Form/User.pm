@@ -74,7 +74,8 @@ sub process_edit : Chained('base') : PathPart('user') : Args(1) {
     my $api    = $c->model('API');
     my $params = { %{ $c->req->params } };
     my @r;
-
+    use DDP;
+    p $c->req->params;
     $params->{role} = "" if $params->{role} eq 'Selecione';
     $params->{change_roles} = 1;
 

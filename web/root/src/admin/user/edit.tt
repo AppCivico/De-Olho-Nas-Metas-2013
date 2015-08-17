@@ -29,11 +29,11 @@
             </div>
             <div class="col-lg-12">
                 <br>           
-				<label>Permissão Atual:</label>
+				<!--<label>Permissão Atual:</label>
 				[% FOR p IN user_obj.roles %]
 				<a>[%IF p == 'counsil'%]Conselheiro[%ELSIF p == 'counsil_master'%]Conselheiro Master[%ELSIF p == 'user'%]Usuário[%ELSIF p == 'admin'%]Administrador[%END%]</a>
-				[%END%]
-                [%select_field('roles','Alterar Permissão',array => select_roles, value => user_obj.role_id.0, input_col=>"col-lg-6" )|none%]
+				[%END%]-->
+                [%select_field('role','Permissão',array => select_roles, value => user_obj.role_id.0 , input_col=>"col-lg-6" )|none%]
                 <br>
             </div>
 

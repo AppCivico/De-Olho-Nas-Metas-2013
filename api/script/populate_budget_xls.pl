@@ -7,6 +7,7 @@ use File::Basename;
 use Spreadsheet::XLSX;
 use DDP;
 use Moose;
+use Text2URI;
 
 use Catalyst::Test q(SMM);
 my $config = SMM->config;
@@ -39,6 +40,8 @@ my @rows;
 my $ok      = 0;
 my $ignored = 0;
 my $header_found;
+
+my $t = new Text2URI();
 
 for my $worksheet ( @{ $excel->{Worksheet} } ) {
 
@@ -85,133 +88,59 @@ for my $worksheet ( @{ $excel->{Worksheet} } ) {
                 $value =~ s/\s+$//;
                 $registro->{$header_name} = $value;
             }
-            eval {
-                $schema->txn_do(
-                    sub {
-                        if ( $registro->{meta_number} =~ /\// ) {
-                            my @goals = split( '/', $registro->{meta_number} );
+            $registro->{Nome_razao} =~ s/",;//g;
+            $registro->{txt_emp} =~ s/&quot;//g;
+            use DDP;
+            p $registro;
+            warn $registro->{txt_emp};
+            $registro->{business_name_url} =
+              $t->translate( $registro->{Nome_razao} )
+              if $registro->{Nome_razao};
 
-                            for my $v_goal (@goals) {
+            next unless $registro->{business_name_url};
+            if ( $registro->{meta_number} =~ / \// ) {
+                warn "entrou";
+                my @goals = split qw/\//, $registro->{meta_number};
+                for my $v_goal (@goals) {
+                    $schema->resultset('Budget')->create(
+                        {
+                            business_name     => $registro->{Nome_razao},
+                            cnpj              => $registro->{Cod_Cpf_Cnpj_Sof},
+                            goal_number       => $v_goal,
+                            dedicated_value   => $registro->{total_emp},
+                            liquidated_value  => $registro->{liquidado},
+                            observation       => $registro->{txt_emp},
+                            dedicated_year    => $registro->{Ano_empenho},
+                            organ_code        => $registro->{cod_orgao},
+                            organ_name        => $registro->{orgao},
+                            cod_emp           => $registro->{code_emp},
+                            business_name_url => $registro->{business_name_url},
 
-                                my $budget =
-                                  $schema->resultset('Budget')->search(
-                                    {
-                                        code_emp => $registro->{code_emp},
-                                        dedicated_year =>
-                                          $registro->{Ano_empenho},
-                                        goal_number => $v_goal,
-                                    }
-                                  )->single;
-                                warn 'loll';
-                                if ($budget) {
-                                    $budget->update(
-                                        {
-                                            business_name =>
-                                              $registro->{Nome_razao},
-                                            cpnj =>
-                                              $registro->{Cod_Cpf_Cnpj_Sof},
-                                            goal_number =>
-                                              $registro->{meta_number},
-                                            dedicated_value =>
-                                              $registro->{total_emp},
-                                            liquidated_value =>
-                                              $registro->{liquidado},
-                                            observation => $registro->{txt_emp},
-                                            dedicated_year =>
-                                              $registro->{Ano_empenho},
-                                            organ_code =>
-                                              $registro->{cod_orgao},
-                                            organ_name => $registro->{orgao},
-                                            code_emp   => $registro->{code_emp}
-
-                                        }
-                                    );
-                                }
-                                else {
-                                    $schema->resultset('Budget')->create(
-                                        {
-                                            business_name =>
-                                              $registro->{Nome_razao},
-                                            cpnj =>
-                                              $registro->{Cod_Cpf_Cnpj_Sof},
-                                            goal_number =>
-                                              $registro->{meta_number},
-                                            dedicated_value =>
-                                              $registro->{total_emp},
-                                            liquidated_value =>
-                                              $registro->{liquidado},
-                                            observation => $registro->{txt_emp},
-                                            dedicated_year =>
-                                              $registro->{Ano_empenho},
-                                            organ_code =>
-                                              $registro->{cod_orgao},
-                                            organ_name => $registro->{orgao},
-                                            code_emp   => $registro->{code_emp}
-
-                                        }
-                                    );
-                                }
-                            }
                         }
-                        else {
-                            use DDP;
-                            p $registro;
-                            warn 'registro2';
+                    );
+                }
+            }
+            else {
 
-                            warn 'budget';
-                            p $budget;
-                            warn 'budget2';
-                            if ($budget) {
+                warn "aki";
+                $schema->resultset('Budget')->create(
+                    {
 
-                                my $bd = $schema->resultset('Budget')->update(
-                                    {
-                                        business_name =>
-                                          $registro->{Nome_razao},
-                                        cpnj => $registro->{Cod_Cpf_Cnpj_Sof},
-                                        goal_number => $registro->{meta_number},
-                                        dedicated_value =>
-                                          $registro->{total_emp},
-                                        liquidated_value =>
-                                          $registro->{liquidado},
-                                        observation => $registro->{txt_emp},
-                                        dedicated_year =>
-                                          $registro->{Ano_empenho},
-                                        organ_code => $registro->{cod_orgao},
-                                        organ_name => $registro->{orgao}
+                        business_name     => $registro->{Nome_razao},
+                        cnpj              => $registro->{Cod_Cpf_Cnpj_Sof},
+                        goal_number       => $registro->{meta_number},
+                        dedicated_value   => $registro->{total_emp},
+                        observation       => $registro->{txt_emp},
+                        liquidated_value  => $registro->{liquidado},
+                        dedicated_year    => $registro->{Ano_empenho},
+                        organ_code        => $registro->{cod_orgao},
+                        organ_name        => $registro->{orgao},
+                        cod_emp           => $registro->{code_emp},
+                        business_name_url => $registro->{business_name_url}
 
-                                    }
-                                );
-                                my %data = $bd->get_dirty_columns;
-
-                            }
-                            else {
-                                warn 'create';
-                                $schema->resultset('Budget')->create(
-                                    {
-                                        business_name =>
-                                          $registro->{Nome_razao},
-                                        cpnj => $registro->{Cod_Cpf_Cnpj_Sof},
-                                        goal_number => $registro->{meta_number},
-                                        dedicated_value =>
-                                          $registro->{total_emp},
-                                        liquidated_value =>
-                                          $registro->{liquidado},
-                                        observation => $registro->{txt_emp},
-                                        dedicated_year =>
-                                          $registro->{Ano_empenho},
-                                        organ_code => $registro->{cod_orgao},
-                                        organ_name => $registro->{orgao}
-
-                                    }
-                                );
-                            }
-                        }
-
-                        die 'rollback';
                     }
                 );
             }
-
         }
     }
 }
