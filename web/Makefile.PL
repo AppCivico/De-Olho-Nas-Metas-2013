@@ -23,6 +23,7 @@ requires 'Catalyst::Plugin::Session::Store::File';
 
 requires 'Catalyst::Plugin::Assets';
 requires 'Catalyst::Plugin::StatusMessage';
+requires 'DateTime::Format::DateParse';
 
 requires 'Catalyst::Plugin::Authentication';
 
