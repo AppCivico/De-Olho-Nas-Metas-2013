@@ -1,29 +1,106 @@
+package Crawler::Data;
+use Moose;
+use HTTP::Request::Common qw(POST);
+use Business::BR::CPF;
+use Business::BR::CNPJ;
+use HTTP::Tiny;
+use HTTP::CookieJar;
+use Path::Tiny;
+
+has 'view_state'           => ( is => 'rw', isa => 'Str' );
+has 'event_target'         => ( is => 'rw', isa => 'Str' );
+has 'event_argument'       => ( is => 'rw', isa => 'Str' );
+has 'last_focus'           => ( is => 'rw', isa => 'Str' );
+has 'view_state_generator' => ( is => 'rw', isa => 'Str' );
+has 'view_state_encrypted' => ( is => 'rw', isa => 'Str' );
+has 'event_validation'     => ( is => 'rw', isa => 'Str' );
+has 'search_type'          => ( is => 'rw', isa => 'Int' );
+has 'enterprise_code'      => ( is => 'rw', isa => 'Int' );
+has 'cpf_cnpj' => ( is => 'rw', isa => 'Str', lazy => 1, default => 'rdCNPJ' );
+has 'year'     => ( is => 'rw', isa => 'Int' );
+
+sub process {
+    my ( $self, %args ) = @_;
+
+    use DDP;
+    p $self;
+    p \%args;
+    my $jar_file = path("jar.txt");
+    my $jar      = HTTP::CookieJar->new->load_cookies( $jar_file->lines );
+
+    $jar_file->touch;
+
+    my $ua = HTTP::Tiny->new(
+        cookie_jar => $jar,
+        agent =>
+"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.0"
+    );
+    my $form = [
+        __VIEWSTATE          => $self->view_state,
+        __EVENTTARGET        => $self->event_target,
+        __EVENTARGUMENT      => $self->event_argument,
+        __LASTFOCUS          => $self->last_focus,
+        __VIEWSTATEGENERATOR => $self->view_state_generator,
+        __VIEWSTATEENCRYPTED => $self->view_state_encrypted,
+        __EVENTVALIDATION    => $self->event_validation,
+        'ctl00$ContentPlaceHolder1$ddlTipoPesquisa' => $self->search_type,
+        'ctl00$ContentPlaceHolder1$CPFCNPJ'         => 'rdCNPJ',
+        'ctl00$ContentPlaceHolder1$ddlAno'          => 0,
+        'ctl00$ContentPlaceHolder1$hid_tooltip'     => '',
+        'ctl00$ContentPlaceHolder1$txtFornecedor'   => '',
+    ];
+    my $res;
+
+    $res = $ua->request(
+        'POST',
+        $args{url},
+        {
+            headers => {
+                referer        => $args{url},
+                'Content-Type' => 'application/x-www-form-urlencoded',
+            },
+            content => POST( '', [], Content => $form )->content
+        }
+    );
+
+    return $res;
+
+}
+
+sub request {
+    my ( $self, %args ) = @_;
+
+}
+
+package Crawler;
+
 use utf8;
 use strict;
 use warnings;
-use HTTP::Tiny;
-use HTTP::Request::Common qw(POST);
-use HTTP::CookieJar;
-use Path::Tiny;
-use DDP;
-use Mojo::DOM;
-use Text2URI;
 use Business::BR::CNPJ;
 use Business::BR::CPF;
+use Crawler::Data;
+use DDP;
+use HTTP::Tiny;
+use HTTP::CookieJar;
+use Mojo::DOM;
+use Text2URI;
+use URI;
+use Path::Tiny;
 
 my $t = Text2URI->new();
 
 my $ano  = 2014;
 my $cnpj = "11.958.828/0001-73";
 
-my $url =
-"http://transparenciasp.prefeitura.sp.gov.br/sj2224_contrato/PaginasPublicas/frmPesquisaContrato.aspx";
+my $url = URI->new("http://transparenciasp.prefeitura.sp.gov.br");
+
+$url->path_segments( 'sj2224_contrato', 'PaginasPublicas',
+    'frmPesquisaContrato.aspx' );
 
 my $jar_file = path("jar.txt");
-$jar_file->touch;
-
-my $jar = HTTP::CookieJar->new->load_cookies( $jar_file->lines );
-my $ua  = HTTP::Tiny->new(
+my $jar      = HTTP::CookieJar->new->load_cookies( $jar_file->lines );
+my $ua       = HTTP::Tiny->new(
     cookie_jar => $jar,
     agent =>
 "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.0"
@@ -31,42 +108,45 @@ my $ua  = HTTP::Tiny->new(
 
 my $res = $ua->request( 'GET', $url, {} );
 
-#p $res;
-
-#   set-cookie         "ASP.NET_SessionId=abr0op0rfphftfomh1gqh3mr; path=/; HttpOnly",
-
 my $dom = Mojo::DOM->new( $res->{content} );
 
-my $form = [
-    __VIEWSTATE   => $dom->find('[id="__VIEWSTATE"]')->first->attr('value'),
-    __EVENTTARGET => 'ctl00$ContentPlaceHolder1$rdCNPJ',
-    __EVENTARGUMENT =>
+my $data = Crawler::Data->new(
+    viewstate    => $dom->find('[id="__VIEWSTATE"]')->first->attr('value'),
+    event_target => 'ctl00$ContentPlaceHolder1$rdCNPJ',
+    event_argument =>
       $dom->find('[id="__EVENTARGUMENT"]')->first->attr('value'),
-    __LASTFOCUS => $dom->find('[id="__LASTFOCUS"]')->first->attr('value'),
-    __VIEWSTATEGENERATOR =>
+    last_focus => $dom->find('[id="__LASTFOCUS"]')->first->attr('value'),
+    view_state_generator =>
       $dom->find('[id="__VIEWSTATEGENERATOR"]')->first->attr('value'),
-    __VIEWSTATEENCRYPTED =>
+    view_state_encrypted =>
       $dom->find('[id="__VIEWSTATEENCRYPTED"]')->first->attr('value'),
-    __EVENTVALIDATION =>
+    event_validation =>
       $dom->find('[id="__EVENTVALIDATION"]')->first->attr('value'),
-    'ctl00$ContentPlaceHolder1$ddlTipoPesquisa' => '4',
-    'ctl00$ContentPlaceHolder1$CPFCNPJ'         => 'rdCNPJ',
-    'ctl00$ContentPlaceHolder1$ddlAno'          => 0,
-    'ctl00$ContentPlaceHolder1$hid_tooltip'     => '',
-    'ctl00$ContentPlaceHolder1$txtFornecedor'   => '',
-];
-
-$res = $ua->request(
-    'POST',
-'http://transparenciasp.prefeitura.sp.gov.br/sj2224_contrato/PaginasPublicas/frmPesquisaContrato.aspx',
-    {
-        headers => {
-            referer        => $url,
-            'Content-Type' => 'application/x-www-form-urlencoded',
-        },
-        content => POST( '', [], Content => $form )->content
-    }
+    search_type => 4
 );
+my $form;
+
+#my $form = [
+#    __VIEWSTATE   => $dom->find('[id="__VIEWSTATE"]')->first->attr('value'),
+#    __EVENTTARGET => 'ctl00$ContentPlaceHolder1$rdCNPJ',
+#    __EVENTARGUMENT =>
+#      $dom->find('[id="__EVENTARGUMENT"]')->first->attr('value'),
+#    __LASTFOCUS => $dom->find('[id="__LASTFOCUS"]')->first->attr('value'),
+#    __VIEWSTATEGENERATOR =>
+#      $dom->find('[id="__VIEWSTATEGENERATOR"]')->first->attr('value'),
+#    __VIEWSTATEENCRYPTED =>
+#      $dom->find('[id="__VIEWSTATEENCRYPTED"]')->first->attr('value'),
+#    __EVENTVALIDATION =>
+#      $dom->find('[id="__EVENTVALIDATION"]')->first->attr('value'),
+#    'ctl00$ContentPlaceHolder1$ddlTipoPesquisa' => '4',
+#    'ctl00$ContentPlaceHolder1$CPFCNPJ'         => 'rdCNPJ',
+#    'ctl00$ContentPlaceHolder1$ddlAno'          => 0,
+#    'ctl00$ContentPlaceHolder1$hid_tooltip'     => '',
+#    'ctl00$ContentPlaceHolder1$txtFornecedor'   => '',
+#];
+$res = $data->process( url => $url );
+use DDP;
+p $res;
 
 #p $res;
 
@@ -92,10 +172,24 @@ my $form = [
     'ctl00$ContentPlaceHolder1$hid_tooltip'     => '',
     'ctl00$ContentPlaceHolder1$txtFornecedor'   => '',
 ];
+$data = Crawler::Data->new(
+    viewstate    => $dom->find('[id="__VIEWSTATE"]')->first->attr('value'),
+    event_target => 'ctl00$ContentPlaceHolder1$rdCNPJ',
+    event_argument =>
+      $dom->find('[id="__EVENTARGUMENT"]')->first->attr('value'),
+    last_focus => $dom->find('[id="__LASTFOCUS"]')->first->attr('value'),
+    view_state_generator =>
+      $dom->find('[id="__VIEWSTATEGENERATOR"]')->first->attr('value'),
+    view_state_encrypted =>
+      $dom->find('[id="__VIEWSTATEENCRYPTED"]')->first->attr('value'),
+    event_validation =>
+      $dom->find('[id="__EVENTVALIDATION"]')->first->attr('value'),
+    search_type => 4
+);
 
+exit;
 $res = $ua->request(
-    'POST',
-'http://transparenciasp.prefeitura.sp.gov.br/sj2224_contrato/PaginasPublicas/frmPesquisaContrato.aspx',
+    'POST', $url,
     {
         headers => {
             referer        => $url,
@@ -131,8 +225,7 @@ my $form = [
 #p $form;
 
 $res = $ua->request(
-    'POST',
-'http://transparenciasp.prefeitura.sp.gov.br/sj2224_contrato/PaginasPublicas/frmPesquisaContrato.aspx',
+    'POST', $url,
     {
         headers => {
             referer        => $url,
@@ -180,7 +273,8 @@ for my $e ( $dom->find('#ctl00_ContentPlaceHolder1_grdContratos tr')->each ) {
 
     for my $td ( $e->find('td a')->each ) {
         if ( $td->attr('id') =~ m#Integra$# ) {
-
+            use DDP;
+            p $td->attr('id');
             my ($doc_id) =
               $td->attr('href') =~ m#javascript:__doPostBack\('([^']+)',''\)#;
             my $form = [
@@ -208,12 +302,10 @@ for my $e ( $dom->find('#ctl00_ContentPlaceHolder1_grdContratos tr')->each ) {
 
             my $res1 = $ua->request(
 
-                'POST',
-'http://transparenciasp.prefeitura.sp.gov.br/sj2224_contrato/PaginasPublicas/frmPesquisaContrato.aspx',
+                'POST', $url,
                 {
                     headers => {
-                        referer =>
-'http://transparenciasp.prefeitura.sp.gov.br/sj2224_contrato/PaginasPublicas/frmPesquisaContrato.aspx',
+                        referer        => $url,
                         'Content-Type' => 'application/x-www-form-urlencoded',
                         Accept =>
 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
