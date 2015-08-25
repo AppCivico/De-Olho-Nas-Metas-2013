@@ -66,6 +66,31 @@ $(document).ready(function () {
 							</table>
 
 						</div>
+
+						<h3>[%l('CONTRATO(S)')%]</h3>
+						<table id="list_budgets" class="table table-striped">
+								<thead>
+									<tr>
+					    	            <th>[%l('Documentos')%]</th>
+					    	            <th></th>
+									</tr>
+								</thead>
+								<tbody>
+						[%IF company.documents.size > 0%]
+						[%FOR x IN company.documents%]
+								<tr>
+									<td>[% x.url_name %]</td>
+									<td><a href="/static/docs/[%company.id%]/[% x.url_name %]" target="__blank">Baixar</a></td>
+								</tr>
+			            [%END%]
+						[%ELSE%]
+								<tr>
+									<td colspan="3">[%l('Documento não encontrado')%].</td>
+								</tr>
+						[%END%]
+								</tbody>
+						</table>
+
 					</div>
 					<div id="disqus_thread"></div>
 					<script type="text/javascript">
