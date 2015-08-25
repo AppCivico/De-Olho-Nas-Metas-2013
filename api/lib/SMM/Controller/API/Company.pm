@@ -32,6 +32,22 @@ __PACKAGE__->config(
                   cnpj
                   /
             ),
+            documents => [
+                map {
+                    my $d = $_;
+                    +{
+                        (
+                            map { $_ => $d->$_ }
+                              qw/
+                              id
+                              url_name
+                              /
+                        ),
+
+                      },
+                  } $r->company_documents,
+
+            ],
 
         };
 
@@ -48,6 +64,7 @@ __PACKAGE__->config(
 );
 with 'CatalystX::Eta::Controller::SimpleCRUD';
 with 'CatalystX::Eta::Controller::Order';
+
 after 'base' => sub {
     my ( $self, $c ) = @_;
 

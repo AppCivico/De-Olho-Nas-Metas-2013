@@ -68,7 +68,8 @@ sub detail : Chained('object') : Args(0) {
         [ 'companies', $c->stash->{company}->{id}, 'budgets' ] );
     $api->stash_result( $c,
         [ 'companies', $c->stash->{company}->{id}, 'goals' ] );
-
+    use DDP;
+    p $c->stash->{company};
     $c->stash->{sum_budgets} =
       sum map { $_->{liquidated_value} } @{ $c->stash->{budgets} };
 }

@@ -241,7 +241,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <th><pre><span class="page-scroll"><a data-animated-anchor href="#code_goal">/public/goals</a></span></pre></th>
+                        <th><pre><span class="page-scroll"><a data-animated-anchor href="#code_goal">/api/public/goals</a></span></pre></th>
                         <td>[%l('Lista de todas as metas')%]</td>
                         <td>
                         <ul class="list-unstyled list-param">
@@ -251,7 +251,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th><pre><span class="page-scroll"><a data-animated-anchor href="#code_goal_detail">/public/goals/*</a></span></pre></th>
+                        <th><pre><span class="page-scroll"><a data-animated-anchor href="#code_goal_detail">/api/public/goals/*</a></span></pre></th>
                         <td>[%l('Lista de todos atributos da meta específica')%]</td>
                         <td>
                         <ul class="list-unstyled list-param">
@@ -261,12 +261,12 @@
                     </tr>
 
                     <tr>
-                        <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-project">/public/projects</a></span></pre></th>
+                        <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-project">/api/public/projects</a></span></pre></th>
                         <td>[%l('Lista de todos os projetos')%]</td>
                         <td>-</td>
                     </tr>
                     <tr>
-                        <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-project-detail">/public/projects/*</a></span></pre></th>
+                        <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-project-detail">/api/public/projects/*</a></span></pre></th>
                         <td>[%l('Lista de todos os atributos do projeto específico')%]</td>
                         <td>
                             <ul class="list-unstyled list-param">
@@ -276,19 +276,19 @@
 
                     </tr>
                     <tr>
-                        <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-objective">/public/objectives</a></span></pre></th>
+                        <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-objective">/api/public/objectives</a></span></pre></th>
                         <td>[%l('Lista de todos os objetivos')%]</td>
                         <td>-</td>
 
                     </tr>
 
                     <tr>
-                        <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-company">/public/companies</a></span></pre></th>
+                        <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-company">/api/public/companies</a></span></pre></th>
                         <td>[%l('Lista de todas as empresas')%].</td>
                         <td>-</td>
                     </tr>
                     <tr>
-                        <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-company-budget">/public/companies/*/budgets</a></span></pre></th>
+                        <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-company-budget">/api/public/companies/*/budgets</a></span></pre></th>
                         <td>[%l('Lista de todas as empresas por metas de acordo com os orçamentos utilizados')%].</td>
                         <td>
                         <ul class="list-unstyled list-param">
@@ -299,7 +299,7 @@
                     </tr>
 
                      <tr>
-                        <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-budget-goal">/public/companies/*/goals</a></span></pre></th>
+                        <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-budget-goal">/api/public/companies/*/goals</a></span></pre></th>
                         <td>[%l('Lista de todas as empresas por metas')%].</td>
 
                         <td>
@@ -310,7 +310,7 @@
                         </td>
                     </tr>
                      <tr>
-                        <th><pre><span class="page-scroll"<a data-animated-anchor href="#code-council">/public/councils</a></span></pre></th>
+                        <th><pre><span class="page-scroll"<a data-animated-anchor href="#code-council">/api/public/councils</a></span></pre></th>
                         <td>[%l('Lista de todos os conselhos')%].</td>
 
                         <td>
@@ -320,7 +320,7 @@
                         </td>
                      </tr>
                      <tr>
-                        <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-district">/public/districts</a></span></pre></th>
+                        <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-district">/api/public/districts</a></span></pre></th>
                         <td>[%l('Lista de todos os distritos')%].</td>
 
                         <td>
@@ -330,7 +330,7 @@
                         </td>
                      </tr>
                      <tr>
-                        <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-subprefecture">/public/subprefectures</a></span></pre></th>
+                        <th><pre><span class="page-scroll"><a data-animated-anchor href="#code-subprefecture">/api/public/subprefectures</a></span></pre></th>
                         <td>[%l('Lista de todas as subprefeituras')%].</td>
 
                         <td>
@@ -343,7 +343,7 @@
                 </tbody>
             </table>
 
-            <h3 id="code_goal" data-animated-anchor-offset="-60">/public/goals [%voltar_link|none%]</h3>
+            <h3 id="code_goal" data-animated-anchor-offset="-60">/api/public/goals [%voltar_link|none%]</h3>
 
             <p>[%l('Exemplo de retorno')%]</p>
             <pre class="precode"><code class="language-javascript" >
@@ -377,7 +377,7 @@
                 ]
 
             </code></pre>
-            <h3 id="code_goal_detail" data-animated-anchor-offset="-60">/public/goals/* [%voltar_link|none%]</h3>
+            <h3 id="code_goal_detail" data-animated-anchor-offset="-60">/api/public/goals/* [%voltar_link|none%]</h3>
 
             <p>[%l('Exemplo de retorno')%]:</p>
             <pre class="precode"><code class="language-javascript">
@@ -431,7 +431,7 @@
 
             </code></pre>
 
-            <h3 id="code-project" data-animated-anchor-offset="-60">/public/projects [%voltar_link|none%]</h3>
+            <h3 id="code-project" data-animated-anchor-offset="-60">/api/public/projects [%voltar_link|none%]</h3>
 
             <p>[%l('Exemplo de retorno')%]:</p>
             <pre class="precode"><code class="language-javascript">
@@ -462,7 +462,7 @@
                     ]
             </code></pre>
 
-            <h3 id="code-project-detail" data-animated-anchor-offset="-60">/public/projects/* [%voltar_link|none%]</h3>
+            <h3 id="code-project-detail" data-animated-anchor-offset="-60">/api/public/projects/* [%voltar_link|none%]</h3>
 
 
             <p>[%l('Exemplo de retorno')%]:</p>
@@ -493,7 +493,7 @@
                     ...    
                     ]
             </code></pre>
-            <h3 id="code-objective" data-animated-anchor-offset="-60">/public/objectives [%voltar_link|none%]</h3>
+            <h3 id="code-objective" data-animated-anchor-offset="-60">/api/public/objectives [%voltar_link|none%]</h3>
 
 
             <p>[%l('Exemplo de retorno')%]:</p>
@@ -533,7 +533,7 @@
                        ]
             </code></pre>
 
-            <h3 id="code-company" data-animated-anchor-offset="-60">/public/companies [%voltar_link|none%]</h3>
+            <h3 id="code-company" data-animated-anchor-offset="-60">/api/public/companies [%voltar_link|none%]</h3>
 
             <p>[%l('Exemplo de retorno')%]:</p>
             <pre class="precode"><code class="language-javascript">
@@ -548,7 +548,7 @@
                       ]
             </code></pre>
 
-            <h3 id="code-company-budget" data-animated-anchor-offset="-60">/public/companies/5405/budgets [%voltar_link|none%]</h3>
+            <h3 id="code-company-budget" data-animated-anchor-offset="-60">/api/public/companies/5405/budgets [%voltar_link|none%]</h3>
 
             <p>[%l('Exemplo de retorno')%]:</p>
             <pre class="precode"><code class="language-javascript">
@@ -580,7 +580,7 @@
             </code></pre>
 
 
-            <h3 id="code-budget-goal" data-animated-anchor-offset="-60">/public/companies/5405/goals [%voltar_link|none%]</h3>
+            <h3 id="code-budget-goal" data-animated-anchor-offset="-60">/api/public/companies/5405/goals [%voltar_link|none%]</h3>
 
             <p>[%l('Exemplo de retorno')%]:</p>
             <pre class="precode"><code class="language-javascript">
@@ -594,7 +594,7 @@
 
             </code></pre>
 
-            <h3 id="code-budget" data-animated-anchor-offset="-60">/public/councils [%voltar_link|none%]</h3>
+            <h3 id="code-budget" data-animated-anchor-offset="-60">/api/public/councils [%voltar_link|none%]</h3>
 
             <p>[%l('Exemplo de retorno')%]:</p>
             <pre class="precode"><code class="language-javascript">
@@ -622,7 +622,7 @@
                           ...
                         ]
             </code></pre>
-	    <h3 id="code-district" data-animated-anchor-offset="-60">/public/districts [%voltar_link|none%]</h3>
+	    <h3 id="code-district" data-animated-anchor-offset="-60">/api/public/districts [%voltar_link|none%]</h3>
 
             <p>[%l('Exemplo de retorno')%]:</p>
             <pre class="precode"><code class="language-javascript">
@@ -640,7 +640,7 @@
 						...
 	 ]
             </code></pre>
-            <h3 id="code-subprefecture" data-animated-anchor-offset="-60">/public/subprefectures [%voltar_link|none%]</h3>
+            <h3 id="code-subprefecture" data-animated-anchor-offset="-60">/api/public/subprefectures [%voltar_link|none%]</h3>
 
             <p>[%l('Exemplo de retorno')%]:</p>
             <pre class="precode"><code class="language-javascript">

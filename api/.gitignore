@@ -16,6 +16,7 @@ nytprof.out
 pm_to_blib
 *_local*
 root/static/user/
+root/static/docs/
 root/static/built/
 .tidyall.d/
 session_data*
