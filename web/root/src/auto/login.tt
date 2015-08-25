@@ -16,7 +16,7 @@
 						</div>
 						
 						<div class="form-group">
-							[%input_text('password','' _ l('Senha') _ ':', req=>1, type => 'password')|none%]
+							[%input_text('password','Senha:', req=>1, type => 'password')|none%]
 							
 							<span class="forgot-login"><a href="/forgot-password">[%l('Esqueceu a senha')%]?</a></span>
 						</div>
