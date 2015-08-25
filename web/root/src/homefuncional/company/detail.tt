@@ -6,6 +6,10 @@
 <script>
 $(document).ready(function () {
        $('.priceformat').formatNumber({format:"#,###.00",locale: "br" });
+
+	   $('.titulo-tutorial').click(function(){ 
+			$('.tutorial-contrato').toggle("slow");
+	   });
 });
 </script>
  <!-- Twitter social plugin -->
@@ -80,7 +84,7 @@ $(document).ready(function () {
 						[%FOR x IN company.documents%]
 								<tr>
 									<td>[% x.url_name %]</td>
-									<td><a href="/static/docs/[%company.id%]/[% x.url_name %]" target="__blank">Baixar</a></td>
+									<td><a href="/static/docs/[%company.id%]/[% x.url_name %]" >Baixar</a></td>
 								</tr>
 			            [%END%]
 						[%ELSE%]
@@ -92,6 +96,15 @@ $(document).ready(function () {
 						</table>
 
 					</div>
+					<br>
+					<br>
+					<p style="font-size:16px;">Os contratos são dados públicos fornecidos no site <a href="http://transparencia.prefeitura.sp.gov.br/contas/Paginas/Contratos-v2.aspx">Transparencia Prefeitura de São Paulo</a>, clique abaixo e siga as instruções para realizar o download manualmente.</p>
+					<h3 class="titulo-tutorial" style="cursor:pointer;">Tutorial Contrato</h3>
+					<div class="tutorial-contrato" style="display:none;">
+					<img src="/static/images/contratosPassoAPasso1.jpg" style="width:100%;float:left;">
+					<img src="/static/images/contratosPassoAPasso2.jpg" style="width:100%;float:left;">
+					</div>
+				
 					<div id="disqus_thread"></div>
 					<script type="text/javascript">
 						/* * * CONFIGURATION VARIABLES * * */
