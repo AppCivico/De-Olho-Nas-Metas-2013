@@ -5,3 +5,4 @@
 0001-donmschema 2015-07-29T14:58:48Z Renan Carvalho <renan.carvalho@eokoe.com> # deploy db
 0002-add_column_counsil_type [0001-donmschema] 2015-07-29T14:59:11Z Renan Carvalho <renan.carvalho@eokoe.com> # adicionando coluna para distinguir nome do conselho
 0003-create-company-document [0002-add_column_counsil_type] 2015-08-25T21:26:06Z Renan Carvalho <renan.carvalho@eokoe.com> # colocando contrato das companias
+0004-column-created_at [0003-create-company-document] 2015-08-26T16:21:48Z Renan Carvalho <renan.carvalho@eokoe.com> # criação do campo para definir o dia que foi criado o comentário do fale conosco

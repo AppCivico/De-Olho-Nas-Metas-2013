@@ -64,6 +64,13 @@ __PACKAGE__->table("contact");
   data_type: 'text'
   is_nullable: 0
 
+=head2 created_at
+
+  data_type: 'timestamp'
+  default_value: current_timestamp
+  is_nullable: 1
+  original: {default_value => \"now()"}
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -80,6 +87,13 @@ __PACKAGE__->add_columns(
   { data_type => "text", is_nullable => 0 },
   "message",
   { data_type => "text", is_nullable => 0 },
+  "created_at",
+  {
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
+    is_nullable   => 1,
+    original      => { default_value => \"now()" },
+  },
 );
 
 =head1 PRIMARY KEY
@@ -95,8 +109,8 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("id");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2014-10-22 07:32:32
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:AssiJX9SpaasDoxJmJw+9w
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-08-26 13:23:19
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:z+kyZnwY0LxyAId8Lr2L1w
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
 with 'SMM::Schema::Role::ResultsetFind';
