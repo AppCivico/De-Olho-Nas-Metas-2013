@@ -75,6 +75,7 @@ sub list_GET {
                               name
                               email
                               message
+                              created_at
                               /
                         ),
                         url => $c->uri_for_action( $self->action_for('result'),
