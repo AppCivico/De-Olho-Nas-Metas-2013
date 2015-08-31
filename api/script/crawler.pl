@@ -319,15 +319,17 @@ for my $budget (@budgets) {
                     }
                     my $name =
                       "$item->{nome_orgao}$item->{data_publicacao}.doc";
-                    my $company_doc = $schema->resultset('CompanyDocument');
-                    next
-                      if $company_doc->search(
+                    my $company_doc_rs  = $schema->resultset('CompanyDocument');
+                    my $company_doc_row = $$company_doc->search(
                         {
                             company_id => $budget->id,
                             url_name   => $name
                         }
-                      )->next;
+                    )->next;
 
+                    if ($company_doc_row) {
+                        $company_doc_row->update{};
+                    }
                     my $company_created = $company_doc->create(
                         {
                             url_name   => $name,
