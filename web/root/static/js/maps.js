@@ -273,6 +273,7 @@ var $maps = function () {
 	function markregiondetail( region_id ){
 		var ib;
 		$.getJSON('/region_project', { id : region_id } ,function(data,status){
+			console.log(data);
 			var json = data;
 			var myLatlng;
 			var geojson = eval('(' + json.geom_json + ')');
@@ -329,13 +330,15 @@ var $maps = function () {
 	        		//window.location.href = url;
 	    		});
 			});
-						
 			var latlong = polygon.getBounds().getCenter();
-			myLatlng = new google.maps.LatLng(latlong.k,latlong.D);	
+			console.log(latlong);
+			myLatlng = new google.maps.LatLng(latlong.H,latlong.L);	
 			
-
+			alert(myLatlng);
+			console.log(myLatlng);
 			if (myLatlng){
 				map.setCenter(myLatlng);
+
 		    	map.setZoom(12);
 			}
       });	
