@@ -250,6 +250,8 @@ for my $budget (@budgets) {
         for my $e (
             $dom3->find('#ctl00_ContentPlaceHolder1_grdContratos tr')->each )
         {
+            use DDP;
+            print p $res;
 
             # say $e->{id}, ':', $e->text;
             my @tr;
@@ -272,7 +274,6 @@ for my $budget (@budgets) {
                 evento          => $tr[8],
                 valor           => $tr[9],
             };
-
             for my $td ( $e->find('td a')->each ) {
                 next unless $td->attr('id');
                 if ( $td->attr('id') =~ m#Integra$# ) {
@@ -304,7 +305,6 @@ for my $budget (@budgets) {
                         ua          => $ua,
                         document    => 1,
                     );
-
                     my $res1 = $data4->process( url => $url );
                     $item->{data_publicacao} =~ s/\//-/g;
                     $item->{nome_orgao} = $t->translate( $item->{nome_orgao} );
@@ -319,18 +319,21 @@ for my $budget (@budgets) {
                     }
                     my $name =
                       "$item->{nome_orgao}$item->{data_publicacao}.doc";
-                    my $company_doc_rs  = $schema->resultset('CompanyDocument');
-                    my $company_doc_row = $$company_doc->search(
+
+                    my $company_doc_rs = $schema->resultset('CompanyDocument');
+
+                    my $company_doc_row = $company_doc_rs->search(
                         {
                             company_id => $budget->id,
                             url_name   => $name
                         }
                     )->next;
-
                     if ($company_doc_row) {
-                        $company_doc_row->update{};
+                        $company_doc_row->update(
+                            { description => $item->{objeto} } );
+                        next;
                     }
-                    my $company_created = $company_doc->create(
+                    my $company_created = $company_doc_rs->create(
                         {
                             url_name   => $name,
                             company_id => $budget->id
