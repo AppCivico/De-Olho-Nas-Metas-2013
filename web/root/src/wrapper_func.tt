@@ -77,9 +77,9 @@
                 <!--    <li>
                         <a href="[% c.uri_for_action('/homefuncional/organization/index')%]">[%l('Conselhos')%]</a>
 					</li>-->
-                    <li>
+                <!--    <li>
                         <a href="[% c.uri_for_action('/homefuncional/campaign/index')%]">[%l('Campanhas')%]</a>
-                    </li>
+                    </li> -->
 
                     <li>
                         <a href="[% c.uri_for_action('/homefuncional/company/index')%]">[%l('Empresas')%]</a>
