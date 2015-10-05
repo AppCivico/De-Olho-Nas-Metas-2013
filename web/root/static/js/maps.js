@@ -334,8 +334,6 @@ var $maps = function () {
 			console.log(latlong);
 			myLatlng = new google.maps.LatLng(latlong.H,latlong.L);	
 			
-			alert(myLatlng);
-			console.log(myLatlng);
 			if (myLatlng){
 				map.setCenter(myLatlng);
 
