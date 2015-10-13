@@ -28,7 +28,6 @@ sub download : Path : Args(0) {
     my $api = $c->model('API');
 
     my $json = $api->stash_result( $c, 'preregisters', get_as_content => 1 );
-    use DDP;
     my $content = decode_json $json;
     $csv .= "$_->{username},$_->{useremail}\n"
       for ( @{ $content->{preregisters} } );

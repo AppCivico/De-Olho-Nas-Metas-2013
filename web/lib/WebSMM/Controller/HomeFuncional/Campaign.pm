@@ -48,9 +48,6 @@ sub index : Chained('base') : PathPart('') : Args(0) {
     my $api = $c->model('API');
     $api->stash_result( $c, 'campaigns' );
     $api->stash_result( $c, 'regions' );
-    use DDP;
-    p $c->stash->{campaigns};
-    warn "campaign";
 }
 
 sub set_campaign : Chained('base') : Args(0) {
@@ -60,9 +57,7 @@ sub set_campaign : Chained('base') : Args(0) {
     my $api = $c->model('API');
 
     my $params = { %{ $c->req->params } };
-    use DDP;
-    p $params;
-    my $form = $c->model('Form');
+    my $form   = $c->model('Form');
 
     $form->format_date( $params, qw/start_in end_on/ );
 
@@ -72,7 +67,6 @@ sub set_campaign : Chained('base') : Args(0) {
         ( $params->{latitude}, $params->{longitude} ) = split ',',
           $params->{latlng};
     }
-    p $params;
     $params->{address} = delete $params->{txtaddress};
     $api->stash_result(
         $c,
@@ -84,8 +78,6 @@ sub set_campaign : Chained('base') : Args(0) {
     if ( $c->stash->{error} ) {
         $c->detach( '/form/redirect_error', [] );
     }
-    use DDP;
-    p $c->stash->{id};
 
     my $avatar = $c->req->upload('avatar');
 

@@ -119,42 +119,6 @@ sub verifiers_specs {
                     required => 0,
                     type     => 'Str',
                 },
-                address => {
-                    required => 0,
-                    type     => 'Str',
-                },
-                postal_code => {
-                    required => 0,
-                    type     => 'Str',
-                },
-                city_id => {
-                    required => 0,
-                    type     => 'Int',
-                },
-                description => {
-                    required => 0,
-                    type     => 'Str',
-                },
-                phone => {
-                    required => 0,
-                    type     => 'Str',
-                },
-                email => {
-                    required => 0,
-                    type     => 'Str',
-                },
-                website => {
-                    required => 0,
-                    type     => 'Str',
-                },
-                complement => {
-                    required => 0,
-                    type     => 'Str',
-                },
-                number => {
-                    required => 0,
-                    type     => 'Str',
-                },
             }
         ),
     };
@@ -168,9 +132,9 @@ sub action_specs {
 
             not defined $values{$_} and delete $values{$_} for keys %values;
 
-            my $organization = $self->update( \%values );
+            my $organization_type = $self->update( \%values );
 
-            return $organization;
+            return $organization_type;
         },
 
     };

@@ -17,9 +17,7 @@ sub process : Chained('base') : PathPart('user') : Args(0) {
 
     my $api    = $c->model('API');
     my $params = { %{ $c->req->params } };
-    use DDP;
-    p $params;
-    my $role = 3;
+    my $role   = 3;
 
     $params->{active} = 1;
     if ( $c->req->param('invite_counsil_master') ) {
@@ -178,8 +176,6 @@ sub process_perfil : Chained('base') : PathPart('edit_perfil') : Args(1) {
         unless ( -e $path ) {
             mkdir $path;
         }
-        use DDP;
-        p $path;
 
         $avatar->copy_to( $path . '/' . $id . '.jpg' );
     }
@@ -189,8 +185,6 @@ sub process_perfil : Chained('base') : PathPart('edit_perfil') : Args(1) {
         method => 'PUT',
         body   => $params
     );
-    use DDP;
-    p $c->stash->{status_msg};
     if ( $c->stash->{error} ) {
         $c->detach( '/form/redirect_error', [] );
     }

@@ -52,8 +52,6 @@ sub add : Chained('base') : PathPart('new') : Args(0) {
     my $api = $c->model('API');
     $api->stash_result( $c, 'subprefectures' );
     $api->stash_result( $c, 'organization_types' );
-    use DDP;
-    p $c->stash;
     $c->stash->{select_subprefectures} =
       [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{subprefectures} } ];
     $c->stash->{select_organization_types} =

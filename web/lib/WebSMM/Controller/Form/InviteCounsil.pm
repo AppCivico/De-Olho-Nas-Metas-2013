@@ -43,8 +43,6 @@ sub contact_admin_council : Chained('base') : PathPart('contact_admin_council')
     my ( $self, $c ) = @_;
 
     my $api = $c->model('API');
-    use DDP;
-    p $c->req->params->{name};
     $api->stash_result(
         $c,
         'register_counsil_manual/email',
@@ -64,7 +62,8 @@ sub contact_admin_council : Chained('base') : PathPart('contact_admin_council')
     $c->detach(
         '/form/redirect_ok',
         [
-            \'/conselho/contato', {},
+            \'/conselho/contato',
+            {},
             'E-mail enviado com sucesso, entraremos em contato em breve!',
             form_ident => $c->req->params->{form_ident}
         ]

@@ -64,8 +64,6 @@ sub kml_file_POST {
                 schema  => $c->model('DB'),
                 app     => $c
             );
-            use DDP;
-            p to_json($file);
             $c->res->body( to_json($file) );
 
         }

@@ -42,7 +42,8 @@ sub index : Chained('object') : PathPart('') : Args(0) {
 
     $c->stash->{user_obj}->{role} =
       { map { $_ => 1 } @{ $c->stash->{user_roles}->{roles} } };
-
+    use DDP;
+    p $c->stash->{user_roles};
     $c->detach( '/form/redirect_ok', ['/admin/dashboard/index'] )
       if $c->stash->{user_obj}->{role}->{admin};
 
@@ -127,7 +128,6 @@ sub campaign_remove : Chained('campaign_param') : PathPart('remover') : Args(0)
 sub campaign_update : Chained('campaign_param') : PathPart('atualizar') :
   Args(0) {
     my ( $self, $c ) = @_;
-    use DDP;
 
     my $api    = $c->model('API');
     my $form   = $c->model('Form');
@@ -142,10 +142,8 @@ sub campaign_update : Chained('campaign_param') : PathPart('atualizar') :
         ( $params->{latitude}, $params->{longitude} ) = split ',',
           $params->{latlng};
     }
-    p $params;
     $params->{address} = delete $params->{txtaddress};
 
-    p $c->req->params;
     $api->stash_result(
         $c,
         [ 'campaigns', $c->stash->{id} ],
@@ -210,8 +208,6 @@ sub campaign : Chained('object') : PathPart('campanhas') : Args(0) {
           { id => $p->{id}, description => $p->{description} }
           if $p->{description};
     }
-    use DDP;
-    p $c->stash->{mobile_campaigns};
     $c->stash->{user_obj}->{role} =
       { map { $_ => 1 } @{ $c->stash->{user_roles}->{roles} } };
 }
@@ -257,9 +253,6 @@ sub survey_list : Chained('survey') : PathPart('') : Args(1) {
         );
     };
 
-    use DDP;
-    p $c->stash->{user_roles};
-
     unless ( $return->code eq 200 or $return->code eq 404 ) {
         $c->stash->{error_msg} =
 "Não foi possível conectar ao sistema de campanhas móveis, por favor tente mais tarde.";
@@ -297,8 +290,6 @@ sub survey_single : Chained('survey') : PathPart('detalhe') : Args(1) {
             ],
         );
     };
-    use DDP;
-    p $return;
     my $data = decode_json $return->content;
     $c->stash->{campaign} = $data->{payload};
 
@@ -425,8 +416,6 @@ sub counsil : Chained('object') : PathPart('conselho') : Args(0) {
         [ 'organizations', $c->user->obj->organization_id ],
         stash => 'organization_obj',
     );
-    use DDP;
-    p $c->stash->{organization_obj};
     $c->stash->{user_obj}->{role} =
       { map { $_ => 1 } @{ $c->stash->{user_roles}->{roles} } };
 }
@@ -438,9 +427,6 @@ sub follow : Chained('object') : PathPart('seguindo') : Args(0) {
 
     $api->stash_result( $c, [ 'users', $c->user->id ], stash => 'user_obj', );
 
-    use DDP;
-    p $c->stash->{user_obj};
-    warn 1;
 }
 
 sub invite : Chained('object') : PathPart('convidar') : Args(0) {

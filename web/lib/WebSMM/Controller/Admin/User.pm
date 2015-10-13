@@ -25,8 +25,6 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
     $api->stash_result( $c, [ 'users', $id ], stash => 'user_obj' );
     my %ar = map { $_ => 1 } @{ $c->stash->{user_obj}{role_ids} };
     $c->stash->{active_roles} = \%ar;
-    use DDP;
-    p $c->stash->{user_obj};
 
     $c->detach( '/form/not_found', [] ) if $c->stash->{user_obj}{error};
 }
@@ -59,8 +57,6 @@ sub edit : Chained('object') : PathPart('') : Args(0) {
     my $api = $c->model('API');
 
     $api->stash_result( $c, 'roles' );
-    use DDP;
-    p $c->stash->{roles};
     my $r = $c->stash->{active_roles};
     $c->stash->{roles} =
       [ map { { id => $_->{id}, name => $_->{name} } }

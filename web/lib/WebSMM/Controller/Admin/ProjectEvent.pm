@@ -5,7 +5,8 @@ use POSIX;
 
 BEGIN { extends 'Catalyst::Controller' }
 
-sub base : Chained('/admin/base') : PathPart('approved_notification') : CaptureArgs(0) {
+sub base : Chained('/admin/base') : PathPart('approved_notification') :
+  CaptureArgs(0) {
     my ( $self, $c, $id ) = @_;
 
 }
@@ -18,7 +19,8 @@ sub index : Chained('base') : PathPart('') : Args(0) {
     my ( $self, $c ) = @_;
 
     my $api = $c->model('API');
-    $api->stash_result( $c, 'project_events', params => { approved => 'false' } );
+    $api->stash_result( $c, 'project_events',
+        params => { approved => 'false' } );
 }
 
 sub set_accepted : Chained('base') : PathPart('aceito') : Args(0) {
@@ -27,8 +29,6 @@ sub set_accepted : Chained('base') : PathPart('aceito') : Args(0) {
     my $api = $c->model('API');
     my $pe  = $c->req->param('pe_id');
 
-    use DDP;
-    p $pe;
     $api->stash_result(
         $c,
         [ 'project_events', $pe ],
@@ -47,8 +47,6 @@ sub set_removed : Chained('base') : PathPart('remover') : Args(0) {
     my $api = $c->model('API');
     my $pe  = $c->req->param('pe_id');
 
-    use DDP;
-    p $pe;
     $api->stash_result(
         $c,
         [ 'project_events', $pe ],

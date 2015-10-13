@@ -23,10 +23,8 @@ sub _download {
     my ( $self, $c, $name, $data ) = @_;
 
     my $ignore_cache = 0;
-    use DDP;
 
     my $file = $c->get_lang() . '_' . $name . '.';
-    p $file;
 
     # evita conflito com outros usuarios
     $file .= join '-', rand, rand, rand, rand, '.' if $ignore_cache;
@@ -42,7 +40,6 @@ sub _download {
       if !$ignore_cache && -e $path;
     my @lines = @{ $data->{main} };
 
-    p $file;
     eval { $self->lines2file( $c, $path, \@lines ) };
 
     if ($@) {
@@ -109,8 +106,6 @@ sub lines2file {
 
 sub _download_and_detach {
     my ( $self, $c, $path, $file, $custom ) = @_;
-    use DDP;
-    p $file;
     if ( $c->stash->{type} =~ /(csv)/ ) {
         $c->response->content_type('text/csv');
     }

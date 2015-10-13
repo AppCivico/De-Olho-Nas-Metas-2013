@@ -68,7 +68,6 @@ sub remove : Chained('object') : PathPart('remover') : Args(0) {
 
 sub update : Chained('object') : PathPart('atualizar') : Args(0) {
     my ( $self, $c ) = @_;
-    use DDP;
 
     my $api    = $c->model('API');
     my $form   = $c->model('Form');
@@ -83,10 +82,8 @@ sub update : Chained('object') : PathPart('atualizar') : Args(0) {
         ( $params->{latitude}, $params->{longitude} ) = split ',',
           $params->{latlng};
     }
-    p $params;
     $params->{address} = delete $params->{txtaddress};
 
-    p $c->req->params;
     $api->stash_result(
         $c,
         [ 'campaigns', $c->stash->{id} ],

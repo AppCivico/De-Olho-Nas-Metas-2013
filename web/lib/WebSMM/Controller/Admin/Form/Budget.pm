@@ -126,7 +126,6 @@ sub upload : Chained('base') : PathPart('upload_budget') : Args(0) {
     my $api = $c->model('API');
 
     my $upload = $c->req->upload('archive');
-    use DDP;
     if ( !$upload ) {
         $c->stash->{error} = 'form_error';
         $c->stash->{form_error} = { 'archive', 'missing' };
@@ -149,8 +148,6 @@ sub upload : Chained('base') : PathPart('upload_budget') : Args(0) {
         ],
         method => 'upload',
     );
-    use DDP;
-    p $c->stash;
     if ( $c->stash->{status}{error} eq 'header_found' ) {
         $c->stash->{error}      = 'form_error';
         $c->stash->{form_error} = {

@@ -32,8 +32,6 @@ sub process : Chained('base') : PathPart('subprefecture') : Args(0) {
         method => 'POST',
         body   => $params
     );
-    use DDP;
-    p $c->stash->{error};
     if ( $c->stash->{error} ) {
         $c->detach( '/form/redirect_error', [] );
     }
@@ -121,7 +119,6 @@ sub upload : Chained('base') : PathPart('upload_subprefecture') : Args(0) {
     my $api = $c->model('API');
 
     my $upload = $c->req->upload('archive');
-    use DDP;
     if ( !$upload ) {
         $c->stash->{error} = 'Selecione um arquivo !';
 

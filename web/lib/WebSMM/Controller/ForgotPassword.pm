@@ -35,9 +35,6 @@ sub forgot_password : Chained('base') : PathPart('forgot-password') : Args(0) {
             hash  => $key,
         }
     );
-    use DDP;
-    p $c->stash;
-    warn '1';
 
     if ( $c->stash->{error} ) {
         $c->detach( '/form/redirect_error', [] );
@@ -71,9 +68,6 @@ sub change_password : Chained('base') : PathPart('change-password') : Args(0) {
         method => 'POST',
         params => $params,
     );
-    use DDP;
-    p $c->stash;
-    warn '1';
 
     $c->stash->{error} = 'Chave expirada.'
       if $c->stash->{form_error}->{hash} eq 'invalid';
