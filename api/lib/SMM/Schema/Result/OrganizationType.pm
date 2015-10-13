@@ -1,5 +1,4 @@
 use utf8;
-
 package SMM::Schema::Result::OrganizationType;
 
 # Created by DBIx::Class::Schema::Loader
@@ -33,8 +32,7 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
-    "PassphraseColumn" );
+__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
 =head1 TABLE: C<organization_type>
 
@@ -56,18 +54,30 @@ __PACKAGE__->table("organization_type");
   data_type: 'text'
   is_nullable: 1
 
+=head2 type
+
+  data_type: 'enum'
+  extra: {custom_type_name => "org_type",list => ["counsil","organization"]}
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
-    "id",
-    {
-        data_type         => "integer",
-        is_auto_increment => 1,
-        is_nullable       => 0,
-        sequence          => "organization_type_id_seq",
-    },
-    "name",
-    { data_type => "text", is_nullable => 1 },
+  "id",
+  {
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+    sequence          => "organization_type_id_seq",
+  },
+  "name",
+  { data_type => "text", is_nullable => 1 },
+  "type",
+  {
+    data_type => "enum",
+    extra => { custom_type_name => "org_type", list => ["counsil", "organization"] },
+    is_nullable => 1,
+  },
 );
 
 =head1 PRIMARY KEY
@@ -93,14 +103,15 @@ Related object: L<SMM::Schema::Result::Organization>
 =cut
 
 __PACKAGE__->has_many(
-    "organizations",
-    "SMM::Schema::Result::Organization",
-    { "foreign.organization_type_id" => "self.id" },
-    { cascade_copy                   => 0, cascade_delete => 0 },
+  "organizations",
+  "SMM::Schema::Result::Organization",
+  { "foreign.organization_type_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-07-29 14:29:19
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:hpcqtAp/Ch9DQO7Ar7Eh0A
+
+# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-10-13 14:22:55
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:0Fp4nUHDjb4owyWTh1ZpSw
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
 with 'SMM::Schema::Role::ResultsetFind';

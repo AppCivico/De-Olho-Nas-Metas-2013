@@ -43,9 +43,9 @@
 				<form method="GET" action="">
 				<div class="col-xs-6 cep">
 					<div class="col-xs-8 region">
-							[%l('por Tipo de Conselho')%]<br />
+							[%l('por Tipo de Organização')%]<br />
 							<div class="select-stylized"><select name="organization_type" id="organization_type">
-								<option value="">[%l('Tipo de Conselho')%]</option>
+								<option value="">[%l('Tipo de Organização')%]</option>
 							[% FOREACH ot IN select_organization_types %]
 							<option value="[%ot.0%]">[%ot.1%]</option>
 							[% END %]
@@ -63,7 +63,7 @@
     </section>
 	<section class="metas-detail search-list">
 		<div class="container">
-			<h2 class="section-title">[%organizations.count.0%] [%l('Conselho(s)')%]</h2>
+			<h2 class="section-title">[%organizations.count.0%] [%l('Organizações')%]</h2>
 
 			[% IF order.size > 2%]
 			<div class="row index-results organization-list violet multi-column">

@@ -42,8 +42,6 @@ sub index : Chained('object') : PathPart('') : Args(0) {
 
     $c->stash->{user_obj}->{role} =
       { map { $_ => 1 } @{ $c->stash->{user_roles}->{roles} } };
-    use DDP;
-    p $c->stash->{user_roles};
     $c->detach( '/form/redirect_ok', ['/admin/dashboard/index'] )
       if $c->stash->{user_obj}->{role}->{admin};
 

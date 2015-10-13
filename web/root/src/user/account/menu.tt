@@ -21,8 +21,7 @@
 							<li><a href="/user/perfil/enquete/[% user_roles.organization.id%]">[%l('Campanha de dados móveis')%]</a></li>
 							<li><a href="/user/perfil/convidar">[%l('Convidar')%]</a></li>
 							<li><a href="/user/perfil/conselho">[%l('Conselho')%]</a></li>
-							<li><a href="/user/perfil/membros?organization=[%c.user.obj.organization_id%]">[%l('Membros do Conselho')%]</a></li>
-							<li><a href="/user/perfil/membros?organization=[%user_obj.organization.name%]">[%l('Membros do Conselho')%]</a></li>
+							<li><a href="/user/perfil/membros?organization=[%c.user.obj.organization_id%]">[% user_roles.organization.type == 'counsil' ? l('Membros do Conselho') : l('Membros da Organização')%]</a></li>
 							<li><a href="/user/perfil/campanhas">[%l('Campanhas')%]</a></li>
 							<li><a href="/user/perfil/seguindo">[%l('Seguindo')%]</a></li>
 							<li><a href="/user/perfil/seguranca">[%l('Segurança')%]</a></li>
@@ -33,7 +32,7 @@
 						<ul>
 							<li><a href="/user/perfil/enquete/[% user_roles.organization.id%]">[%l('Campanha de dados móveis')%]</a></li>
 							<li><a href="/user/perfil/campanhas">[%l('Campanhas')%]</a></li>
-							<li><a href="/user/perfil/membros?organization=[%c.user.obj.organization_id%]">[%l('Membros do Conselho')%]</a></li>
+							<li><a href="/user/perfil/membros?organization=[%c.user.obj.organization_id%]">[% user_roles.organization.type == 'counsil' ? l('Membros do Conselho') : l('Membros da Organização')%]</a></li>
 							<li><a href="/user/perfil/seguindo">[%l('Seguindo')%]</a></li>
 							<li><a href="/user/perfil/seguranca">[%l('Segurança')%]</a></li>
 						</ul>

@@ -17,7 +17,7 @@ __PACKAGE__->config(
                 user_follow_projects =>
                   { 'project' => { project_events => 'project_events_read' } }
             },
-            'organization',
+            { 'organization' => 'organization_type' },
             'user_follow_counsils'
         ],
         distinct => 1
@@ -68,7 +68,8 @@ sub result_GET {
                 ? {
                     name             => $user->organization->name,
                     id               => $user->organization->id,
-                    subprefecture_id => $user->organization->subprefecture_id
+                    subprefecture_id => $user->organization->subprefecture_id,
+                    type => $user->organization->organization_type->type
                   }
                 : undef
             ),
