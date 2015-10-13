@@ -51,8 +51,6 @@ sub key_check_POST {
 
     my $params = { %{ $c->req->params } };
 
-    use DDP;
-    p $params;
     my $dm =
       $c->stash->{collection}->check( for => 'key_check', with => $params );
     my $outcome = $dm->apply;

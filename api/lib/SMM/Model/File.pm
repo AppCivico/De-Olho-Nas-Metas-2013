@@ -15,7 +15,6 @@ sub process {
     my $validate  = $param{validate};
     my $header    = $param{header};
     my $fk        = $param{fk};
-    use DDP;
     my $parse;
 
     eval {
@@ -44,7 +43,6 @@ sub process {
             );
         }
     };
-    p $@;
     die $@ if $@ && ref $@;
     die \[ 'archive', "FATAL ERROR: $@ " ] if $@;
     die "file not supported!\n" unless $parse;
@@ -88,8 +86,8 @@ sub process {
                     my $create;
                     $create = $resultset->create($r);
 
-                    die "Não foi possivel inserir o registro"  unless $create;
-                      
+                    die "Não foi possivel inserir o registro" unless $create;
+
                     $r->{id} = $create->id;
                     $fk->($r) if $fk;
                     my $ref = {

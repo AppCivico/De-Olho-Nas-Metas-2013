@@ -48,7 +48,6 @@ sub result_PUT {
     my ( $self, $c ) = @_;
 
     my $user_follow_project = $c->stash->{user_follow_project};
-    use DDP;
     $user_follow_project->execute(
         $c,
         for  => 'update',
@@ -72,8 +71,6 @@ sub result_DELETE {
     my ( $self, $c ) = @_;
     my $user_follow_project = $c->stash->{user_follow_project};
 
-    use DDP;
-    p $user_follow_project;
     $self->status_gone( $c, message => 'deleted' ), $c->detach
       unless $user_follow_project->active;
 

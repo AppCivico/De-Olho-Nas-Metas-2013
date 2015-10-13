@@ -43,7 +43,6 @@ sub _loc_str {
 sub _download : Chained('base') PathPart('download') : Args(1) {
     my ( $self, $c, $ff ) = @_;
 
-    use DDP;
     $c->detach
       unless $ff =~
 m/meta|empresa|projeto|objetivo|conselho|subprefeitura|orcamento|distrito/;
@@ -102,7 +101,6 @@ sub _define_lines {
     my ( $self, $c, $company ) = @_;
     my $db;
     my @lines;
-    use DDP;
 
     my $data_rs;
     if ( $company eq 'meta' ) {
@@ -336,8 +334,6 @@ sub _define_lines {
 
             push @lines, \@this_row;
         }
-        use DDP;
-        p @lines;
     }
     elsif ( $company eq 'subprefeitura' ) {
         @lines = (

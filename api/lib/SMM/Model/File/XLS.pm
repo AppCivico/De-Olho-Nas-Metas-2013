@@ -15,8 +15,7 @@ sub parse {
     my $file     = $args{tempname};
     my $validate = $args{validate};
 
-    my $xls = Spreadsheet::ParseExcel::Stream->new($file);
-    use DDP;
+    my $xls             = Spreadsheet::ParseExcel::Stream->new($file);
     my %expected_header = %{ $args{header} };
 
     my @rows;
@@ -74,11 +73,8 @@ sub parse {
 
                 }
                 else {
-                    use DDP;
-                    p $vdt;
 
                     my $error = join( q/,/, @{$vdt} );
-                    p $error;
                     die \[ 'archive', 'campos inválidos ' . $error ];
 
                     #$ignored++;

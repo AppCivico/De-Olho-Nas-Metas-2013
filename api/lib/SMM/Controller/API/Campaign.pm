@@ -3,7 +3,6 @@ package SMM::Controller::API::Campaign;
 use Moose;
 use utf8;
 use DateTime;
-use DDP;
 
 BEGIN { extends 'Catalyst::Controller::REST' }
 
@@ -224,8 +223,6 @@ sub list_POST {
                 result_class => 'DBIx::Class::ResultClass::HashRefInflator',
             }
         )->next;
-        use DDP;
-        p $region;
         $c->req->params->{region_id} = $region->{id} if $region;
     }
     my $campaigns = $c->stash->{collection}

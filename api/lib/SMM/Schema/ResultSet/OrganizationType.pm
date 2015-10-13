@@ -22,6 +22,11 @@ sub verifiers_specs {
                     required => 1,
                     type     => 'Str',
                 },
+                type => {
+                    required => 1,
+                    type     => 'Str',
+                },
+
             }
         )
     };

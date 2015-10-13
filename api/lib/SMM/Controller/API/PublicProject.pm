@@ -2,7 +2,6 @@ package SMM::Controller::API::PublicProject;
 
 use Moose;
 use utf8;
-use DDP;
 BEGIN { extends 'Catalyst::Controller::REST' }
 
 __PACKAGE__->config(
@@ -73,7 +72,6 @@ sub result_GET {
             goal => {
                 map {
                     my $p = $_;
-                    p $p;
 
                     id     => $p->goal->id,
                       name => $p->goal->name

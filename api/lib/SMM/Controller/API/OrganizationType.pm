@@ -32,13 +32,7 @@ sub result : Chained('object') : PathPart('') : Args(0) :
 sub result_GET {
     my ( $self, $c ) = @_;
 
-    my $organization = $c->stash->{organization_types};
-
-    my @campaigns =
-      $organization->campaigns->search( undef, { prefetch => 'events' } )->all;
-    my $follow_counsil =
-      $organization->user_follow_counsils->search( { active => 1 } )->count;
-
+    my $organization = $c->stash->{organization_type};
     $self->status_ok(
         $c,
         entity => {
@@ -47,16 +41,9 @@ sub result_GET {
                   qw/
                   id
                   name
-                  address
-                  postal_code
-                  description
-                  phone
-                  email
-                  website
-                  subprefecture_id
+                  type
                   /
             ),
-            follow_counsil => $follow_counsil,
 
         }
     );
@@ -110,6 +97,7 @@ sub list_GET {
                               qw/
                               id
                               name
+                              type
                               /
                         ),
                         url => $c->uri_for_action( $self->action_for('result'),
@@ -136,40 +124,6 @@ sub list_POST {
             id => $organization->id
         }
     );
-}
-
-sub complete : Chained('base') : PathPart('complete') : Args(0) {
-    my ( $self, $c ) = @_;
-
-    my $organization;
-
-    $c->model('DB')->txn_do(
-        sub {
-            $organization = $c->stash->{collection}
-              ->execute( $c, for => 'create', with => $c->req->params );
-
-            $c->req->params->{active}          = 1;
-            $c->req->params->{role}            = 'organization';
-            $c->req->params->{organization_id} = $organization->id;
-
-            my $user = $c->model('DB::User')
-              ->execute( $c, for => 'create', with => $c->req->params );
-        }
-    );
-
-    $self->status_created(
-        $c,
-        location =>
-          $c->uri_for( $self->action_for('result'), [ $organization->id ] )
-          ->as_string,
-        entity => {
-            id => $organization->id
-        }
-    );
-
-}
-
-sub subpref : Chained('base') : Args(0) {
 }
 
 1;
