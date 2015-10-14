@@ -55,7 +55,6 @@ __PACKAGE__->config(
     before_delete => sub {
         my ( $self, $c, $item ) = @_;
 
-        use DDP;
         $item->search_related('budgets')->update( { company_id => undef } )
           or return 0;
         return 1;

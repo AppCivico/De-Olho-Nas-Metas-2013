@@ -91,8 +91,6 @@ sub verifiers_specs {
                         my $r = shift;
 
                         my $user = $self->schema->resultset('User');
-                        use DDP;
-                        p $r;
                         my $qtde =
                           $user->search( { email => $r->get_value('email') } )
                           ->count;
@@ -153,10 +151,7 @@ sub action_specs {
         },
         email => sub {
             my %values = shift->valid_values;
-            warn "lol2";
-            use DDP;
-            p %values;
-            my $user = $self->schema->resultset('User')
+            my $user   = $self->schema->resultset('User')
               ->search( { email => $values{email} } )->first;
 
             my %user_attrs = $user->get_inflated_columns;

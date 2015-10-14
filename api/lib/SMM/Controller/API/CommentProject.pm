@@ -147,8 +147,6 @@ sub list_GET {
 
 sub list_POST {
     my ( $self, $c ) = @_;
-    use DDP;
-    p $c->req->params;
     my $comment_project = $c->stash->{collection}
       ->execute( $c, for => 'create', with => $c->req->params );
 

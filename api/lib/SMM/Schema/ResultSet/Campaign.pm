@@ -56,7 +56,6 @@ sub verifiers_specs {
 
                     #post_check => sub {
                     #    my $r = shift;
-                    #    use DDP;
                     #    p $r;
                     #    return 0
                     #      unless $r->get_value('start_in') <

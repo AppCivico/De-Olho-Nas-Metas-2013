@@ -94,7 +94,6 @@ sub complete : Chained('base') : PathPart('complete') : Args(0) {
 
     $c->model('DB')->txn_do(
         sub {
-            use DDP;
 
             $preregister = $c->stash->{collection}
               ->execute( $c, for => 'create', with => $c->req->params );

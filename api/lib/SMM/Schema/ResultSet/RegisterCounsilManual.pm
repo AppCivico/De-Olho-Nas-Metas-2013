@@ -72,9 +72,7 @@ sub action_specs {
     my $self = shift;
     return {
         create => sub {
-            my %values = shift->valid_values;
-            use DDP;
-            p %values;
+            my %values                  = shift->valid_values;
             my $register_counsil_manual = $self->create(
                 {
                     phone_number => $values{phone_number},
