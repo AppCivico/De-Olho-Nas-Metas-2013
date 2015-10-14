@@ -51,7 +51,6 @@ sub result_GET {
         }
     )->next;
 
-    use DDP;
     my @region_ids;
     @region_ids =
       map  { $_->project->region_id }

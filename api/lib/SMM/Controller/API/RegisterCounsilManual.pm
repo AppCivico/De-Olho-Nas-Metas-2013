@@ -29,9 +29,7 @@ sub email_POST {
     my ( $self, $c ) = @_;
 
     my $params = { %{ $c->req->params } };
-    use DDP;
-    p $params;
-    my $dm = $c->stash->{collection}
+    my $dm     = $c->stash->{collection}
       ->execute( $c, for => 'create', with => $c->req->params );
 
     $self->status_ok( $c, entity => { message => 'ok' } );
@@ -47,8 +45,6 @@ sub key_check_POST {
 
     my $params = { %{ $c->req->params } };
 
-    use DDP;
-    p $params;
     my $dm =
       $c->stash->{collection}->check( for => 'key_check', with => $params );
     my $outcome = $dm->apply;

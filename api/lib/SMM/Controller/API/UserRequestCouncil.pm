@@ -2,7 +2,6 @@ package SMM::Controller::API::UserRequestCouncil;
 
 use Moose;
 use utf8;
-use DDP;
 use List::Util qw/sum/;
 use Math::Round qw/round/;
 

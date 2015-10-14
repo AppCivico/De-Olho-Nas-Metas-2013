@@ -152,9 +152,7 @@ sub list_GET {
     my ( $self, $c ) = @_;
     my $conditions = undef;
     my $rs         = $c->stash->{collection};
-    use DDP;
-    my $params = { %{ $c->req->params } };
-    p $params;
+    my $params     = { %{ $c->req->params } };
     if ( $c->req->params->{organization} ) {
         $rs =
           $rs->search( { organization_id => $c->req->params->{organization} } );
@@ -242,8 +240,6 @@ sub list_GET {
 
 sub list_POST {
     my ( $self, $c ) = @_;
-    use DDP;
-    p $c->req->params;
     my $user = $c->stash->{collection}
       ->execute( $c, for => 'create', with => $c->req->params );
 
@@ -268,8 +264,6 @@ sub project_POST {
     my $user_project =
       $user->user_follow_projects->search( { project_id => $id } )
       ->update( { active => 0 } );
-    use DDP;
-    p $user_project;
 
     $self->status_accepted( $c, entity => { id => 1 } ), $c->detach
       if $user_project;
@@ -290,8 +284,6 @@ sub counsil_POST {
     my $counsil_count =
       $c->model('DB::UserFollowCounsil')
       ->search( { counsil_id => $id, active => 1 } )->count;
-    use DDP;
-    p $counsil_count;
     $self->status_accepted( $c, entity => { counsil_count => $counsil_count } );
 
 }
@@ -369,8 +361,6 @@ sub user_project_event_all_GET {
 
         }
     )->as_hashref->all;
-    use DDP;
-    p $result;
     $self->status_accepted(
         $c,
         entity => $result,

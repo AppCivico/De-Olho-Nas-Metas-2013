@@ -35,13 +35,10 @@ sub document : Chained('base') Args(0) {
     my $return;
     my $res;
 
-    use DDP;
     my $model = $c->model('API');
 
     $c->stash->{url} .= 'goals';
 
-    p $c->stash->{url};
-    exit;
     $res = eval {
         $return = $model->_do_http_req(
             method => 'GET',
@@ -87,22 +84,16 @@ sub goal : Chained('base') Args(0) {
     my @projects;
     my @secretary;
     my @secretaries;
-    my $db = $c->model('DB::Goal');
-    use DDP;
+    my $db    = $c->model('DB::Goal');
     my $model = $c->model('API');
 
     my $url_goal = 'goals';
     my $url_obj  = 'objectives';
 
-    p $c->stash->{url};
-    p $url_goal;
     $res     = $self->furl->get( $c->stash->{url} . $url_goal );
     $res_obj = $self->furl->get( $c->stash->{url} . $url_obj );
     my $data_obj = decode_json $res_obj->content;
     my $data     = decode_json $res->content;
-    use DDP;
-    p $data;
-    exit;
 
     #	p $data_obj;
 
@@ -113,8 +104,6 @@ sub goal : Chained('base') Args(0) {
     for my $goal (@$data) {
         @projects    = ();
         @secretaries = ();
-
-        p $c->stash->{url};
 
         #next
         # if $c->model('DB::Goal')->search( { name => $goal->{name} } )->next;
@@ -306,7 +295,6 @@ sub prefectures : Chained('base') Args(0) {
     my $return;
     my $res;
 
-    use DDP;
     my $model = $c->model('API');
 
     $c->stash->{url} .= 'prefectures';
@@ -314,7 +302,6 @@ sub prefectures : Chained('base') Args(0) {
     $res = $self->furl->get( $c->stash->{url} );
 
     my $data = decode_json $res->content;
-    p $data;
     for my $value (@$data) {
         delete $value->{updated_at};
         delete $value->{created_at};
@@ -332,37 +319,33 @@ sub project_types : Chained('base') : Args(0) {
     my $return;
     my $res;
 
-    use DDP;
     my $model = $c->model('API');
 
     my $url = URI->new("http://planejasampa.prefeitura.sp.gov.br");
     $url->path_segments( 'metas', 'api', 'projects', 'types' );
-    p $url->as_string;
     $res = $self->furl->get( $url->as_string );
 
-    p $res;
     my $data = decode_json $res->content;
 }
 sub search_goal : Chained('base') : Args(0) : ActionClass('REST') { }
 
-sub search_goal_GET {
-    my ( $self, $c ) = @_;
-    my $return;
-    my $res;
-
-    use DDP;
-    my @goals =
-      $c->model('DB::Goal')
-      ->search( undef, { prefetch => [ { goal_projects => 'project' } ] } )
-      ->all;
-
-    for my $key (@goals) {
-        for my $lol ( $key->goal_projects ) {
-            p $lol->project;
-        }
-    }
-    $self->status_ok( $c, entity => \@goals );
-}
+#sub search_goal_GET {
+#    my ( $self, $c ) = @_;
+#    my $return;
+#    my $res;
+#
+#    my @goals =
+#      $c->model('DB::Goal')
+#      ->search( undef, { prefetch => [ { goal_projects => 'project' } ] } )
+#      ->all;
+#
+#    for my $key (@goals) {
+#        for my $lol ( $key->goal_projects ) {
+#            p $lol->project;
+#        }
+#    }
+#    $self->status_ok( $c, entity => \@goals );
+#}
 
 sub furl {
     return Furl->new(

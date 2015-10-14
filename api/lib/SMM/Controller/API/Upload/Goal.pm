@@ -43,8 +43,7 @@ sub configuration_goal_POST {
     $c->stash->{header}   = \%header;
     $c->stash->{validate} = sub {
         my $line = shift;
-        use DDP;
-        my $dv = Data::Verifier->new(
+        my $dv   = Data::Verifier->new(
             filters => [qw(trim)],
             profile => {
                 name                   => { required => 0, type => 'Str' },
@@ -73,9 +72,6 @@ sub configuration_goal_POST {
 
     };
     my $lol = $c->forward('/api/uploadfile/do');
-    use DDP;
-    p $lol;
-    warn 1234567;
 }
 
 1;

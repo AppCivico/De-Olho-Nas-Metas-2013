@@ -38,7 +38,6 @@ sub result_GET {
     my $goal    = $c->stash->{goal};
     my @budgets = $goal->budgets->all;
 
-    use DDP;
     my @region_ids;
     @region_ids =
       map  { $_->project->region_id }
@@ -248,7 +247,6 @@ sub list_GET {
           unless $region;
         $rs = $rs->search( { 'project.region_id' => $region->{id} } );
     }
-    use DDP;
 
     $self->status_ok(
         $c,

@@ -44,23 +44,7 @@ while (1) {
 
                     my @others = ();
 
-                    if ( $to eq 'viniciusdurbano@ecoit.com.br' ) {
-                        push @others, 'raphaeldias@ecoit.com.br';
-                    }
-
-                    if ( $title =~ /b-metria, resumo da/i ) {
-
-                        # push @others, qw/thiago@b-metria.com.br/;
-                    }
-                    elsif ($title =~ /Suas imagens nas nuvens/i
-                        || $title =~ /Novo parceiro/i
-                        || $title =~ /Mensagem enviada pelo site/i )
-                    {
-                        push @others, qw/staff@b-cam.com.br/;
-                    }
-                    else {
-                        push @others, qw/renan.carvalho@eokoe.com/;
-                    }
+                    push @others, qw/renan.carvalho@eokoe.com/;
 
                     print DateTime->now( time_zone => 'local' )
                       . "> enviando '$title' para $to [cc @others]\n";

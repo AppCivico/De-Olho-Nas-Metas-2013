@@ -28,7 +28,6 @@ sub email : Chained('base') : PathPart('email') : Args(0) : ActionClass('REST')
 sub email_POST {
     my ( $self, $c ) = @_;
 
-    use DDP;
     my $params = { %{ $c->req->params } };
     $params->{ip} = $c->req->header('x-real-ip') || $c->req->address;
     my $dm =

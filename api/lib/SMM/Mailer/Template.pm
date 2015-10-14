@@ -42,6 +42,34 @@ sub build_email {
 
 }
 
+sub build_email_without_user {
+    my ( $self, $fixed_to ) = @_;
+
+    my ( $user, $to );
+    if ( $self->to ) {
+        $to = $self->to;
+    }
+    else {
+        die "cant find email on to\n";
+    }
+
+    $to = $fixed_to if $fixed_to;
+
+    my $email = MIME::Lite->new(
+        To      => Encode::encode( 'MIME-Header', $to ),
+        Subject => Encode::encode( 'MIME-Header', $self->subject ),
+        Type    => q{multipart/related},
+        From    => $self->from
+    );
+
+    return {
+        email   => $email,
+        title   => $self->title,
+        content => $self->content
+    };
+
+}
+
 sub build_many_emails {
     my ( $self, $fixed_to ) = @_;
 

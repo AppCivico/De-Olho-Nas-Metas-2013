@@ -92,9 +92,6 @@ sub result_PUT {
     my $params     = { %{ $c->req->params } };
     my $management = $c->stash->{management};
 
-    use DDP;
-    p $c->stash->{management};
-
     $management->execute( $c, for => 'update', with => $params );
 
     $self->status_accepted(
@@ -191,7 +188,7 @@ sub complete : Chained('base') : PathPart('complete') : Args(0) {
             #$c->req->params->{role} 			= 'management';
             #$c->req->params->{management_id} 	= $management->id;
 
-            #my $user = $c->model('DB::User')->execute( $c, for => 'create', with => $c->req->params );
+#my $user = $c->model('DB::User')->execute( $c, for => 'create', with => $c->req->params );
         }
     );
 

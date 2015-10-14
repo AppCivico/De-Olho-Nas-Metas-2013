@@ -48,7 +48,6 @@ sub result_PUT {
     my ( $self, $c ) = @_;
 
     my $user_follow_counsil = $c->stash->{user_follow_counsil};
-    use DDP;
     $user_follow_counsil->execute(
         $c,
         for  => 'update',
@@ -72,8 +71,6 @@ sub result_DELETE {
     my ( $self, $c ) = @_;
     my $user_follow_counsil = $c->stash->{user_follow_counsil};
 
-    use DDP;
-    p $user_follow_counsil;
     $self->status_gone( $c, message => 'deleted' ), $c->detach
       unless $user_follow_counsil->active;
 

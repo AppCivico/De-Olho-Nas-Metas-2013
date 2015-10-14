@@ -60,8 +60,6 @@ sub list_POST {
 
 sub list_GET {
     my ( $self, $c ) = @_;
-    use DDP;
-    p $c->stash->{collection}->as_hashref->all;
     $self->status_ok(
         $c,
         entity => {
@@ -93,7 +91,6 @@ sub complete : Chained('base') : PathPart('complete') : Args(0) {
 
     $c->model('DB')->txn_do(
         sub {
-            use DDP;
 
             $preregister = $c->stash->{collection}
               ->execute( $c, for => 'create', with => $c->req->params );

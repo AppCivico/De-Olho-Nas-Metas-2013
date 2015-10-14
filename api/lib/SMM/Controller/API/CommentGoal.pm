@@ -76,9 +76,7 @@ sub result_DELETE {
 sub result_PUT {
     my ( $self, $c ) = @_;
 
-    my $params = { %{ $c->req->params } };
-    use DDP;
-    p $params;
+    my $params       = { %{ $c->req->params } };
     my $comment_goal = $c->stash->{comment_goal};
 
     $comment_goal->execute( $c, for => 'update', with => $c->req->params );
