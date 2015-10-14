@@ -1,6 +1,5 @@
 [%-CALL assets.include("js/bootstrap-datepicker.js")%]
 [%-CALL assets.include("js/bootstrap-datepicker.pt-BR.js")%]
-[%-CALL assets.include("css/datepicker.css")%]
 [%-CALL assets.include("js/forms.js")%]
 [%-CALL assets.include("js/admin.js")%]
 
