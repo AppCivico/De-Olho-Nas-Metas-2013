@@ -20,7 +20,8 @@ Catalyst Controller.
 
 =cut
 
-sub base : Chained('/homefuncional/base') : PathPart('subprefecture') : CaptureArgs(0) {
+sub base : Chained('/homefuncional/base') : PathPart('subprefecture') :
+  CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
 }
@@ -30,9 +31,11 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
 
     my $api = $c->model('API');
 
-    $api->stash_result( $c, [ 'subprefectures', $id ], stash => 'subprefecture_obj', );
-    use DDP;
-    p $c->stash->{subprefecture_obj};
+    $api->stash_result(
+        $c,
+        [ 'subprefectures', $id ],
+        stash => 'subprefecture_obj',
+    );
 
 }
 
@@ -60,7 +63,8 @@ sub get_id_region : Chained('base') : Args(0) {
     $c->detach unless $c->req->param('latitude') =~ qr/^(\-?\d+(\.\d+)?)$/;
     $c->detach unless $c->req->param('longitude') =~ qr/^(\-?\d+(\.\d+)?)$/;
 
-    my $lnglat = join( q/ /, $c->req->param('longitude'), $c->req->param('latitude') );
+    my $lnglat =
+      join( q/ /, $c->req->param('longitude'), $c->req->param('latitude') );
 
     my $api = $c->model('API');
 

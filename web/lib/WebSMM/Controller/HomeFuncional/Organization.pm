@@ -154,8 +154,6 @@ sub edit : Chained('base') : PathPart('edit') : Args(0) {
         unless ( -e $path ) {
             mkdir $path;
         }
-        use DDP;
-        p $path;
 
         $avatar->copy_to( $path . '/' . $organization_id . '.jpg' );
     }
@@ -163,8 +161,6 @@ sub edit : Chained('base') : PathPart('edit') : Args(0) {
     $c->detach( '/form/redirect_ok',
         [ \'/user/perfil/conselho', {}, 'Cadastrado com sucesso!', ] );
 
-    use DDP;
-    p $c->stash->{counsil};
     $c->res->status(200);
     $c->res->content_type('application/json');
     $c->res->body( JSON::encode_json( $c->stash->{counsil} ) );

@@ -4,7 +4,6 @@ use namespace::autoclean;
 use JSON;
 use Path::Class qw(dir);
 use utf8;
-use DDP;
 use List::Util qw(sum);
 
 BEGIN { extends 'Catalyst::Controller::REST'; }

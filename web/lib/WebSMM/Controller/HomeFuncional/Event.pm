@@ -36,8 +36,6 @@ sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
 
 sub detail : Chained('object') : PathPart('') : Args(0) {
     my ( $self, $c, $id ) = @_;
-    use DDP;
-    p $c->stash->{event_obj};
 }
 
 sub index : Chained('base') : PathPart('') : Args(0) {

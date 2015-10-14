@@ -4,7 +4,6 @@ use namespace::autoclean;
 use utf8;
 use List::MoreUtils qw/uniq/;
 use List::Util qw/sum/;
-use DDP;
 BEGIN { extends 'Catalyst::Controller'; }
 
 =head1 NAME
@@ -68,8 +67,6 @@ sub detail : Chained('object') : Args(0) {
         [ 'companies', $c->stash->{company}->{id}, 'budgets' ] );
     $api->stash_result( $c,
         [ 'companies', $c->stash->{company}->{id}, 'goals' ] );
-    use DDP;
-    p $c->stash->{company};
     $c->stash->{sum_budgets} =
       sum map { $_->{liquidated_value} } @{ $c->stash->{budgets} };
 }

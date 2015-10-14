@@ -34,7 +34,6 @@ sub index : Chained('base') : PathPart('') : Args(0) {
 
     my $api    = $c->model('API');
     my $params = { %{ $c->req->params } };
-    use DDP;
     $params->{role} = "" if $params->{role} eq '--';
     $api->stash_result(
         $c, 'users',

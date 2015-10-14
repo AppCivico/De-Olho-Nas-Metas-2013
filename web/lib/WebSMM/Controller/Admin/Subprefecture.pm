@@ -53,9 +53,6 @@ sub index : Chained('base') : PathPart('') : Args(0) {
     my $api = $c->model('API');
 
     $api->stash_result( $c, 'subprefectures' );
-    use DDP;
-    p $c->stash->{subprefectures};
-    warn 1;
 }
 
 sub add : Chained('base') : PathPart('new') : Args(0) {

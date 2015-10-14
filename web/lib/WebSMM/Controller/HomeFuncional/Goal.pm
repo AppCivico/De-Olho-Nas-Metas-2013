@@ -134,8 +134,6 @@ sub comment : Chained('base') : PathParth('comment') : Args(0) {
     my $goal_id = $c->req->param('goal_id');
 
     $user_id = 53 if $c->req->param('user_id') eq "";
-    use DDP;
-    p $user_id;
     $api->stash_result(
         $c,
         'comment_goals',

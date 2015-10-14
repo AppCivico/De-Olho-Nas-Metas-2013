@@ -4,7 +4,6 @@ use namespace::autoclean;
 use JSON;
 use Path::Class qw(dir);
 use utf8;
-use DDP;
 use DateTime::Format::DateParse;
 
 #use DateTime;
@@ -283,7 +282,6 @@ sub search_by_types : Chained('base') : Args(0) {
             lnglat    => $lnglat    ? $lnglat    : ""
         }
     );
-    use DDP;
     my $now = DateTime->now( time_zone => 'local' );
 
     for my $p ( @{ $c->stash->{projects} } ) {
@@ -333,11 +331,8 @@ sub upload_images : Chained('object') : PathPart('upload_images') : Args(0) {
     };
     my $response = ();
     push( @{ $response->{files} }, $data );
-    p $response;
     $image->copy_to( $path . '/' . $image->filename );
 
-    p $image;
-    p $c->stash->{images_project};
     $c->res->status(200);
     $c->res->content_type('application/json');
     $c->res->body( encode_json($response) );
