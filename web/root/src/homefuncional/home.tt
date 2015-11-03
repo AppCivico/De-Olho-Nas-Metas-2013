@@ -1,3 +1,31 @@
+<style>
+  #legend {
+    background-color: #4d4841;
+	color: #fff;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    margin: 10px;
+    border: 3px solid #000;
+	opacity: 0.8;
+	border-radius: 5px;
+  }
+  #legend img{
+	vertical-align: middle;
+  }
+  #legend h3{
+	margin-top: 0;
+	font-size: 18px;
+  }
+  #legend div{
+	display: block;
+	float: left;
+	clear: both;
+	margin: 2px;
+  }
+  #legend span{
+	font-size: 12px;
+  }
+</style>
 
 	[%-CALL assets.include("js/maps.js")%]
 	[%-CALL assets.include("js/infobubble.min.js")%]
@@ -56,6 +84,7 @@ $(document).ready(function () {
 
 	<section class="metas-filtro">
 		<div class="container">
+
 			<h2 class="title text-center">[%l('Ajude a monitorar as Metas da cidade de São Paulo')%]</h2>
 			<h3 class="section-title">[%l('Use os filtros abaixo para ver os projetos no mapa')%]</h3>
 			<div class="form row">
@@ -144,4 +173,15 @@ $(document).ready(function () {
 			</div>
 		</div>
     </section>
+	<section class="painel">
+		<div id="legend">
+		  <h3>Legenda</h3>
+		  <div>
+			<img src="/static/images/icone_vermelho.png"> <span> Projeto com cumprimento menor que 50% </span>
+		  </div>
+		  <div>
+			<img src="/static/images/icone_verde.png"> <span> Projeto com cumprimento maior que 50%</span>
+		  </div>
+		</div>
+	</section>
 	
