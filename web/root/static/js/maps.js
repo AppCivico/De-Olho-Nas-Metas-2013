@@ -121,7 +121,9 @@ var $maps = function () {
 // 			mc = new MarkerClusterer(map, marker_array);
 			map.setZoom(12);
 		});
-	
+
+map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(
+  document.getElementById('legend'));	
 	}
 
 	function markprojectdetail( project_id ){
