@@ -2,7 +2,6 @@
 [%-CALL assets.include("js/maps.js")%]
 [%-CALL assets.include("js/date-picker/bootstrap-datepicker.js")%]
 [%-CALL assets.include("js/date-picker/bootstrap-datepicker.pt-BR.js")%]
-[%-CALL assets.include("css/date-picker/datepicker.css")%]
 [%-CALL assets.include("js/Moment.js")%]
 [%-CALL assets.include("css/bootstrap-datetimepicker.css")%]
 [%-CALL assets.include("js/bootstrap-datetimepicker.min.js")%]
