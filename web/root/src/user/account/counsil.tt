@@ -2,11 +2,11 @@
 [%-CALL assets.include("js/maps.js")%]
 [%-CALL assets.include("js/date-picker/bootstrap-datepicker.js")%]
 [%-CALL assets.include("js/date-picker/bootstrap-datepicker.pt-BR.js")%]
-[%-CALL assets.include("css/date-picker/datepicker.css")%]
 [%-CALL assets.include("js/Moment.js")%]
 [%-CALL assets.include("css/bootstrap-datetimepicker.css")%]
 [%-CALL assets.include("js/bootstrap-datetimepicker.min.js")%]
-[%-CALL assets.include("js/tinyeditor/tiny.editor.css")%]
+
+<link href="/static/js/tinyeditor/tiny.editor.css" rel="stylesheet">
 <script type="text/javascript" src="/static/js/tinyeditor/tiny.editor.js"></script>
 <script>
 jQuery(function($){
@@ -80,7 +80,7 @@ jQuery(function($){
 				<div class="col-sm-9 .col-md.offset-4">
 					<section class="projetos-result">
 						<div class="tab-content">
-									<h4 class="green">[%l('EDITAR CONSELHO')%]</h4>
+									<h4 class="green">[% user_roles.organization.type == 'counsil' ? l('Editar CONSELHO') : l('EDITAR ORGANIZAÇÃO')%]</h4>
 									[%IF status_msg %]<div class="alert alert-success"><p>[%status_msg%]</p></div>[%END%]
 									[%IF error_msg %]<div class="alert alert-danger"><p>[%error_msg%]</p></div>[%END%]
 									<form action="/organization/edit" method="post" enctype="multipart/form-data">

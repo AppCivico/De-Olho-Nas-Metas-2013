@@ -2,7 +2,7 @@
 						<div class="img text-center"><img src="/static/images/user/[%c.user.id%]/[%c.user.id%].jpg" border="0" class="img-responsive"></div>
 						<div class="name text-center">[% c.user.name %]</div>
 						[% UNLESS user_roles.organization.name == ""%]
-						<div class="text-center">[%l('Conselho')%]: [% user_roles.organization.name %]</div>
+						<div class="text-center">[% user_roles.organization.type == 'counsil' ? l('Conselho') : l('Organização')%]: [% user_roles.organization.name %]</div>
 						[% END %]
 						<a href="/user/perfil/editar" class="btn btn-yellow">[%l('Editar perfil')%]</a>
 					</div>
@@ -20,7 +20,7 @@
 						<ul>
 							<li><a href="/user/perfil/enquete/[% user_roles.organization.id%]">[%l('Campanha de dados móveis')%]</a></li>
 							<li><a href="/user/perfil/convidar">[%l('Convidar')%]</a></li>
-							<li><a href="/user/perfil/conselho">[%l('Conselho')%]</a></li>
+							<li><a href="/user/perfil/conselho">[% user_roles.organization.type == 'counsil' ? l('Conselho') : l('Organização')%]</a></li>
 							<li><a href="/user/perfil/membros?organization=[%c.user.obj.organization_id%]">[% user_roles.organization.type == 'counsil' ? l('Membros do Conselho') : l('Membros da Organização')%]</a></li>
 							<li><a href="/user/perfil/campanhas">[%l('Campanhas')%]</a></li>
 							<li><a href="/user/perfil/seguindo">[%l('Seguindo')%]</a></li>
