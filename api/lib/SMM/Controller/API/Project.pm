@@ -128,7 +128,6 @@ sub result_GET {
             goal => {
                 map {
                     my $p = $_;
-                    p $p;
 
                     id     => $p->goal->id,
                       name => $p->goal->name
