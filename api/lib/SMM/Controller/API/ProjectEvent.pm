@@ -67,7 +67,7 @@ sub result_GET {
 
 sub result_DELETE {
     my ( $self, $c ) = @_;
-    my $project_event = $c->stash->{organization};
+    my $project_event = $c->stash->{project_event};
 
     $project_event->delete;
 
@@ -109,7 +109,7 @@ sub list_GET {
                 '+select' =>
                   [ \q{to_char(me.ts, 'DD/MM/YYYY HH24:MI:SS') AS process_ts} ],
                 '+as'    => ['process_ts'],
-                order_by => 'me.ts'
+                order_by => { '-desc', 'me.ts' },
             },
         );
     }

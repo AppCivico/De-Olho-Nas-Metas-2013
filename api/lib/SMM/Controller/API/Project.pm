@@ -448,6 +448,20 @@ sub list_geom : Chained('base') PathPart('list_geom') : Args(0) {
 
 }
 
+sub project_name : Chained('base') PathPart('list_geom') : Args(0) {
+    my ( $self, $c ) = @_;
+
+    my @projects = $c->model('DB')->resultset('Project')->search(
+        undef,
+        {
+            columns => [qw( id name )],
+        }
+    )->as_hashref->all;
+
+    $self->status_ok( $c, entity => { projects => \@projects } );
+
+}
+
 sub autocomplete : Chained('base') PathPart('autocomplete') : Args(0) {
     my ( $self, $c ) = @_;
 

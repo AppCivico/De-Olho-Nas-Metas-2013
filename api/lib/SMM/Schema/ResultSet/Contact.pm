@@ -73,8 +73,7 @@ sub action_specs {
         create => sub {
             my %values  = shift->valid_values;
             my $contact = $self->create( \%values );
-
-            my $body = '';
+            my $body    = '';
 
             my $wrapper = get_data_section('faleconosco.tt');
             $tt->process(
@@ -98,8 +97,6 @@ sub action_specs {
             my $email =
               $self->_build_email( $data->{email}, $data->{title},
                 $data->{content} );
-
-            p $email;
 
             $self->result_source->schema->resultset('EmailQueue')
               ->create( { body => $email->as_string, title => $title } );

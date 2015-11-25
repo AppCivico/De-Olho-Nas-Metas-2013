@@ -32,6 +32,9 @@ h2{
 	padding: 0;
 }
 
+.box {
+	border-style: groove;
+}
 .word-break{
 	word-break: break-all;
 }

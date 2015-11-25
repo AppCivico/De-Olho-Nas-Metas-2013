@@ -20,7 +20,7 @@ sub index : Chained('base') : PathPart('') : Args(0) {
 
     my $api = $c->model('API');
     $api->stash_result( $c, 'project_events',
-        params => { approved => 'false' } );
+        params => { approved => 'true' } );
 }
 
 sub set_accepted : Chained('base') : PathPart('aceito') : Args(0) {
@@ -46,13 +46,9 @@ sub set_removed : Chained('base') : PathPart('remover') : Args(0) {
 
     my $api = $c->model('API');
     my $pe  = $c->req->param('pe_id');
-
-    $api->stash_result(
-        $c,
-        [ 'project_events', $pe ],
-        method => 'PUT',
-        params => { active => 0 }
-    );
+    use DDP;
+    p $pe;
+    $api->stash_result( $c, [ 'project_events', $pe ], method => 'DELETE' );
 
     $c->res->status(200);
     $c->res->body( message => 'desativado com sucesso' );

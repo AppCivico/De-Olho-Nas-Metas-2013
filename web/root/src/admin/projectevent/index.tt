@@ -11,7 +11,8 @@ $(document).ready(function () {
  
     $('.remover').on('click', function () {
       var id = $(this).data("id");
-   	  $.post( "/admin/project_notification/remover", { pe_id: $(this).data("id"), }).done(function( data ) {
+	  console.log(id);	
+   	  $.post( "/admin/approved_notification/remover", { pe_id: $(this).data("id"), }).done(function( data ) {
    	  $('#control_'+id).html('') 
 	 });	
 	})
@@ -22,8 +23,8 @@ $(document).ready(function () {
 			[% IF project_events.size > 0%]
 			<h2 class="section-title">[% goals.size %] Notificações Encontradas</h2>
 			[% FOREACH pe IN project_events %]	
-			<div class="item row">
-				<div class="col-sm-10 nopadding">
+			<div class="item row-fluid">
+				<div class="box col-sm-10 nopadding">
 					<div class="contents pull-left">
 						<div class="description">
 							<h2>
@@ -31,7 +32,7 @@ $(document).ready(function () {
 							</h2>
 							<p> [%pe.text%]</p>
 							<div id="control_[%pe.id%]">
-								<button type="button" id="accepted" data-id="[%pe.id%]" class="aceitar btn btn-success">Aceitar</button>  <button type="button" id="removed" class="remover btn btn-danger">Remover</button>
+							<!--	<button type="button" id="accepted" data-id="[%pe.id%]" class="aceitar btn btn-success">Aceitar</button> --> <button type="button" id="removed" data-id="[%pe.id%]" class="remover btn btn-danger">Remover</button>
 							</div>	
 						</div>
 					</div>
