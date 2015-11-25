@@ -14,4 +14,5 @@ web/*.conf
 web/api.error.log
 web/session_data/*
 web/websmm_local.conf*
-
+up_api.sh
+up_web.sh

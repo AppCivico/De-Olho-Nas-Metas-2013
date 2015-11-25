@@ -87,7 +87,7 @@ sub action_specs {
             );
             my $title = 'Fale Conosco - De Olho Nas Metas:';
             my $data  = SMM::Mailer::Template->new(
-                to   => 'renan.azevedo.carvalho@gmail.com',
+                to   => $ENV{EMAIL_ADMIN},
                 from => q{"De Olho Nas Metas" <no-reply@deolhonasmetas.org.br>},
                 subject => $title,
                 content => $body,
