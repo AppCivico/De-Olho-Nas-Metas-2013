@@ -41,7 +41,7 @@
 			</div>
 		</div>
 	</section>
-		
+
 	<nav class="nav-top visible-xs">
 		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menu">
 			<i class="fa fa-bars"></i>
@@ -75,11 +75,11 @@
 			[% IF status_msg %]<div class="alert alert-warning" role="alert">[% status_msg %]</div>[%END%]
 			[% IF error_msg %]<div class="alert alert-warning" role="alert">[% error_msg %]</div>[%END%]
 				<h2 class="title">Ajude a monitorar as metas da cidade de São Paulo</h2>
-				
+
 			</div>
 		</div>
     </section>
-	
+
 
 	<a id="about" class="anchor"></a>
     <section class="about text-center">
@@ -110,7 +110,7 @@
 				</div>
 				<div class="col-sm-4 text-center">
 					Patrocínio<br />
-					<a href="http://www.avinaamericas.org" target="_blank"><img src="/static/css/images/logo-avina.png" border="0"></a>
+					<a href="http://www.avinaamericas.org" target="_blank"><img src="/static/css/images/logo-avina.png?v=2" border="0"></a>
 				</div>
 				<div class="col-sm-4 text-center">
 					Parceiro<br />
@@ -123,9 +123,9 @@
 	<a id="faq" class="anchor"></a>
     <section class="faq text-center">
 		<div class="container">
-		
+
 			<h2>Perguntas Frequentes</h2>
-			
+
 			<ul class="faq">
 				<li>
 					<div class="q"><span class="glyphicon glyphicon-question-sign"></span> Gummi bears carrot cake biscuit jelly beans icing lemon drops. Jujubes tiramisu dessert?</div>
@@ -152,7 +152,7 @@
 					<div class="a">Dragée soufflé liquorice candy unerdwear.com dessert donut icing jelly-o. Cupcake tart powder cotton candy tiramisu gingerbread apple pie oat cake. Lemon drops pie liquorice toffee cookie. Caramels sweet roll wafer dragée carrot cake pastry apple pie caramels.</div>
 				</li>
 			</ul>
-			
+
 		</div>
     </section>
 	//-->
@@ -163,7 +163,7 @@
 			<div class="col-sm-8 col-sm-offset-2">
 				<h2 class="title">O De Olho nas Metas está em desenvolvimento e será lançado no início de 2015. Para receber informações, cadastre-se abaixo:</h2>
 				<!--<p>Conheça e monitore as metas da cidade de São Paulo. Preencha o formulário abaixo para se cadastrar:</p>-->
-				
+
 				<form role="form" method="POST" action="/form/preregister">
 					<div class="col-sm-6">
 						<div class="form-group">
@@ -184,7 +184,7 @@
 			</div>
 		</div>
     </section>
-	
+
 
 <!--	<a id="contact" class="anchor"></a>
     <section class="contact text-center">
