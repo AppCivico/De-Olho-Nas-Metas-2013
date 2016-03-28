@@ -39,9 +39,6 @@ our $VERSION = '0.01';
 # with an external configuration file acting as an override for
 # local deployment.
 
-my $user = $ENV{USER};
-my $host = Sys::Hostname::hostname();
-
 __PACKAGE__->config(
     name     => 'SMM',
     encoding => 'UTF-8',
@@ -52,8 +49,6 @@ __PACKAGE__->config(
 
     'Plugin::ConfigLoader' => {
          driver              => { General => { -ForceArray => 1, } },
-         config_local_suffix => "${user}_${host}",
-         file => __PACKAGE__->path_to('conf')
      },
 );
 

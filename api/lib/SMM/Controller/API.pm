@@ -28,6 +28,8 @@ sub api_key_check : Private {
             }
         )->first;
 
+
+use DDP; p $user_session;
         my $user =
             $user_session
           ? $c->find_user( { id => $user_session->user_id } )

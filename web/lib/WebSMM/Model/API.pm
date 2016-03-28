@@ -145,6 +145,8 @@ sub stash_result {
         $c->detach('/rest_error');
     }
 
+    use DDP; p $res
+    ;
     # tratando caso espcial do retorno em json do bad-request
     if ( $res->code == 400 && $obj->{error} =~ /^{/ && $obj->{error} =~ /}$/ ) {
         my $missing = eval { decode_json $obj->{error} };

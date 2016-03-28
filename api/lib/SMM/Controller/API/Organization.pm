@@ -9,37 +9,39 @@ __PACKAGE__->config(
 
     result      => 'DB::Organization',
     object_key  => 'organization',
-    result_attr => {
-        prefetch =>
-          [ { 'city' => 'state' }, 'subprefecture', 'user_follow_counsils' ]
-    },
-    search_ok => {
-        id => 'Int'
-    },
+    result_attr => { prefetch => [ { 'city' => 'state' }, 'subprefecture', 'user_follow_counsils' ] },
+    search_ok => { id => 'Int' },
 
-    update_roles =>
-      [qw/superadmin user admin webapi organization counsil counsil_master/],
+    update_roles => [qw/superadmin user admin webapi organization counsil counsil_master/],
     create_roles => [qw/superadmin admin webapi/],
     delete_roles => [qw/superadmin admin webapi/],
 );
 with 'SMM::TraitFor::Controller::DefaultCRUD';
 
-sub base : Chained('/api/base') : PathPart('organizations') : CaptureArgs(0) { }
+sub base : Chained('/api/base') : PathPart('organizations') : CaptureArgs(0) {
+}
 
-sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
+sub object : Chained('base') : PathPart('') : CaptureArgs(1) {
+}
 
-sub result : Chained('object') : PathPart('') : Args(0) :
-  ActionClass('REST') { }
+sub result : Chained('object') : PathPart('') : Args(0) : ActionClass('REST') {
+}
 
 sub result_GET {
     my ( $self, $c ) = @_;
 
     my $organization = $c->stash->{organization};
 
-    my @campaigns =
-      $organization->campaigns->search( undef, { prefetch => 'events' } )->all;
-    my $follow_counsil =
-      $organization->user_follow_counsils->search( { active => 1 } )->count;
+    my @campaigns = $organization->campaigns->search( undef, { prefetch => 'events' } )->all;
+    my $follow_counsil = $organization->user_follow_counsils->search( { active => 1 } )->count;
+    use DDP;
+    p $organization;
+
+    my $subpref;
+    $subpref =
+      map { $_ ? ( +{ id => $_->id, name => $_->name, latitude => $_->latitude, longitude => $_->longitude, } ) : () }
+      ( $organization->subprefecture )
+      if $organization->subprefecture;
 
     $self->status_ok(
         $c,
@@ -60,22 +62,26 @@ sub result_GET {
             ),
             follow_counsil => $follow_counsil,
             city           => {
-                (
-                    map { $_ => $organization->city->$_, }
-                      qw/
-                      id
-                      name
-                      /
-                ),
-                state => {
+                $organization->city
+                ? (
                     (
-                        map { $_ => $organization->city->state->$_, }
+                        map { $_ => $organization->city->$_, }
                           qw/
                           id
                           name
                           /
-                    )
-                }
+                    ),
+                    state => {
+                        (
+                            map { $_ => $organization->city->state->$_, }
+                              qw/
+                              id
+                              name
+                              /
+                        )
+                    }
+                  )
+                : (),
             },
             events => [
                 map {
@@ -113,20 +119,8 @@ sub result_GET {
                   } (@campaigns),
 
             ],
-            subprefecture => (
-                map {
-                    $_
-                      ? (
-                        +{
-                            id        => $_->id,
-                            name      => $_->name,
-                            latitude  => $_->latitude,
-                            longitude => $_->longitude,
-                        }
-                      )
-                      : ()
-                } ( $organization->subprefecture ),
-            ),
+
+            subprefecture => $subpref
 
         }
     );
@@ -152,26 +146,23 @@ sub result_PUT {
 
     $self->status_accepted(
         $c,
-        location =>
-          $c->uri_for( $self->action_for('result'), [ $organization->id ] )
-          ->as_string,
+        location => $c->uri_for( $self->action_for('result'), [ $organization->id ] )->as_string,
         entity => { id => $organization->id }
       ),
       $c->detach
       if $organization;
 }
 
-sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
+sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') {
+}
 
 sub list_GET {
     my ( $self, $c ) = @_;
     my $rs = $c->stash->{collection};
 
     if ( $c->req->params->{organization_type} ) {
-        $rs = $rs->search(
-            { 'organization_type.id' => $c->req->params->{organization_type} },
-            { join                   => ['organization_type'] }
-        );
+        $rs = $rs->search( { 'organization_type.id' => $c->req->params->{organization_type} },
+            { join => ['organization_type'] } );
     }
     $rs = $rs->search( undef, { order_by => { -asc => [qw/me.name/] } } );
     $self->status_ok(
@@ -227,17 +218,12 @@ sub list_GET {
 sub list_POST {
     my ( $self, $c ) = @_;
 
-    my $organization = $c->stash->{collection}
-      ->execute( $c, for => 'create', with => $c->req->params );
+    my $organization = $c->stash->{collection}->execute( $c, for => 'create', with => $c->req->params );
 
     $self->status_created(
         $c,
-        location =>
-          $c->uri_for( $self->action_for('result'), [ $organization->id ] )
-          ->as_string,
-        entity => {
-            id => $organization->id
-        }
+        location => $c->uri_for( $self->action_for('result'), [ $organization->id ] )->as_string,
+        entity => { id => $organization->id }
     );
 }
 

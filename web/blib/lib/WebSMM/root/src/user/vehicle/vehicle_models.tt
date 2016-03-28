@@ -1,0 +1,1 @@
+[%select_field('vehicle_model_id', 'Modelo', array => select_vehicle_models, req => 1)|none%]
