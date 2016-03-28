@@ -8,5 +8,5 @@ sleep 2
 
 cd /home/smm/SMM/web
 
-starman  -l :5040  --workers 8 --preload-app --error-log /home/smm/SMM/web.error.log --daemonize websmm.psgi
+starman  -l :5040  --workers 2 --preload-app --error-log /home/smm/SMM/web.error.log --daemonize websmm.psgi
 
