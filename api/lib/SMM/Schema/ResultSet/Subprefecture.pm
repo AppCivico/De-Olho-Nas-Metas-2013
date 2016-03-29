@@ -40,7 +40,7 @@ sub verifiers_specs {
                 },
                 email => {
                     required => 0,
-                    type     => 'EmailAddress',
+                    type     => EmailAddress,
                 },
                 telephone => {
                     required => 0,
