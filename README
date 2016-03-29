@@ -23,7 +23,7 @@ Execute this command as root:
 > To login as `root` user you need run `sudo su` on your terminal
 
     # apt-get update;
-    # apt-get install -y postgresql postgresql-contrib build-essential bzip2 gzip less git  nginx libexpat1 libexpat1-dev libxml2-dev curl libpq-dev redis-server
+    # apt-get install -y postgresql postgresql-contrib postgresql-9.3-postgis-2.1  postgresql-9.3-postgis-scripts build-essential bzip2 gzip less git  nginx libexpat1 libexpat1-dev libxml2-dev curl libpq-dev redis-server
 
 With all above commands done, we already can configure PostgreSQL and nginx. But before we can install the Perl version 5.16.3.
 The idea is to create a new a user only for this application and install the perl modules in an isolated environment.
@@ -36,24 +36,7 @@ Execute those commands as root:
 
 > (Fill out the fields as you want; And remember the password!)
 
-### [3] Database configuration
-
-Open a new terminal and type:
-
-    $ sudo su
-    # sed -Ei 's/md5/trust/g'  /etc/postgresql/9.3/main/pg_hba.conf; service postgresql reload
-
-Now all your database accepts users without authentication on localhost. If you have any security knowledge, please configure as you needs.
-
-> Type `exit` to exit the terminal session.
-
-You can test if it worked running `psql -h 127.0.0.1 -U postgres` as an ordinary (non-root) user. Type `\q` to exit psql tool.
-
-After that, you need create the database, in this case, we will name it `donm`
-
-    $ createdb -h 127.0.0.1 -U postgres donm
-
-### [4] Downloading source code
+### [3] Downloading source code
 
 The next command should be executed on user `donm`, if you are not sure how do that, open a new terminal and run:
 
@@ -70,6 +53,28 @@ Go to the folder of the project:
 Change to master (default), where the code is stable:
 
     $ git checkout master
+
+### [4] Database configuration
+Open a new terminal and type:
+
+    $ sudo su
+    # sed -Ei 's/md5/trust/g'  /etc/postgresql/9.3/main/pg_hba.conf; service postgresql reload
+
+Now all your database accepts users without authentication on localhost. If you have any security knowledge, please configure as you needs.
+
+> Type `exit` to exit the terminal session.
+
+You can test if it worked running `psql -h 127.0.0.1 -U postgres` as an ordinary (non-root) user. Type `\q` to exit psql tool.
+
+After that, you need create the database, in this case, we will name it `donm`
+
+    $ createdb -h 127.0.0.1 -U postgres donm
+
+DONM web needs an database too, for I18N, it called lexicon_database.
+Next command will create the database, and then populate it with some keywords
+
+    $ createdb -h 127.0.0.1 -U postgres lexicon_database
+    $ gunzip -c /home/donm/De-Olho-Nas-Metas/web/data/lexicon_database.sql.gz | psql -h 127.0.0.1 -U postgres lexicon_database
 
 ### [5] Perl binary
 
@@ -109,7 +114,7 @@ Let's try to install `DBD::Pg`, which depends on `pg_config` working (if not fou
 
 ### [6] Perl packages
 
-The next command should be executed on user `donm`, on the project folder, if you are not sure, open a new terminal and run:
+Next command should be executed on user `donm`, on the project folder, if you are not sure, open a new terminal and run:
 
     $ su donm; cd De-Olho-Nas-Metas;
 
@@ -120,5 +125,27 @@ And now, you can install the perl packages that DONM needs:
 If any error show when installing, you may need to consult the generated log and search for the solution, which is usually related to installation of any necessary lib. If you are a clean installation, you should be fine.
 
 
-### [7] Configuring DONM
+### [7] Deploying DONM
+
+This set should be executed on user `donm`, on the project folder, if you are not sure, open a new terminal and run:
+
+    $ su donm; cd De-Olho-Nas-Metas;
+
+First, let's create an directory for the logs:
+
+    $ mkdir /home/donm/logs
+
+Now you can execute `up_api.sh` and `up_web.sh`
+
+up_api.sh will deploy the database (which by now, is empty) and then, up an HTTP server running on port 3060.
+up_web.sh up an HTTP server running on port 5040.
+
+    $ ./up_api.sh
+    $ ./up_web.sh
+
+
+
+### Configuring nginx
+
+
 
