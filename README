@@ -120,3 +120,5 @@ And now, you can install the perl packages that DONM needs:
 If any error show when installing, you may need to consult the generated log and search for the solution, which is usually related to installation of any necessary lib. If you are a clean installation, you should be fine.
 
 
+### [7] Configuring DONM
+
