@@ -11,3 +11,4 @@ web/session_data/
 web/session_data/*
 web/websmm_local.conf
 api/smm_local.conf
+**/blib/**
