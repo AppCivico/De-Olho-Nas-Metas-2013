@@ -40,7 +40,13 @@ a:hover{
 
 a.btn:visited,
 a.btn:focus{
-	color: #fff;
+    color: #fff;
+}
+
+
+.table-striped a.btn:visited,
+.table-striped a.btn:focus{
+    color: #3d3934;
 }
 
 /*
@@ -129,7 +135,7 @@ float:none;}
 .main {
 	padding: 20px;
 	min-height: 650px;
-	
+
 }
 @media (min-width: 768px) {
 	.main {
