@@ -30,7 +30,7 @@ The idea is to create a new a user only for this application and install the per
 
 ### [2] Users and accounts
 
-Execute those commands as root:
+Execute this command as root:
 
     # adduser donm
 
@@ -120,7 +120,7 @@ Next command should be executed on user `donm`, on the project folder, if you ar
 
 And now, you can install the perl packages that DONM needs:
 
-    $ cpanm -n Module::Install Catalyst::Devel; cd api; cpanm -n --installdeps .; cd ../web; cpanm -n --installdeps .;
+    $ cpanm -n Module::Install Catalyst::Devel; cd api; cpanm -n installdeps .; cd ../web; cpanm -n installdeps .;
 
 If any error show when installing, you may need to consult the generated log and search for the solution, which is usually related to installation of any necessary lib. If you are a clean installation, you should be fine.
 
@@ -143,9 +143,24 @@ up_web.sh up an HTTP server running on port 5040.
     $ ./up_api.sh
     $ ./up_web.sh
 
+Now you can browse to http://127.0.0.1:5040/ and see the homepage of DONM.
 
+### [8] Configuring nginx as a reverse proxy
 
-### Configuring nginx
+Copy misc/nginx-donm.conf to /etc/nginx/sites-available/default and reload; Execute this command as root:
 
+    # cp /home/donm/De-Olho-Nas-Metas/misc/nginx-donm.conf  /etc/nginx/sites-available/default
+    # service nginx restart
+
+Please feel free for edit the file afterwards
+
+----
+
+# Web administration access
+Default admin user is `admin@email.com` and it password is `12345`, you can login on http://localhost/login after installation and configuration of DONM.
+
+Remember to change the password under http://localhost/admin/user/2 and http://localhost/admin/user/1.
+
+WebAPI is a special user that cannot login, but is used to create new accounts. You may want to change it session key too, and reconfigure `api_user_api_key` on websmm.conf, then restart.
 
 
