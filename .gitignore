@@ -1,8 +1,6 @@
 .tidyall.d/
 .tidyallrc
-up_email.sh
 dbi_dump*
-web.error.log
 web/root/static/images/user/
 web/root/static/docs
 web/root/static/built
@@ -10,9 +8,6 @@ web/root/static/images/project/
 web/root/static/images/campaign/
 web/root/static/images/organization/
 web/session_data/
-web/*.conf
-web/api.error.log
 web/session_data/*
-web/websmm_local.conf*
-up_api.sh
-up_web.sh
+web/websmm_local.conf
+api/smm_local.conf
