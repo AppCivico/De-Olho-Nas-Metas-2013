@@ -76,7 +76,7 @@ requires 'MooseX::Traits';
 requires 'DBD::Pg';
 requires 'Statistics::Descriptive';
 requires 'XML::Simple';
-
+requires 'CatalystX::Eta::Controller::REST';
 requires 'Furl';
 requires 'MooseX::NonMoose';
 requires 'Catalyst::Restarter';
