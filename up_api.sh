@@ -1,12 +1,10 @@
 #!/bin/bash
 
-export PERLBREW_ROOT=/home/smm/perl5/perlbrew
-source ${PERLBREW_ROOT}/etc/bashrc
+source ~/perl5/perlbrew/etc/bashrc
 
 fuser 3060/tcp -k
 sleep 2
 
-cd /home/smm/SMM/api
+cd /home/donm/De-Olho-Nas-Metas/api
 
-EMAIL_ADMIN=your@email.com starman  -l :3060  --workers 2 --preload-app --error-log /home/smm/SMM/web/api.error.log --daemonize smm.psgi
-
+EMAIL_ADMIN=your@email.com starman -l 127.0.0.1:3060 --workers 2 --preload-app --error-log /home/donm/logs/api.error.log --daemonize smm.psgi
