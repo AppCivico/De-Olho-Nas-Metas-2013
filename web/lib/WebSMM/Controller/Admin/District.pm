@@ -53,8 +53,7 @@ sub add : Chained('base') : PathPart('new') : Args(0) {
     my $api = $c->model('API');
 
     $api->stash_result( $c, 'subprefectures' );
-    $c->stash->{select_subprefectures} =
-      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{subprefectures} } ];
+    $c->stash->{select_subprefectures} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{subprefectures} } ];
 
 }
 
@@ -62,15 +61,15 @@ sub edit : Chained('object') : PathPart('edit') : Args(0) {
     my ( $self, $c, $id ) = @_;
     my $api = $c->model('API');
     $api->stash_result( $c, 'subprefectures' );
-    $api->stash_result( $c, 'regions/geom',
-        params => { region_id => $c->stash->{id} } );
-    $c->stash->{geom}->{geom_json} =
-      decode_json $c->stash->{geom}->{geom_json};
 
-    $c->stash->{coord} =
-      encode_json $c->stash->{geom}->{geom_json}->{coordinates}[0];
-    $c->stash->{select_subprefectures} =
-      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{subprefectures} } ];
+    $api->stash_result( $c, 'regions/geom', params => { region_id => $c->stash->{id} } );
+
+    if ( $c->stash->{geom_json} ) {
+        $c->stash->{geom}->{geom_json} = decode_json $c->stash->{geom}->{geom_json};
+
+        $c->stash->{coord} = encode_json $c->stash->{geom}->{geom_json}->{coordinates}[0];
+    }
+    $c->stash->{select_subprefectures} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{subprefectures} } ];
 
 }
 
@@ -80,8 +79,7 @@ sub link_region : Chained('base') : PathPart('link_region') : Args(0) {
     $api->stash_result( $c, 'subprefectures' );
     $api->stash_result( $c, 'regions/regions_map', stash => 'regions' );
 
-    $c->stash->{select_subprefectures} =
-      [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{subprefectures} } ];
+    $c->stash->{select_subprefectures} = [ map { [ $_->{id}, $_->{name} ] } @{ $c->stash->{subprefectures} } ];
 
 }
 
@@ -91,8 +89,7 @@ sub region_shape : Chained('base') : ParthPart('region_shape') : Args(1) {
     $api->stash_result(
         $c, [ 'regions', $id ],
         method => 'PUT',
-        params =>
-          { geom => $c->req->params->{'city.region.update.polygon_path'} }
+        params => { geom => $c->req->params->{'city.region.update.polygon_path'} }
     );
 
 }
