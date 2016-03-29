@@ -23,6 +23,9 @@ requires 'Catalyst::Plugin::I18N::DBI';
 requires 'I18N::AcceptLanguage';
 requires 'App::Sqitch';
 requires 'Data::Section::Simple';
+requires 'MooseX::Types::JSON';
+requires 'JSON::Any';
+
 requires 'Catalyst::Authentication::Store::DBIx::Class';
 requires 'Catalyst::Component::InstancePerContext';
 requires 'Catalyst::Plugin::Params::Nested';
@@ -65,7 +68,7 @@ requires 'DateTime::Format::Excel';
 requires 'Math::Expression::Evaluator';
 requires 'Template';
 requires 'Catalyst::Plugin::Assets';
-
+requires 'Text::CSV';
 requires 'Text::CSV_XS';
 requires 'Digest::MD5';
 requires 'Text2URI';
