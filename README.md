@@ -41,6 +41,8 @@ Execute this command as root:
 The next command should be executed on user `donm`, if you are not sure how do that, open a new terminal and run:
 
     $ su donm
+    
+> always make sure you are $HOME when you su run `cd` to go to $HOME
 
 After that, download the latest code from DONM or make a project fork (recommended).
 
