@@ -1,5 +1,4 @@
 use utf8;
-
 package SMM::Schema::Result::UserRequestCouncil;
 
 # Created by DBIx::Class::Schema::Loader
@@ -33,8 +32,7 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
-    "PassphraseColumn" );
+__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
 =head1 TABLE: C<user_request_council>
 
@@ -79,33 +77,33 @@ __PACKAGE__->table("user_request_council");
 =cut
 
 __PACKAGE__->add_columns(
-    "id",
-    {
-        data_type         => "integer",
-        is_auto_increment => 1,
-        is_nullable       => 0,
-        sequence          => "user_request_council_id_seq",
+  "id",
+  {
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+    sequence          => "user_request_council_id_seq",
+  },
+  "user_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
+  "organization_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
+  "user_status",
+  {
+    data_type => "enum",
+    extra => {
+      custom_type_name => "user_request_type",
+      list => ["pending", "denied", "accepted"],
     },
-    "user_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
-    "organization_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
-    "user_status",
-    {
-        data_type => "enum",
-        extra     => {
-            custom_type_name => "user_request_type",
-            list             => [ "pending", "denied", "accepted" ],
-        },
-        is_nullable => 0,
-    },
-    "created_at",
-    {
-        data_type     => "timestamp",
-        default_value => \"current_timestamp",
-        is_nullable   => 1,
-        original      => { default_value => \"now()" },
-    },
+    is_nullable => 0,
+  },
+  "created_at",
+  {
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
+    is_nullable   => 1,
+    original      => { default_value => \"now()" },
+  },
 );
 
 =head1 PRIMARY KEY
@@ -131,10 +129,10 @@ Related object: L<SMM::Schema::Result::Organization>
 =cut
 
 __PACKAGE__->belongs_to(
-    "organization",
-    "SMM::Schema::Result::Organization",
-    { id            => "organization_id" },
-    { is_deferrable => 0, on_delete => "NO ACTION", on_update => "NO ACTION" },
+  "organization",
+  "SMM::Schema::Result::Organization",
+  { id => "organization_id" },
+  { is_deferrable => 0, on_delete => "NO ACTION", on_update => "NO ACTION" },
 );
 
 =head2 user
@@ -146,14 +144,15 @@ Related object: L<SMM::Schema::Result::User>
 =cut
 
 __PACKAGE__->belongs_to(
-    "user",
-    "SMM::Schema::Result::User",
-    { id            => "user_id" },
-    { is_deferrable => 0, on_delete => "NO ACTION", on_update => "NO ACTION" },
+  "user",
+  "SMM::Schema::Result::User",
+  { id => "user_id" },
+  { is_deferrable => 0, on_delete => "NO ACTION", on_update => "NO ACTION" },
 );
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-24 18:09:38
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:2Z7ywtwoyl5tW+Dlr+y3jA
+
+# Created by DBIx::Class::Schema::Loader v0.07045 @ 2016-05-13 12:05:29
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:pmlHHGrHaz/i/MFPZ7iAtQ
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
 with 'SMM::Schema::Role::ResultsetFind';

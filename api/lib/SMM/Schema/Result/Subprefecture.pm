@@ -1,5 +1,4 @@
 use utf8;
-
 package SMM::Schema::Result::Subprefecture;
 
 # Created by DBIx::Class::Schema::Loader
@@ -33,8 +32,7 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
-    "PassphraseColumn" );
+__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
 =head1 TABLE: C<subprefecture>
 
@@ -106,38 +104,38 @@ __PACKAGE__->table("subprefecture");
 =cut
 
 __PACKAGE__->add_columns(
-    "id",
-    {
-        data_type         => "integer",
-        is_auto_increment => 1,
-        is_nullable       => 0,
-        sequence          => "subprefecture_id_seq",
-    },
-    "acronym",
-    { data_type => "text", is_nullable => 1 },
-    "name",
-    { data_type => "text", is_nullable => 0 },
-    "latitude",
-    { data_type => "text", is_nullable => 1 },
-    "longitude",
-    { data_type => "text", is_nullable => 1 },
-    "timestamp",
-    {
-        data_type     => "timestamp",
-        default_value => \"current_timestamp",
-        is_nullable   => 1,
-        original      => { default_value => \"now()" },
-    },
-    "site",
-    { data_type => "text", is_nullable => 1 },
-    "deputy_mayor",
-    { data_type => "text", is_nullable => 1 },
-    "email",
-    { data_type => "text", is_nullable => 1 },
-    "telephone",
-    { data_type => "text", is_nullable => 1 },
-    "address",
-    { data_type => "text", is_nullable => 1 },
+  "id",
+  {
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+    sequence          => "subprefecture_id_seq",
+  },
+  "acronym",
+  { data_type => "text", is_nullable => 1 },
+  "name",
+  { data_type => "text", is_nullable => 0 },
+  "latitude",
+  { data_type => "text", is_nullable => 1 },
+  "longitude",
+  { data_type => "text", is_nullable => 1 },
+  "timestamp",
+  {
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
+    is_nullable   => 1,
+    original      => { default_value => \"now()" },
+  },
+  "site",
+  { data_type => "text", is_nullable => 1 },
+  "deputy_mayor",
+  { data_type => "text", is_nullable => 1 },
+  "email",
+  { data_type => "text", is_nullable => 1 },
+  "telephone",
+  { data_type => "text", is_nullable => 1 },
+  "address",
+  { data_type => "text", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -163,10 +161,10 @@ Related object: L<SMM::Schema::Result::Organization>
 =cut
 
 __PACKAGE__->has_many(
-    "organizations",
-    "SMM::Schema::Result::Organization",
-    { "foreign.subprefecture_id" => "self.id" },
-    { cascade_copy               => 0, cascade_delete => 0 },
+  "organizations",
+  "SMM::Schema::Result::Organization",
+  { "foreign.subprefecture_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 regions
@@ -177,14 +175,16 @@ Related object: L<SMM::Schema::Result::Region>
 
 =cut
 
-__PACKAGE__->has_one(
-    "regions", "SMM::Schema::Result::Region",
-    { "foreign.subprefecture_id" => "self.id" },
-    { cascade_copy               => 0, cascade_delete => 0 },
+__PACKAGE__->has_many(
+  "regions",
+  "SMM::Schema::Result::Region",
+  { "foreign.subprefecture_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-24 11:38:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:DAI7nyLh3SlTWjuaYUYAzA
+
+# Created by DBIx::Class::Schema::Loader v0.07045 @ 2016-05-13 12:05:29
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:9z6fZEIbjCWna2UW8Nt1Pw
 
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';

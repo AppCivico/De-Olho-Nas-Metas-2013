@@ -1,5 +1,4 @@
 use utf8;
-
 package SMM::Schema::Result::Contact;
 
 # Created by DBIx::Class::Schema::Loader
@@ -33,8 +32,7 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
-    "PassphraseColumn" );
+__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
 =head1 TABLE: C<contact>
 
@@ -76,26 +74,26 @@ __PACKAGE__->table("contact");
 =cut
 
 __PACKAGE__->add_columns(
-    "id",
-    {
-        data_type         => "integer",
-        is_auto_increment => 1,
-        is_nullable       => 0,
-        sequence          => "contact_id_seq",
-    },
-    "name",
-    { data_type => "text", is_nullable => 0 },
-    "email",
-    { data_type => "text", is_nullable => 0 },
-    "message",
-    { data_type => "text", is_nullable => 0 },
-    "created_at",
-    {
-        data_type     => "timestamp",
-        default_value => \"current_timestamp",
-        is_nullable   => 1,
-        original      => { default_value => \"now()" },
-    },
+  "id",
+  {
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+    sequence          => "contact_id_seq",
+  },
+  "name",
+  { data_type => "text", is_nullable => 0 },
+  "email",
+  { data_type => "text", is_nullable => 0 },
+  "message",
+  { data_type => "text", is_nullable => 0 },
+  "created_at",
+  {
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
+    is_nullable   => 1,
+    original      => { default_value => \"now()" },
+  },
 );
 
 =head1 PRIMARY KEY
@@ -110,8 +108,9 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key("id");
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-08-26 13:23:19
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:z+kyZnwY0LxyAId8Lr2L1w
+
+# Created by DBIx::Class::Schema::Loader v0.07045 @ 2016-05-13 12:05:29
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:FdxUQ+Fwc8BofoiZuIsSFQ
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
 with 'SMM::Schema::Role::ResultsetFind';

@@ -1,5 +1,4 @@
 use utf8;
-
 package SMM::Schema::Result::ProgressGoalCounsil;
 
 # Created by DBIx::Class::Schema::Loader
@@ -33,8 +32,7 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
-    "PassphraseColumn" );
+__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
 =head1 TABLE: C<progress_goal_counsil>
 
@@ -77,26 +75,26 @@ __PACKAGE__->table("progress_goal_counsil");
 =cut
 
 __PACKAGE__->add_columns(
-    "id",
-    {
-        data_type         => "integer",
-        is_auto_increment => 1,
-        is_nullable       => 0,
-        sequence          => "progress_goal_counsil_id_seq",
-    },
-    "remainder",
-    { data_type => "double precision", is_nullable => 0 },
-    "owned",
-    { data_type => "double precision", is_nullable => 0 },
-    "goal_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-    "created_at",
-    {
-        data_type     => "timestamp",
-        default_value => \"current_timestamp",
-        is_nullable   => 1,
-        original      => { default_value => \"now()" },
-    },
+  "id",
+  {
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+    sequence          => "progress_goal_counsil_id_seq",
+  },
+  "remainder",
+  { data_type => "double precision", is_nullable => 0 },
+  "owned",
+  { data_type => "double precision", is_nullable => 0 },
+  "goal_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "created_at",
+  {
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
+    is_nullable   => 1,
+    original      => { default_value => \"now()" },
+  },
 );
 
 =head1 PRIMARY KEY
@@ -122,19 +120,20 @@ Related object: L<SMM::Schema::Result::Goal>
 =cut
 
 __PACKAGE__->belongs_to(
-    "goal",
-    "SMM::Schema::Result::Goal",
-    { id => "goal_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "goal",
+  "SMM::Schema::Result::Goal",
+  { id => "goal_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-03-09 20:21:15
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:z16bUIEnuu4iR10cZ/phiQ
+
+# Created by DBIx::Class::Schema::Loader v0.07045 @ 2016-05-13 12:05:29
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:W0LX++A0YRZHha05M6e22g
 
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';

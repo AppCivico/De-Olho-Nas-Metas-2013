@@ -218,7 +218,7 @@ Related object: L<SMM::Schema::Result::Goal>
 =cut
 
 __PACKAGE__->belongs_to(
-  "goals",
+  "goal_number",
   "SMM::Schema::Result::Goal",
   { id => "goal_number" },
   {
@@ -230,8 +230,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-04-15 15:00:11
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Ecb+qB3D2iwy+fXzT1zvSg
+# Created by DBIx::Class::Schema::Loader v0.07045 @ 2016-05-13 12:05:29
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:NmOTXrPnTFJiFGQ8o+aA7A
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;

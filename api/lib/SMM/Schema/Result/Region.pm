@@ -1,5 +1,4 @@
 use utf8;
-
 package SMM::Schema::Result::Region;
 
 # Created by DBIx::Class::Schema::Loader
@@ -33,8 +32,7 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
-    "PassphraseColumn" );
+__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
 =head1 TABLE: C<region>
 
@@ -80,23 +78,23 @@ __PACKAGE__->table("region");
 =cut
 
 __PACKAGE__->add_columns(
-    "id",
-    {
-        data_type         => "integer",
-        is_auto_increment => 1,
-        is_nullable       => 0,
-        sequence          => "region_id_seq",
-    },
-    "geom",
-    { data_type => "geometry", is_nullable => 1 },
-    "name",
-    { data_type => "text", is_nullable => 1 },
-    "lat",
-    { data_type => "text", is_nullable => 1 },
-    "long",
-    { data_type => "text", is_nullable => 1 },
-    "subprefecture_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "id",
+  {
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+    sequence          => "region_id_seq",
+  },
+  "geom",
+  { data_type => "geometry", is_nullable => 1 },
+  "name",
+  { data_type => "text", is_nullable => 1 },
+  "lat",
+  { data_type => "text", is_nullable => 1 },
+  "long",
+  { data_type => "text", is_nullable => 1 },
+  "subprefecture_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -122,10 +120,10 @@ Related object: L<SMM::Schema::Result::Campaign>
 =cut
 
 __PACKAGE__->has_many(
-    "campaigns",
-    "SMM::Schema::Result::Campaign",
-    { "foreign.region_id" => "self.id" },
-    { cascade_copy        => 0, cascade_delete => 0 },
+  "campaigns",
+  "SMM::Schema::Result::Campaign",
+  { "foreign.region_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 project_regions
@@ -137,10 +135,10 @@ Related object: L<SMM::Schema::Result::ProjectRegion>
 =cut
 
 __PACKAGE__->has_many(
-    "project_regions",
-    "SMM::Schema::Result::ProjectRegion",
-    { "foreign.region_id" => "self.id" },
-    { cascade_copy        => 0, cascade_delete => 0 },
+  "project_regions",
+  "SMM::Schema::Result::ProjectRegion",
+  { "foreign.region_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 projects
@@ -152,10 +150,10 @@ Related object: L<SMM::Schema::Result::Project>
 =cut
 
 __PACKAGE__->has_many(
-    "projects",
-    "SMM::Schema::Result::Project",
-    { "foreign.region_id" => "self.id" },
-    { cascade_copy        => 0, cascade_delete => 0 },
+  "projects",
+  "SMM::Schema::Result::Project",
+  { "foreign.region_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 subprefecture
@@ -167,19 +165,20 @@ Related object: L<SMM::Schema::Result::Subprefecture>
 =cut
 
 __PACKAGE__->belongs_to(
-    "subprefecture",
-    "SMM::Schema::Result::Subprefecture",
-    { id => "subprefecture_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "subprefecture",
+  "SMM::Schema::Result::Subprefecture",
+  { id => "subprefecture_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-03-23 18:48:19
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+P9Ygcd873mzFqNZJnqkRg
+
+# Created by DBIx::Class::Schema::Loader v0.07045 @ 2016-05-13 12:05:29
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:No6wU1JQDEAFoW2SZ8dzPw
 
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';

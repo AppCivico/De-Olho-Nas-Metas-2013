@@ -1,5 +1,4 @@
 use utf8;
-
 package SMM::Schema::Result::ProjectEvent;
 
 # Created by DBIx::Class::Schema::Loader
@@ -33,8 +32,7 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
-    "PassphraseColumn" );
+__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
 =head1 TABLE: C<project_event>
 
@@ -96,32 +94,32 @@ __PACKAGE__->table("project_event");
 =cut
 
 __PACKAGE__->add_columns(
-    "id",
-    {
-        data_type         => "integer",
-        is_auto_increment => 1,
-        is_nullable       => 0,
-        sequence          => "project_event_id_seq",
-    },
-    "text",
-    { data_type => "text", is_nullable => 1 },
-    "ts",
-    {
-        data_type     => "timestamp",
-        default_value => \"current_timestamp",
-        is_nullable   => 1,
-        original      => { default_value => \"now()" },
-    },
-    "project_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-    "user_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-    "approved",
-    { data_type => "boolean", default_value => \"false", is_nullable => 1 },
-    "active",
-    { data_type => "boolean", default_value => \"true", is_nullable => 1 },
-    "is_last",
-    { data_type => "boolean", default_value => \"true", is_nullable => 1 },
+  "id",
+  {
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+    sequence          => "project_event_id_seq",
+  },
+  "text",
+  { data_type => "text", is_nullable => 1 },
+  "ts",
+  {
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
+    is_nullable   => 1,
+    original      => { default_value => \"now()" },
+  },
+  "project_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "user_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "approved",
+  { data_type => "boolean", default_value => \"false", is_nullable => 1 },
+  "active",
+  { data_type => "boolean", default_value => \"true", is_nullable => 1 },
+  "is_last",
+  { data_type => "boolean", default_value => \"true", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -151,8 +149,8 @@ __PACKAGE__->set_primary_key("id");
 =cut
 
 __PACKAGE__->add_unique_constraint(
-    "project_event_project_id_is_last_key",
-    [ "project_id", "is_last" ],
+  "project_event_project_id_is_last_key",
+  ["project_id", "is_last"],
 );
 
 =head1 RELATIONS
@@ -166,15 +164,15 @@ Related object: L<SMM::Schema::Result::Project>
 =cut
 
 __PACKAGE__->belongs_to(
-    "project",
-    "SMM::Schema::Result::Project",
-    { id => "project_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "project",
+  "SMM::Schema::Result::Project",
+  { id => "project_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
 =head2 project_events_read
@@ -186,10 +184,10 @@ Related object: L<SMM::Schema::Result::ProjectEventRead>
 =cut
 
 __PACKAGE__->has_many(
-    "project_events_read",
-    "SMM::Schema::Result::ProjectEventRead",
-    { "foreign.project_event_id" => "self.id" },
-    { cascade_copy               => 0, cascade_delete => 0 },
+  "project_events_read",
+  "SMM::Schema::Result::ProjectEventRead",
+  { "foreign.project_event_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 user
@@ -201,19 +199,20 @@ Related object: L<SMM::Schema::Result::User>
 =cut
 
 __PACKAGE__->belongs_to(
-    "user",
-    "SMM::Schema::Result::User",
-    { id => "user_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "user",
+  "SMM::Schema::Result::User",
+  { id => "user_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-27 12:59:55
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:WjLfIdl4ByVCxdyKp3gaPw
+
+# Created by DBIx::Class::Schema::Loader v0.07045 @ 2016-05-13 12:05:29
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:3/k3V99OO4jUjeyp2Lg29A
 
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';

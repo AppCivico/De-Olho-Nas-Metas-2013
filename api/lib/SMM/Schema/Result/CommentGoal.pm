@@ -1,5 +1,4 @@
 use utf8;
-
 package SMM::Schema::Result::CommentGoal;
 
 # Created by DBIx::Class::Schema::Loader
@@ -33,8 +32,7 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
-    "PassphraseColumn" );
+__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
 =head1 TABLE: C<comment_goal>
 
@@ -90,30 +88,30 @@ __PACKAGE__->table("comment_goal");
 =cut
 
 __PACKAGE__->add_columns(
-    "id",
-    {
-        data_type         => "integer",
-        is_auto_increment => 1,
-        is_nullable       => 0,
-        sequence          => "comment_goal_id_seq",
-    },
-    "description",
-    { data_type => "text", is_nullable => 1 },
-    "timestamp",
-    {
-        data_type     => "timestamp",
-        default_value => \"current_timestamp",
-        is_nullable   => 1,
-        original      => { default_value => \"now()" },
-    },
-    "approved",
-    { data_type => "boolean", default_value => \"false", is_nullable => 1 },
-    "goal_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-    "active",
-    { data_type => "boolean", default_value => \"true", is_nullable => 1 },
-    "user_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "id",
+  {
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+    sequence          => "comment_goal_id_seq",
+  },
+  "description",
+  { data_type => "text", is_nullable => 1 },
+  "timestamp",
+  {
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
+    is_nullable   => 1,
+    original      => { default_value => \"now()" },
+  },
+  "approved",
+  { data_type => "boolean", default_value => \"false", is_nullable => 1 },
+  "goal_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "active",
+  { data_type => "boolean", default_value => \"true", is_nullable => 1 },
+  "user_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -139,15 +137,15 @@ Related object: L<SMM::Schema::Result::Goal>
 =cut
 
 __PACKAGE__->belongs_to(
-    "goal",
-    "SMM::Schema::Result::Goal",
-    { id => "goal_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "goal",
+  "SMM::Schema::Result::Goal",
+  { id => "goal_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
 =head2 user
@@ -159,19 +157,20 @@ Related object: L<SMM::Schema::Result::User>
 =cut
 
 __PACKAGE__->belongs_to(
-    "user",
-    "SMM::Schema::Result::User",
-    { id => "user_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "user",
+  "SMM::Schema::Result::User",
+  { id => "user_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
-# Created by DBIx::Class::Schema::Loader v0.07041 @ 2015-02-19 05:24:40
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:z59tG4kvHsH0QnlA+Fyo8A
+
+# Created by DBIx::Class::Schema::Loader v0.07045 @ 2016-05-13 12:05:29
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:4NGNBJr20Q71BG63uv6ZwQ
 
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';

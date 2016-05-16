@@ -1,5 +1,4 @@
 use utf8;
-
 package SMM::Schema::Result::Organization;
 
 # Created by DBIx::Class::Schema::Loader
@@ -33,8 +32,7 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp",
-    "PassphraseColumn" );
+__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
 =head1 TABLE: C<organization>
 
@@ -107,33 +105,33 @@ __PACKAGE__->table("organization");
 =cut
 
 __PACKAGE__->add_columns(
-    "id",
-    {
-        data_type         => "integer",
-        is_auto_increment => 1,
-        is_nullable       => 0,
-        sequence          => "organization_id_seq",
-    },
-    "name",
-    { data_type => "text", is_nullable => 0 },
-    "address",
-    { data_type => "text", is_nullable => 1 },
-    "postal_code",
-    { data_type => "text", is_nullable => 1 },
-    "city_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-    "description",
-    { data_type => "text", is_nullable => 1 },
-    "email",
-    { data_type => "text", is_nullable => 1 },
-    "website",
-    { data_type => "text", is_nullable => 1 },
-    "phone",
-    { data_type => "text", is_nullable => 1 },
-    "subprefecture_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-    "organization_type_id",
-    { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "id",
+  {
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+    sequence          => "organization_id_seq",
+  },
+  "name",
+  { data_type => "text", is_nullable => 0 },
+  "address",
+  { data_type => "text", is_nullable => 1 },
+  "postal_code",
+  { data_type => "text", is_nullable => 1 },
+  "city_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "description",
+  { data_type => "text", is_nullable => 1 },
+  "email",
+  { data_type => "text", is_nullable => 1 },
+  "website",
+  { data_type => "text", is_nullable => 1 },
+  "phone",
+  { data_type => "text", is_nullable => 1 },
+  "subprefecture_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "organization_type_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -159,10 +157,10 @@ Related object: L<SMM::Schema::Result::Campaign>
 =cut
 
 __PACKAGE__->has_many(
-    "campaigns",
-    "SMM::Schema::Result::Campaign",
-    { "foreign.organization_id" => "self.id" },
-    { cascade_copy              => 0, cascade_delete => 0 },
+  "campaigns",
+  "SMM::Schema::Result::Campaign",
+  { "foreign.organization_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 city
@@ -174,15 +172,15 @@ Related object: L<SMM::Schema::Result::City>
 =cut
 
 __PACKAGE__->belongs_to(
-    "city",
-    "SMM::Schema::Result::City",
-    { id => "city_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "city",
+  "SMM::Schema::Result::City",
+  { id => "city_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
 =head2 comment_projects
@@ -194,10 +192,10 @@ Related object: L<SMM::Schema::Result::CommentProject>
 =cut
 
 __PACKAGE__->has_many(
-    "comment_projects",
-    "SMM::Schema::Result::CommentProject",
-    { "foreign.org_id" => "self.id" },
-    { cascade_copy     => 0, cascade_delete => 0 },
+  "comment_projects",
+  "SMM::Schema::Result::CommentProject",
+  { "foreign.org_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 events
@@ -209,9 +207,10 @@ Related object: L<SMM::Schema::Result::Event>
 =cut
 
 __PACKAGE__->has_many(
-    "events", "SMM::Schema::Result::Event",
-    { "foreign.council_id" => "self.id" },
-    { cascade_copy         => 0, cascade_delete => 0 },
+  "events",
+  "SMM::Schema::Result::Event",
+  { "foreign.council_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 goal_organizations
@@ -223,10 +222,10 @@ Related object: L<SMM::Schema::Result::GoalOrganization>
 =cut
 
 __PACKAGE__->has_many(
-    "goal_organizations",
-    "SMM::Schema::Result::GoalOrganization",
-    { "foreign.organization_id" => "self.id" },
-    { cascade_copy              => 0, cascade_delete => 0 },
+  "goal_organizations",
+  "SMM::Schema::Result::GoalOrganization",
+  { "foreign.organization_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 invite_counsils
@@ -238,10 +237,10 @@ Related object: L<SMM::Schema::Result::InviteCounsil>
 =cut
 
 __PACKAGE__->has_many(
-    "invite_counsils",
-    "SMM::Schema::Result::InviteCounsil",
-    { "foreign.organization_id" => "self.id" },
-    { cascade_copy              => 0, cascade_delete => 0 },
+  "invite_counsils",
+  "SMM::Schema::Result::InviteCounsil",
+  { "foreign.organization_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 managements
@@ -253,10 +252,10 @@ Related object: L<SMM::Schema::Result::Management>
 =cut
 
 __PACKAGE__->has_many(
-    "managements",
-    "SMM::Schema::Result::Management",
-    { "foreign.organization_id" => "self.id" },
-    { cascade_copy              => 0, cascade_delete => 0 },
+  "managements",
+  "SMM::Schema::Result::Management",
+  { "foreign.organization_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 organization_type
@@ -268,15 +267,15 @@ Related object: L<SMM::Schema::Result::OrganizationType>
 =cut
 
 __PACKAGE__->belongs_to(
-    "organization_type",
-    "SMM::Schema::Result::OrganizationType",
-    { id => "organization_type_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "organization_type",
+  "SMM::Schema::Result::OrganizationType",
+  { id => "organization_type_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
 =head2 subprefecture
@@ -288,15 +287,15 @@ Related object: L<SMM::Schema::Result::Subprefecture>
 =cut
 
 __PACKAGE__->belongs_to(
-    "subprefecture",
-    "SMM::Schema::Result::Subprefecture",
-    { id => "subprefecture_id" },
-    {
-        is_deferrable => 0,
-        join_type     => "LEFT",
-        on_delete     => "NO ACTION",
-        on_update     => "NO ACTION",
-    },
+  "subprefecture",
+  "SMM::Schema::Result::Subprefecture",
+  { id => "subprefecture_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
 =head2 user_follow_counsils
@@ -308,10 +307,10 @@ Related object: L<SMM::Schema::Result::UserFollowCounsil>
 =cut
 
 __PACKAGE__->has_many(
-    "user_follow_counsils",
-    "SMM::Schema::Result::UserFollowCounsil",
-    { "foreign.counsil_id" => "self.id" },
-    { cascade_copy         => 0, cascade_delete => 0 },
+  "user_follow_counsils",
+  "SMM::Schema::Result::UserFollowCounsil",
+  { "foreign.counsil_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 user_request_councils
@@ -323,10 +322,10 @@ Related object: L<SMM::Schema::Result::UserRequestCouncil>
 =cut
 
 __PACKAGE__->has_many(
-    "user_request_councils",
-    "SMM::Schema::Result::UserRequestCouncil",
-    { "foreign.organization_id" => "self.id" },
-    { cascade_copy              => 0, cascade_delete => 0 },
+  "user_request_councils",
+  "SMM::Schema::Result::UserRequestCouncil",
+  { "foreign.organization_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 users
@@ -338,13 +337,15 @@ Related object: L<SMM::Schema::Result::User>
 =cut
 
 __PACKAGE__->has_many(
-    "users", "SMM::Schema::Result::User",
-    { "foreign.organization_id" => "self.id" },
-    { cascade_copy              => 0, cascade_delete => 0 },
+  "users",
+  "SMM::Schema::Result::User",
+  { "foreign.organization_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2015-07-29 14:29:19
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:iZ5gHAhKj4c/Xm86QolsMw
+
+# Created by DBIx::Class::Schema::Loader v0.07045 @ 2016-05-13 12:05:29
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:WZUtF7+DY0zknuvBGtpmJw
 with 'SMM::Role::Verification';
 with 'SMM::Role::Verification::TransactionalActions::DBIC';
 with 'SMM::Schema::Role::ResultsetFind';
