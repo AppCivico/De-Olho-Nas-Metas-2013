@@ -1,22 +1,58 @@
-<div class="masthead row">
-	<div class="span12">
-		<div class="logo pull-left"><img src="/static/img/logo.png"/></div>
-		<div class="pull-right">
-			<ul class="menu-top">
-				<li class="[% IF "/${c_req_path}" == '/' %]active[%END%] odd"><a href="/" class="white shadow"><i class="icon-home"></i></a></li>
-				<li class="[% IF "/${c_req_path}" == '/sobre' %]active[%END%] even"><a href="/sobre" class="white shadow">Sobre</a></li>
-				[%IF !c.user%]
-					<li class="[% IF "/${c_req_path}" == '/participar' %]active[%END%] odd"><a href="/pre-cadastro" class="white shadow">Participar</a></li>
-					<li class="[% IF "/${c_req_path}" == '/login' %]active[%END%] even"><a href="/login" class="white shadow">Login</a></li>
-					<li class="[% IF "/${c_req_path}" == '/faq' %]active[%END%] odd"><a href="/faq" class="white shadow">Perguntas Frequentes</a></li>
-					<li class="[% IF "/${c_req_path}" == '/contato' %]active[%END%] even"><a href="/contato" class="white shadow">Contato</a></li>
-				[%ELSE%]
-					<li class="odd"><a href="[%c.uri_for_action("/$role_controller/dashboard/index")%]" class="white shadow">Meu perfil</a></li>
-					<li class="[% IF "/${c_req_path}" == '/faq' %]active[%END%] even"><a href="/faq" class="white shadow">Perguntas Frequentes</a></li>
-					<li class="[% IF "/${c_req_path}" == '/contato' %]active[%END%] odd"><a href="/contato" class="white shadow">Contato</a></li>
-					<li class="even"><a href="/logout" class="white shadow">Sair</a></li>
-				[%END%]
+<section class="menu-top hidden-xs">
+		<div class="container">
+			<div class="row">
+					<ul class="menu">
+						<li class="page-scroll">
+							<a href="/">Home</a>
+						</li>
+						<li class="page-scroll">
+							<a href="/sobre">Sobre</a>
+						</li>
+						<li class="page-scroll">
+							<a href="/agendas">Agendas</a>
+						</li>
+						<li class="page-scroll">
+							<a href="/contato">Contato</a>
+						</li>
+					</ul>
+					<ul class="menu menu-social">
+						<li>
+							<a href="" title="Facebook"><i class="fa fa-facebook"></i></a>
+						</li>
+						<li>
+							<a href="" title="Twitter" ><i class="fa fa-twitter"></i></a>
+						</li>
+						<li>
+							<a href="" title="Youtube" ><i class="fa fa-youtube-play"></i></a>
+						</li>
+						<li>
+							<a href="" tittle="search"><i class="fa fa-search"></i></a>
+						</li>
+					</ul>
+
+			</div>
+		</div>
+	</section>
+
+	<nav class="nav-top visible-xs">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menu">
+			<i class="fa fa-bars"></i>
+		</button>
+		<img src="/static/css/images/logo-monitoramento-branco.svg" border="0">
+		<div class="navbar-menu collapse">
+			<ul>
+				<li>
+					<a href="/">Home</a>
+				</li>
+				<li class="page-scroll">
+					<a href="/sobre">Sobre</a>
+				</li>
+				<li class="page-scroll">
+					<a href="/agendas">Agendas</a>
+				</li>
+				<li class="page-scroll">
+					<a href="/contato">Contato</a>
+				</li>
 			</ul>
 		</div>
-	</div>
-</div>
+	</nav>

@@ -1,124 +1,98 @@
-<section class="menu-top hidden-xs">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-4 text-right">
-					<ul class="menu">
-						<li class="page-scroll">
-							<a href="#home">Início</a>
-						</li>
-						<li class="page-scroll">
-							<a href="#about">Sobre</a>
-						</li>
-						<!--//<li class="page-scroll">
-							<a href="#faq">Perguntas Frequentes</a>
-						</li>//-->
-						<!--<li class="page-scroll">
-							<a href="#contact">Contato</a>
-						</li>-->
-					</ul>
-				</div>
-				<div class="col-sm-4 text-center logo-top">
-					<img src="/static/css/images/logo-top.png" class="img-responsive">
-				</div>
-				<div class="col-sm-4 text-left">
-					<ul class="menu">
-						<li class="page-scroll">
-							<a href="#signup">Participe</a>
-						</li>
-						<li>
-							<a href="/login">Entrar</a>
-						</li>
-					</ul>
-<!--					<ul class="menu menu-social">
-						<li class="twitter">
-							<a href="" title="Twitter" alt="Facebook">&nbsp;</a>
-						</li>
-						<li class="facebook">
-							<a href="" title="Facebook" alt="Facebook">&nbsp;</a>
-						</li>-->
-					</ul>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<nav class="nav-top visible-xs">
-		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menu">
-			<i class="fa fa-bars"></i>
-		</button>
-		<img src="/static/css/images/logo-collapse.png" border="0">
-		<div class="navbar-menu collapse">
-			<ul>
-				<li class="page-scroll">
-					<a href="#about">Sobre</a>
-				</li>
-				<!--//<li class="page-scroll">
-					<a href="#faq">Perguntas Frequentes</a>
-				</li>//-->
-				<li class="page-scroll">
-					<a href="#contact">Contato</a>
-				</li>
-				<li class="page-scroll">
-					<a href="#signup">Participe</a>
-				</li>
-				<li>
-					<a href="/login">Entrar</a>
-				</li>
-			</ul>
-		</div>
-	</nav>
+[%INCLUDE parts/menu.tt%]
 	<a id="home" class="anchor"></a>
-    <section class="home text-center">
+    <section class="home text-center <!--filtro-indicadores-->">
 		<div class="container">
-			<div class="col-sm-9 col-sm-offset-2">
+			<div class="col-sm-12">
+				<div class="home-logo-wraper hidden-xs"><img src="/static/css/images/logo-monitoramento-branco.svg?v=1"></div>
 
-			[% IF status_msg %]<div class="alert alert-warning" role="alert">[% status_msg %]</div>[%END%]
-			[% IF error_msg %]<div class="alert alert-warning" role="alert">[% error_msg %]</div>[%END%]
-				<h2 class="title">Ajude a monitorar as metas da cidade de São Paulo</h2>
+				[% IF status_msg %]<div class="alert alert-warning" role="alert">[% status_msg %]</div>[%END%]
+				[% IF error_msg %]<div class="alert alert-warning" role="alert">[% error_msg %]</div>[%END%]
 
+			</div><!-- div.col-sm-12-->
+			<div class="eixos-wrap col-lg-12 col-md-12 col-sm-12">
+					<section class="eixo-wrap col-lg-4 col-md-4 col-sm-12">
+							<div class="eixo-esq">
+								<div class="faixa-b"></div>
+							</div>
+							<div class="eixo-centr"><img src="/static/css/images/icone-eixo1.png"></div>
+							<div class="eixo-dir">
+								<div class="faixa-b"></div>
+							</div>
+							<div class="eixo-txt">
+								<span class="eixo-title">EIXO 1</span>
+								<p class="eixo-paragrafo">DESENVOLVIMENTO SUSTENTAVEL E ENVOLVENTE</p>
+							</div>
+					</section>
+					<section class="eixo-wrap col-lg-4 col-md-4 col-sm-12">
+						<div class="eixo-esq">
+							<div class="faixa-b"></div>
+						</div>
+						<div class="eixo-centr"><img src="/static/css/images/icone-eixo2.png"></div>
+						<div class="eixo-dir">
+							<div class="faixa-b"></div>
+						</div>
+						<div class="eixo-txt">
+							<span class="eixo-title">EIXO 2</span>
+							<p class="eixo-paragrafo">USO SUSTENTAVEL DAS AREAS PROTEGIDAS</p>
+						</div>
+					</section>
+					<section class=" eixo-wrap col-lg-4 col-md-4 col-sm-12">
+						<div class="eixo-esq">
+							<div class="faixa-b"></div>
+						</div>
+						<div class="eixo-centr"><img src="/static/css/images/icone-eixo3.png"></div>
+						<div class="eixo-dir">
+							<div class="faixa-b"></div>
+						</div>
+						<div class="eixo-txt">
+							<span class="eixo-title">EIXO 3</span>
+							<p class="eixo-paragrafo">DEMOCARTIZAÇÃO DO TERIITÓRIO E INCLUSÃO SOCIAL</p>
+						</div>
+					</section>
 			</div>
-		</div>
+		</div><!-- div.container-->
+		<!-- <div class="convexo-home">&nbsp;</div> -->
     </section>
 
 
-	<a id="about" class="anchor"></a>
-    <section class="about text-center">
-		<div class="container">
-			<h2 class="title">Sobre o De Olho nas Metas</h2>
-			<div class="row">
-				<div class="col-sm-8 col-md-offset-2">
-					<p>
-						Criada por iniciativa da sociedade civil, o sistema De Olho nas Metas ajudará cidadãos e organizações da sociedade civil a acompanhar e monitorar o cumprimento de metas da prefeitura de São Paulo.
-						<br /><br />
-						A base para o desenvolvimento do sistema foi o Programa de Metas da Cidade de São Paulo 2013-2016, que contempla 123 metas a serem executadas até o final da atual gestão.
-						<br /><br />
-						O De Olho nas Metas oferecerá uma série de ferramentas para telefonia móvel e mídias sociais criadas especialmente para facilitar o acesso à informação, divulgar o que foi prometido para cada região, e ajudar os conselheiros participativos, as organizações e os cidadãos interessados a garantir que as metas sejam implementadas.
-						<br /><br />
-						O sistema De Olho nas Metas é uma iniciativa da Rede Nossa São Paulo, em parceria com a Avina Américas e o Centro de Mídias Cívicas do Instituto de Tecnologia de Massachusetts (MIT Center for Civic Media).
-					</p>
-				</div>
-			</div>
-			<br />
-			<div class="text-center">
-				<a href="/sobre" class="btn btn-warning">CLIQUE E SAIBA MAIS</a>
-			</div>
-			</br />
-			<div class="about-logos text-center">
-				<div class="col-sm-4">
-					Realização<br />
-					<a href="http://www.nossasaopaulo.org.br" target="_blank"><img src="/static/css/images/logo-rnsp.png" border="0"></a>
-				</div>
-				<div class="col-sm-4 text-center">
-					Patrocínio<br />
-					<a href="http://www.avinaamericas.org" target="_blank"><img src="/static/css/images/logo-avina.png?v=2" border="0"></a>
-				</div>
-				<div class="col-sm-4 text-center">
-					Parceiro<br />
-					<a href="http://civic.mit.edu/" target="_blank"><img src="/static/css/images/logo-civic.png" border="0"></a>
-				</div>
-			</div>
-		</div>
-    </section>
+	<!--<a id="about" class="anchor"></a>
+    <section class="destaques text-center">
+
+		<div id="carousel-destaque-home" class="container carousel-destaque-home carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+			    <li data-target="#carousel-destaque-home" data-slide-to="0" class="active"></li>
+			    <li data-target="#carousel-destaque-home" data-slide-to="1"></li>
+			    <li data-target="#carousel-destaque-home" data-slide-to="2"></li>
+  			</ol>
+			<div class="carousel-inner" role="listbox">
+					<div class="destaque  item active">
+						<div class="destaque-img-wrap col-lg-5 col-md-5 col-sm-5"><img src="/static/css/images/Agenda-desenvol.jpg" title="Agenda de Grandes Emprendimentos"></div>
+						<div class="destaque-txt-wrap col-lg-7 col-md-7 col-sm-7">
+							<h4>Agenda de Desenvolvimento Sustenatável:<br/>
+							contribuições para a baixada Santista e Litoral Norte de São Paulo</h4>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam molestie orci ac rhoncus finibus. Nam nec urna at mauris dignissim pellentesque eu nec lectus. Integer auctor rhoncus diam, vitae rhoncus libero placerat sed. Nulla gravida sem ac lacus varius, non ullamcorper diam condimentum.</p>
+							<a href="#" class="btn btn-primary">LEIA MAIS</a>
+						</div>
+					</div>
+					<div class="destaque  item">
+						<div class="destaque-img-wrap col-lg-5 col-md-5 col-sm-5"><img src="/static/css/images/grandes-emprend.jpg" title="Agenda de Grandes Emprendimentos"></div>
+						<div class="destaque-txt-wrap col-lg-7 col-md-7 col-sm-7">
+							<h4>Mapa interativo de Grandes Empreendimentos do Litoral Paulista</h4>
+							<p>Nullam dignissim ipsum eget nunc tristique laoreet. Praesent consequat tempus nunc. Maecenas tincidunt nisi non quam dictum semper. Vestibulum suscipit mollis porttitor.</p>
+							<a href="#" class="btn btn-primary">LEIA MAIS</a>
+						</div>
+					</div>
+					<div class="destaque 	item">
+						<div class="destaque-img-wrap col-lg-5 col-md-5 col-sm-5"><img src="/static/css/images/grandes-emprend.jpg" title="Agenda de Grandes Emprendimentos"></div>
+						<div class="destaque-txt-wrap col-lg-7 col-md-7 col-sm-7">
+							<h4>Mapa interativo de Grandes Empreendimentos do Litoral Paulista</h4>
+							<p>Suspendisse potenti. In hac habitasse platea dictumst. Donec euismod elit lacus, vel rhoncus lectus lobortis non. Fusce id mi vel mi pellentesque mattis non nec sem. </p>
+							<a href="#" class="btn btn-primary">LEIA MAIS</a>
+						</div>
+					</div>
+			</div><!-- Fim da div.carousel-inner -->
+		<!-- </div><!-- Fim da div#carousel-destaque-home -->
+   <!--  </section>-->
 	<!--//
 	<a id="faq" class="anchor"></a>
     <section class="faq text-center">
@@ -156,34 +130,166 @@
 		</div>
     </section>
 	//-->
-	<a id="signup" class="anchor"></a>
-    <section class="signup text-center">
+    <section class="acoes">
+			<section class="acoes-header">
+				<img src="/static/css/images/fundo-content-top.png">
+				<div class="container"><h2>AÇÔES</h2></div>
 
-		<div class="container">
-			<div class="col-sm-8 col-sm-offset-2">
-				<h2 class="title">O De Olho nas Metas está em desenvolvimento e será lançado no início de 2015. Para receber informações, cadastre-se abaixo:</h2>
-				<!--<p>Conheça e monitore as metas da cidade de São Paulo. Preencha o formulário abaixo para se cadastrar:</p>-->
+			</section>
+			<div class="container">
 
-				<form role="form" method="POST" action="/form/preregister">
-					<div class="col-sm-6">
-						<div class="form-group">
-							NOME<br />
-							<input type="text" name="username" class="form-control signup-input">
+				<section class="filtros-eixos-wrap">
+					<form id="busca_acoes" class="busca-acoes">
+						<div class="input-group add-on">
+							<input name="srch-term" type="search" class="form-control" placeholder="Buscar ações...">
+							<div class="input-group-btn">
+								<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+      						</div>
 						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							E-MAIL<br />
-							<input type="text" name="useremail" class="form-control signup-input">
+					</form>
+					<!--<button id="todos" class="filtro-eixo filtro-atual">TODOS</button>
+					<button id="eixo-1" class="filtro-eixo ">EIXO 1</button>
+					<button id="eixo-2" class="filtro-eixo ">EIXO 2</button>
+					<button id="eixo-3" class="filtro-eixo ">EIXO 3</button>-->
+				</section> 
+				<section class="acoes-list-wrap">
+					<div class="acao-wrap col-lg-4 col-md-4 col-sm-6 col-xs-12">
+						<div class="acao-sub-wrap">
+							<div class="acao-img-wrap"><img  src="/static/images/acoes/SV-INDIO-20150727-14-w600.jpg"></div>
+							<div style="position:relative">
+								<div class="acao-txt-wrap">
+									<div class="row">
+										<img src="/static/images/eixo2.png" class="col-lg-3 col-md-4 col-sm-4 col-xs-4">
+										<h4 class="col-lg-9 col-md-8 col-sm-8 col-xs-8">Ação Regra de Uso e Ocupação das Unidades de Conservação</h4>
+									</div>
+								</div>
+							</div>
 						</div>
+						<a href="#" class="btn btn-primary">LEIA MAIS</a>
 					</div>
-					<div class="button">
-						<button class="btn btn-success">PARTICIPE</button>
+					<div class="acao-wrap col-lg-4 col-md-4 col-sm-6 col-xs-12">
+						<div class="acao-sub-wrap">
+							<div class="acao-img-wrap"><img  src="/static/images/acoes/TS_Cinco-anos-apos-a-tragedia-a-cidade-de-Teresopolis-nao-consegue-reconstruir-suas-casas_11012016001-600x399.jpg"></div>
+							<div style="position:relative">
+								<div class="acao-txt-wrap">
+									<div class="row">
+										<img src="/static/images/eixo3.png" class="col-lg-3 col-md-4 col-sm-4 col-xs-4">
+										<h4 class="col-lg-9 col-md-8 col-sm-8 col-xs-8">Ação Reserva de Terra Urbanizada e bem Localizada</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+						<a href="#" class="btn btn-primary">LEIA MAIS</a>
 					</div>
-				</form>
+					<div class="acao-wrap col-lg-4 col-md-4 col-sm-6 col-xs-12">
+						<div class="acao-sub-wrap">
+							<div class="acao-img-wrap"><img  src="/static/images/acoes/OlharesdoBrasilSaoSebastiao-24-600x400.jpg"></div>
+							<div style="position:relative">
+								<div class="acao-txt-wrap">
+									<div class="row">
+										<img src="/static/images/eixo1.png" class="col-lg-3 col-md-4 col-sm-4 col-xs-4">
+										<h4 class="col-lg-9 col-md-8 col-sm-8 col-xs-8">Ação Diversificação do Turismo</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+						<a href="#" class="btn btn-primary">LEIA MAIS</a>
+					</div>
+					<div class="acao-wrap col-lg-4 col-md-4 col-sm-6 col-xs-12">
+						<div class="acao-sub-wrap">
+							<div class="acao-img-wrap"><img  src="/static/images/acoes/greve-portuarios-20140124_0003-600x400.jpg"></div>
+							<div style="position:relative">
+								<div class="acao-txt-wrap">
+									<div class="row">
+										<img src="/static/images/eixo1.png" class="col-lg-3 col-md-4 col-sm-4 col-xs-4">
+										<h4 class="col-lg-9 col-md-8 col-sm-8 col-xs-8">Ação Produção de Conhecimento</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+						<a href="#" class="btn btn-primary">LEIA MAIS</a>
+					</div>
+					<div class="acao-wrap col-lg-4 col-md-4 col-sm-6 col-xs-12">
+						<div class="acao-sub-wrap">
+							<div class="acao-img-wrap"><img  src="/static/images/acoes/RN-OlharesdoBrasil-IlhaBela-4-768x1024.jpg"></div>
+							<div style="position:relative">
+								<div class="acao-txt-wrap">
+									<div class="row">
+										<img src="/static/images/eixo2.png" class="col-lg-3 col-md-4 col-sm-4 col-xs-4">
+										<h4 class="col-lg-9 col-md-8 col-sm-8 col-xs-8">Ação Recategorização das Unidades de Conservação</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+						<a href="#" class="btn btn-primary">LEIA MAIS</a>
+					</div>
+					<div class="acao-wrap col-lg-4 col-md-4 col-sm-6 col-xs-12">
+						<div class="acao-sub-wrap">
+							<div class="acao-img-wrap"><img  src="/static/images/acoes/campanha_vacinacao_contra-paralisia-infantil_17082015_003-600x398.jpg"></div>
+							<div style="position:relative">
+								<div class="acao-txt-wrap">
+									<div class="row">
+										<img src="/static/images/eixo3.png" class="col-lg-3 col-md-4 col-sm-4 col-xs-4">
+										<h4 class="col-lg-9 col-md-8 col-sm-8 col-xs-8">Ação Qualidade da Rede de Unidades Básicas de Saúde</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+						<a href="#" class="btn btn-primary">LEIA MAIS</a>
+					</div>
+				</section>
+				<div class="text-center">
+					<nav>
+						  <ul class="pagination">
+							    <li>
+								      <a href="#" aria-label="Previous">
+								        <span aria-hidden="true" class="pag-arrow">&lsaquo;</span>
+								      </a>
+							    </li>
+							    <li class="active"><a href="#">1</a></li>
+							    <li><a href="#">2</a></li>
+							    <li><a href="#">3</a></li>
+							    <li><a href="#">4</a></li>
+							    <li><a href="#">5</a></li>
+							    <li>
+								      <a href="#" aria-label="Next">
+								        <span aria-hidden="true" class="pag-arrow">&rsaquo;</span>
+								      </a>
+							    </li>
+						  </ul>
+					</nav>
+				</div>
 			</div>
-		</div>
+			<section class="acoes-footer">
+				<img src="/static/css/images/fundo-content-bottom.png">
+			</section>
     </section>
+    <section class="grandes-empreendimentos">
+	    <div class="container">
+		    <div class="row g-e-title-wrap">
+		    	<h2>GRANDES EMPREENDIMENTOS</h2>
+		    </div>
+		    <div class="row g-e-content-wrap">
+			    <div class="g-e-wrap">
+				    <a href="#">
+					    <div class="titulo-mapa-h">Marco legal da exploração do pertóleo e gás</div>
+					    <div class="imagem-mapa-wrap">
+							<img src="/static/images/grandes-empreendimentos/Mapa-interativo-grandes-empreendimentos.jpg">
+					    </div>
+				    </a>
+			    </div>
+			    <div class="g-e-wrap">
+				    <a href="http://litoralsustentavel.org.br/noticias-sobre-o-projeto/mapa-interativo-grandes-empreendimentos-do-litoral-paulista/">
+					    <div class="titulo-mapa-h">Mapa Grandes Empreendimentos</div>
+					    <div class="imagem-mapa-wrap">
+								<img src="/static/images/grandes-empreendimentos/Mapa-interativo-grandes-empreendimentos2.jpg">
+						</div>
+				    </a>
+			    </div>
+			</div>
+	    </div>
+    </section>
+    
 
 
 <!--	<a id="contact" class="anchor"></a>

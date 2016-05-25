@@ -1,0 +1,168 @@
+[%INCLUDE parts/menu.tt%]
+<section class="home acao-home">
+	<div class="container">
+		<div class="acao-header-title-wrap">
+			<header class="acao-header-title">
+				<img src="/static/images/eixo1.png" alt="Icone para Eixo 1">
+				AÇÃO A | REGIONAL
+			</header>
+			<div class="acao-header-txt">
+				Tem por objetivo contribuir para a construção de alternativas que consolidem o desenvolvimento económico com inclusão social, garantindo a ampliação da participação da população sobre os rumos do desenvolvimento e a responsabilização dos grandes investidores locais sobre o território, estimulando a diversificação económica e a valorização da cultura socioambiental da região.
+			</div>
+		</div>
+	</div>
+</section>
+<section class="acao-content-wrap">
+	<div class="container">
+		<div class="acao-breadcumbs">
+			<span class="breadcrumbs-descri">Você está aqui: </span><a href="/">Home </a>><a href="#"> Eixo 2 </a>><a href="#"> Ação A </a>
+		</div>
+		<div class="mapa-acao-wrap">
+				<h4 class="titulo-mapa">Titulo Mapa</h4>
+				<div class="row">
+					<div class="col-lg-12 col-md-12">
+						<div class="embed-responsive embed-responsive-3by4">
+							<iframe src="https://www.google.com/maps/d/embed?mid=1pgrg0apPDFYKWwHMKH0_kvnAr7w" class="embed-responsive-item" width="100%" height="350"></iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="acao-acordeon">
+				<div class="panel-group" id="accordion-acao" role="tablist" aria-multiselectable="true">
+					  <div class="panel panel-default">
+					    <div class="panel-heading" role="tab" id="headingOne">
+					      <h4 class="panel-title">
+					        <a class="accordion-toggle" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+					          Informações Qualitativas
+					        </a>
+
+					      </h4>
+
+					    </div>
+					    <div id="collapseOne" class="panel-collapse collapse-acao-cont collapse in" role="tabpanel" aria-labelledby="headingOne">
+					      <div class="panel-body">
+					        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+					      </div>
+					    </div>
+					  </div>
+					  <div class="panel panel-default">
+					    <div class="panel-heading" role="tab" id="headingTwo">
+					      <h4 class="panel-title">
+					        <a class="accordion-toggle collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+					          Condicionantes
+					        </a>
+					      </h4>
+					    </div>
+					    <div id="collapseTwo" class="panel-collapse collapse-acao-cont collapse" role="tabpanel" aria-labelledby="headingTwo">
+					      <div class="panel-body">
+					        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+					      </div>
+					    </div>
+					  </div>
+					  <div class="panel panel-default">
+					    <div class="panel-heading" role="tab" id="headingThree">
+					      <h4 class="panel-title">
+					        <a class="accordion-toggle collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+					          Lorem Ipsum
+					        </a>
+					      </h4>
+					    </div>
+					    <div id="collapseThree" class="panel-collapse collapse-acao-cont collapse" role="tabpanel" aria-labelledby="headingThree">
+					      <div class="panel-body">
+					        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+					      </div>
+					    </div>
+					  </div>
+				</div>
+			</div><!-- Fim da div .acao-acordeon -->
+			<div class="acao-tab-indicadores-graf-pizza col lg-12 col-md-12 col-sm-12 col-xs-12">
+				<!-- Tabs de navigação -->
+				<ul class="nav nav-tabs">
+					<li role="presentation" class="active">
+						<a href="#indica-pizza" role="tab" aria-controls="indica-pizza" data-toggle="tab">Indicadores</a>
+					</li>
+					<li role="presentation">
+						<a href="#form-pizza" role="tab" aria-controls="form-pizza" data-toggle="tab">Fórmula</a>
+					</li>
+					<li role="presentation">
+						<a href="#sobre-pizza" role="tab" aria-controls="sobre-pizza" data-toggle="tab">Sobre</a>
+					</li>
+				</ul>
+				<!-- Paineis da tab -->
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="indica-pizza">Conteúdo Indicadores</div>
+    			<div role="tabpanel" class="tab-pane" id="form-pizza">Conteúdo Fórmula</div>
+    			<div role="tabpanel" class="tab-pane" id="sobre-pizza">Conteúdo Sobre</div>
+				</div>
+			</div><!-- Fim da div.acao-tab-indicadores-graf-pizza -->
+			<div class="acao-tab-indicadores-graf-linha col lg-12 col-md-12 col-sm-12 col-xs-12">
+				<!-- Tabs de navigação -->
+				<ul class="nav nav-tabs">
+					<li role="presentation" class="active">
+						<a href="#indica-linha" role="tab" aria-controls="indica-linha" data-toggle="tab">Indicadores</a>
+					</li>
+					<li role="presentation">
+						<a href="#form-linha" role="tab" aria-controls="form-linha" data-toggle="tab">Fórmula</a>
+					</li>
+					<li role="presentation">
+						<a href="#sobre-linha" role="tab" aria-controls="sobre-linha" data-toggle="tab">Sobre</a>
+					</li>
+				</ul>
+				<!-- Paineis da tab -->
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="indica-linha">Conteúdo Indicadores</div>
+    			<div role="tabpanel" class="tab-pane" id="form-linha">Conteúdo Fórmula</div>
+    			<div role="tabpanel" class="tab-pane" id="sobre-linha">Conteúdo Sobre</div>
+				</div>
+			</div><!-- Fim da div.acao-tab-indicadores-graf-linha -->
+			<div class="acao-glosario-wrap">
+				<div class="row">
+					<h4>Glosario</h4>
+					<section class="glo-secao-2-col col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<p class="letra">
+							A
+						</p>
+						<p class="palavra">
+							<span>Aorem: </span>ipsum dolor sit amet, consectetur adipiscing elit. Integer ultrices egestas ante, id mattis est consequat vitae. Maecenas mollis rhoncus massa. Phasellus cursus tellus quis ligula molestie imperdiet.
+						</p>
+						<p class="palavra">
+							<span>ACras: </span>Donec condimentum, lorem sed auctor pharetra, erat enim blandit eros, at pharetra nibh massa at nulla. Donec ultrices, ex nec scelerisque ultrices, augue risus lobortis enim, ut ullamcorper est lorem eu libero.
+						</p>
+						<p class="palavra">
+							<span>Aestibulum: </span>Proin a enim odio. Duis tellus lorem, pellentesque nec luctus ac, placerat a ligula. Curabitur sit amet eros eu ex condimentum sagittis sit amet id erat.
+						</p>
+						<p class="letra">
+							B
+						</p>
+						<p class="palavra">
+							<span>Bivamus: </span>Proin ac neque neque. Proin enim libero, egestas non faucibus in, lobortis at nibh. Aenean volutpat augue vitae condimentum gravida.
+						</p>
+						<p class="palavra">
+							<span>Benean: </span>Cras enim nisl, mattis in nisl nec, facilisis consequat augue. Suspendisse sit amet mauris fermentum, blandit urna eget, luctus sapien.
+						</p>
+						<p class="letra">
+							C
+						</p>
+						<p class="palavra">
+							<span>Catongue in: </span>Donec sit amet mauris nisl. Mauris posuere magna mauris, vehicula placerat elit volutpat iaculis.
+						</p>
+						<p class="palavra">
+							<span>Clacus consectetur: </span>Duis tincidunt eros libero, sed pharetra dui scelerisque eget. Mauris sed faucibus tellus. Nullam venenatis odio
+						</p>
+						<p class="letra">
+							D
+						</p>
+						<p class="palavra">
+							<span>Dpsuere: </span>Curabitur ut tincidunt tellus. Quisque varius condimentum leo nec convallis. Maecenas molestie diam non ultrices
+						</p>
+						<p class="palavra">
+							<span>Dulla: </span>Aenean volutpat augue vitae condimentum gravida. Etiam molestie turpis nec sem finibus, a pellentesque mi lacinia. Fusce feugiat mi suscipit tortor faucibus congue.
+						</p>
+						<p class="palavra">
+							<span>Dsed: </span>Duis tincidunt eros libero, sed pharetra dui scelerisque eget. Mauris sed faucibus tellus. Nullam venenatis odio at ex pretium, ac malesuada neque tempus.
+						</p>
+					</section>
+				</div>
+			</div><!-- Fim da div .acao-glosario-wrap -->
+	</div><!-- Fim da div .container -->
+</section>

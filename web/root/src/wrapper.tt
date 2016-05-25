@@ -1,5 +1,4 @@
-[%IF !without_wrapper%][%IF template_wrapper %][% INCLUDE "wrapper_${template_wrapper}.tt"|none%][%ELSE%]
-<!DOCTYPE html>
+[%IF !without_wrapper%][%IF template_wrapper %][% INCLUDE "wrapper_${template_wrapper}.tt"|none%][%ELSE%]<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
@@ -8,46 +7,97 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>De olho nas metas</title>
-	
-	<link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+    <title>Litoral Sustentavel</title>
+
+<!--	<link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Cabin+Sketch' rel='stylesheet' type='text/css'>
-	
+	<link href='http://fonts.googleapis.com/css?family=Cabin+Sketch' rel='stylesheet' type='text/css'> -->
+  <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,900,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
     <!-- Bootstrap Core CSS -->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    [%-CALL assets.include("css/font-awesome.css")%]
+    [%-CALL assets.include("css/bootstrap-social.css")%]
+
 
     <!-- Fonts -->
 
+
+
+
     <!-- Custom Theme CSS -->
     <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/css/home_style.css" rel="stylesheet">
+    [%- assets.export("css") |none-%]
+
+
 </head>
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
-			
-    [%content|none%]
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom" class="[%body_class%]">
 
-	<footer>
+    [%content|none%]
+	<footer class="footer-principal">
+	    <div class="container">
+		    <div class="row">
+			    <div class="mapa-do-site col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				    <div class="mapa-s-title">
+					    <h2>MAPA DO SITE</h2>
+
+				    </div>
+				    <div class="mapa-site-content">
+					    <ul class="m-s-ul">
+						    <li class="m-s-li-principal">
+						    	<a href="#">SOBRE</a>
+						    	<ul>
+							    	<li><a href="#">Sobre</a></li>
+						    	</ul>
+						    </li>
+						    <li class="m-s-li-principal"><a href="#">AGENDAS</a>
+						    	<ul>
+							    	<li>Sobre</li>
+						    	</ul>
+						    </li>
+						    <li class="m-s-li-principal">
+						    	<a href="#">CONTATO</a>
+						    	<ul>
+							    	<li><a href="#">Sobre</a></li>
+						    	</ul>
+						    </li>
+					    </ul>
+				    </div>
+			    </div>
+			    <div class="apoio-wrap col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				    <a href="#" class="acesso-observatorio-wrap">Acesse o Observatório
+				    	<img src="/static/css/images/logo-branco.svg" alt="Logo Observatório Litoral Sustentável">
+				    </a>
+            <div class="apoio-logos-wrap"><img src="/static/css/images/logos-alinhados.png" alt="Logos apoio ao projeto de monitoramento Litoral Sustentável"></div>
+            <a href="#" class="logo-iota-wrap" ><img src="/static/css/images/iota-negativo.svg" alt="Logo do sistema IOTA" style="width:70%" /></a>
+			    </div>
+		    </div>
+	    </div>
+    </footer>
+	<footer class="footer-creditos">
 		<div class="container">
-			<div class="col-xs-4">
-			</div>
-			<div class="col-xs-4 logo-footer">
-				<div class="text-center">
-					<img src="/static/css/images/logo-footer.png" border="0">
+			<div class="row">
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+					<h2>Observatório Litoral Sustentável</h2>
+					<p>Pólis - Instituto de Estudos, Formação e Assessoria em Políticas Sociais. Rua Araújo 124, São Paulo - SP
+observatorio@litoralsustentavel.org.br</p>
+					<p>55 11 2174 6800</p>
 				</div>
-			</div>
-			<div class="col-xs-4">
-				<div class="aware">Desenvolvido por <a href="http://www.aware.com.br" target="_blank">Aware</a><img src="/static/images/logo-aware.gif" alt="Aware - Desenvolvendo conceitos, criando parceiros"></div>
+				<div class="cc-wrap col-lg-4 col-md-4 col-sm-4 col-xs-12">
+					Alguns direitos reservados <img src="/static/css/images/cc.png">
+				</div>
 			</div>
 		</div>
 	</footer>
 
     <!-- Core JavaScript Files -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>
     <script src="/static/js/jquery.easing.1.3.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
     <!-- Custom Theme JavaScript -->
-    <script src="/static/js/index.js"></script>
+    <script src="/static/js/index.js?v=1.16"></script>
     <!-- GA tag -->
 	<script>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -58,7 +108,7 @@
 		ga('create', 'UA-10515816-3', 'auto');
 		ga('send', 'pageview');
 	</script>
-	
+
 
 </body>
 </html>

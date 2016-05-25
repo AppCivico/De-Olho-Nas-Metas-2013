@@ -1,3 +1,4 @@
+[%INCLUDE parts/menu.tt%]
 	<section class="page-content contato">
 		<div class="container">
 			<h2 class="title">Fale Conosco</h2>

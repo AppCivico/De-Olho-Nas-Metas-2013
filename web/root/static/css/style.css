@@ -31,52 +31,48 @@ h2{
 	position: fixed;
 	left: 0;
 	right: 0;
-	background-image: url("images/bg-menu-top.png");
-	background-repeat: repeat-x;
-	background-position: center top;
+	background-color: #6FA7E0;
 	z-index: 1030;
+  height: 108px;
 }
 
 .menu-top .menu{
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	margin-top: 40px;
+	margin-top: 34px;
 }
 .menu-top .menu li{
 	display: inline-block;
 	padding: 10px 15px;
-	text-transform: uppercase;
 }
 .menu-top .menu li a{
 	color: #fff;
 	font-size: 0.9em;
 	font-weight: bold;
+  height: 30px;
+  position: relative;
+  padding: 6px 5px;
 }
 .menu-top .menu li a:hover{
 	color: #face53;
 }
 
+
 .menu-top .menu-social{
 	float: right;
+  margin-top: 41px;
+}
+
+.menu-top .menu-social a i{
+  border: none!important;
+  font-size: 1.9em;
 }
 
 .menu-top .menu-social li{
 	padding: 0;
 }
 
-.menu-social li a{
-	float: left;
-	text-indent: -999em;
-	display: block;
-	white-space: nowrap;
-	overflow: hidden;
-	width: 36px;
-	height: 36px;
-	background-image: url("images/social-icons.png");
-	background-repeat: no-repeat;
-	background-position: 0 0;
-}
 .menu-social li.facebook a{
 	background-position: -36px 0px;
 }
@@ -170,10 +166,9 @@ section p{
 .home{
 	background-color: #666056;
 	color: #fff;
-	background-image: url("images/img_home.png");
+	background-image: url("images/header_full.jpg");
 	background-repeat: no-repeat;
 	background-position: bottom center;
-	padding-bottom: 370px;
 }
 
 .home h2{
@@ -182,7 +177,7 @@ section p{
 
 
 .about{
-	background-color: #fcf0cc;	
+	background-color: #fcf0cc;
 	color: #666056;
 	font-size: 18px;
 }
@@ -273,7 +268,7 @@ footer .logo-footer img{
 }
 
 @media (min-width: 768px){
-}  
+}
 @media(max-width:979px) {
 }
 @media(max-width:1199px) {
@@ -283,8 +278,8 @@ footer .logo-footer img{
 	.menu-top .menu li a{
 		font-size: 0.8em;
 	}
-}	
-@media(max-width:767px) {	
+}
+@media(max-width:767px) {
 	body{
 		margin-top: 0;
 	}

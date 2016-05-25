@@ -40,13 +40,6 @@ sub index : Path : Args(0) {
 
     $self->root($c);
 
-    $c->res->redirect( $c->uri_for_action('/user/account/index') ), $c->detach
-      if $c->user_exists;
-
-    $c->forward('/homefuncional/base');
-    $c->forward('/homefuncional/home');
-    $c->stash->{template} = 'homefuncional/home.tt';
-
 }
 
 sub change_lang : Chained('root') PathPart('lang') CaptureArgs(1) {
@@ -167,8 +160,6 @@ sub root : Chained('/') : PathPart('') : CaptureArgs(0) {
 
     $c->stash->{c_req_path} = $c->req->path;
 
-    $c->session->{foobar}++;
-
     $self->load_lang($c);
 
     $c->load_status_msgs;
@@ -222,7 +213,7 @@ sub default : Path {
     eval {
         $c->stash->{body_class} .= ' ' . $maybe_view;
         $c->stash->{body_class} =~ s/\//-/g;
-        $c->stash->{template_wrapper} = 'func';
+        #$c->stash->{template_wrapper} = 'func';
         $output =
           $c->view('TT')->render( $c, "auto/$maybe_view.tt", $c->stash );
     };

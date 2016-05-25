@@ -1,3 +1,4 @@
+[%INCLUDE parts/menu.tt%]
 	<section class="page-content sobre">
 		<div class="container">
 			<h2 class="title">Sobre o De Olho nas Metas</h2>

@@ -1,7 +1,7 @@
 # This Makefile is for the WebSMM extension to perl.
 #
 # It was generated automatically by MakeMaker version
-# 6.98 (Revision: 69800) from the contents of
+# 7.1 (Revision: 71000) from the contents of
 # Makefile.PL. Don't edit this file, edit Makefile.PL instead.
 #
 #       ANY CHANGES MADE HERE WILL BE LOST!
@@ -13,18 +13,18 @@
 
 #     ABSTRACT => q[Catalyst based application]
 #     AUTHOR => [q[renato,,,]]
-#     BUILD_REQUIRES => { Test::More=>q[0.88], ExtUtils::MakeMaker=>q[6.36] }
+#     BUILD_REQUIRES => { ExtUtils::MakeMaker=>q[6.36], Test::More=>q[0.88] }
 #     CONFIGURE_REQUIRES => {  }
 #     DISTNAME => q[WebSMM]
 #     EXE_FILES => [q[script/importar_traducao.pl], q[script/websmm_cgi.pl], q[script/websmm_create.pl], q[script/websmm_fastcgi.pl], q[script/websmm_server.pl], q[script/websmm_test.pl]]
 #     LICENSE => q[perl]
 #     NAME => q[WebSMM]
 #     NO_META => q[1]
-#     PREREQ_PM => { Catalyst::Plugin::Session::Store::File=>q[0], namespace::autoclean=>q[0], Catalyst::Plugin::Assets=>q[0], Test::More=>q[0.88], Catalyst::Plugin::Static::Simple=>q[0], Catalyst::Plugin::StatusMessage=>q[0], Moose=>q[0], Furl=>q[0], Catalyst::Plugin::Session::DynamicExpiry=>q[0], Config::General=>q[0], Catalyst::Plugin::Session=>q[0], ExtUtils::MakeMaker=>q[6.36], File::MoreUtil=>q[0], Template::AutoFilter=>q[0], Catalyst::Plugin::Session::State::Cookie=>q[0], Catalyst::Plugin::Authentication=>q[0], Catalyst::Helper::View::Email=>q[0], Catalyst::Plugin::ConfigLoader=>q[0], Catalyst::Runtime=>q[5.90042], Catalyst::Action::RenderView=>q[0], Catalyst::Plugin::Session::PerUser=>q[0], DateTime::Format::DateParse=>q[0] }
+#     PREREQ_PM => { Catalyst::Action::RenderView=>q[0], Catalyst::Helper::View::Email=>q[0], Catalyst::Plugin::Assets=>q[0], Catalyst::Plugin::Authentication=>q[0], Catalyst::Plugin::ConfigLoader=>q[0], Catalyst::Plugin::Session=>q[0], Catalyst::Plugin::Session::DynamicExpiry=>q[0], Catalyst::Plugin::Session::PerUser=>q[0], Catalyst::Plugin::Session::State::Cookie=>q[0], Catalyst::Plugin::Session::Store::File=>q[0], Catalyst::Plugin::Static::Simple=>q[0], Catalyst::Plugin::StatusMessage=>q[0], Catalyst::Runtime=>q[5.90042], CatalystX::RoleApplicator=>q[0], Config::General=>q[0], DateTime::Format::DateParse=>q[0], ExtUtils::MakeMaker=>q[6.36], File::MoreUtil=>q[0], Furl=>q[0], Moose=>q[0], Template::AutoFilter=>q[0], Test::More=>q[0.88], namespace::autoclean=>q[0] }
 #     TEST_REQUIRES => {  }
 #     VERSION => q[0.01]
 #     VERSION_FROM => q[lib/WebSMM.pm]
-#     dist => { PREOP=>q[$(PERL) -I. "-MModule::Install::Admin" -e "dist_preop(q($(DISTVNAME)))"] }
+#     dist => {  }
 #     realclean => { FILES=>q[MYMETA.yml] }
 #     test => { TESTS=>q[t/01app.t t/02pod.t t/03podcoverage.t t/controller_Admin-Goal.t t/controller_Admin-Metas.t t/controller_Download.t t/controller_Goal.t t/controller_HomeFuncional-Campaign.t t/controller_HomeFuncional-Goal.t t/controller_HomeFuncional-Management.t t/controller_HomeFuncional-Project.t t/controller_HomeFuncional-Region-ID.t t/controller_HomeFuncional-Region.t t/controller_HomeFuncional.t t/controller_PromiseTracker.t t/controller_Updates.t t/model_DB.t t/view_TT.t] }
 
@@ -33,7 +33,7 @@
 
 # --- MakeMaker const_config section:
 
-# These definitions are from config.sh (via /home/renato/perl5/perlbrew/perls/perl-5.20.3/lib/5.20.3/x86_64-linux/Config.pm).
+# These definitions are from config.sh (via /home/donm/perl5/perlbrew/perls/perl-5.16.3/lib/5.16.3/x86_64-linux/Config.pm).
 # They may have been overridden via Makefile.PL or on the command line.
 AR = ar
 CC = cc
@@ -50,10 +50,10 @@ LIBC = libc-2.19.so
 LIB_EXT = .a
 OBJ_EXT = .o
 OSNAME = linux
-OSVERS = 3.19.0-25-generic
+OSVERS = 4.2.0-27-generic
 RANLIB = :
-SITELIBEXP = /home/renato/perl5/perlbrew/perls/perl-5.20.3/lib/site_perl/5.20.3
-SITEARCHEXP = /home/renato/perl5/perlbrew/perls/perl-5.20.3/lib/site_perl/5.20.3/x86_64-linux
+SITELIBEXP = /home/donm/perl5/perlbrew/perls/perl-5.16.3/lib/site_perl/5.16.3
+SITEARCHEXP = /home/donm/perl5/perlbrew/perls/perl-5.16.3/lib/site_perl/5.16.3/x86_64-linux
 SO = so
 VENDORARCHEXP = 
 VENDORLIBEXP = 
@@ -83,55 +83,57 @@ MAN3EXT = 3
 INSTALLDIRS = site
 DESTDIR = 
 PREFIX = $(SITEPREFIX)
-PERLPREFIX = /home/renato/perl5/perlbrew/perls/perl-5.20.3
-SITEPREFIX = /home/renato/perl5/perlbrew/perls/perl-5.20.3
+PERLPREFIX = /home/donm/perl5/perlbrew/perls/perl-5.16.3
+SITEPREFIX = /home/donm/perl5/perlbrew/perls/perl-5.16.3
 VENDORPREFIX = 
-INSTALLPRIVLIB = /home/renato/perl5/perlbrew/perls/perl-5.20.3/lib/5.20.3
+INSTALLPRIVLIB = /home/donm/perl5/perlbrew/perls/perl-5.16.3/lib/5.16.3
 DESTINSTALLPRIVLIB = $(DESTDIR)$(INSTALLPRIVLIB)
-INSTALLSITELIB = /home/renato/perl5/perlbrew/perls/perl-5.20.3/lib/site_perl/5.20.3
+INSTALLSITELIB = /home/donm/perl5/perlbrew/perls/perl-5.16.3/lib/site_perl/5.16.3
 DESTINSTALLSITELIB = $(DESTDIR)$(INSTALLSITELIB)
 INSTALLVENDORLIB = 
 DESTINSTALLVENDORLIB = $(DESTDIR)$(INSTALLVENDORLIB)
-INSTALLARCHLIB = /home/renato/perl5/perlbrew/perls/perl-5.20.3/lib/5.20.3/x86_64-linux
+INSTALLARCHLIB = /home/donm/perl5/perlbrew/perls/perl-5.16.3/lib/5.16.3/x86_64-linux
 DESTINSTALLARCHLIB = $(DESTDIR)$(INSTALLARCHLIB)
-INSTALLSITEARCH = /home/renato/perl5/perlbrew/perls/perl-5.20.3/lib/site_perl/5.20.3/x86_64-linux
+INSTALLSITEARCH = /home/donm/perl5/perlbrew/perls/perl-5.16.3/lib/site_perl/5.16.3/x86_64-linux
 DESTINSTALLSITEARCH = $(DESTDIR)$(INSTALLSITEARCH)
 INSTALLVENDORARCH = 
 DESTINSTALLVENDORARCH = $(DESTDIR)$(INSTALLVENDORARCH)
-INSTALLBIN = /home/renato/perl5/perlbrew/perls/perl-5.20.3/bin
+INSTALLBIN = /home/donm/perl5/perlbrew/perls/perl-5.16.3/bin
 DESTINSTALLBIN = $(DESTDIR)$(INSTALLBIN)
-INSTALLSITEBIN = /home/renato/perl5/perlbrew/perls/perl-5.20.3/bin
+INSTALLSITEBIN = /home/donm/perl5/perlbrew/perls/perl-5.16.3/bin
 DESTINSTALLSITEBIN = $(DESTDIR)$(INSTALLSITEBIN)
 INSTALLVENDORBIN = 
 DESTINSTALLVENDORBIN = $(DESTDIR)$(INSTALLVENDORBIN)
-INSTALLSCRIPT = /home/renato/perl5/perlbrew/perls/perl-5.20.3/bin
+INSTALLSCRIPT = /home/donm/perl5/perlbrew/perls/perl-5.16.3/bin
 DESTINSTALLSCRIPT = $(DESTDIR)$(INSTALLSCRIPT)
-INSTALLSITESCRIPT = /home/renato/perl5/perlbrew/perls/perl-5.20.3/bin
+INSTALLSITESCRIPT = /home/donm/perl5/perlbrew/perls/perl-5.16.3/bin
 DESTINSTALLSITESCRIPT = $(DESTDIR)$(INSTALLSITESCRIPT)
 INSTALLVENDORSCRIPT = 
 DESTINSTALLVENDORSCRIPT = $(DESTDIR)$(INSTALLVENDORSCRIPT)
-INSTALLMAN1DIR = /home/renato/perl5/perlbrew/perls/perl-5.20.3/man/man1
+INSTALLMAN1DIR = /home/donm/perl5/perlbrew/perls/perl-5.16.3/man/man1
 DESTINSTALLMAN1DIR = $(DESTDIR)$(INSTALLMAN1DIR)
-INSTALLSITEMAN1DIR = /home/renato/perl5/perlbrew/perls/perl-5.20.3/man/man1
+INSTALLSITEMAN1DIR = /home/donm/perl5/perlbrew/perls/perl-5.16.3/man/man1
 DESTINSTALLSITEMAN1DIR = $(DESTDIR)$(INSTALLSITEMAN1DIR)
 INSTALLVENDORMAN1DIR = 
 DESTINSTALLVENDORMAN1DIR = $(DESTDIR)$(INSTALLVENDORMAN1DIR)
-INSTALLMAN3DIR = /home/renato/perl5/perlbrew/perls/perl-5.20.3/man/man3
+INSTALLMAN3DIR = /home/donm/perl5/perlbrew/perls/perl-5.16.3/man/man3
 DESTINSTALLMAN3DIR = $(DESTDIR)$(INSTALLMAN3DIR)
-INSTALLSITEMAN3DIR = /home/renato/perl5/perlbrew/perls/perl-5.20.3/man/man3
+INSTALLSITEMAN3DIR = /home/donm/perl5/perlbrew/perls/perl-5.16.3/man/man3
 DESTINSTALLSITEMAN3DIR = $(DESTDIR)$(INSTALLSITEMAN3DIR)
 INSTALLVENDORMAN3DIR = 
 DESTINSTALLVENDORMAN3DIR = $(DESTDIR)$(INSTALLVENDORMAN3DIR)
 PERL_LIB =
-PERL_ARCHLIB = /home/renato/perl5/perlbrew/perls/perl-5.20.3/lib/5.20.3/x86_64-linux
+PERL_ARCHLIB = /home/donm/perl5/perlbrew/perls/perl-5.16.3/lib/5.16.3/x86_64-linux
+PERL_ARCHLIBDEP = /home/donm/perl5/perlbrew/perls/perl-5.16.3/lib/5.16.3/x86_64-linux
 LIBPERL_A = libperl.a
 FIRST_MAKEFILE = Makefile
 MAKEFILE_OLD = Makefile.old
 MAKE_APERL_FILE = Makefile.aperl
 PERLMAINCC = $(CC)
-PERL_INC = /home/renato/perl5/perlbrew/perls/perl-5.20.3/lib/5.20.3/x86_64-linux/CORE
-PERL = /home/renato/perl5/perlbrew/perls/perl-5.20.3/bin/perl "-Iinc"
-FULLPERL = /home/renato/perl5/perlbrew/perls/perl-5.20.3/bin/perl "-Iinc"
+PERL_INC = /home/donm/perl5/perlbrew/perls/perl-5.16.3/lib/5.16.3/x86_64-linux/CORE
+PERL_INCDEP = /home/donm/perl5/perlbrew/perls/perl-5.16.3/lib/5.16.3/x86_64-linux/CORE
+PERL = "/home/donm/perl5/perlbrew/perls/perl-5.16.3/bin/perl" "-Iinc"
+FULLPERL = "/home/donm/perl5/perlbrew/perls/perl-5.16.3/bin/perl" "-Iinc"
 ABSPERL = $(PERL)
 PERLRUN = $(PERL)
 FULLPERLRUN = $(FULLPERL)
@@ -144,9 +146,9 @@ PERM_DIR = 755
 PERM_RW = 644
 PERM_RWX = 755
 
-MAKEMAKER   = /home/renato/perl5/perlbrew/perls/perl-5.20.3/lib/5.20.3/ExtUtils/MakeMaker.pm
-MM_VERSION  = 6.98
-MM_REVISION = 69800
+MAKEMAKER   = /home/donm/perl5/perlbrew/perls/perl-5.16.3/lib/site_perl/5.16.3/ExtUtils/MakeMaker.pm
+MM_VERSION  = 7.1
+MM_REVISION = 71000
 
 # FULLEXT = Pathname for extension directory (eg Foo/Bar/Oracle).
 # BASEEXT = Basename part of FULLEXT. May be just equal FULLEXT. (eg Oracle)
@@ -209,7 +211,7 @@ MAN3PODS = lib/WebSMM.pm \
 	lib/WebSMM/View/TT.pm
 
 # Where is the Config information that we are using/depend on
-CONFIGDEP = $(PERL_ARCHLIB)$(DFSEP)Config.pm $(PERL_INC)$(DFSEP)config.h
+CONFIGDEP = $(PERL_ARCHLIBDEP)$(DFSEP)Config.pm $(PERL_INCDEP)$(DFSEP)config.h
 
 # Where to build things
 INST_LIBDIR      = $(INST_LIB)
@@ -225,6 +227,7 @@ INST_BOOT        =
 # Extra linker info
 EXPORT_LIST        = 
 PERL_ARCHIVE       = 
+PERL_ARCHIVEDEP    = 
 PERL_ARCHIVE_AFTER = 
 
 
@@ -526,7 +529,7 @@ PM_TO_BLIB = lib/CatalystX/Plugin/Lexicon.pm \
 
 
 # --- MakeMaker platform_constants section:
-MM_Unix_VERSION = 6.98
+MM_Unix_VERSION = 7.1
 PERL_MALLOC_DEF = -DPERL_EXTMALLOC_DEF -Dmalloc=Perl_malloc -Dfree=Perl_mfree -Drealloc=Perl_realloc -Dcalloc=Perl_calloc
 
 
@@ -584,7 +587,7 @@ ZIPFLAGS = -r
 COMPRESS = gzip --best
 SUFFIX = .gz
 SHAR = shar
-PREOP = $(PERL) -I. "-MModule::Install::Admin" -e "dist_preop(q($(DISTVNAME)))"
+PREOP = $(NOECHO) $(NOOP)
 POSTOP = $(NOECHO) $(NOOP)
 TO_UNIX = $(NOECHO) $(NOOP)
 CI = ci -u
@@ -784,13 +787,13 @@ manifypods : pure_all  \
 	script/websmm_fastcgi.pl \
 	script/websmm_server.pl \
 	script/websmm_test.pl
-	$(NOECHO) $(POD2MAN) --section=1 --perm_rw=$(PERM_RW) \
+	$(NOECHO) $(POD2MAN) --section=1 --perm_rw=$(PERM_RW) -u \
 	  script/websmm_cgi.pl $(INST_MAN1DIR)/websmm_cgi.pl.$(MAN1EXT) \
 	  script/websmm_create.pl $(INST_MAN1DIR)/websmm_create.pl.$(MAN1EXT) \
 	  script/websmm_fastcgi.pl $(INST_MAN1DIR)/websmm_fastcgi.pl.$(MAN1EXT) \
 	  script/websmm_server.pl $(INST_MAN1DIR)/websmm_server.pl.$(MAN1EXT) \
 	  script/websmm_test.pl $(INST_MAN1DIR)/websmm_test.pl.$(MAN1EXT) 
-	$(NOECHO) $(POD2MAN) --section=3 --perm_rw=$(PERM_RW) \
+	$(NOECHO) $(POD2MAN) --section=3 --perm_rw=$(PERM_RW) -u \
 	  lib/WebSMM.pm $(INST_MAN3DIR)/WebSMM.$(MAN3EXT) \
 	  lib/WebSMM/Controller/Admin/Budget.pm $(INST_MAN3DIR)/WebSMM::Controller::Admin::Budget.$(MAN3EXT) \
 	  lib/WebSMM/Controller/Admin/Company.pm $(INST_MAN3DIR)/WebSMM::Controller::Admin::Company.$(MAN3EXT) \
@@ -816,7 +819,7 @@ manifypods : pure_all  \
 	  lib/WebSMM/Controller/HomeFuncional/ProjectAcceptPorcentage.pm $(INST_MAN3DIR)/WebSMM::Controller::HomeFuncional::ProjectAcceptPorcentage.$(MAN3EXT) \
 	  lib/WebSMM/Controller/HomeFuncional/ProjectEventRead.pm $(INST_MAN3DIR)/WebSMM::Controller::HomeFuncional::ProjectEventRead.$(MAN3EXT) \
 	  lib/WebSMM/Controller/HomeFuncional/Region.pm $(INST_MAN3DIR)/WebSMM::Controller::HomeFuncional::Region.$(MAN3EXT) 
-	$(NOECHO) $(POD2MAN) --section=3 --perm_rw=$(PERM_RW) \
+	$(NOECHO) $(POD2MAN) --section=3 --perm_rw=$(PERM_RW) -u \
 	  lib/WebSMM/Controller/HomeFuncional/Region/ID.pm $(INST_MAN3DIR)/WebSMM::Controller::HomeFuncional::Region::ID.$(MAN3EXT) \
 	  lib/WebSMM/Controller/HomeFuncional/Subprefecture.pm $(INST_MAN3DIR)/WebSMM::Controller::HomeFuncional::Subprefecture.$(MAN3EXT) \
 	  lib/WebSMM/Controller/PromiseTracker.pm $(INST_MAN3DIR)/WebSMM::Controller::PromiseTracker.$(MAN3EXT) \
@@ -837,26 +840,14 @@ manifypods : pure_all  \
 
 EXE_FILES = script/importar_traducao.pl script/websmm_cgi.pl script/websmm_create.pl script/websmm_fastcgi.pl script/websmm_server.pl script/websmm_test.pl
 
-pure_all :: $(INST_SCRIPT)/importar_traducao.pl $(INST_SCRIPT)/websmm_cgi.pl $(INST_SCRIPT)/websmm_server.pl $(INST_SCRIPT)/websmm_fastcgi.pl $(INST_SCRIPT)/websmm_create.pl $(INST_SCRIPT)/websmm_test.pl
+pure_all :: $(INST_SCRIPT)/websmm_server.pl $(INST_SCRIPT)/websmm_cgi.pl $(INST_SCRIPT)/websmm_fastcgi.pl $(INST_SCRIPT)/importar_traducao.pl $(INST_SCRIPT)/websmm_test.pl $(INST_SCRIPT)/websmm_create.pl
 	$(NOECHO) $(NOOP)
 
 realclean ::
 	$(RM_F) \
-	  $(INST_SCRIPT)/importar_traducao.pl $(INST_SCRIPT)/websmm_cgi.pl \
-	  $(INST_SCRIPT)/websmm_server.pl $(INST_SCRIPT)/websmm_fastcgi.pl \
-	  $(INST_SCRIPT)/websmm_create.pl $(INST_SCRIPT)/websmm_test.pl 
-
-$(INST_SCRIPT)/importar_traducao.pl : script/importar_traducao.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
-	$(NOECHO) $(RM_F) $(INST_SCRIPT)/importar_traducao.pl
-	$(CP) script/importar_traducao.pl $(INST_SCRIPT)/importar_traducao.pl
-	$(FIXIN) $(INST_SCRIPT)/importar_traducao.pl
-	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/importar_traducao.pl
-
-$(INST_SCRIPT)/websmm_cgi.pl : script/websmm_cgi.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
-	$(NOECHO) $(RM_F) $(INST_SCRIPT)/websmm_cgi.pl
-	$(CP) script/websmm_cgi.pl $(INST_SCRIPT)/websmm_cgi.pl
-	$(FIXIN) $(INST_SCRIPT)/websmm_cgi.pl
-	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/websmm_cgi.pl
+	  $(INST_SCRIPT)/websmm_server.pl $(INST_SCRIPT)/websmm_cgi.pl \
+	  $(INST_SCRIPT)/websmm_fastcgi.pl $(INST_SCRIPT)/importar_traducao.pl \
+	  $(INST_SCRIPT)/websmm_test.pl $(INST_SCRIPT)/websmm_create.pl 
 
 $(INST_SCRIPT)/websmm_server.pl : script/websmm_server.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
 	$(NOECHO) $(RM_F) $(INST_SCRIPT)/websmm_server.pl
@@ -864,23 +855,35 @@ $(INST_SCRIPT)/websmm_server.pl : script/websmm_server.pl $(FIRST_MAKEFILE) $(IN
 	$(FIXIN) $(INST_SCRIPT)/websmm_server.pl
 	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/websmm_server.pl
 
+$(INST_SCRIPT)/websmm_cgi.pl : script/websmm_cgi.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
+	$(NOECHO) $(RM_F) $(INST_SCRIPT)/websmm_cgi.pl
+	$(CP) script/websmm_cgi.pl $(INST_SCRIPT)/websmm_cgi.pl
+	$(FIXIN) $(INST_SCRIPT)/websmm_cgi.pl
+	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/websmm_cgi.pl
+
 $(INST_SCRIPT)/websmm_fastcgi.pl : script/websmm_fastcgi.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
 	$(NOECHO) $(RM_F) $(INST_SCRIPT)/websmm_fastcgi.pl
 	$(CP) script/websmm_fastcgi.pl $(INST_SCRIPT)/websmm_fastcgi.pl
 	$(FIXIN) $(INST_SCRIPT)/websmm_fastcgi.pl
 	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/websmm_fastcgi.pl
 
-$(INST_SCRIPT)/websmm_create.pl : script/websmm_create.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
-	$(NOECHO) $(RM_F) $(INST_SCRIPT)/websmm_create.pl
-	$(CP) script/websmm_create.pl $(INST_SCRIPT)/websmm_create.pl
-	$(FIXIN) $(INST_SCRIPT)/websmm_create.pl
-	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/websmm_create.pl
+$(INST_SCRIPT)/importar_traducao.pl : script/importar_traducao.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
+	$(NOECHO) $(RM_F) $(INST_SCRIPT)/importar_traducao.pl
+	$(CP) script/importar_traducao.pl $(INST_SCRIPT)/importar_traducao.pl
+	$(FIXIN) $(INST_SCRIPT)/importar_traducao.pl
+	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/importar_traducao.pl
 
 $(INST_SCRIPT)/websmm_test.pl : script/websmm_test.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
 	$(NOECHO) $(RM_F) $(INST_SCRIPT)/websmm_test.pl
 	$(CP) script/websmm_test.pl $(INST_SCRIPT)/websmm_test.pl
 	$(FIXIN) $(INST_SCRIPT)/websmm_test.pl
 	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/websmm_test.pl
+
+$(INST_SCRIPT)/websmm_create.pl : script/websmm_create.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
+	$(NOECHO) $(RM_F) $(INST_SCRIPT)/websmm_create.pl
+	$(CP) script/websmm_create.pl $(INST_SCRIPT)/websmm_create.pl
+	$(FIXIN) $(INST_SCRIPT)/websmm_create.pl
+	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/websmm_create.pl
 
 
 
@@ -1024,12 +1027,12 @@ disttest : distdir
 
 
 # --- MakeMaker dist_ci section:
-
 ci :
-	$(PERLRUN) "-MExtUtils::Manifest=maniread" \
-	  -e "@all = keys %{ maniread() };" \
-	  -e "print(qq{Executing $(CI) @all\n}); system(qq{$(CI) @all});" \
-	  -e "print(qq{Executing $(RCS_LABEL) ...\n}); system(qq{$(RCS_LABEL) @all});"
+	$(ABSPERLRUN) -MExtUtils::Manifest=maniread -e '@all = sort keys %{ maniread() };' \
+	  -e 'print(qq{Executing $(CI) @all\n});' \
+	  -e 'system(qq{$(CI) @all}) == 0 or die $$!;' \
+	  -e 'print(qq{Executing $(RCS_LABEL) ...\n});' \
+	  -e 'system(qq{$(RCS_LABEL) @all}) == 0 or die $$!;' --
 
 
 # --- MakeMaker distmeta section:
@@ -1044,7 +1047,7 @@ distmeta : create_distdir metafile
 
 
 # --- MakeMaker distsignature section:
-distsignature : create_distdir
+distsignature : distmeta
 	$(NOECHO) cd $(DISTVNAME) && $(ABSPERLRUN) -MExtUtils::Manifest=maniadd -e 'eval { maniadd({q{SIGNATURE} => q{Public-key signature (added by MakeMaker)}}) }' \
 	  -e '    or print "Could not add SIGNATURE to MANIFEST: $$$${'\''@'\''}\n"' --
 	$(NOECHO) cd $(DISTVNAME) && $(TOUCH) SIGNATURE
@@ -1080,88 +1083,88 @@ doc__install : doc_site_install
 
 pure_perl_install :: all
 	$(NOECHO) $(MOD_INSTALL) \
-		read $(PERL_ARCHLIB)/auto/$(FULLEXT)/.packlist \
-		write $(DESTINSTALLARCHLIB)/auto/$(FULLEXT)/.packlist \
-		$(INST_LIB) $(DESTINSTALLPRIVLIB) \
-		$(INST_ARCHLIB) $(DESTINSTALLARCHLIB) \
-		$(INST_BIN) $(DESTINSTALLBIN) \
-		$(INST_SCRIPT) $(DESTINSTALLSCRIPT) \
-		$(INST_MAN1DIR) $(DESTINSTALLMAN1DIR) \
-		$(INST_MAN3DIR) $(DESTINSTALLMAN3DIR)
+		read "$(PERL_ARCHLIB)/auto/$(FULLEXT)/.packlist" \
+		write "$(DESTINSTALLARCHLIB)/auto/$(FULLEXT)/.packlist" \
+		"$(INST_LIB)" "$(DESTINSTALLPRIVLIB)" \
+		"$(INST_ARCHLIB)" "$(DESTINSTALLARCHLIB)" \
+		"$(INST_BIN)" "$(DESTINSTALLBIN)" \
+		"$(INST_SCRIPT)" "$(DESTINSTALLSCRIPT)" \
+		"$(INST_MAN1DIR)" "$(DESTINSTALLMAN1DIR)" \
+		"$(INST_MAN3DIR)" "$(DESTINSTALLMAN3DIR)"
 	$(NOECHO) $(WARN_IF_OLD_PACKLIST) \
-		$(SITEARCHEXP)/auto/$(FULLEXT)
+		"$(SITEARCHEXP)/auto/$(FULLEXT)"
 
 
 pure_site_install :: all
 	$(NOECHO) $(MOD_INSTALL) \
-		read $(SITEARCHEXP)/auto/$(FULLEXT)/.packlist \
-		write $(DESTINSTALLSITEARCH)/auto/$(FULLEXT)/.packlist \
-		$(INST_LIB) $(DESTINSTALLSITELIB) \
-		$(INST_ARCHLIB) $(DESTINSTALLSITEARCH) \
-		$(INST_BIN) $(DESTINSTALLSITEBIN) \
-		$(INST_SCRIPT) $(DESTINSTALLSITESCRIPT) \
-		$(INST_MAN1DIR) $(DESTINSTALLSITEMAN1DIR) \
-		$(INST_MAN3DIR) $(DESTINSTALLSITEMAN3DIR)
+		read "$(SITEARCHEXP)/auto/$(FULLEXT)/.packlist" \
+		write "$(DESTINSTALLSITEARCH)/auto/$(FULLEXT)/.packlist" \
+		"$(INST_LIB)" "$(DESTINSTALLSITELIB)" \
+		"$(INST_ARCHLIB)" "$(DESTINSTALLSITEARCH)" \
+		"$(INST_BIN)" "$(DESTINSTALLSITEBIN)" \
+		"$(INST_SCRIPT)" "$(DESTINSTALLSITESCRIPT)" \
+		"$(INST_MAN1DIR)" "$(DESTINSTALLSITEMAN1DIR)" \
+		"$(INST_MAN3DIR)" "$(DESTINSTALLSITEMAN3DIR)"
 	$(NOECHO) $(WARN_IF_OLD_PACKLIST) \
-		$(PERL_ARCHLIB)/auto/$(FULLEXT)
+		"$(PERL_ARCHLIB)/auto/$(FULLEXT)"
 
 pure_vendor_install :: all
 	$(NOECHO) $(MOD_INSTALL) \
-		read $(VENDORARCHEXP)/auto/$(FULLEXT)/.packlist \
-		write $(DESTINSTALLVENDORARCH)/auto/$(FULLEXT)/.packlist \
-		$(INST_LIB) $(DESTINSTALLVENDORLIB) \
-		$(INST_ARCHLIB) $(DESTINSTALLVENDORARCH) \
-		$(INST_BIN) $(DESTINSTALLVENDORBIN) \
-		$(INST_SCRIPT) $(DESTINSTALLVENDORSCRIPT) \
-		$(INST_MAN1DIR) $(DESTINSTALLVENDORMAN1DIR) \
-		$(INST_MAN3DIR) $(DESTINSTALLVENDORMAN3DIR)
+		read "$(VENDORARCHEXP)/auto/$(FULLEXT)/.packlist" \
+		write "$(DESTINSTALLVENDORARCH)/auto/$(FULLEXT)/.packlist" \
+		"$(INST_LIB)" "$(DESTINSTALLVENDORLIB)" \
+		"$(INST_ARCHLIB)" "$(DESTINSTALLVENDORARCH)" \
+		"$(INST_BIN)" "$(DESTINSTALLVENDORBIN)" \
+		"$(INST_SCRIPT)" "$(DESTINSTALLVENDORSCRIPT)" \
+		"$(INST_MAN1DIR)" "$(DESTINSTALLVENDORMAN1DIR)" \
+		"$(INST_MAN3DIR)" "$(DESTINSTALLVENDORMAN3DIR)"
 
 
 doc_perl_install :: all
-	$(NOECHO) $(ECHO) Appending installation info to $(DESTINSTALLARCHLIB)/perllocal.pod
-	-$(NOECHO) $(MKPATH) $(DESTINSTALLARCHLIB)
+	$(NOECHO) $(ECHO) Appending installation info to "$(DESTINSTALLARCHLIB)/perllocal.pod"
+	-$(NOECHO) $(MKPATH) "$(DESTINSTALLARCHLIB)"
 	-$(NOECHO) $(DOC_INSTALL) \
 		"Module" "$(NAME)" \
-		"installed into" "$(INSTALLPRIVLIB)" \
+		"installed into" $(INSTALLPRIVLIB) \
 		LINKTYPE "$(LINKTYPE)" \
 		VERSION "$(VERSION)" \
 		EXE_FILES "$(EXE_FILES)" \
-		>> $(DESTINSTALLARCHLIB)/perllocal.pod
+		>> "$(DESTINSTALLARCHLIB)/perllocal.pod"
 
 doc_site_install :: all
-	$(NOECHO) $(ECHO) Appending installation info to $(DESTINSTALLARCHLIB)/perllocal.pod
-	-$(NOECHO) $(MKPATH) $(DESTINSTALLARCHLIB)
+	$(NOECHO) $(ECHO) Appending installation info to "$(DESTINSTALLARCHLIB)/perllocal.pod"
+	-$(NOECHO) $(MKPATH) "$(DESTINSTALLARCHLIB)"
 	-$(NOECHO) $(DOC_INSTALL) \
 		"Module" "$(NAME)" \
-		"installed into" "$(INSTALLSITELIB)" \
+		"installed into" $(INSTALLSITELIB) \
 		LINKTYPE "$(LINKTYPE)" \
 		VERSION "$(VERSION)" \
 		EXE_FILES "$(EXE_FILES)" \
-		>> $(DESTINSTALLARCHLIB)/perllocal.pod
+		>> "$(DESTINSTALLARCHLIB)/perllocal.pod"
 
 doc_vendor_install :: all
-	$(NOECHO) $(ECHO) Appending installation info to $(DESTINSTALLARCHLIB)/perllocal.pod
-	-$(NOECHO) $(MKPATH) $(DESTINSTALLARCHLIB)
+	$(NOECHO) $(ECHO) Appending installation info to "$(DESTINSTALLARCHLIB)/perllocal.pod"
+	-$(NOECHO) $(MKPATH) "$(DESTINSTALLARCHLIB)"
 	-$(NOECHO) $(DOC_INSTALL) \
 		"Module" "$(NAME)" \
-		"installed into" "$(INSTALLVENDORLIB)" \
+		"installed into" $(INSTALLVENDORLIB) \
 		LINKTYPE "$(LINKTYPE)" \
 		VERSION "$(VERSION)" \
 		EXE_FILES "$(EXE_FILES)" \
-		>> $(DESTINSTALLARCHLIB)/perllocal.pod
+		>> "$(DESTINSTALLARCHLIB)/perllocal.pod"
 
 
 uninstall :: uninstall_from_$(INSTALLDIRS)dirs
 	$(NOECHO) $(NOOP)
 
 uninstall_from_perldirs ::
-	$(NOECHO) $(UNINSTALL) $(PERL_ARCHLIB)/auto/$(FULLEXT)/.packlist
+	$(NOECHO) $(UNINSTALL) "$(PERL_ARCHLIB)/auto/$(FULLEXT)/.packlist"
 
 uninstall_from_sitedirs ::
-	$(NOECHO) $(UNINSTALL) $(SITEARCHEXP)/auto/$(FULLEXT)/.packlist
+	$(NOECHO) $(UNINSTALL) "$(SITEARCHEXP)/auto/$(FULLEXT)/.packlist"
 
 uninstall_from_vendordirs ::
-	$(NOECHO) $(UNINSTALL) $(VENDORARCHEXP)/auto/$(FULLEXT)/.packlist
+	$(NOECHO) $(UNINSTALL) "$(VENDORARCHEXP)/auto/$(FULLEXT)/.packlist"
 
 
 # --- MakeMaker force section:
@@ -1193,7 +1196,7 @@ $(FIRST_MAKEFILE) : Makefile.PL $(CONFIGDEP)
 
 # --- MakeMaker makeaperl section ---
 MAP_TARGET    = perl
-FULLPERL      = /home/renato/perl5/perlbrew/perls/perl-5.20.3/bin/perl
+FULLPERL      = "/home/donm/perl5/perlbrew/perls/perl-5.16.3/bin/perl"
 
 $(MAP_TARGET) :: static $(MAKE_APERL_FILE)
 	$(MAKE) $(USEMAKEFILE) $(MAKE_APERL_FILE) $@
@@ -1201,7 +1204,7 @@ $(MAP_TARGET) :: static $(MAKE_APERL_FILE)
 $(MAKE_APERL_FILE) : $(FIRST_MAKEFILE) pm_to_blib
 	$(NOECHO) $(ECHO) Writing \"$(MAKE_APERL_FILE)\" for this $(MAP_TARGET)
 	$(NOECHO) $(PERLRUNINST) \
-		Makefile.PL DIR= \
+		Makefile.PL DIR="" \
 		MAKEFILE=$(MAKE_APERL_FILE) LINKTYPE=static \
 		MAKEAPERL=1 NORECURS=1 CCCDLFLAGS=
 
@@ -1254,15 +1257,16 @@ ppd :
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Plugin::Static::Simple" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Plugin::StatusMessage" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Runtime" VERSION="5.90042" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE NAME="CatalystX::RoleApplicator" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Config::General" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="DateTime::Format::DateParse" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="File::MoreUtil" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Furl::" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Moose::" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Template::AutoFilter" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <REQUIRE VERSION="0.88" NAME="Test::More" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Test::More" VERSION="0.88" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="namespace::autoclean" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="x86_64-linux-5.20" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="x86_64-linux-5.16" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <CODEBASE HREF="" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    </IMPLEMENTATION>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '</SOFTPKG>' >> $(DISTNAME).ppd
@@ -1384,25 +1388,6 @@ pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 
 # End.
 # Postamble by Module::Install 1.16
-# --- Module::Install::Admin::Makefile section:
-
-realclean purge ::
-	$(RM_F) $(DISTVNAME).tar$(SUFFIX)
-	$(RM_F) MANIFEST.bak _build
-	$(PERL) "-Ilib" "-MModule::Install::Admin" -e "remove_meta()"
-	$(RM_RF) inc
-
-reset :: purge
-
-upload :: test dist
-	cpan-upload -verbose $(DISTVNAME).tar$(SUFFIX)
-
-grok ::
-	perldoc Module::Install
-
-distsign ::
-	cpansign -s
-
 # --- Module::Install::AutoInstall section:
 
 config :: installdeps
@@ -1418,14 +1403,14 @@ installdeps_notest ::
 	$(NOECHO) $(NOOP)
 
 upgradedeps ::
-	$(PERL) Makefile.PL --config= --upgradedeps=DateTime::Format::DateParse,0,Catalyst::Helper::View::Email,0,File::MoreUtil,0,Test::More,0.88,Catalyst::Runtime,5.90042,Catalyst::Plugin::ConfigLoader,0,Catalyst::Plugin::Static::Simple,0,Catalyst::Action::RenderView,0,Catalyst::Plugin::StatusMessage,0,Catalyst::Plugin::Session::DynamicExpiry,0,Moose,0,namespace::autoclean,0,Catalyst::Plugin::Session::PerUser,0,Catalyst::Plugin::Session::Store::File,0,Catalyst::Plugin::Assets,0,Catalyst::Plugin::StatusMessage,0,Catalyst::Plugin::Authentication,0,Catalyst::Plugin::Session::DynamicExpiry,0,Catalyst::Plugin::Session,0,Catalyst::Plugin::Session::Store::File,0,Catalyst::Plugin::Session::State::Cookie,0,Catalyst::Plugin::Session::PerUser,0,Template::AutoFilter,0,Furl,0,Config::General,0
+	$(PERL) Makefile.PL --config= --upgradedeps=Test::More,0.88,Catalyst::Runtime,5.90042,Catalyst::Plugin::ConfigLoader,0,Catalyst::Plugin::Static::Simple,0,Catalyst::Action::RenderView,0,Catalyst::Plugin::StatusMessage,0,Catalyst::Plugin::Session::DynamicExpiry,0,Moose,0,namespace::autoclean,0,Catalyst::Plugin::Session::PerUser,0,Catalyst::Plugin::Session::Store::File,0,Catalyst::Plugin::Assets,0,Catalyst::Plugin::StatusMessage,0,DateTime::Format::DateParse,0,Catalyst::Plugin::Authentication,0,Catalyst::Plugin::Session::DynamicExpiry,0,Catalyst::Plugin::Session,0,Catalyst::Plugin::Session::Store::File,0,Catalyst::Plugin::Session::State::Cookie,0,Catalyst::Plugin::Session::PerUser,0,CatalystX::RoleApplicator,0,Template::AutoFilter,0,Furl,0,Catalyst::Helper::View::Email,0,File::MoreUtil,0,Config::General,0
 
 upgradedeps_notest ::
-	$(PERL) Makefile.PL --config=notest,1 --upgradedeps=DateTime::Format::DateParse,0,Catalyst::Helper::View::Email,0,File::MoreUtil,0,Test::More,0.88,Catalyst::Runtime,5.90042,Catalyst::Plugin::ConfigLoader,0,Catalyst::Plugin::Static::Simple,0,Catalyst::Action::RenderView,0,Catalyst::Plugin::StatusMessage,0,Catalyst::Plugin::Session::DynamicExpiry,0,Moose,0,namespace::autoclean,0,Catalyst::Plugin::Session::PerUser,0,Catalyst::Plugin::Session::Store::File,0,Catalyst::Plugin::Assets,0,Catalyst::Plugin::StatusMessage,0,Catalyst::Plugin::Authentication,0,Catalyst::Plugin::Session::DynamicExpiry,0,Catalyst::Plugin::Session,0,Catalyst::Plugin::Session::Store::File,0,Catalyst::Plugin::Session::State::Cookie,0,Catalyst::Plugin::Session::PerUser,0,Template::AutoFilter,0,Furl,0,Config::General,0
+	$(PERL) Makefile.PL --config=notest,1 --upgradedeps=Test::More,0.88,Catalyst::Runtime,5.90042,Catalyst::Plugin::ConfigLoader,0,Catalyst::Plugin::Static::Simple,0,Catalyst::Action::RenderView,0,Catalyst::Plugin::StatusMessage,0,Catalyst::Plugin::Session::DynamicExpiry,0,Moose,0,namespace::autoclean,0,Catalyst::Plugin::Session::PerUser,0,Catalyst::Plugin::Session::Store::File,0,Catalyst::Plugin::Assets,0,Catalyst::Plugin::StatusMessage,0,DateTime::Format::DateParse,0,Catalyst::Plugin::Authentication,0,Catalyst::Plugin::Session::DynamicExpiry,0,Catalyst::Plugin::Session,0,Catalyst::Plugin::Session::Store::File,0,Catalyst::Plugin::Session::State::Cookie,0,Catalyst::Plugin::Session::PerUser,0,CatalystX::RoleApplicator,0,Template::AutoFilter,0,Furl,0,Catalyst::Helper::View::Email,0,File::MoreUtil,0,Config::General,0
 
 listdeps ::
-	@$(PERL) -le "print for @ARGV" DateTime::Format::DateParse Catalyst::Helper::View::Email File::MoreUtil
+	@$(PERL) -le "print for @ARGV" 
 
 listalldeps ::
-	@$(PERL) -le "print for @ARGV" DateTime::Format::DateParse Catalyst::Helper::View::Email File::MoreUtil Test::More Catalyst::Runtime Catalyst::Plugin::ConfigLoader Catalyst::Plugin::Static::Simple Catalyst::Action::RenderView Catalyst::Plugin::StatusMessage Catalyst::Plugin::Session::DynamicExpiry Moose namespace::autoclean Catalyst::Plugin::Session::PerUser Catalyst::Plugin::Session::Store::File Catalyst::Plugin::Assets Catalyst::Plugin::StatusMessage Catalyst::Plugin::Authentication Catalyst::Plugin::Session::DynamicExpiry Catalyst::Plugin::Session Catalyst::Plugin::Session::Store::File Catalyst::Plugin::Session::State::Cookie Catalyst::Plugin::Session::PerUser Template::AutoFilter Furl Config::General
+	@$(PERL) -le "print for @ARGV" Test::More Catalyst::Runtime Catalyst::Plugin::ConfigLoader Catalyst::Plugin::Static::Simple Catalyst::Action::RenderView Catalyst::Plugin::StatusMessage Catalyst::Plugin::Session::DynamicExpiry Moose namespace::autoclean Catalyst::Plugin::Session::PerUser Catalyst::Plugin::Session::Store::File Catalyst::Plugin::Assets Catalyst::Plugin::StatusMessage DateTime::Format::DateParse Catalyst::Plugin::Authentication Catalyst::Plugin::Session::DynamicExpiry Catalyst::Plugin::Session Catalyst::Plugin::Session::Store::File Catalyst::Plugin::Session::State::Cookie Catalyst::Plugin::Session::PerUser CatalystX::RoleApplicator Template::AutoFilter Furl Catalyst::Helper::View::Email File::MoreUtil Config::General
 

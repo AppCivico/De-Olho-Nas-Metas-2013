@@ -20,7 +20,7 @@ Catalyst Controller.
 
 =cut
 
-sub base : Chained('/homefuncional/base') : PathPart('region') : CaptureArgs(0) {
+sub base : Chained('/homefuncional/base') : PathPart('abc') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
 }
