@@ -37,7 +37,7 @@ sub result_GET {
 
     my $subprefecture = $c->stash->{subprefecture};
     my $name          = $subprefecture->organizations->get_column('name');
-    my @projects      = $subprefecture->regions->projects;
+    my @projects      = $c->model('DB::Region')->subprefectures->search({'me.id' => $subprefecture->id})->projects;
 
     $self->status_ok(
         $c,
