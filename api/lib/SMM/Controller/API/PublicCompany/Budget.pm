@@ -1,5 +1,4 @@
 package SMM::Controller::API::PublicCompany::Budget;
-
 use Moose;
 use utf8;
 
@@ -7,8 +6,7 @@ BEGIN { extends 'Catalyst::Controller::REST' }
 
 __PACKAGE__->config( default => 'application/json' );
 
-sub base : Chained('/api/publiccompany/object') : PathPart('budgets') :
-  CaptureArgs(0) { }
+sub base : Chained('/api/publiccompany/object') : PathPart('budgets') : CaptureArgs(0) { }
 
 sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
 
@@ -48,12 +46,8 @@ sub list_GET {
 
                       }
                   } $rs->search(
-                    undef,
-                    {
-                        prefetch => ['goals'],
-                        result_class =>
-                          'DBIx::Class::ResultClass::HashRefInflator'
-                    }
+                    {},
+                    { result_class => 'DBIx::Class::ResultClass::HashRefInflator' }
                   )->all
             ]
         }

@@ -62,24 +62,18 @@ sub base : Chained('/api/base') : PathPart('budgets') : CaptureArgs(0) { }
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
 
-sub result : Chained('object') : PathPart('') : Args(0) :
-  ActionClass('REST') { }
+sub result : Chained('object') : PathPart('') : Args(0) : ActionClass('REST') { }
 
-sub result_GET {
-}
+sub result_GET { }
 
-sub result_DELETE {
-}
+sub result_DELETE { }
 
-sub result_PUT {
-}
+sub result_PUT { }
 
 sub list : Chained('base') : PathPart('') : Args(0) : ActionClass('REST') { }
 
-sub list_GET {
-}
+sub list_GET { }
 
-sub list_POST {
-}
+sub list_POST { }
 
 1;
