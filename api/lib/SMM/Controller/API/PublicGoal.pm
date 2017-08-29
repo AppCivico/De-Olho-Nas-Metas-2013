@@ -17,10 +17,9 @@ __PACKAGE__->config(
         ],
         order_by  => 'me.id',
         '+select' => [
-            \'(select count(distinct p.region_id) from goal_project gp join project p on p.id = gp.project_id where gp.goal_id = me.id)',
             \'(select count(distinct gp.project_id) from goal_project gp where gp.goal_id = me.id)'
         ],
-        '+as' => [ 'region_count', 'project_count' ],
+        '+as' => [ 'project_count' ],
     },
 
     update_roles => [qw/superadmin user admin webapi/],
