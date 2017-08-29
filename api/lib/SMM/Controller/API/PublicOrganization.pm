@@ -24,13 +24,11 @@ __PACKAGE__->config(
 );
 with 'SMM::TraitFor::Controller::DefaultCRUD';
 
-sub base : Chained('/api/base') : PathPart('public/councils') :
-  CaptureArgs(0) { }
+sub base : Chained('/api/root') : PathPart('public/councils') : CaptureArgs(0) { }
 
 sub object : Chained('base') : PathPart('') : CaptureArgs(1) { }
 
-sub result : Chained('object') : PathPart('') : Args(0) :
-  ActionClass('REST') { }
+sub result : Chained('object') : PathPart('') : Args(0) : ActionClass('REST') { }
 
 sub result_GET {
     my ( $self, $c ) = @_;
