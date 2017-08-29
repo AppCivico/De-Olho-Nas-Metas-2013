@@ -15,8 +15,12 @@ __PACKAGE__->config(
         prefetch => [
             { 'goal_projects' => 'project' }, 'objective', 'goal_porcentages',
         ],
-        order_by => 'me.id',
-
+        order_by  => 'me.id',
+        '+select' => [
+            \'(select count(distinct p.region_id) from goal_project gp join project p on p.id = gp.project_id where gp.goal_id = me.id)',
+            \'(select count(distinct gp.project_id) from goal_project gp where gp.goal_id = me.id)'
+        ],
+        '+as' => [ 'region_count', 'project_count' ],
     },
 
     update_roles => [qw/superadmin user admin webapi/],
@@ -63,7 +67,7 @@ sub result_GET {
         $c,
         entity => {
             (
-                map { $_ => $goal->$_, }
+                map { $_ => $goal->get_column($_), }
                   qw/
                   id
                   name

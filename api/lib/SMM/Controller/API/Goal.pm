@@ -324,6 +324,7 @@ sub list_GET {
           unless $region;
         $rs = $rs->search( { 'project.region_id' => $region->{id} } );
     }
+
     $self->status_ok(
         $c,
         entity => {
