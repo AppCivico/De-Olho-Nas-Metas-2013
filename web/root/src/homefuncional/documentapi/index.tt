@@ -221,8 +221,8 @@
         <h1>[%l('API para desenvolvedores')%]</h1>
 
         <div id="api" class="block">
-            <p>[%l('O DONM fornece uma REST API para a consulta dos dados')%].</p>
-            <p>[%l('Os <b>endpoints</b> podem entregar o contéudo serializado em')%] <b>JSON</b>.</p>
+            <p>O DONM fornece uma REST API para a consulta dos dados.</p>
+            <p>Os <b>endpoints</b> podem entregar o contéudo serializado em <b>JSON</b>.</p>
             <p>[%l('O')%] <code>content-type</code> [%l('é definido automaticamente pelo header')%] <code>Accept</code>. [%l('Por padrão, a resposta é no formato')%] <b>JSON</b>.</p>
             <p>[%l('Para pedir manualmente, utilize')%] <code>?content-type=application/json</code> [%l('para JSON')%].</p>
 
