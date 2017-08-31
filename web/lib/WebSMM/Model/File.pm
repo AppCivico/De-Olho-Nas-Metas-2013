@@ -121,18 +121,4 @@ sub _download_and_detach {
     $c->detach;
 }
 
-sub doido_download_csv : Chained('/institute_load') :
-  PathPart('variaveis_exemplo.csv') : Args(0) {
-    my ( $self, $c ) = @_;
-    $c->stash->{type} = 'csv';
-    $self->_download($c);
-}
-
-sub download_xls : Chained('/institute_load') :
-  PathPart('variaveis_exemplo.xls') : Args(0) {
-    my ( $self, $c ) = @_;
-    $c->stash->{type} = 'xls';
-    $self->_download($c);
-}
-
 1;
