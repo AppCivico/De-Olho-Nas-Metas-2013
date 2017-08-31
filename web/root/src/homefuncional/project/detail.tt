@@ -23,7 +23,7 @@
 
 <script id="row_template" type="text/template">
 			{{#projects.length}}<h2 class="section-title">{{ projects.length}} Projeto{{#plural}}s{{/plural}} Encontrado{{#plural}}s{{/plural}}</h2>{{/projects.length}}
-			{{ #projects }}	
+			{{ #projects }}
 			<div class="item row">
 				<div class="col-sm-10 nopadding">
 					<div class="contents pull-left">
@@ -49,53 +49,27 @@
 
 $(document).ready(function () {
 
-  $('[data-toggle="tooltip"]').tooltip();
-
-  $('#follow_or_not').on('click', function () {
-	var id = $(this).data("id"),
-		url,
-		textview;
-	var button = $(this);
-	if ($(this).hasClass('follow')){
-		url = "/project/user_follow_project";
-		$(this).removeClass('follow');
-		textview = "[%l('Parar de Seguir')%]";	
-	}else{
-		url = "/project/user_stop_follow";
-		$(this).addClass('follow');
-		textview = "[%l('Siga o Projeto')%]";	
-	}
-	$(this).attr('disabled',true);
-	$.post( url, { user_id: $(this).data("id"), project_id: $('#projectid').val() },function( data ) {
-
-		$(button).find("span").html(textview);
-		$('.counter').html(data.project_count);
-		
-		$(button).attr('disabled',false);
-    },"json")
-	
-  })
    $('#late').on('click', function () {
 						$.post( '/project_accept_porcentage/' + $('#projectid').val() + '/accepted', { project_id: $('#projectid').val(), progress : 'late' },function( data ) {
 				  console.log(data);
 					 $('#alert_question').html('<div class="alert alert-success"><p>'+data.message+'</p></div>');
 					 $('#content_question').html('');
 						},"json")
-   })   
- 		$('#in_progress').on('click', function () {
+   })
+		$('#in_progress').on('click', function () {
 						$.post( '/project_accept_porcentage/' + $('#projectid').val() + '/accepted', { project_id: $('#projectid').val(), progress: 'in_progress' },function( data ) {
 				  console.log(data);
 					 $('#alert_question').html('<div class="alert alert-success"><p>'+data.message+'</p></div>');
 					 $('#content_question').html('');
 						},"json")
-   })    
+   })
    $('#complete').on('click', function () {
 						$.post( '/project_accept_porcentage/'+ $('#projectid').val() + '/accepted', { project_id: $('#projectid').val(), progress : 'completed' },function( data ) {
 						console.log(data);
 						$('#alert_question').html('<div class="alert alert-success"><p>'+data.message+'</p></div>');
 					 $('#content_question').html('');
       },"json")
-   })    
+   })
   $('#comment_counsil').on('click', function () {
 
 	if ($('#text_comment_counsil').val() == ""){
@@ -106,7 +80,7 @@ $(document).ready(function () {
 	var id = $(this).data("id");
 	$.post( "/project/comment_counsil", { user_id: $(this).data("id"), text: $('#text_comment_counsil').val(), project_id : $('#projectid').val() } ,function( data ) {
 		$('#alert').html('<div class="alert alert-success"><p>'+data.message+'</p></div>');
-  	},"json");
+	},"json");
 
 	$('#text_comment_counsil').val('');
   })
@@ -119,15 +93,15 @@ $(document).ready(function () {
 	var id = $(this).data("id");
 	$.post( "/project/comment", { user_id: $(this).data("id"), text: $('#text_comment').val(), project_id : $('#projectid').val() } ,function( data ) {
 		$('#alert_comment').html('<div class="alert alert-success"><p>'+data.message+'</p></div>');
-  	},"json");
+	},"json");
 
 	$('#text_comment').val('');
   })
 
 	$("#homeregion").change(function(){
-	   	$(".metas-filtro .form .region .select-stylized").removeClass("disabled");
-	   	$(".metas-filtro .form .cep button").addClass("disabled");
-	   	$("#txtaddress").val("");
+		$(".metas-filtro .form .region .select-stylized").removeClass("disabled");
+		$(".metas-filtro .form .cep button").addClass("disabled");
+		$("#txtaddress").val("");
 	});
 
 	$("#add-gallery").click(function(e){
@@ -230,7 +204,7 @@ $(document).ready(function () {
 
 			<div class="row">
 				<div class="col-sm-8">
-				
+
 					<div class="body">
 						<h4 class="subtitle green">[%l('Projeto')%]</h4>
 						<h1>[% project_obj.name %]</h1>
@@ -249,27 +223,10 @@ $(document).ready(function () {
 							[% project_obj.description %]
 						</p>
 					</div>
-	
+
 					<div style="height: 300px;" id="map">
 					</div>
-					<div class="row social">
-						<div class="col-xs-6">
-							<div class="followers">
-								<div class="icon users2"></div> <span class="caption"><span class="counter">[% project_obj.follow_project %]</span> [% IF project_obj.follow_project > 1 %]seguidores [% ELSE %] seguidor [% END %]
-							</div>
-						</div>
-						
-						[% IF c.user%]
-						<div id="follow" class="col-xs-6 text-right">							
-							<button  type="button" id="follow_or_not" data-toggle="tooltip" data-placement="top" title="[%l('Acompanhar e receber notificações por email de cada atualização')%]" class="btn btn-brown custom-tooltip [% do_i_follow > 0 ? "" : "follow"%]" data-id="[% c.user.obj.id%]" autocomplete="off"><span>[% do_i_follow > 0 ? l('Parar de Seguir') : l('Siga o Projeto') %]</span></button>
-						</div>
-						[%ELSE%]
-						<div id="follow" class="col-xs-6 text-right">							
-							<a class="btn btn-brown" href="/login" data-toggle="tooltip" data-placement="top" title="[%l('Acompanhar e receber notificações por email de cada atualização')%]" class="custom-tooltip">[%l('Siga o Projeto')%]</a>
-						</div>
 
-						[%END%]
-					</div>
 					<section class="statistics">
 						[% IF project_obj.percentage != ""%]
 						<h3>[%l('Progresso de acordo com a prefeitura')%]</h3>
@@ -303,7 +260,7 @@ $(document).ready(function () {
 						</table>
 						[% IF project_obj.progress_count == 0%]
 							<p>[%('Sem destaques sobre esse projeto')%].</p>
-						
+
 						[%END%]
 					</section>
 					<br />
@@ -311,15 +268,15 @@ $(document).ready(function () {
 						<h3>Progresso no <img src="/static/css/images/logo-planejasampa.png"></h3>
 						<div class="row">
 							<div class="col-xs-offset-1 col-xs-10">
-		      					<p><a  href="http://planejasampa.prefeitura.sp.gov.br/metas/projeto/[%project_obj.project_number%]" target="_blank"><strong>[%('Clique aqui')%]</strong></a> [%('para acompanhar o andamento do projeto no site Planeja Sampa')%]</p>
+							<p><a  href="http://planejasampa.prefeitura.sp.gov.br/metas/projeto/[%project_obj.project_number%]" target="_blank"><strong>[%('Clique aqui')%]</strong></a> [%('para acompanhar o andamento do projeto no site Planeja Sampa')%]</p>
 							</div>
 						</div>
      </section>
-      				<br />
+				<br />
 
 						[% IF project_obj.region.subprefecture_id == user_obj.organization.subprefecture_id%]
       [% SET user_id = user_obj.id%]
-					 [% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]	
+					 [% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]
 						[% IF users_question.$user_id == 1%]
 						<section class="statistics">
 							<h3>[%l('Opiniões dos conselheiros sobre o progresso')%]</h3>
@@ -342,7 +299,7 @@ $(document).ready(function () {
 										</div>
 									</section>
 							[%END%]
-				 	[%END%]
+					[%END%]
 						[%ELSE%]
 						<section class="statistics">
 							<h3>[%l('Opinião dos conselheiros sobre o progresso do projeto')%]</h3>
@@ -361,8 +318,8 @@ $(document).ready(function () {
 							<thead>
 								<tr>
 					                <th>[%l('Conselheiro')%]</th>
-				    	            <th>[%l('Comentário')%]</th>
-				    	            <th>[%l('Data')%]</th>
+					            <th>[%l('Comentário')%]</th>
+					            <th>[%l('Data')%]</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -379,15 +336,15 @@ $(document).ready(function () {
 								<td colspan="3">[%l('Nenhum comentário encontrado')%]</td>
 							</tr>
 					[% END %]
-	
+
 							</tbody>
 						</table>
 
 					</div>
-					[% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]	
+					[% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]
 					<div id="alert">
 					</div>
-					<div id="comments">						
+					<div id="comments">
 						<textarea id="text_comment_counsil" class="form-control" rows="2"></textarea>
 						<button  type="button" id="comment_counsil" class="btn btn-violet" data-id="[% c.user.obj.id%]" autocomplete="off">[%l('Comentar')%]</button>
 					</div>
@@ -395,7 +352,7 @@ $(document).ready(function () {
 
 					<div class="image-gallery">
 
-					 [% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]	
+					 [% IF user_obj.role.counsil == '1' OR user_obj.role.counsil_master == 1 %]
 						<h3>[% IF project_obj.images.size > 0%][% project_obj.images.size%] [%l('imagens relacionadas')%][% ELSE %][%l('Nenhuma imagem cadastrada')%][% END %] <button class="btn btn-brown pull-right" id="add-gallery">Enviar imagens</button></h3>
 						[%END%]
 						[% IF project_obj.images.size > 0%]
@@ -404,7 +361,7 @@ $(document).ready(function () {
 								<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 							</div>
 							<div class="contents">
-								
+
 								[% FOR img IN project_obj.images%]
 								<a href="[% img.name_image %]" data-lightbox="gallery" data-title="[%l('Descrição')%]: [% img.description %]<br>[%l('Enviado por')%]: [% img.user%]"><img src="[% img.name_image%]"></a>
 								[% END %]
@@ -449,29 +406,14 @@ $(document).ready(function () {
 						</div>
 					</div>
 
-					<h3>[%l('Comentários')%]</h3>
-					<div id="disqus_thread"></div>
-					<script type="text/javascript">
-						/* * * CONFIGURATION VARIABLES * * */
-						var disqus_shortname = 'donm';
-						
-						/* * * DON'T EDIT BELOW THIS LINE * * */
-						(function() {
-							var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-							dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-							(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-						})();
-					</script>
-					<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-
 <!--					<div class="comments">
 						<h3>[%l('Comentários')%]</h3>
 						<table id="list_comment" class="table table-striped">
 							<thead>
 								<tr>
 					                <th>[%l('Nome')%]</th>
-				    	            <th>[%l('Comentário')%]</th>
-				    	            <th>[%l('Data')%]</th>
+					            <th>[%l('Comentário')%]</th>
+					            <th>[%l('Data')%]</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -488,7 +430,7 @@ $(document).ready(function () {
 								<td colspan="3">[%l('Nenhum comentário encontrado')%]</td>
 							</tr>
 					[% END %]
-	
+
 							</tbody>
 						</table>
 
@@ -496,7 +438,7 @@ $(document).ready(function () {
 
 					<div id="alert_comment">
 					</div>
-					<div>						
+					<div>
 						<textarea id="text_comment" class="form-control" rows="2"></textarea>
 						<button  id="comment" type="button" class="btn btn-brown" data-id="[% c.user.obj.id%]">[%l('Comentar')%]</button>
 					</div>
@@ -515,7 +457,7 @@ $(document).ready(function () {
 							[% END %]
 						</ul>
 					</div>
-				    [% IF project_obj.region.size > 0 %]	
+				    [% IF project_obj.region.size > 0 %]
 					<div class="list-regions">
 						<span class="header">[%l('Distrito')%]</span>
 						<ul class="list-regions">
@@ -540,7 +482,7 @@ $(document).ready(function () {
 						</ul>
 					</div>
 					[% END %]
-					[% IF organizations.size > 0 %]	
+					[% IF organizations.size > 0 %]
 					<div class="list-box list-organizations">
 						<span class="header">3 [%l('Organizações')%]</span>
 						<ul class="list-organizations">
@@ -552,7 +494,7 @@ $(document).ready(function () {
 					[% END %]
 				</div>
 			</div>
-			
+
 		</div>
     </section>
 
@@ -575,7 +517,7 @@ $(document).ready(function () {
             <span class="preview"></span>
         </td>
         <td>
-        				<input type="text" name="description" placeholder="Insira uma descrição" class="description">
+					<input type="text" name="description" placeholder="Insira uma descrição" class="description">
             <p class="name">{%=file.name%}</p>
             <strong class="error text-danger"></strong>
         </td>

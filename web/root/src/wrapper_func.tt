@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+<head>
 
 <meta charset="UTF-8">
-<head>
     <meta charset="utf-8">
+    <link rel="canonical" href="http://2013.deolhonasmetas.org.br[%c.req.uri.path_query%]">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -30,7 +31,6 @@
     <link href="/static/css/prism.css" rel="stylesheet">
     <link href="/static/css/images/favicon.png" rel="icon" type="image/x-icon" />
     <link href="/static/css/images/favicon.png" rel="shortcut icon" type="image/x-icon" />
-</head>
 
     <script src="/static/js/jquery-1.10.2.min.js"></script>
 	<script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
@@ -50,6 +50,7 @@
 
 <!--<script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>-->
 
+</head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
 
@@ -77,9 +78,6 @@
                 <!--    <li>
                         <a href="[% c.uri_for_action('/homefuncional/organization/index')%]">[%l('Conselhos')%]</a>
 					</li>-->
-                    <li>
-                        <a href="[% c.uri_for_action('/homefuncional/organization/index')%]">[%l('Organizações')%]</a>
-					</li>
                     <!--<li>
                         <a href="[% c.uri_for_action('/homefuncional/campaign/index')%]">[%l('Campanhas')%]</a>
 					</li>-->
@@ -106,14 +104,6 @@
 						<a href="/login">[%l('Entrar')%]</a>
                     </li>
 					[%END%]
-			<div class="navbar-header page-scroll">
-			<ul class="select-langs list-unstyled">
-				 <li><a href="/lang/en" lang="en" hreflang="en"><img alt="English" title="English" src="//upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/23px-Flag_of_the_United_States.svg.png" width="23" height="12"> </a></li>
-				 <li><a href="/lang/pt-br" lang="pt-br" hreflang="pt-br"><img alt="Português" title="Português" src="//upload.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/22px-Flag_of_Brazil.svg.png" width="17" height="12"></a></li>
-				 <li><a href="/lang/es" lang="es" hreflang="es"><img alt="Español" title="Español" src="//upload.wikimedia.org/wikipedia/en/thumb/9/9a/Flag_of_Spain.svg/23px-Flag_of_Spain.svg.png" width="22" height="12">  </a></li>
-			</ul>
-			</div>
-
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -226,6 +216,13 @@
     <script src="/static/js/home_site.js"></script>
 
 	[% assets.export("js")|none %]
+	<div id="google_translate_element"></div>
+	<script type="text/javascript">
+	function googleTranslateElementInit() {
+	  new google.translate.TranslateElement({pageLanguage: 'pt', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false, gaTrack: true, gaId: 'UA-10515816-3'}, 'google_translate_element');
+	}
+	</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 
 </html>
