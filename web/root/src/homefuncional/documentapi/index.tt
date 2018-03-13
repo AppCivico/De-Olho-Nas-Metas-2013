@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-sm-2">
                     <div class="doc-icon">
-                        <span class="glyphicon glyphicon glyphicon-transfer"></span>    
+                        <span class="glyphicon glyphicon glyphicon-transfer"></span>
                     </div>
                 </div>
                 <div class="col-sm-10">
@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-    
+
         <h1><span class="glyphicon glyphicon-floppy-save"></span> [%l('Baixar arquivos')%]</h1>
 
         <div class="block">
@@ -153,7 +153,7 @@
                             <li><strong>[%l('Url do nome')%]</strong></li>
                         </ul>
                     </div>
-              
+
                 </div>
                  <div class="row" >
                     <div class="col-sm-3">
@@ -245,9 +245,9 @@
                         <td>[%l('Lista de todas as metas')%]</td>
                         <td>
                         <ul class="list-unstyled list-param">
-                            <li></li>
+                            <li>[%l('?type_id=')%]</li>
+                            <li>[%l('?region_id=')%]</li>
                         </ul>
-
                         </td>
                     </tr>
                     <tr>
@@ -347,7 +347,7 @@
 
             <p>[%l('Exemplo de retorno')%]</p>
             <pre class="precode"><code class="language-javascript" >
-            goals 
+            goals
                 [
                   [0]
                     {
@@ -381,7 +381,7 @@
 
             <p>[%l('Exemplo de retorno')%]:</p>
             <pre class="precode"><code class="language-javascript">
-            
+
                 budgets:                  [
                                             [0] {
                                                     business_name:       "FUNDAÇÃO PARA O DESENVOLVIMENTO DAS ARTES E DA COMUNICAÇÃO",
@@ -426,7 +426,7 @@
                 qualitative_progress_5:   "",
                 qualitative_progress_6:   "",
                 region:                   []
-             
+
 
 
             </code></pre>
@@ -458,7 +458,7 @@
                         updated_at:               undef,
                         url:                      "http://www.deolhonasmetas.org.br/api/public/projects/4097"
                         }
-                    ...    
+                    ...
                     ]
             </code></pre>
 
@@ -490,7 +490,7 @@
                         updated_at:               undef,
                         url:                      "http://www.deolhonasmetas.org.br/api/public/projects/4097"
                         }
-                    ...    
+                    ...
                     ]
             </code></pre>
             <h3 id="code-objective" data-animated-anchor-offset="-60">/api/public/objectives [%voltar_link|none%]</h3>
@@ -587,9 +587,9 @@
             goals   [
                     [0] {
                              id:     15,
-                             name:   "Ampliar a jornada escolar de 100 mil alunos da Rede Municipal de Ensino"     
+                             name:   "Ampliar a jornada escolar de 100 mil alunos da Rede Municipal de Ensino"
                         }
-                    ...    
+                    ...
                     ]
 
             </code></pre>
@@ -658,7 +658,7 @@
 			      name        : "Aricanduva",
 			      site        : "http://aricanduva.prefeitura.sp.gov.br",
 			      telephone   : "PABX: 3396-0800"
-			    } 
+			    }
                           ...
               ]
             </code></pre>
